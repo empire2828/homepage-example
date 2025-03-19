@@ -17,7 +17,9 @@ components:
     type: Link
   layout_properties: {slot: left-nav}
   name: column_panel_1
-  properties: {}
+  properties:
+    spacing:
+      margin: [null, 0, null, 0]
   type: ColumnPanel
 - layout_properties: {slot: title}
   name: label_1
@@ -32,6 +34,7 @@ container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
 is_package: true
+properties: []
 slots:
   main_slot:
     index: 0
