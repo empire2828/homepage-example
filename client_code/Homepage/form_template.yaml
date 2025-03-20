@@ -15,6 +15,10 @@ components:
     name: contact_us_link
     properties: {text: Contact Us}
     type: Link
+  - layout_properties: {grid_position: 'MBVFSN,JEQLTM'}
+    name: link_1
+    properties: {}
+    type: Link
   layout_properties: {slot: left-nav}
   name: column_panel_1
   properties:
