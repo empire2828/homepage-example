@@ -16,10 +16,12 @@ class layout(layoutTemplate):
   def home_link_click(self, **event_args):
     """This method is called when the link is clicked"""
     open_form('home')
+    self.home_link.role='selected'
 
   def guestscreen_link_click(self, **event_args):
     """This method is called when the link is clicked"""
     open_form('guestscreen')
+    self.guestscreen_link.role='selected'
 
   def reset_links(self, **event_args):
     self.home_link.role = ''

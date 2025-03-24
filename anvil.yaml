@@ -35,6 +35,19 @@ runtime_options:
   server_spec: {base: python310-standard}
   server_version: python3-full
   version: 3
+secrets:
+  PERPLEXITY_API_KEY:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: 6PFkuGTCKXiRtNxZNhM+Y/MGZNYEL7WTjilZEGY8x3vTOPz+8l2Jml33WLhmNSa2r1vHyxlULQfybLdGgnCWLeM+RKJcS39/qOjsClkQkOA9jMjluv+vRJF/E2sSyKs7kI6GYSBx2TGbEyyzsZYKIEG0UqykZhzX5DcbBY4xe8x/y/sCyZbD2mR46j9KelveKuXa/w==}
+  google_linkedin_search:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: +04cDP9QtlSGl3fH6W5AaE3UdsNogCecj72m7honWSto3AnSebETbFfz7+mRN2JLJmEa5mir+efv3yN4dZREr4Qb6Q0Pb5CmAIBUeVmOUl+JVCadCLNgy6mPPopnJtlGildmc5TleZT0exB3aFmkRHl/RKOcvhQnOMEzbn67fVyB6qeegAk=}
+  google_maps_api_key:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: 8eV6SFGUineV0goM9HAJPmoKi/BWXFgnKcVyzBrrs85PGs993ZPSkNYxGAKpjpUBjvEoqchKEQDwZ72N173fnt75JasN5WxiQiKEBGeGono+8vxn0IU875oQxsPSaVpgGappHN8x/BlDIaK2MYvIyYVc1XWBwdCeaZuWleeZodxXrLt3M8o=}
+  stripe_secret_api_key:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: d5T5SVYWB2oRVd74NKm0n3IhGdtJyuPtCeuJ2lcD8mFNcCzqHxYu8soyxDFVZhRZvAYDJr1C0hrG/OlvFen0Ed2jyoVy/rHcWnQ/BSrLxQkQrqaOQLtaUTar8hU2qOXqE/LmRJux/kVOJ6e/cAExk5DalwEdxESHfkVaWBw4JTUMA1wRvpk8KX4Il88hp/qFgqQxQh59F2LXX5Q4PDXZQlUtpTLXwVHcoOeHrICbx3/rxrG0kKO42gmOzOX74DQ9EtJCcCYAfyPriA==}
 services:
 - client_config: {}
   server_config: {}

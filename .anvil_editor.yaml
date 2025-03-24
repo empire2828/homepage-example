@@ -9,4 +9,6 @@ unique_ids:
   modules: {}
   scripts: {}
   server_modules:
+    address_check: '1742852396825346980472201.23505'
+    google_linkedin: '174285268931644804522709.35453'
     openAI: '1742850094805612327519392.3883'

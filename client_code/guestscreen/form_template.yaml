@@ -15,19 +15,19 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'RIPWIE,WKKMRC SOIDRH,SBGQRM'}
       name: first_name_text_box
-      properties: {}
+      properties: {text: Dirk}
       type: TextBox
     - layout_properties: {grid_position: 'RIPWIE,WKKMRC ATJEIB,WZPCOL'}
       name: street_label
-      properties: {text: Strasse}
+      properties: {text: Strasse und Hausnummer}
       type: Label
     - layout_properties: {grid_position: 'RIPWIE,WKKMRC WSEOVH,TOTRND'}
-      name: text_box_3
-      properties: {}
+      name: street_text_box
+      properties: {text: Sodenkamp 4e}
       type: TextBox
     - layout_properties: {grid_position: 'RIPWIE,SJQMGT HMERSY,CYVJEK'}
-      name: family_text_box
-      properties: {}
+      name: family_name_text_box
+      properties: {text: Klemer}
       type: TextBox
     - layout_properties: {grid_position: 'RIPWIE,SJQMGT GPGCVM,MNTOOH'}
       name: zip_label
@@ -39,25 +39,66 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'RIPWIE,SJQMGT GVUOZX,AWGGXR'}
       name: zip_text_box
-      properties: {}
+      properties: {text: '22337'}
       type: TextBox
     - layout_properties: {grid_position: 'RIPWIE,SJQMGT GVUOZX,IMLQVF'}
       name: city_text_box
-      properties: {}
+      properties: {text: Hamburg}
       type: TextBox
     layout_properties: {}
-    name: outlined_card_1
+    name: guest_data_outlined_card
     properties: {col_widths: '{"AWGGXR":20,"IMLQVF":40,"MNTOOH":20,"FOGIJG":40}', role: outlined-card}
     type: ColumnPanel
   - layout_properties: {}
     name: spacer_1
-    properties: {height: 38.2977294921875}
+    properties: {height: 28.9322509765625}
     type: Spacer
   - event_bindings: {click: guestscreen_button_click}
     layout_properties: {}
     name: guestscreen_button
     properties: {role: outlined-button, text: Gast checken}
     type: Button
+  - layout_properties: {}
+    name: spacer_2
+    properties: {height: 38.20135498046875}
+    type: Spacer
+  - components:
+    - layout_properties: {grid_position: 'URNXOW,QRKIXB'}
+      name: label_2
+      properties: {text: AI check}
+      type: Label
+    - layout_properties: {grid_position: 'UGBGUT,BBDGGS'}
+      name: AI_result_text_area
+      properties: {height: 83.84716796875}
+      type: TextArea
+    - layout_properties: {grid_position: 'NQPMEB,TPCKIZ'}
+      name: address_check_label
+      properties: {text: Adressprüfung}
+      type: Label
+    - layout_properties: {grid_position: 'DFSGTA,NIXQNZ'}
+      name: address_check_text_box
+      properties: {}
+      type: TextBox
+    - layout_properties: {grid_position: 'YGDQAB,BPCSPE'}
+      name: linkedin_check_label
+      properties: {text: Linkedin check}
+      type: Label
+    - layout_properties: {grid_position: 'EVGBZD,YMJBXY'}
+      name: linkedin_check_text_box
+      properties: {}
+      type: TextBox
+    - layout_properties: {grid_position: 'DSJDYB,ZOEZTR'}
+      name: age_check_label
+      properties: {text: Alter}
+      type: Label
+    - layout_properties: {grid_position: 'ICUECT,YJUZGA'}
+      name: age_check_text_box
+      properties: {}
+      type: TextBox
+    layout_properties: {}
+    name: outlined_card_1
+    properties: {role: outlined-card}
+    type: ColumnPanel
 is_package: true
 layout:
   form_event_bindings: {show: form_show}
