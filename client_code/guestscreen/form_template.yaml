@@ -1,0 +1,64 @@
+components_by_slot:
+  main_slot:
+  - layout_properties: {}
+    name: label_1
+    properties: {font_size: 28, text: Hier Gast checken}
+    type: Label
+  - components:
+    - layout_properties: {grid_position: 'XYQZJS,XXKRDQ'}
+      name: first_name_label
+      properties: {text: Vorname}
+      type: Label
+    - layout_properties: {grid_position: 'XYQZJS,EDKGSQ'}
+      name: family_name_label
+      properties: {text: Nachname}
+      type: Label
+    - layout_properties: {grid_position: 'RIPWIE,WKKMRC SOIDRH,SBGQRM'}
+      name: first_name_text_box
+      properties: {}
+      type: TextBox
+    - layout_properties: {grid_position: 'RIPWIE,WKKMRC ATJEIB,WZPCOL'}
+      name: street_label
+      properties: {text: Strasse}
+      type: Label
+    - layout_properties: {grid_position: 'RIPWIE,WKKMRC WSEOVH,TOTRND'}
+      name: text_box_3
+      properties: {}
+      type: TextBox
+    - layout_properties: {grid_position: 'RIPWIE,SJQMGT HMERSY,CYVJEK'}
+      name: family_text_box
+      properties: {}
+      type: TextBox
+    - layout_properties: {grid_position: 'RIPWIE,SJQMGT GPGCVM,MNTOOH'}
+      name: zip_label
+      properties: {text: PLZ}
+      type: Label
+    - layout_properties: {grid_position: 'RIPWIE,SJQMGT GPGCVM,FOGIJG'}
+      name: city_label
+      properties: {text: Stadt}
+      type: Label
+    - layout_properties: {grid_position: 'RIPWIE,SJQMGT GVUOZX,AWGGXR'}
+      name: zip_text_box
+      properties: {}
+      type: TextBox
+    - layout_properties: {grid_position: 'RIPWIE,SJQMGT GVUOZX,IMLQVF'}
+      name: city_text_box
+      properties: {}
+      type: TextBox
+    layout_properties: {}
+    name: outlined_card_1
+    properties: {col_widths: '{"AWGGXR":20,"IMLQVF":40,"MNTOOH":20,"FOGIJG":40}', role: outlined-card}
+    type: ColumnPanel
+  - layout_properties: {}
+    name: spacer_1
+    properties: {height: 38.2977294921875}
+    type: Spacer
+  - event_bindings: {click: guestscreen_button_click}
+    layout_properties: {}
+    name: guestscreen_button
+    properties: {role: outlined-button, text: Gast checken}
+    type: Button
+is_package: true
+layout:
+  form_event_bindings: {show: form_show}
+  type: form:layout

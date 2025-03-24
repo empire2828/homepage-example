@@ -2,9 +2,9 @@ components_by_slot:
   main_slot:
   - layout_properties: {}
     name: label_1
-    properties: {text: This is our about us page!}
+    properties: {text: home}
     type: Label
 is_package: true
 layout:
   form_event_bindings: {show: form_show}
-  type: form:Homepage
+  type: form:layout

@@ -1,19 +1,52 @@
 allow_embedding: false
 correct_dependency_ids: {}
+db_schema:
+  users:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: email
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: enabled
+      type: bool
+    - admin_ui: {order: 2, width: 200}
+      name: last_login
+      type: datetime
+    - admin_ui: {order: 3, width: 200}
+      name: password_hash
+      type: string
+    - admin_ui: {order: 4, width: 200}
+      name: n_password_failures
+      type: number
+    - admin_ui: {order: 5, width: 200}
+      name: confirmed_email
+      type: bool
+    server: full
+    title: Users
 dependencies: []
-name: Clone of Homepage Example
+name: guestscreener_V2
 native_deps: null
 package_name: Homepage_Example
 renamed: true
 runtime_options:
   client_version: '3'
   legacy_features: {__dict__: true, bootstrap3: true, class_names: true, root_container: true}
-  server_spec: {base: python310-minimal}
+  server_spec: {base: python310-standard}
   server_version: python3-full
   version: 3
 services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
-startup: {module: Homepage, type: form}
+- client_config: {allow_signup: false, confirm_email: true, enable_automatically: true, use_email: true, use_facebook: true, use_google: true}
+  server_config: {user_table: users}
+  source: /runtime/services/anvil/users.yml
+- client_config: {}
+  server_config: {}
+  source: /runtime/services/google.yml
+- client_config: {}
+  server_config: {}
+  source: /runtime/services/anvil/secrets.yml
+startup: {module: home, type: form}
 startup_form: null
