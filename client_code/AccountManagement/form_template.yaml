@@ -1,3 +1,29 @@
+components_by_slot:
+  slot_1:
+  - event_bindings: {click: name_change_link_click}
+    layout_properties: {}
+    name: name_change_link
+    properties: {text: Namen ändern}
+    type: Link
+  - event_bindings: {click: email_change_link_click}
+    layout_properties: {}
+    name: email_change_link
+    properties: {text: eMail ändern}
+    type: Link
+  - layout_properties: {}
+    name: password_reset_link
+    properties: {text: Passwort rücksetzen}
+    type: Link
+  - components:
+    - event_bindings: {click: account_delete_link_click}
+      layout_properties: {grid_position: 'APJYIN,DOYVVJ'}
+      name: account_delete_link
+      properties: {text: Account löschen}
+      type: Link
+    layout_properties: {}
+    name: subscription_manage_link
+    properties: {text: Abo verwalten}
+    type: Link
 is_package: true
 layout:
   form_event_bindings: {show: form_show}

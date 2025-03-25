@@ -53,4 +53,16 @@ class AccountManagement(AccountManagementTemplate):
       anvil.users.logout()
       open_form('LoginPage')
 
+  def name_change_link_click(self, **event_args):
+    open_form('AccountManagement.ChangeName')
+    pass
+
+  def email_change_link_click(self, **event_args):
+    open_form('AccountManagement.ChangeEmail')
+    pass
+
+  def account_delete_link_click(self, **event_args):
+    open_form('AccountManagement.DeleteAccountAlert')
+    pass
+
   

@@ -4,12 +4,16 @@ unique_ids:
     theme.css: KUVB5OJQVMMZR6I7XQTQAJ44ABVHFTC6
   forms:
     AccountManagement: '1742930423237806595233168.5376'
-    Form1: '1742932994396716495266755.5952'
+    AccountManagement.ChangeEmail: '1742932994396716495266755.5952'
+    AccountManagement.ChangeName: '1742934208961866787720045.6211'
+    AccountManagement.DeleteAccountAlert: '1742934220494310794643033.8777'
+    StripePricing: '1742936600759103190629811.78262'
     dashboard: '1706487085090307943951287.49384'
     guestscreen: '1706488321970715680747019.729'
     homepage: '1742915656403419166914850.45996'
     layout: BMLJKVRHBO6QVXQVTAMMKFH5KAEMQWA3
-  modules: {}
+  modules:
+    user_permissions: '1742936543407557096112619.8817'
   scripts: {}
   server_modules:
     address_check: '1742852396825346980472201.23505'

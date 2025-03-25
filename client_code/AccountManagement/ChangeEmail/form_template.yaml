@@ -1,0 +1,17 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: label_1
+    properties: {bold: true, text: 'Die eMail zu ändern, ändert auch die eMail für den Zahlungsanbieter Stripe. Hier die neue eMail eingeben:'}
+    type: Label
+  - layout_properties: {}
+    name: email_text_box
+    properties: {}
+    type: TextBox
+  - event_bindings: {click: save_button_click}
+    layout_properties: {}
+    name: save_button
+    properties: {bold: true, role: outlined-button, text: Save}
+    type: Button
+is_package: true
+layout: {type: 'form:layout'}

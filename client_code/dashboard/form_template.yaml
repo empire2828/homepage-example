@@ -1,10 +1,10 @@
 components_by_slot:
-  main_slot:
+  main_slot: []
+  slot_1:
   - layout_properties: {}
     name: label_1
     properties: {text: home}
     type: Label
-  slot_1: []
 is_package: true
 layout:
   form_event_bindings: {show: form_show}

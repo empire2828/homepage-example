@@ -1,0 +1,21 @@
+components_by_slot:
+  slot_1:
+  - components:
+    - layout_properties: {grid_position: 'QKQWIL,KGWMNN'}
+      name: label_1
+      properties: {bold: true, text: Hier können Sie Ihren Account löschen. Das ist nicht endgültig und nicht wiederherstellbar.}
+      type: Label
+    - layout_properties: {grid_position: 'LGDTGY,ZKBDGK'}
+      name: cancel_button
+      properties: {role: outlined-button, text: Cancel}
+      type: Button
+    - layout_properties: {grid_position: 'LGDTGY,ITGQIS'}
+      name: delete_button
+      properties: {role: outlined-button, text: Account löschen}
+      type: Button
+    layout_properties: {}
+    name: outlined_card_1
+    properties: {role: outlined-card, visible: true}
+    type: ColumnPanel
+is_package: true
+layout: {type: 'form:layout'}
