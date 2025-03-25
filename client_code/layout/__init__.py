@@ -13,10 +13,10 @@ class layout(layoutTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-  def home_link_click(self, **event_args):
+  def dashboard_link_click(self, **event_args):
     """This method is called when the link is clicked"""
-    open_form('home')
-    self.home_link.role='selected'
+    open_form('dashboard')
+    self.dashboard_link.role='selected'
 
   def guestscreen_link_click(self, **event_args):
     """This method is called when the link is clicked"""
@@ -24,5 +24,5 @@ class layout(layoutTemplate):
     self.guestscreen_link.role='selected'
 
   def reset_links(self, **event_args):
-    self.home_link.role = ''
+    self.dashboard_link.role = ''
     self.guestscreen_link.role = ''
