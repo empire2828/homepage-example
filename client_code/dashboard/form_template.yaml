@@ -4,6 +4,7 @@ components_by_slot:
     name: label_1
     properties: {text: home}
     type: Label
+  slot_1: []
 is_package: true
 layout:
   form_event_bindings: {show: form_show}
