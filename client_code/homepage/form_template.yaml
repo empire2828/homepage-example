@@ -154,7 +154,7 @@ components:
     align: center
     bold: true
     spacing:
-      margin: ['6', null, null, null]
+      margin: ['4', null, null, null]
     text: kostenlos (bis zu 10 Abrufe)
   type: Label
 - layout_properties: {grid_position: 'QROVTO,XSEFAP XTFRFJ,OCJNXL'}
