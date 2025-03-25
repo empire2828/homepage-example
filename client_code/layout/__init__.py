@@ -14,15 +14,18 @@ class layout(layoutTemplate):
     self.init_components(**properties)
 
   def dashboard_link_click(self, **event_args):
-    """This method is called when the link is clicked"""
-    open_form('dashboard')
-    self.dashboard_link.role='selected'
-
+   open_form('dashboard')
+   self.dashboard_link.role='selected'
+  
   def guestscreen_link_click(self, **event_args):
-    """This method is called when the link is clicked"""
     open_form('guestscreen')
     self.guestscreen_link.role='selected'
 
+  def accountmanagement_link_click(self, **event_args):
+    open_form('AccountManagement')
+    self.accountmanagement_link.role='selected'
+    
   def reset_links(self, **event_args):
     self.dashboard_link.role = ''
     self.guestscreen_link.role = ''
+    self.accountmanagement_link.role = ''

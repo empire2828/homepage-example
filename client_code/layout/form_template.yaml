@@ -15,9 +15,10 @@ components:
     name: guestscreen_link
     properties: {role: null, text: Gast checken}
     type: Link
-  - layout_properties: {grid_position: 'MBVFSN,JEQLTM'}
-    name: link_1
-    properties: {}
+  - event_bindings: {click: accountmanagement_link_click}
+    layout_properties: {grid_position: 'MBVFSN,JEQLTM'}
+    name: accountmanagement_link
+    properties: {role: null, text: Einstellungen}
     type: Link
   layout_properties: {slot: left-nav}
   name: column_panel_1
