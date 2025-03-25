@@ -20,6 +20,11 @@ components:
     name: accountmanagement_link
     properties: {role: null, text: Einstellungen}
     type: Link
+  - event_bindings: {click: upgrade_link_click}
+    layout_properties: {grid_position: 'PHXOWG,ZNVGHT'}
+    name: upgrade_link
+    properties: {text: Upgrade}
+    type: Link
   layout_properties: {slot: left-nav}
   name: column_panel_1
   properties:

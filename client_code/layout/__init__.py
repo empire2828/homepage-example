@@ -29,3 +29,7 @@ class layout(layoutTemplate):
     self.dashboard_link.role = ''
     self.guestscreen_link.role = ''
     self.accountmanagement_link.role = ''
+
+  def upgrade_link_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    open_form('StripePricing')
