@@ -63,7 +63,7 @@ secrets:
     value: {Y4HSOSHAROBHE7LA: 8eV6SFGUineV0goM9HAJPmoKi/BWXFgnKcVyzBrrs85PGs993ZPSkNYxGAKpjpUBjvEoqchKEQDwZ72N173fnt75JasN5WxiQiKEBGeGono+8vxn0IU875oQxsPSaVpgGappHN8x/BlDIaK2MYvIyYVc1XWBwdCeaZuWleeZodxXrLt3M8o=}
   stripe_secret_api_key:
     type: secret
-    value: {Y4HSOSHAROBHE7LA: d5T5SVYWB2oRVd74NKm0n3IhGdtJyuPtCeuJ2lcD8mFNcCzqHxYu8soyxDFVZhRZvAYDJr1C0hrG/OlvFen0Ed2jyoVy/rHcWnQ/BSrLxQkQrqaOQLtaUTar8hU2qOXqE/LmRJux/kVOJ6e/cAExk5DalwEdxESHfkVaWBw4JTUMA1wRvpk8KX4Il88hp/qFgqQxQh59F2LXX5Q4PDXZQlUtpTLXwVHcoOeHrICbx3/rxrG0kKO42gmOzOX74DQ9EtJCcCYAfyPriA==}
+    value: {Y4HSOSHAROBHE7LA: K8dSsqnwtS2xTWaUNo3YMAr3AeU4VZVj6ItEGsQkTvB1ZM/8/DhGXtjKnL9KHhvIlt/FfxSg+/5Nz+YQD1xMJrWsUaPl19izqyoE8hWi/UmNPdyj1+HQeZyUB6hYNaWggZDHBED8b9mvdN/bHxWNWrAYeSpbqXW116ky7jtjbyHZ5p+ccngepXYKfI7eVSdV8Eh4BPsuFtL8BkIU8NCCzXygIyF0BSmG9vqus5lVoX41ekAYGq7GWxEiXMs8LmtoAMQ1B7xZi2yY5g==}
 services:
 - client_config: {}
   server_config: {}
