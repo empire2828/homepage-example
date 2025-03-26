@@ -34,7 +34,8 @@ db_schema:
     server: full
     title: Users
 dependencies: []
-name: guestscreener_V2
+metadata: {description: guestscreener.com, logo_img: 'asset:guestscreener.png', title: guestscreener.com}
+name: guestscreener.com
 native_deps: null
 package_name: Homepage_Example
 renamed: true
