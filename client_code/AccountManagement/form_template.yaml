@@ -20,6 +20,7 @@ components_by_slot:
       name: account_delete_link
       properties: {text: Account löschen}
       type: Link
+    event_bindings: {click: subscription_manage_link_click}
     layout_properties: {}
     name: subscription_manage_link
     properties: {text: Abo verwalten}

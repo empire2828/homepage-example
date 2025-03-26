@@ -65,4 +65,8 @@ class AccountManagement(AccountManagementTemplate):
     open_form('AccountManagement.DeleteAccountAlert')
     pass
 
+  def subscription_manage_link_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    pass
+
   

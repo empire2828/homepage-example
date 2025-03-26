@@ -1,0 +1,8 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: link_1
+    properties: {text: Hier geht es zum Zahlungsanbieter Stripe, url: 'https://billing.stripe.com/p/login/7sIeW3aAjf8CgIodQQ'}
+    type: Link
+is_package: true
+layout: {type: 'form:layout'}
