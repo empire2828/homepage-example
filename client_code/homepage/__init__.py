@@ -20,3 +20,9 @@ class homepage(homepageTemplate):
    if user:
     open_form('dashboard')
     pass
+
+  def outlined_button_1_click(self, **event_args):
+    user = anvil.users.signup_with_form(allow_cancel=True)
+    if user:
+     open_form('dashboard')
+     pass
