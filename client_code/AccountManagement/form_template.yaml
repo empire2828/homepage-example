@@ -23,7 +23,7 @@ components_by_slot:
     event_bindings: {click: subscription_manage_link_click}
     layout_properties: {}
     name: subscription_manage_link
-    properties: {text: Abo verwalten}
+    properties: {text: Abo verwalten (über Stripe), url: 'https://billing.stripe.com/p/login/test_3csg0Lcbpf4i8005kk'}
     type: Link
 is_package: true
 layout:
