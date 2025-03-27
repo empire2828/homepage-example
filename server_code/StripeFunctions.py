@@ -103,6 +103,10 @@ def stripe_subscription_updated():
   # Need to get the users record from the DB based on the subscription objects "customer" field
   stripe_customer_id = payload_json.get("data").get("object").get("customer")
 
+  if stripe_customer_id is None:
+        print("Customer ID is None.")
+        return anvil.server.HttpResponse(400, "Customer ID is missing.")
+
   stripe_customer = stripe.Customer.retrieve(
       stripe_customer_id
     )
