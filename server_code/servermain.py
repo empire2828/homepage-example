@@ -8,15 +8,30 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
-# This is a server module. It runs on the Anvil server,
-# rather than in the user's browser.
-#
-# To allow anvil.server.call() to call functions here, we mark
-# them with @anvil.server.callable.
-# Here is an example - you can replace it with your own:
-#
-# @anvil.server.callable
-# def say_hello(name):
-#   print("Hello, " + name + "!")
-#   return 42
-#
+class Guest:
+    def __init__(self, first_name, last_name, street, house_number, postal_code, city):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.street = street
+        self.house_number = house_number
+        self.postal_code = postal_code
+        self.city = city
+    
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
+    
+    def get_full_address(self):
+        return f"{self.street} {self.house_number}, {self.postal_code} {self.city}"
+    
+    def __str__(self):
+        return f"{self.get_full_name()}, {self.get_full_address()}"
+    
+    def update_address(self, street=None, house_number=None, postal_code=None, city=None):
+        if street:
+            self.street = street
+        if house_number:
+            self.house_number = house_number
+        if postal_code:
+            self.postal_code = postal_code
+        if city:
+            self.city = city
