@@ -69,4 +69,8 @@ class AccountManagement(AccountManagementTemplate):
     """This method is called when the link is clicked"""
     pass
 
+  def outlined_button_1_click(self, **event_args):
+  
+    pass
+
   

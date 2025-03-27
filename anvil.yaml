@@ -70,6 +70,9 @@ secrets:
   stripe_secret_api_key:
     type: secret
     value: {Y4HSOSHAROBHE7LA: K8dSsqnwtS2xTWaUNo3YMAr3AeU4VZVj6ItEGsQkTvB1ZM/8/DhGXtjKnL9KHhvIlt/FfxSg+/5Nz+YQD1xMJrWsUaPl19izqyoE8hWi/UmNPdyj1+HQeZyUB6hYNaWggZDHBED8b9mvdN/bHxWNWrAYeSpbqXW116ky7jtjbyHZ5p+ccngepXYKfI7eVSdV8Eh4BPsuFtL8BkIU8NCCzXygIyF0BSmG9vqus5lVoX41ekAYGq7GWxEiXMs8LmtoAMQ1B7xZi2yY5g==}
+  stripe_test_api_key:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: tmBGw6FIjMQE3lfps4SL3Wc6fQwKXK/yNJ+Q/MbU8VF02hx7wk1zyc43DdS60OMglP75GWIjndcAsFPJjSSbThlmeT+ASlHrzAE6gwTRWG7xYRlw1wTUIjkugg3c59lXAIPWavhF+R9/HJX4O32MQXTt0kmhKwa2Cxwak0dpKsTTHufGMYdeXQ7iU+p87iGV4QEMMKkhzrRK6BI6SZ0QG+4wXuLX3RnMl5rEGnAMtAxtPXjqjt4QbXa7gMhMZx1+VZW0+IBWtj1Dvw==}
 services:
 - client_config: {}
   server_config: {}
