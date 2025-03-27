@@ -2,7 +2,7 @@ components_by_slot:
   slot_1:
   - layout_properties: {}
     name: label_1
-    properties: {bold: true, text: 'Die eMail zu ändern, ändert auch die eMail für den Zahlungsanbieter Stripe. Hier die neue eMail eingeben:'}
+    properties: {bold: false, text: 'Die eMail zu ändern, ändert auch die eMail für den Zahlungsanbieter Stripe. Hier die neue eMail eingeben:'}
     type: Label
   - layout_properties: {}
     name: email_text_box

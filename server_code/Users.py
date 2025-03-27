@@ -62,3 +62,31 @@ def delete_user():
       print("An unexpected error occurred:", e)
   else:
     user.delete()
+
+@anvil.server.callable(require_user=True)
+def send_password_reset_email():
+    """
+    Sends a password reset email to the currently logged-in user.
+    """
+    try:
+        # Get the email of the currently logged-in user
+        user_email = anvil.users.get_user()['email']
+        
+        # Send the password reset email
+        anvil.users.send_password_reset_email(user_email)
+        
+        return "Password reset email sent successfully."
+    except Exception as e:
+        print(f"Error sending password reset email: {e}")
+        return "Failed to send password reset email."
+
+
+# Server-Modul DKL
+@anvil.server.callable
+def get_user_has_subscription():
+    user = anvil.users.get_user()
+    if user and 'Personal' not in user['subscription']:
+        return False
+    else:
+        return True
+  

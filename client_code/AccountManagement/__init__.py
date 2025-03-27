@@ -69,8 +69,8 @@ class AccountManagement(AccountManagementTemplate):
     """This method is called when the link is clicked"""
     pass
 
-  def outlined_button_1_click(self, **event_args):
-  
+  def password_reset_link_click(self, **event_args):
+    anvil.server.call('send_password_reset_email')
     pass
 
   

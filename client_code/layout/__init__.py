@@ -29,7 +29,11 @@ class layout(layoutTemplate):
     self.dashboard_link.role = ''
     self.guestscreen_link.role = ''
     self.accountmanagement_link.role = ''
+    self.upgrade_link.role = ''
 
   def upgrade_link_click(self, **event_args):
-    """This method is called when the link is clicked"""
-    open_form('StripePricing')
+    has_subscription = anvil.server.call('get_user_has_subscription')
+    if not has_subscription:
+        open_form('StripePricing')
+    else:
+      alert('Abo ist bereits upgegraded')
