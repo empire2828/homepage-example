@@ -18,6 +18,7 @@ class dashboard(dashboardTemplate):
     self.layout.reset_links()
 
   def button_1_click(self, **event_args):
-    anvil.server.call('get_all_future_bookings()')
+    result = anvil.server.call('get_all_future_bookings')
+    alert(result)
     pass
 
