@@ -1,6 +1,44 @@
 allow_embedding: false
 correct_dependency_ids: {}
 db_schema:
+  bookings:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: email
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: apartment.Id
+      type: number
+    - admin_ui: {order: 3, width: 200}
+      name: arrival
+      type: string
+    - admin_ui: {order: 4, width: 200}
+      name: departure
+      type: string
+    - admin_ui: {order: 5, width: 200}
+      name: channel.name
+      type: string
+    - admin_ui: {order: 6, width: 200}
+      name: guest-name
+      type: string
+    - admin_ui: {order: 7, width: 200}
+      name: adults
+      type: number
+    - admin_ui: {order: 8, width: 200}
+      name: children
+      type: number
+    - admin_ui: {order: 9, width: 200}
+      name: language
+      type: string
+    - admin_ui: {order: 10, width: 200}
+      name: type
+      type: string
+    - admin_ui: {order: 11, width: 200}
+      name: created-at
+      type: string
+    server: full
+    title: bookings
   users:
     client: none
     columns:
