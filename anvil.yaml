@@ -105,6 +105,9 @@ secrets:
   google_maps_api_key:
     type: secret
     value: {Y4HSOSHAROBHE7LA: 8eV6SFGUineV0goM9HAJPmoKi/BWXFgnKcVyzBrrs85PGs993ZPSkNYxGAKpjpUBjvEoqchKEQDwZ72N173fnt75JasN5WxiQiKEBGeGono+8vxn0IU875oQxsPSaVpgGappHN8x/BlDIaK2MYvIyYVc1XWBwdCeaZuWleeZodxXrLt3M8o=}
+  smoobu_api_key:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: Vqe4UNlJa3V/CTgr+5FL9+Qyv4lYZr0lHwr8DLqxhZX3EOv7LmvpWQ9qWCU2QfyKq/ZLxlJwZNJJhC6Jx7byYzZmb67Xs8r5SVSJXng4X+uPINyHGcpenqYQFPu5T1w55tmJpG9pKkFq56bX4sR9JGhtTFUHVnRC1fRiwAVP/OTIPQ6+kVkKhhA=}
   stripe_secret_api_key:
     type: secret
     value: {Y4HSOSHAROBHE7LA: K8dSsqnwtS2xTWaUNo3YMAr3AeU4VZVj6ItEGsQkTvB1ZM/8/DhGXtjKnL9KHhvIlt/FfxSg+/5Nz+YQD1xMJrWsUaPl19izqyoE8hWi/UmNPdyj1+HQeZyUB6hYNaWggZDHBED8b9mvdN/bHxWNWrAYeSpbqXW116ky7jtjbyHZ5p+ccngepXYKfI7eVSdV8Eh4BPsuFtL8BkIU8NCCzXygIyF0BSmG9vqus5lVoX41ekAYGq7GWxEiXMs8LmtoAMQ1B7xZi2yY5g==}

@@ -1,22 +1,94 @@
-import anvil.email
-import anvil.secrets
-import anvil.google.auth, anvil.google.drive, anvil.google.mail
-from anvil.google.drive import app_files
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
 import anvil.server
+import anvil.tables as tables
+from anvil.tables import app_tables
+import requests
+from datetime import datetime
+import anvil.secrets
 
-# This is a server module. It runs on the Anvil server,
-# rather than in the user's browser.
-#
-# To allow anvil.server.call() to call functions here, we mark
-# them with @anvil.server.callable.
-# Here is an example - you can replace it with your own:
-#
-# @anvil.server.callable
-# def say_hello(name):
-#   print("Hello, " + name + "!")
-#   return 42
-#
+@anvil.server.callable
+def get_all_future_bookings():
+    # Smoobu API endpoint für Reservierungen
+    base_url = "https://login.smoobu.com/api/reservations"
+    
+    # API-Schlüssel aus Anvil Secrets holen
+    api_key = anvil.secrets.get_secret('smoobu_api_key')
+    
+    # Headers mit API-Schlüssel für Autorisierung
+    headers = {
+        "Api-Key": api_key,
+        "Content-Type": "application/json"
+    }
+    
+    # Parameter für die API-Anfrage
+    params = {
+        "start_date": datetime.now().strftime("%Y-%m-%d"),
+        "status": "confirmed",
+        "page": 1,
+        "limit": 100  # Maximale Anzahl von Buchungen pro Seite
+    }
+    
+    all_bookings = []
+    total_pages = 1
+    current_page = 1
+    
+    # Alle Seiten durchlaufen
+    while current_page <= total_pages:
+        params["page"] = current_page
+        
+        # API-Anfrage senden
+        response = requests.get(base_url, headers=headers, params=params)
+        
+        if response.status_code == 200:
+            data = response.json()
+            
+            # Gesamtanzahl der Seiten aus der Antwort extrahieren (falls vorhanden)
+            if "pagination" in data and "totalPages" in data["pagination"]:
+                total_pages = data["pagination"]["totalPages"]
+            
+            # Buchungen aus der aktuellen Seite extrahieren
+            if "data" in data:
+                bookings = data["data"]
+                all_bookings.extend(bookings)
+            else:
+                bookings = data
+                all_bookings.extend(bookings)
+            
+            current_page += 1
+        else:
+            return f"Fehler: {response.status_code} - {response.text}"
+    
+    # Buchungen in die Anvil-Datenbank schreiben
+    bookings_added = 0
+    for booking in all_bookings:
+        # Prüfen, ob die Buchung bereits in der Datenbank existiert
+        existing = app_tables.bookings.get(reservation_id=booking['id'])
+        
+        if existing:
+            # Aktualisiere bestehenden Eintrag
+            existing.update(
+                apartment_id=booking['apartmentId'],
+                arrival_date=booking['arrivalDate'],
+                departure_date=booking['departureDate'],
+                guest_name=booking['guestName'],
+                total_price=booking['totalPrice'],
+                status=booking['status']
+            )
+        else:
+            # Neuen Eintrag hinzufügen
+            app_tables.bookings.add_row(
+                reservation_id=booking['id'],
+                apartment_id=booking['apartmentId'],
+                arrival_date=booking['arrivalDate'],
+                departure_date=booking['departureDate'],
+                guest_name=booking['guestName'],
+                total_price=booking['totalPrice'],
+                status=booking['status']
+            )
+        
+        bookings_added += 1
+    
+    return f"Erfolgreich {bookings_added} Buchungen abgerufen und in der Datenbank gespeichert."
+
+# Funktion aufrufen, um zukünftige Buchungen zu holen und die Datenbank zu aktualisieren
+result = get_all_future_bookings()
+print(result)
