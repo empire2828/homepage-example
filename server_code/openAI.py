@@ -21,7 +21,7 @@ client = OpenAI(
 def open_ai(name, location, checktype):
   if checktype == "job":
     prompt = f"""
-Welchen beruf hat {name} bei einem unternehmen in der nähe von {location}? Wenn kein Beruf bekannt ist, Wo ist Sie in der nähe von {location} in Erscheinung getreten? Schreibe sehr kurz ohne Zitatnummern.
+Welchen beruf hat {name} bei einem unternehmen in der nähe von {location}? Wenn kein Beruf bekannt ist, Wo ist Er oder Sie in der nähe von {location} in Erscheinung getreten? Schreibe sehr kurz ohne Zitatnummern.
 """
   else:
     prompt = f"""
