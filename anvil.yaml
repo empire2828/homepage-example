@@ -40,6 +40,18 @@ db_schema:
     - admin_ui: {width: 200}
       name: reservation_id
       type: number
+    - admin_ui: {order: 13, width: 200}
+      name: address_street
+      type: string
+    - admin_ui: {order: 14, width: 200}
+      name: address_postalcode
+      type: string
+    - admin_ui: {order: 15, width: 200}
+      name: address_city
+      type: string
+    - admin_ui: {order: 16, width: 200}
+      name: address_country
+      type: string
     server: full
     title: bookings
   files:

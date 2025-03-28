@@ -9,6 +9,7 @@ import anvil.secrets
 
 @anvil.server.callable
 def get_all_future_bookings():
+    # Buchungen abrufen
     base_url = "https://login.smoobu.com/api/reservations"
     api_key = anvil.secrets.get_secret('smoobu_api_key')
     
@@ -35,11 +36,9 @@ def get_all_future_bookings():
         if response.status_code == 200:
             data = response.json()
             
-            # Correctly handle pagination
             if "pagination" in data and "totalPages" in data["pagination"]:
                 total_pages = data["pagination"]["totalPages"]
             
-            # Extract bookings from correct API response key
             if "bookings" in data:
                 all_bookings.extend(data["bookings"])
             else:
@@ -52,10 +51,18 @@ def get_all_future_bookings():
     bookings_added = 0
     for booking in all_bookings:
         try:
-            # Get existing booking using reservation_id
+            # Bestehende Buchung anhand der Reservierungs-ID abrufen
             existing = app_tables.bookings.get(reservation_id=booking['id'])
             
-            # Correct field access based on API documentation
+            # Gästedaten abrufen
+            guest_data = get_guest_details(booking['id'], headers)
+            
+            # Adressdaten extrahieren
+            street = guest_data.get('street', '')
+            city = guest_data.get('city', '')
+            postal_code = guest_data.get('postalCode', '')
+            country = guest_data.get('country', '')
+            
             apartment_id = booking['apartment']
             guest_name = booking['guest-name']
             
@@ -69,7 +76,11 @@ def get_all_future_bookings():
                     channel_name=booking['channel']['name'],
                     adults=booking['adults'],
                     children=booking['children'],
-                    type=booking['type']
+                    type=booking['type'],
+                    street=street,
+                    city=city,
+                    postal_code=postal_code,
+                    country=country
                 )
             else:
                 app_tables.bookings.add_row(
@@ -81,7 +92,11 @@ def get_all_future_bookings():
                     channel_name=booking['channel']['name'],
                     adults=booking['adults'],
                     children=booking['children'],
-                    type=booking['type']
+                    type=booking['type'],
+                    street=street,
+                    city=city,
+                    postal_code=postal_code,
+                    country=country
                 )
             
             bookings_added += 1
@@ -89,7 +104,16 @@ def get_all_future_bookings():
             print(f"Missing key in booking data: {e}")
             continue
     
-    return f"Erfolgreich {bookings_added} Buchungen abgerufen und gespeichert."
+    return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten abgerufen und gespeichert."
 
-#result = get_all_future_bookings()()
-#print 
+def get_guest_details(reservation_id, headers):
+    """Ruft die Gästedaten für eine bestimmte Reservierung ab"""
+    guest_url = f"https://login.smoobu.com/api/reservations/{reservation_id}/guest"
+    
+    response = requests.get(guest_url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Fehler beim Abrufen der Gästedaten: {response.status_code} - {response.text}")
+        return {}
