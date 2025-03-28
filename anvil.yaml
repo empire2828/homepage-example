@@ -42,6 +42,20 @@ db_schema:
       type: number
     server: full
     title: bookings
+  files:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: path
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: file
+      type: media
+    - admin_ui: {order: 2, width: 200}
+      name: file_version
+      type: string
+    server: full
+    title: Files
   users:
     client: none
     columns:
@@ -133,5 +147,8 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/anvil/email.yml
+- client_config: {}
+  server_config: {file_table: files}
+  source: /runtime/services/anvil/files.yml
 startup: {module: homepage, type: form}
 startup_form: null
