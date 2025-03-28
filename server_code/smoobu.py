@@ -66,23 +66,18 @@ def get_all_future_bookings():
         if existing:
             # Aktualisiere bestehenden Eintrag
             existing.update(
-                apartment_id=booking['apartmentId'],
-                arrival_date=booking['arrivalDate'],
-                departure_date=booking['departureDate'],
-                guest_name=booking['guestName'],
-                total_price=booking['totalPrice'],
-                status=booking['status']
+                apartment=booking['apartment.Id'],
+                arrival=booking['arrival'],
+                departure=booking['departure'],
+                guestname=booking['guest-name']          
             )
         else:
             # Neuen Eintrag hinzufügen
             app_tables.bookings.add_row(
-                reservation_id=booking['id'],
-                apartment_id=booking['apartmentId'],
-                arrival_date=booking['arrivalDate'],
-                departure_date=booking['departureDate'],
-                guest_name=booking['guestName'],
-                total_price=booking['totalPrice'],
-                status=booking['status']
+                apartment=booking['apartment.Id'],
+                arrival=booking['arrival'],
+                departure=booking['departure'],
+                guestname=booking['guest-name']          
             )
         
         bookings_added += 1
