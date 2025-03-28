@@ -77,6 +77,9 @@ def get_all_future_bookings():
                     adults=booking['adults'],
                     children=booking['children'],
                     type=booking['type'],
+                    street=street,
+                    city=city,
+                    country=country
                 )
             else:
                 app_tables.bookings.add_row(
@@ -89,6 +92,9 @@ def get_all_future_bookings():
                     adults=booking['adults'],
                     children=booking['children'],
                     type=booking['type'],
+                    street=street,
+                    city=city,
+                    country=country
                 )
             
             bookings_added += 1
@@ -100,7 +106,7 @@ def get_all_future_bookings():
 
 def get_guest_details(reservation_id, headers):
     """Ruft die Gästedaten für eine bestimmte Reservierung ab"""
-    guest_url = f"https://login.smoobu.com/api/reservations/{reservation_id}/guest"
+    guest_url = f"https://login.smoobu.com/api/guests"
     
     response = requests.get(guest_url, headers=headers)
     
@@ -109,3 +115,4 @@ def get_guest_details(reservation_id, headers):
     else:
         print(f"Fehler beim Abrufen der Gästedaten: {response.status_code} - {response.text}")
         return {}
+
