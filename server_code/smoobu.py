@@ -8,12 +8,6 @@ from datetime import datetime
 import anvil.secrets
 
 @anvil.server.callable
-def my_server_function():
-    # Function body
-    return "Hello from the server!"
-pass
-
-@anvil.server.callable
 def get_all_future_bookings():
     base_url = "https://login.smoobu.com/api/reservations"
     api_key = anvil.secrets.get_secret('smoobu_api_key')
@@ -62,23 +56,32 @@ def get_all_future_bookings():
             existing = app_tables.bookings.get(reservation_id=booking['id'])
             
             # Correct field access based on API documentation
-            apartment_id = booking['apartment']['id']
+            apartment_id = booking['apartment']
             guest_name = booking['guest-name']
             
             if existing:
                 existing.update(
-                    apartment=apartment_id,
+                    reservation_id=booking['id'],
+                    apartment=booking['apartment']['name'],
                     arrival=booking['arrival'],
                     departure=booking['departure'],
-                    guestname=guest_name
+                    guestname=guest_name,
+                    channel_name=booking['channel']['name'],
+                    adults=booking['adults'],
+                    children=booking['children'],
+                    type=booking['type']
                 )
             else:
                 app_tables.bookings.add_row(
                     reservation_id=booking['id'],
-                    apartment=apartment_id,
+                    apartment=booking['apartment']['name'],
                     arrival=booking['arrival'],
                     departure=booking['departure'],
-                    guestname=guest_name
+                    guestname=guest_name,
+                    channel_name=booking['channel']['name'],
+                    adults=booking['adults'],
+                    children=booking['children'],
+                    type=booking['type']
                 )
             
             bookings_added += 1
