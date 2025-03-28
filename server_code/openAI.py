@@ -41,3 +41,4 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
     return f"Fehler: {e}"
 
 # print(open_ai("Andrea Querner","Dresden","job"))
+# test from github vs studio
