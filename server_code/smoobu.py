@@ -77,9 +77,9 @@ def get_all_future_bookings():
                     adults=booking['adults'],
                     children=booking['children'],
                     type=booking['type'],
-                    street=street,
-                    city=city,
-                    country=country
+                    address_street=street,
+                    address_city=city,
+                    address_country=country
                 )
             else:
                 app_tables.bookings.add_row(
@@ -92,9 +92,9 @@ def get_all_future_bookings():
                     adults=booking['adults'],
                     children=booking['children'],
                     type=booking['type'],
-                    street=street,
-                    city=city,
-                    country=country
+                    address_street=street,
+                    address_city=city,
+                    address_country=country
                 )
             
             bookings_added += 1
