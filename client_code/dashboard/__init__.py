@@ -17,3 +17,7 @@ class dashboard(dashboardTemplate):
     """This method is called when the form is shown on the page"""
     self.layout.reset_links()
 
+  def button_1_click(self, **event_args):
+    anvil.server.call('get_all_future_bookings()')
+    pass
+

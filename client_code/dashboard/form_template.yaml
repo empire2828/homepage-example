@@ -1,10 +1,11 @@
 components_by_slot:
   main_slot: []
   slot_1:
-  - layout_properties: {}
-    name: label_1
-    properties: {text: home}
-    type: Label
+  - event_bindings: {click: button_1_click}
+    layout_properties: {}
+    name: button_1
+    properties: {text: get_all_future_bookings()}
+    type: Button
 is_package: true
 layout:
   form_event_bindings: {show: form_show}
