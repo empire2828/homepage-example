@@ -16,11 +16,10 @@ components_by_slot:
       columns:
       - {data_key: arrival, id: VQIZNH, title: arrival}
       - {data_key: departure, id: LHDULD, title: departure}
-      - {data_key: channel.name, id: LBCJKT, title: channel.name}
+      - {data_key: channel_name, id: LBCJKT, title: channel.name}
       - {data_key: guestname, id: YPEETG, title: guestname}
       - {data_key: adults, id: JAVEAB, title: adults}
       - {data_key: children, id: DNUSAU, title: children}
-      - {data_key: reservation_id, id: DJPEXO, title: reservation_id}
     type: DataGrid
 is_package: true
 layout:
