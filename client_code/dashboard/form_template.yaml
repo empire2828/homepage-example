@@ -6,21 +6,11 @@ components_by_slot:
     name: button_1
     properties: {text: get_all_future_bookings()}
     type: Button
-  - components:
-    - name: booking_repeating_panel
-      properties: {item_template: dashboard.RowTemplate3}
-      type: RepeatingPanel
+  - data_bindings: []
     layout_properties: {}
-    name: data_grid_1
-    properties:
-      columns:
-      - {data_key: arrival, id: VQIZNH, title: arrival}
-      - {data_key: departure, id: LHDULD, title: departure}
-      - {data_key: channel_name, id: LBCJKT, title: channel}
-      - {data_key: guestname, id: YPEETG, title: guestname}
-      - {data_key: adults, id: JAVEAB, title: adults}
-      - {data_key: children, id: DNUSAU, title: children}
-    type: DataGrid
+    name: bookings_repeating_panel
+    properties: {item_template: dashboard.ItemTemplate1}
+    type: RepeatingPanel
 is_package: true
 layout:
   form_event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings, show: form_show}
