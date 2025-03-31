@@ -1,19 +1,39 @@
 components:
-- layout_properties: {grid_position: 'OOXKRQ,UIAMWI ACDDZQ,JJDIWK'}
-  name: stay_dates_text_box
-  properties: {}
-  type: TextBox
-- layout_properties: {grid_position: 'OOXKRQ,UIAMWI EEKPZV,EMSDAW'}
-  name: text_box_4
-  properties: {}
-  type: TextBox
-- layout_properties: {grid_position: 'OOXKRQ,HBDJVR KYOUNN,UUFKIU'}
+- layout_properties: {grid_position: 'OOXKRQ,UIAMWI JPDBSN,WJIJMX'}
   name: guestname_text_box
-  properties: {}
+  properties: {bold: true, text: Gast}
+  type: TextBox
+- layout_properties: {grid_position: 'OOXKRQ,UIAMWI WHOVUC,SQEAKY PWVODD,IVQCKS'}
+  name: label_1
+  properties:
+    spacing:
+      margin: [0, null, 0, null]
+      padding: ['0', null, '0', null]
+    text: Anreise
+  type: Label
+- layout_properties: {grid_position: 'OOXKRQ,UIAMWI WHOVUC,SQEAKY ACMWOP,YMWOAE'}
+  name: arrival_text_box
+  properties: {text: Anreise}
+  type: TextBox
+- layout_properties: {grid_position: 'OOXKRQ,UIAMWI WHOVUC,DEHMJX UPIKZI,OZCWPW'}
+  name: label_2
+  properties:
+    spacing:
+      margin: ['0', null, '0', null]
+      padding: ['0', null, '0', null]
+    text: Abreise
+  type: Label
+- layout_properties: {grid_position: 'OOXKRQ,UIAMWI WHOVUC,DEHMJX FOHJGM,FPYMTM'}
+  name: departure_text_box
+  properties: {text: Abreise}
+  type: TextBox
+- layout_properties: {grid_position: 'OOXKRQ,UIAMWI EWIDMM,VJWBFO'}
+  name: channel_name_text_box
+  properties: {text: Vertriebskanal}
   type: TextBox
 - layout_properties: {grid_position: 'OOXKRQ,HBDJVR JBRNZP,PSVONB'}
   name: ai_text_area
-  properties: {}
+  properties: {height: 78}
   type: TextArea
 - layout_properties: {grid_position: 'OOXKRQ,HBDJVR CORMCZ,TGACZB'}
   name: text_box_1
@@ -28,6 +48,6 @@ components:
   properties: {}
   type: TextBox
 container:
-  properties: {col_widths: '{"HBDJVR":50,"UIAMWI":15}'}
+  properties: {col_widths: '{"HBDJVR":36,"UIAMWI":20}'}
   type: ColumnPanel
 is_package: true

@@ -14,5 +14,8 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.guestname_text_box.text=self.item['guestname']
+    self.arrival_text_box.text=self.item['arrival']
+    self.departure_text_box.text=self.item['departure']
+    self.channel_name_text_box.text=self.item['channel_name']
 
     # Any code you write here will run before the form opens.
