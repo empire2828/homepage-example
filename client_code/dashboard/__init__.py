@@ -12,8 +12,8 @@ class dashboard(dashboardTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.booking_repeating_panel.items = app_tables.bookings.search()
-
+    self.bookings_repeating_panel.items = app_tables.bookings.search()
+    
   def form_show(self, **event_args):
     """This method is called when the form is shown on the page"""
     self.layout.reset_links()

@@ -9,7 +9,7 @@ components_by_slot:
   - data_bindings: []
     layout_properties: {}
     name: bookings_repeating_panel
-    properties: {item_template: dashboard.ItemTemplate1}
+    properties: {item_template: dashboard.bookings_ItemTemplate}
     type: RepeatingPanel
 is_package: true
 layout:
