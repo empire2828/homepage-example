@@ -48,7 +48,7 @@ components_by_slot:
       type: TextBox
     layout_properties: {}
     name: guest_data_outlined_card
-    properties: {col_widths: '{"AWGGXR":20,"IMLQVF":40,"MNTOOH":20,"FOGIJG":40}', role: outlined-card}
+    properties: {background: 'theme:Secondary Container', col_widths: '{"AWGGXR":20,"IMLQVF":40,"MNTOOH":20,"FOGIJG":40}', role: outlined-card}
     type: ColumnPanel
   - layout_properties: {}
     name: spacer_1
@@ -57,7 +57,7 @@ components_by_slot:
   - event_bindings: {click: guestscreen_button_click}
     layout_properties: {}
     name: guestscreen_button
-    properties: {role: outlined-button, text: Gast checken}
+    properties: {background: 'theme:Primary', foreground: 'theme:On Primary', role: outlined-button, text: Gast checken}
     type: Button
   - layout_properties: {}
     name: spacer_2
@@ -98,7 +98,7 @@ components_by_slot:
       type: TextBox
     layout_properties: {}
     name: outlined_card_1
-    properties: {role: outlined-card}
+    properties: {background: 'theme:Secondary Container', role: outlined-card}
     type: ColumnPanel
 is_package: true
 layout:
