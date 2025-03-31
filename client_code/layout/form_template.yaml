@@ -26,6 +26,11 @@ components:
     name: upgrade_link
     properties: {text: Upgrade}
     type: Link
+  - event_bindings: {click: logout_link_click}
+    layout_properties: {grid_position: 'RGLLQE,AJUGIV'}
+    name: logout_link
+    properties: {text: Ausloggen}
+    type: Link
   layout_properties: {slot: left-nav}
   name: column_panel_1
   properties:

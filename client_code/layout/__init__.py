@@ -37,3 +37,8 @@ class layout(layoutTemplate):
         open_form('StripePricing')
     else:
       alert('Abo ist bereits upgegraded')
+
+  def logout_link_click(self, **event_args):
+      anvil.users.logout()
+      open_form('homepage')
+  pass

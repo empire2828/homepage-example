@@ -47,6 +47,10 @@ components:
   name: text_box_3
   properties: {}
   type: TextBox
+- layout_properties: {grid_position: 'UDYJNG,YIEHLZ'}
+  name: spacer_1
+  properties: {height: 1.0867919921875}
+  type: Spacer
 container:
   properties: {col_widths: '{"HBDJVR":36,"UIAMWI":20}'}
   type: ColumnPanel

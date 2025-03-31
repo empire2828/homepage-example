@@ -65,6 +65,8 @@ def get_all_future_bookings():
             
             apartment_id = booking['apartment']
             guest_name = booking['guest-name']
+            current_user = anvil.users.get_user()
+            user_email = current_user['email'] 
             
             if existing:
                 existing.update(
@@ -79,7 +81,8 @@ def get_all_future_bookings():
                     type=booking['type'],
                     address_street=street,
                     address_city=city,
-                    address_country=country
+                    address_country=country,
+                    email=user_email
                 )
             else:
                 app_tables.bookings.add_row(
@@ -94,7 +97,8 @@ def get_all_future_bookings():
                     type=booking['type'],
                     address_street=street,
                     address_city=city,
-                    address_country=country
+                    address_country=country,
+                    email=user_email
                 )
             
             bookings_added += 1
