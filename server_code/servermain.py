@@ -13,7 +13,8 @@ import google_linkedin
 def get_bookings_risk():
     bookings = app_tables.bookings.search(email=anvil.users.get_user()['email'])
     for booking in bookings:
-        booking['screener_google_linkedin'] = google_linkedin(booking['guestname'], booking['city'])
-        print(booking['screener_google_linkedin'])
+        #print(booking['guestname'],booking['address_city'])
+        test = google_linkedin.google_linkedin(booking['guestname'], booking['address_city'])
+        print(test)
     return bookings
 

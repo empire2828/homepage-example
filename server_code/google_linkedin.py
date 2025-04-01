@@ -14,6 +14,11 @@ url = "https://www.googleapis.com/customsearch/v1"
 
 @anvil.server.callable
 def google_linkedin(full_name, city):
+    if full_name is None:
+        full_name = ""
+    if city is None:
+        city = ""
+  
     # Ersetze Leerzeichen im Namen durch Pluszeichen, um sicherzustellen, dass alle Wörter gesucht werden
     query_name = full_name.replace(" ", "+")
     
