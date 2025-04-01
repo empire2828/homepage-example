@@ -6,6 +6,11 @@ components_by_slot:
     name: button_1
     properties: {text: get_all_future_bookings()}
     type: Button
+  - event_bindings: {click: get_bookings_risk_button_click}
+    layout_properties: {}
+    name: get_bookings_risk_button
+    properties: {role: elevated-button, text: get_bookings_risk}
+    type: Button
   - data_bindings: []
     layout_properties: {}
     name: bookings_repeating_panel
