@@ -20,11 +20,6 @@ class dashboard(dashboardTemplate):
     """This method is called when the form is shown on the page"""
     self.layout.reset_links()
 
-  def button_1_click(self, **event_args):
-    result = anvil.server.call('get_all_future_bookings')
-    alert(result)
-    pass
-
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""
     pass
@@ -33,5 +28,11 @@ class dashboard(dashboardTemplate):
     result = anvil.server.call('get_bookings_risk')
     alert(result)
     pass
+
+  def sync_smoobu_button_click(self, **event_args):
+    result = anvil.server.call('launch_sync_smoobu')
+    alert(result)
+    pass
+
 
   

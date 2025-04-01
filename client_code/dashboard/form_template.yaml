@@ -1,10 +1,10 @@
 components_by_slot:
   main_slot: []
   slot_1:
-  - event_bindings: {click: button_1_click}
+  - event_bindings: {click: sync_smoobu_button_click}
     layout_properties: {}
-    name: button_1
-    properties: {text: get_all_future_bookings()}
+    name: sync_smoobu_button
+    properties: {role: elevated-button, text: Sync Smoobu}
     type: Button
   - event_bindings: {click: get_bookings_risk_button_click}
     layout_properties: {}

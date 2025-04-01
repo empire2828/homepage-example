@@ -6,7 +6,15 @@ from datetime import datetime
 import anvil.secrets
 
 @anvil.server.callable
-def get_all_future_bookings():
+def launch_sync_smoobu():
+  current_user = anvil.users.get_user()
+  user_email = current_user['email'] 
+  print(user_email)
+  result= anvil.server.launch_background_task('sync_smoobu',user_email)
+  return result
+
+@anvil.server.background_task
+def sync_smoobu(user_email):
     # Buchungen abrufen
     base_url = "https://login.smoobu.com/api/reservations"
     api_key = anvil.secrets.get_secret('smoobu_api_key')
@@ -63,8 +71,8 @@ def get_all_future_bookings():
             
             apartment_id = booking['apartment']
             guest_name = booking['guest-name']
-            current_user = anvil.users.get_user()
-            user_email = current_user['email'] 
+            #current_user = anvil.users.get_user()
+            #user_email = current_user['email'] 
             
             if existing:
                 existing.update(
