@@ -13,30 +13,40 @@ api_key = anvil.secrets.get_secret('google_maps_api_key')
 
 @anvil.server.callable
 def address_check(address):
-    encoded_address = urllib.parse.quote(address)  # Vollständige Kodierung
-    
-    url = f"https://maps.googleapis.com/maps/api/geocode/json?address={encoded_address}&key={api_key}"
+    # Prüfen, ob die Adresse leer ist
+    if not address:
+        print("Leere Adresse übergeben")
+        return False
     
     try:
-        response = anvil.http.request(url, json=True)
+        encoded_address = urllib.parse.quote(address)  # Vollständige Kodierung
         
-        if 'status' in response and response['status'] == 'OK':
-            if 'results' in response and len(response['results']) > 0:
-                # address check passed
-                print("Address check passed: ", response['results'][0]['formatted_address'])
-                return True
+        url = f"https://maps.googleapis.com/maps/api/geocode/json?address={encoded_address}&key={api_key}"
+        
+        try:
+            response = anvil.http.request(url, json=True)
+            
+            if response and 'status' in response:
+                if response['status'] == 'OK' and 'results' in response and len(response['results']) > 0:
+                    # Address check passed
+                    print("Address check passed: ", response['results'][0]['formatted_address'])
+                    return True
+                else:
+                    # Keine Ergebnisse oder anderer Status
+                    print(f"Address check failed: {response.get('status', 'Unknown error')}")
+                    return False
             else:
-                # keine Ergebnisse gefunden
-                print("No results found!")
+                # Ungültige Antwort
+                print("Invalid API response")
                 return False
-        elif response['status'] == 'ZERO_RESULTS':
-            print("Address not found in Google's database.")
+        except anvil.http.HttpError as e:
+            print(f"API call error: {e.status}")
             return False
-        else:
-            print("API call error:", response['status'])
+        except Exception as e:
+            print(f"Unexpected error: {str(e)}")
             return False
-    except anvil.http.HttpError as e:
-        print(f"API call error: {e.status}")
+    except Exception as e:
+        print(f"Error encoding address: {str(e)}")
         return False
 
 # Beispielaufruf

@@ -17,7 +17,10 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
       self.arrival_text_box.text=self.item['arrival']
       self.departure_text_box.text=self.item['departure']
       self.channel_name_text_box.text=self.item['channel_name']
+      self.google_linkedin_text_box.text=self.item['screener_google_linkedin']
+      self.street_text_box.text=self.item['address_street']
+      self.postal_code_text_box.text=self.item['address_postalcode']
       self.city_text_box.text=self.item['address_city']
-      self.google_linkedin_text_box=self.item['screener_google_linkedin']
+      self.address_check_box.checked=self.item['screener_address_check']
 
     # Any code you write here will run before the form opens.

@@ -24,8 +24,8 @@ class dashboard(dashboardTemplate):
     """This method is called when refresh_data_bindings is called"""
     pass
 
-  def get_bookings_risk_button_click(self, **event_args):
-    result = anvil.server.call('get_bookings_risk')
+  def launch_get_bookings_risk_button_click(self, **event_args):
+    result = anvil.server.call('launch_get_bookings_risk')
     alert(result)
     pass
 
