@@ -76,10 +76,10 @@ components_by_slot:
       name: address_check_label
       properties: {text: Adressprüfung}
       type: Label
-    - layout_properties: {grid_position: 'DFSGTA,NIXQNZ'}
-      name: address_check_text_box
-      properties: {}
-      type: TextBox
+    - layout_properties: {grid_position: 'NQPMEB,KSTWVX'}
+      name: address_check_box
+      properties: {text: address_check_box}
+      type: CheckBox
     - layout_properties: {grid_position: 'YGDQAB,BPCSPE'}
       name: linkedin_check_label
       properties: {text: Linkedin check}
