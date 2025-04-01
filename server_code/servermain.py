@@ -20,7 +20,7 @@ def launch_get_bookings_risk():
 
 @anvil.server.background_task
 def get_bookings_risk(email):
-    bookings = app_tables.bookings.search(email)
+    bookings = app_tables.bookings.search(email=email)
     for booking in bookings:
 
         #openai_job
@@ -39,6 +39,9 @@ def get_bookings_risk(email):
         result = address_check.address_check(address)
         booking['screener_address_check'] = result if result is not None else 0
 
+        #openai_age
+        result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'],"age")
+        booking['screener_openai_age'] = result
         
       
     return bookings

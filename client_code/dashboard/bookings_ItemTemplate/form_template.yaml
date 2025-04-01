@@ -54,7 +54,7 @@ components:
     properties: {}
     type: TextBox
   - layout_properties: {grid_position: 'UEOEIJ,YOCTHM VUZLCT,SZJBGS'}
-    name: text_box_3
+    name: screener_age_text_box
     properties: {}
     type: TextBox
   - layout_properties: {grid_position: 'UEOEIJ,YOCTHM HOZFDE,ECTLEJ'}
