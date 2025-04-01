@@ -48,7 +48,7 @@ components_by_slot:
       type: TextBox
     layout_properties: {}
     name: guest_data_outlined_card
-    properties: {background: 'theme:Secondary Container', col_widths: '{"AWGGXR":20,"IMLQVF":40,"MNTOOH":20,"FOGIJG":40}', role: outlined-card}
+    properties: {background: '', col_widths: '{"AWGGXR":20,"IMLQVF":40,"MNTOOH":20,"FOGIJG":40}', role: outlined-card}
     type: ColumnPanel
   - layout_properties: {}
     name: spacer_1
@@ -94,7 +94,7 @@ components_by_slot:
       type: TextBox
     layout_properties: {}
     name: outlined_card_1
-    properties: {background: 'theme:Secondary Container', role: outlined-card}
+    properties: {background: '', role: outlined-card}
     type: ColumnPanel
 is_package: true
 layout:
