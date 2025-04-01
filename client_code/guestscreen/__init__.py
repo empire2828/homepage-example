@@ -24,7 +24,7 @@ class guestscreen(guestscreenTemplate):
     city = self.city_text_box.text
     
     # Perform AI checks
-    aicheckResult_job = anvil.server.call('open_ai', guest_full_name, city, "job")
+    aicheckResult_job = anvil.server.call('screener_open_ai', guest_full_name, city, "job")
     self.AI_result_text_area.text = aicheckResult_job
     
     # Address Check
@@ -39,5 +39,5 @@ class guestscreen(guestscreenTemplate):
     self.linkedin_check_text_box.text = linkedin_check_result
     
     # Additional AI Check for Age
-    aicheckResult_age = anvil.server.call('open_ai', guest_full_name, city, "age")
+    aicheckResult_age = anvil.server.call('screener_open_ai', guest_full_name, city, "age")
     self.age_check_text_box.text = aicheckResult_age

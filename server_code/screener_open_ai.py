@@ -9,14 +9,14 @@ from anvil.tables import app_tables
 import anvil.server
 from openai import OpenAI
 
-# Prüfe, ob die API-Key-Schlüssel korrekt sind
+# Client außerhalb der Funktion initialisieren, damit er für alle Funktionen verfügbar ist
 client = OpenAI(
   api_key=anvil.secrets.get_secret('PERPLEXITY_API_KEY'),
   base_url="https://api.perplexity.ai"
 )
 
 @anvil.server.callable
-def open_ai(name, location, checktype):
+def screener_open_ai(name, location, checktype):
   if checktype == "job":
     prompt = f"""
 Welchen beruf hat {name} bei einem unternehmen in der nähe von {location}? Wenn kein Beruf bekannt ist, Wo ist Er oder Sie in der nähe von {location} in Erscheinung getreten? Schreibe sehr kurz ohne Zitatnummern.
@@ -26,19 +26,22 @@ Welchen beruf hat {name} bei einem unternehmen in der nähe von {location}? Wenn
 Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges und ob z.B. Kinder vorhanden sind sehr grob ein. Schreibe als Antwort nur: von bis Jahre und lasse alles andere weg.
 """
     
-  # Prüfe, ob der Client korrekt initialisiert wurde
   try:
     response = client.chat.completions.create(
-      model="sonar-pro",
+      model="sonar",
       messages=[
           {"role": "system", "content": prompt},
           {"role": "user", "content": name},  
       ],
+      max_tokens=1024,
+      temperature=0.7,
+      top_p=0.9,
+      stream=False,
+      presence_penalty=0,
+      frequency_penalty=0,
+      response_format=None
     )
     return response.choices[0].message.content
   except Exception as e:
-    # Fange potenzielle Fehler ab
     return f"Fehler: {e}"
 
-# print(open_ai("Andrea Querner","Dresden","job"))
-# test from github vs studio

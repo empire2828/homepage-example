@@ -25,8 +25,8 @@ class dashboard(dashboardTemplate):
     pass
 
   def launch_get_bookings_risk_button_click(self, **event_args):
-    result = anvil.server.call('launch_get_bookings_risk')
-    alert(result)
+    anvil.server.call('launch_get_bookings_risk')
+    alert("Risk evaluating")
     pass
 
   def sync_smoobu_button_click(self, **event_args):

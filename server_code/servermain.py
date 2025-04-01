@@ -7,18 +7,25 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+#import openai
+import screener_open_ai
 import google_linkedin
 import address_check
 
 @anvil.server.callable
 def launch_get_bookings_risk():
-  get_bookings_risk()
+  email=anvil.users.get_user()['email']
+  anvil.server.launch_background_task('get_bookings_risk',email)
   pass
 
 @anvil.server.background_task
-def get_bookings_risk():
-    bookings = app_tables.bookings.search(email=anvil.users.get_user()['email'])
+def get_bookings_risk(email):
+    bookings = app_tables.bookings.search(email)
     for booking in bookings:
+
+        #openai_job
+        result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'],"job")
+        booking['screener_openai_job'] = result
       
         #google_linkedin
         result = google_linkedin.google_linkedin(booking['guestname'], booking['address_city'])
