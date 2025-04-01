@@ -52,14 +52,14 @@ def get_all_future_bookings():
             # Bestehende Buchung anhand der Reservierungs-ID abrufen
             existing = app_tables.bookings.get(reservation_id=booking['id'])
             
+
             # Gästedaten abrufen
-            guest_data = get_guest_details(booking['id'], headers)
-            
-            # Adressdaten extrahieren
-            street = guest_data.get('street', '')
-            city = guest_data.get('city', '')
-            postal_code = guest_data.get('postalCode', '')
-            country = guest_data.get('country', '')
+            guest_data = get_guest_details(booking['guestId'], headers)
+            address = guest_data.get('address', {})
+            street = address.get('street', '')
+            city = address.get('city', '')
+            postal_code = address.get('postalCode', '')
+            country = address.get('country', '')
             
             apartment_id = booking['apartment']
             guest_name = booking['guest-name']
@@ -79,6 +79,7 @@ def get_all_future_bookings():
                     type=booking['type'],
                     guestid=booking['guestId'],
                     address_street=street,
+                    address_postalcode=postal_code,
                     address_city=city,
                     address_country=country,
                     email=user_email
@@ -96,6 +97,7 @@ def get_all_future_bookings():
                     type=booking['type'],
                     guestid=booking['guestId'],
                     address_street=street,
+                    address_postalcode=postal_code,
                     address_city=city,
                     address_country=country,
                     email=user_email
