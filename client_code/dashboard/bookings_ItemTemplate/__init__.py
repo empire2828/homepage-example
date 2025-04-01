@@ -17,5 +17,6 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
       self.arrival_text_box.text=self.item['arrival']
       self.departure_text_box.text=self.item['departure']
       self.channel_name_text_box.text=self.item['channel_name']
+      self.city_text_box.text=self.item['address_city']
 
     # Any code you write here will run before the form opens.
