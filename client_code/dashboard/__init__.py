@@ -30,8 +30,9 @@ class dashboard(dashboardTemplate):
     pass
 
   def sync_smoobu_button_click(self, **event_args):
-    result = anvil.server.call('launch_sync_smoobu')
-    alert(result)
+    anvil.server.call('launch_sync_smoobu')
+    alert("Sync in process.")
+    anvil.server.call('get_bookings_risk')
     pass
 
 

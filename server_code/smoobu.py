@@ -71,8 +71,6 @@ def sync_smoobu(user_email):
             
             apartment_id = booking['apartment']
             guest_name = booking['guest-name']
-            #current_user = anvil.users.get_user()
-            #user_email = current_user['email'] 
             
             if existing:
                 existing.update(
