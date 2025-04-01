@@ -66,20 +66,6 @@ db_schema:
       type: string
     server: full
     title: bookings
-  files:
-    client: none
-    columns:
-    - admin_ui: {width: 200}
-      name: path
-      type: string
-    - admin_ui: {width: 200}
-      name: file
-      type: media
-    - admin_ui: {width: 200}
-      name: file_version
-      type: string
-    server: full
-    title: Files
   users:
     client: none
     columns:

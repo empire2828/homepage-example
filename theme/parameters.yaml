@@ -282,19 +282,21 @@ color_scheme:
       name: Manarola Dark
 roles:
 - components: [Label]
+  display_in_toolbox: true
   name: input-prompt
 - components: [Link]
+  display_in_toolbox: false
   name: selected
 - components: [ColumnPanel, LinearPanel, XYPanel, RepeatingPanel]
   display_in_toolbox: true
   name: outlined-card
   title: Outlined Card
 - components: [ColumnPanel, LinearPanel, XYPanel, RepeatingPanel]
-  display_in_toolbox: false
+  display_in_toolbox: true
   name: elevated-card
   title: Elevated Card
 - components: [ColumnPanel, LinearPanel, XYPanel, RepeatingPanel]
-  display_in_toolbox: false
+  display_in_toolbox: true
   name: tonal-card
   title: Tonal Card
 - components: [Button, FileLoader]
@@ -302,15 +304,15 @@ roles:
   name: outlined-button
   title: Outlined Button
 - components: [Button, FileLoader]
-  display_in_toolbox: false
+  display_in_toolbox: true
   name: filled-button
   title: Filled Button
 - components: [Button, FileLoader]
-  display_in_toolbox: false
+  display_in_toolbox: true
   name: elevated-button
   title: Elevated Button
 - components: [Button, FileLoader]
-  display_in_toolbox: false
+  display_in_toolbox: true
   name: tonal-button
   title: Tonal Button
 - components: [TextBox, TextArea, DatePicker, DropDown]
@@ -318,16 +320,23 @@ roles:
   name: outlined
   title: Outlined TextBox
 - components: [Label, Link]
+  display_in_toolbox: true
   name: display
 - components: [Label, Link]
+  display_in_toolbox: true
   name: headline
 - components: [Label, Link]
+  display_in_toolbox: true
   name: title
 - components: [Label, Link]
+  display_in_toolbox: true
   name: body
 - components: [DataGrid]
+  display_in_toolbox: true
   name: tonal-data-grid
 - components: [TextBox, TextArea, DatePicker, DropDown]
+  display_in_toolbox: true
   name: outlined-error
 - components: [TextBox, TextArea, DatePicker, DropDown]
+  display_in_toolbox: true
   name: input-error

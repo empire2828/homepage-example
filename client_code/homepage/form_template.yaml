@@ -46,19 +46,19 @@ components:
   name: spacer_1
   properties: {height: 42.444427490234375}
   type: Spacer
-- components:
-  - layout_properties: {full_width_row: true, grid_position: 'YYTQPF,COXAUP'}
-    name: label_3
-    properties: {align: center, bold: true, font_size: 38, text: Schützen Sie Ihre Ferienimmobilie vor problematischen Gästen}
-    type: Label
+- layout_properties: {grid_position: 'DOGAIR,ZZIOJH'}
+  name: headline_1
+  properties: {align: center, bold: true, font_size: 38, role: headline, text: Schützen Sie Ihre Ferienimmobilie vor problematischen Gästen}
+  type: Label
+- components: []
   layout_properties: {grid_position: 'ISUFTJ,LCSMDD'}
   name: column_panel_2
   properties: {}
   type: ColumnPanel
-- layout_properties: {grid_position: 'VQSBMJ,WZYLEU'}
-  name: rich_text_1
-  properties: {align: center, content: Guestscreener.com ist Ihre Lösung für sicheres Gästemanagement. Entwickelt von Vermietern für Vermieter., font_size: 24}
-  type: RichText
+- layout_properties: {grid_position: 'RPTVLJ,RWROTS'}
+  name: title_1
+  properties: {align: center, role: title, text: Guestscreener.com ist Ihre Lösung für sicheres Gästemanagement. Entwickelt von Vermietern für Vermieter.}
+  type: Label
 - layout_properties: {grid_position: 'VDVWWS,FMTLDK'}
   name: spacer_2
   properties: {height: 41.5555419921875}
