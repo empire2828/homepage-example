@@ -18,5 +18,6 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
       self.departure_text_box.text=self.item['departure']
       self.channel_name_text_box.text=self.item['channel_name']
       self.city_text_box.text=self.item['address_city']
+      self.google_linkedin_text_box=self.item['screener_google_linkedin']
 
     # Any code you write here will run before the form opens.
