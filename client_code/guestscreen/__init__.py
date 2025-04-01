@@ -31,7 +31,7 @@ class guestscreen(guestscreenTemplate):
     address = self.street_text_box.text + " " + self.zip_text_box.text + " " + self.city_text_box.text
     address_check_result = anvil.server.call('address_check', address)
     print(address_check_result)
-    if address_check_result== true:
+    if address_check_result:
       self.address_check_box.checked = address_check_result
     
     # LinkedIn Check
