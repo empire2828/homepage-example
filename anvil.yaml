@@ -111,6 +111,9 @@ db_schema:
     - admin_ui: {width: 200}
       name: cancel_subscription_at_period_end
       type: bool
+    - admin_ui: {order: 12, width: 200}
+      name: pms_userid
+      type: number
     server: full
     title: Users
 dependencies: []

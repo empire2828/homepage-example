@@ -6,11 +6,6 @@ components_by_slot:
     name: sync_smoobu_button
     properties: {background: 'theme:Primary', foreground: 'theme:On Primary', role: elevated-button, text: Sync Smoobu}
     type: Button
-  - event_bindings: {click: launch_get_bookings_risk_button_click}
-    layout_properties: {}
-    name: launch_get_bookings_risk_button
-    properties: {background: 'theme:Primary', foreground: 'theme:On Primary', role: elevated-button, text: get_bookings_risk}
-    type: Button
   - data_bindings: []
     layout_properties: {}
     name: bookings_repeating_panel
