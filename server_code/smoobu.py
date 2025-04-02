@@ -139,10 +139,10 @@ def smoobu_webhook_handler():
     request = anvil.server.request
     booking_data = request.body_json
     process_booking(booking_data)
+    print(booking_data)
     return {"status": "success"}
 
 def process_booking(booking_data):
-    # Beispiel für das Speichern in einer Anvil-Datenbank:
     app_tables.bookings.add_row(
         arrival=booking_data.get('arrival'),
         departure=booking_data.get('departure'),
