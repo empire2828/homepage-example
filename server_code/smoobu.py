@@ -136,33 +136,19 @@ def get_guest_details(guestid, headers):
 #https://guestscreener.com/_/api/smoobu/webhook
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
 def smoobu_webhook_handler():
-    # Zugriff auf die Anfragedaten
     request = anvil.server.request
-    
-    # Daten aus der Anfrage extrahieren
     booking_data = request.body_json
-    
-    # Hier können Sie die Buchungsdaten verarbeiten
-    # z.B. in eine Datenbank speichern oder E-Mail-Benachrichtigungen senden
     process_booking(booking_data)
-    
-    # Erfolgreiche Antwort zurückgeben
     return {"status": "success"}
 
 def process_booking(booking_data):
-    # Implementieren Sie hier Ihre Logik zur Verarbeitung der Buchungsdaten
-    # Zum Beispiel:
-    # - Speichern in der Anvil-Datenbank
-    # - Senden einer E-Mail-Benachrichtigung
-    # - Aktualisieren einer Benutzeroberfläche
-    
     # Beispiel für das Speichern in einer Anvil-Datenbank:
     app_tables.bookings.add_row(
         arrival_date=booking_data.get('arrivalDate'),
         departure_date=booking_data.get('departureDate'),
         apartment_id=booking_data.get('apartmentId'),
         guest_name=booking_data.get('guestName', ''),
-        booking_id=booking_data.get('id', '')
+        reservation_id=booking_data.get('id', '')
     )
 
 def get_smoobu_userid():
@@ -174,13 +160,14 @@ def get_smoobu_userid():
     response = requests.get("https://login.smoobu.com/api/me", headers=headers)
     
     if response.status_code == 200:
-        return response.json()
+        data = response.json()
+        return data['id']
     else:
         raise Exception(f"API request failed: {response.status_code} - {response.text}")
 
 def save_smoobu_userid():
-    pms_userid = anvil.server.call('get_smoobu_userid')
+    pms_userid = get_smoobu_userid()
     current_user = anvil.users.get_user()
-    app_tables.users.update_row(current_user, pms_userid)
+    app_tables.users.get(email=current_user['email']).update(pms_userid=pms_userid)
     return 
   
