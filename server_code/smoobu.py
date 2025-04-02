@@ -136,11 +136,16 @@ def get_guest_details(guestid, headers):
 #https://guestscreener.com/_/api/smoobu/webhook
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
 def smoobu_webhook_handler():
-    request = anvil.server.request
-    booking_data = request.body_json
-    process_booking(booking_data)
-    print(booking_data)
-    return {"status": "success"}
+    try:
+        request = anvil.server.request
+        booking_data = request.body_json
+        # Logging für Debugging-Zwecke
+        print(f"Webhook-Daten empfangen: {booking_data}")
+        process_booking(booking_data)
+        return {"status": "success"}
+    except Exception as e:
+        print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
+        return {"status": "error", "message": str(e)}, 500
 
 def process_booking(booking_data):
     app_tables.bookings.add_row(
@@ -148,7 +153,7 @@ def process_booking(booking_data):
         departure=booking_data.get('departure'),
         apartment=booking_data.get('apartment', {}).get('id'),
         guestname=booking_data.get('guest-name', ''),
-        reservation_id=booking_data.get('bookings', {}).get('id'),
+        reservation_id=booking_data.get('id'),
     )
 
 def get_smoobu_userid():
