@@ -86,6 +86,7 @@ def sync_smoobu(user_email):
                     children=booking['children'],
                     type=booking['type'],
                     guestid=booking['guestId'],
+                    language=booking['language'],
                     address_street=street,
                     address_postalcode=postal_code,
                     address_city=city,
@@ -104,6 +105,7 @@ def sync_smoobu(user_email):
                     children=booking['children'],
                     type=booking['type'],
                     guestid=booking['guestId'],
+                    language=booking['language'],
                     address_street=street,
                     address_postalcode=postal_code,
                     address_city=city,
@@ -138,22 +140,40 @@ def get_guest_details(guestid, headers):
 def smoobu_webhook_handler():
     try:
         request = anvil.server.request
-        booking_data = request.body_json
-        # Logging für Debugging-Zwecke
-        print(f"Webhook-Daten empfangen: {booking_data}")
-        process_booking(booking_data)
+        webhook_data = request.body_json
+        print(f"Webhook-Daten empfangen: {webhook_data}")
+        
+        # Prüfen, ob es sich um eine Buchungsoperation handelt
+        action = webhook_data.get('action')
+        if action in ['newReservation', 'updateReservation']:
+            # Die eigentlichen Buchungsdaten befinden sich im 'data'-Feld
+            booking_data = webhook_data.get('data', {})
+            process_booking(booking_data)
+            print(f"Buchung verarbeitet: {booking_data.get('id')}")          
         return {"status": "success"}
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
         return {"status": "error", "message": str(e)}, 500
 
 def process_booking(booking_data):
+    if not booking_data or 'id' not in booking_data:
+        print("Keine gültigen Buchungsdaten erhalten")
+        return
+    
+    # Füge einen Debug-Print hinzu, um die Werte zu sehen
+    print(f"Füge Buchung hinzu: ID={booking_data.get('id')}, Ankunft={booking_data.get('arrival')}")
+    
     app_tables.bookings.add_row(
         arrival=booking_data.get('arrival'),
         departure=booking_data.get('departure'),
-        apartment=booking_data.get('apartment', {}).get('id'),
+        apartment=booking_data.get('apartment', {}).get('name'),
         guestname=booking_data.get('guest-name', ''),
         reservation_id=booking_data.get('id'),
+        channel_name=booking_data.get('channel', {}).get('name'),
+        adults=booking_data.get('adults'),
+        children=booking_data.get('children'),
+        language=booking_data.get('language'),
+        guestid=booking_data.get('guestId'),
     )
 
 def get_smoobu_userid():
