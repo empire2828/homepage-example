@@ -144,11 +144,11 @@ def smoobu_webhook_handler():
 def process_booking(booking_data):
     # Beispiel für das Speichern in einer Anvil-Datenbank:
     app_tables.bookings.add_row(
-        arrival=booking_data.get('arrivalDate'),
-        departure=booking_data.get('departureDate'),
-        apartment=booking_data.get('apartmentId'),
-        guestname=booking_data.get('guestName', ''),
-        reservation_id=booking_data.get('booking.id', '')
+        arrival=booking_data.get('arrival'),
+        departure=booking_data.get('departure'),
+        apartment=booking_data.get('apartment', {}).get('id'),
+        guestname=booking_data.get('guest-name', ''),
+        reservation_id=booking_data.get('bookings', {}).get('id'),
     )
 
 def get_smoobu_userid():
