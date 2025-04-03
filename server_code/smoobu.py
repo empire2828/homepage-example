@@ -17,7 +17,6 @@ def launch_sync_smoobu():
 
 @anvil.server.background_task
 def sync_smoobu(user_email):
-    # Buchungen abrufen
     base_url = "https://login.smoobu.com/api/reservations"
     api_key = anvil.secrets.get_secret('smoobu_api_key')
     
@@ -62,17 +61,13 @@ def sync_smoobu(user_email):
             # Bestehende Buchung anhand der Reservierungs-ID abrufen
             existing = app_tables.bookings.get(reservation_id=booking['id'])
             
-
             # Gästedaten abrufen
             guest_data = get_guest_details(booking['guestId'], headers)
             address = guest_data.get('address', {})
             street = address.get('street', '')
             city = address.get('city', '')
             postal_code = address.get('postalCode', '')
-            country = address.get('country', '')
-            
-            apartment_id = booking['apartment']
-            guest_name = booking['guest-name']
+            country = address.get('country', '')       
             
             if existing:
                 existing.update(
@@ -80,7 +75,7 @@ def sync_smoobu(user_email):
                     apartment=booking['apartment']['name'],
                     arrival=booking['arrival'],
                     departure=booking['departure'],
-                    guestname=guest_name,
+                    guestname=booking['guest-name'],
                     channel_name=booking['channel']['name'],
                     adults=booking['adults'],
                     children=booking['children'],
@@ -99,7 +94,7 @@ def sync_smoobu(user_email):
                     apartment=booking['apartment']['name'],
                     arrival=booking['arrival'],
                     departure=booking['departure'],
-                    guestname=guest_name,
+                    guestname=booking['guest-name'],
                     channel_name=booking['channel']['name'],
                     adults=booking['adults'],
                     children=booking['children'],
