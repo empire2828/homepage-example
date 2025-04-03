@@ -143,20 +143,30 @@ def smoobu_webhook_handler():
         if action in ['newReservation', 'updateReservation']:
             # Die eigentlichen Buchungsdaten befinden sich im 'data'-Feld
             booking_data = webhook_data.get('data', {})
-            process_booking(booking_data)
+            user_id = webhook_data.get('user')  # Smoobu-Benutzer-ID
+            process_booking(booking_data, user_id)
             print(f"Buchung verarbeitet: {booking_data.get('id')}")          
         return {"status": "success"}
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
         return {"status": "error", "message": str(e)}, 500
 
-def process_booking(booking_data):
+def process_booking(booking_data, user_id):
     if not booking_data or 'id' not in booking_data:
         print("Keine gültigen Buchungsdaten erhalten")
         return
     
+    # Suche nach der E-Mail des Benutzers anhand der Smoobu-ID
+    user_email = None
+    user_row = app_tables.users.get(smoobu_id=user_id)
+    if user_row:
+        user_email = user_row['email']
+        print(f"Benutzer gefunden: {user_email}")
+    else:
+        print(f"Kein Benutzer mit Smoobu-ID {user_id} gefunden")
+    
     # Füge einen Debug-Print hinzu, um die Werte zu sehen
-    print(f"Füge Buchung hinzu: ID={booking_data.get('id')}, Ankunft={booking_data.get('arrival')}")
+    print(f"Füge Buchung hinzu: ID={booking_data.get('id')}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
     
     app_tables.bookings.add_row(
         arrival=booking_data.get('arrival'),
@@ -169,25 +179,25 @@ def process_booking(booking_data):
         children=booking_data.get('children'),
         language=booking_data.get('language'),
         guestid=booking_data.get('guestId'),
+        email=user_email  
     )
-
-def get_smoobu_userid():
-    headers = {
-        "Api-Key": anvil.secrets.get_secret('smoobu_api_key'),
-        "Cache-Control": "no-cache"
-    }
-    
-    response = requests.get("https://login.smoobu.com/api/me", headers=headers)
-    
-    if response.status_code == 200:
-        data = response.json()
-        return data['id']
-    else:
-        raise Exception(f"API request failed: {response.status_code} - {response.text}")
 
 def save_smoobu_userid():
     pms_userid = get_smoobu_userid()
     current_user = anvil.users.get_user()
     app_tables.users.get(email=current_user['email']).update(pms_userid=pms_userid)
     return 
+
+def get_smoobu_userid():
+    headers = {
+        "Api-Key": anvil.secrets.get_secret('smoobu_api_key'),
+        "Cache-Control": "no-cache"
+    }
   
+    response = requests.get("https://login.smoobu.com/api/me", headers=headers)
+  
+    if response.status_code == 200:
+        data = response.json()
+        return data['id']
+    else:
+        raise Exception(f"API request failed: {response.status_code} - {response.text}")
