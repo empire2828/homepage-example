@@ -15,8 +15,9 @@ components:
     name: guestscreen_link
     properties: {role: null, text: Gast checken}
     type: Link
-  - layout_properties: {grid_position: 'INGWHY,HRKRTP'}
-    name: link_1
+  - event_bindings: {click: channel_manager_connect_link_click}
+    layout_properties: {grid_position: 'INGWHY,HRKRTP'}
+    name: channel_manager_connect_link
     properties: {text: Channel Manager verbinden, wrap_on: mobile}
     type: Link
   - event_bindings: {click: accountmanagement_link_click}
