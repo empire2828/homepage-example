@@ -147,7 +147,7 @@ def smoobu_webhook_handler():
       
         if action in ['newReservation', 'updateReservation']:
             # Die eigentlichen Buchungsdaten befinden sich im 'data'-Feld
-            process_booking(booking_data, user_id)
+            process_booking(booking_data, str(user_id))
             print(f"Buchung verarbeitet: {booking_data.get('id')}")     
         elif action == 'cancelReservation':
             delete_booking(booking_data.get('id'))
