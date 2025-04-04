@@ -5,6 +5,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+from anvil import users
 
 import stripe
 
@@ -80,7 +81,6 @@ def send_password_reset_email():
         print(f"Error sending password reset email: {e}")
         return "Failed to send password reset email."
 
-
 # Server-Modul DKL
 @anvil.server.callable
 def get_user_has_subscription():
@@ -89,4 +89,22 @@ def get_user_has_subscription():
         return False
     else:
         return True
-  
+
+@anvil.server.callable
+def save_user_api_key(api_key):
+    # Den aktuellen Benutzer abrufen
+    current_user = users.get_user()
+    
+    if current_user is None:
+        raise Exception("Kein Benutzer angemeldet")
+    
+    # Den Benutzer in der Datenbank finden und aktualisieren
+    user_row = app_tables.users.get(email=current_user['email'])
+    
+    if user_row is None:
+        raise Exception("Benutzer nicht in der Datenbank gefunden")
+    
+    # API-Key in der Datenbank speichern
+    user_row['pms_api_key'] = api_key
+    
+    return True
