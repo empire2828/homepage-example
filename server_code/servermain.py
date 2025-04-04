@@ -42,7 +42,11 @@ def get_bookings_risk(email):
         #openai_age
         result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'],"age")
         booking['screener_openai_age'] = result
-        
       
     return bookings
 
+@anvil.server.callable
+def send_email(user-email):
+  email=anvil.users.get_user()['email']
+  anvil.server.launch_background_task('get_bookings_risk',email)
+  pass
