@@ -90,6 +90,7 @@ def sync_smoobu(user_email):
                     email=user_email
                 )
             else:
+              if booking['channel']['name'] == 'Blocked channel':
                 app_tables.bookings.add_row(
                     reservation_id=booking['id'],
                     apartment=booking['apartment']['name'],
