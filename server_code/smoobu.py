@@ -12,15 +12,20 @@ def launch_sync_smoobu():
   user_email = current_user['email'] 
   print(user_email)
   result= anvil.server.launch_background_task('sync_smoobu',user_email)
-  save_smoobu_userid()
-  guest_data_update()
+  save_smoobu_userid(user_email)
+  guest_data_update(user_email)
   return result
 
 @anvil.server.background_task
 def sync_smoobu(user_email):
     base_url = "https://login.smoobu.com/api/reservations"
-    api_key = anvil.secrets.get_secret('smoobu_api_key')
-    
+    #api_key = anvil.secrets.get_secret('smoobu_api_key')
+    user= app_tables.users.get(email=user_email)
+    if user:
+        api_key= user['pms_api_key']
+    else:
+      pass
+      
     headers = {
         "Api-Key": api_key,
         "Content-Type": "application/json"
@@ -90,7 +95,7 @@ def sync_smoobu(user_email):
                     email=user_email
                 )
             else:
-              if booking['channel']['name'] == 'Blocked channel':
+              if booking['channel']['name'] != 'Blocked channel':
                 app_tables.bookings.add_row(
                     reservation_id=booking['id'],
                     apartment=booking['apartment']['name'],
@@ -154,7 +159,7 @@ def smoobu_webhook_handler():
             delete_booking(booking_data.get('id'))
             print(f"Buchung gelöscht: {booking_data.get('id')}")
         # bei jedem Aufruf des Webhooks schauen ob Gastdaten sich geändert haben (bei Direktbuchungen erst nach Anlage Buchung)
-        guest_data_update()
+        guest_data_update(user_email)
         return {"status": "success"}
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
@@ -178,8 +183,15 @@ def process_booking(booking_data, user_id):
     print(f"Füge Buchung hinzu: ID={booking_data.get('id')}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
 
     # Gästedaten abrufen
+    user= app_tables.users.get(email=user_email)
+    if user:
+        api_key= user['pms_api_key']
+    else:
+      pass
+
+  #"Api-Key": anvil.secrets.get_secret('smoobu_api_key'),
     headers = {
-        "Api-Key": anvil.secrets.get_secret('smoobu_api_key'),
+        "Api-Key": api_key,
         "Content-Type": "application/json"
     }
     guest_data = get_guest_details(booking_data['guestId'], headers)
@@ -188,8 +200,9 @@ def process_booking(booking_data, user_id):
     city = address.get('city', '')
     postal_code = address.get('postalCode', '')
     country = address.get('country', '')
-    
-    app_tables.bookings.add_row(
+
+    if booking_data['channel']['name'] != 'Blocked channel':
+      app_tables.bookings.add_row(
         arrival=booking_data.get('arrival'),
         departure=booking_data.get('departure'),
         apartment=booking_data.get('apartment', {}).get('name'),
@@ -207,15 +220,22 @@ def process_booking(booking_data, user_id):
         email=user_email  
     )
 
-def save_smoobu_userid():
-    pms_userid = str(get_smoobu_userid())
+def save_smoobu_userid(user_email):
+    pms_userid = str(get_smoobu_userid(user_email))
     current_user = anvil.users.get_user()
     app_tables.users.get(email=current_user['email']).update(pms_userid=pms_userid)
     return 
 
-def get_smoobu_userid():
+def get_smoobu_userid(user_email):
+
+  user= app_tables.users.get(email=user_email)
+  if user:
+        api_key= user['pms_api_key']
+  else:
+    pass
+ #        "Api-Key": anvil.secrets.get_secret('smoobu_api_key'),
     headers = {
-        "Api-Key": anvil.secrets.get_secret('smoobu_api_key'),
+        "Api-Key": api_key,
         "Cache-Control": "no-cache"
     }
   
@@ -244,15 +264,19 @@ def delete_booking(reservation_id):
         print(f"Keine Buchung mit Reservierungs-ID {reservation_id} gefunden")
 #-----------------------------------------------------------------------------------------
 @anvil.server.callable
-def guest_data_update():
-    anvil.server.launch_background_task('update_missing_guest_data')
+def guest_data_update(user_email):
+    anvil.server.launch_background_task('update_missing_guest_data',user_email)
     return "Hintergrundtask zur Aktualisierung der Gastdaten gestartet"
 
 @anvil.server.background_task
-def update_missing_guest_data():
+def update_missing_guest_data(user_email):
     # API-Schlüssel aus den Anvil-Secrets abrufen
-    api_key = anvil.secrets.get_secret('smoobu_api_key')
-    
+    # api_key = anvil.secrets.get_secret('smoobu_api_key')
+    user= app_tables.users.get(email=user_email)
+    if user:
+        api_key= user['pms_api_key']
+    else:
+      pass   
     # Alle Buchungen abrufen, bei denen Gastdaten fehlen
     bookings_with_missing_data = app_tables.bookings.search(
         address_street=None,
