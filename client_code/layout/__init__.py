@@ -46,4 +46,5 @@ class layout(layoutTemplate):
 
   def channel_manager_connect_link_click(self, **event_args):
     open_form('channel_manager_connect')
+    self.channel_manager_connect_link.role='selected'
     pass
