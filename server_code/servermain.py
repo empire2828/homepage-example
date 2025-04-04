@@ -46,7 +46,12 @@ def get_bookings_risk(email):
     return bookings
 
 @anvil.server.callable
-def send_email(user-email):
-  email=anvil.users.get_user()['email']
-  anvil.server.launch_background_task('get_bookings_risk',email)
+def send_email(user_email,email_text,email_subject,reservation_id):
+  anvil.email.send(
+    to=user_email,
+    from_address="noreply",
+    from_name="Guestscreener.com",
+    subject=email_subject,
+    html=email_text
+)
   pass
