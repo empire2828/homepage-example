@@ -55,7 +55,13 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'HYRDJS,EKNZVQ'}
       name: body_2
-      properties: {font_size: 18, role: body, text: Damit werden neue Buchungen automatisch übertragen.}
+      properties:
+        font_size: 18
+        role: body
+        text: |
+          Damit werden neue Buchungen automatisch übertragen. Tragen Sie folgendes ein:
+
+          https://guestscreener.com/_/api/smoobu/webhook
       type: Label
     - layout_properties: {grid_position: 'SWIWMV,MEZYZU'}
       name: image_3
