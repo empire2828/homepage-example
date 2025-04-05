@@ -14,23 +14,26 @@ class layout(layoutTemplate):
     self.init_components(**properties)
 
   def dashboard_link_click(self, **event_args):
+   self.reset_links()
    open_form('dashboard')
    self.dashboard_link.role='selected'
   
   def guestscreen_link_click(self, **event_args):
+    self.reset_links()
     open_form('guestscreen')
     self.guestscreen_link.role='selected'
 
   def accountmanagement_link_click(self, **event_args):
+    self.reset_links()
     open_form('AccountManagement')
     self.accountmanagement_link.role='selected'
     
   def reset_links(self, **event_args):
     self.dashboard_link.role = ''
     self.guestscreen_link.role = ''
+    self.channel_manager_connect_link.role = ''  
     self.accountmanagement_link.role = ''
     self.upgrade_link.role = ''
-    self.channel_manager_connect_link.role = ''
 
   def upgrade_link_click(self, **event_args):
     has_subscription = anvil.server.call('get_user_has_subscription')
@@ -45,6 +48,7 @@ class layout(layoutTemplate):
   pass
 
   def channel_manager_connect_link_click(self, **event_args):
+    self.reset_links()
     open_form('channel_manager_connect')
     self.channel_manager_connect_link.role='selected'
     pass

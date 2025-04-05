@@ -13,10 +13,6 @@ class guestscreen(guestscreenTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-  def form_show(self, **event_args):
-    """This method is called when the form is shown on the page"""
-    self.layout.reset_links()
-
   def guestscreen_button_click(self, **event_args):
     """Handle button click event."""
     # AI Name Check

@@ -15,9 +15,6 @@ class AccountManagement(AccountManagementTemplate):
     self.user = anvil.users.get_user()
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
-  def form_show(self, **event_args):
-    self.layout.reset_links()
   
   def change_name_link_click(self, **event_args):
     """This method is called when the link is clicked"""
