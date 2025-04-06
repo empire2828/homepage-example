@@ -60,6 +60,7 @@ def get_bookings_risk(email=None, booking_id=None):
 def send_result_email(user_email,reservation_id):
   booking = app_tables.bookings.search(reservation_id=reservation_id)
   email_text= booking['sceener_openai_job']
+  print("send_email:",user_email,reservation_id,email_text)
   anvil.email.send(
     to=user_email,
     from_address="noreply",
