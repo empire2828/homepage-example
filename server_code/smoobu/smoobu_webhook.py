@@ -34,7 +34,7 @@ def smoobu_webhook_handler():
         # bei jedem Aufruf des Webhooks schauen ob Gastdaten sich geändert haben (bei Direktbuchungen erst nach Anlage Buchung)
         user_email= get_user_email(user_id)
         guest_data_update(user_email)
-        reservation_id= booking_data('id')
+        reservation_id= booking_data.get('id')
         send_result_email(user_email,reservation_id)   
         return {"status": "success"} 
     except Exception as e:
