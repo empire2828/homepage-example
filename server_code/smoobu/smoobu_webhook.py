@@ -9,7 +9,8 @@ from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
 import requests
-from smoobu import get_guest_details, get_smoobu_userid, guest_data_update, send_result_email
+from smoobu import get_guest_details, get_smoobu_userid, guest_data_update
+from servermain import send_result_email
 
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
 def smoobu_webhook_handler():
