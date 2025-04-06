@@ -45,7 +45,7 @@ def process_booking(booking_data, user_id):
     
     # Suche nach der E-Mail des Benutzers anhand der Smoobu-ID
     user_email = None
-    user_row = app_tables.users.get(pms_userid=user_id)
+    user_row = app_tables.users.get(pms_userid=str(user_id))
     if user_row:
         user_email = user_row['email']
         print(f"Benutzer gefunden: {user_email}")
@@ -110,7 +110,7 @@ def delete_booking(reservation_id):
 
 def get_user_email(user_id):
     user_email = None
-    user_row = app_tables.users.get(pms_userid=user_id)
+    user_row = app_tables.users.get(pms_userid=str(user_id))
     if user_row:
         user_email = user_row['email']
         print(f"Benutzer gefunden: {user_email}")
