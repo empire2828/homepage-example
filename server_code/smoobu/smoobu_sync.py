@@ -1,5 +1,3 @@
-import anvil.files
-from anvil.files import data_files
 import anvil.email
 import anvil.secrets
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
@@ -141,8 +139,6 @@ def guest_data_update(user_email):
 
 @anvil.server.background_task
 def update_missing_guest_data(user_email):
-    # API-Schlüssel aus den Anvil-Secrets abrufen
-    # api_key = anvil.secrets.get_secret('smoobu_api_key')
     user= app_tables.users.get(email=user_email)
     if user:
         api_key= user['pms_api_key']

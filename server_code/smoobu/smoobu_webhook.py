@@ -1,5 +1,3 @@
-import anvil.files
-from anvil.files import data_files
 import anvil.email
 import anvil.secrets
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
@@ -13,8 +11,6 @@ from datetime import datetime
 import requests
 from smoobu import get_guest_details, get_smoobu_userid
 
-#------------------------------------------------------------------------------------------------------------------------
-#https://guestscreener.com/_/api/smoobu/webhook
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
 def smoobu_webhook_handler():
     try:

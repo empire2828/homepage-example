@@ -40,4 +40,3 @@ def get_smoobu_userid(user_email):
     else:
         raise Exception(f"API request failed: {response.status_code} - {response.text}")
 
-#-----------------------------------------------------------------------------------------
