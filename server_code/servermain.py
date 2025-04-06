@@ -19,19 +19,26 @@ def launch_get_bookings_risk():
   pass
 
 @anvil.server.background_task
-def get_bookings_risk(email):
-    bookings = app_tables.bookings.search(email=email)
+def get_bookings_risk(email=None, booking_id=None):
+    if booking_id:
+        bookings = [app_tables.bookings.get(id=booking_id)]
+        if not bookings[0]:
+            return None
+    elif email:
+        bookings = app_tables.bookings.search(email=email)
+    else:
+        return None
+    
     for booking in bookings:
-
-        #openai_job
-        result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'],"job")
+        # OpenAI Job-Prüfung
+        result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'], "job")
         booking['screener_openai_job'] = result
       
-        #google_linkedin
+        # Google LinkedIn-Prüfung
         result = google_linkedin.google_linkedin(booking['guestname'], booking['address_city'])
         booking['screener_google_linkedin'] = result
       
-        #address check
+        # Adressprüfung
         street = booking['address_street'] if booking['address_street'] is not None else ""
         postal = booking['address_postalcode'] if booking['address_postalcode'] is not None else ""
         city = booking['address_city'] if booking['address_city'] is not None else ""
@@ -39,10 +46,14 @@ def get_bookings_risk(email):
         result = address_check.address_check(address)
         booking['screener_address_check'] = result if result is not None else 0
 
-        #openai_age
-        result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'],"age")
+        # OpenAI Alters-Prüfung
+        result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'], "age")
         booking['screener_openai_age'] = result
-      
+    
+    # Bei einer einzelnen Buchung geben wir nur diese zurück
+    if booking_id and bookings:
+        return bookings[0]
+    
     return bookings
 
 @anvil.server.callable
