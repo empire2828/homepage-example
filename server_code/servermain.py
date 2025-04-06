@@ -57,12 +57,14 @@ def get_bookings_risk(email=None, booking_id=None):
     return bookings
 
 @anvil.server.callable
-def send_email(user_email,email_text,email_subject,reservation_id):
+def send_email(user_email,reservation_id):
+  booking = app_tables.bookings.search(reservation_id=reservation_id)
+  email_text= booking['sceener_openai_job']
   anvil.email.send(
     to=user_email,
     from_address="noreply",
     from_name="Guestscreener.com",
-    subject=email_subject,
+    subject="Guestscreener.com Ergebnisse",
     html=email_text
 )
   pass
