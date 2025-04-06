@@ -42,15 +42,8 @@ def process_booking(booking_data, user_id):
     if not booking_data or 'id' not in booking_data:
         print("Keine gültigen Buchungsdaten erhalten")
         return
-    
-    # Suche nach der E-Mail des Benutzers anhand der Smoobu-ID
-    user_email = None
-    user_row = app_tables.users.get(pms_userid=str(user_id))
-    if user_row:
-        user_email = user_row['email']
-        print(f"Benutzer gefunden: {user_email}")
-    else:
-        print(f"Kein Benutzer mit Smoobu-ID {user_id} gefunden")
+
+    user_email= get_user_email(user_id)
     
     # Füge einen Debug-Print hinzu, um die Werte zu sehen
     print(f"Füge Buchung hinzu: ID={booking_data.get('id')}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
