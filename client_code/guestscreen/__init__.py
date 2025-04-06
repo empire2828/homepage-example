@@ -37,3 +37,7 @@ class guestscreen(guestscreenTemplate):
     # Additional AI Check for Age
     aicheckResult_age = anvil.server.call('screener_open_ai', guest_full_name, city, "age")
     self.age_check_text_box.text = aicheckResult_age
+
+  def form_show(self, **event_args):
+    """This method is called when the form is shown on the page"""
+    self.layout.reset_links()
