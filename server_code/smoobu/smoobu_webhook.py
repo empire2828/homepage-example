@@ -31,6 +31,7 @@ def smoobu_webhook_handler():
             delete_booking(booking_data.get('id'))
             print(f"Buchung gelöscht: {booking_data.get('id')}")
         # bei jedem Aufruf des Webhooks schauen ob Gastdaten sich geändert haben (bei Direktbuchungen erst nach Anlage Buchung)
+        user_email= get_user_email(user_id)
         guest_data_update(user_email)
         return {"status": "success"}
     except Exception as e:
@@ -106,3 +107,13 @@ def delete_booking(reservation_id):
         print(f"Buchung mit ID {reservation_id} erfolgreich gelöscht")
     else:
         print(f"Keine Buchung mit Reservierungs-ID {reservation_id} gefunden")
+
+def get_user_email(user_id):
+    user_email = None
+    user_row = app_tables.users.get(pms_userid=user_id)
+    if user_row:
+        user_email = user_row['email']
+        print(f"Benutzer gefunden: {user_email}")
+    else:
+        print(f"Kein Benutzer mit Smoobu-ID {user_id} gefunden")
+    return user_email
