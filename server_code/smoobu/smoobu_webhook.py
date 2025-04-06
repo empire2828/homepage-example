@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
 import requests
-from smoobu import get_guest_details, get_smoobu_userid, guest_data_update
+from smoobu import get_guest_details, get_smoobu_userid, guest_data_update, send_result_email
 
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
 def smoobu_webhook_handler():
@@ -37,6 +37,8 @@ def smoobu_webhook_handler():
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
         return {"status": "error", "message": str(e)}, 500
+    reservation_id= booking_data('id')
+    send_result_email(user_email,reservation_id)
 
 def process_booking(booking_data, user_id):
     if not booking_data or 'id' not in booking_data:
