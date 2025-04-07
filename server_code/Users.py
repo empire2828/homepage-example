@@ -33,8 +33,7 @@ def user_has_subscription(allowed_subscriptions):
         # Check if the user has a valid subscription
         if user["subscription"] and user["subscription"].lower() in [subscription.lower() for subscription in allowed_subscriptions]:
             return True
-        
-        # Check if the user is within their 30-day free trial period
+              # Check if the user is within their 30-day free trial period
         if "first_login_date" in user:
             first_login_date = datetime.strptime(user["signed_up"], "%Y-%m-%d")
             if datetime.now() <= first_login_date + timedelta(days=30):
@@ -95,25 +94,18 @@ def send_password_reset_email():
 # Server-Modul DKL
 @anvil.server.callable
 def get_user_has_subscription():
-    user = anvil.users.get_user()
-    
+    user = anvil.users.get_user()    
     if not user:
-        return False
-    
-    # Überprüfen, ob 'subscription' existiert und den Wert 'Personal' hat
-    if 'subscription' in user and user['subscription'] == 'Personal':
-        return True
-    
-    signed_up_date = user['signed_up']  # Verwende get() für Sicherheit
-    
+        return False   
+    if user['subscription'] == 'Personal':    
+        return True   
+    signed_up_date = user['signed_up']  # Verwende get() für Sicherheit    
     if signed_up_date:
         # Konvertiere naive Zeit zu UTC-aware Zeit
         signed_up_aware = signed_up_date.replace(tzinfo=timezone.utc)
-        trial_end = signed_up_aware + timedelta(days=30)
+        trial_end = signed_up_aware + timedelta(days=5)
         now_utc = datetime.now(timezone.utc)  # Korrekte UTC-Zeit
-        
-        return now_utc <= trial_end
-    
+        return now_utc <= trial_end   
     return False
 
 @anvil.server.callable

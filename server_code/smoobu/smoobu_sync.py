@@ -15,7 +15,6 @@ from smoobu import get_guest_details, get_smoobu_userid, guest_data_update
 def launch_sync_smoobu():
   current_user = anvil.users.get_user()
   user_email = current_user['email'] 
-  print(user_email)
   result= anvil.server.launch_background_task('sync_smoobu',user_email)
   save_smoobu_userid(user_email)
   guest_data_update(user_email)
