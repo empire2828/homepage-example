@@ -46,7 +46,11 @@ components:
   name: label_1
   properties: {role: title, text: guestscreener.com}
   type: Label
-- components: []
+- components:
+  - data_bindings: []
+    name: subscription_body
+    properties: {role: body}
+    type: Label
   layout_properties: {slot: nav-right}
   name: flow_panel_1
   properties: {}

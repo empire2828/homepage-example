@@ -7,7 +7,7 @@ from anvil.tables import app_tables
 import anvil.server
 from anvil import users
 import stripe
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 # Set your secret key. Remember to switch to your live secret key in production.
 # See your keys here: https://dashboard.stripe.com/apikeys
@@ -36,7 +36,7 @@ def user_has_subscription(allowed_subscriptions):
         
         # Check if the user is within their 30-day free trial period
         if "first_login_date" in user:
-            first_login_date = datetime.strptime(user["first_login_date"], "%Y-%m-%d")
+            first_login_date = datetime.strptime(user["signed_up"], "%Y-%m-%d")
             if datetime.now() <= first_login_date + timedelta(days=30):
                 return True
         
@@ -82,16 +82,11 @@ def delete_user():
 
 @anvil.server.callable(require_user=True)
 def send_password_reset_email():
-    """
-    Sends a password reset email to the currently logged-in user.
-    """
     try:
         # Get the email of the currently logged-in user
         user_email = anvil.users.get_user()['email']
-        
-        # Send the password reset email
+                # Send the password reset email
         anvil.users.send_password_reset_email(user_email)
-        
         return "Password reset email sent successfully."
     except Exception as e:
         print(f"Error sending password reset email: {e}")
@@ -101,10 +96,25 @@ def send_password_reset_email():
 @anvil.server.callable
 def get_user_has_subscription():
     user = anvil.users.get_user()
-    if user and 'Personal' not in user['subscription']:
+    
+    if not user:
         return False
-    else:
+    
+    # Überprüfen, ob 'subscription' existiert und den Wert 'Personal' hat
+    if 'subscription' in user and user['subscription'] == 'Personal':
         return True
+    
+    signed_up_date = user['signed_up']  # Verwende get() für Sicherheit
+    
+    if signed_up_date:
+        # Konvertiere naive Zeit zu UTC-aware Zeit
+        signed_up_aware = signed_up_date.replace(tzinfo=timezone.utc)
+        trial_end = signed_up_aware + timedelta(days=30)
+        now_utc = datetime.now(timezone.utc)  # Korrekte UTC-Zeit
+        
+        return now_utc <= trial_end
+    
+    return False
 
 @anvil.server.callable
 def save_user_api_key(api_key):
