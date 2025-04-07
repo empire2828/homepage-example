@@ -5,10 +5,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-
 import stripe
 import json
-
 import datetime
 
 # Set your secret key. Remember to switch to your live secret key in production.

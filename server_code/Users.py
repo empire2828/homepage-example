@@ -6,8 +6,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from anvil import users
-
 import stripe
+from datetime import datetime, timedelta
 
 # Set your secret key. Remember to switch to your live secret key in production.
 # See your keys here: https://dashboard.stripe.com/apikeys
@@ -20,12 +20,28 @@ stripe.api_key = anvil.secrets.get_secret('stripe_secret_api_key')
 # so, if we call @anvil.server.callable(require_user=user_has_subscription(["pro"])), the decorator calls user_has_subscription which returns an evaluated function object that require_user can use
 # verify_subscription receives the currently logged-in user object from @anvil.server.callable automatically
 # See the Product Server Module to see it in use
+
+#old
+#def user_has_subscription(allowed_subscriptions):
+#    def verify_subscription(user):
+#        # Return true if user has subscription in allowed subscriptions
+#        return user["subscription"] and user["subscription"].lower() in [subscription.lower() for subscription in allowed_subscriptions]
+#    return verify_subscription
+
 def user_has_subscription(allowed_subscriptions):
     def verify_subscription(user):
-        # Return true if user has subscription in allowed subscriptions
-        return user["subscription"] and user["subscription"].lower() in [subscription.lower() for subscription in allowed_subscriptions]
-    return verify_subscription
-
+        # Check if the user has a valid subscription
+        if user["subscription"] and user["subscription"].lower() in [subscription.lower() for subscription in allowed_subscriptions]:
+            return True
+        
+        # Check if the user is within their 30-day free trial period
+        if "first_login_date" in user:
+            first_login_date = datetime.strptime(user["first_login_date"], "%Y-%m-%d")
+            if datetime.now() <= first_login_date + timedelta(days=30):
+                return True
+        
+        # If neither condition is met, return False
+        return False
 
 @anvil.server.callable(require_user=True)
 def change_name(name):
