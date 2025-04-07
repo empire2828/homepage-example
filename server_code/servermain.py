@@ -57,15 +57,33 @@ def get_bookings_risk(email=None, booking_id=None):
     return bookings
 
 @anvil.server.callable
-def send_result_email(user_email,reservation_id):
+def send_result_email(user_email, reservation_id):
   booking = app_tables.bookings.get(reservation_id=reservation_id)
-  email_text= booking['screener_openai_job']
-  print("send_email:",user_email,reservation_id,email_text)
+  
+  # OpenAI Ergebnisse
+  email_text_ai = "OpenAI:<br>" + booking['screener_openai_job'] + "<br>"
+  
+  # Adresscheck Ergebnisse
+  address_check = booking['screener_address_check']
+  if address_check is None:
+    email_text_address = "Adresscheck: Keine Ergebnisse<br>"
+  else:
+    email_text_address = "Adresscheck: " + str(address_check) + "<br>"
+  
+  # LinkedIn Ergebnisse
+  linkedin_check = booking['screener_google_linkedin']
+  if linkedin_check is None:
+    email_text_linkedin = "LinkedIn: Keine Ergebnisse<br>"
+  else:
+    email_text_linkedin = "LinkedIn: " + linkedin_check + "<br>"
+  
+  email_text = email_text_ai + email_text_address + email_text_linkedin
+  
+  print("send_email:", user_email, reservation_id, email_text)
   anvil.email.send(
     to=user_email,
     from_address="noreply",
     from_name="Guestscreener.com",
     subject="Guestscreener.com Ergebnisse",
     html=email_text
-)
-  pass
+  )
