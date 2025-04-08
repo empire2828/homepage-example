@@ -12,11 +12,6 @@ class layout(layoutTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    has_subscription = anvil.server.call('get_user_has_subscription')
-    if has_subscription:
-      self.subscription_body.text="Pro-Abo"
-    else:
-      self.subscription_body.text="Basis-Abo"
 
   def dashboard_link_click(self, **event_args):
    self.reset_links()
@@ -56,4 +51,12 @@ class layout(layoutTemplate):
     self.reset_links()
     open_form('channel_manager_connect')
     self.channel_manager_connect_link.role='selected'
+    pass
+
+  def form_show(self, **event_args):
+    has_subscription = anvil.server.call('get_user_has_subscription')
+    if has_subscription:
+      self.subscription_body.text="Pro-Abo"
+    else:
+      self.subscription_body.text="Basis-Abo"
     pass
