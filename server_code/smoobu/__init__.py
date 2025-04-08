@@ -6,6 +6,7 @@ from datetime import datetime
 import anvil.secrets
 import json
 
+@anvil.server.callable
 def get_guest_details(guestid, headers):
     """Ruft die Gästedaten für einen bestimmten Gast ab"""
     guest_url = f"https://login.smoobu.com/api/guests/{guestid}"  
@@ -19,6 +20,7 @@ def get_guest_details(guestid, headers):
         print(f"Fehler beim Abrufen der Gästedaten: {response.status_code} - {response.text}")
         return {}  # Leeres Dictionary für andere Fehler zurückgeben
 
+@anvil.server.callable
 def get_smoobu_userid(user_email):
   user= app_tables.users.get(email=user_email)
   if user:

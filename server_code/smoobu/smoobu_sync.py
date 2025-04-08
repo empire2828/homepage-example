@@ -125,6 +125,7 @@ def sync_smoobu(user_email):
     
     return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten abgerufen und gespeichert."
 
+@anvil.server.callable
 def save_smoobu_userid(user_email):
     pms_userid = str(get_smoobu_userid(user_email))
     current_user = anvil.users.get_user()
