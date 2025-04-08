@@ -36,7 +36,7 @@ def smoobu_webhook_handler():
         guest_data_update(user_email)
         reservation_id= booking_data.get('id')
         print("send result email to with id: ", user_email,reservation_id)
-        #send_result_email(user_email,reservation_id)   
+        send_result_email(user_email,reservation_id)   
         return {"status": "success"} 
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
@@ -49,7 +49,7 @@ def process_booking(booking_data, user_id):
         return
 
     user_email= get_user_email(user_id) or "unbekannt"
-
+  
     # Füge einen Debug-Print hinzu, um die Werte zu sehen
     print(f"Füge Buchung hinzu: ID={booking_data.get('id')}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
 
