@@ -47,7 +47,7 @@ def process_booking(booking_data, user_id):
         print("Keine gültigen Buchungsdaten erhalten")
         return
 
-    user_email= get_user_email(user_id)
+    user_email= get_user_email(user_id) or "unbekannt"
     
     # Füge einen Debug-Print hinzu, um die Werte zu sehen
     print(f"Füge Buchung hinzu: ID={booking_data.get('id')}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
