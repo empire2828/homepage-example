@@ -21,37 +21,6 @@ def get_guest_details(guestid, headers):
         return {}  # Leeres Dictionary für andere Fehler zurückgeben
 
 @anvil.server.callable
-def get_smoobu_userid(user_email):
-    user = app_tables.users.get(email=user_email)
-    if not user:
-        print(f"Kein Benutzer mit der E-Mail {user_email} gefunden")
-        return None
-        
-    api_key = user['pms_api_key']
-    if not api_key:
-        print(f"Kein API-Key für Benutzer {user_email} gefunden")
-        return None
-    
-    headers = {
-        "Api-Key": api_key,
-        "Cache-Control": "no-cache"
-    }
-    
-    try:
-        response = requests.get("https://login.smoobu.com/api/me", headers=headers)
-        
-        if response.status_code == 200:
-            data = response.json()
-            print("get_smoobu_userid: ", data['id'])
-            return data['id']
-        else:
-            print(f"API request failed: {response.status_code} - {response.text}")
-            return None
-    except Exception as e:
-        print(f"Fehler bei der API-Anfrage: {str(e)}")
-        return None
-
-@anvil.server.callable
 def guest_data_update(user_email):
     anvil.server.launch_background_task('update_missing_guest_data',user_email)
     return "Hintergrundtask zur Aktualisierung der Gastdaten gestartet"
