@@ -16,12 +16,12 @@ class homepage(homepageTemplate):
     # Any code you write here will run before the form opens.
 
   def login_button_click(self, **event_args):
-   user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=True, allow_remembered=True)
+   user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
    if user:
     open_form('dashboard')
     pass
 
-  def outlined_button_1_click(self, **event_args):
+  def testen_button_click(self, **event_args):
     user = anvil.users.signup_with_form(allow_cancel=True)
     if user:
      open_form('dashboard')
