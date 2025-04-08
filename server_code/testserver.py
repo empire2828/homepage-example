@@ -12,7 +12,7 @@ import anvil.http
 @anvil.server.callable
 def resend_webhook(webhook_data):
     # URL Ihres Webhook-Endpunkts
-    webhook_url = "https://guestscreener.com/_/smoobu/webhook"
+    webhook_url = "https://guestscreener.com/_/api/smoobu/webhook"
     
     # Webhook-Daten senden
     response = anvil.http.request(
@@ -37,5 +37,5 @@ webhook_data = {
 }
 
 # Webhook erneut senden
-result = resend_webhook(webhook_data)
-print(f"Webhook erneut gesendet, Antwort: {result}")
+#result = resend_webhook(webhook_data)
+#print(f"Webhook erneut gesendet, Antwort: {result}")
