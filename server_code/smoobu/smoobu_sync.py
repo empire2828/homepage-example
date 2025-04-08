@@ -129,6 +129,8 @@ def sync_smoobu(user_email):
 def save_smoobu_userid(user_email):
     pms_userid = str(get_smoobu_userid(user_email))
     current_user = anvil.users.get_user()
+    print("save_smoobu_userid current user: ",current_user)
+    print("save_smoobu_userid pms_userid: ",pms_userid)
     app_tables.users.get(email=current_user['email']).update(pms_userid=pms_userid)
     return 
 

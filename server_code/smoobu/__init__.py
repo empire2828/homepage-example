@@ -36,6 +36,7 @@ def get_smoobu_userid(user_email):
   
     if response.status_code == 200:
         data = response.json()
+        print("get_smoobu_userid: ", data['id'])
         return data['id']
     else:
         raise Exception(f"API request failed: {response.status_code} - {response.text}")
