@@ -68,7 +68,7 @@ def send_result_email(user_email, reservation_id):
   if address_check is None:
     email_text_address = "Adresscheck: Keine Ergebnisse<br>"
   else:
-    email_text_address = "Adresscheck: " + str(address_check) + "<br>"
+    email_text_address = "Adresscheck: " + ("Erfolgreich" if address_check else "Fehlgeschlagen") + "<br>"
   
   # LinkedIn Ergebnisse
   linkedin_check = booking['screener_google_linkedin']

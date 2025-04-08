@@ -22,11 +22,11 @@ def smoobu_webhook_handler():
         # Prüfen, ob es sich um eine Buchungsoperation handelt
         action = webhook_data.get('action')
         booking_data = webhook_data.get('data', {})
-        user_id = webhook_data.get('user')  # Smoobu-Benutzer-ID
+        user_id = str(webhook_data.get('user') or 0)  # Smoobu-Benutzer-ID
       
         if action in ['newReservation', 'updateReservation']:
             # Die eigentlichen Buchungsdaten befinden sich im 'data'-Feld
-            process_booking(booking_data, str(user_id))
+            process_booking(booking_data, user_id)
             print(f"Buchung verarbeitet: {booking_data.get('id')}")     
         elif action == 'cancelReservation':
             delete_booking(booking_data.get('id'))
@@ -108,7 +108,7 @@ def delete_booking(reservation_id):
 
 def get_user_email(user_id):
     user_email = None
-    user_row = app_tables.users.get(pms_userid=str(user_id))
+    user_row = app_tables.users.get(pms_userid=user_id)
     if user_row:
         user_email = user_row['email']
         print(f"Benutzer gefunden: {user_email}")
