@@ -9,9 +9,9 @@ from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
 import requests
-from smoobu import get_guest_details, guest_data_update
+from smoobu.smoobu_main import get_guest_details, guest_data_update
 from servermain import send_result_email
-from screener import get_bookings_risk
+from screener.screener_main import get_bookings_risk
 import time
 
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
