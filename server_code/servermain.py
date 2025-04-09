@@ -78,7 +78,6 @@ def send_result_email(user_email, reservation_id):
     email_text_linkedin = "LinkedIn: " + linkedin_check + "<br>"
   
   email_text = email_text_ai + email_text_address + email_text_linkedin
-  
   print("send_email:", user_email, reservation_id, email_text)
   anvil.email.send(
     to=user_email,
