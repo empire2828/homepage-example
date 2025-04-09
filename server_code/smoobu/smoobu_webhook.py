@@ -11,31 +11,33 @@ from datetime import datetime
 import requests
 from smoobu import get_guest_details, guest_data_update
 from servermain import send_result_email
+from screener import get_bookings_risk
+import time
 
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
 def smoobu_webhook_handler():
     try:
         request = anvil.server.request
         webhook_data = request.body_json
-        print(f"Webhook-Daten empfangen: {webhook_data}")
-        
+        print(f"Webhook-Daten empfangen: {webhook_data}")        
         # Prüfen, ob es sich um eine Buchungsoperation handelt
         action = webhook_data.get('action')
         booking_data = webhook_data.get('data', {})
-        user_id = str(webhook_data.get('user') or 0)  # Smoobu-Benutzer-ID
-      
+        user_id = str(webhook_data.get('user') or 0)  # Smoobu-Benutzer-ID      
+        user_email= get_user_email(user_id)
+        reservation_id= booking_data.get('id')
         if action in ['newReservation', 'updateReservation']:
             # Die eigentlichen Buchungsdaten befinden sich im 'data'-Feld
-            process_booking(booking_data, user_id)
-            print(f"Buchung verarbeitet: {booking_data.get('id')}")     
+            process_booking(booking_data, user_id)            
+            print(f"Buchung verarbeitet: {booking_data.get('id')}") 
+            get_bookings_risk_status= get_bookings_risk(user_email,reservation_id)
         elif action == 'cancelReservation':
             delete_booking(booking_data.get('id'))
             print(f"Buchung gelöscht: {booking_data.get('id')}")
         # bei jedem Aufruf des Webhooks schauen ob Gastdaten sich geändert haben (bei Direktbuchungen erst nach Anlage Buchung)
-        user_email= get_user_email(user_id)
-        guest_data_update(user_email)
-        reservation_id= booking_data.get('id')
-        print("send result email to with id: ", user_email,reservation_id)
+        guest_data_update(user_email)  
+        while get_bookings_risk_status.is_running():
+          time.sleep(5)
         send_result_email(user_email,reservation_id)   
         return {"status": "success"} 
     except Exception as e:
