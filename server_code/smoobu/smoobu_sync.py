@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
 import requests
-from smoobu import get_guest_details, guest_data_update
+from smoobu_main import get_guest_details, guest_data_update
 
 @anvil.server.callable
 def launch_sync_smoobu():
