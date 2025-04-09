@@ -31,13 +31,13 @@ def smoobu_webhook_handler():
             process_booking(booking_data, user_id)            
             print(f"Buchung verarbeitet: {booking_data.get('id')}") 
             get_bookings_risk_status= get_bookings_risk(user_email,reservation_id)
+            while get_bookings_risk_status.is_running():
+              time.sleep(5)
         elif action == 'cancelReservation':
             delete_booking(booking_data.get('id'))
             print(f"Buchung gelöscht: {booking_data.get('id')}")
         # bei jedem Aufruf des Webhooks schauen ob Gastdaten sich geändert haben (bei Direktbuchungen erst nach Anlage Buchung)
         guest_data_update(user_email)  
-        while get_bookings_risk_status.is_running():
-          time.sleep(5)
         send_result_email(user_email,reservation_id)   
         return {"status": "success"} 
     except Exception as e:
