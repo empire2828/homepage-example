@@ -58,10 +58,17 @@ def get_bookings_risk(email=None, booking_id=None):
 
 @anvil.server.callable
 def send_result_email(user_email, reservation_id):
-  booking = app_tables.bookings.get(reservation_id=reservation_id)
+  try:
+    booking = app_tables.bookings.get(reservation_id=reservation_id)
+  except AttributeError:
+    print("Keine Buchung gefunden",user_email, reservation_id)
   
-  # OpenAI Ergebnisse
-  email_text_ai = "OpenAI:<br>" + booking['screener_openai_job'] + "<br>"
+ # OpenAI Ergebnisse
+  openai_job = booking['screener_openai_job']
+  if openai_job is None:
+    email_text_ai = "OpenAI: Keine Ergebnisse<br>"
+  else:
+    email_text_ai = "OpenAI:<br>" + openai_job + "<br>"
   
   # Adresscheck Ergebnisse
   address_check = booking['screener_address_check']
