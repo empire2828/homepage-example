@@ -31,8 +31,8 @@ def smoobu_webhook_handler():
             process_booking(booking_data, user_id)            
             print(f"Buchung verarbeitet: {booking_data.get('id')}") 
             get_bookings_risk_status= get_bookings_risk(user_email,reservation_id)
-            if get_bookings_risk_status.is_running():
-              time.sleep(10)
+            if get_bookings_risk_status.completed():
+              return
         elif action == 'cancelReservation':
             delete_booking(booking_data.get('id'))
             print(f"Buchung gelöscht: {booking_data.get('id')}")
