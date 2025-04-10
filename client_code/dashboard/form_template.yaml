@@ -1,11 +1,6 @@
 components_by_slot:
   main_slot: []
   slot_1:
-  - event_bindings: {click: sync_smoobu_button_click}
-    layout_properties: {}
-    name: sync_smoobu_button
-    properties: {background: 'theme:Primary', foreground: 'theme:On Primary', role: elevated-button, text: Sync Smoobu}
-    type: Button
   - data_bindings: []
     layout_properties: {}
     name: bookings_repeating_panel

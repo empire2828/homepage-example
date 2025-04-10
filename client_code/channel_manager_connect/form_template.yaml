@@ -8,7 +8,7 @@ components_by_slot:
           bold: false
           font_size: 18
           role: body
-          text: "Derzeit unterstützen wir eine API zu Smoobu. Weitere Channel Manager sind in Arbeit. \n\nZum Anbinden sind zwei Schritte notwendig:   \n\n"
+          text: "Derzeit unterstützen wir eine API zu Smoobu. Weitere Channel Manager sind in Arbeit. \n\nZum Anbinden sind folgende Schritte notwendig:   \n\n"
         type: Label
       layout_properties: {grid_position: 'BCTTYC,HGXGNX'}
       name: outlined_card_2
@@ -69,6 +69,20 @@ components_by_slot:
       type: Image
     layout_properties: {}
     name: outlined_card_3
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'IGZTXG,VWIYVT'}
+      name: title_3
+      properties: {role: title, text: '3. Erst-Synchronisation starten:'}
+      type: Label
+    - event_bindings: {click: sync_smoobu_button_click}
+      layout_properties: {grid_position: 'IGZTXG,HJJGAD'}
+      name: sync_smoobu_button
+      properties: {role: filled-button, text: Sync Smoobu}
+      type: Button
+    layout_properties: {}
+    name: outlined_card_4
     properties: {role: outlined-card}
     type: ColumnPanel
 is_package: true
