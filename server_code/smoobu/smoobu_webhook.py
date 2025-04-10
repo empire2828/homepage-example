@@ -24,21 +24,34 @@ def smoobu_webhook_handler():
         action = webhook_data.get('action')
         booking_data = webhook_data.get('data', {})
         user_id = str(webhook_data.get('user') or 0)  # Smoobu-Benutzer-ID      
-        user_email= get_user_email(user_id)
-        reservation_id= booking_data.get('id')
+        user_email = get_user_email(user_id)
+        reservation_id = booking_data.get('id')
+        
         if action in ['newReservation', 'updateReservation']:
             # Die eigentlichen Buchungsdaten befinden sich im 'data'-Feld
             process_booking(booking_data, user_id)            
-            print(f"Buchung verarbeitet: {booking_data.get('id')}") 
-            get_bookings_risk_status= get_bookings_risk(user_email,reservation_id)
-            if get_bookings_risk_status.completed():
-              return
+            print(f"Buchung verarbeitet: {booking_data.get('id')}")
+            
+            # Starte die Risikobewertung als Hintergrundaufgabe
+            risk_task = get_bookings_risk(user_email, reservation_id)
+            
+            # Warte auf Abschluss mit korrekter Überprüfung des Task-Status
+            while not risk_task.is_completed() and not risk_task.has_error():
+                # Kurze Pause, um nicht zu viel CPU zu verbrauchen
+                time.sleep(1)
+                
+            # Überprüfe, ob die Aufgabe erfolgreich abgeschlossen wurde
+            if risk_task.has_error():
+                print(f"Fehler bei der Risikobewertung: {risk_task.get_error()}")
+            
         elif action == 'cancelReservation':
             delete_booking(booking_data.get('id'))
             print(f"Buchung gelöscht: {booking_data.get('id')}")
-        # bei jedem Aufruf des Webhooks schauen ob Gastdaten sich geändert haben (bei Direktbuchungen erst nach Anlage Buchung)
+            
+        # Bei jedem Aufruf des Webhooks schauen, ob Gastdaten sich geändert haben
         guest_data_update(user_email)  
-        send_result_email(user_email,reservation_id)   
+        send_result_email(user_email, reservation_id)   
+        
         return {"status": "success"} 
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
