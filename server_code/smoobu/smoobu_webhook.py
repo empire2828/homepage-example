@@ -33,10 +33,7 @@ def smoobu_webhook_handler():
             print(f"Buchung verarbeitet: {booking_data.get('id')}")
             
             # Starte die Risikobewertung als Hintergrundaufgabe
-            risk_task = get_bookings_risk(user_email, reservation_id)
-            
-            if risk_task.has_error():
-                print(f"Fehler bei der Risikobewertung: {risk_task.get_error()}")
+            anvil.server.launch_background_task('get_bookings_risk',user_email, reservation_id)
             
         elif action == 'cancelReservation':
             delete_booking(booking_data.get('id'))
@@ -44,12 +41,11 @@ def smoobu_webhook_handler():
             
         # Bei jedem Aufruf des Webhooks schauen, ob Gastdaten sich geändert haben
         guest_data_update(user_email)  
-        anvil.server.background_task('send_result_email',user_email,reservation_id) 
+        anvil.server.launch_background_task('send_result_email',user_email,reservation_id) 
         return {"status": "success"} 
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
         return {"status": "error", "message": str(e)}, 500
-
 
 def process_booking(booking_data, user_id):
     if not booking_data or 'id' not in booking_data:
