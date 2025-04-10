@@ -7,9 +7,12 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+import time
 
 @anvil.server.callable
+@anvil.server.background_task
 def send_result_email(user_email, reservation_id):
+  time.sleep(60)
   try:
     booking = app_tables.bookings.get(reservation_id=reservation_id)
   except AttributeError:

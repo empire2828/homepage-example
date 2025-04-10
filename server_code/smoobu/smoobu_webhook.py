@@ -35,12 +35,6 @@ def smoobu_webhook_handler():
             # Starte die Risikobewertung als Hintergrundaufgabe
             risk_task = get_bookings_risk(user_email, reservation_id)
             
-            # Warte auf Abschluss mit korrekter Überprüfung des Task-Status
-            while not risk_task.is_completed() and not risk_task.has_error():
-                # Kurze Pause, um nicht zu viel CPU zu verbrauchen
-                time.sleep(1)
-                
-            # Überprüfe, ob die Aufgabe erfolgreich abgeschlossen wurde
             if risk_task.has_error():
                 print(f"Fehler bei der Risikobewertung: {risk_task.get_error()}")
             
@@ -50,8 +44,7 @@ def smoobu_webhook_handler():
             
         # Bei jedem Aufruf des Webhooks schauen, ob Gastdaten sich geändert haben
         guest_data_update(user_email)  
-        send_result_email(user_email, reservation_id)   
-        
+        anvil.server.background_task('send_result_email',user_email,reservation_id) 
         return {"status": "success"} 
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
@@ -62,12 +55,9 @@ def process_booking(booking_data, user_id):
     if not booking_data or 'id' not in booking_data:
         print("Keine gültigen Buchungsdaten erhalten")
         return
-
     user_email= get_user_email(user_id) or "unbekannt"
-  
     # Füge einen Debug-Print hinzu, um die Werte zu sehen
     print(f"Füge Buchung hinzu: ID={booking_data.get('id')}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
-
     # Gästedaten abrufen
     user= app_tables.users.get(email=user_email)
     if user:
@@ -130,3 +120,4 @@ def get_user_email(user_id):
     else:
         print(f"Kein Benutzer mit Smoobu-ID {user_id} gefunden")
     return user_email
+
