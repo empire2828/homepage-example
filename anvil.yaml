@@ -129,7 +129,7 @@ dependencies: []
 metadata: {description: guestscreener.com, logo_img: 'asset:guestscreener.png', title: guestscreener.com}
 name: guestscreener.com
 native_deps: null
-package_name: Homepage_Example
+package_name: Guestscreener
 renamed: true
 runtime_options:
   client_version: '3'

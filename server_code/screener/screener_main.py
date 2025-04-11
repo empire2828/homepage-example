@@ -45,6 +45,11 @@ def get_bookings_risk(email=None, booking_id=None):
         result = address_check.address_check(address)
         booking['screener_address_check'] = result if result is not None else 0
 
+        # Phone check
+        phone=booking['phone']
+        result = address_check.phone_check(phone)
+        booking['screener_phone_check'] = result if result is not None else 0
+
         # OpenAI Alters-Prüfung
         # result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'], "age")
         # booking['screener_openai_age'] = result
