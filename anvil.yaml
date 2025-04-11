@@ -70,6 +70,9 @@ db_schema:
     - admin_ui: {order: 12.75, width: 200}
       name: phone
       type: string
+    - admin_ui: {order: 21, width: 200}
+      name: screener_phone_check
+      type: bool
     server: full
     title: bookings
   users:

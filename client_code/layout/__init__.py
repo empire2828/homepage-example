@@ -54,14 +54,9 @@ class layout(layoutTemplate):
     pass
 
   def form_show(self, **event_args):
-    self.refresh_data_bindings()
-    pass
-
-  def form_refreshing_data_bindings(self, **event_args):
     has_subscription = anvil.server.call('get_user_has_subscription')
     if has_subscription:
       self.subscription_body.text="Pro-Abo"
     else:
       self.subscription_body.text="Basis-Abo"
-    print("Pro-Subscription: ",has_subscription)
     pass

@@ -57,7 +57,7 @@ components:
   properties: {}
   type: FlowPanel
 container:
-  event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings, show: form_show}
+  event_bindings: {show: form_show}
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
 is_package: true

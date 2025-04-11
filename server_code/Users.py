@@ -28,19 +28,19 @@ stripe.api_key = anvil.secrets.get_secret('stripe_secret_api_key')
 #        return user["subscription"] and user["subscription"].lower() in [subscription.lower() for subscription in allowed_subscriptions]
 #    return verify_subscription
 
-@anvil.server.callable
-def user_has_subscription(allowed_subscriptions):
-    def verify_subscription(user):
-        # Check if the user has a valid subscription
-        if user["subscription"] and user["subscription"].lower() in [subscription.lower() for subscription in allowed_subscriptions]:
-            return True
-              # Check if the user is within their 30-day free trial period
-        if "first_login_date" in user:
-            first_login_date = datetime.strptime(user["signed_up"], "%Y-%m-%d")
-            if datetime.now() <= first_login_date + timedelta(days=30):
-                return True       
-        # If neither condition is met, return False
-        return False
+#@anvil.server.callable
+#def user_has_subscription(allowed_subscriptions):
+#    def verify_subscription(user):
+#        # Check if the user has a valid subscription
+#        if user["subscription"] and user["subscription"].lower() in [subscription.lower() for subscription in allowed_subscriptions]:
+#            return True
+#              # Check if the user is within their 30-day free trial period
+#        if "first_login_date" in user:
+#            first_login_date = datetime.strptime(user["signed_up"], "%Y-%m-%d")
+#            if datetime.now() <= first_login_date + timedelta(days=30):
+#                return True       
+#        # If neither condition is met, return False
+#        return False
 
 @anvil.server.callable(require_user=True)
 def change_name(name):
