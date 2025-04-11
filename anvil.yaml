@@ -67,6 +67,9 @@ db_schema:
     - admin_ui: {order: 12.5, width: 200}
       name: guestid
       type: number
+    - admin_ui: {order: 12.75, width: 200}
+      name: phone
+      type: string
     server: full
     title: bookings
   users:

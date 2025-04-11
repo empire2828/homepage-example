@@ -48,3 +48,12 @@ def send_result_email(user_email, reservation_id):
     subject="Guestscreener.com Ergebnisse",
     html=email_text
   )
+
+@anvil.server.callable
+def server_wake_up():
+  anvil.server.launch_background_task('server_wake_up_background')
+  pass
+
+@anvil.server.background_task
+def server_wake_up_background():
+  print('Server woke up')

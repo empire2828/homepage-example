@@ -80,6 +80,7 @@ def process_booking(booking_data, user_id):
         guestname=booking_data.get('guest-name', ''),
         reservation_id=booking_data.get('id'),
         channel_name=booking_data.get('channel', {}).get('name'),
+        phone=booking_data.get('phone'),
         adults=booking_data.get('adults'),
         children=booking_data.get('children'),
         language=booking_data.get('language'),

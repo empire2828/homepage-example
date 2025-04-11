@@ -12,7 +12,7 @@ class homepage(homepageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
+    anvil.server.call('server_wake_up')
     # Any code you write here will run before the form opens.
 
   def login_button_click(self, **event_args):
