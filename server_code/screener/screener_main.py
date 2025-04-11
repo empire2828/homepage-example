@@ -7,9 +7,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-from screener import screener_open_ai
-from screener import google_linkedin
-from screener import address_check
+from screener import screener_open_ai, google_linkedin, address_check, phone_check
 
 @anvil.server.callable
 def launch_get_bookings_risk():
@@ -47,7 +45,7 @@ def get_bookings_risk(email=None, booking_id=None):
 
         # Phone check
         phone=booking['phone']
-        result = address_check.phone_check(phone)
+        result = phone_check.phone_check(phone)
         booking['screener_phone_check'] = result if result is not None else 0
 
         # OpenAI Alters-Prüfung

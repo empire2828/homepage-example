@@ -58,7 +58,7 @@ components:
     properties: {text: Adresse geprüft}
     type: CheckBox
   - layout_properties: {grid_position: 'BTVWVL,IUFDOV'}
-    name: text_box_1
+    name: phone_text_box
     properties: {}
     type: TextBox
   - layout_properties: {grid_position: 'BTVWVL,NWZFJR'}

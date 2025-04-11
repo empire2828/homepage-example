@@ -23,6 +23,7 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
       self.city_text_box.text=self.item['address_city']
       self.address_check_box.checked=self.item['screener_address_check']
       self.screener_open_ai_text.text=self.item['screener_openai_job']
+      self.phone_text_box.text=self.item['phone']
       self.phone_check_box.checked=self.item['screener_phone_check']
 
     # Any code you write here will run before the form opens.
