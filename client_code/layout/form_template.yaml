@@ -47,7 +47,8 @@ components:
   properties: {role: title, text: guestscreener.com}
   type: Label
 - components:
-  - data_bindings: []
+  - data_bindings:
+    - {code: 'self.item[''subscription'']', property: text, writeback: false}
     name: subscription_body
     properties: {role: body}
     type: Label
@@ -56,7 +57,7 @@ components:
   properties: {}
   type: FlowPanel
 container:
-  event_bindings: {show: form_show}
+  event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings, show: form_show}
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
 is_package: true
