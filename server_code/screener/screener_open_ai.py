@@ -8,11 +8,13 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from openai import OpenAI
+import time
 
 # Client außerhalb der Funktion initialisieren, damit er für alle Funktionen verfügbar ist
 client = OpenAI(
-  api_key=anvil.secrets.get_secret('PERPLEXITY_API_KEY'),
-  base_url="https://api.perplexity.ai"
+  api_key=anvil.secrets.get_secret('gemini_api_key'),
+  #base_url="https://api.perplexity.ai"
+  base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
 
 @anvil.server.callable
@@ -28,7 +30,8 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
     
   try:
     response = client.chat.completions.create(
-      model="sonar",
+      #model="sonar",
+      model="gemini-2.0-flash",
       messages=[
           {"role": "system", "content": prompt},
           {"role": "user", "content": name},  
@@ -38,9 +41,10 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
       top_p=0.9,
       stream=False,
       presence_penalty=0,
-      frequency_penalty=0,
+      #frequency_penalty=0,
       response_format=None
     )
+    time.sleep(5)
     return response.choices[0].message.content
   except Exception as e:
     return f"Fehler: {e}"
