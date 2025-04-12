@@ -141,6 +141,9 @@ secrets:
   PERPLEXITY_API_KEY:
     type: secret
     value: {Y4HSOSHAROBHE7LA: 6PFkuGTCKXiRtNxZNhM+Y/MGZNYEL7WTjilZEGY8x3vTOPz+8l2Jml33WLhmNSa2r1vHyxlULQfybLdGgnCWLeM+RKJcS39/qOjsClkQkOA9jMjluv+vRJF/E2sSyKs7kI6GYSBx2TGbEyyzsZYKIEG0UqykZhzX5DcbBY4xe8x/y/sCyZbD2mR46j9KelveKuXa/w==}
+  gemini_api_key:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: jx21CLzwbvedikGAg9hctVJvCK/ezA+3//rkAHOdDbbpS/1DGgX6KkjtPOfKI+3DhtRLvReUFd8NWWqHB8YgO94YiHxss1kOZVw1dcr5mdySz/HQnhHvXOnHnSR3zt+dtbwgLkbvNMrvjWOSZqBQPyxwPB5DZNLc6dpU8ajhcYXXj0RCv8A=}
   google_linkedin_search:
     type: secret
     value: {Y4HSOSHAROBHE7LA: +04cDP9QtlSGl3fH6W5AaE3UdsNogCecj72m7honWSto3AnSebETbFfz7+mRN2JLJmEa5mir+efv3yN4dZREr4Qb6Q0Pb5CmAIBUeVmOUl+JVCadCLNgy6mPPopnJtlGildmc5TleZT0exB3aFmkRHl/RKOcvhQnOMEzbn67fVyB6qeegAk=}
