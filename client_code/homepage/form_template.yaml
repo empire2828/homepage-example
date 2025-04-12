@@ -114,65 +114,88 @@ components:
     name: label_9
     properties: {align: center, bold: true, text: Abo}
     type: Label
-  - layout_properties: {grid_position: 'IZEIPJ,APCWPT OCNHQE,MHYACM'}
-    name: label_12
-    properties:
-      spacing:
-        margin: ['4', null, '6', null]
-      text: KI gestützte Recherche
+  - components:
+    - layout_properties: {grid_position: 'UMJGQL,JYZUGI'}
+      name: label_12
+      properties:
+        spacing:
+          margin: ['4', null, '6', null]
+        text: KI gestützte Recherche
+      type: Label
+    - layout_properties: {grid_position: 'UMJGQL,TMKUQP'}
+      name: check_box_10
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
+    layout_properties: {grid_position: 'IZABEX,XANQUW'}
+    name: elevated_card_1
+    properties: {role: elevated-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'FUGLSW,GYQXEI'}
+      name: label_19
+      properties:
+        spacing:
+          margin: [null, null, '6', null]
+        text: Linkedin Recherche
+      type: Label
+    - layout_properties: {grid_position: 'FUGLSW,BBVDZT'}
+      name: check_box_2
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
+    layout_properties: {grid_position: 'AIFBEV,XXKAYJ'}
+    name: elevated_card_2
+    properties: {role: elevated-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'WJNXLM,BJLVUW'}
+      name: label_11
+      properties:
+        spacing:
+          margin: [null, null, '6', null]
+        text: Adressprüfung
+      type: Label
+    - layout_properties: {grid_position: 'WJNXLM,MDTBSR'}
+      name: check_box_4
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
+    layout_properties: {grid_position: 'XYXMQN,SOZLMK'}
+    name: elevated_card_3
+    properties: {role: elevated-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'TRLCZK,ROPPKG'}
+      name: label_6
+      properties:
+        spacing:
+          margin: [null, null, '6', null]
+        text: Anbindung via API (Smoobu)
+      type: Label
+    - layout_properties: {grid_position: 'TRLCZK,EMCZTU'}
+      name: check_box_1
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
+    layout_properties: {grid_position: 'AQUFMA,OCQFQP'}
+    name: elevated_card_4
+    properties: {role: elevated-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'KNVGKM,TWRMQK'}
+      name: label_3
+      properties: {text: Telefonnummernprüfung}
+      type: Label
+    - layout_properties: {grid_position: 'KNVGKM,SPVMYZ'}
+      name: check_box_3
+      properties: {align: center, checked: true, enabled: false, text: '', visible: true}
+      type: CheckBox
+    layout_properties: {grid_position: 'CAXXMZ,VXJNFK'}
+    name: elevated_card_5
+    properties: {role: elevated-card}
+    type: ColumnPanel
+  - layout_properties: {grid_position: 'IQCUEL,GVKVCE'}
+    name: body_1
+    properties: {role: body}
     type: Label
-  - layout_properties: {grid_position: 'IZEIPJ,APCWPT YQJAIW,BQBJIX'}
-    name: label_19
-    properties:
-      spacing:
-        margin: [null, null, '6', null]
-      text: Linkedin Recherche
-    type: Label
-  - layout_properties: {grid_position: 'IZEIPJ,GQVYXV XDRERJ,HTADFD'}
-    name: check_box_10
-    properties: {align: center, checked: true, enabled: false, text: ''}
-    type: CheckBox
-  - layout_properties: {grid_position: 'IZEIPJ,GQVYXV GTSPZS,PLVTFO'}
-    name: check_box_2
-    properties: {align: center, checked: true, enabled: false, text: ''}
-    type: CheckBox
-  - layout_properties: {grid_position: 'ODSPXL,PUKMYP'}
-    name: label_11
-    properties:
-      spacing:
-        margin: [null, null, '6', null]
-      text: Adressprüfung
-    type: Label
-  - layout_properties: {grid_position: 'ODSPXL,VEUJAA'}
-    name: check_box_4
-    properties: {align: center, checked: true, enabled: false, text: ''}
-    type: CheckBox
-  - layout_properties: {grid_position: 'TKCXCN,SLFYBP'}
-    name: label_6
-    properties:
-      spacing:
-        margin: [null, null, '6', null]
-      text: Anbindung via API (Smoobu)
-    type: Label
-  - layout_properties: {grid_position: 'TKCXCN,CUSHVZ'}
-    name: check_box_1
-    properties: {align: center, checked: true, enabled: false, text: ''}
-    type: CheckBox
-  - layout_properties: {grid_position: 'ZYRRGS,KOAGCY'}
-    name: label_3
-    properties: {text: Telefonnummernprüfung}
-    type: Label
-  - layout_properties: {grid_position: 'ZYRRGS,ZGDSFB BZRUIV,WDASXB'}
-    name: label_14
-    properties:
-      align: center
-      bold: true
-      italic: true
-      spacing:
-        margin: ['8', null, '8', null]
-      text: coming soon
-    type: Label
-  - layout_properties: {grid_position: 'ZYRRGS,ZGDSFB IQCUEL,PIPGAT'}
+  - layout_properties: {grid_position: 'IQCUEL,PIPGAT'}
     name: label_7
     properties:
       align: center

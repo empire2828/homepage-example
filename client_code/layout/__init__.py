@@ -35,7 +35,7 @@ class layout(layoutTemplate):
     self.upgrade_link.role = ''
 
   def upgrade_link_click(self, **event_args):
-    has_subscription = anvil.server.call('get_user_has_subscription')
+    has_subscription = anvil.server.call_s('get_user_has_subscription')
     if not has_subscription:
         open_form('StripePricing')
     else:
@@ -53,7 +53,7 @@ class layout(layoutTemplate):
     pass
 
   def form_show(self, **event_args):
-    has_subscription = anvil.server.call('get_user_has_subscription')
+    has_subscription = anvil.server.call_s('get_user_has_subscription')
     if has_subscription:
       self.subscription_body.text="Pro-Abo"
     else:

@@ -19,7 +19,7 @@ client = OpenAI(
 def screener_open_ai(name, location, checktype):
   if checktype == "job":
     prompt = f"""
-Welchen beruf hat {name} bei einem unternehmen in der nähe von {location}? Wenn kein Beruf bekannt ist, wo ist er oder sie in der nähe von {location} in Erscheinung getreten? Schreibe sehr kurz ohne Zitatnummern.
+Welchen beruf hat {name} bei einem unternehmen in der nähe von {location}? Wenn kein Beruf bekannt ist, wo ist er oder sie in der nähe von {location} in Erscheinung getreten? Schreibe extrem kurz ohne Zitatnummern.
 """
   else:
     prompt = f"""
@@ -33,7 +33,7 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
           {"role": "system", "content": prompt},
           {"role": "user", "content": name},  
       ],
-      max_tokens=256,
+      max_tokens=128,
       temperature=0.5,
       top_p=0.9,
       stream=False,

@@ -22,15 +22,15 @@ class dashboard(dashboardTemplate):
     pass
 
   def sync_smoobu_button_click(self, **event_args):
-    anvil.server.call('launch_sync_smoobu')
-    anvil.server.call('launch_get_bookings_risk')
+    anvil.server.call_s('launch_sync_smoobu')
+    anvil.server.call_s('launch_get_bookings_risk')
     alert("Sync in process.")
     pass
 
   def resync_smoobu_button_click(self, **event_args):
     alert("Hintergrund- Synchronisation wird gestartet. Das dauert ca. 10 Minuten.")
-    anvil.server.call('launch_sync_smoobu')
-    anvil.server.call('launch_get_bookings_risk')
+    anvil.server.call_s('launch_sync_smoobu')
+    anvil.server.call_s('launch_get_bookings_risk')
     pass
 
   def refresh_button_click(self, **event_args):
