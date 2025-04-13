@@ -1,13 +1,5 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'UHWQTB,UAZTAW'}
-    name: headline_1
-    properties: {role: headline, text: Datenschutz}
-    type: Label
-  - layout_properties: {grid_position: 'FOYAOC,FWULWO'}
-    name: spacer_1
-    properties: {height: 74.5789794921875}
-    type: Spacer
   - layout_properties: {grid_position: 'AVBNVA,BBKSRH'}
     name: body_1
     properties:
@@ -27,6 +19,10 @@ components:
   name: navbar_links
   properties: {}
   type: FlowPanel
+- layout_properties: {slot: title}
+  name: headline_1
+  properties: {role: headline, text: Datenschutz}
+  type: Label
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
