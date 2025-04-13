@@ -218,25 +218,24 @@ components:
   name: spacer_5
   properties: {height: 142.876708984375}
   type: Spacer
-- components:
-  - layout_properties: {}
-    name: spacer_4
-    properties: {height: -483.232666015625}
-    type: Spacer
-  - components:
-    - event_bindings: {click: data_protection_link_click}
-      layout_properties: {grid_position: 'YFDAQS,OQBLKO'}
-      name: data_protection_link
-      properties: {align: right, text: Datenschutz}
-      type: Link
-    event_bindings: {click: impressum_link_click}
-    layout_properties: {}
-    name: impressum_link
-    properties: {align: right, text: Impressum}
-    type: Link
-  layout_properties: {grid_position: 'OAZSMG,KTYRBH'}
+- layout_properties: {grid_position: 'OAZSMG,KTYRBH LGMCZK,EJOWWM'}
+  name: linear_panel_2
+  properties: {}
+  type: LinearPanel
+- layout_properties: {grid_position: 'OAZSMG,KTYRBH LGMCZK,VXUSJN'}
   name: linear_panel_1
   properties: {}
   type: LinearPanel
+- components: []
+  event_bindings: {click: impressum_link_click}
+  layout_properties: {grid_position: 'LGMCZK,JPCWHK'}
+  name: impressum_link
+  properties: {align: center, text: Impressum}
+  type: Link
+- event_bindings: {click: data_protection_link_click}
+  layout_properties: {grid_position: 'LGMCZK,HWMGPD'}
+  name: data_protection_link
+  properties: {align: center, text: Datenschutz}
+  type: Link
 container: {type: ColumnPanel}
 is_package: true
