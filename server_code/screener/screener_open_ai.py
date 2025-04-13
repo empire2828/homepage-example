@@ -30,7 +30,7 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
     
   try:
     response = client.chat.completions.create(
-        #model="sonar",gemini-2.0-flash
+        #model="sonar"
       model="gemini-2.0-flash",
       messages=[
           {"role": "system", "content": prompt},
