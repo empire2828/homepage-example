@@ -150,6 +150,9 @@ secrets:
   google_maps_api_key:
     type: secret
     value: {Y4HSOSHAROBHE7LA: 8eV6SFGUineV0goM9HAJPmoKi/BWXFgnKcVyzBrrs85PGs993ZPSkNYxGAKpjpUBjvEoqchKEQDwZ72N173fnt75JasN5WxiQiKEBGeGono+8vxn0IU875oQxsPSaVpgGappHN8x/BlDIaK2MYvIyYVc1XWBwdCeaZuWleeZodxXrLt3M8o=}
+  openai_api_key:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: OCpGJd5s0WiqKRLkvi6CxXy+kWVyowXgPDYMrQZVwhwNBV/way9gXVjDsuoawUi+WQKSyukd0QuVlZZQcUvoZU/dasA4vQgX5RiMQkaC/yUZhKvbM6IeMxXTJJXZGqiLyqCwaUFJQnM5p50r5dNqBJnU09Yl2QCFcMnvzgIWkbcjM5E/tF57AxKx71W8zdjyO38Hq6DldgTa9cBPzBU+SQAFeNodQOvkPd+s/Z/MYdOSWQJY8Ztt8LhNjDaQPaJwN5ZntmFrcqopHnATnl0ItbTmJ1wbpG7PNwAgVBgY5wmMXnDo1YD5KvjkHhdNgu+anWsso2vVKtDxCDGbow3jHzCBLg==}
   smoobu_api_key:
     type: secret
     value: {Y4HSOSHAROBHE7LA: Vqe4UNlJa3V/CTgr+5FL9+Qyv4lYZr0lHwr8DLqxhZX3EOv7LmvpWQ9qWCU2QfyKq/ZLxlJwZNJJhC6Jx7byYzZmb67Xs8r5SVSJXng4X+uPINyHGcpenqYQFPu5T1w55tmJpG9pKkFq56bX4sR9JGhtTFUHVnRC1fRiwAVP/OTIPQ6+kVkKhhA=}

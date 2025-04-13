@@ -25,3 +25,15 @@ class homepage(homepageTemplate):
     if user:
      open_form('dashboard')
      pass
+
+  def impressum_link_click(self, **event_args):
+    open_form('impressum')
+    pass
+
+  def data_protection_link_click(self, **event_args):
+    open_form('data_protection')
+    pass
+
+  def home_link_click(self, **event_args):
+    open_form('homepage')
+    pass

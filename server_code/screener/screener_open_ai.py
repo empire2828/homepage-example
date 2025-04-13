@@ -12,8 +12,10 @@ import time
 
 # Client außerhalb der Funktion initialisieren, damit er für alle Funktionen verfügbar ist
 client = OpenAI(
-  api_key=anvil.secrets.get_secret('PERPLEXITY_API_KEY'),
+  #api_key=anvil.secrets.get_secret('openai_api_key'),
   #api_key=anvil.secrets.get_secret('gemini_api_key'),
+  api_key=anvil.secrets.get_secret('PERPLEXITY_API_KEY'),
+  #base_url="https://api.openai.com/v1/"
   base_url="https://api.perplexity.ai"
   #base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
@@ -21,9 +23,7 @@ client = OpenAI(
 @anvil.server.callable
 def screener_open_ai(name, location, checktype):
   if checktype == "job":
-    prompt = f"""
-Welchen beruf hat {name} bei einem unternehmen in der nähe von {location}? Wenn kein Beruf bekannt ist, wo ist er oder sie in der nähe von {location} in Erscheinung getreten? Schreibe extrem kurz ohne Zitatnummern.
-"""
+    prompt = "1. Welchen beruf und welches Hobby hat die Person? 2. Schreibe extrem kurz 3. Lasse Zitatnummern weg."
   else:
     prompt = f"""
 Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges und ob z.B. Kinder vorhanden sind sehr grob ein. Schreibe als Antwort nur: von bis Jahre und lasse alles andere weg.
@@ -31,17 +31,18 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
     
   try:
     response = client.chat.completions.create(
-      model="sonar-pro",
+      model="sonar",
+      #model="gpt-4o-mini",
       #model="gemini-2.0-flash",
       messages=[
           {"role": "system", "content": prompt},
-          {"role": "user", "content": name},  
+          {"role": "user", "content": name + " aus " +location},  
       ],
       max_tokens=128,
-      temperature=0.5,
-      top_p=0.9,
-      stream=False,
-      presence_penalty=0,
+      #temperature=0.5,
+      #top_p=0.9,
+      #stream=False,
+      #presence_penalty=0,
       #frequency_penalty=0,
       response_format=None
     )
