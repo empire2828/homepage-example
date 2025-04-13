@@ -2,7 +2,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'QDTLHF,TUZWTW'}
     name: image_1
-    properties: {display_mode: shrink_to_fit, height: '150', horizontal_align: left, source: _/theme/guestscreener.png}
+    properties: {display_mode: shrink_to_fit, height: '100', horizontal_align: left, source: _/theme/guestscreener.png}
     type: Image
   - components:
     - event_bindings: {click: login_button_click}
@@ -18,7 +18,7 @@ components:
         spacing:
           padding: [null, '24', null, '24']
         spacing_below: large
-        text: Login
+        text: '  Login  '
       type: Button
     - event_bindings: {click: testen_button_click}
       layout_properties: {grid_position: 'JIVANT,NPWKNY'}
@@ -54,7 +54,7 @@ components:
   type: Spacer
 - layout_properties: {grid_position: 'DOGAIR,ZZIOJH'}
   name: headline_1
-  properties: {align: center, bold: true, font_size: 38, role: headline, text: Schützen Sie Ihre Ferienimmobilie vor Fake-Profilen und problematischen Gästen}
+  properties: {align: center, bold: true, font_size: 38, role: headline, text: Schützen Sie Ihre Ferienhaus vor Fake-Profilen und problematischen Gästen}
   type: Label
 - components: []
   layout_properties: {grid_position: 'ISUFTJ,LCSMDD'}
@@ -67,43 +67,112 @@ components:
     align: center
     role: title
     spacing:
-      margin: [null, '4', null, '4']
-    text: Guestscreener.com ist Ihre Lösung für sicheres Gästemanagement. Entwickelt von Vermietern für Vermieter.
+      margin: [null, '6', null, '6']
+    text: Guestscreener.com ist Ihre Lösung für sicheres Gästemanagement. Entwickelt von Vermietern für Vermieter. Direkte Anbindung an Smoobu.
   type: Label
 - layout_properties: {grid_position: 'VDVWWS,FMTLDK'}
   name: spacer_2
   properties: {height: 41.5555419921875}
   type: Spacer
-- components:
-  - layout_properties: {grid_position: 'ZAWEKM,RJPZHT'}
-    name: label_2
-    properties: {align: center, bold: true, text: KI- gestütze Suche}
-    type: Label
-  layout_properties: {grid_position: 'JAMWRN,IJVWOG'}
-  name: outlined_card_1
-  properties: {role: outlined-card}
+- layout_properties: {grid_position: 'MANAOT,NHHPAE'}
+  name: column_panel_5
+  properties: {}
   type: ColumnPanel
 - components:
-  - layout_properties: {grid_position: 'OSRPIB,EQINGA'}
-    name: label_4
-    properties: {align: center, bold: true, text: Screening von Social Media}
-    type: Label
-  layout_properties: {grid_position: 'JAMWRN,ANXOHY'}
+  - components:
+    - layout_properties: {grid_position: 'FVZANX,OLOCRU'}
+      name: label_2
+      properties:
+        align: center
+        bold: true
+        font_size: 18
+        text: "KI- gestütze \nSuche"
+      type: Label
+    layout_properties: {grid_position: 'GXCIUU,FVMHTO'}
+    name: outlined_card_1
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'IMMVYM,YMVLDJ'}
+      name: label_4
+      properties:
+        align: center
+        bold: true
+        font_size: 18
+        text: "Screening von \nSocial Media"
+      type: Label
+    layout_properties: {grid_position: 'GXCIUU,AVECON'}
+    name: outlined_card_3
+    properties:
+      role: outlined-card
+      spacing:
+        margin: [null, '6', null, '6']
+        padding: [null, '6', null, '6']
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'PETPVM,LJXEWN'}
+      name: label_1
+      properties:
+        align: center
+        bold: true
+        font_size: 18
+        spacing:
+          margin: [null, '6', null, '6']
+          padding: [null, '15', null, '15']
+        text: |-
+          Telefonummern-
+          prüfung
+      type: Label
+    layout_properties: {grid_position: 'GXCIUU,KBSMLA'}
+    name: outlined_card_9
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'BABMTQ,OUQNJT'}
+      name: label_5
+      properties:
+        align: center
+        bold: true
+        font_size: 18
+        text: |-
+          Adress-
+          prüfung
+      type: Label
+    layout_properties: {grid_position: 'GXCIUU,YFIIZV'}
+    name: outlined_card_8
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  layout_properties: {grid_position: 'YSMDML,AYCXYI'}
   name: outlined_card_2
-  properties: {role: outlined-card}
-  type: ColumnPanel
-- components:
-  - layout_properties: {grid_position: 'VOKHCK,KELXUR'}
-    name: label_5
-    properties: {align: center, bold: true, text: Adress-und Telefonnummernprüfung}
-    type: Label
-  layout_properties: {grid_position: 'JAMWRN,DHWTAM'}
-  name: outlined_card_3
-  properties: {role: outlined-card}
+  properties:
+    role: null
+    spacing:
+      margin: [null, '6', null, '6']
+      padding: [null, '6', null, '6']
   type: ColumnPanel
 - layout_properties: {grid_position: 'WDZLHA,LAYLVE'}
   name: spacer_3
   properties: {height: 70.44439697265625}
+  type: Spacer
+- layout_properties: {grid_position: 'CEFUPS,UNRMRW'}
+  name: body_2
+  properties:
+    font: ''
+    font_size: 18
+    role: body
+    spacing:
+      margin: [null, '6', null, '6']
+      padding: [null, '6', null, '6']
+    text: |-
+      Sie wollen mehr Sicherheit haben, an wen Sie Ihre Ferienhaus oder Ferienwohnung vermieten? Sie haben Direktbuchungen und wollen sich vor Fake-Profilen schützen?
+
+      Dann sind Sie genau richtig hier- beim guestscreener.com.
+
+      Eine KI fasst die Ergebnisse einer Internetsuche zu Ihren Gästen für Sie zusammen. Guestscreener.com prüft zudem die Adresse und Telefonnumer auf formale Richtigkeit. Sie können ganz bequem guestscreener.com an Smoobu per API anschließen und werden dann automatisch bei jeder neuen Buchung per eMail über die Ergebnisse des Gäste- Screenings informiert.
+  type: Label
+- layout_properties: {grid_position: 'BDFCRX,QPJYMW'}
+  name: spacer_4
+  properties: {height: 58.0572509765625}
   type: Spacer
 - components:
   - layout_properties: {grid_position: 'ZEGUXJ,GFGREP'}
@@ -112,12 +181,13 @@ components:
     type: Label
   - layout_properties: {grid_position: 'ZEGUXJ,HVJHZC'}
     name: label_9
-    properties: {align: center, bold: true, text: Abo}
+    properties: {align: center, bold: true, font_size: 18, text: Abo}
     type: Label
   - components:
     - layout_properties: {grid_position: 'UMJGQL,JYZUGI'}
       name: label_12
       properties:
+        font_size: 18
         spacing:
           margin: ['4', null, '6', null]
         text: KI gestützte Recherche
@@ -134,6 +204,7 @@ components:
     - layout_properties: {grid_position: 'FUGLSW,GYQXEI'}
       name: label_19
       properties:
+        font_size: 18
         spacing:
           margin: [null, null, '6', null]
         text: Linkedin Recherche
@@ -150,6 +221,7 @@ components:
     - layout_properties: {grid_position: 'WJNXLM,BJLVUW'}
       name: label_11
       properties:
+        font_size: 18
         spacing:
           margin: [null, null, '6', null]
         text: Adressprüfung
@@ -165,7 +237,7 @@ components:
   - components:
     - layout_properties: {grid_position: 'LJCMFQ,WTTSCW'}
       name: label_3
-      properties: {text: Telefonnummernprüfung}
+      properties: {font_size: 18, text: Telefonnummernprüfung}
       type: Label
     - layout_properties: {grid_position: 'LJCMFQ,XZOVRQ'}
       name: check_box_1
@@ -179,6 +251,7 @@ components:
     - layout_properties: {grid_position: 'KNVGKM,TWRMQK'}
       name: label_6
       properties:
+        font_size: 18
         spacing:
           margin: [null, null, '6', null]
         text: Anbindung via API (Smoobu)
@@ -200,23 +273,27 @@ components:
     properties:
       align: center
       bold: true
+      font_size: 18
       spacing:
         margin: [null, null, '4', null]
       text: € 2,99 monatlich
     type: Label
   layout_properties: {grid_position: 'CFSXJQ,LSZEBP'}
   name: outlined_card_4
-  properties: {role: outlined-card}
+  properties:
+    role: null
+    spacing:
+      margin: [null, '6', null, '6']
   type: ColumnPanel
 - layout_properties: {grid_position: 'LATLFF,HOQDNG'}
   name: spacer_5
   properties: {height: 142.876708984375}
   type: Spacer
-- layout_properties: {grid_position: 'OAZSMG,KTYRBH LGMCZK,EJOWWM'}
+- layout_properties: {grid_position: 'LGMCZK,EJOWWM'}
   name: linear_panel_2
   properties: {}
   type: LinearPanel
-- layout_properties: {grid_position: 'OAZSMG,KTYRBH LGMCZK,VXUSJN'}
+- layout_properties: {grid_position: 'LGMCZK,VXUSJN'}
   name: linear_panel_1
   properties: {}
   type: LinearPanel
@@ -231,5 +308,7 @@ components:
   name: data_protection_link
   properties: {align: center, text: Datenschutz}
   type: Link
-container: {type: ColumnPanel}
+container:
+  properties: {col_widths: '{}'}
+  type: ColumnPanel
 is_package: true

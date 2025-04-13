@@ -22,6 +22,7 @@ client = OpenAI(
 
 @anvil.server.callable
 def screener_open_ai(name, location, checktype):
+  location = location if location and location.lower() != "null" else "unbekannter Ort"
   if checktype == "job":
     prompt = "1. Welchen beruf und welches Hobby hat die Person? 2. Schreibe extrem kurz 3. Lasse Zitatnummern weg."
   else:
