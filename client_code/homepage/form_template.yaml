@@ -27,6 +27,7 @@ components:
         role: outlined-button
         spacing:
           padding: [null, '24', null, '24']
+        spacing_below: large
         text: Login
       type: Button
     - event_bindings: {click: testen_button_click}
