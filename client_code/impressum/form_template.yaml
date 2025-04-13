@@ -13,9 +13,10 @@ components:
     properties:
       role: body
       text: |-
-        Dirk Klemer
-        Sodenkamp 4e
-        22337 Hamburg
+        Dirk Kle mer
+        Soden kamp 4e
+        22337 Ham burg
+        info@guestscreener.com
     type: Label
   - event_bindings: {click: back_link_click}
     layout_properties: {grid_position: 'FVBYGR,AKUEJR'}

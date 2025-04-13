@@ -159,16 +159,20 @@ components:
   properties:
     font: ''
     font_size: 18
+    italic: false
     role: body
     spacing:
       margin: [null, '6', null, '6']
       padding: [null, '6', null, '6']
     text: |-
-      Sie wollen mehr Sicherheit haben, an wen Sie Ihre Ferienhaus oder Ferienwohnung vermieten? Sie haben Direktbuchungen und wollen sich vor Fake-Profilen schützen?
+      Sie wollen mehr Sicherheit haben, an wen Sie Ihre Ferienhaus oder Ferienwohnung vermieten? Sie haben Direktbuchungen und wollen sich vor Fake-Profilen und Problemen schützen?
 
       Dann sind Sie genau richtig hier- beim guestscreener.com.
 
       Eine KI fasst die Ergebnisse einer Internetsuche zu Ihren Gästen für Sie zusammen. Guestscreener.com prüft zudem die Adresse und Telefonnumer auf formale Richtigkeit. Sie können ganz bequem guestscreener.com an Smoobu per API anschließen und werden dann automatisch bei jeder neuen Buchung per eMail über die Ergebnisse des Gäste- Screenings informiert.
+
+      Nur Sie können die Daten Ihre Gäste sehen, die Daten werden nach Ablauf der Reisedaten automatisiert gelöscht.
+    underline: false
   type: Label
 - layout_properties: {grid_position: 'BDFCRX,QPJYMW'}
   name: spacer_4
