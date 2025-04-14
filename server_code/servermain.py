@@ -8,6 +8,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 import time
+from tester import test_email
 
 @anvil.server.callable
 @anvil.server.background_task
@@ -65,6 +66,7 @@ def send_result_email(user_email, reservation_id):
       html=email_text
 )
     print("E-Mail erfolgreich gesendet")
+    test_email(user_email)
     return True
   except Exception as e:
     print(f"Fehler beim E-Mail-Versand: {str(e)}")

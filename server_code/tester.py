@@ -21,10 +21,10 @@ import anvil.server
 #   return 42
 #
 @anvil.server.callable()
-def test():
+def test_email(user_email):
   
   anvil.email.send(
-    to="dirk.klemer@gmail.com",
+    to=user_email, #"dirk.klemer@gmail.com",
     from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
     from_name="Guestscreener.com",
     subject="Guestscreener.com Ergebnisse",
