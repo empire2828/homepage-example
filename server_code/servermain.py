@@ -68,8 +68,8 @@ def send_result_email(user_email, reservation_id):
     print("E-Mail erfolgreich gesendet")
     if user_email=="dirk.klemer@gmail.com":
       print("ja")
-    elif:
-      print(user_email)
+    else:
+      print("nein",user_email)
     test_email(user_email)
     return True
   except Exception as e:
