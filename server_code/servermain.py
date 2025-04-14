@@ -65,3 +65,14 @@ def server_wake_up():
 @anvil.server.background_task
 def server_wake_up_background():
   print('Server woke up')
+
+@anvil.server.callable
+def delete_bookings_by_email(email):
+    matching_rows = app_tables.bookings.search(email=email)
+    deleted_count = 0    
+    # Lösche jede gefundene Zeile
+    for row in matching_rows:
+        row.delete()
+        deleted_count += 1
+    print ("Buchungen von ",email," gelöscht. Anzahl: ",deleted_count)
+    return deleted_count

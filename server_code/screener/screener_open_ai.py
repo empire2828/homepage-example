@@ -22,7 +22,7 @@ client = OpenAI(
 
 @anvil.server.callable
 def screener_open_ai(name, location, checktype):
-  location = location if location and location.lower() != "null" else "unbekannter Ort"
+  location = location if location and location.lower() != "null" else ""
   if checktype == "job":
     prompt = "1. Welchen beruf und welches Hobby hat die Person? 2. Schreibe extrem kurz 3. Lasse Zitatnummern weg."
   else:
@@ -39,7 +39,7 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
           {"role": "system", "content": prompt},
           {"role": "user", "content": name + " aus " +location},  
       ],
-      max_tokens=128,
+      max_tokens=100,
       #temperature=0.5,
       #top_p=0.9,
       #stream=False,
