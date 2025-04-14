@@ -50,19 +50,26 @@ def send_result_email(user_email, reservation_id):
   guestname= booking['guestname'] or ""
   arrival= booking['arrival'] or ""
   departure= booking['departure'] or ""
-  bookingdata = guestname+" "+arrival+" - "+departure + "<br><br>"
+  bookingdata = guestname+" "+arrival+" - "+departure 
 
   intro_text="Hier kommen die Guestscreener Ergebnisse für die neue Buchung: "+ bookingdata+ "<br><br><br>"
   
   email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone
   print("send_email:", user_email, reservation_id, email_text)
-  anvil.email.send(
-    to=user_email,
-    from_address="noreply",
-    from_name="Guestscreener.com",
-    subject="Guestscreener.com Ergebnisse für "+ bookingdata,
-    html=email_text
-  )
+  try:
+    anvil.email.send(
+      to=user_email,
+      from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
+      from_name="Guestscreener.com",
+      subject="Guestscreener.com Ergebnisse",
+      text=email_text
+)
+    print("E-Mail erfolgreich gesendet")
+    return True
+  except Exception as e:
+    print(f"Fehler beim E-Mail-Versand: {str(e)}")
+  return False
+
 
 @anvil.server.callable
 def server_wake_up():
