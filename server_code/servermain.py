@@ -62,7 +62,7 @@ def send_result_email(user_email, reservation_id):
       from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
       from_name="Guestscreener.com",
       subject="Guestscreener.com Ergebnisse",
-      text=email_text
+      html=email_text
 )
     print("E-Mail erfolgreich gesendet")
     return True

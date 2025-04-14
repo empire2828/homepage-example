@@ -28,5 +28,5 @@ def test():
     from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
     from_name="Guestscreener.com",
     subject="Guestscreener.com Ergebnisse",
-    text="test"
+    html="test"+ "<br>"
   )
