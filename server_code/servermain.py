@@ -47,7 +47,7 @@ def send_result_email(user_email, reservation_id):
     email_text_phone = "Phone check: " + ("Erfolgreich" if phone_check else "Fehlgeschlagen") + "<br><br>"
 
   
-  email_text = email_text_ai + email_text_linkedin + email_text_address +  + email_text_phone
+  email_text = email_text_ai + email_text_linkedin + email_text_address + email_text_phone
   print("send_email:", user_email, reservation_id, email_text)
   anvil.email.send(
     to=user_email,
