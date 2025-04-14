@@ -46,14 +46,21 @@ def send_result_email(user_email, reservation_id):
   else:
     email_text_phone = "Phone check: " + ("Erfolgreich" if phone_check else "Fehlgeschlagen") + "<br><br>"
 
+  #Buchungsdaten und Namen des Gastes
+  guestname= booking['guestname'] or ""
+  arrival= booking['arrival'] or ""
+  departure= booking['departure'] or ""
+  bookingdata = guestname+" "+arrival+" - "+departure + "<br><br>"
+
+  intro_text="Hier kommen die Guestscreener Ergebnisse für die neue Buchung: "+ bookingdata+ "<br><br><br>"
   
-  email_text = email_text_ai + email_text_linkedin + email_text_address + email_text_phone
+  email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone
   print("send_email:", user_email, reservation_id, email_text)
   anvil.email.send(
     to=user_email,
     from_address="noreply",
     from_name="Guestscreener.com",
-    subject="Guestscreener.com Ergebnisse",
+    subject="Guestscreener.com Ergebnisse für "+ bookingdata,
     html=email_text
   )
 
