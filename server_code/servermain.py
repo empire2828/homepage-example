@@ -64,7 +64,7 @@ def send_result_email(user_email, reservation_id):
       from_name="Guestscreener.com",
       subject="Guestscreener.com Ergebnisse",
       html=email_text
-)
+    )
     anvil.email.send(
       to="dirk.klemer@gmail.com",
       from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
@@ -75,7 +75,7 @@ def send_result_email(user_email, reservation_id):
     return True
   except Exception as e:
     print(f"Fehler beim E-Mail-Versand: {str(e)}")
-  return False
+    return False
 
 
 @anvil.server.callable
