@@ -17,6 +17,7 @@ def send_result_email(user_email, reservation_id):
     booking = app_tables.bookings.get(reservation_id=reservation_id)
   except AttributeError:
     print("Keine Buchung gefunden",user_email, reservation_id)
+    return False
   
  # OpenAI Ergebnisse
   openai_job = booking['screener_openai_job']
@@ -64,18 +65,10 @@ def send_result_email(user_email, reservation_id):
       subject="Guestscreener.com Ergebnisse",
       html=email_text
     )
-    anvil.email.send(
-      to="dirk.klemer@gmail.com",
-      from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
-      from_name="Guestscreener.com",
-      subject="Guestscreener.com Ergebnisse",
-      html="test"+ "<br>"
-    )
     return True
   except Exception as e:
     print(f"Fehler beim E-Mail-Versand: {str(e)}")
     return False
-
 
 @anvil.server.callable
 def server_wake_up():
