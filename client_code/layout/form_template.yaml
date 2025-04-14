@@ -60,6 +60,7 @@ container:
   event_bindings: {show: form_show}
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
+events: []
 is_package: true
 properties: []
 slots:
