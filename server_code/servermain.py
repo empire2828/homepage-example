@@ -10,7 +10,6 @@ import anvil.server
 import time
 from tester import test_email
 
-@anvil.server.callable
 @anvil.server.background_task
 def send_result_email(user_email, reservation_id):
   time.sleep(60)
