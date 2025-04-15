@@ -58,13 +58,14 @@ def send_result_email(user_email, reservation_id):
   email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone
   print("send_email:", user_email, reservation_id, email_text)
   try:
-    anvil.email.send(
-      to=user_email,
-      from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
-      from_name="Guestscreener.com",
-      subject="Guestscreener.com Ergebnisse",
-      html=email_text
-    )
+    send_email(user_email,email_text)
+    #anvil.email.send(
+    #  to=user_email,
+    #  from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
+    #  from_name="Guestscreener.com",
+    #  subject="Guestscreener.com Ergebnisse",
+    #  html=email_text
+    #)
     return True
   except Exception as e:
     print(f"Fehler beim E-Mail-Versand: {str(e)}")
@@ -89,3 +90,13 @@ def delete_bookings_by_email(email):
         deleted_count += 1
     print ("Buchungen von ",email," gelöscht. Anzahl: ",deleted_count)
     return deleted_count
+
+@anvil.server.callable
+def send_email(user_email,email_text):
+  anvil.email.send(
+      to=user_email,
+      from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
+      from_name="Guestscreener.com",
+      subject="Guestscreener.com Ergebnisse",
+      html=email_text
+    )
