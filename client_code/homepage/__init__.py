@@ -21,6 +21,16 @@ class homepage(homepageTemplate):
     pass
 
   def testen_button_click(self, **event_args):
+    result = alert(
+    content="Bitte bestätigen Sie, dass Sie als Ferienhaus- oder Ferienwohnungsvermieter ein berechtigtes Interesse an zusätzlichen Prüfungen Ihrer Gästedaten zu haben.",
+    title="An important choice",
+    large=True,
+    buttons=[
+        ("Yes", "YES"),
+        ("No", "NO"),
+    ]
+    )
+    
     user = anvil.users.signup_with_form(allow_cancel=True)
     if user:
      open_form('dashboard')
