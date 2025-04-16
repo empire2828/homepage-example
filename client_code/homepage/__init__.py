@@ -22,19 +22,19 @@ class homepage(homepageTemplate):
 
   def testen_button_click(self, **event_args):
     result = alert(
-    content="Bitte bestätigen Sie, dass Sie als Ferienhaus- oder Ferienwohnungsvermieter ein berechtigtes Interesse an zusätzlichen Prüfungen Ihrer Gästedaten zu haben.",
-    title="An important choice",
+    content="Bitte bestätigen Sie, dass Sie als Ferienhaus- oder Ferienwohnungsvermieter ein berechtigtes Interesse an zusätzlichen Prüfungen Ihrer Gästedaten zu haben, um so Ihr Eigentüm besser zu schützen. Dieser Service richtet sich ausschließlich an Vermieter.",
+    title="Bestätigung berechtigtes Interesse nach DSVGO",
     large=True,
     buttons=[
         ("Yes", "YES"),
         ("No", "NO"),
     ]
     )
-    
-    user = anvil.users.signup_with_form(allow_cancel=True)
-    if user:
-     open_form('dashboard')
-     pass
+    if result=='YES':
+      user = anvil.users.signup_with_form(allow_cancel=True)
+      if user:
+        open_form('dashboard')
+    pass
 
   def impressum_link_click(self, **event_args):
     open_form('impressum')
