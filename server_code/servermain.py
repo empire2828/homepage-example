@@ -12,7 +12,7 @@ from tester import test_email
 
 @anvil.server.background_task
 def send_result_email(user_email, reservation_id):
-  time.sleep(20)
+  time.sleep(60)
   try:
     booking = app_tables.bookings.get(reservation_id=reservation_id)
   except AttributeError:
