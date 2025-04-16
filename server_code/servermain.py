@@ -68,8 +68,11 @@ def send_result_email(user_email, reservation_id):
     )
     print("email versendet: ",user_email,email_text)
     return True
+  
+  except anvil.email.SendFailure as e:
+    print(f"Send-Fehler beim E-Mail-Versand: {str(e)}")
   except Exception as e:
-    print(f"Fehler beim E-Mail-Versand: {str(e)}")
+    print(f"Allg.Fehler beim E-Mail-Versand: {str(e)}")
     return False
 
 @anvil.server.callable
