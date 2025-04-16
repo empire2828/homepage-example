@@ -48,6 +48,7 @@ def smoobu_webhook_handler():
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
         return {"status": "error", "message": str(e)}, 500
 
+@anvil.server.background_task
 def process_booking(booking_data, user_id):
     if not booking_data or 'id' not in booking_data:
         print("Keine gültigen Buchungsdaten erhalten")
@@ -128,7 +129,7 @@ def process_booking(booking_data, user_id):
             email=user_email
         )
 
-
+@anvil.server.background_task
 def delete_booking(reservation_id):
     """Löscht eine Buchung aus der Datenbank anhand der Reservierungs-ID"""
     if not reservation_id:
@@ -145,6 +146,7 @@ def delete_booking(reservation_id):
     else:
         print(f"Keine Buchung mit Reservierungs-ID {reservation_id} gefunden")
 
+@anvil.server.background_task
 def get_user_email(user_id):
     user_email = None
     user_row = app_tables.users.get(pms_userid=user_id)
