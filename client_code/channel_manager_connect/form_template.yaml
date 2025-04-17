@@ -10,10 +10,41 @@ components_by_slot:
           role: body
           text: "Derzeit unterstützen wir eine API zu Smoobu. Weitere Channel Manager sind in Arbeit. \n\nZum Anbinden sind folgende Schritte notwendig:   \n\n"
         type: Label
+      - layout_properties: {grid_position: 'GJPIJB,EGKHRN'}
+        name: map_1
+        properties: {}
+        type: GoogleMap
       layout_properties: {grid_position: 'BCTTYC,HGXGNX'}
       name: outlined_card_2
       properties: {role: outlined-card}
       type: ColumnPanel
+    layout_properties: {}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'UGVXQX,KJXGYE BXMOFV,UEKTPE'}
+      name: title_2
+      properties: {role: title, text: 2. Webhook bei Smoobu eintragen}
+      type: Label
+    - layout_properties: {grid_position: 'UGVXQX,KJXGYE HYRDJS,EKNZVQ'}
+      name: body_2
+      properties:
+        font_size: 18
+        role: body
+        text: |
+          Damit werden neue Buchungen automatisch übertragen. Tragen Sie folgendes ein:
+
+          https://guestscreener.com/_/api/smoobu/webhook
+      type: Label
+    - layout_properties: {grid_position: 'UGVXQX,SHEOEV'}
+      name: label_1
+      properties: {}
+      type: Label
+    - layout_properties: {grid_position: 'UGVXQX,KJXGYE SWIWMV,MEZYZU'}
+      name: image_3
+      properties: {source: _/theme/webhook smoobu.png}
+      type: Image
     - components:
       - layout_properties: {grid_position: 'KXIPBC,JDMULL'}
         name: title_1
@@ -40,33 +71,10 @@ components_by_slot:
         name: image_2
         properties: {source: _/theme/api key.png}
         type: Image
-      layout_properties: {grid_position: 'NGMPVA,XUDMIR'}
+      layout_properties: {grid_position: 'YHJURM,VDHSXB'}
       name: outlined_card_1
       properties: {role: outlined-card}
       type: ColumnPanel
-    layout_properties: {}
-    name: column_panel_1
-    properties: {}
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'BXMOFV,UEKTPE'}
-      name: title_2
-      properties: {role: title, text: 2. Webhook bei Smoobu eintragen}
-      type: Label
-    - layout_properties: {grid_position: 'HYRDJS,EKNZVQ'}
-      name: body_2
-      properties:
-        font_size: 18
-        role: body
-        text: |
-          Damit werden neue Buchungen automatisch übertragen. Tragen Sie folgendes ein:
-
-          https://guestscreener.com/_/api/smoobu/webhook
-      type: Label
-    - layout_properties: {grid_position: 'SWIWMV,MEZYZU'}
-      name: image_3
-      properties: {source: _/theme/webhook smoobu.png}
-      type: Image
     layout_properties: {}
     name: outlined_card_3
     properties: {role: outlined-card}
@@ -74,7 +82,7 @@ components_by_slot:
   - components:
     - layout_properties: {grid_position: 'IGZTXG,VWIYVT'}
       name: title_3
-      properties: {role: title, text: '3. Erst-Synchronisation starten:'}
+      properties: {align: center, bold: true, role: title, text: '3. Erst-Synchronisation starten:', underline: false}
       type: Label
     - event_bindings: {click: sync_smoobu_button_click}
       layout_properties: {grid_position: 'IGZTXG,HJJGAD'}
@@ -83,6 +91,19 @@ components_by_slot:
       type: Button
     layout_properties: {}
     name: outlined_card_4
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  - layout_properties: {}
+    name: body_3
+    properties: {role: body}
+    type: Label
+  - components:
+    - layout_properties: {grid_position: 'ACQYDY,QAZVBV'}
+      name: title_4
+      properties: {bold: true, role: title, text: 4. Datenschutzprüfung prüfen}
+      type: Label
+    layout_properties: {}
+    name: outlined_card_5
     properties: {role: outlined-card}
     type: ColumnPanel
 is_package: true
