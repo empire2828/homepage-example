@@ -29,10 +29,12 @@ def get_bookings_risk(email=None, booking_id=None):
     for booking in bookings:
         # OpenAI Job-Prüfung
         result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'], "job")
+        print('AI result: ',result)
         booking['screener_openai_job'] = result
       
         # Google LinkedIn-Prüfung
         result = google_linkedin.google_linkedin(booking['guestname'], booking['address_city'])
+        print('linkedin_result: ',result)
         booking['screener_google_linkedin'] = result
       
         # Adressprüfung
@@ -41,12 +43,13 @@ def get_bookings_risk(email=None, booking_id=None):
         city = booking['address_city'] or ""
         address = " ".join(filter(None, [street, postal, city]))
         result = address_check.address_check(address)
-        print(result)
+        print('address_check: ',result)
         booking['screener_address_check'] = result if result is not None else False
 
         # Phone check
         phone=booking['phone']
         result = phone_check.phone_check(phone)
+        print('phone_check:',result)
         booking['screener_phone_check'] = result if result is not None else False
 
         # OpenAI Alters-Prüfung
