@@ -32,3 +32,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
     anvil.server.call('launch_get_bookings_risk')
     pass
 
+  def Data_protection_link_click(self, **event_args):
+    open_form('data_protection')
+    pass
+
