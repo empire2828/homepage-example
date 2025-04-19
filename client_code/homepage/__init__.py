@@ -22,7 +22,7 @@ class homepage(homepageTemplate):
 
   def testen_button_click(self, **event_args):
     result = alert(
-    content="Dieser Service richtet sich ausschließlich an Vermieter von Ferienimmobilien (da diese ein legitimes Interesse haben Gäste zu prüfen, um so ihr Eigentum zu schützen). Trifft das auf Sie zu?",
+    content="Dieser Service richtet sich ausschließlich an Vermieter von Ferienimmobilien. Diese haben ein nach DSVGO legitimes Interesse daran, die Identität Ihre Gäste zu prüfen, um so ihr Eigentum zu schützen. Trifft das auf Sie zu?",
     title="Bestätigung berechtigtes Interesse nach DSVGO",
     large=True,
     buttons=[
