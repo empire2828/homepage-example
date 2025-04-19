@@ -6,7 +6,9 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from anvil_extras import routing
 
+@routing.route('data_protection')
 class homepage(homepageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
