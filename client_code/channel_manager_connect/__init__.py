@@ -35,4 +35,3 @@ class channel_manager_connect(channel_manager_connectTemplate):
   def Data_protection_link_click(self, **event_args):
     open_form('data_protection')
     pass
-

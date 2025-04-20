@@ -8,6 +8,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from screener import screener_open_ai, google_linkedin, address_check, phone_check
+import time
 
 @anvil.server.callable
 def launch_get_bookings_risk():
@@ -23,19 +24,19 @@ def get_bookings_risk(email=None, booking_id=None):
             return None
     elif email:
         bookings = app_tables.bookings.search(email=email)
+        print('Anzahl Buchungen: ',len(bookings))
+        time.sleep(30)
     else:
         return None
     
     for booking in bookings:
         # OpenAI Job-Prüfung
         result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'], "job")
-        print('AI result: ',result)
-        booking['screener_openai_job'] = result
+        booking['screener_openai_job'] = result if result is not None else ""
       
         # Google LinkedIn-Prüfung
         result = google_linkedin.google_linkedin(booking['guestname'], booking['address_city'])
-        print('linkedin_result: ',result)
-        booking['screener_google_linkedin'] = result
+        booking['screener_google_linkedin'] = result if result is not None else ""
       
         # Adressprüfung
         street = booking['address_street'] or ""
@@ -43,13 +44,11 @@ def get_bookings_risk(email=None, booking_id=None):
         city = booking['address_city'] or ""
         address = " ".join(filter(None, [street, postal, city]))
         result = address_check.address_check(address)
-        print('address_check: ',result)
         booking['screener_address_check'] = result if result is not None else False
 
         # Phone check
         phone=booking['phone']
         result = phone_check.phone_check(phone)
-        print('phone_check:',result)
         booking['screener_phone_check'] = result if result is not None else False
 
         # OpenAI Alters-Prüfung
