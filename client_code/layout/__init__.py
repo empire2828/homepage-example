@@ -42,8 +42,16 @@ class layout(layoutTemplate):
       alert('Abo ist bereits upgegraded')
 
   def logout_link_click(self, **event_args):
-      anvil.users.logout()
-      open_form('homepage')
+      result= alert(
+        content="Wollen Sie sich ausloggen?",
+        title="Log off",
+        buttons=[
+        ("Yes", "YES"),
+        ("No", "NO"),
+      ])
+      if result=="YES":
+        anvil.users.logout()
+        open_form('homepage')
   pass
 
   def channel_manager_connect_link_click(self, **event_args):

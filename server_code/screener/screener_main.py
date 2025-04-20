@@ -19,10 +19,12 @@ def launch_get_bookings_risk():
 @anvil.server.background_task
 def get_bookings_risk(email=None, booking_id=None):
     if booking_id:
+        time.sleep(5)
         bookings = [app_tables.bookings.get(reservation_id=booking_id)]
         if not bookings[0]:
             return None
     elif email:
+        time.sleep(30)
         bookings = app_tables.bookings.search(email=email)
         print('Anzahl Buchungen: ',len(bookings))
     else:
@@ -59,4 +61,3 @@ def get_bookings_risk(email=None, booking_id=None):
         return bookings[0]
     
     return bookings
-
