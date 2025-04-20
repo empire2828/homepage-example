@@ -25,7 +25,6 @@ def get_bookings_risk(email=None, booking_id=None):
     elif email:
         bookings = app_tables.bookings.search(email=email)
         print('Anzahl Buchungen: ',len(bookings))
-        time.sleep(30)
     else:
         return None
     
