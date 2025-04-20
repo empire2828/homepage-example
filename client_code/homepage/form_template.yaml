@@ -52,15 +52,15 @@ components:
   name: headline_1
   properties: {align: center, bold: true, font_size: 38, role: headline, text: Schützen Sie Ihre Ferienhaus vor Fake-Profilen und problematischen Gästen}
   type: Label
+- layout_properties: {grid_position: 'NWGGGK,TEQYSN'}
+  name: spacer_2
+  properties: {height: 41.5555419921875}
+  type: Spacer
 - layout_properties: {grid_position: 'BFJGOD,SUSODA'}
   name: spacer_1
   properties: {height: -42}
   type: Spacer
 - components:
-  - layout_properties: {grid_position: 'ELAIFT,PTBALU'}
-    name: spacer_2
-    properties: {height: 41.5555419921875}
-    type: Spacer
   - layout_properties: {grid_position: 'NPNYZM,PYHGUW'}
     name: title_1
     properties:
@@ -86,11 +86,18 @@ components:
         align: center
         bold: true
         font_size: 18
+        spacing:
+          margin: ['6', null, '6', null]
+          padding: ['6', null, '6', null]
         text: "KI- gestütze \nSuche"
       type: Label
     layout_properties: {grid_position: 'GXCIUU,FVMHTO'}
     name: outlined_card_1
-    properties: {role: outlined-card}
+    properties:
+      role: outlined-card
+      spacing:
+        margin: ['6', '6', '6', '6']
+        padding: ['6', '6', '6', '6']
     type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'IMMVYM,YMVLDJ'}
@@ -99,6 +106,9 @@ components:
         align: center
         bold: true
         font_size: 18
+        spacing:
+          margin: ['6', null, '6', null]
+          padding: ['6', null, '6', null]
         text: "Screening von \nSocial Media"
       type: Label
     layout_properties: {grid_position: 'GXCIUU,AVECON'}
@@ -106,8 +116,8 @@ components:
     properties:
       role: outlined-card
       spacing:
-        margin: [null, '6', null, '6']
-        padding: [null, '6', null, '6']
+        margin: ['6', '6', '6', '6']
+        padding: ['6', '6', '6', '6']
     type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'PETPVM,LJXEWN'}
@@ -117,20 +127,20 @@ components:
         bold: true
         font_size: 18
         spacing:
-          margin: [null, '6', null, '6']
-          padding: [null, '15', null, '15']
+          margin: ['6', '6', '6', '6']
+          padding: ['6', '15', '6', '15']
         text: |-
           Telefonummern-
           prüfung
       type: Label
-    layout_properties: {grid_position: 'GXCIUU,KBSMLA GQYKGO,VTEHVS'}
+    layout_properties: {grid_position: 'GXCIUU,KBSMLA'}
     name: outlined_card_9
-    properties: {role: outlined-card}
+    properties:
+      role: outlined-card
+      spacing:
+        margin: ['6', '6', '6', '6']
+        padding: ['6', '6', '6', '6']
     type: ColumnPanel
-  - layout_properties: {grid_position: 'GXCIUU,KBSMLA CCQBHK,JBYLOY'}
-    name: spacer_3
-    properties: {height: 70.44439697265625}
-    type: Spacer
   - components:
     - layout_properties: {grid_position: 'BABMTQ,OUQNJT'}
       name: label_5
@@ -138,13 +148,20 @@ components:
         align: center
         bold: true
         font_size: 18
+        spacing:
+          margin: ['6', null, '6', null]
+          padding: ['6', null, '6', null]
         text: |-
           Adress-
           prüfung
       type: Label
     layout_properties: {grid_position: 'GXCIUU,YFIIZV'}
     name: outlined_card_8
-    properties: {role: outlined-card}
+    properties:
+      role: outlined-card
+      spacing:
+        margin: ['6', '6', '6', '6']
+        padding: ['6', '6', '6', '6']
     type: ColumnPanel
   layout_properties: {grid_position: 'RSFZWV,GLKKBJ'}
   name: outlined_card_2
@@ -154,7 +171,11 @@ components:
       margin: [null, '6', null, '6']
       padding: [null, '6', null, '6']
   type: ColumnPanel
-- layout_properties: {grid_position: 'YJYPLD,ZKEAAN'}
+- layout_properties: {grid_position: 'KIKWHS,HOQGVE'}
+  name: spacer_3
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'HTFENO,QKRTDW'}
   name: label_15
   properties:
     bold: true
@@ -279,6 +300,7 @@ components:
     - layout_properties: {grid_position: 'UMJGQL,JYZUGI'}
       name: label_12
       properties:
+        align: left
         font_size: 18
         spacing:
           margin: ['4', null, '6', null]
@@ -290,12 +312,17 @@ components:
       type: CheckBox
     layout_properties: {grid_position: 'IZABEX,XANQUW'}
     name: elevated_card_1
-    properties: {role: elevated-card}
+    properties:
+      role: elevated-card
+      spacing:
+        padding: ['6', null, '6', null]
+      wrap_on: never
     type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'FUGLSW,GYQXEI'}
       name: label_19
       properties:
+        align: left
         font_size: 18
         spacing:
           margin: [null, null, '6', null]
@@ -307,16 +334,22 @@ components:
       type: CheckBox
     layout_properties: {grid_position: 'AIFBEV,XXKAYJ'}
     name: elevated_card_2
-    properties: {role: elevated-card}
+    properties:
+      role: elevated-card
+      spacing:
+        padding: ['6', null, '6', null]
+      wrap_on: never
     type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'WJNXLM,BJLVUW'}
       name: label_11
       properties:
+        align: left
         font_size: 18
         spacing:
           margin: [null, null, '6', null]
         text: Adressprüfung
+        underline: false
       type: Label
     - layout_properties: {grid_position: 'WJNXLM,MDTBSR'}
       name: check_box_4
@@ -324,7 +357,11 @@ components:
       type: CheckBox
     layout_properties: {grid_position: 'XYXMQN,SOZLMK'}
     name: elevated_card_3
-    properties: {role: elevated-card}
+    properties:
+      role: elevated-card
+      spacing:
+        padding: ['6', null, '6', null]
+      wrap_on: never
     type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'LJCMFQ,WTTSCW'}
@@ -337,7 +374,11 @@ components:
       type: CheckBox
     layout_properties: {grid_position: 'AQUFMA,OCQFQP'}
     name: elevated_card_4
-    properties: {role: elevated-card}
+    properties:
+      role: elevated-card
+      spacing:
+        padding: ['6', null, '6', null]
+      wrap_on: never
     type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'KNVGKM,TWRMQK'}
@@ -354,7 +395,11 @@ components:
       type: CheckBox
     layout_properties: {grid_position: 'CAXXMZ,VXJNFK'}
     name: elevated_card_5
-    properties: {role: elevated-card}
+    properties:
+      role: elevated-card
+      spacing:
+        padding: ['6', null, '6', null]
+      wrap_on: never
     type: ColumnPanel
   - layout_properties: {grid_position: 'IQCUEL,GVKVCE'}
     name: body_1
@@ -376,6 +421,7 @@ components:
     role: null
     spacing:
       margin: [null, '6', null, '6']
+    wrap_on: never
   type: ColumnPanel
 - layout_properties: {grid_position: 'LATLFF,HOQDNG'}
   name: spacer_5
