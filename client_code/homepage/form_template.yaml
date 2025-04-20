@@ -48,11 +48,11 @@ components:
     spacing:
       margin: ['8', '4', '8', '4']
   type: ColumnPanel
-- layout_properties: {grid_position: 'NWGGGK,GDRMNX'}
+- layout_properties: {full_width_row: false, grid_position: 'NWGGGK,IHQQEH'}
   name: headline_1
   properties: {align: center, bold: true, font_size: 38, role: headline, text: Schützen Sie Ihre Ferienhaus vor Fake-Profilen und problematischen Gästen}
   type: Label
-- layout_properties: {grid_position: 'NWGGGK,TEQYSN'}
+- layout_properties: {grid_position: 'CXRKHK,DJIWDD'}
   name: spacer_2
   properties: {height: 41.5555419921875}
   type: Spacer
@@ -447,6 +447,6 @@ components:
   properties: {align: center, text: Datenschutz}
   type: Link
 container:
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{"IHQQEH":20}'}
   type: ColumnPanel
 is_package: true

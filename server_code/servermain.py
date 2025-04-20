@@ -8,7 +8,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 import time
-from tester import test_email
+from datetime import datetime, timedelta
 
 @anvil.server.background_task
 def send_result_email(user_email, reservation_id):
@@ -31,7 +31,7 @@ def send_result_email(user_email, reservation_id):
   if linkedin_check is None:
     email_text_linkedin = "LinkedIn: Keine Ergebnisse<br>"
   else:
-    email_text_linkedin = "LinkedIn: " + linkedin_check + "<br><br>"
+    email_text_linkedin = "LinkedIn:<br>" + linkedin_check + "<br><br>"
   
   # Adresscheck Ergebnisse
   address_check = booking['screener_address_check']
@@ -54,8 +54,11 @@ def send_result_email(user_email, reservation_id):
   bookingdata = guestname+" "+arrival+" - "+departure 
 
   intro_text="Hier kommen die Guestscreener Ergebnisse für die neue Buchung: "+ bookingdata+ "<br><br><br>"
+  disclaimer_text="Die Ergebnisse können durch insbesondere bei häufig vorhandenen Namen falsch sein."+"<br><br><br>"
+  url_text="guestscreener.com"
   
-  email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone
+  email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone+ disclaimer_text+ url_text
+  subject="Guestscreener- Ergebnisse für: "+ bookingdata
   print("send_email:", user_email, reservation_id, email_text)
   try:
     #send_email(user_email,email_text)
@@ -63,7 +66,7 @@ def send_result_email(user_email, reservation_id):
       to=user_email,
       from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
       from_name="Guestscreener.com",
-      subject="Guestscreener.com Ergebnisse",
+      subject=subject,
       html=email_text
     )
     print("email versendet: ",user_email,email_text)
@@ -74,15 +77,6 @@ def send_result_email(user_email, reservation_id):
   except Exception as e:
     print(f"Allg.Fehler beim E-Mail-Versand: {str(e)}")
     return False
-
-@anvil.server.callable
-def server_wake_up():
-  anvil.server.launch_background_task('server_wake_up_background')
-  pass
-
-@anvil.server.background_task
-def server_wake_up_background():
-  print('Server woke up')
 
 @anvil.server.callable
 def delete_bookings_by_email(email):
@@ -104,3 +98,17 @@ def send_email(user_email,email_text):
       subject="Guestscreener.com Ergebnisse",
       html=email_text
     )
+
+from datetime import datetime, timedelta
+
+@anvil.server.callable
+def delete_old_bookings():
+    today = datetime.now().date()
+    cutoff_date = today - timedelta(days=14)
+    matching_rows = app_tables.bookings.search(departure=lambda d: d <= cutoff_date)
+    deleted_count = 0
+    for row in matching_rows:
+        row.delete()
+        deleted_count += 1
+    print(f"Buchungen gelöscht, deren Abreisedatum 14 Tage oder mehr zurückliegt. Anzahl: {deleted_count}")
+    return deleted_count
