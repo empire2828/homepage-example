@@ -11,12 +11,6 @@ db_schema:
       name: apartment
       type: string
     - admin_ui: {width: 200}
-      name: arrival
-      type: string
-    - admin_ui: {order: 4, width: 155}
-      name: departure
-      type: string
-    - admin_ui: {width: 200}
       name: channel_name
       type: string
     - admin_ui: {width: 200}
@@ -33,9 +27,6 @@ db_schema:
       type: string
     - admin_ui: {width: 200}
       name: type
-      type: string
-    - admin_ui: {width: 200}
-      name: created-at
       type: string
     - admin_ui: {width: 200}
       name: reservation_id
@@ -73,6 +64,15 @@ db_schema:
     - admin_ui: {order: 21, width: 200}
       name: screener_phone_check
       type: bool
+    - admin_ui: {order: 2.25, width: 200}
+      name: arrival
+      type: date
+    - admin_ui: {order: 3.625, width: 200}
+      name: departure
+      type: date
+    - admin_ui: {order: 10.5, width: 200}
+      name: created-at
+      type: date
     server: full
     title: bookings
   users:
