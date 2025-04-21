@@ -92,8 +92,8 @@ def process_booking(booking_data, user_id):
         # Aktualisiere die bestehende Buchung
         print(f"Aktualisiere bestehende Buchung: {reservation_id}")
         existing_booking.update(
-            arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
-            departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
+            arrival=datetime.strptime(booking_data.get('arrival'),"%Y-%m-%d").date(),
+            departure=datetime.strptime(booking_data.get('departure'),"%Y-%m-%d").date(),
             apartment=booking_data.get('apartment', {}).get('name'),
             guestname=booking_data.get('guest-name', ''),
             channel_name=booking_data.get('channel', {}).get('name'),
@@ -111,8 +111,8 @@ def process_booking(booking_data, user_id):
         # Füge eine neue Buchung hinzu
         print(f"Füge neue Buchung hinzu: {reservation_id}")
         app_tables.bookings.add_row(
-            arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
-            departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
+            arrival=datetime.strptime(booking_data.get('arrival'),"%Y-%m-%d").date(),
+            departure=datetime.strptime(booking_data.get('departure'),"%Y-%m-%d").date(),
             apartment=booking_data.get('apartment', {}).get('name'),
             guestname=booking_data.get('guest-name', ''),
             reservation_id=reservation_id,
