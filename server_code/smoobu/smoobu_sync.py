@@ -1,4 +1,4 @@
-import anvil.email
+.import anvil.email
 import anvil.secrets
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
 from anvil.google.drive import app_files
@@ -82,8 +82,8 @@ def sync_smoobu(user_email):
                 existing.update(
                     reservation_id=booking['id'],
                     apartment=booking['apartment']['name'],
-                    arrival=booking['arrival'],
-                    departure=booking['departure'],
+                    arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
+                    departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
                     guestname=booking['guest-name'],
                     channel_name=booking['channel']['name'],
                     phone=booking['phone'],
@@ -103,9 +103,8 @@ def sync_smoobu(user_email):
                 app_tables.bookings.add_row(
                     reservation_id=booking['id'],
                     apartment=booking['apartment']['name'],
-                    arrival=booking['arrival'],
-                    departure=booking['departure'],
-                    guestname=booking['guest-name'],
+                    arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
+                    departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),                    guestname=booking['guest-name'],
                     channel_name=booking['channel']['name'],
                     phone=booking['phone'],
                     adults=booking['adults'],
