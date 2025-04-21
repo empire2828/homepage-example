@@ -175,114 +175,6 @@ components:
   name: spacer_3
   properties: {height: 32}
   type: Spacer
-- layout_properties: {grid_position: 'HTFENO,QKRTDW'}
-  name: label_15
-  properties:
-    bold: true
-    font_size: 18
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Was genau prüft die KI Suche?
-  type: Label
-- layout_properties: {grid_position: 'ETGTXW,WEBALR'}
-  name: body_6
-  properties:
-    bold: false
-    font_size: 18
-    role: body
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Die Suche sucht im Netz nach frei verfügbaren Informationen Ihrer Gäste und fasst diese zusammen.
-  type: Label
-- layout_properties: {grid_position: 'EDIYJG,UVKVQZ'}
-  name: label_14
-  properties:
-    bold: true
-    font_size: 18
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Was genau prüft die Adress- und Telefonprüfung?
-    underline: false
-  type: Label
-- layout_properties: {grid_position: 'PCEQFW,YWSJYD'}
-  name: body_4
-  properties:
-    bold: false
-    font_size: 18
-    role: body
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Die Adresse wird daraufhin geprüft, ob es diese überhaupt gibt. Es wird nicht geprüft, ob der Gast tatsächlich hier wohnt. Bei der Telefonnummer wird auf formale Richtigkeit geprüft, nicht ob der Gast diese konkrete Telefonnummer oder jemand Anderes diese hat.
-  type: Label
-- layout_properties: {grid_position: 'DZYRWU,FFCCEI'}
-  name: label_10
-  properties:
-    align: left
-    bold: true
-    font_size: 18
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Wie erhält Guestscreener.com die Informationen?
-  type: Label
-- layout_properties: {grid_position: 'LOAKOG,IDUGYD'}
-  name: body_2
-  properties:
-    font: ''
-    font_size: 18
-    italic: false
-    role: body
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Sie können Guestscreener.com per API direkt an Smoobu anbinden. Alternativ können Sie auch die Daten von einzelnen Gästen manuell eingeben.
-    underline: false
-  type: Label
-- layout_properties: {grid_position: 'RFDCDP,EYSIRW'}
-  name: label_13
-  properties:
-    bold: true
-    font_size: 18
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Wie bekommen Sie die Informationen?
-  type: Label
-- layout_properties: {grid_position: 'HYSDMQ,UULWAK'}
-  name: body_3
-  properties:
-    font_size: 18
-    role: body
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Sobald eine neue Buchung in Smoobu erfasst wird, erhalten Sie automatisch eine eMail mit den Informationen.
-  type: Label
-- layout_properties: {grid_position: 'MYSKYQ,BPWMAQ'}
-  name: label_16
-  properties:
-    bold: true
-    font_size: 18
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Ist das Datenschutzkonform?
-  type: Label
-- layout_properties: {grid_position: 'FDTYHI,OJSIYN'}
-  name: body_5
-  properties:
-    font_size: 18
-    role: body
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: "Guestscreener.com prüft Gästedaten für Ferienimmobilienvermieter auf Basis der DSGVO, da ein *berechtigtes Interesse* gemäß Art. 6 Abs. 1 lit. f DSGVO besteht: Der Vermieter darf personenbezogene Daten verarbeiten, wenn dies notwendig ist, um das Eigentum vor Schäden oder Betrug zu schützen – etwa durch eine Risikoprüfung potenzieller Gäste. Die Prüfung erfolgt ausschließlich anhand öffentlich zugänglicher Informationen, es werden keine sensiblen oder nicht relevanten Daten erhoben. \n\nDie Datenverarbeitung ist auf das notwendige Maß beschränkt (Datenminimierung) und erfolgt nur für den klar definierten Zweck der Gefahrenabwehr (Zweckbindung). 14 Tage nach Ablauf der Buchung werden die Daten automatisiert gelöscht.\n"
-    underline: false
-  type: Label
 - layout_properties: {grid_position: 'RAEQJD,KAEYXV'}
   name: spacer_4
   properties: {height: 32}
@@ -423,14 +315,14 @@ components:
       margin: [null, '6', null, '6']
     wrap_on: never
   type: ColumnPanel
-- layout_properties: {grid_position: 'SJVAIV,ZXFHFP'}
-  name: spacer_5
-  properties: {height: 142.876708984375}
-  type: Spacer
-- layout_properties: {grid_position: 'BSAWGV,IRKCQI'}
+- layout_properties: {grid_position: 'RTEELW,NYYPBF'}
   name: faq_repeating_panel
   properties: {item_template: homepage.faq_template}
   type: RepeatingPanel
+- layout_properties: {grid_position: 'YGVEAY,ZVAOAD'}
+  name: spacer_5
+  properties: {height: 142.876708984375}
+  type: Spacer
 - layout_properties: {grid_position: 'LGMCZK,EJOWWM'}
   name: linear_panel_2
   properties: {}

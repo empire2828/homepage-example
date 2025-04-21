@@ -18,7 +18,7 @@ class faq_template(faq_templateTemplate):
     self.faq_answer_body.visible = False
 
   def faq_answer_button_click(self, **event_args):
-    self.faq_answer_body.visible= not self.faq_answer_body.vi
+    self.faq_answer_body.visible= not self.faq_answer_body.visible
     pass
 
 

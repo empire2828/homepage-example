@@ -16,8 +16,18 @@ class homepage(homepageTemplate):
     #anvil.server.call('server_wake_up')
     # Any code you write here will run before the form opens.
     self.faq_repeating_panel.items = [
-    {"question": "Was ist Anvil?", "answer": "Anvil ist ein Python-basiertes Web-Framework."},
-    {"question": "Wie nutze ich Repeating Panels?", "answer": "Repeating Panels wiederholen ein UI-Template für jedes Item in einer Liste."}
+    {"question": "Was genau prüft die KI Suche?", "answer": "Die Suche sucht im Netz nach frei verfügbaren Informationen Ihrer Gäste und fasst diese zusammen."},
+    {"question": "Was genau prüft die Adress- und Telefonprüfung?", "answer": "Die Adresse wird daraufhin geprüft, ob es diese überhaupt gibt. Es wird nicht geprüft, ob der Gast tatsächlich hier wohnt. Bei der Telefonnummer wird auf formale Richtigkeit geprüft, nicht ob der Gast diese konkrete Telefonnummer oder jemand Anderes diese hat."},
+    {"question": "Wie erhält Guestscreener.com die Informationen über meine Gäste?", "answer": "Sie können Guestscreener.com per API direkt an Smoobu anbinden. Alternativ können Sie auch die Daten von einzelnen Gästen manuell eingeben."},
+    {"question": "Wie bekommen Sie die Informationen zurück?", "answer": "Sobald eine neue Buchung in Smoobu erfasst wird, erhalten Sie automatisch eine eMail mit den Informationen. Alternativ können Sie alles im Dashboard hier sehen."},
+    {"question": "Ist das Datenschutzkonform?", "answer": 
+      "Guestscreener.com prüft Gästedaten für Ferienimmobilienvermieter auf Basis der DSGVO, da ein *berechtigtes Interesse* gemäß Art. 6 Abs. 1 lit. f DSGVO besteht: "
+      "Der Vermieter darf personenbezogene Daten verarbeiten, wenn dies notwendig ist, um das Eigentum vor Schäden oder Betrug zu schützen – etwa durch eine Risikoprüfung potenzieller Gäste. "
+      "Die Prüfung erfolgt ausschließlich anhand öffentlich zugänglicher Informationen, es werden keine sensiblen oder nicht relevanten Daten erhoben."
+      "\n\n"
+      "Die Datenverarbeitung ist auf das notwendige Maß beschränkt (Datenminimierung) und erfolgt nur für den klar definierten Zweck der Gefahrenabwehr (Zweckbindung). "
+      "14 Tage nach Ablauf der Buchung werden die Daten automatisiert gelöscht."
+      }
     ]
 
   def login_button_click(self, **event_args):
