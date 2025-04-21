@@ -1,16 +1,27 @@
 components:
-- layout_properties: {grid_position: 'HKSYCG,PSFAYQ'}
+- layout_properties: {grid_position: 'OJBCNM,GERYIC'}
   name: faq_question_body
-  properties: {role: body}
+  properties:
+    role: body
+    spacing:
+      margin: [null, '8', null, '8']
+      padding: ['8', null, '8', null]
+    spacing_above: medium
+    spacing_below: medium
   type: Label
-- layout_properties: {grid_position: 'UEFAAP,STKKHC'}
-  name: faq_answer_body
-  properties: {role: body}
-  type: Label
-- layout_properties: {grid_position: 'UEFAAP,IVXXSX'}
-  name: button_1
-  properties: {text: button_1}
+- event_bindings: {click: faq_answer_button_click}
+  layout_properties: {grid_position: 'OJBCNM,BDDDIS'}
+  name: faq_answer_button
+  properties: {align: left, bold: true, icon: 'fa:caret-right', text: ''}
   type: Button
+- layout_properties: {grid_position: 'SVLMNS,LZPWHE'}
+  name: faq_answer_body
+  properties:
+    role: body
+    spacing:
+      margin: ['8', '8', '8', '8']
+      padding: ['8', null, '8', null]
+  type: Label
 - layout_properties: {grid_position: 'XIKDHC,SVSNSR'}
   name: spacer_1
   properties: {height: 32}

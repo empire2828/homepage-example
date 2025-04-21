@@ -15,6 +15,10 @@ class homepage(homepageTemplate):
     self.init_components(**properties)
     #anvil.server.call('server_wake_up')
     # Any code you write here will run before the form opens.
+    self.faq_repeating_panel.items = [
+    {"question": "Was ist Anvil?", "answer": "Anvil ist ein Python-basiertes Web-Framework."},
+    {"question": "Wie nutze ich Repeating Panels?", "answer": "Repeating Panels wiederholen ein UI-Template für jedes Item in einer Liste."}
+    ]
 
   def login_button_click(self, **event_args):
    user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
@@ -50,7 +54,4 @@ class homepage(homepageTemplate):
     open_form('homepage')
     pass
 
-self.faq_repeating_panel.items = [
-  {"question": "Was ist Anvil?", "answer": "Anvil ist ein Python-basiertes Web-Framework."},
-  {"question": "Wie nutze ich Repeating Panels?", "answer": "Repeating Panels wiederholen ein UI-Template für jedes Item in einer Liste."}
-]
+
