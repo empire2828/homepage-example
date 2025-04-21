@@ -315,7 +315,7 @@ components:
       margin: [null, '6', null, '6']
     wrap_on: never
   type: ColumnPanel
-- layout_properties: {grid_position: 'RTEELW,NYYPBF'}
+- layout_properties: {grid_position: 'VSRBZN,HZOZJQ'}
   name: faq_repeating_panel
   properties: {item_template: homepage.faq_template}
   type: RepeatingPanel
