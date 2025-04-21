@@ -29,9 +29,6 @@ db_schema:
       name: type
       type: string
     - admin_ui: {width: 200}
-      name: created-at
-      type: string
-    - admin_ui: {width: 200}
       name: reservation_id
       type: number
     - admin_ui: {order: 13, width: 200}
@@ -72,6 +69,9 @@ db_schema:
       type: date
     - admin_ui: {order: 3.625, width: 200}
       name: departure
+      type: date
+    - admin_ui: {order: 10.5, width: 200}
+      name: created-at
       type: date
     server: full
     title: bookings
