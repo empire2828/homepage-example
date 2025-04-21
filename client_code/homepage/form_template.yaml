@@ -42,16 +42,16 @@ components:
     name: column_panel_3
     properties: {wrap_on: never}
     type: ColumnPanel
+  - layout_properties: {grid_position: 'YDWJIQ,UCSMFP'}
+    name: headline_1
+    properties: {align: center, bold: true, font_size: 38, role: headline, text: Schützen Sie Ihre Ferienhaus vor Fake-Profilen und problematischen Gästen}
+    type: Label
   layout_properties: {grid_position: 'YFDFSY,PXGTID'}
   name: column_panel_1
   properties:
     spacing:
       margin: ['8', '4', '8', '4']
   type: ColumnPanel
-- layout_properties: {full_width_row: false, grid_position: 'NWGGGK,IHQQEH'}
-  name: headline_1
-  properties: {align: center, bold: true, font_size: 38, role: headline, text: Schützen Sie Ihre Ferienhaus vor Fake-Profilen und problematischen Gästen}
-  type: Label
 - layout_properties: {grid_position: 'CXRKHK,DJIWDD'}
   name: spacer_2
   properties: {height: 41.5555419921875}
@@ -194,7 +194,7 @@ components:
     spacing:
       margin: [null, '6', null, '6']
       padding: [null, '6', null, '6']
-    text: Die Suche sucht im Netz nach frei verfügbaren Informationen und fasst diese zusammen.
+    text: Die Suche sucht im Netz nach frei verfügbaren Informationen Ihrer Gäste und fasst diese zusammen.
   type: Label
 - layout_properties: {grid_position: 'EDIYJG,UVKVQZ'}
   name: label_14
@@ -216,7 +216,7 @@ components:
     spacing:
       margin: [null, '6', null, '6']
       padding: [null, '6', null, '6']
-    text: Die Adresse wird daraufhin geprüft, ob es diese überhaupt gibt. Es wird jedoch nicht geprüft, ob der Gast tatsächlich hier wohnt. Bei der Telefonnummer wird auf formale Richtigkeit geprüft, nicht jedoch ob der Gast diese Telefonnummer hat.
+    text: Die Adresse wird daraufhin geprüft, ob es diese überhaupt gibt. Es wird nicht geprüft, ob der Gast tatsächlich hier wohnt. Bei der Telefonnummer wird auf formale Richtigkeit geprüft, nicht ob der Gast diese konkrete Telefonnummer oder jemand Anderes diese hat.
   type: Label
 - layout_properties: {grid_position: 'DZYRWU,FFCCEI'}
   name: label_10
@@ -229,7 +229,7 @@ components:
       padding: [null, '6', null, '6']
     text: Wie erhält Guestscreener.com die Informationen?
   type: Label
-- layout_properties: {grid_position: 'VSRYSR,GHLJNG'}
+- layout_properties: {grid_position: 'LOAKOG,IDUGYD'}
   name: body_2
   properties:
     font: ''
@@ -447,6 +447,6 @@ components:
   properties: {align: center, text: Datenschutz}
   type: Link
 container:
-  properties: {col_widths: '{"IHQQEH":20}'}
+  properties: {col_widths: '{}'}
   type: ColumnPanel
 is_package: true

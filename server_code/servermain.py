@@ -51,10 +51,10 @@ def send_result_email(user_email, reservation_id):
   guestname= booking['guestname'] or ""
   arrival= booking['arrival'] or ""
   departure= booking['departure'] or ""
-  bookingdata = guestname+" "+arrival+" - "+departure 
+  bookingdata = guestname+" "+arrival.strftime('%Y-%m-%d')+" - "+departure.strftime('%Y-%m-%d')
 
   intro_text="Hier kommen die Guestscreener Ergebnisse für die neue Buchung: "+ bookingdata+ "<br><br><br>"
-  disclaimer_text="Die Ergebnisse können durch insbesondere bei häufig vorhandenen Namen falsch sein."+"<br><br><br>"
+  disclaimer_text="Die Ergebnisse können insbesondere bei häufig vorhandenen Namen falsch sein."+"<br><br><br>"
   url_text="guestscreener.com"
   
   email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone+ disclaimer_text+ url_text
