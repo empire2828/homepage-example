@@ -99,8 +99,6 @@ def send_email(user_email,email_text):
       html=email_text
     )
 
-from datetime import datetime, timedelta
-
 @anvil.server.callable
 def delete_old_bookings():
     today = datetime.now().date()

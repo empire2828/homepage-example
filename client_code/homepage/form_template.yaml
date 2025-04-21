@@ -280,7 +280,7 @@ components:
     spacing:
       margin: [null, '6', null, '6']
       padding: [null, '6', null, '6']
-    text: "Guestscreener.com prüft Gästedaten für Ferienimmobilienvermieter auf Basis der DSGVO, da ein *berechtigtes Interesse* gemäß Art. 6 Abs. 1 lit. f DSGVO besteht: Der Vermieter darf personenbezogene Daten verarbeiten, wenn dies notwendig ist, um das Eigentum vor Schäden oder Betrug zu schützen – etwa durch eine Risikoprüfung potenzieller Gäste. Die Prüfung erfolgt ausschließlich anhand öffentlich zugänglicher Informationen, es werden keine sensiblen oder nicht relevanten Daten erhoben. \n\nDie Datenverarbeitung ist auf das notwendige Maß beschränkt (Datenminimierung) und erfolgt nur für den klar definierten Zweck der Gefahrenabwehr (Zweckbindung). Nach Ablauf der Buchung werden die Daten automatisiert gelöscht.\n"
+    text: "Guestscreener.com prüft Gästedaten für Ferienimmobilienvermieter auf Basis der DSGVO, da ein *berechtigtes Interesse* gemäß Art. 6 Abs. 1 lit. f DSGVO besteht: Der Vermieter darf personenbezogene Daten verarbeiten, wenn dies notwendig ist, um das Eigentum vor Schäden oder Betrug zu schützen – etwa durch eine Risikoprüfung potenzieller Gäste. Die Prüfung erfolgt ausschließlich anhand öffentlich zugänglicher Informationen, es werden keine sensiblen oder nicht relevanten Daten erhoben. \n\nDie Datenverarbeitung ist auf das notwendige Maß beschränkt (Datenminimierung) und erfolgt nur für den klar definierten Zweck der Gefahrenabwehr (Zweckbindung). 14 Tage nach Ablauf der Buchung werden die Daten automatisiert gelöscht.\n"
     underline: false
   type: Label
 - layout_properties: {grid_position: 'RAEQJD,KAEYXV'}
