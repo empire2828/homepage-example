@@ -1,10 +1,10 @@
 components:
+- layout_properties: {grid_position: 'HVUQPJ,YAVCMX'}
+  name: image_1
+  properties: {display_mode: shrink_to_fit, height: '90', horizontal_align: left, source: _/theme/guestscreener.png}
+  type: Image
 - components:
-  - layout_properties: {grid_position: 'QDTLHF,TUZWTW TIFUIG,OEHEQG'}
-    name: image_1
-    properties: {display_mode: shrink_to_fit, height: '90', horizontal_align: left, source: _/theme/guestscreener.png}
-    type: Image
-  - layout_properties: {grid_position: 'QDTLHF,TUZWTW SBZBGS,CUSYYH'}
+  - layout_properties: {grid_position: 'QDTLHF,TUZWTW'}
     name: linear_panel_3
     properties: {}
     type: LinearPanel
@@ -423,10 +423,14 @@ components:
       margin: [null, '6', null, '6']
     wrap_on: never
   type: ColumnPanel
-- layout_properties: {grid_position: 'LATLFF,HOQDNG'}
+- layout_properties: {grid_position: 'SJVAIV,ZXFHFP'}
   name: spacer_5
   properties: {height: 142.876708984375}
   type: Spacer
+- layout_properties: {grid_position: 'BSAWGV,IRKCQI'}
+  name: faq_repeating_panel
+  properties: {item_template: homepage.faq_template}
+  type: RepeatingPanel
 - layout_properties: {grid_position: 'LGMCZK,EJOWWM'}
   name: linear_panel_2
   properties: {}

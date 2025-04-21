@@ -49,3 +49,8 @@ class homepage(homepageTemplate):
   def home_link_click(self, **event_args):
     open_form('homepage')
     pass
+
+self.faq_repeating_panel.items = [
+  {"question": "Was ist Anvil?", "answer": "Anvil ist ein Python-basiertes Web-Framework."},
+  {"question": "Wie nutze ich Repeating Panels?", "answer": "Repeating Panels wiederholen ein UI-Template für jedes Item in einer Liste."}
+]
