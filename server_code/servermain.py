@@ -99,7 +99,7 @@ def send_email(user_email,email_text):
       html=email_text
     )
 
-@anvil.server.callable
+@anvil.server.background_task
 def delete_old_bookings():
     today = datetime.now().date()
     cutoff_date = today - timedelta(days=14)
