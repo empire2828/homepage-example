@@ -99,14 +99,3 @@ def send_email(user_email,email_text):
       html=email_text
     )
 
-@anvil.server.background_task
-def delete_old_bookings():
-    today = datetime.now().date()
-    cutoff_date = today - timedelta(days=14)
-    matching_rows = app_tables.bookings.search(departure=lambda d: d <= cutoff_date)
-    deleted_count = 0
-    for row in matching_rows:
-        row.delete()
-        deleted_count += 1
-    print(f"Buchungen gelöscht, deren Abreisedatum 14 Tage oder mehr zurückliegt. Anzahl: {deleted_count}")
-    return deleted_count
