@@ -32,5 +32,7 @@ components:
       margin: ['8', '8', '8', '8']
       padding: ['8', null, '8', null]
   type: Label
-container: {type: ColumnPanel}
+container:
+  properties: {wrap_on: never}
+  type: ColumnPanel
 is_package: true
