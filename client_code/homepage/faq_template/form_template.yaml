@@ -18,7 +18,7 @@ components:
     align: left
     bold: true
     font_size: 18
-    icon: fa:caret-right
+    icon: fa:angle-double-down
     spacing:
       padding: [null, null, null, '4']
     text: ''
