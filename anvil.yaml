@@ -114,7 +114,7 @@ db_schema:
     - admin_ui: {width: 200}
       name: name
       type: string
-    - admin_ui: {order: 11, width: 608}
+    - admin_ui: {order: 11, width: 326}
       name: cancel_subscription_at_period_end
       type: bool
     - admin_ui: {order: 13, width: 200}
