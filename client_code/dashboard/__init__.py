@@ -29,7 +29,7 @@ class dashboard(dashboardTemplate):
 
   def resync_smoobu_button_click(self, **event_args):
     user = users.get_user()
-    if user[pms_api_key] != None:
+    if user['pms_api_key'] is not None:
       alert("Hintergrund- Synchronisation wird gestartet. Das dauert ca. 10 Minuten.")
       anvil.server.call_s('delete_bookings_by_email',anvil.users.get_user()['email'])
       anvil.server.call_s('launch_sync_smoobu')
