@@ -60,17 +60,6 @@ class layout(layoutTemplate):
     self.channel_manager_connect_link.role='selected'
     pass
 
-  def form_show(self, **event_args):
-    has_subscription = anvil.server.call_s('get_user_has_subscription')
-    if has_subscription:
-      self.subscription_body.text="Pro-Abo"
-    else:
-      self.subscription_body.text="Basis-Abo"
-    pass
-
-import anvil.server
-import anvil.users
-
 def form_show(self, **event_args):
     try:
         has_subscription = anvil.server.call_s('get_user_has_subscription')
