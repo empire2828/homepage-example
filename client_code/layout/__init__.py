@@ -67,3 +67,26 @@ class layout(layoutTemplate):
     else:
       self.subscription_body.text="Basis-Abo"
     pass
+
+import anvil.server
+import anvil.users
+
+def form_show(self, **event_args):
+    try:
+        has_subscription = anvil.server.call_s('get_user_has_subscription')
+        if has_subscription:
+            self.subscription_body.text = "Pro-Abo"
+        else:
+            self.subscription_body.text = "Basis-Abo"
+    except anvil.server.SessionExpiredError:
+        anvil.server.reset_session()
+        # Optional: automatisches Re-Login, falls "remember me" genutzt wurde
+        if anvil.users.get_user(allow_remembered=True):
+            has_subscription = anvil.server.call_s('get_user_has_subscription')
+            if has_subscription:
+                self.subscription_body.text = "Pro-Abo"
+            else:
+                self.subscription_body.text = "Basis-Abo"
+        else:
+            # Benutzer muss sich neu anmelden
+            anvil.users.login_with_form()
