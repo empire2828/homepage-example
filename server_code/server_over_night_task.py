@@ -51,11 +51,16 @@ def send_new_signups():
 def delete_old_bookings():
     today = datetime.now().date()
     cutoff_date = today - timedelta(days=14)
-    matching_rows = app_tables.bookings.search(departure=lambda d: d <= cutoff_date)
+    
+    # Korrekte Suchabfrage ohne Lambda
+    matching_rows = app_tables.bookings.search(departure=q.less_than_or_equal_to(cutoff_date))
+    
     print(len(matching_rows))
     deleted_count = 0
+    
     for row in matching_rows:
         row.delete()
         deleted_count += 1
-    print(f"Buchungen gelöscht, deren Abreisedatum 14 Tage oder mehr zurückliegt. Anzahl: {deleted_count}")
+        
+    print(f"Gelöschte Buchungen: {deleted_count}")
     return deleted_count
