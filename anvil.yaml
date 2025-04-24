@@ -144,8 +144,8 @@ scheduled_tasks:
 - job_id: RWFLPXON
   task_name: delete_old_bookings
   time_spec:
-    at: {hour: 3, minute: 0}
-    every: day
+    at: {}
+    every: minute
     n: 1
 secrets:
   PERPLEXITY_API_KEY:

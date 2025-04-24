@@ -19,6 +19,7 @@ class dashboard(dashboardTemplate):
     user = users.get_user()
     if user['pms_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
+      self.channel_manager_button.visible = True
       self.refresh_button.visible = False
       self.resync_smoobu_button.visible = False
 
@@ -46,9 +47,11 @@ class dashboard(dashboardTemplate):
     self.__init__()
     pass
 
-  def channel_manager_connect_link_click(self, **event_args):
+  def channel_manager_button_click(self, **event_args):
     open_form('channel_manager_connect')
     pass
+
+
 
 
 

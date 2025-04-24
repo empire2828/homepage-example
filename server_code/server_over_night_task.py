@@ -1,3 +1,4 @@
+
 import anvil.email
 import anvil.secrets
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
@@ -51,6 +52,7 @@ def delete_old_bookings():
     today = datetime.now().date()
     cutoff_date = today - timedelta(days=14)
     matching_rows = app_tables.bookings.search(departure=lambda d: d <= cutoff_date)
+    print(len(matching_rows))
     deleted_count = 0
     for row in matching_rows:
         row.delete()
