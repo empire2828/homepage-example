@@ -16,6 +16,11 @@ class dashboard(dashboardTemplate):
     
   def form_show(self, **event_args):
     self.layout.reset_links()
+    user = users.get_user()
+    if user['pms_api_key'] is None:
+      self.pms_need_to_connect_text.visible = True
+      self.refresh_button.visible = False
+      self.resync_smoobu_button.visible = False
 
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""
@@ -39,6 +44,10 @@ class dashboard(dashboardTemplate):
 
   def refresh_button_click(self, **event_args):
     self.__init__()
+    pass
+
+  def channel_manager_connect_link_click(self, **event_args):
+    open_form('channel_manager_connect')
     pass
 
 

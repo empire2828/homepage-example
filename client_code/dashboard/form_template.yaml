@@ -21,6 +21,17 @@ components_by_slot:
     name: bookings_repeating_panel
     properties: {item_template: dashboard.bookings_ItemTemplate}
     type: RepeatingPanel
+  - components:
+    - event_bindings: {click: channel_manager_connect_link_click}
+      layout_properties: {}
+      name: channel_manager_connect_link
+      properties: {text: Channel Manager verbinden}
+      type: Link
+    event_bindings: {}
+    layout_properties: {}
+    name: pms_need_to_connect_text
+    properties: {content: 'Hier erscheint eine Übersicht der Buchungen mit den Check- Ergebnissen, sobald Sie sich mit dem Channel Manager verbunden haben:', font_size: 18, visible: false}
+    type: RichText
 is_package: true
 layout:
   form_event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings, show: form_show}

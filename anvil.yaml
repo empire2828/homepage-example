@@ -70,9 +70,9 @@ db_schema:
     - admin_ui: {order: 3.625, width: 200}
       name: departure
       type: date
-    - admin_ui: {order: 10.5, width: 200}
+    - admin_ui: {width: 200}
       name: created-at
-      type: date
+      type: datetime
     server: full
     title: bookings
   users:

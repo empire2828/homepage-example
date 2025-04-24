@@ -78,7 +78,7 @@ components_by_slot:
   - components:
     - layout_properties: {grid_position: 'IGZTXG,VWIYVT'}
       name: title_3
-      properties: {align: center, bold: true, role: title, text: '3. Erst-Synchronisation starten:', underline: false}
+      properties: {align: left, bold: true, role: title, text: '3. Erst-Synchronisation starten:', underline: false}
       type: Label
     - event_bindings: {click: sync_smoobu_button_click}
       layout_properties: {grid_position: 'IGZTXG,HJJGAD'}

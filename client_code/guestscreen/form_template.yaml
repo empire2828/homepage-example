@@ -3,7 +3,13 @@ components_by_slot:
   slot_1:
   - layout_properties: {}
     name: label_1
-    properties: {font_size: 28, text: Hier Gast checken}
+    properties:
+      bold: true
+      font_size: 18
+      spacing:
+        margin: [null, '0', null, '0']
+        padding: [null, '15', null, '15']
+      text: Hier Gast manuell checken
     type: Label
   - components:
     - components:
