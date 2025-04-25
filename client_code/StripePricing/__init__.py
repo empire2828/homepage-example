@@ -17,6 +17,8 @@ class StripePricing(StripePricingTemplate):
     # Passes the user's email to the Stripe checkout. This ensures records match in both Stripe and the app.
     # pricing_table.setAttribute("customer-email", anvil.users.get_user()["email"])
 
+
+
 @anvil.server.callable
 def create_stripe_subscription(price_id, apartment_count):
     user = anvil.users.get_user()

@@ -5,6 +5,7 @@ container:
       <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
       <stripe-pricing-table pricing-table-id="prctbl_1RHnNrHX2HNyR4vTaukJ7TLk"
       publishable-key="pk_live_51R4ldUHX2HNyR4vTwRXBN7hAerzEm7r4JsPrUKVg6O1OLDmrFRl5tblXLYbLJQE48UdPkH2vnJW6pEDDMfBxxxJG001qxCm1gd">
+      client-reference-id="{{ anvil.users.get_user()['email'] }}">
       </stripe-pricing-table>
   type: HtmlTemplate
 is_package: true
