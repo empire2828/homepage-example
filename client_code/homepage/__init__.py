@@ -1,14 +1,15 @@
 from ._anvil_designer import homepageTemplate
 from anvil import *
 import anvil.server
-import anvil.google.auth, anvil.google.drive
+import anvil.google.auth
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras import routing
-#from data_protection import data_protection
+from ..data_protection import data_protection
 
+@routing.template('')
 class homepage(homepageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
