@@ -123,7 +123,9 @@ def sync_smoobu(user_email):
         except KeyError as e:
             print(f"Missing key in booking data: {e}")
             continue
-    
+
+    anvil.server.launch_background_task('save_user_apartment_count',user_email)
+
     return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten abgerufen und gespeichert."
 
 @anvil.server.callable
@@ -164,11 +166,19 @@ def get_smoobu_userid(user_email):
         print(f"Fehler bei der API-Anfrage: {str(e)}")
         return None
 
-@anvil.server.callable
-def save_distinct_apartment_count(user_email):
-    # Fetch only the "apartment" column for rows matching the email
-    rows = app_tables.bookings.search(email=user_email, apartment=q.not_none())
-    # Use a set to collect unique apartment names
+@anvil.server.background_task
+def save_user_apartment_count(user_email):
+    # Step 1: Get distinct apartments for the user from bookings
+    rows = app_tables.bookings.search(email=user_email, apartment=q.not_(None))
     unique_apartments = set(row['apartment'] for row in rows)
-    # Return the count of unique apartments
-    return len(unique_apartments)
+    count = len(unique_apartments)
+
+    # Step 2: Find the user row in the user table
+    user_row = app_tables.users.get(email=user_email)
+    if user_row is not None:
+        # Step 3: Store the count in the user row (assume column is 'apartment_count')
+        user_row['apartment_count'] = count
+        return count
+    else:
+        # Optionally handle missing user
+        raise Exception(f"User with email {user_email} not found")
