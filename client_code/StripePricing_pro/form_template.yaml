@@ -1,0 +1,6 @@
+components: []
+container:
+  properties:
+    html: "<script async src=\"https://js.stripe.com/v3/pricing-table.js\"></script>\n<stripe-pricing-table \n  anvil-name=\"stripe-pricing-table-pro\"\n  pricing-table-id=\"prctbl_1RHo5NHX2HNyR4vTjYgfrQx8\"\n  publishable-key=\"pk_live_51R4ldUHX2HNyR4vTwRXBN7hAerzEm7r4JsPrUKVg6O1OLDmrFRl5tblXLYbLJQE48UdPkH2vnJW6pEDDMfBxxxJG001qxCm1gd\">\n</stripe-pricing-table>"
+  type: HtmlTemplate
+is_package: true

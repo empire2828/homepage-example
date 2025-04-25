@@ -63,7 +63,7 @@ class layout(layoutTemplate):
   def form_show(self, **event_args):
     has_subscription = anvil.server.call_s('get_user_has_subscription')
     if has_subscription:
-      self.subscription_body.text="Pro-Abo"
+      self.subscription_body.text="Abo"
     else:
-      self.subscription_body.text="Basis-Abo"
+      self.subscription_body.text="Trial-Abo"
     pass
