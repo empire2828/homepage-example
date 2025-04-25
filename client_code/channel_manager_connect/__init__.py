@@ -12,8 +12,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
-    # Any code you write here will run before the form opens.
+   # Any code you write here will run before the form opens.
 
   def save_api_key_button_click(self, **event_args):
     api_key = self.api_key_text_box.text       
