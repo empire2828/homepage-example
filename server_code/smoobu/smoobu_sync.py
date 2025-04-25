@@ -10,7 +10,7 @@ import anvil.server
 from datetime import datetime
 import requests
 from smoobu.smoobu_main import get_guest_details, guest_data_update
-from user import get_distinct_ap
+from users import get_distinct_apartment_count
 
 @anvil.server.callable
 def launch_sync_smoobu():
@@ -165,3 +165,11 @@ def get_smoobu_userid(user_email):
         print(f"Fehler bei der API-Anfrage: {str(e)}")
         return None
 
+@anvil.server.callable
+def save_distinct_apartment_count(user_email):
+    # Fetch only the "apartment" column for rows matching the email
+    rows = app_tables.bookings.search(email=user_email, apartment=q.not_none())
+    # Use a set to collect unique apartment names
+    unique_apartments = set(row['apartment'] for row in rows)
+    # Return the count of unique apartments
+    return len(unique_apartments
