@@ -123,6 +123,9 @@ db_schema:
     - admin_ui: {order: 14, width: 200}
       name: pms_userid
       type: string
+    - admin_ui: {order: 15, width: 200}
+      name: number_of_properties
+      type: number
     server: full
     title: Users
 dependencies:
