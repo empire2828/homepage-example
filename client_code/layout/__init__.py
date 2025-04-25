@@ -35,11 +35,23 @@ class layout(layoutTemplate):
     self.upgrade_link.role = ''
 
   def upgrade_link_click(self, **event_args):
-    has_subscription = anvil.server.call_s('get_user_has_subscription')
-    if not has_subscription:
-        open_form('StripePricing')
-    else:
-      alert('Abo ist bereits upgegraded')
+    try:
+        user = anvil.users.get_user()
+        if not user:
+            alert('Kein Benutzer angemeldet')
+            return
+
+        subscription = user.get('subscription')
+        apartment_count = user.get('apartment_count', 0) or 1
+
+        if (subscription is None or subscription == 'Pro-Subscription') and apartment_count < 4:
+            open_form('StripePricing')
+        elif (subscription is None or subscription == 'Subscription') and apartment_count > 3:
+            open_form('StripePricing_pro')
+        else:
+            alert('Abo ist bereits upgegraded')
+    except Exception as e:
+        alert(f'Ein Fehler ist aufgetreten: {e}')
 
   def logout_link_click(self, **event_args):
       result= alert(
@@ -52,7 +64,7 @@ class layout(layoutTemplate):
       if result=="YES":
         anvil.users.logout()
         open_form('homepage')
-  pass
+      pass
 
   def channel_manager_connect_link_click(self, **event_args):
     self.reset_links()
@@ -61,9 +73,6 @@ class layout(layoutTemplate):
     pass
 
   def form_show(self, **event_args):
-    has_subscription = anvil.server.call_s('get_user_has_subscription')
-    if has_subscription:
-      self.subscription_body.text="Abo"
-    else:
-      self.subscription_body.text="Trial-Abo"
-    pass
+      user = anvil.users.get_user()    
+      self.subscription_body.text=user['subscription']
+      pass
