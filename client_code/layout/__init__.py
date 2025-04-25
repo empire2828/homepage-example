@@ -72,7 +72,7 @@ class layout(layoutTemplate):
     self.channel_manager_connect_link.role='selected'
     pass
 
-def form_show(self, **event_args):
+  def form_show(self, **event_args):
     user = anvil.users.get_user()
     if user is not None:
         if user['subscription'] is None:
