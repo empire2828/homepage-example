@@ -1,6 +1,10 @@
 components: []
 container:
   properties:
-    html: "<script async src=\"https://js.stripe.com/v3/pricing-table.js\"></script>\n<stripe-pricing-table \n  anvil-name=\"stripe-pricing-table\"\n  pricing-table-id=\"prctbl_1R6wylQdGeyhAdPtmYCF6oLw\"\npublishable-key=\"pk_test_51R4ldgQdGeyhAdPtAjd6FGCMb1v0y2QPbKUv2W7OJk8qIjvE4WXDaffoivEm5TtyARcTMDDRGCrMXvuosv8LK0aw00H2ZaKqFW\">\n</stripe-pricing-table>"
+    html: |
+      <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+      <stripe-pricing-table pricing-table-id="prctbl_1RHnNrHX2HNyR4vTaukJ7TLk"
+      publishable-key="pk_live_51R4ldUHX2HNyR4vTwRXBN7hAerzEm7r4JsPrUKVg6O1OLDmrFRl5tblXLYbLJQE48UdPkH2vnJW6pEDDMfBxxxJG001qxCm1gd">
+      </stripe-pricing-table>
   type: HtmlTemplate
 is_package: true
