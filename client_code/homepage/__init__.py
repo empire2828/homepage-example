@@ -47,9 +47,10 @@ class homepage(homepageTemplate):
     ]
     )
     if result=='YES':
-      user = anvil.users.signup_with_form(allow_cancel=True)
-      if user:
-        open_form('dashboard')
+      #user = 
+      anvil.users.signup_with_form(allow_cancel=True)
+      #if user:
+      #  open_form('dashboard')
     pass
 
   def impressum_link_click(self, **event_args):
