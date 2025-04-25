@@ -15,3 +15,7 @@ class faq_template(faq_templateTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def faq_answer_button_click(self, **event_args):
+    self.faq_answer_body.visible= not self.faq_answer_body.visible
+    pass

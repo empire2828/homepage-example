@@ -1,7 +1,16 @@
 components:
 - layout_properties: {grid_position: 'MKKTVS,ATKJXP'}
   name: faq_question_body
-  properties: {role: body}
+  properties: {bold: true, font_size: 18, role: body}
+  type: Label
+- event_bindings: {click: faq_answer_button_click}
+  layout_properties: {grid_position: 'MKKTVS,CIMJZK'}
+  name: faq_answer_button
+  properties: {bold: true, font_size: 18, icon: 'fa:chevron-down', text: ''}
+  type: Button
+- layout_properties: {grid_position: 'NCZRJA,ITEDUA'}
+  name: faq_answer_body
+  properties: {font_size: 18, role: body, visible: false}
   type: Label
 container: {type: ColumnPanel}
 is_package: true
