@@ -6,12 +6,14 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from anvil_extras import routing
+from data_protection import data_protection
 
 class homepage(homepageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    #anvil.server.call('server_wake_up')
+    routing.launch()
     # Any code you write here will run before the form opens.
     self.faq_repeating_panel.items = [
     {"question": "Was genau prüft die KI Suche?", "answer": "Die Suche sucht im Netz nach frei verfügbaren Informationen Ihrer Gäste und fasst diese zusammen."},
