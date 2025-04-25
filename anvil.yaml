@@ -147,9 +147,9 @@ scheduled_tasks:
 - job_id: YPGPYLUN
   task_name: delete_booking
   time_spec:
-    at: {}
-    every: minute
-    n: 10
+    at: {hour: 3, minute: 0}
+    every: day
+    n: 1
 secrets:
   PERPLEXITY_API_KEY:
     type: secret
