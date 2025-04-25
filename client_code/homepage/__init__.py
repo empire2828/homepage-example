@@ -7,7 +7,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras import routing
-from data_protection import data_protection
+#from data_protection import data_protection
 
 class homepage(homepageTemplate):
   def __init__(self, **properties):
