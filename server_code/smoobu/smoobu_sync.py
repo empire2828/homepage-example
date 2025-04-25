@@ -10,6 +10,7 @@ import anvil.server
 from datetime import datetime
 import requests
 from smoobu.smoobu_main import get_guest_details, guest_data_update
+from user import get_distinct_ap
 
 @anvil.server.callable
 def launch_sync_smoobu():
