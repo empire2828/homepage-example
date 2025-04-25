@@ -73,6 +73,7 @@ class layout(layoutTemplate):
     pass
 
   def form_show(self, **event_args):
-      user = anvil.users.get_user()    
+      user = anvil.users.get_user()
+      
       self.subscription_body.text=user['subscription']
       pass
