@@ -74,6 +74,9 @@ class layout(layoutTemplate):
 
   def form_show(self, **event_args):
       user = anvil.users.get_user()
-      
-      self.subscription_body.text=user['subscription']
+      if user['subscription'] is None:
+        self.subscription_body.text="Trial-Subscription"
+      else: 
+        self.subscription_body.text=user['subscription']
+      print('tested')
       pass
