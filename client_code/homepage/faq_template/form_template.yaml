@@ -1,7 +1,13 @@
 components:
 - layout_properties: {grid_position: 'MKKTVS,ATKJXP'}
   name: faq_question_body
-  properties: {bold: true, font_size: 18, role: body}
+  properties:
+    bold: true
+    font_size: 18
+    role: body
+    spacing:
+      margin: [null, '4', '0', '4']
+      padding: ['4', '4', '4', '4']
   type: Label
 - event_bindings: {click: faq_answer_button_click}
   layout_properties: {grid_position: 'MKKTVS,CIMJZK'}
@@ -10,7 +16,13 @@ components:
   type: Button
 - layout_properties: {grid_position: 'NCZRJA,ITEDUA'}
   name: faq_answer_body
-  properties: {font_size: 18, role: body, visible: false}
+  properties:
+    font_size: 18
+    role: body
+    spacing:
+      margin: ['0', '4', '8', '4']
+      padding: ['4', '4', '4', '4']
+    visible: false
   type: Label
 container: {type: ColumnPanel}
 is_package: true
