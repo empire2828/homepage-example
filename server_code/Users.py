@@ -126,3 +126,12 @@ def save_user_api_key(api_key):
     user_row['pms_api_key'] = api_key
     
     return True
+
+@anvil.server.callable
+def get_distinct_apartment_count(user_email):
+    # Fetch only the "apartment" column for rows matching the email
+    rows = app_tables.bookings.search(email=user_email, apartment=q.not_none())
+    # Use a set to collect unique apartment names
+    unique_apartments = set(row['apartment'] for row in rows)
+    # Return the count of unique apartments
+    return len(unique_apartments)

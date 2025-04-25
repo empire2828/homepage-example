@@ -163,3 +163,4 @@ def get_smoobu_userid(user_email):
     except Exception as e:
         print(f"Fehler bei der API-Anfrage: {str(e)}")
         return None
+
