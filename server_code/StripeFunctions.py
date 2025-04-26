@@ -87,7 +87,7 @@ def stripe_customer_created():
 @anvil.server.http_endpoint('/stripe/stripe_subscription_updated')
 def stripe_subscription_updated():
   # Here we want to look for "customer.subscription.updated" because this event is what shows whether a subscription is valid or not. Events like "customer.subscription.created" are similar but are called before a charge is attempted and is usually followed by "customer.subscription.updated".
-  # needs to be for stripe_subscription_created as well, define  for both in stripe!
+  # and for CUSTOMER.subscription.updated AND customer.subscription.CREATED
   payload_json = json.loads(anvil.server.request.body.get_bytes())
 
   # Make sure the event is in a format we expect
@@ -124,9 +124,11 @@ def stripe_subscription_updated():
     if price_id_of_plan in stripe_price_list:
         user["subscription"] = stripe_price_list[price_id_of_plan].get("product_name")
     
-    if payload_json.get("data").get("object").get("cancel_subscription_at_period_end"):
+    if payload_json.get("data").get("object").get("cancel_at_period_end"):
+      user["subscription"] = "cancelled"
       user["cancel_subscription_at_period_end"] = True
     else:
+      user["subscription"] = "expired"
       user["cancel_subscription_at_period_end"] = False
       
   elif subscription_status == "past_due":
