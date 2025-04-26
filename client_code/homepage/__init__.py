@@ -6,8 +6,6 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from routing.router import launch
-from . import routes  # noqa: F401
 
 class homepage(homepageTemplate):
   def __init__(self, **properties):
@@ -63,5 +61,3 @@ class homepage(homepageTemplate):
   def home_link_click(self, **event_args):
     open_form('homepage')
     pass
-
-launch()

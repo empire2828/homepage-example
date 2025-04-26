@@ -194,5 +194,5 @@ services:
 - client_config: {}
   server_config: {custom_smtp: false}
   source: /runtime/services/anvil/email.yml
-startup: {module: homepage, type: form}
+startup: {module: startup, type: module}
 startup_form: null
