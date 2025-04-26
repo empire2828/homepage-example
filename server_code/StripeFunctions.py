@@ -87,7 +87,7 @@ def stripe_customer_created():
 @anvil.server.http_endpoint('/stripe/stripe_subscription_updated')
 def stripe_subscription_updated():
   # Here we want to look for "customer.subscription.updated" because this event is what shows whether a subscription is valid or not. Events like "customer.subscription.created" are similar but are called before a charge is attempted and is usually followed by "customer.subscription.updated".
-
+  # needs to be for stripe_subscription_created as well, define  for both in stripe!
   payload_json = json.loads(anvil.server.request.body.get_bytes())
 
   # Make sure the event is in a format we expect
@@ -145,59 +145,3 @@ def stripe_subscription_updated():
 
   anvil.server.HttpResponse(200)
 
-@anvil.server.http_endpoint('/stripe/stripe_subscription_created')
-def stripe_subscription_created():
-    # Parse the incoming request
-    payload_json = json.loads(anvil.server.request.body.get_bytes())
-
-    # Validate the event payload
-    try:
-        event = stripe.Event.construct_from(
-            payload_json, stripe.api_key
-        )
-    except ValueError as e:
-        # Invalid payload
-        return anvil.server.HttpResponse(400)
-
-    # Only handle subscription created or updated events
-    if event.type in ["customer.subscription.created", "customer.subscription.updated"]:
-        subscription = event.data.object
-        stripe_customer_id = subscription.get("customer")
-
-        if stripe_customer_id is None:
-            print("Customer ID is None.")
-            return anvil.server.HttpResponse(400, "Customer ID is missing.")
-
-        stripe_customer = stripe.Customer.retrieve(stripe_customer_id)
-        stripe_customer_email = stripe_customer["email"]
-        user = app_tables.users.get(email=stripe_customer_email)
-
-        subscription_status = subscription.get("status")
-        # Only process if subscription is active
-        if subscription_status == "active":
-            items = subscription.get("items", {}).get("data", [])
-            if items:
-                price_id_of_plan = items[0].get("price", {}).get("id")
-                stripe_price_list = get_prices()
-                if price_id_of_plan in stripe_price_list:
-                    user["subscription"] = stripe_price_list[price_id_of_plan].get("product_name")
-
-            user["cancel_subscription_at_period_end"] = subscription.get("cancel_at_period_end", False)
-
-        elif subscription_status == "past_due":
-            anvil.email.send(
-                from_name="My SaaS app",
-                to="",
-                subject="Subscription Past Due",
-                text=f"""
-                A user's subscription payment has failed.
-                Email: {user['email']}
-                Stripe Customer ID: {stripe_customer_id}
-                """
-            )
-            user["subscription"] = "expired"
-        else:
-            user["subscription"] = "expired"
-
-    # Return a 200 response to acknowledge receipt of the event
-    return anvil.server.HttpResponse(200)
