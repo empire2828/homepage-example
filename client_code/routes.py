@@ -2,11 +2,11 @@ from routing.router import Route, debug_logging
 
 debug_logging(True)
 
-class homepage(Route):
+class homepageRoute(Route):
     path = "/"
     form = "homepage"
 
-class data_protection(Route):
+class data_protectionRoute(Route):
     path = "/data_protection"
     form = "data_protection"
 

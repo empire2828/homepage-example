@@ -9,8 +9,6 @@ from anvil.tables import app_tables
 from routing.router import launch
 from . import routes  # noqa: F401
 
-launch()
-
 class homepage(homepageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -65,3 +63,5 @@ class homepage(homepageTemplate):
   def home_link_click(self, **event_args):
     open_form('homepage')
     pass
+
+launch()
