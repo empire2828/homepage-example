@@ -128,7 +128,6 @@ def stripe_subscription_updated():
       user["subscription"] = "cancelled"
       user["cancel_subscription_at_period_end"] = True
     else:
-      user["subscription"] = "expired"
       user["cancel_subscription_at_period_end"] = False
       
   elif subscription_status == "past_due":
