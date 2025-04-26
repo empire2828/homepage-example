@@ -125,7 +125,7 @@ def stripe_subscription_updated():
         user["subscription"] = stripe_price_list[price_id_of_plan].get("product_name")
     
     if payload_json.get("data").get("object").get("cancel_at_period_end"):
-      user["subscription"] = "cancelled"
+      user["subscription"] = "canceled"
       user["cancel_subscription_at_period_end"] = True
     else:
       user["cancel_subscription_at_period_end"] = False
@@ -141,6 +141,12 @@ def stripe_subscription_updated():
                  """
                  )
     user["subscription"] = "expired"
+    
+  elif subscription_status == "canceled":
+        # Hier wird explizit auf das gelöschte/abgebrochene Abo reagiert
+        user["subscription"] = "expired"
+        user["cancel_subscription_at_period_end"] = False
+  
   else:
     user["subscription"] = "expired"
 
