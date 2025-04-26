@@ -8,7 +8,6 @@ from anvil import users
 import anvil.server
 from anvil_extras import routing
 
-#@routing.route('dashboard')
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
