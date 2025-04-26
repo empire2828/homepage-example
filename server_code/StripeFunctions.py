@@ -11,7 +11,8 @@ import datetime
 
 # Set your secret key. Remember to switch to your live secret key in production.
 # See your keys here: https://dashboard.stripe.com/apikeys
-stripe.api_key = anvil.secrets.get_secret('stripe_secret_api_key')
+#stripe.api_key = anvil.secrets.get_secret('stripe_secret_api_key')
+stripe.api_key = anvil.secrets.get_secret('stripe_test_api_key')
 
 # This is predicated on a flat 1:1 Product:Price relationship
 def get_prices():
@@ -86,7 +87,7 @@ def stripe_customer_created():
 @anvil.server.http_endpoint('/stripe/stripe_subscription_updated')
 def stripe_subscription_updated():
   # Here we want to look for "customer.subscription.updated" because this event is what shows whether a subscription is valid or not. Events like "customer.subscription.created" are similar but are called before a charge is attempted and is usually followed by "customer.subscription.updated".
-
+  # needs to be for stripe_subscription_created as well, define  for both in stripe!
   payload_json = json.loads(anvil.server.request.body.get_bytes())
 
   # Make sure the event is in a format we expect
@@ -143,3 +144,4 @@ def stripe_subscription_updated():
     user["subscription"] = "expired"
 
   anvil.server.HttpResponse(200)
+

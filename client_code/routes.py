@@ -1,6 +1,6 @@
-from routing.router import Route, debug_logging
+from routing.router import Route #, debug_logging
 
-debug_logging(True)
+# debug_logging(True)
 
 class homepage_route(Route):
     path = "/"
