@@ -19,7 +19,6 @@ class dashboard(dashboardTemplate):
   def form_show(self, **event_args):
     self.layout.reset_links()
     user = users.get_user()
-    if get_
     if user['pms_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       self.refresh_button.visible = False
