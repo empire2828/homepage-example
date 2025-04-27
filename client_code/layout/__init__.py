@@ -83,3 +83,7 @@ class layout(layoutTemplate):
             self.subscription_body.text = "Abo abgelaufen"
     else:
         self.subscription_body.text = "No User logged in"
+        if user['subscription'] is None:
+            self.subscription_body.text = 'Trial subscription'
+        else:
+            self.subscription_body.text = user['subscription']
