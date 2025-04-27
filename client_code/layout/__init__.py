@@ -35,6 +35,8 @@ class layout(layoutTemplate):
     self.upgrade_link.role = ''
 
   def upgrade_link_click(self, **event_args):
+    self.reset_links()
+    self.upgrade_link.role='selected'
     try:
         user = anvil.users.get_user()
         if not user:
