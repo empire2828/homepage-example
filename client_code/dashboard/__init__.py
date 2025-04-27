@@ -21,11 +21,11 @@ class dashboard(dashboardTemplate):
     self.layout.reset_links()
     user = users.get_user()
     if get_user_has_subscription:
-    if user['pms_api_key'] is None:
-      self.pms_need_to_connect_text.visible = True
-      self.refresh_button.visible = False
-      self.resync_smoobu_button.visible = False
-      self.chanel_manager_connect_button.visible = True
+      if user['pms_api_key'] is None:
+        self.pms_need_to_connect_text.visible = True
+        self.refresh_button.visible = False
+        self.resync_smoobu_button.visible = False
+        self.chanel_manager_connect_button.visible = True
 
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""
