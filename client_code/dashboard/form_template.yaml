@@ -1,5 +1,4 @@
 components_by_slot:
-  main_slot: []
   slot_1:
   - components:
     - event_bindings: {click: refresh_button_click}
@@ -16,8 +15,7 @@ components_by_slot:
     name: column_panel_1
     properties: {}
     type: ColumnPanel
-  - data_bindings: []
-    layout_properties: {}
+  - layout_properties: {}
     name: bookings_repeating_panel
     properties: {item_template: dashboard.bookings_ItemTemplate}
     type: RepeatingPanel

@@ -9,6 +9,7 @@ import anvil.server
 from anvil_extras import routing
 from users import get_user_has_subscription
 
+
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
