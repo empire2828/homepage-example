@@ -76,10 +76,6 @@ class layout(layoutTemplate):
     user = anvil.users.get_user()
     if user is not None:
         if user['subscription'] is None:
-            self.subscription_body.text = "Test- Abo"
-        elif user['subscription'] == "Subscription":
-            self.subscription_body.text = "Abo"
-        elif user['subscription'] == "Pro-Subscription":
-            self.subscription_body.text = "Pro- Abo"
-    else:
-        self.subscription_body.text = "No User logged in"
+            self.subscription_body.text = 'Trial subscription'
+        else:
+            self.subscription_body.text = user['subscription']
