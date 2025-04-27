@@ -21,16 +21,27 @@ components_by_slot:
     name: bookings_repeating_panel
     properties: {item_template: dashboard.bookings_ItemTemplate}
     type: RepeatingPanel
-  - components: []
+  - layout_properties: {}
+    name: spacer_1
+    properties: {height: 32}
+    type: Spacer
+  - components:
+    - event_bindings: {click: chanel_manager_connect_button_click}
+      name: chanel_manager_connect_button
+      properties: {role: filled-button, text: Channel Manager verbinden, visible: false}
+      type: Button
+    - layout_properties: {}
+      name: dashboard_upgrade_needed_text
+      properties: {content: 'Um sich direkt mit einem Channel- Manager zu verbinden und Ihre Buchungen automatisch zu importieren brauchen Sie ein Abo- hier können Sie upgraden:', visible: false}
+      type: RichText
     event_bindings: {}
     layout_properties: {}
     name: pms_need_to_connect_text
     properties: {content: 'Hier erscheint eine Übersicht der Buchungen mit den Check- Ergebnissen, sobald Sie sich mit dem Channel Manager verbunden haben:', font_size: 18, visible: false}
     type: RichText
-  - event_bindings: {click: chanel_manager_connect_button_click}
-    layout_properties: {}
-    name: chanel_manager_connect_button
-    properties: {role: filled-button, text: Channel Manager verbinden, visible: false}
+  - layout_properties: {}
+    name: dashboard_upgrade_button
+    properties: {role: filled-button, text: Upgrade, visible: false}
     type: Button
 is_package: true
 layout:
