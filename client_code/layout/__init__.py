@@ -50,6 +50,8 @@ class layout(layoutTemplate):
             open_form('StripePricing')
         elif subscription != 'Pro-Subscription' and apartment_count > 3:
             open_form('StripePricing_pro')
+        else:
+          alert('Abo bereits vorhanden.')
     except Exception as e:
         alert(f'Ein Fehler ist aufgetreten: {e}')
 

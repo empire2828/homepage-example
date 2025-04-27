@@ -97,9 +97,9 @@ def get_user_has_subscription():
     user = anvil.users.get_user()    
     if not user:
         return False   
-    if user['subscription'] == 'Personal':    
+    if user['subscription'] == ('Subscription' or 'Pro-Subscription' or 'Canceled'):    
         return True   
-    signed_up_date = user['signed_up']  # Verwende get() für Sicherheit    
+    signed_up_date = user['signed_up']  
     if signed_up_date:
         # Konvertiere naive Zeit zu UTC-aware Zeit
         signed_up_aware = signed_up_date.replace(tzinfo=timezone.utc)
