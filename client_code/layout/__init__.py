@@ -44,12 +44,10 @@ class layout(layoutTemplate):
         subscription = user.get('subscription')
         apartment_count = user.get('apartment_count', 0) or 1
 
-        if (subscription is None or subscription == 'Pro-Subscription') and apartment_count < 4:
+        if subscription != 'Subscription' and apartment_count < 4:
             open_form('StripePricing')
-        elif (subscription is None or subscription == 'Subscription') and apartment_count > 3:
+        elif subscription != 'Pro-Subscription' and apartment_count > 3:
             open_form('StripePricing_pro')
-        else:
-            alert('Abo ist bereits upgegraded')
     except Exception as e:
         alert(f'Ein Fehler ist aufgetreten: {e}')
 
@@ -75,11 +73,13 @@ class layout(layoutTemplate):
   def form_show(self, **event_args):
     user = anvil.users.get_user()
     if user is not None:
-        if user['subscription'] is None:
-            self.subscription_body.text = "Test- Abo"
-        elif user['subscription'] == "Subscription":
+        if user['subscription'] == "Subscription":
             self.subscription_body.text = "Abo"
         elif user['subscription'] == "Pro-Subscription":
             self.subscription_body.text = "Pro- Abo"
+        elif user['subscription'] is None:
+            self.subscription_body.text = "Test- Abo"
+        else:
+            self.subscription_body.text = "Abo abgelaufen"
     else:
         self.subscription_body.text = "No User logged in"
