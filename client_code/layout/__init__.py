@@ -73,16 +73,6 @@ class layout(layoutTemplate):
   def form_show(self, **event_args):
     user = anvil.users.get_user()
     if user is not None:
-        if user['subscription'] == "Subscription":
-            self.subscription_body.text = "Abo"
-        elif user['subscription'] == "Pro-Subscription":
-            self.subscription_body.text = "Pro- Abo"
-        elif user['subscription'] is None:
-            self.subscription_body.text = "Test- Abo"
-        else:
-            self.subscription_body.text = "Abo abgelaufen"
-    else:
-        self.subscription_body.text = "No User logged in"
         if user['subscription'] is None:
             self.subscription_body.text = 'Trial subscription'
         else:
