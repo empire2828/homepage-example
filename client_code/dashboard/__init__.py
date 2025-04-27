@@ -7,7 +7,7 @@ from anvil.tables import app_tables
 from anvil import users
 import anvil.server
 from anvil_extras import routing
-from users import get_user_has_subscription
+#from users import get_user_has_subscription
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):

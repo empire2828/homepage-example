@@ -319,10 +319,6 @@ components:
   name: spacer_5
   properties: {height: 142.876708984375}
   type: Spacer
-- layout_properties: {grid_position: 'MUQDYA,WBQKCM'}
-  name: column_panel_5
-  properties: {}
-  type: ColumnPanel
 - layout_properties: {grid_position: 'LGMCZK,EJOWWM'}
   name: linear_panel_2
   properties: {}
