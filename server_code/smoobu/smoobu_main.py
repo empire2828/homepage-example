@@ -14,7 +14,7 @@ def get_guest_details(guestid, headers):
     if response.status_code == 200:
         return response.json()
     elif response.status_code == 422:
-        print(f"Gast nicht gefunden für ID: {guestid}")
+        print(f"Gast nicht gefunden für ID: ç")
         return {}  # Leeres Dictionary zurückgeben, wenn der Gast nicht gefunden wurde
     else:
         print(f"Fehler beim Abrufen der Gästedaten: {response.status_code} - {response.text}")
