@@ -17,7 +17,7 @@ def get_guest_details(guestid, headers):
         print(f"Gast nicht gefunden für ID: ç")
         return {}  # Leeres Dictionary zurückgeben, wenn der Gast nicht gefunden wurde
     else:
-        print(f"Fehler beim Abrufen der Gästedaten: {response.status_code} - {response.text}")
+        print(f"Fehler beim Abrufen der Gästedaten: guestid: {guestid} {response.status_code} - {response.text}")
         return {}  # Leeres Dictionary für andere Fehler zurückgeben
 
 @anvil.server.callable
