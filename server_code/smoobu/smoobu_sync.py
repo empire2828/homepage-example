@@ -68,7 +68,7 @@ def sync_smoobu(user_email):
     for booking in all_bookings:
         try:
             # Bestehende Buchung anhand der Reservierungs-ID abrufen
-            existing = app_tables.bookings.get(reservation_id=booking['id'])
+            existing = app_tables.bookings.get(reservation_id=booking['id'], email=user_email)
             
             # Gästedaten abrufen
             guest_data = get_guest_details(booking['guestId'], headers)
@@ -104,7 +104,8 @@ def sync_smoobu(user_email):
                     reservation_id=booking['id'],
                     apartment=booking['apartment']['name'],
                     arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
-                    departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),                    guestname=booking['guest-name'],
+                    departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
+                    guestname=booking['guest-name'],
                     channel_name=booking['channel']['name'],
                     phone=booking['phone'],
                     adults=booking['adults'],
