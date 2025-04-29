@@ -77,7 +77,8 @@ def sync_smoobu(user_email):
             city = address.get('city', '')
             postal_code = address.get('postalCode', '')
             country = address.get('country', '')       
-            
+            print('Added guest details ',booking['guestId'],' ',booking['guest-name'],' ',address.get('city', ''))
+          
             if existing:
                 existing.update(
                     reservation_id=booking['id'],
@@ -98,6 +99,7 @@ def sync_smoobu(user_email):
                     address_country=country,
                     email=user_email
                 )
+                print('Updated existing booking: ',user_email,' ',booking['id'],' ',booking['guest-name'],' ',datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),' ',datetime.strptime(booking['departure'],"%Y-%m-%d").date())
             else:
               if booking['channel']['name'] != 'Blocked channel':
                 app_tables.bookings.add_row(
@@ -119,7 +121,7 @@ def sync_smoobu(user_email):
                     address_country=country,
                     email=user_email
                 )
-            
+              print('Added new booking: ',user_email,' ',booking['id'],' ',booking['guest-name'],' ',datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),' ',datetime.strptime(booking['departure'],"%Y-%m-%d").date())
             bookings_added += 1
         except KeyError as e:
             print(f"Missing key in booking data: {e}")
@@ -179,7 +181,7 @@ def save_user_apartment_count(user_email):
     if user_row is not None:
         # Step 3: Store the count in the user row (assume column is 'apartment_count')
         user_row['apartment_count'] = count
-        print('')
+        print('Stored for user ',user_email,' following apartment count: ',count)
         return count
     else:
         # Optionally handle missing user
