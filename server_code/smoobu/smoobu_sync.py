@@ -179,6 +179,7 @@ def save_user_apartment_count(user_email):
     if user_row is not None:
         # Step 3: Store the count in the user row (assume column is 'apartment_count')
         user_row['apartment_count'] = count
+        print('')
         return count
     else:
         # Optionally handle missing user
