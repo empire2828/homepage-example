@@ -11,6 +11,9 @@ def get_guest_details(guestid, headers):
     """Ruft die Gästedaten für einen bestimmten Gast ab"""
     guest_url = f"https://login.smoobu.com/api/guests/{guestid}"  
     response = requests.get(guest_url, headers=headers) 
+    if guestid is None:
+      print('Guest ID is none')
+      return {}  # Leeres Dictionary zurückgeben
     if response.status_code == 200:
         return response.json()
     elif response.status_code == 422:
