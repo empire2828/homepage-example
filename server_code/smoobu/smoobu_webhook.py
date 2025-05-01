@@ -159,7 +159,7 @@ def delete_booking(reservation_id, user_id):
 def get_user_email(user_id):
     user_email = None
     # Suche alle Zeilen mit dieser user_id
-    user_rows = app_tables.users.search(pms_userid=user_id)
+    user_rows = app_tables.users.search(pms_userid=str(user_id))
     # Explizit einen Iterator erzeugen
     first_row = next(iter(user_rows), None)
     if first_row:
