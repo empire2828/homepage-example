@@ -60,3 +60,7 @@ class homepage(homepageTemplate):
   def home_link_click(self, **event_args):
     open_form('homepage')
     pass
+
+  def second_test_button_click(self, **event_args):
+    self.testen_button_click()
+    pass
