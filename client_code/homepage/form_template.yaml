@@ -54,7 +54,7 @@ components:
   type: Label
 - layout_properties: {grid_position: 'VCVIFN,OTKTRF'}
   name: spacer_2
-  properties: {height: 41.5555419921875}
+  properties: {height: 36.003448486328125}
   type: Spacer
 - layout_properties: {grid_position: 'BFJGOD,SUSODA'}
   name: spacer_1
@@ -173,8 +173,27 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'LWWHYF,EAOQZS'}
   name: spacer_6
-  properties: {height: 71.63107299804688}
+  properties: {height: 29.18402099609375}
   type: Spacer
+- layout_properties: {grid_position: 'NNGYNY,AWBXZF'}
+  name: rich_text_1
+  properties:
+    content: |-
+      Sie freuen sich auch über Direktbuchungen.... aber wer kommt denn da überhaupt? Falls es mal richtig Probleme geben sollte, müssen Sie den richtigen Namen und Adresse haben um Ihre Ansprüche durchzusetzen. Dann wollen Sie kein Fake-Profil haben in ihrem Buchungssystem.
+
+      Bestimmte Berufsgruppen sind sehr anspruchsvoll. Sie wollen vorher wissen wer kommt, möchten aber nicht jedes Mal googeln?
+
+      Dann sind Sie hier genau richtig.
+    font_size: 18
+  type: RichText
+- layout_properties: {grid_position: 'KCRVRS,YVTZBP'}
+  name: spacer_9
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'QMCHLL,NUYAEA'}
+  name: label_22
+  properties: {align: left, font_size: 18, text: 'Wie läuft das genau ab?'}
+  type: Label
 - layout_properties: {grid_position: 'XNHJHK,ULMQQM'}
   name: image_2
   properties: {height: 452.3124694824219, source: _/theme/Folie1.jpeg}
@@ -188,9 +207,17 @@ components:
     name: label_8
     properties: {}
     type: Label
+  - layout_properties: {grid_position: 'ZEGUXJ,DOVNOI'}
+    name: label_18
+    properties: {align: center, bold: true, font_size: 18, text: Always free}
+    type: Label
   - layout_properties: {grid_position: 'ZEGUXJ,HVJHZC'}
     name: label_9
     properties: {align: center, bold: true, font_size: 18, text: Abo}
+    type: Label
+  - layout_properties: {grid_position: 'ZEGUXJ,DVQCGG'}
+    name: label_10
+    properties: {align: center, bold: true, font_size: 18, text: Pro- Abo}
     type: Label
   - components:
     - layout_properties: {grid_position: 'UMJGQL,JYZUGI'}
@@ -202,8 +229,16 @@ components:
           margin: ['4', null, '6', null]
         text: KI gestützte Recherche
       type: Label
+    - layout_properties: {grid_position: 'UMJGQL,XRJACB'}
+      name: check_box_11
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
     - layout_properties: {grid_position: 'UMJGQL,TMKUQP'}
       name: check_box_10
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
+    - layout_properties: {grid_position: 'UMJGQL,OQTBIX'}
+      name: check_box_5
       properties: {align: center, checked: true, enabled: false, text: ''}
       type: CheckBox
     layout_properties: {grid_position: 'IZABEX,XANQUW'}
@@ -224,8 +259,16 @@ components:
           margin: [null, null, '6', null]
         text: Linkedin Recherche
       type: Label
+    - layout_properties: {grid_position: 'FUGLSW,MZCOTV'}
+      name: check_box_12
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
     - layout_properties: {grid_position: 'FUGLSW,BBVDZT'}
       name: check_box_2
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
+    - layout_properties: {grid_position: 'FUGLSW,WRJFYC'}
+      name: check_box_6
       properties: {align: center, checked: true, enabled: false, text: ''}
       type: CheckBox
     layout_properties: {grid_position: 'AIFBEV,XXKAYJ'}
@@ -247,8 +290,16 @@ components:
         text: Adressprüfung
         underline: false
       type: Label
+    - layout_properties: {grid_position: 'WJNXLM,OBZGIV'}
+      name: check_box_13
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
     - layout_properties: {grid_position: 'WJNXLM,MDTBSR'}
       name: check_box_4
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
+    - layout_properties: {grid_position: 'WJNXLM,UVROMW'}
+      name: check_box_7
       properties: {align: center, checked: true, enabled: false, text: ''}
       type: CheckBox
     layout_properties: {grid_position: 'XYXMQN,SOZLMK'}
@@ -264,8 +315,16 @@ components:
       name: label_3
       properties: {font_size: 18, text: Telefonnummernprüfung}
       type: Label
+    - layout_properties: {grid_position: 'LJCMFQ,BASLRV'}
+      name: check_box_14
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
     - layout_properties: {grid_position: 'LJCMFQ,XZOVRQ'}
       name: check_box_1
+      properties: {align: center, checked: true, enabled: false, text: ''}
+      type: CheckBox
+    - layout_properties: {grid_position: 'LJCMFQ,GFRBFF'}
+      name: check_box_8
       properties: {align: center, checked: true, enabled: false, text: ''}
       type: CheckBox
     layout_properties: {grid_position: 'AQUFMA,OCQFQP'}
@@ -285,9 +344,17 @@ components:
           margin: [null, null, '6', null]
         text: Anbindung via API (Smoobu)
       type: Label
+    - layout_properties: {grid_position: 'KNVGKM,VAAWRX'}
+      name: check_box_15
+      properties: {align: center, text: ''}
+      type: CheckBox
     - layout_properties: {grid_position: 'KNVGKM,SPVMYZ'}
       name: check_box_3
       properties: {align: center, checked: true, enabled: false, text: '', visible: true}
+      type: CheckBox
+    - layout_properties: {grid_position: 'KNVGKM,HASDLS'}
+      name: check_box_9
+      properties: {align: center, checked: true, enabled: false, text: ''}
       type: CheckBox
     layout_properties: {grid_position: 'CAXXMZ,VXJNFK'}
     name: elevated_card_5
@@ -297,11 +364,48 @@ components:
         padding: ['6', null, '6', null]
       wrap_on: never
     type: ColumnPanel
-  - layout_properties: {grid_position: 'IQCUEL,GVKVCE'}
-    name: body_1
-    properties: {role: body}
+  - components:
+    - layout_properties: {grid_position: 'YLUPJR,ENXFFK'}
+      name: label_13
+      properties: {font_size: 18, text: Anzahl Objekte}
+      type: Label
+    - layout_properties: {grid_position: 'YLUPJR,NEVOMW'}
+      name: label_20
+      properties: {align: center, font_size: 18, text: 1-3}
+      type: Label
+    - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
+      name: label_14
+      properties: {align: center, font_size: 18, text: 1-3}
+      type: Label
+    - layout_properties: {grid_position: 'YLUPJR,KPUDGW'}
+      name: label_15
+      properties: {align: center, font_size: 18, text: 4-10}
+      type: Label
+    layout_properties: {grid_position: 'NLAVXR,YGUMAO'}
+    name: elevated_card_6
+    properties: {role: elevated-card}
+    type: ColumnPanel
+  - layout_properties: {grid_position: 'IQCUEL,QWNJEE'}
+    name: label_17
+    properties: {bold: true, font_size: 18, text: Abo- Preis monatlich}
     type: Label
-  - layout_properties: {grid_position: 'IQCUEL,PIPGAT'}
+  - layout_properties: {grid_position: 'IQCUEL,QWNJEE EXAMII,LMATMA'}
+    name: label_26
+    properties: {font_size: 18, text: jederzeit kündbar}
+    type: Label
+  - layout_properties: {grid_position: 'IQCUEL,OZZWWB'}
+    name: label_21
+    properties: {align: center, bold: true, font_size: 18, text: '€ 0,00'}
+    type: Label
+  - layout_properties: {grid_position: 'IQCUEL,LWZJGX KIASVM,FXOIPI'}
+    name: label_16
+    properties: {align: center, bold: true, font_size: 18, text: '€ 2,99'}
+    type: Label
+  - layout_properties: {grid_position: 'IQCUEL,LWZJGX KXALZQ,ZCLKHE'}
+    name: label_24
+    properties: {align: center, font_size: 18, text: 30 Tage kostenlos testen}
+    type: Label
+  - layout_properties: {grid_position: 'IQCUEL,PIPGAT UWJNMF,FZAYWR'}
     name: label_7
     properties:
       align: center
@@ -309,7 +413,11 @@ components:
       font_size: 18
       spacing:
         margin: [null, null, '4', null]
-      text: € 2,99 monatlich (für 1-3 Objekte)
+      text: € 4,99
+    type: Label
+  - layout_properties: {grid_position: 'IQCUEL,PIPGAT UKNRCE,VDRZQL'}
+    name: label_25
+    properties: {align: center, font_size: 18, text: 30 Tage kostenlos testen}
     type: Label
   layout_properties: {grid_position: 'CFSXJQ,LSZEBP'}
   name: outlined_card_4
@@ -319,6 +427,10 @@ components:
       margin: [null, '6', null, '6']
     wrap_on: never
   type: ColumnPanel
+- layout_properties: {grid_position: 'LZWKXC,NEQNTC'}
+  name: spacer_8
+  properties: {height: 32}
+  type: Spacer
 - layout_properties: {grid_position: 'EWFIVC,CWNBQW'}
   name: faq_repeating_panel
   properties: {item_template: homepage.faq_template}
