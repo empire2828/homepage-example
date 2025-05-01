@@ -34,11 +34,11 @@ def smoobu_webhook_handler():
             
             # Starte die Risikobewertung als Hintergrundaufgabe
             anvil.server.launch_background_task('get_bookings_risk',user_email, reservation_id)
-            
+
         elif action == 'cancelReservation':
-            delete_booking(booking_data.get('id'))
-            print(f"Buchung gelöscht: {booking_data.get('id')}")
-            
+            delete_booking(booking_data.get('id'), webhook_data.get('user'))
+            print(f"Buchung gelöscht: {booking_data.get('id')} ",webhook_data.get('user'))
+
         # Bei jedem Aufruf des Webhooks schauen, ob Gastdaten sich geändert haben
         guest_data_update(user_email)  
         if action=='newReservation':
@@ -130,21 +130,30 @@ def process_booking(booking_data, user_id):
         )
 
 @anvil.server.background_task
-def delete_booking(reservation_id):
-    """Löscht eine Buchung aus der Datenbank anhand der Reservierungs-ID"""
-    if not reservation_id:
-        print("Keine gültige Reservierungs-ID erhalten")
+def delete_booking(reservation_id, user_id):
+    """Löscht eine Buchung aus der Datenbank anhand der Reservierungs-ID und Benutzer-ID"""
+    if not reservation_id or not user_id:
+        print("Ungültige Reservierungs-ID oder Benutzer-ID")
         return
     
-    # Suche nach der Buchung in der Datenbank
-    booking = app_tables.bookings.get(reservation_id=reservation_id)
+    # Hole die Benutzer-E-Mail anhand der Smoobu-Benutzer-ID
+    user_email = get_user_email(user_id)
+    if not user_email:
+        print(f"Keine E-Mail für Benutzer-ID {user_id} gefunden")
+        return
+    
+    # Suche nach der Buchung mit Reservierungs-ID UND Benutzer-E-Mail
+    booking = app_tables.bookings.get(
+        reservation_id=reservation_id,
+        email=user_email  # Voraussetzung: Spalte "email" in der Buchungstabelle
+    )
     
     if booking:
-        # Buchung löschen
         booking.delete()
-        print(f"Buchung mit ID {reservation_id} erfolgreich gelöscht")
+        print(f"Buchung {reservation_id} für Benutzer {user_email} gelöscht")
     else:
-        print(f"Keine Buchung mit Reservierungs-ID {reservation_id} gefunden")
+        print(f"Keine Buchung mit ID {reservation_id} für Benutzer {user_email} gefunden")
+
 
 @anvil.server.background_task
 def get_user_email(user_id):
