@@ -158,9 +158,12 @@ def delete_booking(reservation_id, user_id):
 @anvil.server.background_task
 def get_user_email(user_id):
     user_email = None
-    user_row = app_tables.users.get(pms_userid=user_id)
-    if user_row:
-        user_email = user_row['email']
+    # Suche alle Zeilen mit dieser user_id
+    user_rows = app_tables.users.search(pms_userid=user_id)
+    # user_rows ist ein Iterator – wir holen das erste Element, falls vorhanden
+    first_row = next(user_rows, None)
+    if first_row:
+        user_email = first_row['email']
         print(f"Benutzer gefunden: {user_email}")
     else:
         print(f"Kein Benutzer mit Smoobu-ID {user_id} gefunden")
