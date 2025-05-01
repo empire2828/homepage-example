@@ -171,6 +171,18 @@ components:
       margin: [null, '6', null, '6']
       padding: [null, '6', null, '6']
   type: ColumnPanel
+- layout_properties: {grid_position: 'LWWHYF,EAOQZS'}
+  name: spacer_6
+  properties: {height: 71.63107299804688}
+  type: Spacer
+- layout_properties: {grid_position: 'XNHJHK,ULMQQM'}
+  name: image_2
+  properties: {height: 452.3124694824219, source: _/theme/Folie1.jpeg}
+  type: Image
+- layout_properties: {grid_position: 'MIQGPO,CYFDXQ'}
+  name: spacer_7
+  properties: {height: 57.3289794921875}
+  type: Spacer
 - components:
   - layout_properties: {grid_position: 'ZEGUXJ,GFGREP'}
     name: label_8
