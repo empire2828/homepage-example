@@ -160,12 +160,13 @@ def get_user_email(user_id):
     user_email = None
     # Suche alle Zeilen mit dieser user_id
     user_rows = app_tables.users.search(pms_userid=user_id)
-    # user_rows ist ein Iterator – wir holen das erste Element, falls vorhanden
-    first_row = next(user_rows, None)
+    # Explizit einen Iterator erzeugen
+    first_row = next(iter(user_rows), None)
     if first_row:
         user_email = first_row['email']
         print(f"Benutzer gefunden: {user_email}")
     else:
         print(f"Kein Benutzer mit Smoobu-ID {user_id} gefunden")
     return user_email
+
 
