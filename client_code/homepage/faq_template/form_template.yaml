@@ -24,5 +24,7 @@ components:
       padding: ['4', '4', '4', '4']
     visible: false
   type: Label
-container: {type: ColumnPanel}
+container:
+  properties: {wrap_on: never}
+  type: ColumnPanel
 is_package: true

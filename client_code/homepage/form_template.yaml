@@ -185,6 +185,9 @@ components:
 
       Dann sind Sie hier genau richtig.
     font_size: 18
+    spacing:
+      margin: [null, '6', null, '6']
+      padding: [null, '6', null, '6']
   type: RichText
 - layout_properties: {grid_position: 'KCRVRS,YVTZBP'}
   name: spacer_9
@@ -192,7 +195,13 @@ components:
   type: Spacer
 - layout_properties: {grid_position: 'QMCHLL,NUYAEA'}
   name: label_22
-  properties: {align: left, font_size: 18, text: 'Wie läuft das genau ab?'}
+  properties:
+    align: left
+    font_size: 18
+    spacing:
+      margin: [null, '6', null, '6']
+      padding: [null, '6', null, '6']
+    text: Wie läuft das genau ab?
   type: Label
 - layout_properties: {grid_position: 'XNHJHK,ULMQQM'}
   name: image_2
@@ -383,7 +392,7 @@ components:
       type: Label
     layout_properties: {grid_position: 'NLAVXR,YGUMAO'}
     name: elevated_card_6
-    properties: {role: elevated-card}
+    properties: {role: elevated-card, wrap_on: never}
     type: ColumnPanel
   - layout_properties: {grid_position: 'IQCUEL,QWNJEE'}
     name: label_17
