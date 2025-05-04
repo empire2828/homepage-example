@@ -119,3 +119,11 @@ def send_registration_notification(user_email):
     subject="Neuer Benutzer registriert für Guestscreener.com",
     text=f"Ein neuer Benutzer hat sich registriert: {user_email}"
   )
+
+@anvil.server.callable
+def send_help_request(help_request_text, help_request_file, user_email):
+   anvil.email.send(
+   to="dirk.klemer@gmail.com",  # Deine eigene Adresse
+   subject="Help request Guestscreener.com",
+   text=help_request_text + user_email
+  )
