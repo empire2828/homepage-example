@@ -33,6 +33,7 @@ class layout(layoutTemplate):
     self.channel_manager_connect_link.role = ''  
     self.accountmanagement_link.role = ''
     self.upgrade_link.role = ''
+    self.help_link.role= ''
 
   def upgrade_link_click(self, **event_args):
     self.reset_links()
@@ -81,3 +82,9 @@ class layout(layoutTemplate):
             self.subscription_body.text = 'Trial subscription'
         else:
             self.subscription_body.text = user['subscription']
+
+  def help_link_click(self, **event_args):
+    self.reset_links()
+    open_form('help')
+    self.help_link.role='selected'
+    pass
