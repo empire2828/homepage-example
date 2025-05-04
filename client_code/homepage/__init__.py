@@ -13,7 +13,7 @@ class homepage(homepageTemplate):
     self.init_components(**properties)
     # Any code you write here will run before the form opens.
     self.faq_repeating_panel.items = [
-    {"question": "Was genau prüft die KI Suche?", "answer": "Die Suche sucht im Netz nach frei verfügbaren Informationen Ihrer Gäste und fasst diese zusammen."},
+    {"question": "Was genau prüft die KI Suche?", "answer": "Die Suche sucht im Netz nach frei verfügbaren Informationen Ihrer Gäste und fasst diese zusammen. Gibt es mehrere Personen mit dem gleich oder ähnlichen Namen, kann die KI fehlerhafte Ergebnisse ausgeben."},
     {"question": "Was genau prüft die Adress- und Telefonprüfung?", "answer": "Die Adresse wird daraufhin geprüft, ob es diese überhaupt gibt. Es wird nicht geprüft, ob der Gast tatsächlich hier wohnt. Bei der Telefonnummer wird auf formale Richtigkeit geprüft, nicht ob der Gast diese konkrete Telefonnummer oder jemand Anderes diese hat."},
     {"question": "Wie erhält Guestscreener.com die Informationen über meine Gäste?", "answer": "Sie können Guestscreener.com per API direkt an Smoobu anbinden. Alternativ können Sie auch die Daten von einzelnen Gästen manuell eingeben."},
     {"question": "Wie bekommen Sie die Informationen zurück?", "answer": "Sobald eine neue Buchung in Smoobu erfasst wird, erhalten Sie automatisch eine eMail mit den Informationen. Alternativ können Sie alles im Dashboard hier sehen."},
