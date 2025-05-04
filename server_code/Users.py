@@ -123,7 +123,7 @@ def save_user_api_key(api_key):
         raise Exception("Benutzer nicht in der Datenbank gefunden")
     
     # API-Key in der Datenbank speichern
-    user_row['pms_api_key'] = api_key
+    user_row['smoobu_api_key'] = api_key
     
     return True
 

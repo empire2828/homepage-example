@@ -25,7 +25,7 @@ def sync_smoobu(user_email):
     base_url = "https://login.smoobu.com/api/reservations"
     user= app_tables.users.get(email=user_email)
     if user:
-        api_key= user['pms_api_key']
+        api_key= user['smoobu_api_key']
     else:
       pass
       
@@ -131,9 +131,9 @@ def sync_smoobu(user_email):
 
 @anvil.server.callable
 def save_smoobu_userid(user_email):
-    pms_userid = str(get_smoobu_userid(user_email))
+    smoobu_userid = str(get_smoobu_userid(user_email))
     current_user = anvil.users.get_user()
-    app_tables.users.get(email=current_user['email']).update(pms_userid=pms_userid)
+    app_tables.users.get(email=current_user['email']).update(smoobu_userid=smoobu_userid)
     return 
 
 @anvil.server.callable
@@ -143,7 +143,7 @@ def get_smoobu_userid(user_email):
         print(f"Kein Benutzer mit der E-Mail {user_email} gefunden")
         return None
         
-    api_key = user['pms_api_key']
+    api_key = user['smoobu_api_key']
     if not api_key:
         print(f"Kein API-Key für Benutzer {user_email} gefunden")
         return None

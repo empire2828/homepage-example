@@ -63,7 +63,7 @@ def process_booking(booking_data, user_id):
     # Gästedaten abrufen
     user = app_tables.users.get(email=user_email)
     if user:
-        api_key = user['pms_api_key']
+        api_key = user['smoobu_api_key']
     else:
         print(f"Kein Benutzer mit E-Mail {user_email} gefunden")
         return
@@ -159,7 +159,7 @@ def delete_booking(reservation_id, user_id):
 def get_user_email(user_id):
     user_email = None
     # Suche alle Zeilen mit dieser user_id
-    user_rows = app_tables.users.search(pms_userid=str(user_id))
+    user_rows = app_tables.users.search(smoobu_userid=str(user_id))
     # Explizit einen Iterator erzeugen
     first_row = next(iter(user_rows), None)
     if first_row:

@@ -100,9 +100,6 @@ db_schema:
       name: n_password_failures
       type: number
     - admin_ui: {width: 200}
-      name: confirmed_email
-      type: bool
-    - admin_ui: {width: 200}
       name: signed_up
       type: datetime
     - admin_ui: {width: 200}
@@ -117,11 +114,11 @@ db_schema:
     - admin_ui: {width: 200}
       name: cancel_subscription_at_period_end
       type: bool
-    - admin_ui: {order: 13, width: 200}
-      name: pms_api_key
+    - admin_ui: {order: 12.5, width: 200}
+      name: smoobu_api_key
       type: string
     - admin_ui: {order: 14, width: 200}
-      name: pms_userid
+      name: smoobu_userid
       type: string
     - admin_ui: {order: 15, width: 200}
       name: apartment_count

@@ -20,7 +20,7 @@ class dashboard(dashboardTemplate):
     self.layout.reset_links()
     user = users.get_user()
     #if get_user_has_subscription:
-    if user['pms_api_key'] is None:
+    if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       self.refresh_button.visible = False
       self.resync_smoobu_button.visible = False
@@ -38,7 +38,7 @@ class dashboard(dashboardTemplate):
 
   def resync_smoobu_button_click(self, **event_args):
     user = users.get_user()
-    if user['pms_api_key'] is not None:
+    if user['smoobu_api_key'] is not None:
       alert("Hintergrund- Synchronisation wird gestartet. Das dauert ca. 10 Minuten.")
       anvil.server.call_s('delete_bookings_by_email',anvil.users.get_user()['email'])
       anvil.server.call_s('launch_sync_smoobu')

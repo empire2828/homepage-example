@@ -32,7 +32,7 @@ def guest_data_update(user_email):
 def update_missing_guest_data(user_email):
     user= app_tables.users.get(email=user_email)
     if user:
-        api_key= user['pms_api_key']
+        api_key= user['smoobu_api_key']
     else:
       pass   
     # Alle Buchungen abrufen, bei denen Gastdaten fehlen
