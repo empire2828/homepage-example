@@ -34,14 +34,14 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
     
   try:
     response = client.chat.completions.create(
-      model="sonar",
+      model="sonar-pro",
       #model="gpt-4o-mini",
       #model="gemini-2.0-flash",
       messages=[
           {"role": "system", "content": prompt},
           {"role": "user", "content": name + " aus " +location},  
       ],
-      max_tokens=100,
+      max_tokens=150,
       #temperature=0.5,
       #top_p=0.9,
       #stream=False,

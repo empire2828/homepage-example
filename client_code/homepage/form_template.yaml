@@ -355,7 +355,7 @@ components:
       type: Label
     - layout_properties: {grid_position: 'KNVGKM,VAAWRX'}
       name: check_box_15
-      properties: {align: center, text: ''}
+      properties: {align: center, enabled: false, text: ''}
       type: CheckBox
     - layout_properties: {grid_position: 'KNVGKM,SPVMYZ'}
       name: check_box_3

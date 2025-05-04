@@ -16,6 +16,7 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
       self.guestname_text_box.text=self.item['guestname']
       self.arrival_text_box.text=self.item['arrival']
       self.departure_text_box.text=self.item['departure']
+      self.apartment_text_box.text=self.item['apartment']
       self.channel_name_text_box.text=self.item['channel_name']
       self.google_linkedin_text_box.text=self.item['screener_google_linkedin']
       self.street_text_box.text=self.item['address_street']
