@@ -111,3 +111,11 @@ def delete_old_bookings():
         deleted_count += 1
     print(f"Buchungen gelöscht, deren Abreisedatum 14 Tage oder mehr zurückliegt. Anzahl: {deleted_count}")
     return deleted_count
+
+@anvil.server.callable
+def send_registration_notification(user_email):
+  anvil.email.send(
+    to="dirk.klemer@gmail.com",  # Deine eigene Adresse
+    subject="Neuer Benutzer registriert für Guestscreener.com",
+    text=f"Ein neuer Benutzer hat sich registriert: {user_email}"
+  )

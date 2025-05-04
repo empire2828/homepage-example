@@ -34,19 +34,19 @@ class AccountManagement(AccountManagementTemplate):
       anvil.users.logout()
       open_form("LoginPage")
 
-  def delete_account_link_click(self, **event_args):
-    if alert(DeleteAccountAlert(), buttons=None, large=True):
-      anvil.server.call('delete_user')
-      anvil.users.logout()
-      open_form('LoginPage')
+  #def delete_account_link_click(self, **event_args):
+  #  if alert(DeleteAccountAlert(), buttons=None, large=True):
+  #   anvil.server.call('delete_user')
+  #    anvil.users.logout()
+  #    open_form('LoginPage')
 
-  def name_change_link_click(self, **event_args):
-    open_form('AccountManagement.ChangeName')
-    pass
+  #def name_change_link_click(self, **event_args):
+  #  open_form('AccountManagement.ChangeName')
+  #  pass
 
-  def email_change_link_click(self, **event_args):
-    open_form('AccountManagement.ChangeEmail')
-    pass
+  #def email_change_link_click(self, **event_args):
+  #  open_form('AccountManagement.ChangeEmail')
+  #  pass
 
   def account_delete_link_click(self, **event_args):
     open_form('AccountManagement.DeleteAccountAlert')

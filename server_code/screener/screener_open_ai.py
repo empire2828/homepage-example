@@ -26,7 +26,7 @@ def screener_open_ai(name, location, checktype):
     location=""
   location = location
   if checktype == "job":
-    prompt = "1. Welchen Beruf und welches Hobby hat die Person? 2. Schreibe extrem kurz mit sehr wenig Wörtern 3. Lasse Zitatnummern weg. 4. Lasse Bezüge weg"
+    prompt = "1. Welchen Beruf und welches Hobby hat die Person? 2. Schreibe extrem kurz mit sehr wenig Wörtern 3. Lasse Zitatnummern weg. 4. Lasse Bezüge weg 5. Suche auch bei linkedin"
   else:
     prompt = f"""
 Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges und ob z.B. Kinder vorhanden sind sehr grob ein. Schreibe als Antwort nur: von bis Jahre und lasse alles andere weg.

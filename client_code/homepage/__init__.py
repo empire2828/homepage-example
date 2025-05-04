@@ -46,6 +46,7 @@ class homepage(homepageTemplate):
     if result=='YES':
       user = anvil.users.signup_with_form(allow_cancel=True)
       if user:
+        anvil.server.call('send_registration_notification', user['email'])
         open_form('dashboard')
     pass
 
