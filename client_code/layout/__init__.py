@@ -32,13 +32,13 @@ class layout(layoutTemplate):
   def accountmanagement_link_click(self, **event_args):
     self.reset_links()
     open_form('AccountManagement')
-    self.accountmanagement_link.role='selected'
+    # self.accountmanagement_link.role='selected'
     
   def reset_links(self, **event_args):
     self.dashboard_link.role = ''
     self.guestscreen_link.role = ''
     self.channel_manager_connect_link.role = ''  
-    self.accountmanagement_link.role = ''
+    # self.accountmanagement_link.role = ''
     self.upgrade_link.role = ''
 
   def upgrade_link_click(self, **event_args):
