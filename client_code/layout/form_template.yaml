@@ -46,10 +46,18 @@ components:
     name: subscription_body
     properties: {role: body}
     type: Label
+  - event_bindings: {click: help_icon_button_click}
+    layout_properties: {}
+    name: help_icon_button
+    properties:
+      appearance: filled
+      icon: mi:question_mark
+      margin: ['8', null, '0', null]
+    type: form:dep_g9k4toow7i44kq:_Components.IconButton
   - data_bindings: []
     layout_properties: {}
     name: user_icon_button_menu
-    properties: {appearance: filled, icon: 'mi:user_attributes'}
+    properties: {align: center, appearance: filled, icon: 'mi:user_attributes'}
     type: form:dep_g9k4toow7i44kq:_Components.IconButtonMenu
   layout_properties: {slot: nav-right}
   name: flow_panel_1

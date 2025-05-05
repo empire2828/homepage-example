@@ -1,2 +1,20 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: title_1
+    properties: {role: title, text: 'Beschreiben Sie hier kurz ihr Problem (gerne mit ScreenShots):'}
+    type: Label
+  - layout_properties: {full_width_row: false}
+    name: help_text_area
+    properties: {height: 128, label: '', text: ''}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
+  - layout_properties: {}
+    name: help_file_loader
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.FileLoader
+  - layout_properties: {}
+    name: help_send_button
+    properties: {role: filled-button, text: send}
+    type: Button
 is_package: true
 layout: {type: 'form:layout'}

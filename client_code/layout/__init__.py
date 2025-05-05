@@ -89,3 +89,7 @@ class layout(layoutTemplate):
         else:
             self.subscription_body.text = user['subscription']
 
+  def help_icon_button_click(self, **event_args):
+    open_form('help')
+    pass
+
