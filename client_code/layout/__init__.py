@@ -12,13 +12,12 @@ class layout(layoutTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.profile_menu = m3.ButtonMenu(icon="person", appearance="text")
-    settings_item = m3.MenuItem(text="Einstellungen", leading_icon="settings")
-    logout_item = m3.MenuItem(text="Ausloggen", leading_icon="logout")
-    settings_item.set_event_handler("click", self.settings_click)
-    logout_item.set_event_handler("click", self.logout_click)
-    self.profile_menu.menu_items = [settings_item, logout_item]
-    self.header_row.add_component(self.profile_menu, slot="right")
+    settings_item = m3.MenuItem(text="Einstellungen")
+    logout_item = m3.MenuItem(text="Ausloggen")
+    settings_item.set_event_handler("click", self.accountmanagement_link_click)
+    logout_item.set_event_handler("click", self.logout_link_click)
+    self.user_icon_button_menu.menu_items = [settings_item, logout_item]
+    #self.header_row.add_component(self.profile_menu, slot="right")
   
   def dashboard_link_click(self, **event_args):
    self.reset_links()
@@ -89,3 +88,4 @@ class layout(layoutTemplate):
             self.subscription_body.text = 'Trial subscription'
         else:
             self.subscription_body.text = user['subscription']
+
