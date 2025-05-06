@@ -121,9 +121,13 @@ def send_registration_notification(user_email):
   )
     
 @anvil.server.callable
-def send_help_request(help_request_text, help_request_file, user_email):
-   anvil.email.send(
-   to="dirk.klemer@gmail.com",  # Deine eigene Adresse
-   subject="Help request Guestscreener.com",
-   text=help_request_text + user_email
-  )
+def send_email_to_support(text, file=None, email=None):
+  attachments = []
+  if file is not None:
+    attachments.append(file)
+    anvil.email.send(
+      to="dirk.klemer@gmail.com",
+      subject="Neue Supportanfragen vom Guestscreener.com",
+      text=text+"\n\n"+ email,
+      attachments=attachments
+    )

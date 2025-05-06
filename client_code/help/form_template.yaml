@@ -8,11 +8,13 @@ components_by_slot:
     name: help_text_area
     properties: {error: false, height: 128, label: '', supporting_text: '', text: ''}
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
-  - layout_properties: {}
+  - data_bindings: []
+    layout_properties: {}
     name: help_file_loader
     properties: {}
     type: form:dep_g9k4toow7i44kq:_Components.FileLoader
-  - layout_properties: {}
+  - event_bindings: {click: help_send_button_click}
+    layout_properties: {}
     name: help_send_button
     properties: {role: filled-button, text: send}
     type: Button

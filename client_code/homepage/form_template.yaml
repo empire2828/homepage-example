@@ -406,6 +406,10 @@ components:
     name: label_21
     properties: {align: center, bold: true, font_size: 18, text: '€ 0,00'}
     type: Label
+  - layout_properties: {grid_position: 'IQCUEL,OZZWWB ZFORVE,DDKLNB'}
+    name: title_2
+    properties: {role: title}
+    type: Label
   - layout_properties: {grid_position: 'IQCUEL,LWZJGX KIASVM,FXOIPI'}
     name: label_16
     properties: {align: center, bold: true, font_size: 18, text: '€ 2,99'}

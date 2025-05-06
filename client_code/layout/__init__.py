@@ -98,8 +98,8 @@ class layout(layoutTemplate):
     pass
 
   def password_reset_link_click(self, **event_args):
+    alert('Sie erhalten eine eMail zum Zurücksetzen des Passwortes. Bitte haben Sie ein klein wenig Geduld.')
     anvil.server.call('send_password_reset_email')
-    alert('Rücksetz- eMail gesendet.')
     pass
 
   def subscription_admin_link_click(self, **event_args):
