@@ -38,7 +38,8 @@ components_by_slot:
     name: dashboard_upgrade_needed_text
     properties: {content: 'Um sich direkt mit einem Channel- Manager zu verbinden und Ihre Buchungen automatisch zu importieren brauchen Sie ein Abo- hier können Sie upgraden:', font_size: 18, visible: false}
     type: RichText
-  - layout_properties: {}
+  - event_bindings: {click: dashboard_upgrade_button_click}
+    layout_properties: {}
     name: dashboard_upgrade_button
     properties: {role: filled-button, text: Upgrade, visible: false}
     type: Button

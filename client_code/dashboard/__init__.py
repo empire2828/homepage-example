@@ -7,6 +7,7 @@ from anvil.tables import app_tables
 from anvil import users
 import anvil.server
 from anvil_extras import routing
+import layout.upgrade_link_click
 #from users import get_user_has_subscription
 
 class dashboard(dashboardTemplate):
@@ -25,6 +26,15 @@ class dashboard(dashboardTemplate):
       self.refresh_button.visible = False
       self.resync_smoobu_button.visible = False
       self.chanel_manager_connect_button.visible = True
+    else:
+      if anvil.server.call('get_user_has_subscription') is False:
+        self.dashboard_upgrade_needed_text.visible=True
+        self.dashboard_upgrade_button.visible=True
+        self.pms_need_to_connect_text.visible = False
+        self.refresh_button.visible = False
+        self.resync_smoobu_button.visible = False
+        self.chanel_manager_connect_button.visible = False
+        self.bookings_repeating_panel.visible=False 
 
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""
@@ -52,6 +62,10 @@ class dashboard(dashboardTemplate):
 
   def chanel_manager_connect_button_click(self, **event_args):
     open_form('channel_manager_connect')
+    pass
+
+  def dashboard_upgrade_button_click(self, **event_args):
+    self.layout.upgrade_link_click()
     pass
 
 
