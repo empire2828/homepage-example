@@ -6,7 +6,7 @@ components_by_slot:
     type: Label
   - layout_properties: {full_width_row: false}
     name: help_text_area
-    properties: {height: 128, label: '', text: ''}
+    properties: {error: false, height: 128, label: '', supporting_text: '', text: ''}
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
   - layout_properties: {}
     name: help_file_loader
