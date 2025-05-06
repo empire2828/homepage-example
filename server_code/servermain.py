@@ -125,9 +125,14 @@ def send_email_to_support(text, file=None, email=None):
   attachments = []
   if file is not None:
     attachments.append(file)
+  try:
     anvil.email.send(
       to="dirk.klemer@gmail.com",
       subject="Neue Supportanfragen vom Guestscreener.com",
-      text=text+"\n\n"+ email,
+      text=text + "\n\n" + str(email),
       attachments=attachments
     )
+    print("send_email_to_support: success", email, text)
+  except Exception as e:
+    print("send_email_to_support: ERROR", e)
+
