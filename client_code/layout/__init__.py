@@ -17,7 +17,7 @@ class layout(layoutTemplate):
     logout_item = m3.MenuItem(text="Ausloggen")
     subscription_admin_item=m3.MenuItem(text="Abo verwalten (via Stripe)")
     #settings_item.set_event_handler("click", self.accountmanagement_link_click)
-    subscription_admin_item.set_event_handler("click".self.subscription_admin_link_click)
+    subscription_admin_item.set_event_handler("click",self.subscription_admin_link_click)
     password_reset_item.set_event_handler("click",self.password_reset_link_click)
     logout_item.set_event_handler("click", self.logout_link_click)
     self.user_icon_button_menu.menu_items = [password_reset_item,subscription_admin_item,logout_item]
