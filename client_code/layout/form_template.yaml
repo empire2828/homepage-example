@@ -38,8 +38,12 @@ components:
 - components:
   - data_bindings:
     - {code: 'self.item[''subscription'']', property: text, writeback: false}
+    layout_properties: {}
     name: subscription_body
-    properties: {role: body}
+    properties:
+      role: body
+      spacing:
+        margin: ['18', null, null, null]
     type: Label
   - event_bindings: {click: help_icon_button_click}
     layout_properties: {}
