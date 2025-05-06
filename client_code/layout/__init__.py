@@ -12,16 +12,13 @@ class layout(layoutTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    #settings_item = m3.MenuItem(text="Einstellungen")
     password_reset_item=m3.MenuItem(text="Passwort rücksetzen")
     logout_item = m3.MenuItem(text="Ausloggen")
     subscription_admin_item=m3.MenuItem(text="Abo verwalten (via Stripe)")
-    #settings_item.set_event_handler("click", self.accountmanagement_link_click)
     subscription_admin_item.set_event_handler("click",self.subscription_admin_link_click)
     password_reset_item.set_event_handler("click",self.password_reset_link_click)
     logout_item.set_event_handler("click", self.logout_link_click)
     self.user_icon_button_menu.menu_items = [password_reset_item,subscription_admin_item,logout_item]
-    #self.header_row.add_component(self.profile_menu, slot="right")
   
   def dashboard_link_click(self, **event_args):
    self.reset_links()
@@ -33,16 +30,11 @@ class layout(layoutTemplate):
     open_form('guestscreen')
     self.guestscreen_link.role='selected'
 
-  def accountmanagement_link_click(self, **event_args):
-    self.reset_links()
-    open_form('AccountManagement')
-    # self.accountmanagement_link.role='selected'
-    
+  
   def reset_links(self, **event_args):
     self.dashboard_link.role = ''
     self.guestscreen_link.role = ''
-    self.channel_manager_connect_link.role = ''  
-    # self.accountmanagement_link.role = ''
+    self.channel_manager_connect_link.role = '' 
     self.upgrade_link.role = ''
 
   def upgrade_link_click(self, **event_args):
