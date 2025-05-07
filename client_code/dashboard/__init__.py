@@ -64,9 +64,25 @@ class dashboard(dashboardTemplate):
     open_form('channel_manager_connect')
     pass
 
-  def dashboard_upgrade_button_click(self, **event_args):
-    self.layout.upgrade_link_click()
-    pass
+  def dashboard_upgrade_button_click(self, **event_args):    
+    try:
+      user = anvil.users.get_user()
+    if not user:
+      alert('Kein Benutzer angemeldet')
+    return
+
+    subscription = user.get('subscription')
+    apartment_count = user.get('apartment_count', 0) or 1
+
+    if subscription != 'Subscription' and apartment_count < 4:
+      open_form('StripePricing')
+    elif subscription != 'Pro-Subscription' and apartment_count > 3:
+      open_form('StripePricing_pro')
+    else:
+      alert('Abo bereits vorhanden.')
+  except Exception as e:
+    alert(f'Ein Fehler ist aufgetreten: {e}')
+  pass
 
 
 

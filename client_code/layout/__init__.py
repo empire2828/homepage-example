@@ -57,6 +57,7 @@ class layout(layoutTemplate):
           alert('Abo bereits vorhanden.')
     except Exception as e:
         alert(f'Ein Fehler ist aufgetreten: {e}')
+    #identisch zu in Dashboard zu pflegen!
 
   def logout_link_click(self, **event_args):
       result= alert(
