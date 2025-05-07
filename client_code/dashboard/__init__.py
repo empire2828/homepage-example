@@ -13,13 +13,13 @@ class dashboard(dashboardTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    filtered_data = app_tables.bookings.search(email=anvil.users.get_user()['email'])
-    self.bookings_repeating_panel.items = filtered_data
+    if anvil.server.call('get_user_has_subscription') is True:
+      filtered_data = app_tables.bookings.search(email=anvil.users.get_user()['email'])
+      self.bookings_repeating_panel.items = filtered_data
     
   def form_show(self, **event_args):
     self.layout.reset_links()
     user = users.get_user()
-    #if get_user_has_subscription:
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       self.refresh_button.visible = False

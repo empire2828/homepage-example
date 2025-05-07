@@ -29,7 +29,6 @@ class layout(layoutTemplate):
     self.reset_links()
     open_form('guestscreen')
     self.guestscreen_link.role='selected'
-
   
   def reset_links(self, **event_args):
     self.dashboard_link.role = ''
