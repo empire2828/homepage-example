@@ -30,7 +30,7 @@ class dashboard(dashboardTemplate):
       self.resync_smoobu_button.visible = False
       self.chanel_manager_connect_button.visible = True
     else:
-      if anvil.server.call('get_user_has_subscription') is False:
+      if anvil.server.call_s('get_user_has_subscription') is False:
         self.dashboard_upgrade_needed_text.visible=True
         self.dashboard_upgrade_button.visible=True
         self.pms_need_to_connect_text.visible = False
