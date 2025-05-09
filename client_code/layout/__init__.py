@@ -1,24 +1,18 @@
 from ._anvil_designer import layoutTemplate
 from anvil import *
-import anvil.google.auth, anvil.google.drive
+import anvil.google.auth
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.users
 import anvil.server
 import m3.components as m3
+import time
 
 class layout(layoutTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    password_reset_item=m3.MenuItem(text="Passwort rücksetzen")
-    logout_item = m3.MenuItem(text="Ausloggen")
-    subscription_admin_item=m3.MenuItem(text="Abo verwalten (via Stripe)")
-    subscription_admin_item.set_event_handler("click",self.subscription_admin_link_click)
-    password_reset_item.set_event_handler("click",self.password_reset_link_click)
-    logout_item.set_event_handler("click", self.logout_link_click)
-    self.user_icon_button_menu.menu_items = [password_reset_item,subscription_admin_item,logout_item]
   
   def dashboard_link_click(self, **event_args):
    self.reset_links()
@@ -78,12 +72,21 @@ class layout(layoutTemplate):
     pass
 
   def form_show(self, **event_args):
+    print("layout form show start:",time.strftime("%H:%M:%S"))
+    password_reset_item=m3.MenuItem(text="Passwort rücksetzen")
+    logout_item = m3.MenuItem(text="Ausloggen")
+    subscription_admin_item=m3.MenuItem(text="Abo verwalten (via Stripe)")
+    subscription_admin_item.set_event_handler("click",self.subscription_admin_link_click)
+    password_reset_item.set_event_handler("click",self.password_reset_link_click)
+    logout_item.set_event_handler("click", self.logout_link_click)
+    self.user_icon_button_menu.menu_items = [password_reset_item,subscription_admin_item,logout_item]
     user = anvil.users.get_user()
     if user is not None:
         if user['subscription'] is None:
             self.subscription_body.text = 'Trial subscription'
         else:
             self.subscription_body.text = user['subscription']
+    print("layout form show end:",time.strftime("%H:%M:%S"))
 
   def help_icon_button_click(self, **event_args):
     open_form('help')
