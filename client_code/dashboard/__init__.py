@@ -1,23 +1,25 @@
 from ._anvil_designer import dashboardTemplate
 from anvil import *
-import anvil.google.auth, anvil.google.drive
+import anvil.google.auth
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil import users
 import anvil.server
 from anvil_extras import routing
-#from users import get_user_has_subscription
+import time
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    
+  def form_show(self, **event_args):
+    print("dashboard form show sart:",time.strftime("%H:%M:%S"))
     if anvil.server.call('get_user_has_subscription') is True:
       filtered_data = app_tables.bookings.search(email=anvil.users.get_user()['email'])
       self.bookings_repeating_panel.items = filtered_data
-    
-  def form_show(self, **event_args):
+    print("repeating pannel end:",time.strftime("%H:%M:%S"))
     self.layout.reset_links()
     user = users.get_user()
     if user['smoobu_api_key'] is None:
@@ -26,7 +28,7 @@ class dashboard(dashboardTemplate):
       self.resync_smoobu_button.visible = False
       self.chanel_manager_connect_button.visible = True
     else:
-      if anvil.server.call('get_user_has_subscription') is False:
+      if anvil.server.call_s('get_user_has_subscription') is False:
         self.dashboard_upgrade_needed_text.visible=True
         self.dashboard_upgrade_button.visible=True
         self.pms_need_to_connect_text.visible = False
@@ -34,7 +36,8 @@ class dashboard(dashboardTemplate):
         self.resync_smoobu_button.visible = False
         self.chanel_manager_connect_button.visible = False
         self.bookings_repeating_panel.visible=False 
-
+    print("dashboard form show end:",time.strftime("%H:%M:%S"))
+  
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""
     pass
