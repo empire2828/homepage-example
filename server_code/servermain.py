@@ -136,3 +136,28 @@ def send_email_to_support(text, file=None, email=None):
   except Exception as e:
     print("send_email_to_support: ERROR", e)
 
+@anvil.server.callable
+def get_dashboard_data():
+  user = anvil.users.get_user()
+  bookings = app_tables.bookings.search(
+    q.fetch_only(
+      "guestname", 
+      "arrival", 
+      "departure", 
+      "apartment", 
+      "channel_name", 
+      "screener_google_linkedin", 
+      "address_street", 
+      "address_postalcode", 
+      "address_city", 
+      "screener_address_check", 
+      "screener_openai_job", 
+      "phone", 
+      "screener_phone_check", 
+      "adults", 
+      "children"
+    ),
+    email=user['email']
+   )
+  return bookings
+

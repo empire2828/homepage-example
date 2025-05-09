@@ -18,7 +18,8 @@ class dashboard(dashboardTemplate):
   def form_show(self, **event_args):
     print("form show sart:",time.strftime("%H:%M:%S"))
     if anvil.server.call('get_user_has_subscription') is True:
-      filtered_data = app_tables.bookings.search(email=anvil.users.get_user()['email'])
+      #filtered_data = app_tables.bookings.search(email=anvil.users.get_user()['email'])
+      filtered_data = anvil.server.call('get_dashboard_data')
       self.bookings_repeating_panel.items = filtered_data
     self.layout.reset_links()
     user = users.get_user()
