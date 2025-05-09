@@ -136,3 +136,30 @@ def send_email_to_support(text, file=None, email=None):
   except Exception as e:
     print("send_email_to_support: ERROR", e)
 
+@anvil.server.callable
+def get_dashboard_data():
+  user = anvil.users.get_user()
+  has_subscription = check_user_subscription(user)
+
+  result = {
+    'has_subscription': has_subscription,
+    'smoobu_api_key': user['smoobu_api_key']
+  }
+
+  if has_subscription:
+    # Daten nur abrufen, wenn Subscription vorhanden
+    bookings = app_tables.bookings.search(
+      q.fetch_only(
+        'guestname', 'arrival', 'departure', 'apartment', 
+        'channel_name', 'screener_google_linkedin', 
+        'address_street', 'address_postalcode', 
+        'address_city', 'screener_address_check', 
+        'screener_openai_job', 'phone', 
+        'screener_phone_check', 'adults', 'children'
+      ),
+      email=user['email']
+    )
+    # Alle Daten vorab laden, um zusätzliche Server-Aufrufe zu vermeiden
+    result['bookings'] = [dict(row) for row in bookings]
+
+    return result
