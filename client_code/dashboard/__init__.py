@@ -61,7 +61,7 @@ class dashboard(dashboardTemplate):
     pass
 
   def refresh_button_click(self, **event_args):
-    self.__init__()
+    self.form_show()
     pass
 
   def chanel_manager_connect_button_click(self, **event_args):
