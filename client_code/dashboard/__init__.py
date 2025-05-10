@@ -6,9 +6,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil import users
 import anvil.server
-from anvil_extras import routing
+#from anvil_extras import routing
 import time
-#from users import get_user_has_subscription
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
