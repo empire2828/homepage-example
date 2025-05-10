@@ -168,5 +168,5 @@ def call_server_wake_up():
 
 @anvil.server.background_task
 def server_wake_up():
-  print("server wake up")
-  pass
+  result= 1+1
+  return result

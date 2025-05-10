@@ -28,9 +28,11 @@ class homepage(homepageTemplate):
     ]
 
   def login_button_click(self, **event_args):
-   user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
-   if user:
-    open_form('dashboard')
+    anvil.server.call_s('call_server_wake_up')
+    print("call server wake up")
+    user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
+    if user:
+      open_form('dashboard')
     pass
 
   def testen_button_click(self, **event_args):
@@ -64,9 +66,4 @@ class homepage(homepageTemplate):
 
   def second_test_button_click(self, **event_args):
     self.testen_button_click()
-    pass
-
-  def form_show(self, **event_args):
-    anvil.server.call_s('call_server_wake_up')
-    print("call server wake up")
     pass
