@@ -8,7 +8,7 @@ from anvil import users
 import anvil.server
 from anvil_extras import routing
 import time
-#from users import get_user_has_subscription
+#from users import get_user_has_s
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
