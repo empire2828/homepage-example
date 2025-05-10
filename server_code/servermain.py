@@ -161,11 +161,12 @@ def get_dashboard_data():
    )
   return bookings
 
+@anvil.server.callable
+def call_server_wake_up():
+  anvil.server.launch_background_task('server_wake_up')
+  pass
+
 @anvil.server.background_task
 def server_wake_up():
   print("server wake up")
   pass
-
-@anvil.server.callable
-def call_server_wake_up():
-  anvil.server.call

@@ -65,3 +65,8 @@ class homepage(homepageTemplate):
   def second_test_button_click(self, **event_args):
     self.testen_button_click()
     pass
+
+  def form_show(self, **event_args):
+    anvil.server.call_s('call_server_wake_up')
+    print("call server wake up")
+    pass
