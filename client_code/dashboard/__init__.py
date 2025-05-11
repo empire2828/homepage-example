@@ -16,7 +16,7 @@ class dashboard(dashboardTemplate):
     self.init_components(**properties)
     
   def form_show(self, **event_args):
-    print("form show sart:", time.strftime("%H:%M:%S"))
+    print("dashboard form show sart:", time.strftime("%H:%M:%S"))
     if anvil.server.call('get_user_has_subscription') is True:
       filtered_data = anvil.server.call('get_dashboard_data')
       print("server call end:", time.strftime("%H:%M:%S"))
@@ -38,7 +38,7 @@ class dashboard(dashboardTemplate):
         self.resync_smoobu_button.visible = False
         self.chanel_manager_connect_button.visible = False
         self.bookings_repeating_panel.visible = False
-    print("form show end:", time.strftime("%H:%M:%S"))
+    print("dashboard form show end:", time.strftime("%H:%M:%S"))
   
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""
