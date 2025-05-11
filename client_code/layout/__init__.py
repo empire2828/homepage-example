@@ -79,13 +79,15 @@ class layout(layoutTemplate):
     pass
 
   def form_show(self, **event_args):
-    print("layout form show start:",time.strftime("%H:%M:%S"))
+    print("layout form show start:", time.strftime("%H:%M:%S"))
     user = anvil.users.get_user()
-    if user['subscription'] is None:
-        self.subscription_body.text = 'Trial subscription'
+    if user is None:
+      self.subscription_body.text = 'Not logged in'
+    elif user['subscription'] is None:
+      self.subscription_body.text = 'Trial subscription'
     else:
       self.subscription_body.text = user['subscription']
-    print("layout form show end:",time.strftime("%H:%M:%S"))
+      print("layout form show end:", time.strftime("%H:%M:%S"))
 
   def help_icon_button_click(self, **event_args):
     open_form('help')
