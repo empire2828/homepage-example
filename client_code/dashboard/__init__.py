@@ -17,7 +17,8 @@ class dashboard(dashboardTemplate):
     
   def form_show(self, **event_args):
     print("dashboard form show sart:", time.strftime("%H:%M:%S"))
-    if anvil.server.call('get_user_has_subscription') is True:
+    user_has_subscription= anvil.server.call('get_user_has_subscription')
+    if user_has_subscription:
       filtered_data = anvil.server.call('get_dashboard_data')
       print("server call end:", time.strftime("%H:%M:%S"))
       self.bookings_repeating_panel.items = filtered_data
@@ -30,7 +31,7 @@ class dashboard(dashboardTemplate):
       self.resync_smoobu_button.visible = False
       self.chanel_manager_connect_button.visible = True
     else:
-      if anvil.server.call_s('get_user_has_subscription') is False:
+      if user_has_subscription is False:
         self.dashboard_upgrade_needed_text.visible = True
         self.dashboard_upgrade_button.visible = True
         self.pms_need_to_connect_text.visible = False

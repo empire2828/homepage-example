@@ -101,3 +101,12 @@ class layout(layoutTemplate):
     alert('Sie werden jetzt auf die Seite unseres Zahlungsanbieters Stripe weitergeleitet.')
     anvil.js.window.open("https://billing.stripe.com/p/login/test_3csg0Lcbpf4i8005kk", "_blank")
     pass
+
+  def get_cached_user_data(self, key, default=None):
+    if key not in self.user_cache:
+      user = anvil.users.get_user()
+      if key in user:
+        self.user_cache[key] = user[key]
+      else:
+        self.user_cache[key] = default
+    return self.user_cache[key]
