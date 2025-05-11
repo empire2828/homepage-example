@@ -81,11 +81,10 @@ class layout(layoutTemplate):
   def form_show(self, **event_args):
     print("layout form show start:",time.strftime("%H:%M:%S"))
     user = anvil.users.get_user()
-    if user is not None:
-        if user['subscription'] is None:
-            self.subscription_body.text = 'Trial subscription'
-        else:
-            self.subscription_body.text = user['subscription']
+    if user['subscription'] is None:
+        self.subscription_body.text = 'Trial subscription'
+    else:
+      self.subscription_body.text = user['subscription']
     print("layout form show end:",time.strftime("%H:%M:%S"))
 
   def help_icon_button_click(self, **event_args):
@@ -102,11 +101,3 @@ class layout(layoutTemplate):
     anvil.js.window.open("https://billing.stripe.com/p/login/test_3csg0Lcbpf4i8005kk", "_blank")
     pass
 
-  def get_cached_user_data(self, key, default=None):
-    if key not in self.user_cache:
-      user = anvil.users.get_user()
-      if key in user:
-        self.user_cache[key] = user[key]
-      else:
-        self.user_cache[key] = default
-    return self.user_cache[key]
