@@ -159,7 +159,7 @@ def get_dashboard_data():
     ),
     email=user['email']
    )
-  return bookings
+  return list(bookings)
 
 @anvil.server.callable
 def call_server_wake_up():
