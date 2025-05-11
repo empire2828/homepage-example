@@ -8,7 +8,6 @@ from anvil import users
 import anvil.server
 from anvil_extras import routing
 import time
-#from users import get_user_has_s
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
@@ -17,12 +16,17 @@ class dashboard(dashboardTemplate):
     
   def form_show(self, **event_args):
     print("dashboard form show sart:", time.strftime("%H:%M:%S"))
-    user_has_subscription= anvil.server.call('get_user_has_subscription')
-    if user_has_subscription:
-      filtered_data = anvil.server.call('get_dashboard_data')
-      print("server call end:", time.strftime("%H:%M:%S"))
-      self.bookings_repeating_panel.items = filtered_data
+    print("server call start:", time.strftime("%H:%M:%S"))
+    dashboard_data= anvil.server.call('get_dashboard_data')
+    print("server call end:", time.strftime("%H:%M:%S"))
+    user_has_subscription= dashboard_data['has_subscription']
 
+    if user_has_subscription:
+      print("repeating panel start:", time.strftime("%H:%M:%S"))
+      panel_data = dashboard_data['bookings']
+      self.bookings_repeating_panel.items = panel_data
+      print("repeating panel end:", time.strftime("%H:%M:%S"))
+      
     self.layout.reset_links()
     user = users.get_user()
     if user['smoobu_api_key'] is None:

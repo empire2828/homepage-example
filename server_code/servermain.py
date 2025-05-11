@@ -138,28 +138,40 @@ def send_email_to_support(text, file=None, email=None):
 
 @anvil.server.callable
 def get_dashboard_data():
+  print("server code start:", time.strftime("%H:%M:%S"))
   user = anvil.users.get_user()
+
+  # Fetch bookings data
   bookings = app_tables.bookings.search(
     q.fetch_only(
-      "guestname", 
-      "arrival", 
-      "departure", 
-      "apartment", 
-      "channel_name", 
-      "screener_google_linkedin", 
-      "address_street", 
-      "address_postalcode", 
-      "address_city", 
-      "screener_address_check", 
-      "screener_openai_job", 
-      "phone", 
-      "screener_phone_check", 
-      "adults", 
-      "children"
+      "guestname", "arrival", "departure", "apartment",
+      "channel_name", "screener_google_linkedin", "address_street",
+      "address_postalcode", "address_city", "screener_address_check",
+      "screener_openai_job", "phone", "screener_phone_check",
+      "adults", "children"
     ),
     email=user['email']
-   )
-  return list(bookings)
+  )
+
+  # Subscription check logic
+  has_subscription = False
+  if user:
+    if user['subscription'] in ['Subscription', 'Pro-Subscription', 'Canceled']:
+      has_subscription = True
+    else:
+      signed_up_date = user['signed_up']
+      if signed_up_date:
+        signed_up_aware = signed_up_date.replace
+        trial_end = signed_up_aware + timedelta(days=5)
+        now_utc = datetime.now
+        has_subscription = now_utc <= trial_end
+        
+    print("server code end:", time.strftime("%H:%M:%S"))
+    return {
+      'bookings': list(bookings),
+      'has_subscription': has_subscription
+    }
+
 
 @anvil.server.callable
 def call_server_wake_up():
