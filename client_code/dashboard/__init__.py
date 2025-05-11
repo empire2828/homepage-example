@@ -16,29 +16,39 @@ class dashboard(dashboardTemplate):
     self.init_components(**properties)
     
   def form_show(self, **event_args):
-    print("form show sart:", time.strftime("%H:%M:%S"))
-    if anvil.server.call('get_user_has_subscription') is True:
-      filtered_data = anvil.server.call('get_dashboard_data')
-      print("server call end:", time.strftime("%H:%M:%S"))
-      self.bookings_repeating_panel.items = filtered_data
+    print("dashboard form show start:", time.strftime("%H:%M:%S"))
 
-    self.layout.reset_links()
     user = users.get_user()
-    if user['smoobu_api_key'] is None:
-      self.pms_need_to_connect_text.visible = True
-      self.refresh_button.visible = False
-      self.resync_smoobu_button.visible = False
-      self.chanel_manager_connect_button.visible = True
-    else:
-      if anvil.server.call_s('get_user_has_subscription') is False:
-        self.dashboard_upgrade_needed_text.visible = True
-        self.dashboard_upgrade_button.visible = True
-        self.pms_need_to_connect_text.visible = False
+    has_subscription = anvil.server.call_s('get_user_has_subscription')
+
+    if has_subscription is True and user['smoobu_api_key'] is not None:
+      # Starte einen Hintergrundtask für das Laden der Dashboard-Daten
+      task = anvil.server.launch_background_task('get_dashboard_data_bg')
+      self.loading_indicator.visible = True
+
+      def on_task_completed(task):
+        self.bookings_repeating_panel.items = task.get_return_value()
+        print("data loaded:", time.strftime("%H:%M:%S"))
+        task.add_callback(on_task_completed)
+
+      # UI-Aktualisierung basierend auf Benutzerattributen
+      if user['smoobu_api_key'] is None:
+        self.pms_need_to_connect_text.visible = True
         self.refresh_button.visible = False
         self.resync_smoobu_button.visible = False
-        self.chanel_manager_connect_button.visible = False
-        self.bookings_repeating_panel.visible = False
-    print("form show end:", time.strftime("%H:%M:%S"))
+        self.chanel_manager_connect_button.visible = True
+      else:
+        if not has_subscription:
+          self.dashboard_upgrade_needed_text.visible = True
+          self.dashboard_upgrade_button.visible = True
+          self.pms_need_to_connect_text.visible = False
+          self.refresh_button.visible = False
+          self.resync_smoobu_button.visible = False
+          self.chanel_manager_connect_button.visible = False
+          self.bookings_repeating_panel.visible = False
+
+    self.layout.reset_links()
+    print("dash board form show end:", time.strftime("%H:%M:%S"))
   
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""

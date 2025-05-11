@@ -136,8 +136,8 @@ def send_email_to_support(text, file=None, email=None):
   except Exception as e:
     print("send_email_to_support: ERROR", e)
 
-@anvil.server.callable
-def get_dashboard_data():
+@anvil.server.background_task
+def get_dashboard_data_bg():
   user = anvil.users.get_user()
   bookings = app_tables.bookings.search(
     q.fetch_only(
@@ -158,8 +158,10 @@ def get_dashboard_data():
       "children"
     ),
     email=user['email']
-   )
-  return bookings
+  )
+  # Konvertiere zu Liste, um sicherzustellen, dass die Daten vollständig geladen sind
+  return list(bookings)
+
 
 @anvil.server.callable
 def call_server_wake_up():
