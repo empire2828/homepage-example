@@ -16,29 +16,35 @@ class dashboard(dashboardTemplate):
     self.init_components(**properties)
     
   def form_show(self, **event_args):
-    print("form show sart:",time.strftime("%H:%M:%S"))
-    if anvil.server.call('get_user_has_subscription') is True:
-      #filtered_data = app_tables.bookings.search(email=anvil.users.get_user()['email'])
-      filtered_data = anvil.server.call('get_dashboard_data')
-      print("server call end:",time.strftime("%H:%M:%S"))
-      self.bookings_repeating_panel.items = filtered_data
-    self.layout.reset_links()
-    user = users.get_user()
-    if user['smoobu_api_key'] is None:
-      self.pms_need_to_connect_text.visible = True
-      self.refresh_button.visible = False
-      self.resync_smoobu_button.visible = False
-      self.chanel_manager_connect_button.visible = True
-    else:
-      if anvil.server.call_s('get_user_has_subscription') is False:
-        self.dashboard_upgrade_needed_text.visible=True
-        self.dashboard_upgrade_button.visible=True
-        self.pms_need_to_connect_text.visible = False
+    print("form show sart:", time.strftime("%H:%M:%S"))
+
+    try:
+      if anvil.server.call('get_user_has_subscription') is True:
+        filtered_data = anvil.server.call('get_dashboard_data')
+        print("server call end:", time.strftime("%H:%M:%S"))
+        self.bookings_repeating_panel.items = filtered_data
+
+      self.layout.reset_links()
+      user = users.get_user()
+      if user['smoobu_api_key'] is None:
+        self.pms_need_to_connect_text.visible = True
         self.refresh_button.visible = False
         self.resync_smoobu_button.visible = False
-        self.chanel_manager_connect_button.visible = False
-        self.bookings_repeating_panel.visible=False 
-    print("form show end:",time.strftime("%H:%M:%S"))
+        self.chanel_manager_connect_button.visible = True
+      else:
+        if anvil.server.call_s('get_user_has_subscription') is False:
+          self.dashboard_upgrade_needed_text.visible = True
+          self.dashboard_upgrade_button.visible = True
+          self.pms_need_to_connect_text.visible = False
+          self.refresh_button.visible = False
+          self.resync_smoobu_button.visible = False
+          self.chanel_manager_connect_button.visible = False
+          self.bookings_repeating_panel.visible = False
+    finally:
+      # Stoppe den Ladeindikator, egal was passiert
+      self.loading_indicator.stop()
+
+    print("form show end:", time.strftime("%H:%M:%S"))
   
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""
