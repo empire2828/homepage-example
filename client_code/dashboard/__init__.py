@@ -18,11 +18,11 @@ class dashboard(dashboardTemplate):
   def form_show(self, **event_args):
     print("dashboard form show sart:", time.strftime("%H:%M:%S"))
     print("server call start:", time.strftime("%H:%M:%S"))
-    #dashboard_data = local_storage.get('dashboard_data')
-    #if not dashboard_data or self.should_refresh:
-    #  dashboard_data = anvil.server.call('get_dashboard_data')
-    #  local_storage['dashboard_data'] = dashboard_data
-    dashboard_data= anvil.server.call('get_dashboard_data')
+    dashboard_data = local_storage.get('dashboard_data')
+    if not dashboard_data:
+      dashboard_data = anvil.server.call('get_dashboard_data_dict')
+      local_storage['dashboard_data'] = dashboard_data
+    #dashboard_data= anvil.server.call('get_dashboard_data')
     print("server call end:", time.strftime("%H:%M:%S"))
     user_has_subscription= dashboard_data['has_subscription']
 

@@ -195,12 +195,12 @@ def get_dashboard_data_dict():
 
     # Serialisierung der Buchungen
     serialized_bookings = []
-    for b in bookings:
+    for b in bookings:      
       serialized_bookings.append({
         'guestname': b['guestname'],
         'arrival': b['arrival'].isoformat() if b['arrival'] else None,
         'departure': b['departure'].isoformat() if b['departure'] else None,
-        'apartment': b['apartment']['id'] if b['apartment'] else None,  # Linked Row als ID
+        'apartment': b['apartment'] if isinstance(b['apartment'], str) else b['apartment']['id'],
         'channel_name': b['channel_name'],
         'screener_google_linkedin': b['screener_google_linkedin'],
         'address_street': b['address_street'],
@@ -222,7 +222,7 @@ def get_dashboard_data_dict():
         if signed_up_date:
           # Korrekte Zeitberechnung mit Zeitzone
           trial_end = signed_up_date + timedelta(days=5)
-          now_utc = datetime.now(timezone.utc)
+          now_utc = datetime.now
           has_subscription = now_utc <= trial_end
 
     print("server code end:", time.strftime("%H:%M:%S"))
