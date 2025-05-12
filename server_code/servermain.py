@@ -144,8 +144,8 @@ def get_dashboard_data():
   # Fetch bookings data
   bookings = app_tables.bookings.search(
     q.fetch_only(
-      "guestname", "arrival", "departure", "apartment",
-      "channel_name", "screener_google_linkedin", "address_street",
+     "guestname", "arrival", "departure", "apartment",
+     "channel_name", "screener_google_linkedin", "address_street",
       "address_postalcode", "address_city", "screener_address_check",
       "screener_openai_job", "phone", "screener_phone_check",
       "adults", "children"
