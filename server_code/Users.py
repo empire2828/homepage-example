@@ -13,35 +13,6 @@ from datetime import datetime, timedelta, timezone
 # See your keys here: https://dashboard.stripe.com/apikeys
 stripe.api_key = anvil.secrets.get_secret('stripe_secret_api_key')
 
-# @anvil.server.callable's require_user argument takes either a Boolean value. If the Boolean is True, the user has permission to run the decorated function.
-# We can pass require_user a function which evaluates to True or False but we cannot pass any arguments to that function
-# To get around this, we can pass require_user a higher order function - user_has_subscription - which returns an evaluated function verify_subscription
-# user_has_subscription can accept arguments, use them in verify_subscription and return the evaluated verify_subscription function
-# so, if we call @anvil.server.callable(require_user=user_has_subscription(["pro"])), the decorator calls user_has_subscription which returns an evaluated function object that require_user can use
-# verify_subscription receives the currently logged-in user object from @anvil.server.callable automatically
-# See the Product Server Module to see it in use
-
-#old
-#def user_has_subscription(allowed_subscriptions):
-#    def verify_subscription(user):
-#        # Return true if user has subscription in allowed subscriptions
-#        return user["subscription"] and user["subscription"].lower() in [subscription.lower() for subscription in allowed_subscriptions]
-#    return verify_subscription
-
-#@anvil.server.callable
-#def user_has_subscription(allowed_subscriptions):
-#    def verify_subscription(user):
-#        # Check if the user has a valid subscription
-#        if user["subscription"] and user["subscription"].lower() in [subscription.lower() for subscription in allowed_subscriptions]:
-#            return True
-#              # Check if the user is within their 30-day free trial period
-#        if "first_login_date" in user:
-#            first_login_date = datetime.strptime(user["signed_up"], "%Y-%m-%d")
-#            if datetime.now() <= first_login_date + timedelta(days=30):
-#                return True       
-#        # If neither condition is met, return False
-#        return False
-
 @anvil.server.callable(require_user=True)
 def change_name(name):
   user = anvil.users.get_user()

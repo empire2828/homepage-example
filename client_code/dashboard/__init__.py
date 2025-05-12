@@ -1,9 +1,9 @@
 from ._anvil_designer import dashboardTemplate
 from anvil import *
 #import anvil.google.auth
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
+#import anvil.tables as tables
+#import anvil.tables.query as q
+#from anvil.tables import app_tables
 from anvil import users
 import anvil.server
 #from anvil_extras import routing
