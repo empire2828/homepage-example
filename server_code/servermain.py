@@ -171,6 +171,67 @@ def get_dashboard_data():
       'has_subscription': has_subscription
     }
 
+@anvil.server.callable
+def get_dashboard_data_dict():
+  print("server code start:", time.strftime("%H:%M:%S"))
+  user = anvil.users.get_user()
+
+  # Initialisiere bookings als leere Liste für den Fall, dass kein User existiert
+  bookings = []
+  has_subscription = False
+
+  if user:
+    # Buchexistenz prüfen
+    bookings = app_tables.bookings.search(
+      q.fetch_only(
+        "guestname", "arrival", "departure", "apartment",
+        "channel_name", "screener_google_linkedin", "address_street",
+        "address_postalcode", "address_city", "screener_address_check",
+        "screener_openai_job", "phone", "screener_phone_check",
+        "adults", "children"
+      ),
+      email=user['email']
+    )
+
+    # Serialisierung der Buchungen
+    serialized_bookings = []
+    for b in bookings:
+      serialized_bookings.append({
+        'guestname': b['guestname'],
+        'arrival': b['arrival'].isoformat() if b['arrival'] else None,
+        'departure': b['departure'].isoformat() if b['departure'] else None,
+        'apartment': b['apartment']['id'] if b['apartment'] else None,  # Linked Row als ID
+        'channel_name': b['channel_name'],
+        'screener_google_linkedin': b['screener_google_linkedin'],
+        'address_street': b['address_street'],
+        'address_postalcode': b['address_postalcode'],
+        'address_city': b['address_city'],
+        'screener_address_check': b['screener_address_check'],
+        'screener_openai_job': b['screener_openai_job'],
+        'phone': b['phone'],
+        'screener_phone_check': b['screener_phone_check'],
+        'adults': b['adults'],
+        'children': b['children']
+      })
+
+      # Subscription-Logik korrigiert
+      if user['subscription'] in ['Subscription', 'Pro-Subscription', 'Canceled']:
+        has_subscription = True
+      else:
+        signed_up_date = user['signed_up']
+        if signed_up_date:
+          # Korrekte Zeitberechnung mit Zeitzone
+          trial_end = signed_up_date + timedelta(days=5)
+          now_utc = datetime.now(timezone.utc)
+          has_subscription = now_utc <= trial_end
+
+    print("server code end:", time.strftime("%H:%M:%S"))
+
+  return {
+    'bookings': serialized_bookings,  # Serialisierte Daten statt Row-Objekte
+    'has_subscription': has_subscription
+  }
+
 
 @anvil.server.callable
 def call_server_wake_up():
