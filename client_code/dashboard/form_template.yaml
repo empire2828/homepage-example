@@ -1,6 +1,18 @@
 components_by_slot:
   slot_1:
   - components:
+    - name: repeating_panel_1
+      properties: {item_template: dashboard.RowTemplate1}
+      type: RepeatingPanel
+    layout_properties: {}
+    name: data_grid_1
+    properties:
+      columns:
+      - {data_key: guestname, expand: false, id: KSXBTS, title: guestname, width: 313}
+      - {data_key: column_1, expand: false, id: JFSPNT, title: arrival, width: 226}
+      - {data_key: column_1, id: RBEFDK, title: Column 1}
+    type: DataGrid
+  - components:
     - event_bindings: {click: refresh_button_click}
       layout_properties: {grid_position: 'KPTSEW,ZBNAQH'}
       name: refresh_button
@@ -11,41 +23,6 @@ components_by_slot:
       name: resync_smoobu_button
       properties: {role: filled-button, text: Re-sync Smoobu}
       type: Button
-    - components:
-      - name: repeating_panel_1
-        properties: {item_template: dashboard.ItemTemplate2}
-        type: RepeatingPanel
-      layout_properties: {grid_position: 'MWJZOQ,ZXELMU'}
-      name: data_grid_1
-      properties:
-        auto_header: true
-        columns:
-        - {data_key: email, id: DWIMZQ, title: email}
-        - {data_key: apartment, id: AXEILX, title: apartment}
-        - {data_key: arrival, id: JUTMPD, title: arrival}
-        - {data_key: departure, id: OCVOMW, title: departure}
-        - {data_key: channel_name, id: RXXGCF, title: channel_name}
-        - {data_key: guestname, id: XVRXUA, title: guestname}
-        - {data_key: adults, id: XIHOLD, title: adults}
-        - {data_key: children, id: AKIMDB, title: children}
-        - {data_key: language, id: WIDPZU, title: language}
-        - {data_key: type, id: ONNAVK, title: type}
-        - {data_key: created-at, id: ZFXWAV, title: created-at}
-        - {data_key: reservation_id, id: OTEARI, title: reservation_id}
-        - {data_key: guestid, id: BIQTQV, title: guestid}
-        - {data_key: phone, id: PBUHDJ, title: phone}
-        - {data_key: address_street, id: PKHWUE, title: address_street}
-        - {data_key: address_postalcode, id: DTTAKD, title: address_postalcode}
-        - {data_key: address_city, id: CSHUCZ, title: address_city}
-        - {data_key: address_country, id: ZFSOCW, title: address_country}
-        - {data_key: screener_openai_job, id: CIZCRQ, title: screener_openai_job}
-        - {data_key: screener_address_check, id: FDSUSH, title: screener_address_check}
-        - {data_key: screener_google_linkedin, id: RCBWGB, title: screener_google_linkedin}
-        - {data_key: screener_openai_age, id: YORUAD, title: screener_openai_age}
-        - {data_key: screener_phone_check, id: BWYCOM, title: screener_phone_check}
-        rows_per_page: 5
-        show_page_controls: true
-      type: DataGrid
     - layout_properties: {grid_position: 'SBFGPI,XJNBDE'}
       name: bookings_repeating_panel
       properties: {item_template: dashboard.bookings_ItemTemplate}

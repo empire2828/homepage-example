@@ -1,21 +1,27 @@
 components:
-- layout_properties: {}
-  name: guestname_text_box
-  properties: {role: outlined}
-  type: TextBox
-- layout_properties: {column: 'null'}
-  name: outlined_1
-  properties: {role: outlined}
-  type: TextBox
-- layout_properties: {column: 'null'}
-  name: outlined_2
-  properties: {role: outlined}
-  type: TextBox
-- layout_properties: {column: 'null'}
+- layout_properties: {column: JFSPNT}
   name: display_1
   properties: {role: display}
   type: Label
-container:
-  properties: {auto_display_data: false}
-  type: DataRowPanel
+- layout_properties: {column: KSXBTS}
+  name: outlined_1
+  properties: {role: outlined}
+  type: TextBox
+- layout_properties: {column: JFSPNT}
+  name: outlined_2
+  properties: {role: outlined}
+  type: TextBox
+- layout_properties: {column: KSXBTS}
+  name: outlined_3
+  properties: {role: outlined}
+  type: TextBox
+- layout_properties: {column: JFSPNT}
+  name: body_1
+  properties: {role: body}
+  type: Label
+- layout_properties: {column: KSXBTS}
+  name: headline_1
+  properties: {role: headline}
+  type: Label
+container: {type: DataRowPanel}
 is_package: true
