@@ -9,6 +9,7 @@ import anvil.server
 import time
 from datetime import datetime, timedelta
 from . import routes # noqa: F401
+#from anvil_extras.serialisation import datatable_schema
 
 @anvil.server.background_task
 def send_result_email(user_email, reservation_id):
@@ -137,38 +138,49 @@ def send_email_to_support(text, file=None, email=None):
 
 @anvil.server.callable
 def get_dashboard_data():
-  print("server code start:", time.strftime("%H:%M:%S"))
   user = anvil.users.get_user()
+  bookings = []
+  if not user:
+    return {"has_subscription": False, "bookings": []}
 
-  # Fetch bookings data
-  bookings = app_tables.bookings.search(
-    q.fetch_only(
-      "guestname", "arrival", "departure", "apartment",
-      "channel_name", "screener_google_linkedin", "address_street",
-      "address_postalcode", "address_city", "screener_address_check",
-      "screener_openai_job", "phone", "screener_phone_check",
-      "adults", "children"
-    ),
-    email=user['email']
-  )
+    # Buchungen für den aktuellen User laden
+    bookings = app_tables.bookings.search(email=user['email'])
 
-  # Subscription check logic
-  has_subscription = False
-  if user:
-    if user['subscription'] in ['Subscription', 'Pro-Subscription', 'Canceled']:
-      has_subscription = True
-    else:
-      signed_up_date = user['signed_up']
-      if signed_up_date:
-        signed_up_aware = signed_up_date.replace
-        trial_end = signed_up_aware + timedelta(days=5)
-        now_utc = datetime.now
-        has_subscription = now_utc <= trial_end
-        
-    print("server code end:", time.strftime("%H:%M:%S"))
+  # Serialisierung: Nur primitive Typen und Strings
+  bookings_dicts = []
+  for b in bookings:
+    bookings_dicts.append({
+      "guestname": b.get("guestname"),
+      "arrival": b.get("arrival").isoformat() if b.get("arrival") else None,
+      "departure": b.get("departure").isoformat() if b.get("departure") else None,
+      "apartment": b["apartment"]["id"] if b.get("apartment") else None,
+      "channel_name": b.get("channel_name"),
+      "screener_google_linkedin": b.get("screener_google_linkedin"),
+      "address_street": b.get("address_street"),
+      "address_postalcode": b.get("address_postalcode"),
+      "address_city": b.get("address_city"),
+      "screener_address_check": b.get("screener_address_check"),
+      "screener_openai_job": b.get("screener_openai_job"),
+      "phone": b.get("phone"),
+      "screener_phone_check": b.get("screener_phone_check"),
+      "adults": b.get("adults"),
+      "children": b.get("children")
+    })
+
+    # Subscription-Logik
+    has_subscription = False
+  if user.get('subscription') in ['Subscription', 'Pro-Subscription', 'Canceled']:
+    has_subscription = True
+  else:
+    signed_up_date = user.get('signed_up')
+    if signed_up_date:
+      trial_end = signed_up_date + timedelta(days=5)
+      now_utc = datetime.utcnow()
+      has_subscription = now_utc <= trial_end
+
     return {
-      'bookings': list(bookings),
-      'has_subscription': has_subscription
+      "has_subscription": has_subscription,
+      "bookings": bookings_dicts
     }
 
 

@@ -16,38 +16,50 @@ class dashboard(dashboardTemplate):
     self.init_components(**properties)
     
   def form_show(self, **event_args):
-    print("dashboard form show sart:", time.strftime("%H:%M:%S"))
-    print("server call start:", time.strftime("%H:%M:%S"))
-    dashboard_data = local_storage.get('dashboard_data')
-    if not dashboard_data:
-      dashboard_data = anvil.server.call('get_dashboard_data')
-      local_storage['dashboard_data'] = dashboard_data
-    #dashboard_data= anvil.server.call('get_dashboard_data')
-    print("server call end:", time.strftime("%H:%M:%S"))
-    user_has_subscription= dashboard_data['has_subscription']
+    print("dashboard form show start:", time.strftime("%H:%M:%S"))
 
-    if user_has_subscription:
+    # 1. Daten aus Local Storage holen mit Default-Wert
+    dashboard_data = local_storage.get('dashboard_data', {})
+
+    # 2. Validierung des Server-Responses
+    if not dashboard_data or 'has_subscription' not in dashboard_data:
+      print("server call start:", time.strftime("%H:%M:%S"))
+      try:
+        dashboard_data = anvil.server.call('get_dashboard_data') or {}
+        local_storage['dashboard_data'] = dashboard_data
+      except Exception as e:
+        print("Server error:", e)
+        dashboard_data = {}
+        print("server call end:", time.strftime("%H:%M:%S"))
+
+    # 3. Sichere Zugriffe mit get()-Methode
+    user_has_subscription = dashboard_data.get('has_subscription')
+    panel_data = dashboard_data.get('bookings', [])
+
+    if user_has_subscription and panel_data:
       print("repeating panel start:", time.strftime("%H:%M:%S"))
-      panel_data = dashboard_data['bookings']
       self.bookings_repeating_panel.items = panel_data
       print("repeating panel end:", time.strftime("%H:%M:%S"))
-      
-    self.layout.reset_links()
+
+    # 4. Null-Check für User-Objekt
     user = users.get_user()
-    if user['smoobu_api_key'] is None:
+    if not user:
+      return
+
+    # 5. Sichere Zugriffe auf User-Attribute
+    smoobu_key = user.get('smoobu_api_key')
+
+    if not smoobu_key:
       self.pms_need_to_connect_text.visible = True
       self.refresh_button.visible = False
       self.resync_smoobu_button.visible = False
       self.chanel_manager_connect_button.visible = True
     else:
-      if user_has_subscription is False:
+      if not user_has_subscription:
         self.dashboard_upgrade_needed_text.visible = True
         self.dashboard_upgrade_button.visible = True
-        self.pms_need_to_connect_text.visible = False
-        self.refresh_button.visible = False
-        self.resync_smoobu_button.visible = False
-        self.chanel_manager_connect_button.visible = False
         self.bookings_repeating_panel.visible = False
+
     print("dashboard form show end:", time.strftime("%H:%M:%S"))
   
   def form_refreshing_data_bindings(self, **event_args):
