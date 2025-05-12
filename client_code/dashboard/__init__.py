@@ -6,7 +6,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil import users
 import anvil.server
-from anvil_extras import routing
+#from anvil_extras import routing
 import time
 
 class dashboard(dashboardTemplate):
