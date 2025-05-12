@@ -8,6 +8,7 @@ import anvil.users
 import anvil.server
 import m3.components as m3
 import time
+import anvil.js
 
 class layout(layoutTemplate):
   def __init__(self, **properties):
@@ -28,6 +29,7 @@ class layout(layoutTemplate):
   
   def guestscreen_link_click(self, **event_args):
     self.reset_links()
+    anvil.js.window.scrollTo(0, 0)
     open_form('guestscreen')
     self.guestscreen_link.role='selected'
   
@@ -39,6 +41,7 @@ class layout(layoutTemplate):
 
   def upgrade_link_click(self, **event_args):
     self.reset_links()
+    anvil.js.window.scrollTo(0, 0)
     self.upgrade_link.role='selected'
     try:
         user = anvil.users.get_user()
@@ -74,6 +77,7 @@ class layout(layoutTemplate):
 
   def channel_manager_connect_link_click(self, **event_args):
     self.reset_links()
+    anvil.js.window.scrollTo(0, 0)
     open_form('channel_manager_connect')
     self.channel_manager_connect_link.role='selected'
     pass
