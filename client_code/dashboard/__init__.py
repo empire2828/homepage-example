@@ -1,6 +1,6 @@
 from ._anvil_designer import dashboardTemplate
 from anvil import *
-import anvil.google.auth
+#import anvil.google.auth
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
