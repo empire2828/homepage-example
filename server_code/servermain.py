@@ -24,14 +24,14 @@ def send_result_email(user_email, reservation_id):
   if openai_job is None:
     email_text_ai = "OpenAI: Keine Ergebnisse<br>"
   else:
-    email_text_ai = "OpenAI:<br>" + openai_job + "<br><br>"
+    email_text_ai = "OpenAI: " + openai_job + "<br><br>"
   
   # LinkedIn Ergebnisse
   linkedin_check = booking['screener_google_linkedin']
   if linkedin_check is None:
     email_text_linkedin = "LinkedIn: Keine Ergebnisse<br>"
   else:
-    email_text_linkedin = "LinkedIn:<br>" + linkedin_check + "<br><br>"
+    email_text_linkedin = "LinkedIn: " + linkedin_check + "<br><br>"
   
   # Adresscheck Ergebnisse
   address_check = booking['screener_address_check']
@@ -51,10 +51,10 @@ def send_result_email(user_email, reservation_id):
   guestname= booking['guestname'] or ""
   arrival= booking['arrival'] or ""
   departure= booking['departure'] or ""
-  bookingdata = guestname+" "+arrival+" - "+departure 
+  bookingdata = guestname + " " + str(arrival) + " - " + str(departure)
 
   intro_text="Hier kommen die Guestscreener Ergebnisse für die neue Buchung: "+ bookingdata+ "<br><br><br>"
-  disclaimer_text="Die Ergebnisse können durch insbesondere bei häufig vorhandenen Namen falsch sein."+"<br><br><br>"
+  disclaimer_text="Die Ergebnisse können insbesondere bei häufig vorkommenen Namen falsch sein."+"<br><br><br>"
   url_text="guestscreener.com"
   
   email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone+ disclaimer_text+ url_text
