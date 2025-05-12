@@ -29,7 +29,6 @@ unique_ids:
   modules:
     routes: '1745655924804334363659245.3344'
     startup: '1745674174373484660370752.75824'
-    user_permissions: '1742936543407557096112619.8817'
   scripts: {}
   server_modules:
     StripeFunctions: '174293747742990391147785.92871'
