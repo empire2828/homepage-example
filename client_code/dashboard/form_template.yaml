@@ -1,16 +1,41 @@
 components_by_slot:
   slot_1:
   - components:
-    - name: repeating_panel_1
+    - name: text_box_1
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - name: repeating_panel_2
+      properties: {item_template: dashboard.ItemTemplate1}
+      type: RepeatingPanel
+    - data_bindings:
+      - {code: 'self.item['''']', property: items, writeback: false}
+      name: repeating_panel_1
       properties: {item_template: dashboard.RowTemplate1}
       type: RepeatingPanel
-    layout_properties: {}
+    layout_properties: {full_width_row: false}
     name: data_grid_1
     properties:
       columns:
-      - {data_key: guestname, expand: false, id: KSXBTS, title: guestname, width: 313}
-      - {data_key: column_1, expand: false, id: JFSPNT, title: arrival, width: 226}
-      - {data_key: column_1, id: RBEFDK, title: Column 1}
+      - {data_key: apartment, id: CTOVCO, title: apartment}
+      - {data_key: arrival, id: LXYTRA, title: arrival}
+      - {data_key: departure, id: CXBTKF, title: departure}
+      - {data_key: channel_name, id: DCDHXC, title: channel_name}
+      - {data_key: guestname, id: CWLVEG, title: guestname}
+      - {data_key: adults, id: TYFGLP, title: adults}
+      - {data_key: children, id: ZSBNWO, title: children}
+      - {data_key: reservation_id, id: WXTZXV, title: reservation_id}
+      - {data_key: guestid, id: YMXNDW, title: guestid}
+      - {data_key: phone, id: JKESUE, title: phone}
+      - {data_key: address_street, id: KYTMHK, title: address_street}
+      - {data_key: address_postalcode, id: LMEKFG, title: address_postalcode}
+      - {data_key: address_city, id: JQBWDJ, title: address_city}
+      - {data_key: address_country, id: RWJUZC, title: address_country}
+      - {data_key: screener_openai_job, id: KWNGBC, title: screener_openai_job}
+      - {data_key: screener_address_check, id: JAZQJW, title: screener_address_check}
+      - {data_key: screener_google_linkedin, id: FXVNZA, title: screener_google_linkedin}
+      - {data_key: screener_openai_age, id: IPAMKG, title: screener_openai_age}
+      - {data_key: screener_phone_check, id: GVCPAW, title: screener_phone_check}
+      rows_per_page: 5
     type: DataGrid
   - components:
     - event_bindings: {click: refresh_button_click}

@@ -25,7 +25,8 @@ class dashboard(dashboardTemplate):
       print("repeating panel start:", time.strftime("%H:%M:%S"))
       panel_data = dashboard_data['bookings']
       self.bookings_repeating_panel.items = panel_data
-      self.data_grid_1.items= panel_data
+      self.repeating_panel_1.items= panel_data #ffffffffffffffffffffffffffffffffffffffffffffffffff
+      self.repeating_panel_2.items = panel_data
       print("repeating panel end:", time.strftime("%H:%M:%S"))
       
     self.layout.reset_links()
