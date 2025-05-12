@@ -13,5 +13,5 @@ class ItemTemplate1(ItemTemplate1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
+    self.name_display.text=self.item['guestname']
     # Any code you write here will run before the form opens.

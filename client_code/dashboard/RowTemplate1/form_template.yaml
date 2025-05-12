@@ -1,13 +1,17 @@
 components:
-- layout_properties: {column: LQUSSX}
+- layout_properties: {}
+  name: guestname_text_box
+  properties: {role: outlined}
+  type: TextBox
+- layout_properties: {column: 'null'}
   name: outlined_1
   properties: {role: outlined}
   type: TextBox
-- layout_properties: {column: YHLCIQ}
+- layout_properties: {column: 'null'}
   name: outlined_2
   properties: {role: outlined}
   type: TextBox
 container:
-  properties: {auto_display_data: true}
+  properties: {auto_display_data: false}
   type: DataRowPanel
 is_package: true
