@@ -1,13 +1,11 @@
 from ._anvil_designer import impressumTemplate
 from anvil import *
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+import anvil.google.auth
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
 
 class impressum(impressumTemplate):
   def __init__(self, **properties):
