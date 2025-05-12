@@ -1,3 +1,13 @@
-components: []
-container: {type: DataRowPanel}
+components:
+- layout_properties: {column: LQUSSX}
+  name: outlined_1
+  properties: {role: outlined}
+  type: TextBox
+- layout_properties: {column: YHLCIQ}
+  name: outlined_2
+  properties: {role: outlined}
+  type: TextBox
+container:
+  properties: {auto_display_data: true}
+  type: DataRowPanel
 is_package: true

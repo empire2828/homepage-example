@@ -16,48 +16,16 @@ components_by_slot:
     properties: {}
     type: ColumnPanel
   - components:
-    - layout_properties: {}
-      name: repeating_panel_2
-      properties: {item_template: dashboard.RowTemplate1}
+    - name: bookings_repeating_panel
+      properties: {item_template: dashboard.bookings_ItemTemplate}
       type: RepeatingPanel
-    - name: heading_1
-      properties: {}
-      type: form:dep_g9k4toow7i44kq:_Components.Heading
     - name: repeating_panel_1
-      properties: {item_template: dashboard.RowTemplate1}
+      properties: {item_template: dashboard.RowTemplate2}
       type: RepeatingPanel
     layout_properties: {}
     name: data_grid_1
-    properties:
-      columns:
-      - {data_key: email, id: LQUSSX, title: email}
-      - {data_key: apartment, id: XVDXRV, title: apartment}
-      - {data_key: arrival, id: NWMWVU, title: arrival}
-      - {data_key: departure, id: YHLCIQ, title: departure}
-      - {data_key: channel_name, id: BLRPEZ, title: channel_name}
-      - {data_key: guestname, id: EZWLKZ, title: guestname}
-      - {data_key: adults, id: RYRJHD, title: adults}
-      - {data_key: children, id: WQHTBQ, title: children}
-      - {data_key: language, id: GFNTRX, title: language}
-      - {data_key: type, id: LUYIUF, title: type}
-      - {data_key: created-at, id: PAUBCA, title: created-at}
-      - {data_key: reservation_id, id: ARGDHZ, title: reservation_id}
-      - {data_key: guestid, id: EIQXWZ, title: guestid}
-      - {data_key: phone, id: CQESLU, title: phone}
-      - {data_key: address_street, id: ZJMUWU, title: address_street}
-      - {data_key: address_postalcode, id: RNPZZB, title: address_postalcode}
-      - {data_key: address_city, id: EZOPHO, title: address_city}
-      - {data_key: address_country, id: FWLKIF, title: address_country}
-      - {data_key: screener_openai_job, id: RYAMAC, title: screener_openai_job}
-      - {data_key: screener_address_check, id: SNROQH, title: screener_address_check}
-      - {data_key: screener_google_linkedin, id: GYZVAN, title: screener_google_linkedin}
-      - {data_key: screener_openai_age, id: WINPXR, title: screener_openai_age}
-      - {data_key: screener_phone_check, id: KDEXZD, title: screener_phone_check}
+    properties: {}
     type: DataGrid
-  - layout_properties: {}
-    name: bookings_repeating_panel
-    properties: {item_template: dashboard.bookings_ItemTemplate}
-    type: RepeatingPanel
   - components:
     - event_bindings: {click: chanel_manager_connect_button_click}
       name: chanel_manager_connect_button
