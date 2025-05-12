@@ -1,6 +1,7 @@
 import anvil.server
 import phonenumbers
-from phonenumbers import geocoder, carrier, timezone
+#from phonenumbers import  timezone
+#from phonenumbers import  geocoder, carrier
 
 @anvil.server.callable
 def phone_check(phone_number, default_region="DE"):

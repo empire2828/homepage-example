@@ -1,18 +1,18 @@
-import anvil.email
-import anvil.secrets
-import anvil.google.auth, anvil.google.drive, anvil.google.mail
-from anvil.google.drive import app_files
+#import anvil.email
+#import anvil.secrets
+#import anvil.google.auth, anvil.google.drive, anvil.google.mail
+#from anvil.google.drive import app_files
 import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
+#import anvil.tables as tables
+#import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
-import requests
+#import requests
 from smoobu.smoobu_main import get_guest_details, guest_data_update
 from servermain import send_result_email
 from screener.screener_main import get_bookings_risk
-import time
+#import time
 
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
 def smoobu_webhook_handler():

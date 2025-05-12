@@ -1,4 +1,4 @@
-import anvil.email
+#import anvil.email
 import anvil.http
 import urllib.parse
 import anvil.secrets

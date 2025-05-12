@@ -1,10 +1,10 @@
 import anvil.server
-import anvil.tables as tables
+#import anvil.tables as tables
 from anvil.tables import app_tables
 import requests
-from datetime import datetime
-import anvil.secrets
-import json
+#from datetime import datetime
+#import anvil.secrets
+#import json
 
 @anvil.server.callable
 def get_guest_details(guestid, headers):
