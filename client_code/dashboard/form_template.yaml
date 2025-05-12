@@ -12,7 +12,8 @@ components_by_slot:
       properties: {role: filled-button, text: Re-sync Smoobu}
       type: Button
     - components:
-      - name: repeating_panel_1
+      - layout_properties: {pinned: false}
+        name: repeating_panel_1
         properties: {item_template: dashboard.ItemTemplate1}
         type: RepeatingPanel
       layout_properties: {grid_position: 'MWJZOQ,ZXELMU'}
