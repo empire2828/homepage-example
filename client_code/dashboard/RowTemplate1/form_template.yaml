@@ -1,27 +1,19 @@
 components:
-- layout_properties: {column: JFSPNT}
-  name: display_1
-  properties: {role: display}
-  type: Label
 - layout_properties: {column: KSXBTS}
-  name: outlined_1
-  properties: {role: outlined}
-  type: TextBox
+  name: text_1
+  properties: {text: Gast}
+  type: form:dep_g9k4toow7i44kq:_Components.Text
+- layout_properties: {column: ''}
+  name: text_area_1
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
 - layout_properties: {column: JFSPNT}
-  name: outlined_2
-  properties: {role: outlined}
-  type: TextBox
-- layout_properties: {column: KSXBTS}
-  name: outlined_3
-  properties: {role: outlined}
-  type: TextBox
-- layout_properties: {column: JFSPNT}
-  name: body_1
-  properties: {role: body}
-  type: Label
-- layout_properties: {column: KSXBTS}
-  name: headline_1
-  properties: {role: headline}
-  type: Label
+  name: text_box_2
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+- layout_properties: {column: RBEFDK}
+  name: text_box_1
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
 container: {type: DataRowPanel}
 is_package: true
