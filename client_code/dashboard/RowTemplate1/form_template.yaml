@@ -11,6 +11,10 @@ components:
   name: outlined_2
   properties: {role: outlined}
   type: TextBox
+- layout_properties: {column: 'null'}
+  name: display_1
+  properties: {role: display}
+  type: Label
 container:
   properties: {auto_display_data: false}
   type: DataRowPanel

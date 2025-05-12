@@ -1,0 +1,15 @@
+components:
+- layout_properties: {grid_position: 'MUHVRU,ERDIGV'}
+  name: text_1
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Text
+- layout_properties: {grid_position: 'YNZPXQ,LXOQCZ'}
+  name: text_area_1
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
+- layout_properties: {grid_position: 'YNZPXQ,NLOIQF'}
+  name: text_area_2
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
+container: {type: ColumnPanel}
+is_package: true
