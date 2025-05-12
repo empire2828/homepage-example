@@ -11,13 +11,17 @@ import time
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.current_page = 1
+    self.rows_per_page = 10
+    self.panel_data = []  # Will be set in form_show
     
   def form_show(self, **event_args):
     print("dashboard form show sart:", time.strftime("%H:%M:%S"))
     print("server call start:", time.strftime("%H:%M:%S"))
-    dashboard_data= anvil.server.call('get_dashboard_data')
+    dashboard_data = anvil.server.call('get_dashboard_data')
+    self.panel_data = dashboard_data['bookings']
+    self.show_current_page()    
     print("server call end:", time.strftime("%H:%M:%S"))
     user_has_subscription= dashboard_data['has_subscription']
 
@@ -25,7 +29,6 @@ class dashboard(dashboardTemplate):
       print("repeating panel start:", time.strftime("%H:%M:%S"))
       panel_data = dashboard_data['bookings']
       self.bookings_repeating_panel.items = panel_data
-      self.data_grid_1.items= panel_data
       print("repeating panel end:", time.strftime("%H:%M:%S"))
       
     self.layout.reset_links()
@@ -95,5 +98,19 @@ class dashboard(dashboardTemplate):
   pass
   #identisch zu pflegen in Layout!
 
+  def show_current_page(self):
+    start = (self.current_page - 1) * self.rows_per_page
+    end = start + self.rows_per_page
+    self.bookings_repeating_panel.items = self.panel_data[start:end]
+
+  def next_page_click(self, **event_args):
+    if self.current_page * self.rows_per_page < len(self.panel_data):
+      self.current_page += 1
+      self.show_current_page()
+
+  def prev_page_click(self, **event_args):
+    if self.current_page > 1:
+      self.current_page -= 1
+      self.show_current_page()
 
   
