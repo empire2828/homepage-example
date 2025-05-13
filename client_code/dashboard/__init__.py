@@ -9,7 +9,8 @@ import anvil.server
 #from anvil_extras import routing
 from anvil_extras.storage import local_storage
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
+#, timezone
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
@@ -25,10 +26,11 @@ class dashboard(dashboardTemplate):
     
     cache_too_old = False
     if dashboard_data:      
-      last_login = user['last_login'].astimezone(anvil.tz.tzlocal())
+      last_login =  user['last_login'].replace(tzinfo=None)
       now = datetime.now()
       if now - last_login > timedelta(days=3):
         cache_too_old = True
+        print('Cache too old', last_login,now)
     else:
       cache_too_old = True
     
