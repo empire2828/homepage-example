@@ -48,6 +48,7 @@ def smoobu_webhook_handler():
 
         user_row = app_tables.users.get(email=user_email)
         user_row['local_storage_update_needed'] = True
+        print(user_row)
   
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
