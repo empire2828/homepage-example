@@ -1,13 +1,9 @@
 from ._anvil_designer import dashboardTemplate
 from anvil import *
 import anvil.facebook.auth
-#import anvil.google.auth
-#import anvil.tables as tables
-#import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil import users
 import anvil.server
-#from anvil_extras import routing
 from anvil_extras.storage import local_storage
 import time
 from datetime import datetime, timedelta
@@ -28,14 +24,15 @@ class dashboard(dashboardTemplate):
     cache_too_old = False
     if dashboard_data:      
       last_login =  user['last_login'].replace(tzinfo=None)
-      now = datetime.now()
-      if now - last_login > timedelta(days=3):
+      if datetime.now() - last_login > timedelta(days=3):
         cache_too_old = True
-        print('Cache too old', last_login,now)
     else:
       cache_too_old = True
+
+    local_storage_update_needed = anvil.server.call('get_local_storage_update_needed',user['email'])
     
-    if not dashboard_data or cache_too_old:
+    if not dashboard_data or cache_too_old or local_storage_update_needed:
+      print('cache too old, local storage update needed: ',cache_too_old,local_storage_update_needed)
       dashboard_data = anvil.server.call('get_dashboard_data_dict')
       local_storage['dashboard_data'] = dashboard_data
     print("server call end:", time.strftime("%H:%M:%S"))    

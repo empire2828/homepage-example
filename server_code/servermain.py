@@ -1,11 +1,8 @@
 import anvil.facebook.auth
 import anvil.email
-#import anvil.secrets
-#import anvil.google.auth, anvil.google.mail
 import anvil.users
-#import anvil.tables as tables
 import anvil.tables.query as q
-from anvil.tables import app_tables
+from anvil.tables import app_tables, order_by
 import anvil.server
 import time
 from datetime import datetime, timedelta
@@ -150,6 +147,7 @@ def get_dashboard_data():
       "screener_openai_job", "phone", "screener_phone_check",
       "adults", "children"
     ),
+    order_by("arrival", ascending=False),
     email=user['email']
   )
 
@@ -226,13 +224,15 @@ def get_dashboard_data_dict():
           now_utc = datetime.now
           has_subscription = now_utc <= trial_end
 
+    user_row = app_tables.users.get(email=user['email'])
+    user_row['local_storage_update_needed'] = False
+
     print("server code end:", time.strftime("%H:%M:%S"))
 
   return {
     'bookings': serialized_bookings,  # Serialisierte Daten statt Row-Objekte
     'has_subscription': has_subscription
   }
-
 
 @anvil.server.callable
 def call_server_wake_up():
@@ -243,3 +243,8 @@ def call_server_wake_up():
 def server_wake_up():
   result= 1+1
   return result
+
+@anvil.server.callable
+def get_local_storage_update_needed(user_email):
+  user_row = app_tables.users.get(email=user_email)
+  return user_row['local_storage_update_needed'] 
