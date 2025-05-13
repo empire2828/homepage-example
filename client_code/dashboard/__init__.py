@@ -9,6 +9,7 @@ import anvil.server
 #from anvil_extras import routing
 from anvil_extras.storage import local_storage
 import time
+from datetime import datetime, timedelta, timezone
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
@@ -18,12 +19,27 @@ class dashboard(dashboardTemplate):
   def form_show(self, **event_args):
     print("dashboard form show sart:", time.strftime("%H:%M:%S"))
     print("server call start:", time.strftime("%H:%M:%S"))
+    self.layout.reset_links()
+    user = users.get_user()
     dashboard_data = local_storage.get('dashboard_data')
-    if not dashboard_data:
+    
+    reload_needed = False
+    if dashboard_data:
+      last_login = user.get('last_login').astimezone(anvil.tz.tzlocal()).replace(tzinfo=None)
+      if last_login:
+        try:
+          if datetime.now() - last_login > timedelta(days=3):
+            reload_needed = True
+        except ValueError:
+          reload_needed = True
+      else:
+        reload_needed = True
+    
+    if not dashboard_data or reload_needed:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')
       local_storage['dashboard_data'] = dashboard_data
-    #dashboard_data= anvil.server.call('get_dashboard_data')
     print("server call end:", time.strftime("%H:%M:%S"))
+    
     user_has_subscription= dashboard_data['has_subscription']
 
     if user_has_subscription:
@@ -32,8 +48,6 @@ class dashboard(dashboardTemplate):
       self.bookings_repeating_panel.items = panel_data
       print("repeating panel end:", time.strftime("%H:%M:%S"))
       
-    self.layout.reset_links()
-    user = users.get_user()
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       self.refresh_button.visible = False
@@ -48,6 +62,7 @@ class dashboard(dashboardTemplate):
         self.resync_smoobu_button.visible = False
         self.chanel_manager_connect_button.visible = False
         self.bookings_repeating_panel.visible = False
+        
     print("dashboard form show end:", time.strftime("%H:%M:%S"))
   
   def form_refreshing_data_bindings(self, **event_args):
@@ -71,6 +86,7 @@ class dashboard(dashboardTemplate):
     pass
 
   def refresh_button_click(self, **event_args):
+    local_storage['dashboard_data_last_login'] = (datetime.now() - timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%S")
     self.form_show()
     pass
 
