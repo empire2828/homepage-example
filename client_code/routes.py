@@ -1,3 +1,4 @@
+import anvil.facebook.auth
 from routing.router import Route #, debug_logging
 
 # debug_logging(True)

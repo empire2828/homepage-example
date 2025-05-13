@@ -1,3 +1,4 @@
+import anvil.facebook.auth
 import anvil.server
 import phonenumbers
 #from phonenumbers import  timezone

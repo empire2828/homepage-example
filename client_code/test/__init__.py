@@ -1,5 +1,6 @@
 from ._anvil_designer import testTemplate
 from anvil import *
+import anvil.facebook.auth
 import anvil.server
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
