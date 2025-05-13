@@ -123,6 +123,9 @@ db_schema:
     - admin_ui: {order: 15, width: 200}
       name: apartment_count
       type: number
+    - admin_ui: {width: 200}
+      name: local_storage_update_needed
+      type: bool
     server: full
     title: Users
 dependencies:

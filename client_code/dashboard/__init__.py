@@ -3,13 +3,13 @@ from anvil import *
 #import anvil.google.auth
 #import anvil.tables as tables
 #import anvil.tables.query as q
-#from anvil.tables import app_tables
+from anvil.tables import app_tables
 from anvil import users
 import anvil.server
 #from anvil_extras import routing
 from anvil_extras.storage import local_storage
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
@@ -22,23 +22,20 @@ class dashboard(dashboardTemplate):
     self.layout.reset_links()
     user = users.get_user()
     dashboard_data = local_storage.get('dashboard_data')
-    last_login_str = user['last_login']
-    reload_needed = False
     
-    if dashboard_data and last_login_str:
-      
-      last_login = datetime.strptime(last_login_str, "%Y-%m-%dT%H:%M:%S")
+    cache_too_old = False
+    if dashboard_data:      
+      last_login = user['last_login'].astimezone(anvil.tz.tzlocal())
       now = datetime.now()
       if now - last_login > timedelta(days=3):
-        reload_needed = True
+        cache_too_old = True
     else:
-      reload_needed = True
+      cache_too_old = True
     
-    if not dashboard_data or reload_needed:
+    if not dashboard_data or cache_too_old:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')
       local_storage['dashboard_data'] = dashboard_data
-    print("server call end:", time.strftime("%H:%M:%S"))
-    
+    print("server call end:", time.strftime("%H:%M:%S"))    
     user_has_subscription= dashboard_data['has_subscription']
 
     if user_has_subscription:

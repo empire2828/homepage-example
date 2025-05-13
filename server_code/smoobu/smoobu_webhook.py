@@ -44,6 +44,10 @@ def smoobu_webhook_handler():
         if action=='newReservation':
           anvil.server.launch_background_task('send_result_email',user_email,reservation_id) 
         return {"status": "success"} 
+
+        user_row = app_tables.users.get(email=user_email)
+        user_row['local_storage_update_needed'] = True
+  
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
         return {"status": "error", "message": str(e)}, 500
@@ -153,7 +157,6 @@ def delete_booking(reservation_id, user_id):
         print(f"Buchung {reservation_id} für Benutzer {user_email} gelöscht")
     else:
         print(f"Keine Buchung mit ID {reservation_id} für Benutzer {user_email} gefunden")
-
 
 @anvil.server.background_task
 def get_user_email(user_id):
