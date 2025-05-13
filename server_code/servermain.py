@@ -233,7 +233,6 @@ def get_dashboard_data_dict():
     'has_subscription': has_subscription
   }
 
-
 @anvil.server.callable
 def call_server_wake_up():
   anvil.server.launch_background_task('server_wake_up')
@@ -243,3 +242,8 @@ def call_server_wake_up():
 def server_wake_up():
   result= 1+1
   return result
+
+@anvil.server.callable
+def get_local_storage():
+  user_row = app_tables.users.get(email=user_email)
+  local_storage_update_needed = user_row['local_storage_update_needed'] 

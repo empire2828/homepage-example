@@ -44,11 +44,12 @@ def smoobu_webhook_handler():
         guest_data_update(user_email)  
         if action=='newReservation':
           anvil.server.launch_background_task('send_result_email',user_email,reservation_id) 
-        return {"status": "success"} 
-
+        
         user_row = app_tables.users.get(email=user_email)
-        user_row['local_storage_update_needed'] = True
-        print(user_row)
+        if user_row:
+          user_row['local_storage_update_needed'] = True
+
+        return {"status": "success"} 
   
     except Exception as e:
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")

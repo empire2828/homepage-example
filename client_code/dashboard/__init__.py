@@ -34,10 +34,14 @@ class dashboard(dashboardTemplate):
         print('Cache too old', last_login,now)
     else:
       cache_too_old = True
+
+    user_row = app_tables.users.get(email=user_email)
+    local_storage_update_needed = user_row['local_storage_update_needed'] 
     
-    if not dashboard_data or cache_too_old:
+    if not dashboard_data or cache_too_old or local_storage_update_needed:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')
       local_storage['dashboard_data'] = dashboard_data
+      user_row['local_storage_update_needed'] = False
     print("server call end:", time.strftime("%H:%M:%S"))    
     user_has_subscription= dashboard_data['has_subscription']
 
