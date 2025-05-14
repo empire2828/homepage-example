@@ -2,11 +2,7 @@ from ._anvil_designer import homepageTemplate
 from anvil import *
 import anvil.facebook.auth
 import anvil.server
-#import anvil.google.auth
 import anvil.users
-#import anvil.tables as tables
-#import anvil.tables.query as q
-#from anvil.tables import app_tables
 
 class homepage(homepageTemplate):
   def __init__(self, **properties):

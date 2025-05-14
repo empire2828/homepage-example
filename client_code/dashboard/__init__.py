@@ -1,13 +1,9 @@
 from ._anvil_designer import dashboardTemplate
 from anvil import *
 import anvil.facebook.auth
-#import anvil.google.auth
-#import anvil.tables as tables
-#import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil import users
 import anvil.server
-#from anvil_extras import routing
 from anvil_extras.storage import local_storage
 import time
 from datetime import datetime, timedelta
@@ -29,19 +25,17 @@ class dashboard(dashboardTemplate):
     if dashboard_data:      
       last_login =  user['last_login'].replace(tzinfo=None)
       now = datetime.now()
-      if now - last_login > timedelta(days=3):
+      if now - last_login > timedelta(days=5):
         cache_too_old = True
         print('Cache too old', last_login,now)
     else:
       cache_too_old = True
 
-    user_row = app_tables.users.get(email=user['email'])
-    local_storage_update_needed = user_row['local_storage_update_needed'] 
+    local_storage_update_needed = user['local_storage_update_needed'] 
     
     if not dashboard_data or cache_too_old or local_storage_update_needed:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')
       local_storage['dashboard_data'] = dashboard_data
-      user_row['local_storage_update_needed'] = False
     print("server call end:", time.strftime("%H:%M:%S"))    
     user_has_subscription= dashboard_data['has_subscription']
 
@@ -85,12 +79,12 @@ class dashboard(dashboardTemplate):
       anvil.server.call_s('delete_bookings_by_email',anvil.users.get_user()['email'])
       anvil.server.call_s('launch_sync_smoobu')
       anvil.server.call_s('launch_get_bookings_risk')
-      self.init_components()
     pass
 
   def refresh_button_click(self, **event_args):
-    local_storage['dashboard_data_last_login'] = (datetime.now() - timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%S")
+    local_storage.clear()
     self.form_show()
+    self.refresh_data_bindings()
     pass
 
   def chanel_manager_connect_button_click(self, **event_args):
