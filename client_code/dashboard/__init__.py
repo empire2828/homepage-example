@@ -35,7 +35,7 @@ class dashboard(dashboardTemplate):
     else:
       cache_too_old = True
 
-    user_row = app_tables.users.get(email=user_email)
+    user_row = app_tables.users.get(email=user['email'])
     local_storage_update_needed = user_row['local_storage_update_needed'] 
     
     if not dashboard_data or cache_too_old or local_storage_update_needed:
