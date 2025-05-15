@@ -26,7 +26,7 @@ def google_linkedin(full_name, city):
     params = {
         "key": api_key,
         "cx": cse_id,
-        "q": f"site:linkedin.com \"{query_name}\" {city}",  # Vollständiger Name in Anführungszeichen und Stadt separat
+        "q": f"site:linkedin.com \"Suche {query_name}\" aus {city} bei linkedin",  # Vollständiger Name in Anführungszeichen und Stadt separat
         "num": 1  # Nur ein Ergebnis zurückgeben
     }
     
