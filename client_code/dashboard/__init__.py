@@ -78,8 +78,7 @@ class dashboard(dashboardTemplate):
       anvil.server.call_s('launch_get_bookings_risk')
       local_storage.clear()
       self.bookings_repeating_panel.items = []
-      self.form_show()
-      self.refresh_data_bindings()
+      self.init_components()
     pass
 
   def refresh_button_click(self, **event_args):
