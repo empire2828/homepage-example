@@ -7,7 +7,7 @@ class faq_template(faq_templateTemplate):
     self.init_components(**properties)
     self.faq_question_body.text = self.item['question']
     self.faq_answer_body.text = self.item['answer']
-    self.faq_answer_body.visible = False
+    #self.faq_answer_body.visible = False
 
   def faq_answer_button_click(self, **event_args):
     self.faq_answer_body.visible= not self.faq_answer_body.visible

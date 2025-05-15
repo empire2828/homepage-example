@@ -15,7 +15,6 @@ class dashboard(dashboardTemplate):
   def form_show(self, **event_args):
     print("dashboard form show sart:", time.strftime("%H:%M:%S"))
     print("server call start:", time.strftime("%H:%M:%S"))
-    #self.layout.reset_links()
     user = users.get_user()
     dashboard_data = local_storage.get('dashboard_data')
     
@@ -77,10 +76,15 @@ class dashboard(dashboardTemplate):
       anvil.server.call_s('delete_bookings_by_email',anvil.users.get_user()['email'])
       anvil.server.call_s('launch_sync_smoobu')
       anvil.server.call_s('launch_get_bookings_risk')
+      local_storage.clear()
+      self.bookings_repeating_panel.items = []
+      self.form_show()
+      self.refresh_data_bindings()
     pass
 
   def refresh_button_click(self, **event_args):
     local_storage.clear()
+    self.bookings_repeating_panel.items = []
     self.form_show()
     self.refresh_data_bindings()
     pass
