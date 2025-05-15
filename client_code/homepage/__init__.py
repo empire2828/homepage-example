@@ -1,14 +1,11 @@
 from ._anvil_designer import homepageTemplate
 from anvil import *
-import anvil.facebook.auth
 import anvil.server
 import anvil.users
 
 class homepage(homepageTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    # Any code you write here will run before the form opens.
     self.faq_repeating_panel.items = [
     {"question": "Was genau prüft die KI Suche?", "answer": "Die Suche sucht im Netz nach frei verfügbaren Informationen Ihrer Gäste und fasst diese zusammen. Gibt es mehrere Personen mit dem gleich oder ähnlichen Namen, kann die KI fehlerhafte Ergebnisse ausgeben."},
     {"question": "Was genau prüft die Adress- und Telefonprüfung?", "answer": "Die Adresse wird daraufhin geprüft, ob es diese überhaupt gibt. Es wird nicht geprüft, ob der Gast tatsächlich hier wohnt. Bei der Telefonnummer wird auf formale Richtigkeit geprüft, nicht ob der Gast diese konkrete Telefonnummer oder jemand Anderes diese hat."},

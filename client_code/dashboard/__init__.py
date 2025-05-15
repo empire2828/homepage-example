@@ -1,13 +1,11 @@
 from ._anvil_designer import dashboardTemplate
 from anvil import *
-import anvil.facebook.auth
 from anvil.tables import app_tables
 from anvil import users
 import anvil.server
 from anvil_extras.storage import local_storage
 import time
 from datetime import datetime, timedelta
-#, timezone
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
@@ -17,7 +15,7 @@ class dashboard(dashboardTemplate):
   def form_show(self, **event_args):
     print("dashboard form show sart:", time.strftime("%H:%M:%S"))
     print("server call start:", time.strftime("%H:%M:%S"))
-    self.layout.reset_links()
+    #self.layout.reset_links()
     user = users.get_user()
     dashboard_data = local_storage.get('dashboard_data')
     

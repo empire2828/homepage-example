@@ -1,6 +1,5 @@
 from ._anvil_designer import data_protectionTemplate
 from anvil import *
-import anvil.facebook.auth
 import anvil.server
 import anvil.google.auth
 import anvil.users

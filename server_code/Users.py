@@ -1,4 +1,3 @@
-import anvil.facebook.auth
 #import anvil.email
 import anvil.secrets
 import anvil.users

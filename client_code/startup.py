@@ -1,4 +1,3 @@
-import anvil.facebook.auth
 from routing.router import launch
 from . import routes  # noqa: F401
 

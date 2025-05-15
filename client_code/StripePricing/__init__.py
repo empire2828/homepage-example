@@ -1,6 +1,5 @@
 from ._anvil_designer import StripePricingTemplate
 from anvil import *
-import anvil.facebook.auth
 import anvil.server
 import anvil.users
 import anvil.tables as tables
