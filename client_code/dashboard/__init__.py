@@ -73,13 +73,13 @@ class dashboard(dashboardTemplate):
     user = users.get_user()
     if user['smoobu_api_key'] is not None:
       alert("Hintergrund- Synchronisation wird gestartet. Das dauert ca. 10 Minuten.")
+      local_storage.clear()
+      self.bookings_repeating_panel.items = []
+      self.refresh_data_bindings()    
+      self.form_show()
       anvil.server.call_s('delete_bookings_by_email',anvil.users.get_user()['email'])
       anvil.server.call_s('launch_sync_smoobu')
       anvil.server.call_s('launch_get_bookings_risk')
-      local_storage.clear()
-      self.bookings_repeating_panel.items = []
-      self.form_show()
-      self.refresh_data_bindings()
     pass
 
   def refresh_button_click(self, **event_args):
