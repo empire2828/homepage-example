@@ -27,12 +27,11 @@ def screener_open_ai(name, location, checktype):
   location = location
   if checktype == "job":
     prompt = """
-    1. Welchen Beruf und welches Hobby hat die Person?
-    2. Schreibe extrem kurz mit sehr wenig Wörtern.
-    3. Lasse Zitatnummern weg. 
-    4. Lasse Bezüge weg.
-    5. Suche auch bei linkedin und Xing.
-    6. Lasse Personen weg, die nicht mehr leben."""
+    1. Welchen Beruf hat die Person? Schaue auch bei linkedin und Xing. 
+    2. Welches Hobby hat die Person? 
+    3. Schreibe sehr kurz mit wenig Wörtern.
+    4. Lasse Zitatnummern weg.
+    5. Wichtig: Keine Daten vor 1970"""   
   else:
     prompt = f"""
 Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges und ob z.B. Kinder vorhanden sind sehr grob ein. Schreibe als Antwort nur: von bis Jahre und lasse alles andere weg.
@@ -47,8 +46,8 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
           {"role": "system", "content": prompt},
           {"role": "user", "content": name + " aus " +location},  
       ],
-      max_tokens=160,
-      temperature=0.4,
+      max_tokens=150,
+      temperature=0.5,
       top_p=0.9,
       #stream=False,
       #presence_penalty=0,
