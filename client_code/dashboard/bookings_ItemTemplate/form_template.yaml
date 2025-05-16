@@ -1,9 +1,9 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD IKJTIU,SEVJMY'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD HHJCLU,YACWLW'}
     name: guestname_text_box
-    properties: {background: 'theme:Secondary Container', bold: true, text: Gast}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW NKOZPB,OQHNZF'}
     name: label_1
     properties:
@@ -12,10 +12,10 @@ components:
         padding: ['0', null, '0', null]
       text: Anreise
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW XUEJHF,OHSZGG'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW KZZWJC,APMBJP'}
     name: arrival_text_box
-    properties: {background: 'theme:Secondary Container', text: Anreise}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,AJAYUM FGXYRV,YWYJPO'}
     name: label_2
     properties:
@@ -24,10 +24,10 @@ components:
         padding: ['0', null, '0', null]
       text: Abreise
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,AJAYUM DEPIBM,EPYELV'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,AJAYUM HCKSHN,AVNHLK'}
     name: departure_text_box
-    properties: {background: 'theme:Secondary Container', text: Abreise}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,QXDUNY WZPJLD,VLBEWE'}
     name: label_8
     properties:
@@ -36,10 +36,10 @@ components:
         padding: ['0', null, '0', null]
       text: Vermietobjekt
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,QXDUNY KOZWQB,BQGWFR'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,QXDUNY LOGLAK,YBZKLO'}
     name: apartment_text_box
-    properties: {background: 'theme:Secondary Container'}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,AYIQIV FWBERZ,NEXAJS'}
     name: label_7
     properties:
@@ -48,11 +48,10 @@ components:
         padding: ['0', null, '0', null]
       text: Vertriebskanal
     type: Label
-  - data_bindings: []
-    layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,AYIQIV OWARLM,GFEPKI'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,AYIQIV XTCLQR,RHMWCF'}
     name: channel_name_text_box
-    properties: {background: 'theme:Secondary Container', text: Vertriebskanal}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KZVRIH YXGSTD,OBTLYN'}
     name: label_3
     properties:
@@ -61,10 +60,10 @@ components:
         padding: ['0', null, '0', null]
       text: Erwachsene
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KZVRIH QPTKUH,NEOEZX'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KZVRIH TUMHUJ,HPDRQB'}
     name: adults_text_box
-    properties: {background: 'theme:Secondary Container'}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KTAJVH IDHXHI,YREMUZ'}
     name: label_4
     properties:
@@ -73,10 +72,10 @@ components:
         padding: ['0', null, '0', null]
       text: Kinder
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KTAJVH QFAQPG,DUMEIF'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KTAJVH VKLJDV,GYMRWX'}
     name: children_text_box
-    properties: {background: 'theme:Secondary Container'}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD OKLQUY,SPRNCB'}
     name: spacer_2
     properties: {height: 5.03643798828125}
@@ -89,18 +88,18 @@ components:
         padding: ['0', null, '0', null]
       text: Adresse
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QEQSQH,XQLSRY'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD KTTUCM,COCBLR'}
     name: street_text_box
-    properties: {background: 'theme:Secondary Container'}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD TESOQM,CIXOKO'}
     name: postal_code_text_box
-    properties: {background: 'theme:Secondary Container'}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD TESOQM,GMWGGO'}
     name: city_text_box
-    properties: {background: 'theme:Secondary Container'}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD TGTPNC,IORVQI'}
     name: address_check_box
     properties: {text: Adresse geprüft}
@@ -113,10 +112,10 @@ components:
         padding: ['0', null, '0', null]
       text: KI gestütze Suche
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,YOCTHM YTWCJD,PUMALA'}
+  - layout_properties: {grid_position: 'UEOEIJ,YOCTHM NJJMTB,CZDAXV'}
     name: screener_open_ai_text
-    properties: {background: 'theme:Secondary Container', height: 258.44439697265625}
-    type: TextArea
+    properties: {height: 133.17010498046875}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
   - layout_properties: {grid_position: 'UEOEIJ,YOCTHM MKRITV,VAJQRO'}
     name: label_5
     properties:
@@ -125,16 +124,14 @@ components:
         padding: ['0', null, '0', null]
       text: linkedin
     type: Label
-  - data_bindings:
-    - {code: '', property: height, writeback: false}
-    layout_properties: {grid_position: 'UEOEIJ,YOCTHM WWLOPD,XOJUOS'}
+  - layout_properties: {grid_position: 'UEOEIJ,YOCTHM TCGMOW,SSVHHG'}
     name: google_linkedin_text_box
-    properties: {appearance: filled, background_color: 'theme:Secondary Container', display_bold: false, display_font_size: null, display_italic: false, enabled: true, height: 136}
+    properties: {height: 255.42880249023438}
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
   - layout_properties: {grid_position: 'BTVWVL,IUFDOV'}
     name: phone_text_box
-    properties: {background: 'theme:Secondary Container'}
-    type: TextBox
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - layout_properties: {grid_position: 'BTVWVL,NWZFJR'}
     name: phone_check_box
     properties: {text: Telefonnummer validiert}
