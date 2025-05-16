@@ -125,9 +125,11 @@ components:
         padding: ['0', null, '0', null]
       text: linkedin
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,YOCTHM WWLOPD,XOJUOS'}
+  - data_bindings:
+    - {code: '', property: height, writeback: false}
+    layout_properties: {grid_position: 'UEOEIJ,YOCTHM WWLOPD,XOJUOS'}
     name: google_linkedin_text_box
-    properties: {appearance: filled, background_color: 'theme:Secondary Container', enabled: false, height: 171.5806884765625}
+    properties: {appearance: filled, background_color: 'theme:Secondary Container', display_bold: false, display_font_size: null, display_italic: false, enabled: true, height: 136}
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
   - layout_properties: {grid_position: 'BTVWVL,IUFDOV'}
     name: phone_text_box

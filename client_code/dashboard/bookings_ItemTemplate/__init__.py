@@ -19,6 +19,7 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
       self.apartment_text_box.text=self.item['apartment']
       self.channel_name_text_box.text=self.item['channel_name']
       self.google_linkedin_text_box.text=self.item['screener_google_linkedin']
+      self.google_linkedin_text_box.height=136
       self.street_text_box.text=self.item['address_street']
       self.postal_code_text_box.text=self.item['address_postalcode']
       self.city_text_box.text=self.item['address_city']
@@ -28,5 +29,6 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
       self.phone_check_box.checked=self.item['screener_phone_check']
       self.adults_text_box.text=self.item['adults']
       self.children_text_box.text=self.item['children']
+    
 
     # Any code you write here will run before the form opens.
