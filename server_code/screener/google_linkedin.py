@@ -1,6 +1,7 @@
 import anvil.http
 import urllib.parse
 import anvil.secrets
+import re
 
 # Google Custom Search Engine ID
 cse_id = "f4731bf6df41348f2"
@@ -18,15 +19,12 @@ def google_linkedin(full_name, city):
   if city is None:
     city = ""
 
-    # Ersetze Leerzeichen im Namen durch Pluszeichen, um sicherzustellen, dass alle Wörter gesucht werden
-  #query_name = full_name.replace(" ", "+")
-
   # Einrichten der Abfrageparameter
   params = {
     "key": api_key,
     "cx": cse_id,
     "q": f"site:linkedin.com intitle:\"{full_name}\" {city}",
-    "num": 1  # Nur ein Ergebnis zurückgeben
+    "num": 10  # Mehr Ergebnisse anfordern, um nach Filterung noch genug zu haben
   }
 
   try:
@@ -37,21 +35,28 @@ def google_linkedin(full_name, city):
     # HTTP-Anfrage mithilfe der Anvil-Bibliothek mit json=True
     response = anvil.http.request(full_url, method="GET", json=True)
 
-    # Extrahieren und Rückgabe des Titels des ersten Suchergebnisses, wenn der vollständige Name vorhanden ist
-    if "items" in response and len(response["items"]) > 0:
-      first_result = response["items"][0]
-      title = first_result.get("title", "")
-      snippet = first_result.get("snippet", "")
-      if full_name.lower() in title.lower() or full_name.lower() in snippet.lower():
-        return title
-      else:
-        return None
+    # Nur die Titel der relevanten Profile extrahieren
+    titles = []
+    if "items" in response:
+      for item in response["items"]:
+        title = item.get("title", "")
+        # Ausschließen von Titeln, die mit "100+" beginnen und "profiles" enthalten
+        if not "profiles | LinkedIn" in title and not "Profile mit dem Suchbegriff" in title:
+          titles.append(title)
+          # Sobald wir drei Titel haben, brechen wir ab
+          if len(titles) >= 3:
+            break
+
+    # Rückgabe der Titel mit Zeilenumbruch
+    if titles:
+      return "\n".join(titles)
     else:
       return None
 
   except Exception as e:
     print(f"Fehler beim Suchen nach LinkedIn-Profilen: {e}")
     return None
+
 
 # Beispielanwendung
 #full_name = "Dirk Klemer"
