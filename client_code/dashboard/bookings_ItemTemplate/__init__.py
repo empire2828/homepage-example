@@ -25,7 +25,7 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
       self.city_text_box.text=self.item['address_city']
       self.address_check_box.checked=self.item['screener_address_check']
       self.screener_open_ai_text.text=self.item['screener_openai_job']
-      self.screener_open_ai_text.height=320
+      self.screener_open_ai_text.height=313
       self.phone_text_box.text=self.item['phone']
       self.phone_check_box.checked=self.item['screener_phone_check']
       self.adults_text_box.text=self.item['adults']

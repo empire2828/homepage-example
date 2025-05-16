@@ -1,11 +1,10 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD HHJCLU,YACWLW'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD SSRAVZ,RZXXFY'}
     name: guestname_text_box
-    properties:
-      margin: ['0', null, '0', null]
-    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW NKOZPB,OQHNZF'}
+    properties: {bold: true}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW'}
     name: label_1
     properties:
       spacing:
@@ -13,12 +12,11 @@ components:
         padding: ['0', null, '0', null]
       text: Anreise
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW KZZWJC,APMBJP'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW RBIISA,TXPPKV'}
     name: arrival_text_box
-    properties:
-      margin: ['0', null, '0', null]
-    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,AJAYUM FGXYRV,YWYJPO'}
+    properties: {role: body}
+    type: Label
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,AJAYUM GIFBYT,ANARIE'}
     name: label_2
     properties:
       spacing:
@@ -26,11 +24,10 @@ components:
         padding: ['0', null, '0', null]
       text: Abreise
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,AJAYUM HCKSHN,AVNHLK'}
-    name: departure_text_box
-    properties:
-      margin: ['0', null, '0', null]
-    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,AJAYUM WPAFLN,HXLCLR'}
+    name: body_1
+    properties: {role: body}
+    type: Label
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,QXDUNY WZPJLD,VLBEWE'}
     name: label_8
     properties:
@@ -39,11 +36,11 @@ components:
         padding: ['0', null, '0', null]
       text: Vermietobjekt
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,QXDUNY LOGLAK,YBZKLO'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,QXDUNY WJZFPE,WRXZMZ'}
     name: apartment_text_box
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,AYIQIV FWBERZ,NEXAJS'}
+    properties: {role: body}
+    type: Label
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,AYIQIV'}
     name: label_7
     properties:
       spacing:
@@ -51,11 +48,10 @@ components:
         padding: ['0', null, '0', null]
       text: Vertriebskanal
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,AYIQIV XTCLQR,RHMWCF'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,AYIQIV DRYUJN,NDWEFG'}
     name: channel_name_text_box
-    properties:
-      margin: ['0', null, '0', null]
-    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    properties: {role: body}
+    type: Label
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KZVRIH YXGSTD,OBTLYN'}
     name: label_3
     properties:
@@ -64,11 +60,10 @@ components:
         padding: ['0', null, '0', null]
       text: Erwachsene
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KZVRIH TUMHUJ,HPDRQB'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KZVRIH UIVCWN,JVZLMH'}
     name: adults_text_box
-    properties:
-      margin: ['0', null, '0', null]
-    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    properties: {role: body}
+    type: Label
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KTAJVH IDHXHI,YREMUZ'}
     name: label_4
     properties:
@@ -109,10 +104,6 @@ components:
     properties:
       margin: ['0', null, '0', null]
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD TGTPNC,IORVQI'}
-    name: address_check_box
-    properties: {text: Adresse geprüft}
-    type: CheckBox
   - layout_properties: {grid_position: 'UEOEIJ,YOCTHM SCXHOY,QAHHZN'}
     name: label_6
     properties:
@@ -146,7 +137,11 @@ components:
     properties:
       margin: ['0', null, '0', null]
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
-  - layout_properties: {grid_position: 'BTVWVL,NWZFJR'}
+  - layout_properties: {grid_position: 'BTVWVL,NWZFJR AOPHJZ,NTCZUJ'}
+    name: address_check_box
+    properties: {text: Adresse geprüft}
+    type: CheckBox
+  - layout_properties: {grid_position: 'BTVWVL,NWZFJR AUKEZT,SCBSTZ'}
     name: phone_check_box
     properties: {text: Telefonnummer validiert}
     type: CheckBox
