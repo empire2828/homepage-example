@@ -127,7 +127,7 @@ components:
     type: Label
   - layout_properties: {grid_position: 'UEOEIJ,YOCTHM WWLOPD,XOJUOS'}
     name: google_linkedin_text_box
-    properties: {appearance: filled, background_color: 'theme:Secondary Container', height: 171.5806884765625}
+    properties: {appearance: filled, background_color: 'theme:Secondary Container', enabled: false, height: 171.5806884765625}
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
   - layout_properties: {grid_position: 'BTVWVL,IUFDOV'}
     name: phone_text_box
