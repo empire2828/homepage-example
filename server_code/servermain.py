@@ -228,6 +228,8 @@ def get_dashboard_data_dict():
           now_utc = datetime.now
           has_subscription = now_utc <= trial_end
 
+    user['local_storage_update_needed']=False
+    
     print("server code end:", time.strftime("%H:%M:%S"))
 
   return {
