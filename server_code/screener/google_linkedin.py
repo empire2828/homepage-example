@@ -24,9 +24,11 @@ def google_linkedin(full_name, city):
   params = {
     "key": api_key,
     "cx": cse_id,
-    "q": f"site:linkedin.com intitle:\"{full_name} {city}",
-    "num": 10  # Mehr Ergebnisse anfordern, um nach Filterung noch genug zu haben
-  }
+    "q": f'site:linkedin.com/in/ {full_name} {city}',  # Ohne Anführungszeichen für flexiblere Suche
+    "num": 10,
+    "gl": "de",
+    "sort": "relevance"
+}
 
   try:
     # Kodieren der Abfrageparameter und Anhängen an die URL
