@@ -11,6 +11,7 @@ api_key = anvil.secrets.get_secret('google_linkedin_search')
 
 # URL der API
 url = "https://www.googleapis.com/customsearch/v1"
+#https://cse.google.com/cse?cx=f4731bf6df41348f2#gsc.tab=0
 
 @anvil.server.callable
 def google_linkedin(full_name, city):
@@ -23,7 +24,7 @@ def google_linkedin(full_name, city):
   params = {
     "key": api_key,
     "cx": cse_id,
-    "q": f"site:linkedin.com intitle:\"{full_name}\" {city}",
+    "q": f"site:linkedin.com intitle:\"{full_name} {city}",
     "num": 10  # Mehr Ergebnisse anfordern, um nach Filterung noch genug zu haben
   }
 

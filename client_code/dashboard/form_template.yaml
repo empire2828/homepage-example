@@ -16,6 +16,10 @@ components_by_slot:
     properties: {}
     type: ColumnPanel
   - layout_properties: {}
+    name: text_1
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  - layout_properties: {}
     name: bookings_repeating_panel
     properties: {item_template: dashboard.bookings_ItemTemplate}
     type: RepeatingPanel
