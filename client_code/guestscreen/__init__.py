@@ -11,6 +11,8 @@ class guestscreen(guestscreenTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.AI_result_text_area.height=310
+    self.linkedin_check_text_box.height=135
 
   def guestscreen_button_click(self, **event_args):
     """Handle button click event."""
