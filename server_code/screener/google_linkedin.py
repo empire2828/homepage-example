@@ -1,7 +1,6 @@
 import anvil.http
 import urllib.parse
 import anvil.secrets
-import re
 
 # Google Custom Search Engine ID
 cse_id = "f4731bf6df41348f2"
@@ -20,7 +19,6 @@ def google_linkedin(full_name, city):
   if city is None:
     city = ""
 
-  # Einrichten der Abfrageparameter
   params = {
     "key": api_key,
     "cx": cse_id,
@@ -28,42 +26,62 @@ def google_linkedin(full_name, city):
     "num": 10,
     "gl": "de",
     "sort": "relevance"
+  }
+  "q": f' {full_name} {city}',
+#"q": f'site:linkedin.com/in/ "{full_name}" {city}',
+#"exactTerms": full_name,
+"num": 10
 }
 
-  try:
-    # Kodieren der Abfrageparameter und Anhängen an die URL
-    encoded_params = urllib.parse.urlencode(params)
-    full_url = f"{url}?{encoded_params}"
+try:
+  # Kodieren der Abfrageparameter und Anhängen an die URL
+  encoded_params = urllib.parse.urlencode(params)
+  full_url = f"{url}?{encoded_params}"
 
-    # HTTP-Anfrage mithilfe der Anvil-Bibliothek mit json=True
-    response = anvil.http.request(full_url, method="GET", json=True)
+  # HTTP-Anfrage mithilfe der Anvil-Bibliothek mit json=True
+  response = anvil.http.request(full_url, method="GET", json=True)
 
-    # Nur die Titel der relevanten Profile extrahieren
-    titles = []
-    if "items" in response:
-      for item in response["items"]:
-        title = item.get("title", "")
-        # Ausschließen von Titeln, die mit "100+" beginnen und "profiles" enthalten
-        if not "profiles | LinkedIn" in title and not "Profile mit dem Suchbegriff" in title:
-          titles.append(title)
-          # Sobald wir drei Titel haben, brechen wir ab
-          if len(titles) >= 3:
+  # Debugging
+  print("API-Antwort:", response)
+
+  # Nur die Titel der relevanten Profile extrahieren
+  results = []
+  if "items" in response:
+    for item in response["items"]:
+      title = item.get("title", "")
+      #link = item.get("link", "")
+      #snippet = item.get("snippet", "")
+
+      # Nur Ergebnisse mit dem exakten Namen im Titel berücksichtigen
+      if full_name.lower() in title.lower():
+        # Ausschließen von Suchergebnisseiten und Listenseiten
+        if  "profiles | LinkedIn" not in title and "Profile mit dem Suchbegriff" not in title:
+          results.append(f"{title}")
+          # Sobald wir drei relevante Ergebnisse haben, brechen wir ab
+          if len(results) >= 3:
             break
 
-    # Rückgabe der Titel mit Zeilenumbruch
-    if titles:
-      return "\n".join(titles)
-    else:
-      return None
+    # Rückgabe der Ergebnisse mit Zeilenumbruch
+  if results:
+    return "\n".join(results)
+  else:
+    return f"Keine passenden LinkedIn-Profile für '{full_name}' in {city if city else 'beliebiger Stadt'} gefunden."
 
-  except Exception as e:
-    print(f"Fehler beim Suchen nach LinkedIn-Profilen: {e}")
-    return None
+except Exception as e:
+  print(f"Fehler beim Suchen nach LinkedIn-Profilen: {e}")
+  return f"Fehler bei der Suche: {str(e)}"
 
 
 # Beispielanwendung
 #full_name = "Dirk Klemer"
 #city = "Hamburg"
-#title = google_linkedin(full_name, city)
-#if title:
-#  print(title)
+#ergebnisse = google_linkedin(full_name, city)
+#if ergebnisse:
+#  print(ergebnisse)
+
+# Beispielanwendung
+#full_name = "Carolin Bunsen"
+#city = "Georgsmarienhütte"
+#ergebnisse = google_linkedin(full_name, city)
+#if ergebnisse:
+#  print(ergebnisse)
