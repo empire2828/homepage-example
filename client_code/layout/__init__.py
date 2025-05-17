@@ -89,6 +89,7 @@ class layout(layoutTemplate):
       print("layout form show end:", time.strftime("%H:%M:%S"))
 
   def help_icon_button_click(self, **event_args):
+    self.reset_links()
     open_form('help')
     pass
 
