@@ -215,6 +215,7 @@ def get_dashboard_data_dict():
         'adults': b['adults'],
         'children': b['children']
       })
+      serialized_bookings.sort(key=lambda b: b['arrival'] or "") 
 
       # Subscription-Logik korrigiert
       if user['subscription'] in ['Subscription', 'Pro-Subscription', 'Canceled']:
