@@ -22,13 +22,13 @@ class dashboard(dashboardTemplate):
     if dashboard_data:      
       last_login =  user['last_login'].replace(tzinfo=None)
       now = datetime.now()
-      if now - last_login > timedelta(days=5):
+      if now - last_login > timedelta(days=3):
         cache_too_old = True
         print('Cache too old', last_login,now)
     else:
       cache_too_old = True
 
-    local_storage_update_needed = user['local_storage_update_needed'] 
+    local_storage_update_needed = True
     
     if not dashboard_data or cache_too_old or local_storage_update_needed:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')

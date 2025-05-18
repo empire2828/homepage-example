@@ -18,7 +18,7 @@ def launch_sync_smoobu():
   result= anvil.server.launch_background_task('sync_smoobu',user_email)
   save_smoobu_userid(user_email)
   guest_data_update(user_email)
-  current_user['local_storage_update_needed'] = True
+  current_user['server_data_last_update'] = datetime.now()
   return result
 
 @anvil.server.background_task
