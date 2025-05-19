@@ -29,6 +29,7 @@ class dashboard(dashboardTemplate):
       cache_too_old = True
 
     local_storage_update_needed = True
+    #user['server_data_last_update']
     
     if not dashboard_data or cache_too_old or local_storage_update_needed:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')
