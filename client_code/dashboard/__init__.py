@@ -29,7 +29,26 @@ class dashboard(dashboardTemplate):
       cache_too_old = True
 
     local_storage_update_needed = True
-    #user['server_data_last_update']
+    if user is not None and dashboard_data is not None:
+      #if ('server_data_last_update' in user and 
+      if ('server_data_last_update' in dashboard_data and
+         user['server_data_last_update'] is not None and 
+         dashboard_data['server_data_last_update'] is not None):
+            if dashboard_data['server_data_last_update'] >= user['server_data_last_update']:
+              local_storage_update_needed = False
+
+    if dashboard_data is not None:
+      local_date = dashboard_data.get('server_data_last_update')
+      if local_date is not None:
+        print('local_date', local_date)
+
+    if user is not None:
+      server_date = user.get('server_data_last_update')
+      if server_date is not None:
+        print('server_date', server_date)
+
+      
+    print('local_storage_update_needed: ',local_storage_update_needed)
     
     if not dashboard_data or cache_too_old or local_storage_update_needed:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')

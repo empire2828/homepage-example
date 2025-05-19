@@ -36,7 +36,7 @@ def google_linkedin(full_name, city):
     response = anvil.http.request(full_url, method="GET", json=True)
 
     # Debugging
-    print("API-Antwort:", response)
+    #print("API-Antwort:", response)
 
     # Nur die Titel der relevanten Profile extrahieren
     results = []
@@ -67,8 +67,8 @@ def google_linkedin(full_name, city):
 
 
 # Beispielanwendung
-full_name = "Dirk Klemer"
-city = "Hamburg"
-ergebnisse = google_linkedin(full_name, city)
-if ergebnisse:
-  print(ergebnisse)
+#full_name = "Dirk Klemer"
+#city = "Hamburg"
+#ergebnisse = google_linkedin(full_name, city)
+#if ergebnisse:
+#  print(ergebnisse)

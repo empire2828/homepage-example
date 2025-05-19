@@ -136,44 +136,6 @@ def send_email_to_support(text, file=None, email=None):
     print("send_email_to_support: ERROR", e)
 
 @anvil.server.callable
-def get_dashboard_data():
-  print("server code start:", time.strftime("%H:%M:%S"))
-  user = anvil.users.get_user()
-
-  # Fetch bookings data
-  bookings = app_tables.bookings.search(
-    q.fetch_only(
-      "guestname", "arrival", "departure", "apartment",
-      "channel_name", "screener_google_linkedin", "address_street",
-      "address_postalcode", "address_city", "screener_address_check",
-      "screener_openai_job", "phone", "screener_phone_check",
-      "adults", "children"
-    ),
-    email=user['email']
-  )
-
-  # Subscription check logic
-  has_subscription = False
-  if user:
-    if user['subscription'] in ['Subscription', 'Pro-Subscription', 'Canceled']:
-      has_subscription = True
-    else:
-      signed_up_date = user['signed_up']
-      if signed_up_date:
-        signed_up_aware = signed_up_date.replace
-        trial_end = signed_up_aware + timedelta(days=5)
-        now_utc = datetime.now
-        has_subscription = now_utc <= trial_end
-
-    user['local_storage_update_needed'] = False
-    
-    print("server code end:", time.strftime("%H:%M:%S"))
-    return {
-      'bookings': list(bookings),
-      'has_subscription': has_subscription
-    }
-
-@anvil.server.callable
 def get_dashboard_data_dict():
   print("server code start:", time.strftime("%H:%M:%S"))
   user = anvil.users.get_user()
@@ -228,13 +190,15 @@ def get_dashboard_data_dict():
           now_utc = datetime.now
           has_subscription = now_utc <= trial_end
 
-    user['local_storage_update_needed']=False
+    #user['local_storage_update_needed']=False
+    server_data_last_update= user['server_data_last_update']
     
     print("server code end:", time.strftime("%H:%M:%S"))
 
   return {
     'bookings': serialized_bookings,  # Serialisierte Daten statt Row-Objekte
-    'has_subscription': has_subscription
+    'has_subscription': has_subscription,
+    'server_data_last_update': server_data_last_update
   }
 
 @anvil.server.callable
