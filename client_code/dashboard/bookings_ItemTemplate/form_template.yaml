@@ -143,9 +143,14 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'LJHFVZ,KIAVLA'}
   name: spacer_1
-  properties: {height: 11.7958984375}
+  properties: {height: 5.3291015625}
   type: Spacer
 container:
-  properties: {background: '', col_widths: '{}'}
+  properties:
+    background: ''
+    col_widths: '{}'
+    spacing:
+      margin: [null, null, null, null]
+    spacing_below: small
   type: ColumnPanel
 is_package: true

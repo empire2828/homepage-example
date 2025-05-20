@@ -452,7 +452,7 @@ components:
   name: spacer_4
   properties: {height: 32}
   type: Spacer
-- event_bindings: {click: second_test_button_click}
+- event_bindings: {click: testen_button_click}
   layout_properties: {grid_position: 'MAYQMM,YCEXBO'}
   name: second_test_button
   properties: {bold: true, role: filled-button, text: 30 Tage testen}
