@@ -12,7 +12,7 @@ class data_protection_route(Route):
     path = "/data_protection"
     form = "data_protection"
 
-class daashboard_route(Route):
+class dashboard_route(Route):
     path = "/dashboard"
     form = "dashboard"
 
