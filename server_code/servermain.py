@@ -4,7 +4,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from . import routes # noqa: F401
 
 @anvil.server.background_task
@@ -183,7 +183,7 @@ def get_dashboard_data_dict():
         if signed_up_date:
           # Korrekte Zeitberechnung mit Zeitzone
           trial_end = signed_up_date + timedelta(days=5)
-          now_utc = datetime.now
+          now_utc = datetime.now(timezone.utc)
           has_subscription = now_utc <= trial_end
 
     #user['local_storage_update_needed']=False
