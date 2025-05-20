@@ -22,7 +22,7 @@ class dashboard(dashboardTemplate):
     if dashboard_data:      
       last_login =  user['last_login'].replace(tzinfo=None)
       now = datetime.now()
-      if now - last_login > timedelta(days=3):
+      if now - last_login > timedelta(days=5):
         cache_too_old = True
         print('Cache too old', last_login,now)
     else:
