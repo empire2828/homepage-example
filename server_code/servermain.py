@@ -1,8 +1,5 @@
 import anvil.email
-#import anvil.secrets
-#import anvil.google.auth, anvil.google.mail
 import anvil.users
-#import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
@@ -61,7 +58,6 @@ def send_result_email(user_email, reservation_id):
   subject="Guestscreener- Ergebnisse für: "+ bookingdata
   print("send_email:", user_email, reservation_id, email_text)
   try:
-    #send_email(user_email,email_text)
     anvil.email.send(
       to=user_email,
       from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse

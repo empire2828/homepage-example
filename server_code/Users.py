@@ -74,7 +74,7 @@ def get_user_has_subscription():
     if signed_up_date:
         # Konvertiere naive Zeit zu UTC-aware Zeit
         signed_up_aware = signed_up_date.replace(tzinfo=timezone.utc)
-        trial_end = signed_up_aware + timedelta(days=5)
+        trial_end = signed_up_aware + timedelta(days=30)
         now_utc = datetime.now(timezone.utc)  # Korrekte UTC-Zeit
         return now_utc <= trial_end   
     return False
