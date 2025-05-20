@@ -103,7 +103,7 @@ components:
     type: TextBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD MSXOMT,XVATWP'}
     name: address_check_box
-    properties: {text: Adresse geprüft}
+    properties: {background: '', checked: false, foreground: '', text: Adresse geprüft}
     type: CheckBox
   - layout_properties: {grid_position: 'UEOEIJ,ICGROD GMDPXJ,BEUOZG'}
     name: phone_text_box

@@ -14,11 +14,11 @@ components_by_slot:
           text: Hier Gast manuell checken
         type: Label
       - event_bindings: {click: guestscreen_button_click}
-        layout_properties: {grid_position: 'MYOBEA,LJQOEQ'}
+        layout_properties: {grid_position: 'MYOBEA,WZBBGF'}
         name: guestscreen_button
         properties: {background: '', foreground: '', role: filled-button, text: Gast checken}
         type: Button
-      - layout_properties: {grid_position: 'MYOBEA,DEHIKS'}
+      - layout_properties: {grid_position: 'MYOBEA,USWTVN'}
         name: heading_1
         properties: {}
         type: form:dep_g9k4toow7i44kq:_Components.Heading

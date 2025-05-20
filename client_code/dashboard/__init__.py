@@ -22,7 +22,7 @@ class dashboard(dashboardTemplate):
     if dashboard_data:      
       last_login =  user['last_login'].replace(tzinfo=None)
       now = datetime.now()
-      if now - last_login > timedelta(days=5):
+      if now - last_login > timedelta(days=7):
         cache_too_old = True
         print('Cache too old', last_login,now)
     else:
@@ -30,7 +30,6 @@ class dashboard(dashboardTemplate):
 
     local_storage_update_needed = True
     if user is not None and dashboard_data is not None:
-      #if ('server_data_last_update' in user and 
       if ('server_data_last_update' in dashboard_data and
          user['server_data_last_update'] is not None and 
          dashboard_data['server_data_last_update'] is not None):
@@ -92,12 +91,23 @@ class dashboard(dashboardTemplate):
   def resync_smoobu_button_click(self, **event_args):
     user = users.get_user()
     if user['smoobu_api_key'] is not None:
-      alert("Hintergrund- Synchronisation wird gestartet. Das dauert ca. 10 Minuten.")
-      local_storage.clear()
-      anvil.server.call_s('delete_bookings_by_email',anvil.users.get_user()['email'])
-      anvil.server.call_s('launch_sync_smoobu')
-      anvil.server.call_s('launch_get_bookings_risk')
-    pass
+      result = alert(
+        content="Hierdurch werden im Hintergrund alle Daten erneut synchronsiert. Dies ist normalerweise nicht notwendig, da neue Buchungen per API automatisiert empfangen werden. Die erneute Synchronisation dauert ca. 10 Minuten.",
+        title="Re-synchronisation Starten?",
+        buttons=[
+          ("Ja", "YES"),
+          ("Nein", "NO"),
+        ]
+      )
+      if result == "YES":
+        local_storage.clear()
+        anvil.server.call_s('delete_bookings_by_email',anvil.users.get_user()['email'])
+        anvil.server.call_s('launch_sync_smoobu')
+        anvil.server.call_s('launch_get_bookings_risk')
+        pass
+      else:
+      # Code ausführen, wenn Benutzer Nein wählt oder das Popup schließt
+        pass
 
   def refresh_button_click(self, **event_args):
     local_storage.clear()
