@@ -15,15 +15,23 @@ components_by_slot:
     - components:
       - layout_properties: {grid_position: 'UFQCUP,RBHELV VDCXNE,ACSFSH'}
         name: guest_name_label
-        properties: {text: Vor- und Nachname}
+        properties:
+          spacing:
+            margin: [null, null, '0', null]
+            padding: ['4', null, '4', null]
+          text: Vor- und Nachname
         type: Label
       - layout_properties: {grid_position: 'UFQCUP,RBHELV SVVYVM,XISVZQ'}
         name: guest_name_text_box
-        properties: {background_color: 'theme:Secondary Container', display_bold: true}
+        properties: {background_color: 'theme:Secondary Container', display_bold: true, display_font_size: -1}
         type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
       - layout_properties: {grid_position: 'UFQCUP,RBHELV YIXKUE,NRHJYR'}
         name: street_label
-        properties: {text: Strasse}
+        properties:
+          spacing:
+            margin: [null, null, '0', null]
+            padding: ['4', null, '4', null]
+          text: Strasse
         type: Label
       - layout_properties: {grid_position: 'UFQCUP,RBHELV KWHDKG,PEQIJI'}
         name: street_text_box
@@ -31,7 +39,11 @@ components_by_slot:
         type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
       - layout_properties: {grid_position: 'UFQCUP,RBHELV URVRLT,XZNKBZ XTCIQL,ARZYZV'}
         name: zip_label
-        properties: {text: PLZ}
+        properties:
+          spacing:
+            margin: [null, null, '0', null]
+            padding: ['4', null, '4', null]
+          text: PLZ
         type: Label
       - layout_properties: {grid_position: 'UFQCUP,RBHELV URVRLT,XZNKBZ OOAPYV,VFFZGQ'}
         name: zip_text_box
@@ -39,7 +51,11 @@ components_by_slot:
         type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
       - layout_properties: {grid_position: 'UFQCUP,RBHELV URVRLT,HRKYUV OQCBKE,FJDSQD'}
         name: city_label
-        properties: {text: Stadt}
+        properties:
+          spacing:
+            margin: [null, null, '0', null]
+            padding: ['4', null, '4', null]
+          text: Stadt
         type: Label
       - layout_properties: {grid_position: 'UFQCUP,RBHELV URVRLT,HRKYUV JBDTAO,MDZZRD'}
         name: city_text_box
@@ -47,15 +63,28 @@ components_by_slot:
         type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
       - layout_properties: {grid_position: 'UFQCUP,RBHELV WEOKSI,IAIJQT'}
         name: address_manual_check_box
-        properties: {enabled: true, text: Adresse geprüft}
+        properties:
+          enabled: true
+          spacing:
+            margin: ['0', null, null, null]
+            padding: ['4', null, '4', null]
+          text: Adresse geprüft
         type: CheckBox
       - layout_properties: {grid_position: 'UFQCUP,RBHELV GYRTCS,PASQCK'}
         name: label_3
-        properties: {text: Telefon}
+        properties:
+          spacing:
+            margin: [null, null, '0', null]
+            padding: ['4', null, '4', null]
+          text: Telefon
         type: Label
       - layout_properties: {grid_position: 'UFQCUP,QDGLQS GFPUZG,ERWGXM'}
         name: label_2
-        properties: {text: AI check}
+        properties:
+          spacing:
+            margin: [null, null, '0', null]
+            padding: ['4', null, '4', null]
+          text: AI check
         type: Label
       - layout_properties: {grid_position: 'UFQCUP,QDGLQS DPXIDQ,BDBKBV'}
         name: AI_result_text_area
@@ -63,7 +92,11 @@ components_by_slot:
         type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
       - layout_properties: {grid_position: 'UFQCUP,QDGLQS FGQHZZ,AAHGUD'}
         name: linkedin_check_label
-        properties: {text: Linkedin check}
+        properties:
+          spacing:
+            margin: [null, null, '0', null]
+            padding: ['4', null, '4', null]
+          text: Linkedin check
         type: Label
       - layout_properties: {grid_position: 'UFQCUP,QDGLQS DETMAP,KNVWXY'}
         name: linkedin_check_text_box
@@ -75,7 +108,10 @@ components_by_slot:
         type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
       - layout_properties: {grid_position: 'UFQCUP,RBHELV ZONYJR,LXQPHM'}
         name: phone_manual_check_box
-        properties: {text: Telefonnummer geprüft}
+        properties:
+          spacing:
+            padding: ['4', null, '0', null]
+          text: Telefonnummer geprüft
         type: CheckBox
       layout_properties: {grid_position: 'VTORFE,WFUEET'}
       name: guest_data_outlined_card
