@@ -87,7 +87,7 @@ def stripe_customer_created():
 @anvil.server.http_endpoint('/stripe/stripe_subscription_updated')
 def stripe_subscription_updated():
   # Here we want to look for "customer.subscription.updated" because this event is what shows whether a subscription is valid or not. Events like "customer.subscription.created" are similar but are called before a charge is attempted and is usually followed by "customer.subscription.updated".
-  # and for CUSTOMER.subscription.updated AND customer.subscription.CREATED And .deleted
+  #############!!!!!!!!!!!!!! FOR CUSTOMER.subscription.updated AND customer.subscription.CREATED And customer.subscription.deleted
   payload_json = json.loads(anvil.server.request.body.get_bytes())
 
   # Make sure the event is in a format we expect
