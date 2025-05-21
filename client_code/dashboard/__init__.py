@@ -45,8 +45,7 @@ class dashboard(dashboardTemplate):
       server_date = user.get('server_data_last_update')
       if server_date is not None:
         print('server_date', server_date)
-
-      
+   
     print('local_storage_update_needed: ',local_storage_update_needed)
     
     if not dashboard_data or cache_too_old or local_storage_update_needed:
