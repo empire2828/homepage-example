@@ -408,7 +408,7 @@ components:
     type: Label
   - layout_properties: {grid_position: 'IQCUEL,OZZWWB ZFORVE,DDKLNB'}
     name: title_2
-    properties: {role: title, text: .}
+    properties: {role: title, text: ''}
     type: Label
   - layout_properties: {grid_position: 'IQCUEL,LWZJGX KIASVM,FXOIPI'}
     name: label_16
