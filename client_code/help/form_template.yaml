@@ -2,7 +2,7 @@ components_by_slot:
   slot_1:
   - layout_properties: {}
     name: title_1
-    properties: {role: title, text: 'Beschreiben Sie hier kurz ihr Problem (gerne mit ScreenShots):'}
+    properties: {role: title, text: 'Beschreibe hier kurz Dein Problem oder Anregung (gerne mit ScreenShots):'}
     type: Label
   - layout_properties: {full_width_row: false}
     name: help_text_area
