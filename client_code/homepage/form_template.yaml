@@ -56,16 +56,16 @@ components:
   name: column_panel_2
   properties: {}
   type: ColumnPanel
-- event_bindings: {click: testen_button_click}
-  layout_properties: {grid_position: 'KYFRKV,AYJIMA'}
-  name: filled_button_1
-  properties: {role: filled-button, text: 30 Tage testen}
-  type: Button
-- layout_properties: {grid_position: 'KIKWHS,HOQGVE'}
-  name: spacer_3
-  properties: {height: 32}
-  type: Spacer
-- layout_properties: {grid_position: 'NONHWX,APRMVR'}
+- components:
+  - layout_properties: {}
+    name: spacer_3
+    properties: {height: 39.173583984375}
+    type: Spacer
+  - event_bindings: {click: testen_button_click}
+    name: filled_button_1
+    properties: {role: filled-button, text: 30 Tage testen}
+    type: Button
+  layout_properties: {grid_position: 'NONHWX,APRMVR'}
   name: rich_text_1
   properties:
     content: |-
@@ -122,7 +122,7 @@ components:
       type: Label
     - layout_properties: {grid_position: 'EXGCIK,ARJOMP'}
       name: text_2
-      properties: {font_size: 18, text: Profile des größten beruflichen Netz-werkes LinkedIn werden gezeigt.}
+      properties: {font_size: 18, text: Die Profile des größten beruflichen Netz-werkes LinkedIn werden durchsucht und angezeigt.}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,AVECON'}
     name: outlined_card_3
@@ -174,7 +174,7 @@ components:
       type: Label
     - layout_properties: {grid_position: 'LGBMGK,AMYMYQ'}
       name: text_4
-      properties: {font_size: 18, text: 'Die Adresse wird dahin gehend geprüft, ob es diese tatsächlich gibt.'}
+      properties: {font_size: 18, text: 'Die Adresse wird dahingehend geprüft, ob es diese tatsächlich gibt.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,YFIIZV'}
     name: outlined_card_8
@@ -215,7 +215,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'OKZENO,GZFQZL'}
     name: image_4
-    properties: {height: 70.282958984375, source: _/theme/smoobu.jpg}
+    properties: {height: 62.001708984375, source: _/theme/smoobu.jpg}
     type: Image
   - layout_properties: {grid_position: 'OKZENO,UETBJW'}
     name: rich_text_4
@@ -232,12 +232,12 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'USYSUM,PWSOBU'}
   name: spacer_9
-  properties: {height: 41.64495849609375}
+  properties: {height: 59.906219482421875}
   type: Spacer
 - layout_properties: {grid_position: 'TWGPFQ,KZILKJ'}
   name: image_3
   properties:
-    height: 272.5806884765625
+    height: 275.49560546875
     margin: [null, '8', null, '8']
     source: _/theme/Beispielmaske.jpg
   type: Image
@@ -255,12 +255,12 @@ components:
   type: RichText
 - layout_properties: {grid_position: 'WCVNWP,MUNGTW'}
   name: spacer_6
-  properties: {height: 34.4556884765625}
+  properties: {height: 62.25518798828125}
   type: Spacer
 - components:
   - layout_properties: {grid_position: 'BMXVKJ,QJCHOD'}
     name: image_2
-    properties: {display_mode: shrink_to_fit, height: 96.53466796875, source: _/theme/email.jpg}
+    properties: {display_mode: shrink_to_fit, height: 79.85931396484375, source: _/theme/email.jpg}
     type: Image
   - components: []
     layout_properties: {grid_position: 'BMXVKJ,HJOBZT'}
@@ -278,19 +278,32 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'RGHABL,HMYEIA'}
   name: spacer_17
-  properties: {}
+  properties: {height: 62.853271484375}
   type: Spacer
-- layout_properties: {grid_position: 'UZXACJ,IZIFQM'}
-  name: icon_button_1
-  properties: {align: center, appearance: standard, enabled: true, icon: 'mi:delete'}
-  type: form:dep_g9k4toow7i44kq:_Components.IconButton
+- layout_properties: {grid_position: 'UZXACJ,PTWRFZ'}
+  name: image_5
+  properties: {height: 77.50689697265625, source: _/theme/papierkorb.jpg}
+  type: Image
 - layout_properties: {grid_position: 'UZXACJ,YPYTJA'}
   name: rich_text_5
-  properties: {content: 14 Tage nach Abreise werden alle Buuchungs- und Gästedaten automatisiert gelöscht., font_size: 18}
+  properties:
+    content: 14 Tage nach Abreise werden alle Buchungs- und Gästedaten automatisiert gelöscht.
+    font_size: 18
+    spacing:
+      margin: [null, '6', null, '6']
+      padding: [null, '6', null, '6']
   type: RichText
 - layout_properties: {grid_position: 'JYEFSH,WWQIWC'}
   name: spacer_11
-  properties: {height: 38.19354248046875}
+  properties: {height: 20.10675048828125}
+  type: Spacer
+- layout_properties: {grid_position: 'OLSRVR,QRJMDM'}
+  name: divider_2
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Divider
+- layout_properties: {grid_position: 'OVHKCM,GNOJHF'}
+  name: spacer_18
+  properties: {}
   type: Spacer
 - event_bindings: {click: testen_button_click}
   layout_properties: {grid_position: 'NKYGON,TVEZAN'}
@@ -310,10 +323,6 @@ components:
   name: spacer_16
   properties: {}
   type: Spacer
-- layout_properties: {grid_position: 'TVXNKS,VFYTAJ'}
-  name: divider_2
-  properties: {}
-  type: form:dep_g9k4toow7i44kq:_Components.Divider
 - layout_properties: {grid_position: 'MIQGPO,CYFDXQ'}
   name: spacer_7
   properties: {height: 33.314208984375}
@@ -501,30 +510,44 @@ components:
     name: elevated_card_6
     properties: {role: elevated-card, wrap_on: never}
     type: ColumnPanel
-  - layout_properties: {grid_position: 'IQCUEL,QWNJEE'}
+  - layout_properties: {grid_position: 'IQCUEL,QWNJEE WFYPUO,RGCQIV'}
     name: label_17
-    properties: {bold: true, font_size: 18, text: Abo- Preis monatlich}
+    properties:
+      bold: true
+      font_size: 18
+      spacing:
+        margin: [null, null, null, '6']
+        padding: [null, null, null, '6']
+      text: Abo- Preis monatlich
     type: Label
-  - layout_properties: {grid_position: 'IQCUEL,QWNJEE EXAMII,LMATMA'}
-    name: label_26
-    properties: {font_size: 18, text: jederzeit kündbar}
-    type: Label
-  - layout_properties: {grid_position: 'IQCUEL,OZZWWB'}
+  - layout_properties: {grid_position: 'IQCUEL,QWNJEE ZBIGCU,AEIHXZ'}
+    name: spacer_10
+    properties: {height: 50.4088134765625}
+    type: Spacer
+  - layout_properties: {grid_position: 'IQCUEL,OZZWWB SOMOIN,PTOWWN'}
     name: label_21
     properties: {align: center, bold: true, font_size: 18, text: '€ 0,00'}
     type: Label
-  - layout_properties: {grid_position: 'IQCUEL,OZZWWB NOCRXY,XPCNDW'}
-    name: spacer_10
-    properties: {height: 65.8228759765625}
+  - layout_properties: {grid_position: 'IQCUEL,OZZWWB IMUDSV,PEQDHC'}
+    name: spacer_21
+    properties: {}
     type: Spacer
+  - layout_properties: {grid_position: 'IQCUEL,OZZWWB DNDBIA,IOGPLK'}
+    name: text_5
+    properties: {align: center, font_size: 18, text: für immer kostenlos}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
   - layout_properties: {grid_position: 'IQCUEL,LWZJGX KIASVM,FXOIPI'}
     name: label_16
     properties: {align: center, bold: true, font_size: 18, text: '€ 2,99'}
     type: Label
-  - layout_properties: {grid_position: 'IQCUEL,LWZJGX KXALZQ,ZCLKHE'}
-    name: label_24
-    properties: {align: center, font_size: 18, text: 30 Tage kostenlos testen}
-    type: Label
+  - layout_properties: {grid_position: 'IQCUEL,LWZJGX EQGXKR,JZJQQI'}
+    name: spacer_19
+    properties: {}
+    type: Spacer
+  - layout_properties: {grid_position: 'IQCUEL,LWZJGX DJILBO,PAUPDT'}
+    name: text_6
+    properties: {align: center, font_size: 18, text: 30 Tage kostenlos}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
   - layout_properties: {grid_position: 'IQCUEL,PIPGAT UWJNMF,FZAYWR'}
     name: label_7
     properties:
@@ -535,10 +558,14 @@ components:
         margin: [null, null, '4', null]
       text: € 4,99
     type: Label
-  - layout_properties: {grid_position: 'IQCUEL,PIPGAT UKNRCE,VDRZQL'}
-    name: label_25
-    properties: {align: center, font_size: 18, text: 30 Tage kostenlos testen}
-    type: Label
+  - layout_properties: {grid_position: 'IQCUEL,PIPGAT QAXZNW,ENCLDV'}
+    name: spacer_20
+    properties: {}
+    type: Spacer
+  - layout_properties: {grid_position: 'IQCUEL,PIPGAT RMQVEG,XEHGPC'}
+    name: text_7
+    properties: {align: center, font_size: 18, text: 30 Tage kostenlos}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
   layout_properties: {grid_position: 'CFSXJQ,LSZEBP'}
   name: outlined_card_4
   properties:
@@ -547,6 +574,21 @@ components:
       margin: [null, '6', null, '6']
     wrap_on: never
   type: ColumnPanel
+- layout_properties: {grid_position: 'RYSXCY,PSKUQA'}
+  name: spacer_22
+  properties: {}
+  type: Spacer
+- layout_properties: {grid_position: 'NBIFDU,PIJDSI'}
+  name: text_8
+  properties:
+    align: center
+    bold: true
+    font_size: 18
+    spacing:
+      margin: [null, null, null, '6']
+      padding: [null, null, null, '6']
+    text: Alle Abos jederzeit kündbar.
+  type: form:dep_g9k4toow7i44kq:_Components.Text
 - layout_properties: {grid_position: 'LZWKXC,NEQNTC'}
   name: spacer_8
   properties: {height: 32}
@@ -588,6 +630,6 @@ components:
   properties: {align: center, text: Datenschutz}
   type: Link
 container:
-  properties: {col_widths: '{"KZILKJ":35,"SKCXEY":25}'}
+  properties: {col_widths: '{"KZILKJ":30,"SKCXEY":30}'}
   type: ColumnPanel
 is_package: true
