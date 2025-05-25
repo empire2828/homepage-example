@@ -133,7 +133,6 @@ def send_email_to_support(text, file=None, email=None):
 
 @anvil.server.callable
 def get_dashboard_data_dict():
-  print("server code start:", time.strftime("%H:%M:%S"))
   user = anvil.users.get_user()
 
   # Initialisiere bookings als leere Liste für den Fall, dass kein User existiert
@@ -188,8 +187,6 @@ def get_dashboard_data_dict():
 
     #user['local_storage_update_needed']=False
     server_data_last_update= user['server_data_last_update']
-    
-    print("server code end:", time.strftime("%H:%M:%S"))
 
   return {
     'bookings': serialized_bookings,  # Serialisierte Daten statt Row-Objekte

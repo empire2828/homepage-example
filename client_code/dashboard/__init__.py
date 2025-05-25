@@ -13,16 +13,15 @@ class dashboard(dashboardTemplate):
     self.init_components(**properties)
     
   def form_show(self, **event_args):
-    print("dashboard form show sart:", time.strftime("%H:%M:%S"))
-    print("server call start:", time.strftime("%H:%M:%S"))
     user = users.get_user()
+    print('User Logged in: ',user['email'])
     dashboard_data = local_storage.get('dashboard_data')
     
     cache_too_old = False
     if dashboard_data:      
       last_login =  user['last_login'].replace(tzinfo=None)
       now = datetime.now()
-      if now - last_login > timedelta(days=7):
+      if now - last_login > timedelta(days=3):
         cache_too_old = True
         print('Cache too old', last_login,now)
     else:
@@ -46,19 +45,16 @@ class dashboard(dashboardTemplate):
       if server_date is not None:
         print('server_date', server_date)
    
-    print('local_storage_update_needed: ',local_storage_update_needed)
+    print('dashboard data not None: ', dashboard_data is not None, 'local_storage_update_needed: ',local_storage_update_needed,'cache too old: ',cache_too_old)
     
     if not dashboard_data or cache_too_old or local_storage_update_needed:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')
       local_storage['dashboard_data'] = dashboard_data
-    print("server call end:", time.strftime("%H:%M:%S"))    
     user_has_subscription= dashboard_data['has_subscription']
 
     if user_has_subscription:
-      print("repeating panel start:", time.strftime("%H:%M:%S"))
       panel_data = dashboard_data['bookings']
       self.bookings_repeating_panel.items = panel_data
-      print("repeating panel end:", time.strftime("%H:%M:%S"))
       
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
@@ -75,7 +71,6 @@ class dashboard(dashboardTemplate):
         self.chanel_manager_connect_button.visible = False
         self.bookings_repeating_panel.visible = False
         
-    print("dashboard form show end:", time.strftime("%H:%M:%S"))
   
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""

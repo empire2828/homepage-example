@@ -75,10 +75,11 @@ components_by_slot:
           Damit werden neue Buchungen automatisch übertragen. Trage folgendes ein:
 
       type: Label
-    - layout_properties: {grid_position: 'ODTDZA,QHKGYO'}
-      name: body_4
-      properties: {font_size: 18, italic: true, role: body, text: 'https://guestscreener.com/_/api/smoobu/webhook'}
-      type: Label
+    - data_bindings: []
+      layout_properties: {grid_position: 'TCKHMI,NGNHWV'}
+      name: rich_text_1
+      properties: {content: '*https://guestscreener.com/_/api/smoobu/webhook*', font_size: 18, format: markdown}
+      type: RichText
     layout_properties: {}
     name: outlined_card_3
     properties: {role: outlined-card}
@@ -113,7 +114,7 @@ components_by_slot:
     - event_bindings: {click: Data_protection_link_click}
       layout_properties: {grid_position: 'EGKLGQ,MQMWBO'}
       name: Data_protection_link
-      properties: {font_size: 18, text: 'https://guestscreener.com/data_protection'}
+      properties: {bold: false, font_size: 18, italic: true, text: 'https://guestscreener.com/data_protection'}
       type: Link
     layout_properties: {}
     name: outlined_card_5
