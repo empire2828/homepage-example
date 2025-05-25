@@ -55,3 +55,4 @@ class homepage(homepageTemplate):
   def home_link_click(self, **event_args):
     open_form('homepage')
     pass
+

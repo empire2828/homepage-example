@@ -1,19 +1,15 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'QDTLHF,TUZWTW TIFUIG,OEHEQG'}
-    name: image_1
-    properties: {display_mode: shrink_to_fit, height: '90', horizontal_align: left, source: _/theme/guestscreener.png}
-    type: Image
-  - layout_properties: {grid_position: 'QDTLHF,TUZWTW SBZBGS,CUSYYH'}
-    name: linear_panel_3
-    properties: {}
-    type: LinearPanel
   - components:
+    - layout_properties: {grid_position: 'OVKUPU,SINBZT'}
+      name: image_1
+      properties: {display_mode: shrink_to_fit, height: '90', horizontal_align: left, source: _/theme/guestscreener.png}
+      type: Image
     - event_bindings: {click: login_button_click}
-      layout_properties: {grid_position: 'JIVANT,NJCKHB'}
+      layout_properties: {grid_position: 'OVKUPU,ITMSVO'}
       name: login_button
       properties:
-        align: center
+        align: right
         background: theme:Primary
         bold: true
         foreground: theme:On Primary
@@ -23,20 +19,6 @@ components:
           padding: [null, '24', null, '24']
         spacing_below: large
         text: '  Login  '
-      type: Button
-    - event_bindings: {click: testen_button_click}
-      layout_properties: {grid_position: 'JIVANT,NPWKNY'}
-      name: testen_button
-      properties:
-        align: right
-        background: theme:Primary
-        bold: true
-        foreground: theme:On Primary
-        icon_align: right
-        role: outlined-button
-        spacing:
-          padding: [null, '24', null, null]
-        text: 30 Tage testen
       type: Button
     layout_properties: {grid_position: 'QDTLHF,JUECYB'}
     name: column_panel_3
@@ -50,7 +32,7 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'DCEYRM,FQZQIK'}
   name: headline_1
-  properties: {align: center, bold: true, font_size: 38, role: headline, text: Schützen Sie Ihre Ferienhaus vor Fake-Profilen und problematischen Gästen}
+  properties: {align: center, bold: true, font_size: 38, role: headline, text: Schütze Dein Ferienhaus vor Fake-Profilen und problematischen Gästen}
   type: Label
 - layout_properties: {grid_position: 'VCVIFN,OTKTRF'}
   name: spacer_2
@@ -68,15 +50,38 @@ components:
       role: title
       spacing:
         margin: [null, '6', null, '6']
-      text: Guestscreener.com ist Ihre Lösung für sicheres Gästemanagement. Entwickelt von Vermietern für Vermieter. Direkte Anbindung an Smoobu.
+      text: 'Guestscreener.com ist Deine Lösung für sicheres Gästemanagement. Entwickelt von Vermietern für Vermieter. '
     type: Label
   layout_properties: {grid_position: 'ISUFTJ,PYQQRP'}
   name: column_panel_2
   properties: {}
   type: ColumnPanel
+- event_bindings: {click: testen_button_click}
+  layout_properties: {grid_position: 'KYFRKV,AYJIMA'}
+  name: filled_button_1
+  properties: {role: filled-button, text: 30 Tage testen}
+  type: Button
 - layout_properties: {grid_position: 'KIKWHS,HOQGVE'}
   name: spacer_3
   properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'NONHWX,APRMVR'}
+  name: rich_text_1
+  properties:
+    content: |-
+      Du freust Dich über Direktbuchungen.... aber was ist wenn das Ferienhaus danach verwüstet ist und die angegebene Adresse stimmt gar nicht und der Name war ausgedacht?
+
+      Bestimmte Berufsgruppen sind sehr anspruchsvoll. Du willst vorher wissen wer kommt, aber nicht jedes Mal googeln?
+
+      Dann bist Du hier genau richtig!
+    font_size: 18
+    spacing:
+      margin: [null, '6', null, '6']
+      padding: [null, '6', null, '6']
+  type: RichText
+- layout_properties: {grid_position: 'GXKZXD,NGWPWC'}
+  name: spacer_13
+  properties: {}
   type: Spacer
 - components:
   - components:
@@ -91,6 +96,10 @@ components:
           padding: ['6', null, '6', null]
         text: "KI- gestütze \nSuche"
       type: Label
+    - layout_properties: {grid_position: 'ZCBITY,AMYBTI'}
+      name: text_1
+      properties: {font_size: 18, text: Das Internet   wird nach frei verfügbaren Informationen durchsucht.}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,FVMHTO'}
     name: outlined_card_1
     properties:
@@ -109,8 +118,12 @@ components:
         spacing:
           margin: ['6', null, '6', null]
           padding: ['6', null, '6', null]
-        text: "Screening von \nSocial Media"
+        text: LinkedIn Profilanzeige
       type: Label
+    - layout_properties: {grid_position: 'EXGCIK,ARJOMP'}
+      name: text_2
+      properties: {font_size: 18, text: Profile des größten beruflichen Netz-werkes LinkedIn werden gezeigt.}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,AVECON'}
     name: outlined_card_3
     properties:
@@ -128,11 +141,15 @@ components:
         font_size: 18
         spacing:
           margin: ['6', '6', '6', '6']
-          padding: ['6', '15', '6', '15']
+          padding: ['6', '4', '6', '4']
         text: |-
           Telefonummern-
           prüfung
       type: Label
+    - layout_properties: {grid_position: 'KVCFJA,JSDRTD'}
+      name: text_3
+      properties: {font_size: 18, text: Die Telefonnummer wird auf formal richtigen Syntax geprüft.}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,KBSMLA'}
     name: outlined_card_9
     properties:
@@ -155,6 +172,10 @@ components:
           Adress-
           prüfung
       type: Label
+    - layout_properties: {grid_position: 'LGBMGK,AMYMYQ'}
+      name: text_4
+      properties: {font_size: 18, text: 'Die Adresse wird dahin gehend geprüft, ob es diese tatsächlich gibt.'}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,YFIIZV'}
     name: outlined_card_8
     properties:
@@ -171,45 +192,119 @@ components:
       margin: [null, '6', null, '6']
       padding: [null, '6', null, '6']
   type: ColumnPanel
-- layout_properties: {grid_position: 'LWWHYF,EAOQZS'}
-  name: spacer_6
-  properties: {height: 29.18402099609375}
+- layout_properties: {grid_position: 'RHAAWF,ESIYCQ'}
+  name: spacer_12
+  properties: {height: 35.87841796875}
   type: Spacer
-- layout_properties: {grid_position: 'NNGYNY,AWBXZF'}
-  name: rich_text_1
-  properties:
-    content: |-
-      Sie freuen sich auch über Direktbuchungen.... aber wer kommt denn da überhaupt? Falls es mal richtig Probleme geben sollte, müssen Sie den richtigen Namen und Adresse haben um Ihre Ansprüche durchzusetzen. Dann wollen Sie kein Fake-Profil haben in ihrem Buchungssystem.
-
-      Bestimmte Berufsgruppen sind sehr anspruchsvoll. Sie wollen vorher wissen wer kommt, möchten aber nicht jedes Mal googeln?
-
-      Dann sind Sie hier genau richtig.
-    font_size: 18
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-  type: RichText
-- layout_properties: {grid_position: 'KCRVRS,YVTZBP'}
-  name: spacer_9
-  properties: {height: 32}
+- layout_properties: {grid_position: 'XBNWLH,TMXEZR'}
+  name: divider_1
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Divider
+- layout_properties: {grid_position: 'PCRBBY,CIJVLT'}
+  name: spacer_15
+  properties: {}
   type: Spacer
-- layout_properties: {grid_position: 'QMCHLL,NUYAEA'}
-  name: label_22
-  properties:
-    align: left
-    font_size: 18
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-    text: Wie läuft das genau ab?
+- layout_properties: {grid_position: 'ZMNQUZ,ZVMDXK'}
+  name: body_1
+  properties: {align: center, bold: true, font_size: 18, role: body, text: 'Wie funktioniert das Ganze?'}
   type: Label
-- layout_properties: {grid_position: 'XNHJHK,ULMQQM'}
-  name: image_2
-  properties: {height: 452.3124694824219, source: _/theme/Folie1.jpeg}
+- layout_properties: {grid_position: 'WQLGOO,RUOWWN'}
+  name: spacer_14
+  properties: {}
+  type: Spacer
+- components:
+  - layout_properties: {grid_position: 'OKZENO,GZFQZL'}
+    name: image_4
+    properties: {height: 70.282958984375, source: _/theme/smoobu.jpg}
+    type: Image
+  - layout_properties: {grid_position: 'OKZENO,UETBJW'}
+    name: rich_text_4
+    properties:
+      content: Die Buchungsdaten werden automatisiert von Smoobu per API importiert. Eine manuelle Eingabe ist ebenfalls möglich. Weitere Anbindungen sind in Arbeit.
+      font_size: 18
+      spacing:
+        margin: [null, '6', null, '6']
+        padding: [null, '6', null, '6']
+    type: RichText
+  layout_properties: {grid_position: 'DZBPAX,OLHLWS'}
+  name: column_panel_5
+  properties: {col_widths: '{"GZFQZL":30,"UETBJW":30}'}
+  type: ColumnPanel
+- layout_properties: {grid_position: 'USYSUM,PWSOBU'}
+  name: spacer_9
+  properties: {height: 41.64495849609375}
+  type: Spacer
+- layout_properties: {grid_position: 'TWGPFQ,KZILKJ'}
+  name: image_3
+  properties:
+    height: 272.5806884765625
+    margin: [null, '8', null, '8']
+    source: _/theme/Beispielmaske.jpg
   type: Image
+- layout_properties: {grid_position: 'TWGPFQ,SKCXEY'}
+  name: rich_text_2
+  properties:
+    content: |+
+      In einem Dashboard wird für jede Buchung eine Maske angezeigt, in der die grundlegenden Buchungsdaten erscheinen zusammen mit den Ergebnissen der Suche und Prüfungen.
+
+
+    font_size: 18
+    spacing:
+      margin: [null, '6', '0', '6']
+      padding: [null, '6', '4', '6']
+  type: RichText
+- layout_properties: {grid_position: 'WCVNWP,MUNGTW'}
+  name: spacer_6
+  properties: {height: 34.4556884765625}
+  type: Spacer
+- components:
+  - layout_properties: {grid_position: 'BMXVKJ,QJCHOD'}
+    name: image_2
+    properties: {display_mode: shrink_to_fit, height: 96.53466796875, source: _/theme/email.jpg}
+    type: Image
+  - components: []
+    layout_properties: {grid_position: 'BMXVKJ,HJOBZT'}
+    name: rich_text_3
+    properties:
+      content: 'Zusätzlich erhältst Du diese Information per eMail mit jeder neuen Buchung - kein Einloggen notwendig! '
+      font_size: 18
+      spacing:
+        margin: [null, '6', null, '6']
+        padding: [null, '4', null, '4']
+    type: RichText
+  layout_properties: {grid_position: 'HSANHV,EMLHID'}
+  name: column_panel_4
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {grid_position: 'VLUZLY,JAOEMO'}
+  name: spacer_11
+  properties: {height: 38.19354248046875}
+  type: Spacer
+- event_bindings: {click: testen_button_click}
+  layout_properties: {grid_position: 'NKYGON,TVEZAN'}
+  name: testen_button
+  properties:
+    align: center
+    background: theme:Primary
+    bold: true
+    foreground: theme:On Primary
+    icon_align: right
+    role: outlined-button
+    spacing:
+      padding: [null, '24', null, null]
+    text: 30 Tage testen
+  type: Button
+- layout_properties: {grid_position: 'JAOCWG,MYBQQP'}
+  name: spacer_16
+  properties: {}
+  type: Spacer
+- layout_properties: {grid_position: 'TVXNKS,VFYTAJ'}
+  name: divider_2
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Divider
 - layout_properties: {grid_position: 'MIQGPO,CYFDXQ'}
   name: spacer_7
-  properties: {height: 57.3289794921875}
+  properties: {height: 33.314208984375}
   type: Spacer
 - components:
   - layout_properties: {grid_position: 'ZEGUXJ,GFGREP'}
@@ -406,10 +501,10 @@ components:
     name: label_21
     properties: {align: center, bold: true, font_size: 18, text: '€ 0,00'}
     type: Label
-  - layout_properties: {grid_position: 'IQCUEL,OZZWWB ZFORVE,DDKLNB'}
-    name: title_2
-    properties: {role: title, text: ''}
-    type: Label
+  - layout_properties: {grid_position: 'IQCUEL,OZZWWB NOCRXY,XPCNDW'}
+    name: spacer_10
+    properties: {height: 66.55029296875}
+    type: Spacer
   - layout_properties: {grid_position: 'IQCUEL,LWZJGX KIASVM,FXOIPI'}
     name: label_16
     properties: {align: center, bold: true, font_size: 18, text: '€ 2,99'}
@@ -481,6 +576,6 @@ components:
   properties: {align: center, text: Datenschutz}
   type: Link
 container:
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{"KZILKJ":35,"SKCXEY":25}'}
   type: ColumnPanel
 is_package: true
