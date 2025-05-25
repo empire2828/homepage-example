@@ -91,25 +91,25 @@ components_by_slot:
       name: webhook_label
       properties: {font_size: 14, italic: true, role: null, text: 'https://guestscreener.com/_/api/smoobu/webhook', visible: true}
       type: Label
-    - layout_properties: {grid_position: 'YGMRGP,QDKMGY'}
-      name: text_area_1
-      properties: {label: 'https://guestscreener.com/_/api/smoobu/webhook'}
-      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
     layout_properties: {}
     name: outlined_card_3
     properties: {role: outlined-card}
     type: ColumnPanel
   - components:
-    - layout_properties: {grid_position: 'IGZTXG,VWIYVT PXPUNP,SDBUBM'}
+    - layout_properties: {grid_position: 'PXPUNP,SDBUBM'}
       name: title_3
       properties: {align: left, bold: true, role: title, text: '3. Erst-Synchronisation starten:', underline: false}
       type: Label
-    - layout_properties: {grid_position: 'IGZTXG,VWIYVT QSBKIL,ZUWODJ'}
+    - layout_properties: {grid_position: 'QSBKIL,ZUWODJ'}
       name: text_1
-      properties: {font_size: 18, text: 'Die initiale Synchronisation und Analyse erfolgt im Hintergrund und dauert ca. 10 Minuten. Die Ergebnisse erscheinen im Dashboard, erreichbar über die linke Menuleiste.'}
+      properties: {font_size: 18, text: 'Die initiale Synchronisation und Analyse erfolgt im Hintergrund und dauert ca. 10 Minuten. '}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
+    - layout_properties: {grid_position: ''}
+      name: text_2
+      properties: {font_size: 18, text: 'Die Ergebnisse erscheinen dann im Dashboard, erreichbar über die linke obere Menuleiste.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - event_bindings: {click: sync_smoobu_button_click}
-      layout_properties: {grid_position: 'IGZTXG,HJJGAD'}
+      layout_properties: {grid_position: 'JKQSKF,OCEIBY'}
       name: sync_smoobu_button
       properties: {role: filled-button, text: Sync Smoobu}
       type: Button
