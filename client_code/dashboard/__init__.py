@@ -58,7 +58,7 @@ class dashboard(dashboardTemplate):
       
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
-      self.refresh_button.visible = False
+      #self.refresh_button.visible = False
       self.resync_smoobu_button.visible = False
       self.chanel_manager_connect_button.visible = True
     else:
@@ -66,7 +66,7 @@ class dashboard(dashboardTemplate):
         self.dashboard_upgrade_needed_text.visible = True
         self.dashboard_upgrade_button.visible = True
         self.pms_need_to_connect_text.visible = False
-        self.refresh_button.visible = False
+        #self.refresh_button.visible = False
         self.resync_smoobu_button.visible = False
         self.chanel_manager_connect_button.visible = False
         self.bookings_repeating_panel.visible = False

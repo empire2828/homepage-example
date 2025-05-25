@@ -237,7 +237,7 @@ components:
 - layout_properties: {grid_position: 'TWGPFQ,KZILKJ'}
   name: image_3
   properties:
-    height: 275.49560546875
+    height: 247.189208984375
     margin: [null, '8', null, '8']
     source: _/theme/Beispielmaske.jpg
   type: Image
@@ -303,10 +303,10 @@ components:
   type: form:dep_g9k4toow7i44kq:_Components.Divider
 - layout_properties: {grid_position: 'OVHKCM,GNOJHF'}
   name: spacer_18
-  properties: {}
+  properties: {height: 52.64666748046875}
   type: Spacer
 - event_bindings: {click: testen_button_click}
-  layout_properties: {grid_position: 'NKYGON,TVEZAN'}
+  layout_properties: {grid_position: 'UXNUUW,SLHOZS'}
   name: testen_button
   properties:
     align: center
@@ -319,13 +319,9 @@ components:
       padding: [null, '24', null, null]
     text: 30 Tage testen
   type: Button
-- layout_properties: {grid_position: 'JAOCWG,MYBQQP'}
-  name: spacer_16
+- layout_properties: {grid_position: 'ZGYPGG,CGBILT'}
+  name: spacer_22
   properties: {}
-  type: Spacer
-- layout_properties: {grid_position: 'MIQGPO,CYFDXQ'}
-  name: spacer_7
-  properties: {height: 33.314208984375}
   type: Spacer
 - components:
   - layout_properties: {grid_position: 'ZEGUXJ,GFGREP'}
@@ -574,9 +570,9 @@ components:
       margin: [null, '6', null, '6']
     wrap_on: never
   type: ColumnPanel
-- layout_properties: {grid_position: 'RYSXCY,PSKUQA'}
-  name: spacer_22
-  properties: {}
+- layout_properties: {grid_position: 'XUGNSY,WSAJJB'}
+  name: spacer_16
+  properties: {height: 10.9964599609375}
   type: Spacer
 - layout_properties: {grid_position: 'NBIFDU,PIJDSI'}
   name: text_8
@@ -589,6 +585,14 @@ components:
       padding: [null, null, null, '6']
     text: Alle Abos jederzeit kündbar.
   type: form:dep_g9k4toow7i44kq:_Components.Text
+- layout_properties: {grid_position: 'CQUFIO,GVEAZT'}
+  name: spacer_7
+  properties: {}
+  type: Spacer
+- layout_properties: {grid_position: 'VMPBGX,BXYZMG'}
+  name: divider_3
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Divider
 - layout_properties: {grid_position: 'LZWKXC,NEQNTC'}
   name: spacer_8
   properties: {height: 32}
