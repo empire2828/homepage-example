@@ -13,9 +13,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
    # Any code you write here will run before the form opens.
-    self.webhook_label.tag.style.wordWrap = "break-word"
-    self.webhook_label.tag.style.overflowWrap = "break-word"
-
+ 
   def save_api_key_button_click(self, **event_args):
     api_key = self.api_key_text_box.text       
         # Serveraufruf zum Speichern des API-Keys

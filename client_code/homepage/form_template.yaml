@@ -527,7 +527,7 @@ components:
     type: Spacer
   - layout_properties: {grid_position: 'IQCUEL,OZZWWB DNDBIA,IOGPLK'}
     name: text_5
-    properties: {align: center, font_size: 18, text: für immer kostenlos}
+    properties: {align: center, font_size: 18, text: immer kostenlos}
     type: form:dep_g9k4toow7i44kq:_Components.Text
   - layout_properties: {grid_position: 'IQCUEL,LWZJGX KIASVM,FXOIPI'}
     name: label_16
