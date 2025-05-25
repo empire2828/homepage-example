@@ -100,6 +100,7 @@ class layout(layoutTemplate):
 
   def subscription_admin_link_click(self, **event_args):
     alert('Du wirst jetzt auf die Seite unseres Zahlungsanbieters Stripe weitergeleitet.')
-    anvil.js.window.open("https://billing.stripe.com/p/login/test_3csg0Lcbpf4i8005kk", "_blank")
+    anvil.js.window.open("https://billing.stripe.com/p/login/7sIeW3aAjf8CgIodQQ", "_blank")
+    #link ist unter: https://dashboard.stripe.com/settings/billing/portal
     pass
 
