@@ -94,12 +94,12 @@ class layout(layoutTemplate):
     pass
 
   def password_reset_link_click(self, **event_args):
-    alert('Sie erhalten eine eMail zum Zurücksetzen des Passwortes. Bitte haben Sie ein klein wenig Geduld.')
+    alert('Du erhältst eine eMail zum Zurücksetzen des Passwortes. Bitte habe ein klein wenig Geduld.')
     anvil.server.call('send_password_reset_email')
     pass
 
   def subscription_admin_link_click(self, **event_args):
-    alert('Sie werden jetzt auf die Seite unseres Zahlungsanbieters Stripe weitergeleitet.')
+    alert('Du wirst jetzt auf die Seite unseres Zahlungsanbieters Stripe weitergeleitet.')
     anvil.js.window.open("https://billing.stripe.com/p/login/test_3csg0Lcbpf4i8005kk", "_blank")
     pass
 
