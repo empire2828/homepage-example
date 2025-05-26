@@ -25,6 +25,25 @@ components:
     name: upgrade_link
     properties: {text: Upgrade}
     type: Link
+  - event_bindings: {click: dashboard_menu_click}
+    layout_properties: {grid_position: 'IBDMZE,TGJIRE'}
+    name: dashboard_menu
+    properties: {leading_icon: 'mi:dashboard', text: Dashboard}
+    type: form:dep_g9k4toow7i44kq:_Components.MenuItem
+  - data_bindings: []
+    event_bindings: {click: menu_item_2_click}
+    layout_properties: {grid_position: 'VSEUYH,ETMJBR'}
+    name: menu_item_2
+    properties: {background_color: '', bold: false, enabled: true, leading_icon: 'mi:scanner', role: '', text: Einzelnen Gast checken, visible: true}
+    type: form:dep_g9k4toow7i44kq:_Components.MenuItem
+  - layout_properties: {grid_position: 'COKYDM,FYAUQG'}
+    name: menu_item_3
+    properties: {enabled: true, leading_icon: 'mi:cable', text: Channel Manager verbinden}
+    type: form:dep_g9k4toow7i44kq:_Components.MenuItem
+  - layout_properties: {grid_position: 'YIKSWJ,RRXINZ'}
+    name: menu_item_4
+    properties: {leading_icon: 'mi:upgrade', text: Upgrade}
+    type: form:dep_g9k4toow7i44kq:_Components.MenuItem
   layout_properties: {slot: left-nav}
   name: column_panel_1
   properties:

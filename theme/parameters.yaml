@@ -284,9 +284,7 @@ roles:
 - components: [Label]
   display_in_toolbox: true
   name: input-prompt
-- components: [Link]
-  display_in_toolbox: false
-  name: selected
+- {components: null, display_in_toolbox: false, name: selected}
 - components: [ColumnPanel, LinearPanel, XYPanel, RepeatingPanel]
   display_in_toolbox: true
   name: outlined-card

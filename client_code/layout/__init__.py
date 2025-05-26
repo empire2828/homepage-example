@@ -102,4 +102,12 @@ class layout(layoutTemplate):
     #link ist unter: https://dashboard.stripe.com/settings/billing/portal
     pass
 
+  def dashboard_menu_click(self, **event_args):
+    """This method is called when the component is clicked"""
+    pass
+
+  def menu_item_2_click(self, **event_args):
+    self.menu_item_2.background_color = 'theme:Secondary Container'
+    pass
+
  

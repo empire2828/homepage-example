@@ -1041,9 +1041,3 @@ div.plot-container.plotly svg.main-svg {
     --anvil-spinner-bg: %color:Surface Variant%;
 }
 
-@media (max-width: 768px) {
-  .mobile-text-wrap {
-    word-break: break-all;
-    overflow-wrap: anywhere;
-  }
-}
