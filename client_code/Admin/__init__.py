@@ -16,7 +16,7 @@ class Admin(AdminTemplate):
     # Any code you write here will run before the form opens.
 
   def admin_file_loader_change(self, files, **event_args):
-    for f in files:
-      filedata = f.get_bytes()
-      anvil.server.call('read_csv', filedata)
-    pass
+    if files:
+      csv_file = files[0]
+      result = anvil.server.call('import_bookings_csv', csv_file.get_bytes())
+      print(result)  # "X Zeilen importiert"
