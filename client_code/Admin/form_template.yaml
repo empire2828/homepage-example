@@ -1,0 +1,9 @@
+components_by_slot:
+  slot_1:
+  - event_bindings: {change: admin_file_loader_change}
+    layout_properties: {}
+    name: admin_file_loader
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.FileLoader
+is_package: true
+layout: {type: 'form:layout'}
