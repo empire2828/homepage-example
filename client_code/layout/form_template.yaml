@@ -25,6 +25,14 @@ components:
     name: upgrade_link
     properties: {text: Upgrade}
     type: Link
+  - layout_properties: {grid_position: 'ANXCWI,FJOTWL'}
+    name: nav_link_2
+    properties: {text: Einstellungen}
+    type: form:dep_i8vdrigkugb23n:router.NavLink
+  - layout_properties: {grid_position: 'DPRRCC,BASTLQ'}
+    name: nav_link_1
+    properties: {text: Hilfe}
+    type: form:dep_i8vdrigkugb23n:router.NavLink
   layout_properties: {slot: left-nav}
   name: column_panel_1
   properties:
@@ -45,19 +53,6 @@ components:
       spacing:
         margin: ['18', null, null, null]
     type: Label
-  - event_bindings: {click: help_icon_button_click}
-    layout_properties: {}
-    name: help_icon_button
-    properties:
-      appearance: filled
-      icon: mi:question_mark
-      margin: ['8', null, '0', null]
-    type: form:dep_g9k4toow7i44kq:_Components.IconButton
-  - data_bindings: []
-    layout_properties: {}
-    name: user_icon_button_menu
-    properties: {align: center, appearance: filled, icon: 'mi:user_attributes'}
-    type: form:dep_g9k4toow7i44kq:_Components.IconButtonMenu
   layout_properties: {slot: nav-right}
   name: flow_panel_1
   properties: {}

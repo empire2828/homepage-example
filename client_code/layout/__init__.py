@@ -2,7 +2,6 @@ from ._anvil_designer import layoutTemplate
 from anvil import *
 import anvil.users
 import anvil.server
-import m3.components as m3
 import time
 import anvil.js
 

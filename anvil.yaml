@@ -132,9 +132,6 @@ db_schema:
     server: full
     title: Users
 dependencies:
-- dep_id: dep_g9k4toow7i44kq
-  resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
-  version: {version_tag: v1.2.4}
 - dep_id: dep_i8vdrigkugb23n
   resolution_hints: {app_id: 3PIDO5P3H4VPEMPL, name: routing, package_name: routing}
   version: {version_tag: v0.3.5}

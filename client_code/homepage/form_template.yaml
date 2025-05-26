@@ -101,10 +101,6 @@ components:
           padding: ['6', null, '6', null]
         text: "KI- gestütze \nSuche"
       type: Label
-    - layout_properties: {grid_position: 'ZCBITY,AMYBTI'}
-      name: text_1
-      properties: {font_size: 18, text: Das Internet   wird nach frei verfügbaren Informationen durchsucht.}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,FVMHTO'}
     name: outlined_card_1
     properties:
@@ -125,10 +121,6 @@ components:
           padding: ['6', null, '6', null]
         text: LinkedIn Profilanzeige
       type: Label
-    - layout_properties: {grid_position: 'EXGCIK,ARJOMP'}
-      name: text_2
-      properties: {font_size: 18, text: Die Profile des größten beruflichen Netz-werkes LinkedIn werden durchsucht und angezeigt.}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,AVECON'}
     name: outlined_card_3
     properties:
@@ -151,10 +143,6 @@ components:
           Telefonummern-
           prüfung
       type: Label
-    - layout_properties: {grid_position: 'KVCFJA,JSDRTD'}
-      name: text_3
-      properties: {font_size: 18, text: Die Telefonnummer wird auf formal richtigen Syntax geprüft.}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,KBSMLA'}
     name: outlined_card_9
     properties:
@@ -177,10 +165,6 @@ components:
           Adress-
           prüfung
       type: Label
-    - layout_properties: {grid_position: 'LGBMGK,AMYMYQ'}
-      name: text_4
-      properties: {font_size: 18, text: 'Die Adresse wird dahingehend geprüft, ob es diese tatsächlich gibt.'}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,YFIIZV'}
     name: outlined_card_8
     properties:
@@ -533,10 +517,6 @@ components:
     name: spacer_21
     properties: {}
     type: Spacer
-  - layout_properties: {grid_position: 'IQCUEL,OZZWWB DNDBIA,IOGPLK'}
-    name: text_5
-    properties: {align: center, font_size: 18, text: immer kostenlos}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
   - layout_properties: {grid_position: 'IQCUEL,LWZJGX KIASVM,FXOIPI'}
     name: label_16
     properties: {align: center, bold: true, font_size: 18, text: '€ 2,99'}
@@ -545,10 +525,6 @@ components:
     name: spacer_19
     properties: {}
     type: Spacer
-  - layout_properties: {grid_position: 'IQCUEL,LWZJGX DJILBO,PAUPDT'}
-    name: text_6
-    properties: {align: center, font_size: 18, text: 30 Tage kostenlos}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
   - layout_properties: {grid_position: 'IQCUEL,PIPGAT UWJNMF,FZAYWR'}
     name: label_7
     properties:
@@ -563,10 +539,6 @@ components:
     name: spacer_20
     properties: {}
     type: Spacer
-  - layout_properties: {grid_position: 'IQCUEL,PIPGAT RMQVEG,XEHGPC'}
-    name: text_7
-    properties: {align: center, font_size: 18, text: 30 Tage kostenlos}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
   layout_properties: {grid_position: 'CFSXJQ,LSZEBP'}
   name: outlined_card_4
   properties:
@@ -579,25 +551,10 @@ components:
   name: spacer_16
   properties: {height: 10.9964599609375}
   type: Spacer
-- layout_properties: {grid_position: 'NBIFDU,PIJDSI'}
-  name: text_8
-  properties:
-    align: center
-    bold: true
-    font_size: 18
-    spacing:
-      margin: [null, null, null, '6']
-      padding: [null, null, null, '6']
-    text: Alle Abos jederzeit kündbar.
-  type: form:dep_g9k4toow7i44kq:_Components.Text
 - layout_properties: {grid_position: 'CQUFIO,GVEAZT'}
   name: spacer_7
   properties: {}
   type: Spacer
-- layout_properties: {grid_position: 'VMPBGX,BXYZMG'}
-  name: divider_3
-  properties: {}
-  type: form:dep_g9k4toow7i44kq:_Components.Divider
 - layout_properties: {grid_position: 'LZWKXC,NEQNTC'}
   name: spacer_8
   properties: {height: 32}

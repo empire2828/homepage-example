@@ -71,7 +71,6 @@ class dashboard(dashboardTemplate):
         self.chanel_manager_connect_button.visible = False
         self.bookings_repeating_panel.visible = False
         
-  
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""
     pass
