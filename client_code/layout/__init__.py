@@ -21,6 +21,7 @@ class layout(layoutTemplate):
    self.reset_links()
    open_form('dashboard')
    self.dashboard_link.role='selected'
+   self.dashboard_link.background_color = app.theme_colors['Secondary Container']
   
   def guestscreen_link_click(self, **event_args):
     self.reset_links()
@@ -29,12 +30,12 @@ class layout(layoutTemplate):
     self.guestscreen_link.role='selected'
   
   def reset_links(self, **event_args):
-    self.dashboard_link.role = ''
-    self.guestscreen_link.role = ''
-    self.channel_manager_connect_link.role = '' 
-    self.upgrade_link.role = ''
+    #self.dashboard_link.role = ''
+    #self.guestscreen_link.role = ''
+    #self.channel_manager_connect_link.role = '' 
+    #self.upgrade_link.role = ''
 
-  def upgrade_link_click(self, **event_args):
+ def upgrade_link_click(self, **event_args):
     self.reset_links()
     anvil.js.window.scrollTo(0, 0)
     self.upgrade_link.role='selected'
