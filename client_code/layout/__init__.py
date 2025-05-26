@@ -16,6 +16,15 @@ class layout(layoutTemplate):
     password_reset_item.set_event_handler("click",self.password_reset_link_click)
     logout_item.set_event_handler("click", self.logout_link_click)
     self.user_icon_button_menu.menu_items = [password_reset_item,subscription_admin_item,logout_item]
+    self.m3_navlink = m3.NavigationLink(
+      text="Startseite",
+      icon="home",
+      navigate_to=self.dashboard_link(),
+      background_color="#1976d2",   # z.B. klassisches Blau
+      text_color="#fff",
+      icon_color="#fff",
+      spacing=16
+    )
   
   def dashboard_link_click(self, **event_args):
    self.reset_links()

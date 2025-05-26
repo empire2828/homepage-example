@@ -25,6 +25,10 @@ components:
     name: upgrade_link
     properties: {text: Upgrade}
     type: Link
+  - layout_properties: {grid_position: 'PUXCPG,CDQPIV'}
+    name: m3_navlink
+    properties: {icon: 'mi:stop_circle'}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   layout_properties: {slot: left-nav}
   name: column_panel_1
   properties:
