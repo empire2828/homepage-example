@@ -86,8 +86,8 @@ class layout(layoutTemplate):
       self.subscription_body.text = 'Trial subscription'
     else:
       self.subscription_body.text = user['subscription']
-    if user.get('admin') is True:
-      self.admin_menu_item.visible= True
+      if user.get('admin') is True:
+        self.admin_menu_item.visible= True
 
   def help_icon_button_click(self, **event_args):
     self.reset_links()
