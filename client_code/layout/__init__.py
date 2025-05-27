@@ -82,11 +82,11 @@ class layout(layoutTemplate):
     user = anvil.users.get_user()
     if user is None:
       self.subscription_body.text = 'Not logged in'
-    elif user['subscription'] is None:
+    elif user.get('subscription') is None:
       self.subscription_body.text = 'Trial subscription'
     else:
       self.subscription_body.text = user['subscription']
-    if user['admin'] is True:
+    if user.get('admin') is True:
       self.admin_menu_item.visible= True
 
   def help_icon_button_click(self, **event_args):
