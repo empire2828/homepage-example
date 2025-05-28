@@ -57,6 +57,7 @@ class dashboard(dashboardTemplate):
       bookings = panel_data
 
     # Dropdown Menu - vereinfacht
+    panel_data = dashboard_data.get('bookings', [])  # Initialize with empty list as fallback
     bookings = panel_data
     apartments = set()
     

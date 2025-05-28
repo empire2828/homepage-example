@@ -137,6 +137,7 @@ def get_dashboard_data_dict():
   filtered_bookings = []
   has_subscription = False
   server_data_last_update = None
+  serialized_bookings = []
 
   if user:
     # Determine apartment limit based on subscription

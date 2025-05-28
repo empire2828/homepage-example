@@ -1,7 +1,10 @@
 import anvil.secrets
 import anvil.server
 from openai import OpenAI
-from linkup import LinkupClient  # Changed import
+
+import urllib.request
+import urllib.parse
+import json
 
 # Client außerhalb der Funktion initialisieren, damit er für alle Funktionen verfügbar ist
 client = OpenAI(
@@ -55,14 +58,14 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
 
 
 
-# Initialize Linkup client########################################################################################
-client = LinkupClient(
-  api_key=anvil.secrets.get_secret('linkup_api_key')  # Make sure to store this in Anvil secrets
-)
+
 
 @anvil.server.callable
 def screener_open_ai(name, location, checktype):
   location = location or ""  # Handle None location
+
+  # Get API key from Anvil secrets
+  api_key = anvil.secrets.get_secret('linkup_api_key')
 
   # Construct queries based on checktype
   if checktype == "job":
@@ -83,15 +86,33 @@ def screener_open_ai(name, location, checktype):
         """
 
   try:
-    # Execute Linkup search instead of OpenAI call
-    response = client.search(
-      query=query,
-      depth="deep",  # For comprehensive results
-      output_type="sourcedAnswer"  # Get structured answer with sources
+    # Setup request data
+    data = {
+      "q": query,
+      "depth": "deep",
+      "outputType": "sourcedAnswer"
+    }
+
+    # Convert data to JSON and encode
+    json_data = json.dumps(data).encode('utf-8')
+
+    # Create request
+    request = urllib.request.Request(
+      'https://api.linkup.so/v1/search',
+      data=json_data,
+      headers={
+        'Authorization': f'Bearer {api_key}',
+        'Content-Type': 'application/json'
+      }
     )
 
-    return response['answer']  # Access the answer directly from response
+    # Make API request
+    with urllib.request.urlopen(request) as response:
+      result = json.loads(response.read().decode('utf-8'))
+      return result.get('answer', 'Keine Antwort erhalten')
 
+  except urllib.error.HTTPError as e:
+    return f"HTTP-Fehler: {e.code} - {e.reason}"
   except Exception as e:
     return f"Fehler: {e}"
 
