@@ -71,11 +71,9 @@ def screener_open_ai(name, location, checktype):
   if checktype == "job":
     query = f"""
         Find professional information about {name} from {location}. Include:
-        1. Welchen Beruf hat die Person? Schaue auch bei linkedin und Xing. 
-        2. Welches Hobby hat die Person? 
-        3. Schreibe sehr kurz mit wenig Wörtern.
-        4. Lasse Zitatnummern weg.
-        5. Wichtig: Keine Daten vor 1970   
+        Welchen Beruf hat die Person? Schaue auch bei linkedin und Xing. 
+        Welches Hobby hat die Person? 
+        Wichtig: Keine Daten vor 1970   
         """
   else:
     query = f"""
@@ -89,7 +87,7 @@ def screener_open_ai(name, location, checktype):
     # Setup request data
     data = {
       "q": query,
-      "depth": "deep",
+      "depth": "standard",
       "outputType": "sourcedAnswer"
     }
 
