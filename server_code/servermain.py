@@ -221,7 +221,6 @@ def get_dashboard_data_dict():
     'server_data_last_update': user.get('server_data_last_update')
   }
 
-
 @anvil.server.callable
 def call_server_wake_up():
   anvil.server.launch_background_task('server_wake_up')

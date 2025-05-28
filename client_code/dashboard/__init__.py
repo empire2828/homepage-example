@@ -15,6 +15,7 @@ class dashboard(dashboardTemplate):
   def form_show(self, **event_args):
     user = users.get_user()
     print('User Logged in: ',user['email'])
+  
     dashboard_data = local_storage.get('dashboard_data')
     
     cache_too_old = False
@@ -50,7 +51,24 @@ class dashboard(dashboardTemplate):
     if not dashboard_data or cache_too_old or local_storage_update_needed:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')
       local_storage['dashboard_data'] = dashboard_data
+      
     user_has_subscription= dashboard_data['has_subscription']
+
+    if user['smoobu_api_key'] is None:
+      self.pms_need_to_connect_text.visible = True
+      #self.refresh_button.visible = False
+      self.apartment_dropdown_menu.visible = False
+      self.resync_smoobu_button.visible = False
+      self.chanel_manager_connect_button.visible = True
+    else:
+      if user_has_subscription is False:
+        self.dashboard_upgrade_needed_text.visible = True
+        self.dashboard_upgrade_button.visible = True
+        self.pms_need_to_connect_text.visible = False
+        self.apartment_dropdown_menu.visible = False
+        self.resync_smoobu_button.visible = False
+        self.chanel_manager_connect_button.visible = False
+        self.bookings_repeating_panel.visible = False
 
     if user_has_subscription:
       panel_data = dashboard_data['bookings']
