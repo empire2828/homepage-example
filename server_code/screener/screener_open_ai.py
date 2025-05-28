@@ -1,6 +1,7 @@
 import anvil.secrets
 import anvil.server
 from openai import OpenAI
+from linkup import LinkupClient  # Changed import
 
 # Client außerhalb der Funktion initialisieren, damit er für alle Funktionen verfügbar ist
 client = OpenAI(
@@ -13,7 +14,7 @@ client = OpenAI(
 )
 
 @anvil.server.callable
-def screener_open_ai(name, location, checktype):
+def screener_open_ai_old(name, location, checktype):
   if location is None:
     location=""
   location = location
@@ -49,6 +50,48 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
     )
     #time.sleep(5)
     return response.choices[0].message.content
+  except Exception as e:
+    return f"Fehler: {e}"
+
+
+
+# Initialize Linkup client########################################################################################
+client = LinkupClient(
+  api_key=anvil.secrets.get_secret('linkup_api_key')  # Make sure to store this in Anvil secrets
+)
+
+@anvil.server.callable
+def screener_open_ai(name, location, checktype):
+  location = location or ""  # Handle None location
+
+  # Construct queries based on checktype
+  if checktype == "job":
+    query = f"""
+        Find professional information about {name} from {location}. Include:
+        1. Welchen Beruf hat die Person? Schaue auch bei linkedin und Xing. 
+        2. Welches Hobby hat die Person? 
+        3. Schreibe sehr kurz mit wenig Wörtern.
+        4. Lasse Zitatnummern weg.
+        5. Wichtig: Keine Daten vor 1970   
+        """
+  else:
+    query = f"""
+        Estimate approximate age range of {name} from {location} based on:
+        - Career progression timeline
+        - Family status (e.g., presence of children)
+        Respond ONLY with format: 'XX-XX Jahre' without additional text
+        """
+
+  try:
+    # Execute Linkup search instead of OpenAI call
+    response = client.search(
+      query=query,
+      depth="deep",  # For comprehensive results
+      output_type="sourcedAnswer"  # Get structured answer with sources
+    )
+
+    return response['answer']  # Access the answer directly from response
+
   except Exception as e:
     return f"Fehler: {e}"
 
