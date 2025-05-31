@@ -123,12 +123,12 @@ db_schema:
     - admin_ui: {order: 15, width: 200}
       name: apartment_count
       type: number
-    - admin_ui: {width: 200}
-      name: local_storage_update_needed
-      type: bool
     - admin_ui: {order: 17, width: 200}
       name: server_data_last_update
       type: datetime
+    - admin_ui: {order: 18, width: 200}
+      name: admin
+      type: bool
     server: full
     title: Users
 dependencies:
@@ -172,6 +172,9 @@ secrets:
   google_maps_api_key:
     type: secret
     value: {Y4HSOSHAROBHE7LA: 8eV6SFGUineV0goM9HAJPmoKi/BWXFgnKcVyzBrrs85PGs993ZPSkNYxGAKpjpUBjvEoqchKEQDwZ72N173fnt75JasN5WxiQiKEBGeGono+8vxn0IU875oQxsPSaVpgGappHN8x/BlDIaK2MYvIyYVc1XWBwdCeaZuWleeZodxXrLt3M8o=}
+  linkup_api_key:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: Q3eBkldBWNBche87s5ARvhIuTBDM9ty+wRD5DfYS6T/p0co82RTU5g2X48OSh4v3Ls92JsHJK6X/wS/m1w3xFgRZyTFx8s0LXxLN5dUKE8B0cUdztQPgqZ2A64Xec55/WZGMnnxvpSZsAexlC0bbhOYKHMOfubE45iKYEYB0dDKfxzo=}
   openai_api_key:
     type: secret
     value: {Y4HSOSHAROBHE7LA: OCpGJd5s0WiqKRLkvi6CxXy+kWVyowXgPDYMrQZVwhwNBV/way9gXVjDsuoawUi+WQKSyukd0QuVlZZQcUvoZU/dasA4vQgX5RiMQkaC/yUZhKvbM6IeMxXTJJXZGqiLyqCwaUFJQnM5p50r5dNqBJnU09Yl2QCFcMnvzgIWkbcjM5E/tF57AxKx71W8zdjyO38Hq6DldgTa9cBPzBU+SQAFeNodQOvkPd+s/Z/MYdOSWQJY8Ztt8LhNjDaQPaJwN5ZntmFrcqopHnATnl0ItbTmJ1wbpG7PNwAgVBgY5wmMXnDo1YD5KvjkHhdNgu+anWsso2vVKtDxCDGbow3jHzCBLg==}

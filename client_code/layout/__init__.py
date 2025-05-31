@@ -17,27 +17,28 @@ class layout(layoutTemplate):
     logout_item.set_event_handler("click", self.logout_link_click)
     self.user_icon_button_menu.menu_items = [password_reset_item,subscription_admin_item,logout_item]
   
-  def dashboard_link_click(self, **event_args):
+  def dashboard_menu_item_click(self, **event_args):
    self.reset_links()
    open_form('dashboard')
-   self.dashboard_link.role='selected'
+   self.dashboard_menu_item.background_color='theme:Secondary Container'
   
-  def guestscreen_link_click(self, **event_args):
+  def guestscreen_menu_item_click(self, **event_args):
     self.reset_links()
     anvil.js.window.scrollTo(0, 0)
     open_form('guestscreen')
-    self.guestscreen_link.role='selected'
+    self.guestscreen_menu_item.background_color='theme:Secondary Container'
   
   def reset_links(self, **event_args):
-    self.dashboard_link.role = ''
-    self.guestscreen_link.role = ''
-    self.channel_manager_connect_link.role = '' 
-    self.upgrade_link.role = ''
+    self.dashboard_menu_item.background_color = ''
+    self.guestscreen_menu_item.background_color = ''
+    self.channel_manager_connect_menu_item.background_color = '' 
+    self.upgrade_menu_item.background_color = ''
+    self.admin_menu_item.background_color = ''
 
-  def upgrade_link_click(self, **event_args):
+  def upgrade_menu_item_click(self, **event_args):
     self.reset_links()
     anvil.js.window.scrollTo(0, 0)
-    self.upgrade_link.role='selected'
+    self.upgrade_menu_item.background_color='theme:Secondary Container'
     try:
         user = anvil.users.get_user()
         if not user:
@@ -70,21 +71,23 @@ class layout(layoutTemplate):
         open_form('homepage')
       pass
 
-  def channel_manager_connect_link_click(self, **event_args):
+  def channel_manager_connect_menu_item_click(self, **event_args):
     self.reset_links()
     anvil.js.window.scrollTo(0, 0)
     open_form('channel_manager_connect')
-    self.channel_manager_connect_link.role='selected'
+    self.channel_manager_connect_menu_item.background_color='theme:Secondary Container'
     pass
 
   def form_show(self, **event_args):
     user = anvil.users.get_user()
     if user is None:
       self.subscription_body.text = 'Not logged in'
-    elif user['subscription'] is None:
+    elif user.get('subscription') is None:
       self.subscription_body.text = 'Trial subscription'
     else:
       self.subscription_body.text = user['subscription']
+      if user.get('admin') is True:
+        self.admin_menu_item.visible= True
 
   def help_icon_button_click(self, **event_args):
     self.reset_links()
@@ -101,5 +104,11 @@ class layout(layoutTemplate):
     anvil.js.window.open("https://billing.stripe.com/p/login/7sIeW3aAjf8CgIodQQ", "_blank")
     #link ist unter: https://dashboard.stripe.com/settings/billing/portal
     pass
+
+  def admin_menu_item_click(self, **event_args):
+    self.admin_menu_item.background_color='theme:Secondary Container'
+    open_form('Admin')
+    pass
+
 
  

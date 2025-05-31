@@ -5,26 +5,32 @@ components:
   properties: {col_widths: '{}'}
   type: ColumnPanel
 - components:
-  - event_bindings: {click: dashboard_link_click}
-    layout_properties: {grid_position: 'YBYLKT,NSLEWL'}
-    name: dashboard_link
-    properties: {role: null, text: Dashboard}
-    type: Link
-  - event_bindings: {click: guestscreen_link_click}
-    layout_properties: {grid_position: 'RZDTXJ,GAVGIW'}
-    name: guestscreen_link
-    properties: {role: null, text: Einzelnen Gast checken}
-    type: Link
-  - event_bindings: {click: channel_manager_connect_link_click}
-    layout_properties: {grid_position: 'INGWHY,HRKRTP'}
-    name: channel_manager_connect_link
-    properties: {text: Channel Manager verbinden, wrap_on: mobile}
-    type: Link
-  - event_bindings: {click: upgrade_link_click}
-    layout_properties: {grid_position: 'PHXOWG,ZNVGHT'}
-    name: upgrade_link
-    properties: {text: Upgrade}
-    type: Link
+  - event_bindings: {click: dashboard_menu_item_click}
+    layout_properties: {grid_position: 'IBDMZE,TGJIRE'}
+    name: dashboard_menu_item
+    properties: {leading_icon: 'mi:dashboard', text: Dashboard}
+    type: form:dep_g9k4toow7i44kq:_Components.MenuItem
+  - data_bindings: []
+    event_bindings: {click: guestscreen_menu_item_click}
+    layout_properties: {grid_position: 'VSEUYH,ETMJBR'}
+    name: guestscreen_menu_item
+    properties: {background_color: '', bold: false, enabled: true, leading_icon: 'mi:scanner', role: '', text: Einzelnen Gast checken, visible: true}
+    type: form:dep_g9k4toow7i44kq:_Components.MenuItem
+  - event_bindings: {click: channel_manager_connect_menu_item_click}
+    layout_properties: {grid_position: 'COKYDM,FYAUQG'}
+    name: channel_manager_connect_menu_item
+    properties: {enabled: true, leading_icon: 'mi:cable', text: Channel Manager verbinden}
+    type: form:dep_g9k4toow7i44kq:_Components.MenuItem
+  - event_bindings: {click: upgrade_menu_item_click}
+    layout_properties: {grid_position: 'YIKSWJ,RRXINZ'}
+    name: upgrade_menu_item
+    properties: {leading_icon: 'mi:upgrade', text: Upgrade}
+    type: form:dep_g9k4toow7i44kq:_Components.MenuItem
+  - event_bindings: {click: admin_menu_item_click}
+    layout_properties: {grid_position: 'ZFTYYY,WIZMIX'}
+    name: admin_menu_item
+    properties: {enabled: true, leading_icon: 'mi:service_toolbox', text: Admin, visible: false}
+    type: form:dep_g9k4toow7i44kq:_Components.MenuItem
   layout_properties: {slot: left-nav}
   name: column_panel_1
   properties:

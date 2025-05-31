@@ -15,6 +15,7 @@ class dashboard(dashboardTemplate):
   def form_show(self, **event_args):
     user = users.get_user()
     print('User Logged in: ',user['email'])
+  
     dashboard_data = local_storage.get('dashboard_data')
     
     cache_too_old = False
@@ -50,15 +51,13 @@ class dashboard(dashboardTemplate):
     if not dashboard_data or cache_too_old or local_storage_update_needed:
       dashboard_data = anvil.server.call('get_dashboard_data_dict')
       local_storage['dashboard_data'] = dashboard_data
+      
     user_has_subscription= dashboard_data['has_subscription']
 
-    if user_has_subscription:
-      panel_data = dashboard_data['bookings']
-      self.bookings_repeating_panel.items = panel_data
-      
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       #self.refresh_button.visible = False
+      self.apartment_dropdown_menu.visible = False
       self.resync_smoobu_button.visible = False
       self.chanel_manager_connect_button.visible = True
     else:
@@ -66,12 +65,60 @@ class dashboard(dashboardTemplate):
         self.dashboard_upgrade_needed_text.visible = True
         self.dashboard_upgrade_button.visible = True
         self.pms_need_to_connect_text.visible = False
-        #self.refresh_button.visible = False
+        self.apartment_dropdown_menu.visible = False
         self.resync_smoobu_button.visible = False
         self.chanel_manager_connect_button.visible = False
         self.bookings_repeating_panel.visible = False
-        
-  
+
+    if user_has_subscription:
+      panel_data = dashboard_data['bookings']
+      bookings = panel_data
+
+    # Dropdown Menu - vereinfacht
+    panel_data = dashboard_data.get('bookings', [])  # Initialize with empty list as fallback
+    bookings = panel_data
+    apartments = set()
+    
+    # Speichere panel_data als Instanzvariable
+    self.panel_data = panel_data
+    
+    for booking in bookings:
+      apartment_name = booking.get('apartment', '')  # Direkt als String behandeln
+      if apartment_name:  # Nur hinzufügen wenn nicht leer
+        apartments.add(apartment_name)
+    
+    dropdown_items = sorted(list(apartments))
+    self.apartment_dropdown_menu.items = dropdown_items
+    self.apartment_dropdown_menu.include_placeholder = True
+    self.apartment_dropdown_menu.placeholder = "Apartment wählen"
+    
+    # Setze das erste Apartment als Standard-Auswahl
+    if dropdown_items:  # Prüfe ob Items vorhanden sind
+      self.apartment_dropdown_menu.selected_value = dropdown_items[0]
+    
+      # Filtere auch sofort die Bookings für das erste Apartment
+      first_apartment = dropdown_items[0]
+      filtered_bookings = [
+        booking for booking in self.panel_data  # Verwende self.panel_data
+        if booking.get('apartment') == first_apartment
+      ]
+      self.bookings_repeating_panel.items = filtered_bookings
+    else:
+      self.apartment_dropdown_menu.selected_value = None
+      self.bookings_repeating_panel.items = self.panel_data
+    
+  def apartment_dropdown_menu_change(self, **event_args):
+    selected_apartment_name = self.apartment_dropdown_menu.selected_value
+    if selected_apartment_name is not None:
+      filtered_bookings = [
+        booking for booking in self.panel_data  # Verwende self.panel_data
+        if booking.get('apartment') == selected_apartment_name
+      ]
+      self.bookings_repeating_panel.items = filtered_bookings
+    else:
+      self.bookings_repeating_panel.items = self.panel_data  # Verwende self.panel_data
+
+
   def form_refreshing_data_bindings(self, **event_args):
     """This method is called when refresh_data_bindings is called"""
     pass
@@ -134,6 +181,12 @@ class dashboard(dashboardTemplate):
       alert(f'Ein Fehler ist aufgetreten: {e}')
   pass
   #identisch zu pflegen in Layout!
+
+
+
+
+
+
 
 
   

@@ -135,63 +135,90 @@ def send_email_to_support(text, file=None, email=None):
 def get_dashboard_data_dict():
   user = anvil.users.get_user()
 
-  # Initialisiere bookings als leere Liste für den Fall, dass kein User existiert
-  bookings = []
-  has_subscription = False
+  if not user:
+    return {
+      'bookings': [],
+      'has_subscription': False,
+      'server_data_last_update': None
+    }
 
-  if user:
-    # Buchexistenz prüfen
-    bookings = app_tables.bookings.search(
-      q.fetch_only(
-        "guestname", "arrival", "departure", "apartment",
-        "channel_name", "screener_google_linkedin", "address_street",
-        "address_postalcode", "address_city", "screener_address_check",
-        "screener_openai_job", "phone", "screener_phone_check",
-        "adults", "children"
-      ),
-      email=user['email']
-    )
+    # Bestimme Apartment-Limit basierend auf Subscription
+  apartment_limit = 10 if user.get('subscription') == 'Pro-Subscription' else 3
 
-    # Serialisierung der Buchungen
-    serialized_bookings = []
-    for b in bookings:      
+  # Fetch alle Bookings mit optimiertem fetch_only
+  all_bookings = app_tables.bookings.search(
+    q.fetch_only(
+      "guestname", "arrival", "departure", "apartment",
+      "channel_name", "screener_google_linkedin", "address_street",
+      "address_postalcode", "address_city", "screener_address_check",
+      "screener_openai_job", "phone", "screener_phone_check",
+      "adults", "children"
+    ),
+    email=user['email']
+  )
+
+  # Gruppiere und verarbeite Bookings in einem Durchgang
+  apartments = {}
+  for booking in all_bookings:
+    apt = booking.get('apartment')
+    apt_id = apt['id'] if isinstance(apt, dict) and 'id' in apt else apt
+
+    if apt_id not in apartments:
+      apartments[apt_id] = []
+    apartments[apt_id].append(booking)
+
+    # Sortiere Apartments nach frühestem Ankunftsdatum
+  def earliest_arrival(booking_list):
+    arrivals = [b.get('arrival') for b in booking_list if b.get('arrival')]
+    return min(arrivals) if arrivals else datetime.max.replace(tzinfo=timezone.utc)
+
+  sorted_apartment_ids = sorted(
+    apartments.keys(), 
+    key=lambda aid: earliest_arrival(apartments[aid])
+  )[:apartment_limit]
+
+  # Sammle und serialisiere Bookings in einem Schritt
+  serialized_bookings = []
+  for apt_id in sorted_apartment_ids:
+    for booking in apartments[apt_id]:
+      apt = booking.get('apartment')
+      apt_id_final = apt['id'] if isinstance(apt, dict) and 'id' in apt else apt
+
       serialized_bookings.append({
-        'guestname': b['guestname'],
-        'arrival': b['arrival'].isoformat() if b['arrival'] else None,
-        'departure': b['departure'].isoformat() if b['departure'] else None,
-        'apartment': b['apartment'] if isinstance(b['apartment'], str) else b['apartment']['id'],
-        'channel_name': b['channel_name'],
-        'screener_google_linkedin': b['screener_google_linkedin'],
-        'address_street': b['address_street'],
-        'address_postalcode': b['address_postalcode'],
-        'address_city': b['address_city'],
-        'screener_address_check': b['screener_address_check'],
-        'screener_openai_job': b['screener_openai_job'],
-        'phone': b['phone'],
-        'screener_phone_check': b['screener_phone_check'],
-        'adults': b['adults'],
-        'children': b['children']
+        'guestname': booking.get('guestname'),
+        'arrival': booking.get('arrival').isoformat() if booking.get('arrival') else None,
+        'departure': booking.get('departure').isoformat() if booking.get('departure') else None,
+        'apartment': apt_id_final,
+        'channel_name': booking.get('channel_name'),
+        'screener_google_linkedin': booking.get('screener_google_linkedin'),
+        'address_street': booking.get('address_street'),
+        'address_postalcode': booking.get('address_postalcode'),
+        'address_city': booking.get('address_city'),
+        'screener_address_check': booking.get('screener_address_check'),
+        'screener_openai_job': booking.get('screener_openai_job'),
+        'phone': booking.get('phone'),
+        'screener_phone_check': booking.get('screener_phone_check'),
+        'adults': booking.get('adults'),
+        'children': booking.get('children')
       })
-      serialized_bookings.sort(key=lambda b: b['arrival'] or "") 
 
-      # Subscription-Logik korrigiert
-      if user['subscription'] in ['Subscription', 'Pro-Subscription', 'Canceled']:
-        has_subscription = True
-      else:
-        signed_up_date = user['signed_up']
-        if signed_up_date:
-          # Korrekte Zeitberechnung mit Zeitzone
-          trial_end = signed_up_date + timedelta(days=5)
-          now_utc = datetime.now(timezone.utc)
-          has_subscription = now_utc <= trial_end
+    # Sortiere nach Ankunftsdatum
+  serialized_bookings.sort(key=lambda b: b.get('arrival') or "")
 
-    #user['local_storage_update_needed']=False
-    server_data_last_update= user['server_data_last_update']
+  # Subscription-Status bestimmen
+  has_subscription = user.get('subscription') in ['Subscription', 'Pro-Subscription', 'Canceled']
+
+  if not has_subscription:
+    signed_up_date = user.get('signed_up')
+    if signed_up_date:
+      trial_end = signed_up_date + timedelta(days=5)
+      now_utc = datetime.now(timezone.utc)
+      has_subscription = now_utc <= trial_end
 
   return {
-    'bookings': serialized_bookings,  # Serialisierte Daten statt Row-Objekte
+    'bookings': serialized_bookings,
     'has_subscription': has_subscription,
-    'server_data_last_update': server_data_last_update
+    'server_data_last_update': user.get('server_data_last_update')
   }
 
 @anvil.server.callable

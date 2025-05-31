@@ -2,6 +2,10 @@ import anvil.secrets
 import anvil.server
 from openai import OpenAI
 
+import urllib.request
+import urllib.parse
+import json
+
 # Client außerhalb der Funktion initialisieren, damit er für alle Funktionen verfügbar ist
 client = OpenAI(
   #api_key=anvil.secrets.get_secret('openai_api_key'),
@@ -13,7 +17,7 @@ client = OpenAI(
 )
 
 @anvil.server.callable
-def screener_open_ai(name, location, checktype):
+def screener_open_ai_old(name, location, checktype):
   if location is None:
     location=""
   location = location
@@ -49,6 +53,64 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
     )
     #time.sleep(5)
     return response.choices[0].message.content
+  except Exception as e:
+    return f"Fehler: {e}"
+
+
+
+
+
+@anvil.server.callable
+def screener_open_ai(name, location, checktype):
+  location = location or ""  # Handle None location
+
+  # Get API key from Anvil secrets
+  api_key = anvil.secrets.get_secret('linkup_api_key')
+
+  # Construct queries based on checktype
+  if checktype == "job":
+    query = f"""
+        Find professional information about {name} from {location}. Include:
+        Welchen Beruf hat die Person? Schaue auch bei linkedin und Xing. 
+        Welches Hobby hat die Person? 
+        Wichtig: Keine Daten vor 1970   
+        """
+  else:
+    query = f"""
+        Estimate approximate age range of {name} from {location} based on:
+        - Career progression timeline
+        - Family status (e.g., presence of children)
+        Respond ONLY with format: 'XX-XX Jahre' without additional text
+        """
+
+  try:
+    # Setup request data
+    data = {
+      "q": query,
+      "depth": "standard",
+      "outputType": "sourcedAnswer"
+    }
+
+    # Convert data to JSON and encode
+    json_data = json.dumps(data).encode('utf-8')
+
+    # Create request
+    request = urllib.request.Request(
+      'https://api.linkup.so/v1/search',
+      data=json_data,
+      headers={
+        'Authorization': f'Bearer {api_key}',
+        'Content-Type': 'application/json'
+      }
+    )
+
+    # Make API request
+    with urllib.request.urlopen(request) as response:
+      result = json.loads(response.read().decode('utf-8'))
+      return result.get('answer', 'Keine Antwort erhalten')
+
+  except urllib.error.HTTPError as e:
+    return f"HTTP-Fehler: {e.code} - {e.reason}"
   except Exception as e:
     return f"Fehler: {e}"
 
