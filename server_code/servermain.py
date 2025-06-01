@@ -50,18 +50,18 @@ def send_result_email(user_email, reservation_id):
   departure= booking['departure'] or ""
   bookingdata = guestname + " " + str(arrival) + " - " + str(departure)
 
-  intro_text="Hier kommen die Guestscreener Ergebnisse für die neue Buchung: "+ bookingdata+ "<br><br><br>"
+  intro_text="Hier kommen die Lodginia Ergebnisse für die neue Buchung: "+ bookingdata+ "<br><br><br>"
   disclaimer_text="Die Ergebnisse können insbesondere bei häufig vorkommenen Namen falsch sein."+"<br><br><br>"
-  url_text="guestscreener.com"
+  url_text="Lodginia.com"
   
   email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone+ disclaimer_text+ url_text
-  subject="Guestscreener- Ergebnisse für: "+ bookingdata
+  subject="Lodginia- Ergebnisse für: "+ bookingdata
   print("send_email:", user_email, reservation_id, email_text)
   try:
     anvil.email.send(
       to=user_email,
-      from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
-      from_name="Guestscreener.com",
+      from_address="noreply@lodginia.com",  # Vollständige E-Mail-Adresse
+      from_name="Lodginia.com",
       subject=subject,
       html=email_text
     )
@@ -89,9 +89,9 @@ def delete_bookings_by_email(email):
 def send_email(user_email,email_text):
   anvil.email.send(
       to=user_email,
-      from_address="noreply@guestscreener.com",  # Vollständige E-Mail-Adresse
-      from_name="Guestscreener.com",
-      subject="Guestscreener.com Ergebnisse",
+      from_address="noreply@lodginia.com",  # Vollständige E-Mail-Adresse
+      from_name="Lodginia.com",
+      subject="Lodginia.com Ergebnisse",
       html=email_text
     )
 
@@ -111,7 +111,7 @@ def delete_old_bookings():
 def send_registration_notification(user_email):
   anvil.email.send(
     to="dirk.klemer@gmail.com",  # Deine eigene Adresse
-    subject="Neuer Benutzer registriert für Guestscreener.com",
+    subject="Neuer Benutzer registriert für Lodginia.com",
     text=f"Ein neuer Benutzer hat sich registriert: {user_email}"
   )
     
@@ -123,7 +123,7 @@ def send_email_to_support(text, file=None, email=None):
   try:
     anvil.email.send(
       to="dirk.klemer@gmail.com",
-      subject="Neue Supportanfragen vom Guestscreener.com",
+      subject="Neue Supportanfragen vom Lodginia.com",
       text=text + "\n\n" + str(email),
       attachments=attachments
     )

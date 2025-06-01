@@ -39,7 +39,7 @@ components:
   type: ColumnPanel
 - layout_properties: {slot: title}
   name: label_1
-  properties: {role: title, text: guestscreener.com}
+  properties: {role: title, text: lodginia.com}
   type: Label
 - components:
   - data_bindings:
