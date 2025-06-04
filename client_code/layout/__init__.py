@@ -106,6 +106,7 @@ class layout(layoutTemplate):
     pass
 
   def admin_menu_item_click(self, **event_args):
+    self.reset_links()
     self.admin_menu_item.background_color='theme:Secondary Container'
     open_form('Admin')
     pass
