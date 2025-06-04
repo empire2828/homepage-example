@@ -1,7 +1,7 @@
 components:
 - layout_properties: {grid_position: 'YFDFSY,XNWNGQ'}
   name: image_1
-  properties: {display_mode: shrink_to_fit, height: 159, horizontal_align: left, source: _/theme/Lodginia_orange_transparent.jpg}
+  properties: {display_mode: shrink_to_fit, height: 110.22219848632812, horizontal_align: left, source: _/theme/Lodginia_orange_transparent.jpg}
   type: Image
 - components:
   - components:
