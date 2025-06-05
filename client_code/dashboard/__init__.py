@@ -129,27 +129,6 @@ class dashboard(dashboardTemplate):
     alert("Sync in process.")
     pass
 
-  def resync_smoobu_button_click(self, **event_args):
-    user = users.get_user()
-    if user['smoobu_api_key'] is not None:
-      result = alert(
-        content="Hierdurch werden im Hintergrund alle Daten erneut synchronsiert. Dies ist normalerweise nicht notwendig, da neue Buchungen per API automatisiert empfangen werden. Die erneute Synchronisation dauert ca. 10 Minuten.",
-        title="Re-synchronisation Starten?",
-        buttons=[
-          ("Ja", "YES"),
-          ("Nein", "NO"),
-        ]
-      )
-      if result == "YES":
-        local_storage.clear()
-        anvil.server.call_s('delete_bookings_by_email',anvil.users.get_user()['email'])
-        anvil.server.call_s('launch_sync_smoobu')
-        anvil.server.call_s('launch_get_bookings_risk')
-        pass
-      else:
-      # Code ausführen, wenn Benutzer Nein wählt oder das Popup schließt
-        pass
-
   def refresh_button_click(self, **event_args):
     local_storage.clear()
     self.bookings_repeating_panel.items = []
