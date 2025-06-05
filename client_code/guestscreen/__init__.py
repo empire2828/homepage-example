@@ -17,8 +17,16 @@ class guestscreen(guestscreenTemplate):
   def guestscreen_button_click(self, **event_args):
     """Handle button click event."""
     # AI Name Check
-    guest_name = self.guest_name_text_box.text 
-    city = self.city_text_box.text    
+    if self.guest_name_text_box.text:
+      guest_name = self.guest_name_text_box.text 
+    else:
+      alert('Bitte Vor- und Familiennamen eingeben.')
+      return
+    if self.city_text_box.text:
+      city = self.city_text_box.text 
+    else: 
+      alert('Die Stadt bitte eingeben.')
+      return
     aicheckResult_job = anvil.server.call('screener_open_ai', guest_name, city, "job")
     self.AI_result_text_area.text = aicheckResult_job
     

@@ -66,7 +66,6 @@ class dashboard(dashboardTemplate):
         self.dashboard_upgrade_button.visible = True
         self.pms_need_to_connect_text.visible = False
         self.apartment_dropdown_menu.visible = False
-        self.resync_smoobu_button.visible = False
         self.chanel_manager_connect_button.visible = False
         self.bookings_repeating_panel.visible = False
 

@@ -16,7 +16,7 @@ components_by_slot:
   - event_bindings: {click: help_send_button_click}
     layout_properties: {}
     name: help_send_button
-    properties: {role: filled-button, text: send}
+    properties: {role: filled-button, text: Send}
     type: Button
   - layout_properties: {}
     name: spacer_1

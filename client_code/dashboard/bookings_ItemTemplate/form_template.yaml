@@ -12,7 +12,7 @@ components:
         padding: ['0', null, '0', null]
       text: Anreise
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW XUEJHF,OHSZGG'}
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW XUEJHF,OHSZGG', row_background: ''}
     name: arrival_text_box
     properties: {background: 'theme:Surface Variant', text: Anreise}
     type: TextBox
@@ -109,6 +109,10 @@ components:
     name: phone_text_box
     properties: {background: 'theme:Surface Variant'}
     type: TextBox
+  - layout_properties: {grid_position: 'UEOEIJ,ICGROD GMDPXJ,LUEWVR'}
+    name: phone_check_box
+    properties: {text: Telefonnummer validiert}
+    type: CheckBox
   - layout_properties: {grid_position: 'UEOEIJ,YOCTHM SCXHOY,QAHHZN'}
     name: label_6
     properties:
@@ -133,10 +137,6 @@ components:
     name: google_linkedin_text_box
     properties: {appearance: filled, background_color: 'theme:Surface Variant', height: 126.841796875, text: '  '}
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
-  - layout_properties: {grid_position: 'MRMFMU,TLBVBM'}
-    name: phone_check_box
-    properties: {text: Telefonnummer validiert}
-    type: CheckBox
   layout_properties: {grid_position: 'LTPONZ,GZIWLQ'}
   name: outlined_card_1
   properties: {background: '', col_widths: '{"CIXOKO":25,"GMWGGO":35}', role: outlined-card}
