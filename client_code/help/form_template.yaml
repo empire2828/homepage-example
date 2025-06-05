@@ -1,8 +1,8 @@
 components_by_slot:
   slot_1:
   - layout_properties: {}
-    name: title_1
-    properties: {role: title, text: 'Beschreibe hier kurz Dein Problem oder Anregung (gerne mit ScreenShots):'}
+    name: body_2
+    properties: {font_size: 18, role: body, text: 'Beschreibe hier kurz Dein Problem oder Anregung (gerne mit ScreenShots):'}
     type: Label
   - layout_properties: {full_width_row: false}
     name: help_text_area
@@ -17,6 +17,22 @@ components_by_slot:
     layout_properties: {}
     name: help_send_button
     properties: {role: filled-button, text: send}
+    type: Button
+  - layout_properties: {}
+    name: spacer_1
+    properties: {height: 73.18182373046875}
+    type: Spacer
+  - layout_properties: {}
+    name: body_1
+    properties:
+      font_size: 18
+      role: body
+      text: "Hier kannst Du eine komplette Neusynchronisation zu Deinem\nChanel- Manager starten (normalerweise nicht notwendig). Der im Hintergrund laufende Prozess dauert ca. 10 Minuten. \n"
+    type: Label
+  - event_bindings: {click: resync_button_click}
+    layout_properties: {}
+    name: resync_button
+    properties: {role: filled-button, text: Re-sync}
     type: Button
 is_package: true
 layout: {type: 'form:layout'}

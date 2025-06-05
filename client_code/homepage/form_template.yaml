@@ -1,10 +1,10 @@
 components:
-- layout_properties: {grid_position: 'YFDFSY,XNWNGQ'}
-  name: image_1
-  properties: {display_mode: shrink_to_fit, height: 63.111083984375, horizontal_align: left, source: _/theme/lodginia_orange_v2.jpg}
-  type: Image
 - components:
   - components:
+    - layout_properties: {grid_position: 'OVKUPU,OXQSCA'}
+      name: image_1
+      properties: {display_mode: shrink_to_fit, height: 63.111083984375, horizontal_align: left, source: _/theme/lodginia_orange_v2.jpg}
+      type: Image
     - event_bindings: {click: login_button_click}
       layout_properties: {grid_position: 'OVKUPU,ITMSVO'}
       name: login_button
@@ -617,7 +617,7 @@ components:
   type: Button
 - layout_properties: {grid_position: 'MUQDYA,OJJGNF'}
   name: spacer_5
-  properties: {height: 142.876708984375}
+  properties: {height: 113.54547119140625}
   type: Spacer
 - layout_properties: {grid_position: 'LGMCZK,EJOWWM'}
   name: linear_panel_2
