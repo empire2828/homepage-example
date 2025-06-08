@@ -6,6 +6,7 @@ import urllib.request
 import urllib.parse
 import json
 
+######### OLD ###############
 # Client außerhalb der Funktion initialisieren, damit er für alle Funktionen verfügbar ist
 client = OpenAI(
   #api_key=anvil.secrets.get_secret('openai_api_key'),
@@ -17,6 +18,7 @@ client = OpenAI(
 )
 
 @anvil.server.callable
+
 def screener_open_ai_old(name, location, checktype):
   if location is None:
     location=""
@@ -55,10 +57,6 @@ Schätze das Alter von {name} aus {location} anhand des beruflichen Werdeganges 
     return response.choices[0].message.content
   except Exception as e:
     return f"Fehler: {e}"
-
-
-
-
 
 @anvil.server.callable
 def screener_open_ai(name, location, checktype):
