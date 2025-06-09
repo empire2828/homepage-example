@@ -75,6 +75,14 @@ db_schema:
       type: datetime
     server: full
     title: bookings
+  disposable_domains:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: domain
+      type: string
+    server: full
+    title: disposable_domains
   users:
     client: none
     columns:
