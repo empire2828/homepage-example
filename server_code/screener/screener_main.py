@@ -50,8 +50,8 @@ def get_bookings_risk(email=None, booking_id=None):
 
         # eMail check
         email=booking['guest_email']
-        result = screener_email.is_not_disposable_email(email)
-        booking['screener_email'] = result if result is not None else False
+        result = screener_email.is_disposable_email(email)
+        booking['screener_disposable_email'] = result if result is not None else False
     
     # Bei einer einzelnen Buchung geben wir nur diese zurück
     if booking_id and bookings:

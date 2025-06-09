@@ -140,7 +140,7 @@ def get_dashboard_data_dict():
       "channel_name", "screener_google_linkedin", "address_street",
       "address_postalcode", "address_city", "screener_address_check",
       "screener_openai_job", "phone", "screener_phone_check",
-      "guest_email", "screener_email",
+      "guest_email", "screener_disposable_email",
       "adults", "children"
     ),
     email=user['email']
@@ -188,7 +188,7 @@ def get_dashboard_data_dict():
         'phone': booking.get('phone'),
         'screener_phone_check': booking.get('screener_phone_check'),
         'guest_email': booking.get('guest_email'),
-        'screener_email': booking.get('screener_email'),        
+        'screener_disposable_email': booking.get('screener_disposable_email'),        
         'adults': booking.get('adults'),
         'children': booking.get('children')
       })

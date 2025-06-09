@@ -171,7 +171,7 @@ components:
         type: Label
       - layout_properties: {grid_position: 'EPJIMJ,IGCHAY'}
         name: email_check_box
-        properties: {align: left, checked: false, enabled: true, text: 'keine Wegwerf eMail?', visible: true}
+        properties: {align: left, allow_indeterminate: false, background_color: '', checkbox_color: '', checked: false, enabled: true, error: false, text: 'Wegwerf eMail?', visible: true}
         type: form:dep_g9k4toow7i44kq:_Components.Checkbox
       layout_properties: {grid_position: 'XPPWPP,KNGHNX'}
       name: column_panel_4
@@ -190,7 +190,7 @@ components:
         type: form:dep_g9k4toow7i44kq:_Components.Text
       - layout_properties: {grid_position: 'LCKXNY,EPBPRR'}
         name: phone_check_box
-        properties: {text: 'Telefon geprüft?'}
+        properties: {checkbox_color: '', checked: false, text: 'Telefon geprüft?'}
         type: form:dep_g9k4toow7i44kq:_Components.Checkbox
       layout_properties: {grid_position: 'VALVLS,UYSBZD'}
       name: column_panel_5
