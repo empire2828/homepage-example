@@ -73,12 +73,12 @@ db_schema:
     - admin_ui: {width: 200}
       name: created-at
       type: datetime
-    - admin_ui: {order: 22, width: 200}
-      name: screener_email
-      type: bool
     - admin_ui: {order: 12.625, width: 200}
       name: guest_email
       type: string
+    - admin_ui: {width: 200}
+      name: screener_disposable_email
+      type: bool
     server: full
     title: bookings
   disposable_domains:

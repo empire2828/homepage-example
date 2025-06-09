@@ -27,7 +27,7 @@ class bookings_ItemTemplate(bookings_ItemTemplateTemplate):
       self.screener_open_ai_text.text=self.item['screener_openai_job']
       self.screener_open_ai_text.height=320
       self.email_text_box.text=self.item['guest_email']
-      self.email_check_box.checked=self.item['screener_email'] 
+      self.email_check_box.checked=self.item['screener_disposable_email'] 
       self.phone_text_box.text=self.item['phone']
       self.phone_check_box.checked=self.item['screener_phone_check']
       self.adults_text_box.text=self.item['adults']

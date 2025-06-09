@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 import anvil.server
 
 @anvil.server.callable
-def is_not_disposable_email(email):
+def is_disposable_email(email):
   """
     Checks if the given email address belongs to a domain in the disposable_domains table.
     Returns True if the domain is found, otherwise False.
@@ -21,4 +21,4 @@ def is_not_disposable_email(email):
     return False  # Invalid email format
 
     # Check if the domain exists in the table
-  return app_tables.disposable_domains.get(domain=domain) is None
+  return app_tables.disposable_domains.get(domain=domain) is not None
