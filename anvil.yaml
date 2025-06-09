@@ -73,6 +73,12 @@ db_schema:
     - admin_ui: {width: 200}
       name: created-at
       type: datetime
+    - admin_ui: {order: 22, width: 200}
+      name: is_disposable_email
+      type: bool
+    - admin_ui: {order: 12.625, width: 200}
+      name: guest_email
+      type: string
     server: full
     title: bookings
   disposable_domains:
@@ -162,7 +168,13 @@ runtime_options:
   version: 3
 scheduled_tasks:
 - job_id: YPGPYLUN
-  task_name: delete_booking
+  task_name: download_and_store_blocklist
+  time_spec:
+    at: {day: 1, hour: 3, minute: 0}
+    every: week
+    n: 1
+- job_id: QBWEQBQF
+  task_name: delete_old_bookings
   time_spec:
     at: {hour: 3, minute: 0}
     every: day

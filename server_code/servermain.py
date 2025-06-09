@@ -95,8 +95,6 @@ def send_email(user_email,email_text):
       html=email_text
     )
 
-
-
 @anvil.server.callable
 def send_registration_notification(user_email):
   anvil.email.send(

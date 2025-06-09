@@ -1,6 +1,8 @@
 import anvil.server
 import anvil.http
 from anvil.tables import app_tables
+import time
+from datetime import datetime, timedelta, timezone
 
 @anvil.server.background_task
 def download_and_store_blocklist():
@@ -20,8 +22,12 @@ def download_and_store_blocklist():
   for domain in domains:
     app_tables.disposable_domains.add_row(domain=domain)
 
-
 @anvil.server.callable
+def launch_blocklist_download():
+  task = anvil.server.launch_background_task('download_and_store_blocklist')
+  return task
+
+@anvil.server.background_task
 def delete_old_bookings():
   today = datetime.now().date()
   cutoff_date = today - timedelta(days=14)
@@ -32,3 +38,4 @@ def delete_old_bookings():
     deleted_count += 1
   print(f"Buchungen gelöscht, deren Abreisedatum 14 Tage oder mehr zurückliegt. Anzahl: {deleted_count}")
   return deleted_count
+
