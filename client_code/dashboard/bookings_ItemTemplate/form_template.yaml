@@ -1,152 +1,239 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD TIPADO,CQYBRX'}
+  - layout_properties: {grid_position: 'UVYFRY,WDPCER XJLXCM,UHGMQS'}
     name: guestname_text_box
     properties: {bold: true, role: title}
     type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW NKOZPB,OQHNZF'}
-    name: label_1
-    properties:
-      spacing:
-        margin: [0, null, 0, null]
-        padding: ['0', null, '0', null]
-      text: Anreise
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,RZBXZW UGOKOG,QZFKHT'}
-    name: arrival_text_box2
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,AJAYUM FGXYRV,YWYJPO'}
-    name: label_2
-    properties:
-      spacing:
-        margin: ['0', null, '0', null]
-        padding: ['0', null, '0', null]
-      text: Abreise
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD RHCMXY,AJAYUM JHKVNI,FOPBGP'}
-    name: departure_text_box
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,QXDUNY WZPJLD,VLBEWE'}
-    name: label_8
-    properties:
-      spacing:
-        margin: ['0', null, '0', null]
-        padding: ['0', null, '0', null]
-      text: Vermietobjekt
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,QXDUNY CZFPBB,AQQUMN'}
-    name: apartment_text_box
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,AYIQIV FWBERZ,NEXAJS'}
-    name: label_7
-    properties:
-      spacing:
-        margin: ['0', null, '0', null]
-        padding: ['0', null, '0', null]
-      text: Vertriebskanal
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD FHBEQO,AYIQIV LGFCGB,MEDXWB'}
-    name: channel_name_text_box
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KZVRIH YXGSTD,OBTLYN'}
-    name: label_3
-    properties:
-      spacing:
-        margin: ['0', null, '0', null]
-        padding: ['0', null, '0', null]
-      text: Erwachsene
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KZVRIH RLFGWB,TZYQYN'}
-    name: adults_text_box
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KTAJVH IDHXHI,YREMUZ'}
-    name: label_4
-    properties:
-      spacing:
-        margin: ['0', null, '0', null]
-        padding: ['0', null, '0', null]
-      text: Kinder
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QCBFIR,KTAJVH VNRINV,VKOEEU'}
-    name: children_text_box
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD OKLQUY,SPRNCB'}
+  - layout_properties: {grid_position: 'UVYFRY,WDPCER OLVHMM,EGXQWS'}
     name: spacer_2
-    properties: {height: 5.03643798828125}
+    properties: {height: 10}
     type: Spacer
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD ERJMSY,QDUKQL'}
-    name: label_9
-    properties:
-      spacing:
-        margin: ['0', null, '0', null]
-        padding: ['0', null, '0', null]
-      text: Adresse
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QEQSQH,XQLSRY'}
-    name: street_text_box
+  - components:
+    - components:
+      - layout_properties: {grid_position: 'UBKPME,MQCSFN'}
+        name: label_1
+        properties:
+          bold: true
+          spacing:
+            margin: [0, null, 0, null]
+            padding: ['0', null, '0', null]
+          text: Anreise
+        type: Label
+      - layout_properties: {grid_position: 'UBKPME,CWIEVR'}
+        name: label_2
+        properties:
+          bold: true
+          spacing:
+            margin: ['0', null, '0', null]
+            padding: ['0', null, '0', null]
+          text: Abreise
+        type: Label
+      - layout_properties: {grid_position: 'RPGFOQ,DKZFXU'}
+        name: arrival_text_box
+        properties:
+          spacing:
+            margin: [null, null, '8', null]
+            padding: [null, null, null, null]
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'RPGFOQ,OMLOOZ'}
+        name: departure_text_box
+        properties:
+          spacing:
+            margin: [null, null, '8', null]
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      layout_properties: {grid_position: 'UYVXFW,AZOOFL'}
+      name: column_panel_8
+      properties: {wrap_on: never}
+      type: ColumnPanel
+    - components:
+      - layout_properties: {grid_position: 'DKTPKK,MZAUPA HJOUAV,TGTLRZ'}
+        name: label_8
+        properties:
+          bold: true
+          spacing:
+            margin: ['0', null, '0', null]
+            padding: ['0', null, '0', null]
+          text: Vermietobjekt
+        type: Label
+      - layout_properties: {grid_position: 'DKTPKK,MZAUPA RDIGBR,XWYMRW'}
+        name: apartment_text_box
+        properties:
+          spacing:
+            margin: [null, null, '8', null]
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'DKTPKK,LNYQHD NZMNCD,CSZKQI'}
+        name: label_7
+        properties:
+          bold: true
+          spacing:
+            margin: ['0', null, '0', null]
+            padding: ['0', null, '0', null]
+          text: Vertriebskanal
+        type: Label
+      - layout_properties: {grid_position: 'DKTPKK,LNYQHD EMMLJM,SXPSPK'}
+        name: channel_name_text_box
+        properties:
+          spacing:
+            margin: [null, null, '8', null]
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      layout_properties: {grid_position: 'JPTLOZ,HEKTDV'}
+      name: column_panel_7
+      properties: {wrap_on: never}
+      type: ColumnPanel
+    - components:
+      - layout_properties: {grid_position: 'DMIGLW,NPUCPX WWQVJX,SFJFDT'}
+        name: label_3
+        properties:
+          bold: true
+          spacing:
+            margin: ['0', null, '0', null]
+            padding: ['0', null, '0', null]
+          text: Erwachsene
+        type: Label
+      - layout_properties: {grid_position: 'DMIGLW,NPUCPX TYRCKQ,GQUBUI'}
+        name: adults_text_box
+        properties:
+          spacing:
+            margin: [null, null, '8', null]
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'DMIGLW,BRMACP UWFCDE,CLJASN'}
+        name: label_4
+        properties:
+          bold: true
+          spacing:
+            margin: ['0', null, '0', null]
+            padding: ['0', null, '0', null]
+          text: Kinder
+        type: Label
+      - layout_properties: {grid_position: 'DMIGLW,BRMACP QEVAND,QZECPF'}
+        name: children_text_box
+        properties:
+          spacing:
+            margin: [null, null, '8', null]
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      layout_properties: {grid_position: 'VGLMBJ,XLEHSC'}
+      name: column_panel_6
+      properties: {wrap_on: never}
+      type: ColumnPanel
+    - components:
+      - layout_properties: {grid_position: 'LQVAAX,HOIXDE'}
+        name: spacer_3
+        properties: {height: 7}
+        type: Spacer
+      - layout_properties: {grid_position: 'MDEZVQ,HJOAQC'}
+        name: text_1
+        properties: {bold: true, text: Adresse}
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'ONXVLW,METTPU'}
+        name: street_text_box
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'ONXVLW,TTWERL'}
+        name: address_check_box
+        properties:
+          spacing:
+            margin: [null, null, '0', null]
+          text: Adresse geprüft?
+        type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+      - layout_properties: {full_width_row: false, grid_position: 'VAYJPS,KFJMVJ'}
+        name: postal_code_text_box
+        properties:
+          scale: medium
+          spacing:
+            margin: [null, '0', '8', null]
+            padding: [null, '0', null, null]
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'JGKCXJ,NCNKFH'}
+        name: city_text_box
+        properties:
+          spacing:
+            margin: [null, null, '8', null]
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      layout_properties: {grid_position: 'TWAEMK,JNCOMJ'}
+      name: column_panel_2
+      properties: {wrap_on: never}
+      type: ColumnPanel
+    - components:
+      - layout_properties: {grid_position: 'RTYFFY,SZUTQT'}
+        name: spacer_4
+        properties: {height: 7}
+        type: Spacer
+      - layout_properties: {grid_position: 'NIWWYN,CNKNOT'}
+        name: text_2
+        properties: {bold: true, text: eMail}
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'EPJIMJ,QFCKEI'}
+        name: email_text_box
+        properties:
+          role: body
+          spacing:
+            margin: [null, null, '8', null]
+        type: Label
+      - layout_properties: {grid_position: 'EPJIMJ,IGCHAY'}
+        name: email_check_box
+        properties: {align: left, checked: false, enabled: true, text: 'keine Wegwerf eMail?', visible: true}
+        type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+      layout_properties: {grid_position: 'XPPWPP,KNGHNX'}
+      name: column_panel_4
+      properties: {wrap_on: never}
+      type: ColumnPanel
+    - components:
+      - layout_properties: {grid_position: 'VHZLUI,KWSFRC'}
+        name: text_3
+        properties: {bold: true, text: Telefon}
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'LCKXNY,TNKVEO'}
+        name: phone_text_box
+        properties:
+          spacing:
+            margin: [null, null, '8', null]
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'LCKXNY,EPBPRR'}
+        name: phone_check_box
+        properties: {text: 'Telefon geprüft?'}
+        type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+      layout_properties: {grid_position: 'VALVLS,UYSBZD'}
+      name: column_panel_5
+      properties: {wrap_on: never}
+      type: ColumnPanel
+    layout_properties: {grid_position: 'UVYFRY,WDPCER ZTKHHE,OWSULS'}
+    name: column_panel_1
     properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD QEQSQH,ERUKSX'}
-    name: address_check_box
-    properties: {text: 'Adresse geprüft?'}
-    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD TESOQM,CIXOKO'}
-    name: postal_code_text_box
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'UKGZBR,JHYYOQ'}
+      name: label_6
+      properties:
+        bold: true
+        spacing:
+          margin: ['0', null, '0', null]
+          padding: ['0', null, '0', null]
+        text: KI gestütze Suche
+      type: Label
+    - layout_properties: {grid_position: 'IQGOFR,KPUNOV'}
+      name: screener_open_ai_text
+      properties: {background: 'theme:Surface Variant', height: 323.5361328125}
+      type: TextArea
+    - layout_properties: {grid_position: 'SNTRAP,JBUDKW'}
+      name: label_5
+      properties:
+        bold: true
+        spacing:
+          margin: ['0', null, '0', null]
+          padding: ['0', null, '0', null]
+        text: Mögliche linkedin Profile
+      type: Label
+    - layout_properties: {grid_position: 'BXZOAO,ANDURY'}
+      name: google_linkedin_text_box
+      properties: {appearance: filled, background_color: 'theme:Surface Variant', height: 126.841796875, text: '  '}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
+    layout_properties: {grid_position: 'UVYFRY,QSNBRE'}
+    name: column_panel_3
     properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD TESOQM,GMWGGO'}
-    name: city_text_box
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD IXMNQM,GJWIPK'}
-    name: email_text_box
-    properties: {role: body}
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD IXMNQM,LOMMUI'}
-    name: email_check_box
-    properties: {align: left, checked: false, enabled: true, text: 'keine Wegwerf eMail?', visible: true}
-    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD GMDPXJ,BEUOZG'}
-    name: phone_text_box
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'UEOEIJ,ICGROD GMDPXJ,LUEWVR'}
-    name: phone_check_box
-    properties: {text: 'Telefon geprüft?'}
-    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
-  - layout_properties: {grid_position: 'UEOEIJ,YOCTHM SCXHOY,QAHHZN'}
-    name: label_6
-    properties:
-      spacing:
-        margin: ['0', null, '0', null]
-        padding: ['0', null, '0', null]
-      text: KI gestütze Suche
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,YOCTHM YTWCJD,PUMALA'}
-    name: screener_open_ai_text
-    properties: {background: 'theme:Surface Variant', height: 323.5361328125}
-    type: TextArea
-  - layout_properties: {grid_position: 'UEOEIJ,YOCTHM MKRITV,VAJQRO'}
-    name: label_5
-    properties:
-      spacing:
-        margin: ['0', null, '0', null]
-        padding: ['0', null, '0', null]
-      text: Mögliche linkedin Profile
-    type: Label
-  - layout_properties: {grid_position: 'UEOEIJ,YOCTHM WWLOPD,XOJUOS'}
-    name: google_linkedin_text_box
-    properties: {appearance: filled, background_color: 'theme:Surface Variant', height: 126.841796875, text: '  '}
-    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
+    type: ColumnPanel
   layout_properties: {grid_position: 'LTPONZ,GZIWLQ'}
   name: outlined_card_1
-  properties: {background: '', col_widths: '{"CIXOKO":25,"GMWGGO":35}', role: outlined-card}
+  properties: {background: '', col_widths: '{}', role: outlined-card}
   type: ColumnPanel
 - layout_properties: {grid_position: 'LJHFVZ,KIAVLA'}
   name: spacer_1
