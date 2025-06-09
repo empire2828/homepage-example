@@ -1,13 +1,7 @@
-#import anvil.email
-#import anvil.secrets
-#import anvil.google.auth, anvil.google.drive, anvil.google.mail
-#from anvil.google.drive import app_files
 import anvil.users
-#import anvil.tables as tables
-#import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
-from screener import screener_open_ai, google_linkedin, address_check, phone_check
+from screener import screener_open_ai, google_linkedin, address_check, phone_check, screener_email
 import time
 
 @anvil.server.callable
@@ -32,7 +26,9 @@ def get_bookings_risk(email=None, booking_id=None):
     
     for booking in bookings:
         # OpenAI Job-Prüfung
-        result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'], "job")
+        #result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'], "job")
+        # to save 10 cent per updating all bookings #################################################################
+        result= None
         booking['screener_openai_job'] = result if result is not None else ""
       
         # Google LinkedIn-Prüfung
@@ -52,9 +48,10 @@ def get_bookings_risk(email=None, booking_id=None):
         result = phone_check.phone_check(phone)
         booking['screener_phone_check'] = result if result is not None else False
 
-        # OpenAI Alters-Prüfung
-        # result = screener_open_ai.screener_open_ai(booking['guestname'], booking['address_city'], "age")
-        # booking['screener_openai_age'] = result
+        # eMail check
+        email=booking['guest_email']
+        result = screener_email.is_not_disposable_email(email)
+        booking['screener_email'] = result if result is not None else False
     
     # Bei einer einzelnen Buchung geben wir nur diese zurück
     if booking_id and bookings:
