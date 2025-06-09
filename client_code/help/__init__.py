@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from anvil_extras.storage import local_storage
 
 class help(helpTemplate):
   def __init__(self, **properties):
@@ -26,7 +27,7 @@ class help(helpTemplate):
     pass
 
   def resync_button_click(self, **event_args):
-    user = users.get_user()
+    user = anvil.users.get_user()
     if user['smoobu_api_key'] is not None:
       result = alert(
         content="Hierdurch werden im Hintergrund alle Daten erneut synchronsiert. Dies ist normalerweise nicht notwendig, da neue Buchungen per API automatisiert empfangen werden. Die erneute Synchronisation dauert ca. 10 Minuten.",

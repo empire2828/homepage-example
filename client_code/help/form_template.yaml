@@ -20,7 +20,7 @@ components_by_slot:
     type: Button
   - layout_properties: {}
     name: spacer_1
-    properties: {height: 73.18182373046875}
+    properties: {height: 102.95657348632812}
     type: Spacer
   - layout_properties: {}
     name: body_1
@@ -29,6 +29,10 @@ components_by_slot:
       role: body
       text: "Hier kannst Du eine komplette Neusynchronisation zu Deinem\nChanel- Manager starten (normalerweise nicht notwendig). Der im Hintergrund laufende Prozess dauert ca. 10 Minuten. \n"
     type: Label
+  - layout_properties: {}
+    name: spacer_2
+    properties: {height: 18.9617919921875}
+    type: Spacer
   - event_bindings: {click: resync_button_click}
     layout_properties: {}
     name: resync_button
