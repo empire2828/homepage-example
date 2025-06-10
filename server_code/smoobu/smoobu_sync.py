@@ -21,114 +21,110 @@ def launch_sync_smoobu():
 
 @anvil.server.background_task
 def sync_smoobu(user_email):
-    base_url = "https://login.smoobu.com/api/reservations"
-    user= app_tables.users.get(email=user_email)
-    if user:
-        api_key= user['smoobu_api_key']
+  base_url = "https://login.smoobu.com/api/reservations"
+  user = app_tables.users.get(email=user_email)
+  if user:
+    api_key = user['smoobu_api_key']
+  else:
+    return "User not found."
+
+  headers = {
+    "Api-Key": api_key,
+    "Content-Type": "application/json"
+  }
+
+  params = {
+    "page": 1,
+    "pageSize": 100
+  }
+
+  all_bookings = []
+  current_page = 1
+  total_pages = 1
+
+  while current_page <= total_pages:
+    params["page"] = current_page
+    response = requests.get(base_url, headers=headers, params=params)
+    if response.status_code == 200:
+      data = response.json()
+      total_pages = data.get("page_count", 1)
+      bookings = data.get("bookings", [])
+      all_bookings.extend(bookings)
+      current_page += 1
     else:
-      pass
-      
-    headers = {
-        "Api-Key": api_key,
-        "Content-Type": "application/json"
-    }
-    
-    params = {
-        "status": "confirmed",
-        "page": 1,
-        "limit": 100
-    }
-          #"start_date": datetime.now().strftime("%Y-%m-%d"),
-    
-    all_bookings = []
-    total_pages = 1
-    current_page = 1
-    
-    while current_page <= total_pages:
-        params["page"] = current_page
-        response = requests.get(base_url, headers=headers, params=params)
-        
-        if response.status_code == 200:
-            data = response.json()
-            
-            if "pagination" in data and "totalPages" in data["pagination"]:
-                total_pages = data["pagination"]["totalPages"]
-            
-            if "bookings" in data:
-                all_bookings.extend(data["bookings"])
-            else:
-                return "Error: Unexpected API response structure"
-            
-            current_page += 1
-        else:
-            return f"Fehler: {response.status_code} - {response.text}"
-    
-    bookings_added = 0
-    for booking in all_bookings:
-        try:
-            # Bestehende Buchung anhand der Reservierungs-ID abrufen
-            existing = app_tables.bookings.get(reservation_id=booking['id'], email=user_email)
-            
-            # Gästedaten abrufen
-            guest_data = get_guest_details(booking['guestId'], headers)
-            address = guest_data.get('address', {})
-            street = address.get('street', '')
-            city = address.get('city', '')
-            postal_code = address.get('postalCode', '')
-            country = address.get('country', '')       
-            
-            if existing:
-                existing.update(
-                    reservation_id=booking['id'],
-                    apartment=booking['apartment']['name'],
-                    arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
-                    departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
-                    guestname=booking['guest-name'],
-                    channel_name=booking['channel']['name'],
-                    guest_email=booking['email'],
-                    phone=booking['phone'],
-                    adults=booking['adults'],
-                    children=booking['children'],
-                    type=booking['type'],
-                    guestid=booking['guestId'],
-                    language=booking['language'],
-                    address_street=street,
-                    address_postalcode=postal_code,
-                    address_city=city,
-                    address_country=country,
-                    email=user_email
-                )
-            else:
-              if booking['channel']['name'] != 'Blocked channel':
-                app_tables.bookings.add_row(
-                    reservation_id=booking['id'],
-                    apartment=booking['apartment']['name'],
-                    arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
-                    departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
-                    guestname=booking['guest-name'],
-                    channel_name=booking['channel']['name'],
-                    guest_email=booking['email'],  
-                    phone=booking['phone'],
-                    adults=booking['adults'],
-                    children=booking['children'],
-                    type=booking['type'],
-                    guestid=booking['guestId'],
-                    language=booking['language'],
-                    address_street=street,
-                    address_postalcode=postal_code,
-                    address_city=city,
-                    address_country=country,
-                    email=user_email
-                )
-            
-            bookings_added += 1
-        except KeyError as e:
-            print(f"Missing key in booking data: {e}")
-            continue
+      return f"Fehler: {response.status_code} - {response.text}"
 
-    anvil.server.launch_background_task('save_user_apartment_count',user_email)
+  bookings_added = 0
+  for booking in all_bookings:
+    try:
+      existing = app_tables.bookings.get(reservation_id=booking['id'], email=user_email)
 
-    return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten abgerufen und gespeichert."
+      guest_data = get_guest_details(booking['guestId'], headers)
+      address = guest_data.get('address', {}) if guest_data else {}
+      street = address.get('street', '')
+      city = address.get('city', '')
+      postal_code = address.get('postalCode', '')
+      country = address.get('country', '')
+
+      if existing:
+        existing.update(
+          reservation_id=booking['id'],
+          apartment=booking['apartment']['name'],
+          arrival=datetime.strptime(booking['arrival'], "%Y-%m-%d").date(),
+          departure=datetime.strptime(booking['departure'], "%Y-%m-%d").date(),
+          guestname=booking.get('guest-name', ''),
+          channel_name=booking['channel']['name'],
+          guest_email=booking.get('email', ''),
+          phone=booking.get('phone', ''),
+          adults=booking.get('adults', 0),
+          children=booking.get('children', 0),
+          type=booking.get('type', ''),
+          guestid=booking['guestId'],
+          language=booking.get('language', ''),
+          address_street=street,
+          address_postalcode=postal_code,
+          address_city=city,
+          address_country=country,
+          email=user_email
+                )
+      else:
+                if booking['channel']['name'] != 'Blocked channel':
+                    app_tables.bookings.add_row(
+                        reservation_id=booking['id'],
+                        apartment=booking['apartment']['name'],
+                        arrival=datetime.strptime(booking['arrival'], "%Y-%m-%d").date(),
+                        departure=datetime.strptime(booking['departure'], "%Y-%m-%d").date(),
+                        guestname=booking.get('guest-name', ''),
+                        channel_name=booking['channel']['name'],
+                        guest_email=booking.get('email', ''),
+                        phone=booking.get('phone', ''),
+                        adults=booking.get('adults', 0),
+                        children=booking.get('children', 0),
+                        type=booking.get('type', ''),
+                        guestid=booking['guestId'],
+                        language=booking.get('language', ''),
+                        address_street=street,
+                        address_postalcode=postal_code,
+                        address_city=city,
+                        address_country=country,
+                        email=user_email
+                    )
+      bookings_added += 1
+    except KeyError as e:
+        print(f"Missing key in booking data: {e}")
+        continue
+
+  # Moved outside the for loop
+  anvil.server.launch_background_task('save_user_apartment_count', user_email)
+  return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten abgerufen und gespeichert."
+
+# Moved outside the sync_smoobu function
+#def get_guest_details(guest_id, headers):
+#    guest_url = f"https://login.smoobu.com/api/guests/{guest_id}"
+#    response = requests.get(guest_url, headers=headers)
+#    if response.status_code == 200:
+#        return response.json()
+#    return {}
 
 @anvil.server.callable
 def save_smoobu_userid(user_email):
