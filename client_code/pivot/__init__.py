@@ -14,4 +14,7 @@ class pivot(pivotTemplate):
     self.init_components(**properties)
     pivot_data = anvil.server.call('get_dashboard_data_dict')
     self.pivot_1.items= pivot_data
+    self.pivot_1.rows = ['user']       # Group by user
+    self.pivot_1.columns = ['channel']    # Group by date
+    self.pivot_1.values = ['price']    # Summarize price
     # Any code you write here will run before the form opens.
