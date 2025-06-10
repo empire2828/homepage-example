@@ -38,3 +38,7 @@ class Admin(AdminTemplate):
 
       except Exception as e:
         alert(f"Fehler beim Import: {str(e)}")
+
+  def navigation_link_1_click(self, **event_args):
+    open_form('pivot')
+    pass

@@ -12,5 +12,6 @@ class pivot(pivotTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
+    pivot_data = anvil.server.call('get_dashboard_data_dict')
+    self.pivot_1.items= pivot_data
     # Any code you write here will run before the form opens.

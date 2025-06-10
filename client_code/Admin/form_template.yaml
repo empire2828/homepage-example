@@ -5,5 +5,10 @@ components_by_slot:
     name: admin_file_loader
     properties: {}
     type: form:dep_g9k4toow7i44kq:_Components.FileLoader
+  - event_bindings: {click: navigation_link_1_click}
+    layout_properties: {}
+    name: navigation_link_1
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
 is_package: true
 layout: {type: 'form:layout'}
