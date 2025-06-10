@@ -1,4 +1,4 @@
-from ._anvil_designer import dashboardTemplate
+from ._anvil_designer import guest_screeningTemplate
 from anvil import *
 from anvil.tables import app_tables
 from anvil import users
@@ -7,7 +7,7 @@ from anvil_extras.storage import local_storage
 import time
 from datetime import datetime, timedelta
 
-class dashboard(dashboardTemplate):
+class guest_screening(guest_screeningTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

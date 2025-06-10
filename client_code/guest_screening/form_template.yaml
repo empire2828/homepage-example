@@ -22,7 +22,7 @@ components_by_slot:
   - layout_properties: {}
     name: bookings_repeating_panel
     properties:
-      item_template: dashboard.bookings_ItemTemplate
+      item_template: guest_screening.bookings_ItemTemplate
       margin: [null, null, '0', null]
     type: RepeatingPanel
   - components:
