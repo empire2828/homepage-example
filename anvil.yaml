@@ -173,12 +173,6 @@ scheduled_tasks:
     at: {day: 1, hour: 3, minute: 0}
     every: week
     n: 1
-- job_id: QBWEQBQF
-  task_name: delete_old_bookings
-  time_spec:
-    at: {hour: 3, minute: 0}
-    every: day
-    n: 1
 secrets:
   PERPLEXITY_API_KEY:
     type: secret

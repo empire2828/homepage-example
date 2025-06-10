@@ -34,7 +34,7 @@ def sync_smoobu(user_email):
     }
     
     params = {
-        "start_date": datetime.now().strftime("%Y-%m-%d"),
+        #"start_date": datetime.now().strftime("%Y-%m-%d"),
         "status": "confirmed",
         "page": 1,
         "limit": 100
