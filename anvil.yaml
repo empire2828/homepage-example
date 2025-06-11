@@ -222,6 +222,9 @@ secrets:
   stripe_test_api_key:
     type: secret
     value: {Y4HSOSHAROBHE7LA: tmBGw6FIjMQE3lfps4SL3Wc6fQwKXK/yNJ+Q/MbU8VF02hx7wk1zyc43DdS60OMglP75GWIjndcAsFPJjSSbThlmeT+ASlHrzAE6gwTRWG7xYRlw1wTUIjkugg3c59lXAIPWavhF+R9/HJX4O32MQXTt0kmhKwa2Cxwak0dpKsTTHufGMYdeXQ7iU+p87iGV4QEMMKkhzrRK6BI6SZ0QG+4wXuLX3RnMl5rEGnAMtAxtPXjqjt4QbXa7gMhMZx1+VZW0+IBWtj1Dvw==}
+  supabase_api_key:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: nN6bKtM0+BTPcIaCVRZc78tSJlyeE/hAskXEm4hxtHGwaaH3MM4eouEq1tAylfzcF/PvNpXgFuWWEZ5JHMMIo1BrUB2aAaEwq+VxYhjlT/iRwpmQXrxqhn8mpHAj8dcomfDBFE0sNMQPFT7b0pyCyAi+XNbrO0QOM6lpWx/mzZdagxcZtYHIwVY8MlRzXmmotJcJgPN1WpDGKbAfx1I7QI0sp1U9GrZhgsBX7Kf0YvwE/qf+rlMTSOza3Q3P4CGnx5QCncZdzUwEtbAlEiy+vk+5ulbhD9DqV+na+RaykZAscA+7HncWliJsn4ZUOQU/Iw9InvgdxjF7JjzOrJ3n61CQzvH6VKHO0tyRhYuOXPlzL4kj8hfoRvVBQjzIJ0lKquPgMrzgw1DcKLBWCDi0x3vyvjY2D6p5fjQ=}
 services:
 - client_config: {enable_v2: true}
   server_config: {}
