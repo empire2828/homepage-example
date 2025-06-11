@@ -79,6 +79,27 @@ db_schema:
     - admin_ui: {order: 4.3125, width: 200}
       name: created_at
       type: date
+    - admin_ui: {order: 23, width: 200}
+      name: price
+      type: number
+    - admin_ui: {order: 24, width: 200}
+      name: price_paid
+      type: bool
+    - admin_ui: {order: 25, width: 200}
+      name: prepayment
+      type: number
+    - admin_ui: {order: 26, width: 200}
+      name: prepayment_paid
+      type: bool
+    - admin_ui: {order: 27, width: 200}
+      name: deposit
+      type: number
+    - admin_ui: {order: 28, width: 200}
+      name: deposit_paid
+      type: bool
+    - admin_ui: {order: 29, width: 200}
+      name: commission_included
+      type: number
     server: full
     title: bookings
   disposable_domains:
