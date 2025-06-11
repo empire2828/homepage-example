@@ -36,7 +36,9 @@ def sync_smoobu(user_email):
   params = {
     "status": "confirmed",
     "page": 1,
-    "limit": 100
+    "limit": 100,
+    "from": "2019-01-01",
+    "includePriceElements": True
   }
   #"start_date": datetime.now().strftime("%Y-%m-%d"),
 
@@ -84,6 +86,7 @@ def sync_smoobu(user_email):
           apartment=booking['apartment']['name'],
           arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
           departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
+          created_at = datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M"),
           guestname=booking['guest-name'],
           channel_name=booking['channel']['name'],
           guest_email=booking['email'],
@@ -106,6 +109,7 @@ def sync_smoobu(user_email):
             apartment=booking['apartment']['name'],
             arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
             departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
+            created_at = datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M"),
             guestname=booking['guest-name'],
             channel_name=booking['channel']['name'],
             guest_email=booking['email'],  
