@@ -50,7 +50,8 @@ def sync_smoobu(user_email):
 
     if response.status_code == 200:
       data = response.json()
-
+      print (data)
+      
       if "pagination" in data and "totalPages" in data["pagination"]:
         total_pages = data["pagination"]["totalPages"]
 
