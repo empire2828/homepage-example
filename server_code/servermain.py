@@ -209,7 +209,7 @@ def get_dashboard_data_dict():
   }
 
 def get_bookings_from_supabase(email):
-  response = supabase_client.from_('bookings').eq('email', email).execute()
+  response = supabase_client.from_('bookings').select("*").eq('email', email).execute()
   return response.data
 
 @anvil.server.callable
