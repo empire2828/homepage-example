@@ -6,6 +6,12 @@ import anvil.server
 import time
 from datetime import datetime, timedelta, timezone
 from . import routes # noqa: F401
+from supabase import create_client, Client
+import anvil.secrets
+
+supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.background_task
 def send_result_email(user_email, reservation_id):
@@ -134,18 +140,8 @@ def get_dashboard_data_dict():
   apartment_limit = 10 if user.get('subscription') == 'Pro-Subscription' else 3
 
   # Fetch alle Bookings mit optimiertem fetch_only
-  all_bookings = app_tables.bookings.search(
-    q.fetch_only(
-      "guestname", "arrival", "departure", "apartment",
-      "channel_name", "screener_google_linkedin", "address_street",
-      "address_postalcode", "address_city", "screener_address_check",
-      "screener_openai_job", "phone", "screener_phone_check",
-      "guest_email", "screener_disposable_email",
-      "adults", "children"
-    ),
-    email=user['email']
-  )
-
+  all_bookings = get_bookings_from_supabase(user['email'])
+  
   # Gruppiere und verarbeite Bookings in einem Durchgang
   apartments = {}
   for booking in all_bookings:
@@ -211,6 +207,10 @@ def get_dashboard_data_dict():
     'has_subscription': has_subscription,
     'server_data_last_update': user.get('server_data_last_update')
   }
+
+def get_bookings_from_supabase(email):
+  response = supabase_client.from_('bookings').eq('email', email).execute()
+  return response.data
 
 @anvil.server.callable
 def call_server_wake_up():

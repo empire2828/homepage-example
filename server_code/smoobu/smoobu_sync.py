@@ -10,7 +10,7 @@ from supabase import create_client, Client
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase: Client = create_client(supabase_url, supabase_api_key)
+supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.callable
 def launch_sync_smoobu():
@@ -116,7 +116,7 @@ def sync_smoobu(user_email):
 
       # Upsert in Supabase (fügt hinzu oder aktualisiert, falls vorhanden)
       response = (
-        supabase
+        supabase_client
           .from_("bookings")
           .upsert(row, on_conflict="reservation_id")
           .execute()
