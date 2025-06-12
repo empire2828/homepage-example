@@ -9,7 +9,7 @@ from smoobu.smoobu_main import get_guest_details, guest_data_update
 from supabase import create_client, Client
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_key')
+supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
 supabase: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.callable
@@ -75,7 +75,7 @@ def sync_smoobu(user_email):
   for booking in all_bookings:
     try:
       # Bestehende Buchung anhand der Reservierungs-ID abrufen
-      existing = app_tables.bookings.get(reservation_id=booking['id'], email=user_email)
+      #existing = app_tables.bookings.get(reservation_id=booking['id'], email=user_email)
 
       # Gästedaten abrufen
       guest_data = get_guest_details(booking['guestId'], headers)
@@ -85,65 +85,42 @@ def sync_smoobu(user_email):
       postal_code = address.get('postalCode', '')
       country = address.get('country', '')       
 
-      if existing:
-        existing.update(
-          reservation_id=booking['id'],
-          apartment=booking['apartment']['name'],
-          arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
-          departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
-          created_at = datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").date(),
-          guestname=booking['guest-name'],
-          channel_name=booking['channel']['name'],
-          guest_email=booking['email'],
-          phone=booking['phone'],
-          adults=booking['adults'],
-          children=booking['children'],
-          type=booking['type'],
-          price=booking['price'],
-          price_paid=booking['price-paid'],
-          prepayment=booking['prepayment'],
-          prepayment_paid=booking['prepayment-paid'],
-          deposit=booking['deposit'],
-          deposit_paid=booking['deposit-paid'],
-          commission_included=booking['commission-included'],
-          guestid=booking['guestId'],
-          language=booking['language'],
-          address_street=street,
-          address_postalcode=postal_code,
-          address_city=city,
-          address_country=country,
-          email=user_email
-        )
-      else:
-        if booking['channel']['name'] != 'Blocked channel':
-          app_tables.bookings.add_row(
-            reservation_id=booking['id'],
-            apartment=booking['apartment']['name'],
-            arrival=datetime.strptime(booking['arrival'],"%Y-%m-%d").date(),
-            departure=datetime.strptime(booking['departure'],"%Y-%m-%d").date(),
-            created_at = datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").date(),
-            guestname=booking['guest-name'],
-            channel_name=booking['channel']['name'],
-            guest_email=booking['email'],  
-            phone=booking['phone'],
-            adults=booking['adults'],
-            children=booking['children'],
-            type=booking['type'],
-            price=booking['price'],
-            price_paid=booking['price-paid'],
-            prepayment=booking['prepayment'],
-            prepayment_paid=booking['prepayment-paid'],
-            deposit=booking['deposit'],
-            deposit_paid=booking['deposit-paid'],
-            commission_included=booking['commission-included'],
-            guestid=booking['guestId'],
-            language=booking['language'],
-            address_street=street,
-            address_postalcode=postal_code,
-            address_city=city,
-            address_country=country,
-            email=user_email
-          )
+      row = {
+        "reservation_id": booking['id'],
+        "apartment": booking['apartment']['name'],
+        "arrival": datetime.strptime(booking['arrival'], "%Y-%m-%d").date().isoformat(),
+        "departure": datetime.strptime(booking['departure'], "%Y-%m-%d").date().isoformat(),
+        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").isoformat(),
+        "guestname": booking['guest-name'],
+        "channel_name": booking['channel']['name'],
+        "guest_email": booking['email'],
+        "phone": booking['phone'],
+        "adults": booking['adults'],
+        "children": booking['children'],
+        "type": booking['type'],
+        "price": booking['price'],
+        "price_paid": booking['price-paid'],
+        "prepayment": booking['prepayment'],
+        "prepayment_paid": booking['prepayment-paid'],
+        "deposit": booking['deposit'],
+        "deposit_paid": booking['deposit-paid'],
+        "commission_included": booking['commission-included'],
+        "guestid": booking['guestId'],
+        "language": booking['language'],
+        "address_street": street,
+        "address_postalcode": postal_code,
+        "address_city": city,
+        "address_country": country,
+        "email": user_email
+      }
+
+      # Upsert in Supabase (fügt hinzu oder aktualisiert, falls vorhanden)
+      response = (
+        supabase
+          .from_("bookings")
+          .upsert(row, on_conflict="reservation_id")
+          .execute()
+      )
 
       bookings_added += 1
     except KeyError as e:
