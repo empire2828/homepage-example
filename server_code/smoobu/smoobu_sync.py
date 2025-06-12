@@ -1,13 +1,16 @@
-#import anvil.email
-#import anvil.secrets
+import anvil.secrets
 import anvil.users
-#import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
 import requests
 from smoobu.smoobu_main import get_guest_details, guest_data_update
+from supabase import create_client, Client
+
+supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+supabase_api_key = anvil.secrets.get_secret('supabase_key')
+supabase: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.callable
 def launch_sync_smoobu():
