@@ -171,8 +171,9 @@ def get_dashboard_data_dict():
 
       serialized_bookings.append({
         'guestname': booking.get('guestname'),
-        'arrival': booking.get('arrival').isoformat() if booking.get('arrival') else None,
-        'departure': booking.get('departure').isoformat() if booking.get('departure') else None,
+        'arrival': booking.get('arrival') if booking.get('arrival') else None,
+       #'arrival': booking.get('arrival').isoformat() if booking.get('arrival') else None,
+        'departure': booking.get('departure') if booking.get('departure') else None,
         'apartment': apt_id_final,
         'channel_name': booking.get('channel_name'),
         'screener_google_linkedin': booking.get('screener_google_linkedin'),

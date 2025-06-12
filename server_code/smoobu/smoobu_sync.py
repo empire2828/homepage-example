@@ -54,19 +54,17 @@ def sync_smoobu(user_email):
   while current_page <= total_pages:
     params["page"] = current_page
     response = requests.get(base_url, headers=headers, params=params)
-
     if response.status_code == 200:
       data = response.json()
-      print (data)
-      
-      if "pagination" in data and "totalPages" in data["pagination"]:
-        total_pages = data["pagination"]["totalPages"]
-
+      # ACHTUNG: Die API liefert page_count und bookings
+      total_pages = data.get("pagination", {}).get("totalPages", 1)
+      # oder manchmal page_count
+      if "page_count" in data:
+        total_pages = data["page_count"]
       if "bookings" in data:
         all_bookings.extend(data["bookings"])
       else:
         return "Error: Unexpected API response structure"
-
       current_page += 1
     else:
       return f"Fehler: {response.status_code} - {response.text}"
