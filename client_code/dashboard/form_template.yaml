@@ -1,7 +1,12 @@
 components_by_slot:
   slot_1:
+  - components: []
+    layout_properties: {}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
   - layout_properties: {}
-    name: pivot_1
+    name: revenue_pivot
     properties: {}
     type: form:dep_pa3otpma4dkzg:Pivot
 is_package: true
