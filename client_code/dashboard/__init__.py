@@ -71,15 +71,12 @@ class dashboard(dashboardTemplate):
 
     if user_has_subscription:
       panel_data = dashboard_data['bookings']
-      bookings = panel_data
 
     # Dropdown Menu - vereinfacht
     panel_data = dashboard_data.get('bookings', [])  # Initialize with empty list as fallback
     bookings = panel_data
     apartments = set()
-
-    # Speichere panel_data als Instanzvariable
-    self.panel_data = panel_data
+    self.panel_data = panel_data     # Speichere panel_data als Instanzvariable
 
     for booking in bookings:
       apartment_name = booking.get('apartment', '')  # Direkt als String behandeln
@@ -101,10 +98,10 @@ class dashboard(dashboardTemplate):
         booking for booking in self.panel_data  # Verwende self.panel_data
         if booking.get('apartment') == first_apartment
       ]
-      self.bookings_repeating_panel.items = filtered_bookings
+      self.panel_date_selected = filtered_bookings
     else:
       self.apartment_dropdown_menu.selected_value = None
-      #self.bookings_repeating_panel.items = self.panel_data
+      self.panel_date_selected = self.panel_data
 
     self.build_revenue_graph()
 
@@ -162,30 +159,31 @@ class dashboard(dashboardTemplate):
   pass
   #identisch zu pflegen in Layout!
 
-def build_revenue_graph(self):
-  # Gesamtsumme berechnen
-  total_revenue = sum(booking.get('price', 0) for booking in self.panel_data)
-  self.revenue_title.text = f"Gesamtumsatz: {total_revenue:.2f} €"
-
-  # Umsatz nach Monat plotten
-  from collections import defaultdict
-  revenue_by_month = defaultdict(float)
-  for booking in self.panel_data:
-    date = booking.get('arrival')
-    price = booking.get('price', 0)
-    if date:
-      month = date[:7]
-      revenue_by_month[month] += price
-
-  months = sorted(revenue_by_month.keys())
-  revenues = [revenue_by_month[m] for m in months]
-
-  import plotly.graph_objects as go
-  self.revenue_plot.data = go.Bar(
-    x=months,
-    y=revenues,
-    marker=dict(color='#2196f3')
-  )
+  def build_revenue_graph(self):
+    # Gesamtsumme berechnen
+    total_revenue = sum(booking.get('price', 0) for booking in self.panel_data_selected)
+    print(total_revenue)
+    self.revenue_title.text = f"Gesamtumsatz: {total_revenue:.2f} €"
+  
+    # Umsatz nach Monat plotten
+    from collections import defaultdict
+    revenue_by_month = defaultdict(float)
+    for booking in self.panel_data_selected:
+      date = booking.get('arrival')
+      price = booking.get('price', 0)
+      if date:
+        month = date[:7]
+        revenue_by_month[month] += price
+  
+    months = sorted(revenue_by_month.keys())
+    revenues = [revenue_by_month[m] for m in months]
+  
+    import plotly.graph_objects as go
+    self.revenue_plot.data = go.Bar(
+      x=months,
+      y=revenues,
+      marker=dict(color='#2196f3')
+    )
 
 
 

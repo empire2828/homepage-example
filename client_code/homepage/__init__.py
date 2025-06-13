@@ -24,7 +24,7 @@ class homepage(homepageTemplate):
   def login_button_click(self, **event_args):
     user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
     if user:
-      open_form('guest_screening')
+      open_form('dashboard')
     pass
 
   def testen_button_click(self, **event_args):
