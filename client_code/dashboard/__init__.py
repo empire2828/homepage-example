@@ -71,9 +71,8 @@ class dashboard(dashboardTemplate):
 
     if user_has_subscription:
       panel_data = dashboard_data['bookings']
-
-    # Dropdown Menu - vereinfacht
-    panel_data = dashboard_data.get('bookings', [])  # Initialize with empty list as fallback
+    else: 
+      panel_data = dashboard_data.get('bookings', [])  # Initialize with empty list as fallback
     bookings = panel_data
     apartments = set()
     self.panel_data = panel_data     # Speichere panel_data als Instanzvariable
@@ -98,13 +97,14 @@ class dashboard(dashboardTemplate):
         booking for booking in self.panel_data  # Verwende self.panel_data
         if booking.get('apartment') == first_apartment
       ]
-      self.panel_date_selected = filtered_bookings
+      self.panel_data_selected = filtered_bookings
     else:
       self.apartment_dropdown_menu.selected_value = None
-      self.panel_date_selected = self.panel_data
+      self.panel_data_selected = self.panel_data
 
-    self.build_revenue_graph()
-
+    #self.build_revenue_graph()
+    self.bookings_repeating_panel.items= self.panel_data_selected
+ 
   def apartment_dropdown_menu_change(self, **event_args):
     selected_apartment_name = self.apartment_dropdown_menu.selected_value
     if selected_apartment_name is not None:
@@ -163,7 +163,7 @@ class dashboard(dashboardTemplate):
     # Gesamtsumme berechnen
     total_revenue = sum(booking.get('price', 0) for booking in self.panel_data_selected)
     print(total_revenue)
-    self.revenue_title.text = f"Gesamtumsatz: {total_revenue:.2f} €"
+    self.revenue_display.text = f"Gesamtumsatz: {total_revenue:.2f} €"
   
     # Umsatz nach Monat plotten
     from collections import defaultdict
