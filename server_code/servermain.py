@@ -174,6 +174,7 @@ def get_dashboard_data_dict():
         'arrival': booking.get('arrival') if booking.get('arrival') else None,
        #'arrival': booking.get('arrival').isoformat() if booking.get('arrival') else None,
         'departure': booking.get('departure') if booking.get('departure') else None,
+        'created_at': booking.get('created_at') if booking.get('created_at') else None,
         'apartment': apt_id_final,
         'channel_name': booking.get('channel_name'),
         'screener_google_linkedin': booking.get('screener_google_linkedin'),
@@ -187,7 +188,17 @@ def get_dashboard_data_dict():
         'guest_email': booking.get('guest_email'),
         'screener_disposable_email': booking.get('screener_disposable_email'),        
         'adults': booking.get('adults'),
-        'children': booking.get('children')
+        'children': booking.get('children'),
+        'language': booking.get('language'),
+        'type': booking.get('type'),
+        'price': booking.get('price'),
+        'prepayment': booking.get('prepayment'),
+        'deposit': booking.get('deposit'),
+        'commission_included': booking.get('commission_included'),
+        'price_paid': booking.get('price_paid'),
+        'prepayment_paid': booking.get('prepayment_paid'),
+        'deposit_paid': booking.get('deposit_paid'),
+        'guest_count': booking.get('guest_count')
       })
 
     # Sortiere nach Ankunftsdatum
