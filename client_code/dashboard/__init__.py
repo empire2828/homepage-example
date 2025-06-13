@@ -104,11 +104,13 @@ class dashboard(dashboardTemplate):
 
     #self.build_revenue_graph()
     self.bookings_repeating_panel.items= self.panel_data_selected
-    print(self.panel_data_selected)
+    #print(self.panel_data_selected)
     self.dashboard_pivot.items = self.panel_data_selected
-    self.dashboard_pivot.rows = ['apartment']
-    self.dashboard_pivot.columns = ['arrival']
-    self.dashboard_pivot.values = [{'field': 'price', 'op': 'sum'}]
+    print(self.panel_data_selected)
+    self.dashboard_pivot.rows = ["guest_count"]
+    self.dashboard_pivot.columns = ["channel_name"]
+    self.dashboard_pivot.values = ["guest_count"]
+    self.dashboard_pivot.aggregator = ["Sum"]
 
   ######################################
  

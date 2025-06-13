@@ -198,7 +198,8 @@ def get_dashboard_data_dict():
         'price_paid': booking.get('price_paid'),
         'prepayment_paid': booking.get('prepayment_paid'),
         'deposit_paid': booking.get('deposit_paid'),
-        'guest_count': booking.get('guest_count')
+        'guest_count': booking.get('guest_count'),
+        'revenue': booking.get('revenue'),
       })
 
     # Sortiere nach Ankunftsdatum
@@ -220,6 +221,7 @@ def get_dashboard_data_dict():
     'server_data_last_update': user.get('server_data_last_update')
   }
 
+@anvil.server.callable
 def get_bookings_from_supabase(email):
   response = supabase_client.from_('bookings').select("*").eq('email', email).execute()
   return response.data
