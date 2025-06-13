@@ -104,6 +104,7 @@ class dashboard(dashboardTemplate):
 
     #self.build_revenue_graph()
     self.bookings_repeating_panel.items= self.panel_data_selected
+    print (self.panel_data_selected)
  
   def apartment_dropdown_menu_change(self, **event_args):
     selected_apartment_name = self.apartment_dropdown_menu.selected_value
