@@ -201,7 +201,7 @@ def get_dashboard_data_dict():
         'guest_count': booking.get('guest_count'),
         'revenue': booking.get('revenue'),
       })
-
+  
     # Sortiere nach Ankunftsdatum
   serialized_bookings.sort(key=lambda b: b.get('arrival') or "")
 

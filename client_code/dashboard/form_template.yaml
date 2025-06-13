@@ -17,14 +17,9 @@ components_by_slot:
     name: spacer_2
     properties: {}
     type: Spacer
-  - data_bindings: []
-    layout_properties: {}
-    name: dashboard_pivot
-    properties:
-      aggregator: Count
-      columns: []
-      rows: []
-      values: []
+  - layout_properties: {}
+    name: pivot_1
+    properties: {}
     type: form:dep_pa3otpma4dkzg:Pivot
   - layout_properties: {}
     name: spacer_1
