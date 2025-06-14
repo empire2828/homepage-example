@@ -104,12 +104,25 @@ class dashboard(dashboardTemplate):
 
     #self.build_revenue_graph()
     self.bookings_repeating_panel.items= self.panel_data_selected
-    print(self.panel_data_selected)
-    self.pivot_1.items = self.panel_data_selected
-    self.pivot_1.rows = ["guest_count"]
-    self.pivot_1.columns = ["children"]
-    self.pivot_1.values = ["revenue"]
-    self.pivot_1.aggregator = "sum"
+    #print(self.panel_data_selected)
+    #self.pivot_1.items = self.panel_data_selected
+    self.pivot_2.rows = ["guest_count"]
+    self.pivot_2.columns = ["children"]
+    self.pivot_2.values = ["revenue"]
+    self.pivot_2.aggregator = "sum"
+    
+    # Then assign the data
+    self.pivot_2.items = [
+      {"guest_count": 2, "children": 0, "revenue": 120},
+      {"guest_count": 2, "children": 1, "revenue": 150},
+      {"guest_count": 3, "children": 2, "revenue": 200},
+      {"guest_count": 2, "children": 0, "revenue": 80},
+      {"guest_count": 3, "children": 1, "revenue": 170},
+      {"guest_count": 2, "children": 1, "revenue": 130},
+      {"guest_count": 3, "children": 2, "revenue": 220},
+      {"guest_count": 4, "children": 0, "revenue": 300},
+      {"guest_count": 4, "children": 1, "revenue": 350},
+    ]
 
   ######################################
  

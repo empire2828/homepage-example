@@ -22,6 +22,10 @@ components_by_slot:
     properties: {}
     type: form:dep_pa3otpma4dkzg:Pivot
   - layout_properties: {}
+    name: pivot_2
+    properties: {}
+    type: form:dep_pa3otpma4dkzg:Pivot
+  - layout_properties: {}
     name: spacer_1
     properties: {}
     type: Spacer
