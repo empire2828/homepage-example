@@ -2,4 +2,3 @@ stripe
 openai
 phonenumbers
 supabase
-dash-pivottable==0.0.2

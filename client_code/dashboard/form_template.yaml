@@ -18,12 +18,11 @@ components_by_slot:
     properties: {}
     type: Spacer
   - layout_properties: {}
-    name: pivot_1
-    properties: {}
-    type: form:dep_pa3otpma4dkzg:Pivot
-  - layout_properties: {}
     name: pivot_2
-    properties: {}
+    properties:
+      aggregator: Sum
+      rows: [guest_count]
+      values: [revenue]
     type: form:dep_pa3otpma4dkzg:Pivot
   - layout_properties: {}
     name: spacer_1
