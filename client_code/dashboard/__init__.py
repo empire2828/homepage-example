@@ -8,6 +8,7 @@ import time
 from datetime import datetime, timedelta
 from anvil.js.window import jQuery
 from anvil.js import get_dom_node
+import json
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
@@ -106,7 +107,7 @@ class dashboard(dashboardTemplate):
 
     #self.build_revenue_graph()
     self.bookings_repeating_panel.items= self.panel_data_selected
-    print(self.panel_data_selected)
+    #print(self.panel_data_selected)
     self.pivot_2.items = self.panel_data_selected
     self.pivot_2._init_pivot()
     #self.pivot_2.rows = ["guest_count"]
@@ -114,18 +115,21 @@ class dashboard(dashboardTemplate):
     #self.pivot_2.values = ["revenue"]
     #self.pivot_2.aggregator = "sum"
 
-    iframe = jQuery("<iframe width='100%' height='800px'>").attr("src","https://lookerstudio.google.com/embed/reporting/a6aa14ec-5ff7-4db9-8d54-b36f8ce26cc3/page/FVCOF")
-    iframe.appendTo(get_dom_node(self.flow_panel))
+    #iframe = jQuery("<iframe width='100%' height='800px'>").attr("src","https://lookerstudio.google.com/embed/reporting/a6aa14ec-5ff7-4db9-8d54-b36f8ce26cc3/page/FVCOF")
     
     # Then assign the data
+
+    email= user['email']
+    self.init_iframe(email)
     
-  def init_iframe(self, user_key):
-    base_url = "https://lookerstudio.google.com/embed/reporting/REPORT_ID"
-    params = {"user_key": user_key}
+  def init_iframe(self, supabase_key):
+    base_url = "https://lookerstudio.google.com/embed/reporting/a6aa14ec-5ff7-4db9-8d54-b36f8ce26cc3/page/FVCOF"
+    params = {"supabase_key": supabase_key}
 
     # URL mit Parameter kodieren
     encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
     iframe_url = f"{base_url}{encoded_params}"
+    print (iframe_url)
 
     # iFrame erstellen und einbinden
     iframe = jQuery("<iframe>").attr({
@@ -135,6 +139,7 @@ class dashboard(dashboardTemplate):
       "frameborder": "0"
     })
     iframe.appendTo(get_dom_node(self.flow_panel))
+
   
   ######################################
  
