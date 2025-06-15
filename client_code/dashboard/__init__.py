@@ -118,7 +118,24 @@ class dashboard(dashboardTemplate):
     iframe.appendTo(get_dom_node(self.flow_panel))
     
     # Then assign the data
+    
+  def init_iframe(self, user_key):
+    base_url = "https://lookerstudio.google.com/embed/reporting/REPORT_ID"
+    params = {"user_key": user_key}
 
+    # URL mit Parameter kodieren
+    encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
+    iframe_url = f"{base_url}{encoded_params}"
+
+    # iFrame erstellen und einbinden
+    iframe = jQuery("<iframe>").attr({
+      "src": iframe_url,
+      "width": "100%",
+      "height": "800px",
+      "frameborder": "0"
+    })
+    iframe.appendTo(get_dom_node(self.flow_panel))
+  
   ######################################
  
   def apartment_dropdown_menu_change(self, **event_args):
