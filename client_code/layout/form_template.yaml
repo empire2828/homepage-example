@@ -83,5 +83,5 @@ properties: []
 slots:
   slot_1:
     index: 0
-    set_layout_properties: {grid_position: 'ANQSLW,FNPHAC'}
+    set_layout_properties: {full_width_row: true, grid_position: 'ANQSLW,FNPHAC'}
     target: {name: content_panel, type: container}

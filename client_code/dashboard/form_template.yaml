@@ -1,10 +1,6 @@
 components_by_slot:
   slot_1:
-  - layout_properties: {}
-    name: spacer_1
-    properties: {}
-    type: Spacer
-  - layout_properties: {}
+  - layout_properties: {full_width_row: true}
     name: flow_panel
     properties: {}
     type: FlowPanel
