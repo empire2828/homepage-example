@@ -48,6 +48,10 @@ components_by_slot:
       - {data_key: prepayment_paid, expand: false, id: XBYOVL, title: prepayment_paid, width: 37.0572509765625}
       role: tonal-data-grid
     type: DataGrid
+  - layout_properties: {}
+    name: flow_panel
+    properties: {}
+    type: FlowPanel
 is_package: true
 layout:
   form_event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings, show: form_show}

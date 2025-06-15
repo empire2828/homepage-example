@@ -6,6 +6,8 @@ import anvil.server
 from anvil_extras.storage import local_storage
 import time
 from datetime import datetime, timedelta
+from anvil.js.window import jQuery
+from anvil.js import get_dom_node
 
 class dashboard(dashboardTemplate):
   def __init__(self, **properties):
@@ -111,6 +113,9 @@ class dashboard(dashboardTemplate):
     #self.pivot_2.columns = ["children"]
     #self.pivot_2.values = ["revenue"]
     #self.pivot_2.aggregator = "sum"
+
+    iframe = jQuery("<iframe width='100%' height='800px'>").attr("src","https://lookerstudio.google.com/embed/reporting/a6aa14ec-5ff7-4db9-8d54-b36f8ce26cc3/page/FVCOF")
+    iframe.appendTo(get_dom_node(self.flow_panel))
     
     # Then assign the data
 
