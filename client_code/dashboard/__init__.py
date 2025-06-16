@@ -124,6 +124,7 @@ class dashboard(dashboardTemplate):
     
   def init_iframe(self, supabase_key):
     base_url = "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/qmCOF"
+    #https://lookerstudio.google.com/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de
     params = {"supabase_key": supabase_key}
 
     # URL mit Parameter kodieren
