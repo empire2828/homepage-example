@@ -17,21 +17,8 @@ class layout(layoutTemplate):
     logout_item.set_event_handler("click", self.logout_link_click)
     self.user_icon_button_menu.menu_items = [password_reset_item,subscription_admin_item,logout_item]
   
-  def guest_screening_menu_item_click(self, **event_args):
-   self.reset_links()
-   open_form('guest_screening')
-   self.guest_screening_menu_item.background_color='theme:Secondary Container'
-  
-  def guestscreen_menu_item_click(self, **event_args):
-    self.reset_links()
-    anvil.js.window.scrollTo(0, 0)
-    open_form('guestscreen')
-    self.guestscreen_menu_item.background_color='theme:Secondary Container'
-  
   def reset_links(self, **event_args):
     self.dashboard_menu_item.background_color = ''
-    self.guest_screening_menu_item.background_color = ''
-    self.guestscreen_menu_item.background_color = ''
     self.channel_manager_connect_menu_item.background_color = '' 
     self.upgrade_menu_item.background_color = ''
     self.admin_menu_item.background_color = ''

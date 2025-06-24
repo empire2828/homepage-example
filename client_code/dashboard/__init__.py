@@ -3,7 +3,6 @@ from anvil import *
 from anvil.tables import app_tables
 from anvil import users
 import anvil.server
-from anvil_extras.storage import local_storage
 import time
 from datetime import datetime, timedelta
 from anvil.js.window import jQuery
@@ -19,7 +18,7 @@ class dashboard(dashboardTemplate):
     user = users.get_user()
     print('User Logged in: ',user['email'])
 
-    user_has_subscription= dashboard_data['has_subscription']
+    user_has_subscription= anvil.server.call('get_user_has_subscription')
 
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
@@ -37,54 +36,10 @@ class dashboard(dashboardTemplate):
         self.bookings_repeating_panel.visible = False
 
     if user_has_subscription:
-      panel_data = dashboard_data['bookings']
+      email= user['email']
+      self.init_iframe(email)
     else: 
-      panel_data = dashboard_data.get('bookings', [])  # Initialize with empty list as fallback
-    bookings = panel_data
-    apartments = set()
-    self.panel_data = panel_data     # Speichere panel_data als Instanzvariable
-
-    for booking in bookings:
-      apartment_name = booking.get('apartment', '')  # Direkt als String behandeln
-      if apartment_name:  # Nur hinzufügen wenn nicht leer
-        apartments.add(apartment_name)
-
-    #dropdown_items = sorted(list(apartments))
-    #self.apartment_dropdown_menu.items = dropdown_items
-    #self.apartment_dropdown_menu.include_placeholder = True
-    #self.apartment_dropdown_menu.placeholder = "Apartment wählen"
-
-    # Setze das erste Apartment als Standard-Auswahl
-    #if dropdown_items:  # Prüfe ob Items vorhanden sind
-    #  self.apartment_dropdown_menu.selected_value = dropdown_items[0]
-
-      # Filtere auch sofort die Bookings für das erste Apartment
-    #  first_apartment = dropdown_items[0]
-    #  filtered_bookings = [
-    #    booking for booking in self.panel_data  # Verwende self.panel_data
-    #    if booking.get('apartment') == first_apartment
-    #  ]
-    #  self.panel_data_selected = filtered_bookings
-    #else:
-    #  self.apartment_dropdown_menu.selected_value = None
-    #  self.panel_data_selected = self.panel_data
-
-    #self.build_revenue_graph()
-    #self.bookings_repeating_panel.items= self.panel_data_selected
-    #print(self.panel_data_selected)
-    #self.pivot_2.items = self.panel_data_selected
-    #self.pivot_2._init_pivot()
-    #self.pivot_2.rows = ["guest_count"]
-    #self.pivot_2.columns = ["children"]
-    #self.pivot_2.values = ["revenue"]
-    #self.pivot_2.aggregator = "sum"
-
-    #iframe = jQuery("<iframe width='100%' height='800px'>").attr("src","https://lookerstudio.google.com/embed/reporting/a6aa14ec-5ff7-4db9-8d54-b36f8ce26cc3/page/FVCOF")
-    
-    # Then assign the data
-
-    email= user['email']
-    self.init_iframe(email)
+      pass
     
   def init_iframe(self, supabase_key):
     base_url = "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/qmCOF"
