@@ -18,7 +18,7 @@ class layout(layoutTemplate):
     self.user_icon_button_menu.menu_items = [password_reset_item,subscription_admin_item,logout_item]
   
   def reset_links(self, **event_args):
-    self.dashboard_menu_item.background_color = ''
+    self.analytics_menu_item.background_color = ''
     self.channel_manager_connect_menu_item.background_color = '' 
     self.upgrade_menu_item.background_color = ''
     self.admin_menu_item.background_color = ''
@@ -44,7 +44,7 @@ class layout(layoutTemplate):
           alert('Abo bereits vorhanden.')
     except Exception as e:
         alert(f'Ein Fehler ist aufgetreten: {e}')
-    #identisch zu in Dashboard zu pflegen!
+
 
   def logout_link_click(self, **event_args):
       result= alert(
@@ -99,10 +99,10 @@ class layout(layoutTemplate):
     open_form('Admin')
     pass
 
-  def dashboard_menu_item_click(self, **event_args):
+  def analytics_menu_item_click(self, **event_args):
     self.reset_links()
-    self.dashboard_menu_item.background_color='theme:Secondary Container'
-    open_form('dashboard')
+    self.analytics_menu_item.background_color='theme:Secondary Container'
+    open_form('Analytics')
     pass
 
 

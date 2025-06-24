@@ -8,7 +8,7 @@ components:
   - event_bindings: {click: dashboard_menu_item_click}
     layout_properties: {grid_position: 'XOWDVP,EUSCDN'}
     name: dashboard_menu_item
-    properties: {leading_icon: 'mi:dashboard_2', text: Start analytics}
+    properties: {leading_icon: 'mi:dashboard_2', text: Analytics}
     type: form:dep_g9k4toow7i44kq:_Components.MenuItem
   - event_bindings: {click: channel_manager_connect_menu_item_click}
     layout_properties: {grid_position: 'COKYDM,FYAUQG'}

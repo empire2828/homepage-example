@@ -30,6 +30,9 @@ components_by_slot:
     - name: button_1
       properties: {text: Connect Channel Manager}
       type: form:dep_g9k4toow7i44kq:_Components.Button
+    - name: column_panel_5
+      properties: {}
+      type: ColumnPanel
     layout_properties: {full_width_row: true}
     name: flow_panel
     properties: {}
@@ -37,4 +40,4 @@ components_by_slot:
 is_package: true
 layout:
   form_event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings, show: form_show}
-  type: form:layout
+  type: form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout
