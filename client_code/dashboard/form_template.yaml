@@ -1,14 +1,35 @@
 components_by_slot:
   slot_1:
   - components:
+    - name: column_panel_2
+      properties: {}
+      type: ColumnPanel
+    - name: column_panel_1
+      properties: {}
+      type: ColumnPanel
     - components:
-      - layout_properties: {}
-        name: text_1
-        properties: {text: ssssss}
+      - name: text_1
+        properties: {font_size: 18, text: 'To analyze your bookings you need to connect your channel manager:'}
         type: form:dep_g9k4toow7i44kq:_Components.Text
       name: flow_panel_1
       properties: {}
       type: FlowPanel
+    - name: column_panel_3
+      properties: {}
+      type: ColumnPanel
+    - layout_properties: {width: 153.3203125}
+      name: column_panel_4
+      properties: {}
+      type: ColumnPanel
+    - name: text_1_copy
+      properties: {font_size: 18, text: 'You need a subscription to use Lodginia:'}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
+    - name: button_1_copy
+      properties: {text: Connect Channel Manager}
+      type: form:dep_g9k4toow7i44kq:_Components.Button
+    - name: button_1
+      properties: {text: Connect Channel Manager}
+      type: form:dep_g9k4toow7i44kq:_Components.Button
     layout_properties: {full_width_row: true}
     name: flow_panel
     properties: {}
