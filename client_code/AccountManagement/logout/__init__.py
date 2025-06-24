@@ -14,7 +14,7 @@ class logout(logoutTemplate):
     self.init_components(**properties)
 
     result= alert(
-      content="Wollen Sie sich ausloggen?",
+      content="Do you want to logout?",
       title="Log off",
       buttons=[
         ("Yes", "YES"),

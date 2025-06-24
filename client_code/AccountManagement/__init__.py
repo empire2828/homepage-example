@@ -56,16 +56,14 @@ class AccountManagement(AccountManagementTemplate):
     pass
 
   def password_reset_link_click(self, **event_args):
-    anvil.server.call('send_password_reset_email')
+    open_form('AccountManagement.reset_password')
     pass
 
-  def form_show(self, **event_args):
-    self.layout.reset_links()
-
   def logout_navigation_link_click(self, **event_args):
-    self.form_show('logout')
+    open_form('AccountManagement.logout')
     pass
 
   def subscription_management_navigation_link_click(self, **event_args):
-    self.form_show('subscription_management')
+    open_form('AccountManagement.subscription_management')
     pass
+

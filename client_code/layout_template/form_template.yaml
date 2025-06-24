@@ -1,5 +1,9 @@
 components_by_slot:
   navigation:
+  - layout_properties: {}
+    name: subscription_body
+    properties: {font_size: 12, icon_size: 10, scale: small, style: label, visible: true}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
   - event_bindings: {click: analytics_navigation_link_click}
     layout_properties: {}
     name: analytics_navigation_link

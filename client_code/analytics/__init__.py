@@ -18,6 +18,7 @@ class analytics(analyticsTemplate):
     print('User Logged in: ',user['email'])
 
     user_has_subscription= anvil.server.call('get_user_has_subscription')
+    self.iframe_flow_panel.visible = False
 
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
@@ -32,6 +33,7 @@ class analytics(analyticsTemplate):
         self.chanel_manager_connect_button.visible = False
 
     if user_has_subscription:
+      self.iframe_flow_panel.visible = True
       email= user['email']
       self.init_iframe(email)
     else: 
