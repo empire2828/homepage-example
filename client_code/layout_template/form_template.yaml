@@ -1,17 +1,17 @@
 components_by_slot:
-  content: []
   navigation:
   - layout_properties: {}
     name: navigation_link_1
-    properties: {}
+    properties: {icon: 'mi:euro', text: Analytics}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - layout_properties: {}
     name: navigation_link_2
-    properties: {icon: 'mi:dashboard_2'}
+    properties: {icon: 'mi:cable', navigate_to: channel_manager_connect, text: Channel Manager connect}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - layout_properties: {}
     name: navigation_link_3
-    properties: {icon: 'mi:custom_typography'}
+    properties: {badge: false, icon: 'mi:upgrade', text: Upgrade}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
 is_package: true
 layout: {type: 'form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout'}
+slots: {}
