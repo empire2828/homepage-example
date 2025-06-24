@@ -19,42 +19,6 @@ class dashboard(dashboardTemplate):
     user = users.get_user()
     print('User Logged in: ',user['email'])
 
-    dashboard_data = local_storage.get('dashboard_data')
-
-    cache_too_old = False
-    if dashboard_data:      
-      last_login =  user['last_login'].replace(tzinfo=None)
-      now = datetime.now()
-      if now - last_login > timedelta(days=3):
-        cache_too_old = True
-        print('Cache too old', last_login,now)
-    else:
-      cache_too_old = True
-
-    local_storage_update_needed = True
-    if user is not None and dashboard_data is not None:
-      if ('server_data_last_update' in dashboard_data and
-          user['server_data_last_update'] is not None and 
-          dashboard_data['server_data_last_update'] is not None):
-        if dashboard_data['server_data_last_update'] >= user['server_data_last_update']:
-          local_storage_update_needed = False
-
-    if dashboard_data is not None:
-      local_date = dashboard_data.get('server_data_last_update')
-      if local_date is not None:
-        print('local_date', local_date)
-
-    if user is not None:
-      server_date = user.get('server_data_last_update')
-      if server_date is not None:
-        print('server_date', server_date)
-
-    print('dashboard data not None: ', dashboard_data is not None, 'local_storage_update_needed: ',local_storage_update_needed,'cache too old: ',cache_too_old)
-
-    if not dashboard_data or cache_too_old or local_storage_update_needed:
-      dashboard_data = anvil.server.call('get_dashboard_data_dict')
-      local_storage['dashboard_data'] = dashboard_data
-
     user_has_subscription= dashboard_data['has_subscription']
 
     if user['smoobu_api_key'] is None:

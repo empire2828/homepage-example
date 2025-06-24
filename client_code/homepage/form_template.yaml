@@ -32,25 +32,30 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'DCEYRM,FQZQIK'}
   name: headline_1
-  properties: {align: center, bold: true, font_size: 38, role: headline, text: Schütze Dein Ferienhaus vor Fake-Profilen und problematischen Gästen}
+  properties: {align: center, bold: true, font_size: 54, foreground: 'theme:Primary', role: headline, text: Turn Your Booking Data Into Profit}
   type: Label
-- layout_properties: {grid_position: 'VCVIFN,OTKTRF'}
-  name: spacer_2
-  properties: {height: 36.003448486328125}
-  type: Spacer
+- layout_properties: {grid_position: 'UZFTYE,NGOVFK'}
+  name: rich_text_1
+  properties: {align: center, content: 'By owners, for owners', font_size: 19, foreground: '', format: markdown}
+  type: RichText
 - layout_properties: {grid_position: 'BFJGOD,SUSODA'}
   name: spacer_1
   properties: {height: -42}
+  type: Spacer
+- layout_properties: {grid_position: 'VVEUQH,WONNPT'}
+  name: spacer_24
+  properties: {}
   type: Spacer
 - components:
   - layout_properties: {grid_position: 'NPNYZM,PYHGUW'}
     name: title_1
     properties:
       align: center
+      font_size: 28
       role: title
       spacing:
         margin: [null, '6', null, '6']
-      text: 'Lodginia.com ist Deine Lösung für sicheres Gästemanagement. Entwickelt von Vermietern für Vermieter. '
+      text: Stop guessing about your vacation rental performance. Get crystal-clear insights that help you maximize revenue, optimize pricing, and outperform your competition—all in one beautiful dashboard.
     type: Label
   layout_properties: {grid_position: 'ISUFTJ,PYQQRP'}
   name: column_panel_2
@@ -63,30 +68,39 @@ components:
 - event_bindings: {click: testen_button_click}
   layout_properties: {grid_position: 'IKPBEQ,IPIVMI'}
   name: filled_button_1
-  properties: {role: filled-button, text: 30 Tage kostenlos testen}
+  properties: {role: filled-button, text: 30 day free trial}
   type: Button
 - layout_properties: {grid_position: 'PCMAMW,TEZRUI'}
   name: spacer_13
-  properties: {}
+  properties: {height: 16.99908447265625}
   type: Spacer
-- components: []
-  layout_properties: {grid_position: 'NONHWX,APRMVR'}
-  name: rich_text_1
-  properties:
-    content: |-
-      Du freust Dich über Direktbuchungen.... aber was ist wenn das Ferienhaus danach verwüstet ist und die angegebene Adresse stimmt gar nicht und der Name war ausgedacht?
-
-      Bestimmte Berufsgruppen sind sehr anspruchsvoll. Du willst vorher wissen wer kommt, aber nicht jedes Mal googeln?
-
-      Dann bist Du hier genau richtig!
-    font_size: 18
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-  type: RichText
+- layout_properties: {grid_position: 'EPFGQR,WXTVFO'}
+  name: checkbox_3
+  properties: {align: center, checked: true, font_size: 18, text: No credit card required for trial}
+  type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+- layout_properties: {grid_position: 'EPFGQR,THKDVQ'}
+  name: checkbox_1
+  properties: {align: center, checked: true, font_size: 18, text: Setup in under 5 minutes}
+  type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+- layout_properties: {grid_position: 'EPFGQR,PWARMZ'}
+  name: checkbox_2
+  properties: {align: center, checked: true, font_size: 18, text: Cancel anytime}
+  type: form:dep_g9k4toow7i44kq:_Components.Checkbox
 - layout_properties: {grid_position: 'HKXVNZ,XZBPGF'}
   name: spacer_3
-  properties: {height: 21}
+  properties: {height: 135.05377197265625}
+  type: Spacer
+- layout_properties: {grid_position: 'NLHCJU,DWKFXP'}
+  name: headline_2
+  properties: {align: center, bold: true, font_size: 28, role: headline, text: Everything You Need to Maximize Your Rental Income}
+  type: Label
+- layout_properties: {grid_position: 'ORIWXP,MJHYFO'}
+  name: body_1
+  properties: {align: center, font_size: 18, role: body, text: Powerful analytics and insights designed specifically for vacation rental owners who want to grow their business.}
+  type: Label
+- layout_properties: {grid_position: 'LGETWC,ZVOLBE'}
+  name: spacer_2
+  properties: {height: 60.48779296875}
   type: Spacer
 - components:
   - components:
@@ -96,14 +110,27 @@ components:
         align: center
         bold: true
         font_size: 18
+        icon: fa:dollar
         spacing:
           margin: ['6', null, '6', null]
           padding: ['6', null, '6', null]
-        text: "KI- gestütze \nSuche"
+        text: ''
+      type: Label
+    - layout_properties: {grid_position: 'GTBEWR,SLFREP'}
+      name: label_2_copy
+      properties:
+        align: center
+        bold: true
+        font_size: 18
+        icon: ''
+        spacing:
+          margin: ['6', null, '6', null]
+          padding: ['6', null, '6', null]
+        text: Revenue Analytics
       type: Label
     - layout_properties: {grid_position: 'ZCBITY,AMYBTI'}
       name: text_1
-      properties: {font_size: 18, text: Das Internet   wird nach frei verfügbaren Informationen durchsucht.}
+      properties: {font_size: 18, text: 'Track your earnings, identify peak seasons, and optimize pricing strategies with detailed revenue insights.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,FVMHTO'}
     name: outlined_card_1
@@ -120,14 +147,27 @@ components:
         align: center
         bold: true
         font_size: 18
+        icon: fa:book
         spacing:
           margin: ['6', null, '6', null]
           padding: ['6', null, '6', null]
-        text: LinkedIn Profilanzeige
+        text: ''
+      type: Label
+    - layout_properties: {grid_position: 'NTXWHC,LREXLD'}
+      name: label_4_copy
+      properties:
+        align: center
+        bold: true
+        font_size: 18
+        icon: ''
+        spacing:
+          margin: ['6', null, '6', null]
+          padding: ['6', null, '6', null]
+        text: Booking Patterns
       type: Label
     - layout_properties: {grid_position: 'EXGCIK,ARJOMP'}
       name: text_2
-      properties: {font_size: 18, text: Die Profile des größten beruflichen Netz-werkes LinkedIn werden durchsucht und angezeigt.}
+      properties: {font_size: 18, text: 'Understand your booking trends, seasonal variations, and guest behavior to maximize occupancy.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,AVECON'}
     name: outlined_card_3
@@ -144,16 +184,27 @@ components:
         align: center
         bold: true
         font_size: 18
+        icon: fa:bar-chart
         spacing:
           margin: ['6', '6', '6', '6']
           padding: ['6', '4', '6', '4']
-        text: |-
-          Telefonummern-
-          prüfung
+        text: ''
+      type: Label
+    - layout_properties: {grid_position: 'PWFKAG,TTHALL'}
+      name: label_1_copy
+      properties:
+        align: center
+        bold: true
+        font_size: 18
+        icon: ''
+        spacing:
+          margin: ['6', '6', '6', '6']
+          padding: ['6', '4', '6', '4']
+        text: Performance Metrics
       type: Label
     - layout_properties: {grid_position: 'KVCFJA,JSDRTD'}
       name: text_3
-      properties: {font_size: 18, text: Die Telefonnummer wird auf formal richtigen Syntax geprüft.}
+      properties: {font_size: 18, text: 'Monitor occupancy rates, ADR, RevPAR, and other key metrics that matter to your rental business.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,KBSMLA'}
     name: outlined_card_9
@@ -164,22 +215,33 @@ components:
         padding: ['6', '6', '6', '6']
     type: ColumnPanel
   - components:
+    - layout_properties: {grid_position: 'TPCJJH,TJVVRX'}
+      name: label_5_copy
+      properties:
+        align: center
+        bold: true
+        font_size: 18
+        icon: fa:odnoklassniki
+        spacing:
+          margin: ['6', null, '6', null]
+          padding: ['6', null, '6', null]
+        text: ''
+      type: Label
     - layout_properties: {grid_position: 'BABMTQ,OUQNJT'}
       name: label_5
       properties:
         align: center
         bold: true
         font_size: 18
+        icon: ''
         spacing:
           margin: ['6', null, '6', null]
           padding: ['6', null, '6', null]
-        text: |-
-          Adress-
-          prüfung
+        text: Guest Insights
       type: Label
     - layout_properties: {grid_position: 'LGBMGK,AMYMYQ'}
       name: text_4
-      properties: {font_size: 18, text: 'Die Adresse wird dahingehend geprüft, ob es diese tatsächlich gibt.'}
+      properties: {font_size: 18, text: 'Analyze guest demographics, booking lead times, and stay patterns to improve your marketing.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,YFIIZV'}
     name: outlined_card_8
@@ -199,116 +261,72 @@ components:
   type: ColumnPanel
 - layout_properties: {grid_position: 'RHAAWF,ESIYCQ'}
   name: spacer_12
-  properties: {height: 35.87841796875}
-  type: Spacer
-- layout_properties: {grid_position: 'XBNWLH,TMXEZR'}
-  name: divider_1
-  properties: {}
-  type: form:dep_g9k4toow7i44kq:_Components.Divider
-- layout_properties: {grid_position: 'PCRBBY,CIJVLT'}
-  name: spacer_15
-  properties: {}
-  type: Spacer
-- layout_properties: {grid_position: 'ZMNQUZ,ZVMDXK'}
-  name: body_1
-  properties: {align: center, bold: true, font_size: 18, role: body, text: 'Wie funktioniert das Ganze?'}
-  type: Label
-- layout_properties: {grid_position: 'WQLGOO,RUOWWN'}
-  name: spacer_14
-  properties: {}
+  properties: {height: 123.4417724609375}
   type: Spacer
 - components:
-  - layout_properties: {grid_position: 'OKZENO,GZFQZL'}
-    name: image_4
-    properties: {height: 62.001708984375, source: _/theme/smoobu.jpg}
-    type: Image
-  - layout_properties: {grid_position: 'OKZENO,UETBJW'}
-    name: rich_text_4
-    properties:
-      content: Die Buchungsdaten werden automatisiert von Smoobu per API importiert. Eine manuelle Eingabe ist ebenfalls möglich. Weitere Anbindungen sind in Arbeit.
-      font_size: 18
-      spacing:
-        margin: [null, '6', null, '6']
-        padding: [null, '6', null, '6']
-    type: RichText
-  layout_properties: {grid_position: 'DZBPAX,OLHLWS'}
-  name: column_panel_5
-  properties: {col_widths: '{"GZFQZL":30,"UETBJW":30}'}
-  type: ColumnPanel
-- layout_properties: {grid_position: 'USYSUM,PWSOBU'}
-  name: spacer_9
-  properties: {height: 59.906219482421875}
-  type: Spacer
-- layout_properties: {grid_position: 'TWGPFQ,KZILKJ'}
-  name: image_3
-  properties:
-    height: 247.189208984375
-    margin: [null, '8', null, '8']
-    source: _/theme/Beispielmaske.jpg
-  type: Image
-- layout_properties: {grid_position: 'TWGPFQ,SKCXEY'}
-  name: rich_text_2
-  properties:
-    content: |+
-      In einem Dashboard wird für jede Buchung eine Maske angezeigt, in der die grundlegenden Buchungsdaten erscheinen zusammen mit den Ergebnissen der Suche und Prüfungen.
-
-
-    font_size: 18
-    spacing:
-      margin: [null, '6', '0', '6']
-      padding: [null, '6', '4', '6']
-  type: RichText
-- layout_properties: {grid_position: 'WCVNWP,MUNGTW'}
-  name: spacer_6
-  properties: {height: 62.25518798828125}
-  type: Spacer
-- components:
-  - layout_properties: {grid_position: 'BMXVKJ,QJCHOD'}
-    name: image_2
-    properties: {display_mode: shrink_to_fit, height: 79.85931396484375, source: _/theme/email.jpg}
-    type: Image
-  - components: []
-    layout_properties: {grid_position: 'BMXVKJ,HJOBZT'}
-    name: rich_text_3
-    properties:
-      content: 'Zusätzlich erhältst Du diese Information per eMail mit jeder neuen Buchung - kein Einloggen notwendig! '
-      font_size: 18
-      spacing:
-        margin: [null, '6', null, '6']
-        padding: [null, '4', null, '4']
-    type: RichText
-  layout_properties: {grid_position: 'HSANHV,EMLHID'}
+  - layout_properties: {grid_position: 'BXYRXS,VZDGBI'}
+    name: title_2
+    properties: {font_size: 28, role: title, text: Why Vacation Rental Owners Choose Lodginia}
+    type: Label
+  - layout_properties: {grid_position: 'ZSYVVX,VDQGZZ'}
+    name: spacer_6
+    properties: {height: 10.21783447265625}
+    type: Spacer
+  - layout_properties: {grid_position: 'TREXXF,NFJBJJ'}
+    name: body_2
+    properties: {font_size: 18, role: body, text: We understand the unique challenges of managing vacation rentals because we've been there. Our platform is built by property owners who know what metrics actually matter.}
+    type: Label
+  - layout_properties: {grid_position: 'TYFLZW,XUJSIW'}
+    name: spacer_9
+    properties: {height: 12.5511474609375}
+    type: Spacer
+  - layout_properties: {grid_position: 'AJJQPA,VGXLKH'}
+    name: checkbox_4
+    properties: {checked: true, font_size: 18, text: Increase revenue by data-driven pricing}
+    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+  - layout_properties: {grid_position: 'GYEZHR,FLRMFU'}
+    name: checkbox_5
+    properties: {checked: true, font_size: 18, text: Reduce vacancy periods with optimized availibility planning}
+    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+  - layout_properties: {grid_position: 'REVGLU,HAIBMX'}
+    name: checkbox_6
+    properties: {checked: true, font_size: 18, text: Save hours of work on manual analysis}
+    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+  - layout_properties: {grid_position: 'IWBOBG,ZWNSZC'}
+    name: checkbox_7
+    properties: {checked: true, font_size: 18, text: Outperform competitors}
+    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+  layout_properties: {grid_position: 'UTJDOT,MFHHRO'}
   name: column_panel_4
   properties: {}
   type: ColumnPanel
-- layout_properties: {grid_position: 'RGHABL,HMYEIA'}
-  name: spacer_17
-  properties: {height: 62.853271484375}
-  type: Spacer
-- layout_properties: {grid_position: 'UZXACJ,PTWRFZ'}
-  name: image_5
-  properties: {height: 77.50689697265625, source: _/theme/papierkorb.jpg}
-  type: Image
-- layout_properties: {grid_position: 'UZXACJ,YPYTJA'}
-  name: rich_text_5
-  properties:
-    content: 14 Tage nach Abreise werden alle Buchungs- und Gästedaten automatisiert gelöscht.
-    font_size: 18
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-  type: RichText
-- layout_properties: {grid_position: 'JYEFSH,WWQIWC'}
-  name: spacer_11
-  properties: {height: 20.10675048828125}
-  type: Spacer
-- layout_properties: {grid_position: 'OLSRVR,QRJMDM'}
-  name: divider_2
+- layout_properties: {grid_position: 'UTJDOT,NMNDYD UWYEPM,GKNMWS'}
+  name: flow_panel_1
   properties: {}
-  type: form:dep_g9k4toow7i44kq:_Components.Divider
+  type: FlowPanel
+- layout_properties: {grid_position: 'UTJDOT,NMNDYD HIJDYF,BMGLUF'}
+  name: spacer_14
+  properties: {height: 54.2977294921875}
+  type: Spacer
 - layout_properties: {grid_position: 'OVHKCM,GNOJHF'}
   name: spacer_18
-  properties: {height: 52.64666748046875}
+  properties: {height: 105.6041259765625}
+  type: Spacer
+- layout_properties: {grid_position: 'JBRSKF,RKXTVL'}
+  name: title_3
+  properties: {align: center, font_size: 28, role: title, text: Loved by Property Owners Worldwide}
+  type: Label
+- layout_properties: {grid_position: 'VZQMOX,YHIQYP'}
+  name: body_3
+  properties: {align: center, font_size: 18, role: body, text: Join other successful rental owners who trust RentalMetrics}
+  type: Label
+- layout_properties: {grid_position: 'AYVCYO,MFRVCM'}
+  name: rich_text_1_copy
+  properties: {align: center, content: Built with ❤️ by vacation rental owners., font_size: 16}
+  type: RichText
+- layout_properties: {grid_position: 'GZOFNN,GSWMBD'}
+  name: spacer_11
+  properties: {height: 75.13275146484375}
   type: Spacer
 - event_bindings: {click: testen_button_click}
   layout_properties: {grid_position: 'UXNUUW,SLHOZS'}
@@ -322,145 +340,25 @@ components:
     role: outlined-button
     spacing:
       padding: [null, '24', null, null]
-    text: 30 Tage kostenlos testen
+    text: 30 day free trial
   type: Button
 - layout_properties: {grid_position: 'ZGYPGG,CGBILT'}
   name: spacer_22
-  properties: {}
+  properties: {height: 82.79595947265625}
   type: Spacer
 - components:
   - layout_properties: {grid_position: 'ZEGUXJ,GFGREP'}
     name: label_8
     properties: {}
     type: Label
-  - layout_properties: {grid_position: 'ZEGUXJ,DOVNOI'}
-    name: label_18
-    properties: {align: center, bold: true, font_size: 18, text: Always free}
-    type: Label
   - layout_properties: {grid_position: 'ZEGUXJ,HVJHZC'}
     name: label_9
-    properties: {align: center, bold: true, font_size: 18, text: Abo}
+    properties: {align: center, bold: true, font_size: 18, text: Subscription}
     type: Label
   - layout_properties: {grid_position: 'ZEGUXJ,DVQCGG'}
     name: label_10
-    properties: {align: center, bold: true, font_size: 18, text: Pro- Abo}
+    properties: {align: center, bold: true, font_size: 18, text: Pro- Subscription}
     type: Label
-  - components:
-    - layout_properties: {grid_position: 'UMJGQL,JYZUGI'}
-      name: label_12
-      properties:
-        align: left
-        font_size: 18
-        spacing:
-          margin: ['4', null, '6', null]
-        text: KI gestützte Recherche
-      type: Label
-    - layout_properties: {grid_position: 'UMJGQL,XRJACB'}
-      name: check_box_11
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    - layout_properties: {grid_position: 'UMJGQL,TMKUQP'}
-      name: check_box_10
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    - layout_properties: {grid_position: 'UMJGQL,OQTBIX'}
-      name: check_box_5
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    layout_properties: {grid_position: 'IZABEX,XANQUW'}
-    name: elevated_card_1
-    properties:
-      role: elevated-card
-      spacing:
-        padding: ['6', null, '6', null]
-      wrap_on: never
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'FUGLSW,GYQXEI'}
-      name: label_19
-      properties:
-        align: left
-        font_size: 18
-        spacing:
-          margin: [null, null, '6', null]
-        text: Linkedin Recherche
-      type: Label
-    - layout_properties: {grid_position: 'FUGLSW,MZCOTV'}
-      name: check_box_12
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    - layout_properties: {grid_position: 'FUGLSW,BBVDZT'}
-      name: check_box_2
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    - layout_properties: {grid_position: 'FUGLSW,WRJFYC'}
-      name: check_box_6
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    layout_properties: {grid_position: 'AIFBEV,XXKAYJ'}
-    name: elevated_card_2
-    properties:
-      role: elevated-card
-      spacing:
-        padding: ['6', null, '6', null]
-      wrap_on: never
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'WJNXLM,BJLVUW'}
-      name: label_11
-      properties:
-        align: left
-        font_size: 18
-        spacing:
-          margin: [null, null, '6', null]
-        text: Adressprüfung
-        underline: false
-      type: Label
-    - layout_properties: {grid_position: 'WJNXLM,OBZGIV'}
-      name: check_box_13
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    - layout_properties: {grid_position: 'WJNXLM,MDTBSR'}
-      name: check_box_4
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    - layout_properties: {grid_position: 'WJNXLM,UVROMW'}
-      name: check_box_7
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    layout_properties: {grid_position: 'XYXMQN,SOZLMK'}
-    name: elevated_card_3
-    properties:
-      role: elevated-card
-      spacing:
-        padding: ['6', null, '6', null]
-      wrap_on: never
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'LJCMFQ,WTTSCW'}
-      name: label_3
-      properties: {font_size: 18, text: Telefonnummernprüfung}
-      type: Label
-    - layout_properties: {grid_position: 'LJCMFQ,BASLRV'}
-      name: check_box_14
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    - layout_properties: {grid_position: 'LJCMFQ,XZOVRQ'}
-      name: check_box_1
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    - layout_properties: {grid_position: 'LJCMFQ,GFRBFF'}
-      name: check_box_8
-      properties: {align: center, checked: true, enabled: false, text: ''}
-      type: CheckBox
-    layout_properties: {grid_position: 'AQUFMA,OCQFQP'}
-    name: elevated_card_4
-    properties:
-      role: elevated-card
-      spacing:
-        padding: ['6', null, '6', null]
-      wrap_on: never
-    type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'KNVGKM,TWRMQK'}
       name: label_6
@@ -468,12 +366,8 @@ components:
         font_size: 18
         spacing:
           margin: [null, null, '6', null]
-        text: Anbindung via API (Smoobu)
+        text: Connection via API (Smoobu)
       type: Label
-    - layout_properties: {grid_position: 'KNVGKM,VAAWRX'}
-      name: check_box_15
-      properties: {align: center, enabled: false, text: ''}
-      type: CheckBox
     - layout_properties: {grid_position: 'KNVGKM,SPVMYZ'}
       name: check_box_3
       properties: {align: center, checked: true, enabled: false, text: '', visible: true}
@@ -493,11 +387,7 @@ components:
   - components:
     - layout_properties: {grid_position: 'YLUPJR,ENXFFK'}
       name: label_13
-      properties: {font_size: 18, text: Anzahl Objekte}
-      type: Label
-    - layout_properties: {grid_position: 'YLUPJR,NEVOMW'}
-      name: label_20
-      properties: {align: center, font_size: 18, text: 1-3}
+      properties: {font_size: 18, text: Number of objects}
       type: Label
     - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
       name: label_14
@@ -519,37 +409,13 @@ components:
       spacing:
         margin: [null, null, null, '6']
         padding: [null, null, null, '6']
-      text: Abo- Preis monatlich
+      text: Monthly price
     type: Label
-  - layout_properties: {grid_position: 'IQCUEL,QWNJEE ZBIGCU,AEIHXZ'}
-    name: spacer_10
-    properties: {height: 50.4088134765625}
-    type: Spacer
-  - layout_properties: {grid_position: 'IQCUEL,OZZWWB SOMOIN,PTOWWN'}
-    name: label_21
-    properties: {align: center, bold: true, font_size: 18, text: '€ 0,00'}
-    type: Label
-  - layout_properties: {grid_position: 'IQCUEL,OZZWWB IMUDSV,PEQDHC'}
-    name: spacer_21
-    properties: {}
-    type: Spacer
-  - layout_properties: {grid_position: 'IQCUEL,OZZWWB DNDBIA,IOGPLK'}
-    name: text_5
-    properties: {align: center, font_size: 18, text: immer kostenlos}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'IQCUEL,LWZJGX KIASVM,FXOIPI'}
+  - layout_properties: {grid_position: 'IQCUEL,LWZJGX'}
     name: label_16
     properties: {align: center, bold: true, font_size: 18, text: '€ 2,99'}
     type: Label
-  - layout_properties: {grid_position: 'IQCUEL,LWZJGX EQGXKR,JZJQQI'}
-    name: spacer_19
-    properties: {}
-    type: Spacer
-  - layout_properties: {grid_position: 'IQCUEL,LWZJGX DJILBO,PAUPDT'}
-    name: text_6
-    properties: {align: center, font_size: 18, text: 30 Tage kostenlos}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'IQCUEL,PIPGAT UWJNMF,FZAYWR'}
+  - layout_properties: {grid_position: 'IQCUEL,PIPGAT'}
     name: label_7
     properties:
       align: center
@@ -559,14 +425,6 @@ components:
         margin: [null, null, '4', null]
       text: € 4,99
     type: Label
-  - layout_properties: {grid_position: 'IQCUEL,PIPGAT QAXZNW,ENCLDV'}
-    name: spacer_20
-    properties: {}
-    type: Spacer
-  - layout_properties: {grid_position: 'IQCUEL,PIPGAT RMQVEG,XEHGPC'}
-    name: text_7
-    properties: {align: center, font_size: 18, text: 30 Tage kostenlos}
-    type: form:dep_g9k4toow7i44kq:_Components.Text
   layout_properties: {grid_position: 'CFSXJQ,LSZEBP'}
   name: outlined_card_4
   properties:
@@ -588,33 +446,20 @@ components:
     spacing:
       margin: [null, null, null, '6']
       padding: [null, null, null, '6']
-    text: Alle Abos jederzeit kündbar.
+    text: Cancel anytime
   type: form:dep_g9k4toow7i44kq:_Components.Text
 - layout_properties: {grid_position: 'CQUFIO,GVEAZT'}
   name: spacer_7
-  properties: {}
+  properties: {height: 70.57891845703125}
   type: Spacer
-- layout_properties: {grid_position: 'VMPBGX,BXYZMG'}
-  name: divider_3
-  properties: {}
-  type: form:dep_g9k4toow7i44kq:_Components.Divider
 - layout_properties: {grid_position: 'LZWKXC,NEQNTC'}
   name: spacer_8
   properties: {height: 32}
   type: Spacer
 - layout_properties: {grid_position: 'EWFIVC,CWNBQW'}
   name: faq_repeating_panel
-  properties: {item_template: homepage.faq_template}
+  properties: {item_template: homepage.faq_template, visible: false}
   type: RepeatingPanel
-- layout_properties: {grid_position: 'EWTVVO,QTMWUH'}
-  name: spacer_4
-  properties: {height: 32}
-  type: Spacer
-- event_bindings: {click: testen_button_click}
-  layout_properties: {grid_position: 'MAYQMM,YCEXBO'}
-  name: second_test_button
-  properties: {bold: true, role: filled-button, text: 30 Tage kostenlos testen}
-  type: Button
 - layout_properties: {grid_position: 'MUQDYA,OJJGNF'}
   name: spacer_5
   properties: {height: 113.54547119140625}
@@ -636,9 +481,9 @@ components:
 - event_bindings: {click: data_protection_link_click}
   layout_properties: {grid_position: 'LGMCZK,HWMGPD'}
   name: data_protection_link
-  properties: {align: center, text: Datenschutz}
+  properties: {align: center, text: data protection}
   type: Link
 container:
-  properties: {col_widths: '{"KZILKJ":30,"SKCXEY":30}'}
+  properties: {col_widths: '{}'}
   type: ColumnPanel
 is_package: true
