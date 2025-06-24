@@ -1,6 +1,15 @@
 components_by_slot:
   slot_1:
-  - layout_properties: {full_width_row: true}
+  - components:
+    - components:
+      - layout_properties: {}
+        name: text_1
+        properties: {text: ssssss}
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      name: flow_panel_1
+      properties: {}
+      type: FlowPanel
+    layout_properties: {full_width_row: true}
     name: flow_panel
     properties: {}
     type: FlowPanel

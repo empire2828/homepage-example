@@ -13,7 +13,7 @@ components:
   - event_bindings: {click: channel_manager_connect_menu_item_click}
     layout_properties: {grid_position: 'COKYDM,FYAUQG'}
     name: channel_manager_connect_menu_item
-    properties: {enabled: true, leading_icon: 'mi:cable', text: Channel Manager verbinden}
+    properties: {enabled: true, leading_icon: 'mi:cable', text: Connect channel manager}
     type: form:dep_g9k4toow7i44kq:_Components.MenuItem
   - event_bindings: {click: upgrade_menu_item_click}
     layout_properties: {grid_position: 'YIKSWJ,RRXINZ'}
