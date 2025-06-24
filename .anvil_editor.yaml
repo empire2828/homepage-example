@@ -27,6 +27,7 @@ unique_ids:
     AccountManagement.ChangeName: '1742934208961866787720045.6211'
     AccountManagement.DeleteAccountAlert: '1742934220494310794643033.8777'
     AccountManagement.logout: '1750797034799342287750477.427'
+    AccountManagement.reset_password: '1750797455580238715181947.60312'
     Admin: '1748271610211380068613801.98755'
     StripePricing: '1742940286992306594417637.6347'
     StripePricing_pro: '1745594037947288525384242.9807'

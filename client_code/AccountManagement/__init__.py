@@ -61,3 +61,7 @@ class AccountManagement(AccountManagementTemplate):
 
   def form_show(self, **event_args):
     self.layout.reset_links()
+
+  def logout_navigation_link_click(self, **event_args):
+    self.form_show('logout')
+    pass
