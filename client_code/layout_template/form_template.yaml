@@ -13,5 +13,4 @@ components_by_slot:
     properties: {badge: false, icon: 'mi:upgrade', text: Upgrade}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
 is_package: true
-layout: {type: 'form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout'}
-slots: {}
+layout: {type: 'form:layout_template'}
