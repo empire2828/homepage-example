@@ -1,17 +1,27 @@
 components_by_slot:
-  slot_1:
-  - event_bindings: {click: password_reset_link_click}
+  content:
+  - components:
+    - components:
+      - components:
+        - layout_properties: {grid_position: 'ABQFGT,BIWFMG'}
+          name: logout_navigation_link
+          properties: {}
+          type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+        event_bindings: {click: subscription_manage_link_click}
+        layout_properties: {grid_position: 'VXSKIO,PMVADB'}
+        name: subscription_manage_link
+        properties: {text: Abo verwalten (über Stripe), url: 'https://billing.stripe.com/p/login/test_3csg0Lcbpf4i8005kk'}
+        type: Link
+      event_bindings: {click: password_reset_link_click}
+      name: password_reset_link
+      properties: {text: Passwort zurück setzen (per eMail link)}
+      type: Link
     layout_properties: {}
-    name: password_reset_link
-    properties: {text: Passwort zurück setzen (per eMail link)}
-    type: Link
-  - components: []
-    event_bindings: {click: subscription_manage_link_click}
-    layout_properties: {}
-    name: subscription_manage_link
-    properties: {text: Abo verwalten (über Stripe), url: 'https://billing.stripe.com/p/login/test_3csg0Lcbpf4i8005kk'}
-    type: Link
+    name: flow_panel_1
+    properties: {}
+    type: FlowPanel
+  slot_1: []
 is_package: true
 layout:
   form_event_bindings: {show: form_show}
-  type: form:layout
+  type: form:layout_template

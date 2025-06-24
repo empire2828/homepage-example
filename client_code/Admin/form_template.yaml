@@ -1,5 +1,5 @@
 components_by_slot:
-  slot_1:
+  content:
   - event_bindings: {change: admin_file_loader_change}
     layout_properties: {}
     name: admin_file_loader
@@ -10,5 +10,6 @@ components_by_slot:
     name: navigation_link_1
     properties: {icon: 'mi:pivot_table_chart', navigate_to: pivot, text: Pivot}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  slot_1: []
 is_package: true
-layout: {type: 'form:layout'}
+layout: {type: 'form:layout_template'}

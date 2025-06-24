@@ -18,4 +18,4 @@ components_by_slot:
     properties: {role: outlined-card, visible: true}
     type: ColumnPanel
 is_package: true
-layout: {type: 'form:layout'}
+layout: {type: 'form:layout_template'}

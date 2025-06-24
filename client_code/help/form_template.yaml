@@ -1,10 +1,10 @@
 components_by_slot:
-  slot_1:
+  content:
   - layout_properties: {}
     name: body_2
     properties: {font_size: 18, role: body, text: 'Beschreibe hier kurz Dein Problem oder Anregung (gerne mit ScreenShots):'}
     type: Label
-  - layout_properties: {full_width_row: false}
+  - layout_properties: {}
     name: help_text_area
     properties: {background_color: 'theme:Secondary Container', error: false, height: 128, label: '', supporting_text: '', text: ''}
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
@@ -38,5 +38,6 @@ components_by_slot:
     name: resync_button
     properties: {role: filled-button, text: Re-sync}
     type: Button
+  slot_1: []
 is_package: true
-layout: {type: 'form:layout'}
+layout: {type: 'form:layout_template'}

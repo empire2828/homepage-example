@@ -14,3 +14,29 @@ class layout_template(layout_templateTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def reset_links(self, **event_args):
+    self.analytics_navigation_link.selected= False
+    self.channel_manager_connect_navigation_link.selected = False
+    self.upgrade_navigation_link.selected = False
+    self.help_navigation_link.selected = False
+
+  def analytics_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def channel_manager_connect_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def upgrade_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def help_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def settings_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
