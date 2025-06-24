@@ -65,3 +65,7 @@ class AccountManagement(AccountManagementTemplate):
   def logout_navigation_link_click(self, **event_args):
     self.form_show('logout')
     pass
+
+  def subscription_management_navigation_link_click(self, **event_args):
+    self.form_show('subscription_management')
+    pass

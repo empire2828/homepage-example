@@ -7,8 +7,9 @@ components_by_slot:
           name: reset_password_navigation_link
           properties: {icon: 'mi:passkey', navigate_to: AccountManagement.reset_password, text: Reset password}
           type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-        - layout_properties: {grid_position: 'ZHNIPR,MTWUIX'}
-          name: navigation_link_1
+        - event_bindings: {click: subscription_management_navigation_link_click}
+          layout_properties: {grid_position: 'ZHNIPR,MTWUIX'}
+          name: subscription_management_navigation_link
           properties: {icon: 'mi:subscriptions', text: Subscription Management (via Stripe)}
           type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
         - event_bindings: {click: logout_navigation_link_click}
