@@ -11,8 +11,8 @@ from anvil.tables import app_tables
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
-    self.init_components(**properties)
-
+    self.init_components(**properties)    
+    self.form_show()
     # Any code you write here will run before the form opens.
 
   def reset_links(self, **event_args):
@@ -51,4 +51,4 @@ class layout_template(layout_templateTemplate):
     else:
       self.subscription_body.text = user['subscription']
       if user.get('admin') is True:
-        self.admin_menu_item.visible= True
+        self.admin_navigation_link.visible= True

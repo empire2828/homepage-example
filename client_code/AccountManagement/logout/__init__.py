@@ -12,15 +12,17 @@ class logout(logoutTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    # Typically, you would not call self.logout() here.
+    # Instead, bind this to a button click or similar event.
 
-    result= alert(
+  def logout(self, **event_args):
+    result = alert(
       content="Do you want to logout?",
       title="Log off",
       buttons=[
         ("Yes", "YES"),
         ("No", "NO"),
       ])
-    if result=="YES":
+    if result == "YES":
       anvil.users.logout()
       open_form('homepage')
-    pass
