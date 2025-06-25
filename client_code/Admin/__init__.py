@@ -40,9 +40,8 @@ class Admin(AdminTemplate):
         alert(f"Fehler beim Import: {str(e)}")
 
   def delete_supabase_data_button_click(self, **event_args):
-    user = self.email_input_prompt.text
-    if user and 'email' in user:
-      email = user['email']
+    email = self.email_input_prompt.text
+    if email:
       try:
         result = anvil.server.call('delete_bookings_by_email', email)
         alert(f"{result['count']} Buchungen mit der E-Mail {email} wurden gelöscht.")

@@ -58,7 +58,7 @@ class dashboard(dashboardTemplate):
       "height": "800px",
       "frameborder": "0"
     })
-    iframe.appendTo(get_dom_node(self.flow_panel))
+    iframe.appendTo(get_dom_node(self.iframe_flow_panel))
 
   
   ######################################

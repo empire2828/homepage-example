@@ -112,11 +112,10 @@ def sync_smoobu(user_email):
         "email": user_email
       }
 
-      # Upsert in Supabase (fügt hinzu oder aktualisiert, falls vorhanden)
       response = (
         supabase_client
           .from_("bookings")
-          .upsert(row, on_conflict="reservation_id")
+          .upsert(row, on_conflict="reservation_id,email")
           .execute()
       )
 
