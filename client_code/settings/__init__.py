@@ -79,3 +79,7 @@ class settings(settingsTemplate):
     #link ist unter: https://dashboard.stripe.com/settings/billing/portal
     pass
 
+  def reset_password_navigation_link_click(self, **event_args):
+    """This method is called when the component is clicked"""
+    pass
+

@@ -322,7 +322,7 @@ components:
   type: Label
 - layout_properties: {grid_position: 'VZQMOX,YHIQYP'}
   name: body_3
-  properties: {align: center, font_size: 18, role: body, text: Join other successful rental owners who trust RentalMetrics}
+  properties: {align: center, font_size: 18, role: body, text: Join other successful rental owners who trust Lodginia}
   type: Label
 - layout_properties: {grid_position: 'AYVCYO,MFRVCM'}
   name: rich_text_1_copy

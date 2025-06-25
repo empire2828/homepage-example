@@ -3,9 +3,10 @@ components_by_slot:
   - components:
     - components:
       - components:
-        - layout_properties: {grid_position: 'SCNASZ,UTAFES'}
+        - event_bindings: {click: reset_password_navigation_link_click}
+          layout_properties: {grid_position: 'SCNASZ,UTAFES'}
           name: reset_password_navigation_link
-          properties: {icon: 'mi:passkey', navigate_to: AccountManagement.reset_password, text: Reset password}
+          properties: {icon: 'mi:passkey', navigate_to: settings.reset_password, text: Reset password}
           type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
         - event_bindings: {click: subscription_management_navigation_link_click}
           layout_properties: {grid_position: 'ZHNIPR,MTWUIX'}
