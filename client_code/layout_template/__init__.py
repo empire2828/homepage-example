@@ -21,6 +21,7 @@ class layout_template(layout_templateTemplate):
     self.upgrade_navigation_link.selected = False
     self.help_navigation_link.selected = False
     self.settings_navigation_link.selected = False
+    self.admin_navigation_link.selected = False
 
   def analytics_navigation_link_click(self, **event_args):
     self.reset_links()
@@ -52,3 +53,7 @@ class layout_template(layout_templateTemplate):
       self.subscription_body.text = user['subscription']
       if user.get('admin') is True:
         self.admin_navigation_link.visible= True
+
+  def admin_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
