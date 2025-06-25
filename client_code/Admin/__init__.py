@@ -39,6 +39,16 @@ class Admin(AdminTemplate):
       except Exception as e:
         alert(f"Fehler beim Import: {str(e)}")
 
-  def navigation_link_1_click(self, **event_args):
-    open_form('pivot')
+  def delete_supabase_data_button_click(self, **event_args):
+    user = self.email_input_prompt.text
+    if user and 'email' in user:
+      email = user['email']
+      try:
+        result = anvil.server.call('delete_bookings_by_email', email)
+        alert(f"{result['count']} Buchungen mit der E-Mail {email} wurden gelöscht.")
+      except Exception as e:
+        alert(f"Fehler beim Löschen: {str(e)}")
+    else:
+      alert("Kein Nutzer angemeldet oder E-Mail nicht verfügbar.")
     pass
+

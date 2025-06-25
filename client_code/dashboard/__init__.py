@@ -85,13 +85,6 @@ class dashboard(dashboardTemplate):
     alert("Sync in process.")
     pass
 
-  def refresh_button_click(self, **event_args):
-    local_storage.clear()
-    self.bookings_repeating_panel.items = []
-    self.form_show()
-    self.refresh_data_bindings()
-    pass
-
   def chanel_manager_connect_button_click(self, **event_args):
     open_form('channel_manager_connect')
     pass
@@ -116,38 +109,3 @@ class dashboard(dashboardTemplate):
       alert(f'Ein Fehler ist aufgetreten: {e}')
   pass
   #identisch zu pflegen in Layout!
-
-  def build_revenue_graph(self):
-    # Gesamtsumme berechnen
-    total_revenue = sum(booking.get('price', 0) for booking in self.panel_data_selected)
-    print(total_revenue)
-    self.revenue_display.text = f"Gesamtumsatz: {total_revenue:.2f} €"
-  
-    # Umsatz nach Monat plotten
-    from collections import defaultdict
-    revenue_by_month = defaultdict(float)
-    for booking in self.panel_data_selected:
-      date = booking.get('arrival')
-      price = booking.get('price', 0)
-      if date:
-        month = date[:7]
-        revenue_by_month[month] += price
-  
-    months = sorted(revenue_by_month.keys())
-    revenues = [revenue_by_month[m] for m in months]
-  
-    import plotly.graph_objects as go
-    self.revenue_plot.data = go.Bar(
-      x=months,
-      y=revenues,
-      marker=dict(color='#2196f3')
-    )
-
-
-
-
-
-
-
-
-

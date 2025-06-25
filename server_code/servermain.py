@@ -81,7 +81,7 @@ def send_result_email(user_email, reservation_id):
     return False
 
 @anvil.server.callable
-def delete_bookings_by_email(email):
+def delete_bookings_by_email_old(email):
     matching_rows = app_tables.bookings.search(email=email)
     deleted_count = 0    
     # Lösche jede gefundene Zeile
@@ -90,6 +90,30 @@ def delete_bookings_by_email(email):
         deleted_count += 1
     print ("Buchungen von ",email," gelöscht. Anzahl: ",deleted_count)
     return deleted_count
+
+# Supabase-Client initialisieren
+supabase: Client = create_client(supabase_url, supabase_api_key)
+
+@anvil.server.callable
+def delete_bookings_by_email(user_email):
+  # Führe die DELETE-Operation aus
+  response = (
+    supabase.table("bookings")
+      .delete()
+      .eq("email", user_email)
+      .execute()
+  )
+
+  # Extrahiere die Anzahl der gelöschten Zeilen
+  deleted_count = len(response.data)  # response.data enthält die gelöschten Zeilen
+
+  # Gib serialisierbare Daten zurück
+  return {
+    "status": "success",
+    "deleted_count": deleted_count,
+    "deleted_data": response.data  # Nur wenn benötigt
+  }
+
 
 @anvil.server.callable
 def send_email(user_email,email_text):

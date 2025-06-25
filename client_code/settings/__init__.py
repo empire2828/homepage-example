@@ -53,11 +53,11 @@ class settings(settingsTemplate):
   #  pass
 
   def account_delete_link_click(self, **event_args):
-    open_form('AccountManagement.DeleteAccountAlert')
+    open_form('settings.DeleteAccountAlert')
     pass
 
   def password_reset_link_click(self, **event_args):
-    open_form('AccountManagement.reset_password')
+    open_form('settings.reset_password')
     pass
 
   def logout_navigation_link_click(self, **event_args):
@@ -70,6 +70,7 @@ class settings(settingsTemplate):
           ])
     if result == "YES":
       anvil.users.logout()
+      print('logged out')
       open_form('homepage')
       pass
 
