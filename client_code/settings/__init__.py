@@ -71,7 +71,8 @@ class settings(settingsTemplate):
     if result == "YES":
       anvil.users.logout()
       print('logged out')
-      open_form('homepage')
+      anvil.server.session.clear()
+      open_form('homepage', force= True)
       pass
 
   def subscription_management_navigation_link_click(self, **event_args):
