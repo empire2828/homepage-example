@@ -41,7 +41,7 @@ class help(helpTemplate):
         local_storage.clear()
         anvil.server.call('delete_bookings_by_email',anvil.users.get_user()['email'])
         
-        open_form('dashboard')
+        open_form('analytics')
         
         anvil.server.call_s('launch_sync_smoobu')
         anvil.server.call_s('launch_get_bookings_risk')

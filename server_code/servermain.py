@@ -15,70 +15,71 @@ supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.background_task
 def send_result_email(user_email, reservation_id):
-  time.sleep(60)
-  try:
-    booking = app_tables.bookings.get(reservation_id=reservation_id)
-  except AttributeError:
-    print("Keine Buchung gefunden",user_email, reservation_id)
+  # Buchung jetzt ausschließlich aus Supabase holen
+  booking = fetch_booking(user_email, reservation_id)
+  if not booking:
+    print("Keine Buchung gefunden", user_email, reservation_id)
     return False
-  
- # OpenAI Ergebnisse
-  openai_job = booking['screener_openai_job']
-  if openai_job is None:
-    email_text_ai = "OpenAI: Keine Ergebnisse<br>"
-  else:
-    email_text_ai = "OpenAI: " + openai_job + "<br><br>"
-  
-  # LinkedIn Ergebnisse
-  linkedin_check = booking['screener_google_linkedin']
-  if linkedin_check is None:
-    email_text_linkedin = "LinkedIn: Keine Ergebnisse<br>"
-  else:
-    email_text_linkedin = "LinkedIn: " + linkedin_check + "<br><br>"
-  
-  # Adresscheck Ergebnisse
-  address_check = booking['screener_address_check']
-  if address_check is None:
-    email_text_address = "Adresscheck: Keine Ergebnisse<br>"
-  else:
-    email_text_address = "Adresscheck: " + ("Erfolgreich" if address_check else "Fehlgeschlagen") + "<br><br>"
 
-    # Phone check Ergebnisse
-  phone_check = booking['screener_phone_check']
-  if phone_check is None:
-    email_text_phone = "Phone check: Keine Ergebnisse<br>"
-  else:
-    email_text_phone = "Phone check: " + ("Erfolgreich" if phone_check else "Fehlgeschlagen") + "<br><br>"
+  # -------- Ergebnis-Aufbereitung (unverändert) --------
+  openai_job = booking.get("screener_openai_job")
+  email_text_ai = (
+    "OpenAI: Keine Ergebnisse<br>"
+    if openai_job is None
+    else f"OpenAI: {openai_job}<br><br>"
+  )
 
-  #Buchungsdaten und Namen des Gastes
-  guestname= booking['guestname'] or ""
-  arrival= booking['arrival'] or ""
-  departure= booking['departure'] or ""
-  bookingdata = guestname + " " + str(arrival) + " - " + str(departure)
+  linkedin_check = booking.get("screener_google_linkedin")
+  email_text_linkedin = (
+    "LinkedIn: Keine Ergebnisse<br>"
+    if linkedin_check is None
+    else f"LinkedIn: {linkedin_check}<br><br>"
+  )
 
-  intro_text="Hier kommen die Lodginia Ergebnisse für die neue Buchung: "+ bookingdata+ "<br><br><br>"
-  disclaimer_text="Die Ergebnisse können insbesondere bei häufig vorkommenen Namen falsch sein."+"<br><br><br>"
-  url_text="Lodginia.com"
-  
-  email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone+ disclaimer_text+ url_text
-  subject="Lodginia- Ergebnisse für: "+ bookingdata
-  print("send_email:", user_email, reservation_id, email_text)
-  try:
-    anvil.email.send(
-      to=user_email,
-      from_address="noreply@lodginia.com",  # Vollständige E-Mail-Adresse
-      from_name="Lodginia.com",
-      subject=subject,
-      html=email_text
-    )
-    print("email versendet: ",user_email,email_text)
-    return True
-  
-  except anvil.email.SendFailure as e:
-    print(f"Send-Fehler beim E-Mail-Versand: {str(e)}")
-  except Exception as e:
-    print(f"Allg.Fehler beim E-Mail-Versand: {str(e)}")
-    return False
+  address_check = booking.get("screener_address_check")
+  email_text_address = (
+    "Adresscheck: Keine Ergebnisse<br>"
+    if address_check is None
+    else f"Adresscheck: {'Erfolgreich' if address_check else 'Fehlgeschlagen'}<br><br>"
+  )
+
+  phone_check = booking.get("screener_phone_check")
+  email_text_phone = (
+    "Phone check: Keine Ergebnisse<br>"
+    if phone_check is None
+    else f"Phone check: {'Erfolgreich' if phone_check else 'Fehlgeschlagen'}<br><br>"
+  )
+
+  guestname = booking.get("guestname", "")
+  arrival = booking.get("arrival", "")
+  departure = booking.get("departure", "")
+  bookingdata = f"{guestname} {arrival} - {departure}"
+
+  intro_text = f"Hier kommen die Lodginia Ergebnisse für die neue Buchung: {bookingdata}<br><br><br>"
+  disclaimer_text = "Die Ergebnisse können insbesondere bei häufig vorkommenen Namen falsch sein.<br><br><br>"
+  url_text = "Lodginia.com"
+
+  html_body = (
+    intro_text
+    + email_text_ai
+    + email_text_linkedin
+    + email_text_address
+    + email_text_phone
+    + disclaimer_text
+    + url_text
+  )
+
+  subject = f"Lodginia – Ergebnisse für: {bookingdata}"
+
+  anvil.email.send(
+    to=user_email,
+    from_address="noreply@lodginia.com",
+    from_name="Lodginia.com",
+    subject=subject,
+    html=html_body,
+  )
+  print("E-Mail versendet:", user_email, reservation_id)
+  return True
 
 @anvil.server.callable
 def delete_bookings_by_email_old(email):
@@ -96,24 +97,17 @@ supabase: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.callable
 def delete_bookings_by_email(user_email):
-  # Führe die DELETE-Operation aus
-  response = (
+  resp = (
     supabase.table("bookings")
       .delete()
       .eq("email", user_email)
       .execute()
   )
-
-  # Extrahiere die Anzahl der gelöschten Zeilen
-  deleted_count = len(response.data)  # response.data enthält die gelöschten Zeilen
-
-  # Gib serialisierbare Daten zurück
   return {
     "status": "success",
-    "deleted_count": deleted_count,
-    "deleted_data": response.data  # Nur wenn benötigt
+    "deleted_count": len(resp.data),
+    "deleted_data": resp.data,
   }
-
 
 @anvil.server.callable
 def send_email(user_email,email_text):
@@ -247,8 +241,13 @@ def get_dashboard_data_dict():
 
 @anvil.server.callable
 def get_bookings_from_supabase(email):
-  response = supabase_client.from_('bookings').select("*").eq('email', email).execute()
-  return response.data
+  return (
+    supabase.table("bookings")
+      .select("*")
+      .eq("email", email)
+      .execute()
+      .data
+  )
 
 @anvil.server.callable
 def call_server_wake_up():
