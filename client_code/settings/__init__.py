@@ -70,8 +70,6 @@ class settings(settingsTemplate):
           ])
     if result == "YES":
       anvil.users.logout()
-      print('logged out')
-      anvil.server.session.clear()
       open_form('homepage', force= True)
       pass
 
