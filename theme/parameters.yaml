@@ -338,3 +338,5 @@ roles:
 - components: [TextBox, TextArea, DatePicker, DropDown]
   display_in_toolbox: true
   name: input-error
+- components: []
+  name: flex-column-fill

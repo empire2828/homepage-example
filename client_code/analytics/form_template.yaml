@@ -2,16 +2,17 @@ components_by_slot:
   content:
   - layout_properties: {}
     name: iframe_flow_panel
-    properties: {}
+    properties: {visible: false}
     type: FlowPanel
   - components:
     - layout_properties: {expand: false}
       name: pms_need_to_connect_text
-      properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to connect your channel manager first:'}
+      properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to connect your channel manager first:', visible: false}
       type: Label
     - event_bindings: {click: chanel_manager_connect_button_click}
+      layout_properties: {}
       name: chanel_manager_connect_button
-      properties: {text: Connect Channel Manager}
+      properties: {text: Connect Channel Manager, visible: false}
       type: form:dep_g9k4toow7i44kq:_Components.Button
     layout_properties: {}
     name: flow_panel_2
@@ -24,12 +25,12 @@ components_by_slot:
   - components:
     - layout_properties: {}
       name: dashboard_upgrade_needed_text
-      properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to upgrade now to use Lodginia full power:'}
+      properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to upgrade now to use Lodginia full power:', visible: false}
       type: Label
     - event_bindings: {click: dashboard_upgrade_button_click}
       layout_properties: {}
       name: dashboard_upgrade_button
-      properties: {text: Upgrade}
+      properties: {text: Upgrade, visible: false}
       type: form:dep_g9k4toow7i44kq:_Components.Button
     layout_properties: {}
     name: flow_panel_3

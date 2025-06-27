@@ -50,12 +50,13 @@ class analytics(analyticsTemplate):
     print (iframe_url)
 
     # iFrame erstellen und einbinden
-    iframe = jQuery("<iframe>").attr({
-      "src": iframe_url,
-      "width": "100%",
-      "height": "800px",
-      "frameborder": "0"
-    })
+    #iframe = jQuery("<iframe>").attr({
+    #  "src": iframe_url,
+    #  "width": "100%",
+    #  "height": "1200px",
+    #  "frameborder": "0"
+    #})
+    iframe = jQuery("<iframe class='anvil-role-looker-iframe flex-column-fill'>").attr("src", iframe_url)
     iframe.appendTo(get_dom_node(self.iframe_flow_panel))# Any code you write here will run before the form opens.
 
   def dashboard_upgrade_button_click(self, **event_args):
