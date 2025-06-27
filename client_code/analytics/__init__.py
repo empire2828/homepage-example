@@ -54,7 +54,7 @@ class analytics(analyticsTemplate):
       "src": iframe_url,
       "width": "100%",
       #"height": "100%",
-      "height": "1200px",
+      "height": "1400px",
       "frameborder": "0"
     })
     #iframe = jQuery("<iframe class='anvil-role-looker-iframe flex-column-fill'>").attr("src", iframe_url)
