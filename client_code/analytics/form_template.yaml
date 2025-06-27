@@ -2,7 +2,7 @@ components_by_slot:
   content:
   - layout_properties: {}
     name: iframe_flow_panel
-    properties: {visible: false}
+    properties: {role: null, visible: false}
     type: FlowPanel
   - components:
     - layout_properties: {expand: false}
