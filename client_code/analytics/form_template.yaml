@@ -1,9 +1,5 @@
 components_by_slot:
   content:
-  - layout_properties: {}
-    name: iframe_flow_panel
-    properties: {role: null, visible: false}
-    type: FlowPanel
   - components:
     - layout_properties: {expand: false}
       name: pms_need_to_connect_text
@@ -34,6 +30,10 @@ components_by_slot:
       type: form:dep_g9k4toow7i44kq:_Components.Button
     layout_properties: {}
     name: flow_panel_3
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: looker_flow_panel
     properties: {}
     type: FlowPanel
   navigation: []

@@ -1041,13 +1041,3 @@ div.plot-container.plotly svg.main-svg {
     --anvil-spinner-bg: %color:Surface Variant%;
 }
 
-.flex-column-fill, .anvil-role-looker-iframe {
-  height: 100%;
-  width: 100%;
-  border: none;
-}
-html, body, #anvil-root-container, #appGoesHere {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
