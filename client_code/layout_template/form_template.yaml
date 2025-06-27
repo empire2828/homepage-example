@@ -12,7 +12,7 @@ components_by_slot:
   - event_bindings: {click: channel_manager_connect_navigation_link_click}
     layout_properties: {}
     name: channel_manager_connect_navigation_link
-    properties: {icon: 'mi:cable', navigate_to: channel_manager_connect, text: Connect Channel Manager}
+    properties: {icon: 'mi:cable', navigate_to: channel_manager_connect, text: Connect}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: upgrade_navigation_link_click}
     layout_properties: {}
