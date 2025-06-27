@@ -14,4 +14,4 @@ components_by_slot:
     properties: {bold: true, role: outlined-button, text: Save}
     type: Button
 is_package: true
-layout: {type: 'form:layout'}
+layout: {type: 'form:layout_template'}

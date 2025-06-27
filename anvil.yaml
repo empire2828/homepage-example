@@ -70,15 +70,36 @@ db_schema:
     - admin_ui: {order: 3.625, width: 200}
       name: departure
       type: date
-    - admin_ui: {width: 200}
-      name: created-at
-      type: datetime
     - admin_ui: {order: 12.625, width: 200}
       name: guest_email
       type: string
     - admin_ui: {width: 200}
       name: screener_disposable_email
       type: bool
+    - admin_ui: {order: 4.3125, width: 200}
+      name: created_at
+      type: date
+    - admin_ui: {order: 23, width: 200}
+      name: price
+      type: number
+    - admin_ui: {order: 25, width: 200}
+      name: prepayment
+      type: number
+    - admin_ui: {order: 27, width: 200}
+      name: deposit
+      type: number
+    - admin_ui: {order: 29, width: 200}
+      name: commission_included
+      type: number
+    - admin_ui: {order: 30, width: 200}
+      name: price_paid
+      type: string
+    - admin_ui: {order: 31, width: 200}
+      name: prepayment_paid
+      type: string
+    - admin_ui: {order: 32, width: 200}
+      name: deposit_paid
+      type: string
     server: full
     title: bookings
   disposable_domains:
@@ -107,7 +128,7 @@ db_schema:
     - admin_ui: {width: 200}
       name: last_login
       type: datetime
-    - admin_ui: {width: 200}
+    - admin_ui: {order: 3, width: 209}
       name: password_hash
       type: string
     - admin_ui: {width: 200}
@@ -143,22 +164,25 @@ db_schema:
     - admin_ui: {order: 18, width: 200}
       name: admin
       type: bool
+    - admin_ui: {order: 0.125, width: 200}
+      name: supabase_key
+      type: string
     server: full
     title: Users
 dependencies:
 - dep_id: dep_g9k4toow7i44kq
   resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
-  version: {version_tag: v1.2.4}
+  version: {version_tag: v1.2.5}
 - dep_id: dep_i8vdrigkugb23n
   resolution_hints: {app_id: 3PIDO5P3H4VPEMPL, name: routing, package_name: routing}
   version: {version_tag: v0.3.5}
 - dep_id: dep_pa3otpma4dkzg
   resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
   version: {version_tag: v3.1.0}
-metadata: {description: lodginia.com, logo_img: 'asset:lodginia.jpg', title: lodginia.com}
+metadata: {description: lodginia.com, logo_img: 'asset:Lodginia_orange_transparent-logo.jpeg', title: lodginia.com}
 name: lodginia.com
 native_deps: null
-package_name: Guestscreener
+package_name: lodginia
 renamed: true
 runtime_options:
   client_version: '3'
@@ -201,6 +225,9 @@ secrets:
   stripe_test_api_key:
     type: secret
     value: {Y4HSOSHAROBHE7LA: tmBGw6FIjMQE3lfps4SL3Wc6fQwKXK/yNJ+Q/MbU8VF02hx7wk1zyc43DdS60OMglP75GWIjndcAsFPJjSSbThlmeT+ASlHrzAE6gwTRWG7xYRlw1wTUIjkugg3c59lXAIPWavhF+R9/HJX4O32MQXTt0kmhKwa2Cxwak0dpKsTTHufGMYdeXQ7iU+p87iGV4QEMMKkhzrRK6BI6SZ0QG+4wXuLX3RnMl5rEGnAMtAxtPXjqjt4QbXa7gMhMZx1+VZW0+IBWtj1Dvw==}
+  supabase_api_key:
+    type: secret
+    value: {Y4HSOSHAROBHE7LA: nN6bKtM0+BTPcIaCVRZc78tSJlyeE/hAskXEm4hxtHGwaaH3MM4eouEq1tAylfzcF/PvNpXgFuWWEZ5JHMMIo1BrUB2aAaEwq+VxYhjlT/iRwpmQXrxqhn8mpHAj8dcomfDBFE0sNMQPFT7b0pyCyAi+XNbrO0QOM6lpWx/mzZdagxcZtYHIwVY8MlRzXmmotJcJgPN1WpDGKbAfx1I7QI0sp1U9GrZhgsBX7Kf0YvwE/qf+rlMTSOza3Q3P4CGnx5QCncZdzUwEtbAlEiy+vk+5ulbhD9DqV+na+RaykZAscA+7HncWliJsn4ZUOQU/Iw9InvgdxjF7JjzOrJ3n61CQzvH6VKHO0tyRhYuOXPlzL4kj8hfoRvVBQjzIJ0lKquPgMrzgw1DcKLBWCDi0x3vyvjY2D6p5fjQ=}
 services:
 - client_config: {enable_v2: true}
   server_config: {}

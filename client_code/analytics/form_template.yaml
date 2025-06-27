@@ -1,0 +1,43 @@
+components_by_slot:
+  content:
+  - components:
+    - layout_properties: {expand: false}
+      name: pms_need_to_connect_text
+      properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to connect your channel manager first:', visible: false}
+      type: Label
+    - event_bindings: {click: chanel_manager_connect_button_click}
+      layout_properties: {}
+      name: chanel_manager_connect_button
+      properties: {text: Connect Channel Manager, visible: false}
+      type: form:dep_g9k4toow7i44kq:_Components.Button
+    layout_properties: {}
+    name: flow_panel_2
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: flow_panel_1
+    properties: {}
+    type: FlowPanel
+  - components:
+    - layout_properties: {}
+      name: dashboard_upgrade_needed_text
+      properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to upgrade now to use Lodginia full power:', visible: false}
+      type: Label
+    - event_bindings: {click: dashboard_upgrade_button_click}
+      layout_properties: {}
+      name: dashboard_upgrade_button
+      properties: {text: Upgrade, visible: false}
+      type: form:dep_g9k4toow7i44kq:_Components.Button
+    layout_properties: {}
+    name: flow_panel_3
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: looker_flow_panel
+    properties: {}
+    type: FlowPanel
+  navigation: []
+is_package: true
+layout:
+  properties: {navigation_rail_collapse_to: bottom_app_bar, show_sidesheet: false}
+  type: form:layout_template

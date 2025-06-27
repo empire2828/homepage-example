@@ -1,0 +1,45 @@
+components_by_slot:
+  navigation:
+  - layout_properties: {}
+    name: subscription_body
+    properties: {align: center, font_size: 8, icon_size: 10, scale: small, style: label, visible: true}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  - event_bindings: {click: analytics_navigation_link_click}
+    layout_properties: {}
+    name: analytics_navigation_link
+    properties: {icon: 'mi:attach_money', navigate_to: analytics, text: Analytics}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - event_bindings: {click: channel_manager_connect_navigation_link_click}
+    layout_properties: {}
+    name: channel_manager_connect_navigation_link
+    properties: {icon: 'mi:cable', navigate_to: channel_manager_connect, text: Connect}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - event_bindings: {click: upgrade_navigation_link_click}
+    layout_properties: {}
+    name: upgrade_navigation_link
+    properties: {badge: false, icon: 'mi:upgrade', navigate_to: upgrade, text: Upgrade}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - event_bindings: {click: help_navigation_link_click}
+    layout_properties: {}
+    name: help_navigation_link
+    properties: {icon: 'mi:question_mark', navigate_to: help, text: Help}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - event_bindings: {click: settings_navigation_link_click}
+    layout_properties: {}
+    name: settings_navigation_link
+    properties: {icon: 'mi:tools_wrench', navigate_to: settings, text: Settings}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - event_bindings: {click: admin_navigation_link_click}
+    layout_properties: {}
+    name: admin_navigation_link
+    properties: {icon: 'mi:admin_panel_settings', navigate_to: Admin, text: Admin, visible: false}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+is_package: true
+layout:
+  properties: {navigation_rail_collapse_to: bottom_app_bar, show_sidesheet: false}
+  type: form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout
+slots:
+  content:
+    index: 0
+    set_layout_properties: {}
+    target: {name: content, type: slot}

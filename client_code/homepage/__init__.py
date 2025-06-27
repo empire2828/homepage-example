@@ -24,24 +24,14 @@ class homepage(homepageTemplate):
   def login_button_click(self, **event_args):
     user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
     if user:
-      open_form('guest_screening')
+      open_form('analytics')
     pass
 
   def testen_button_click(self, **event_args):
-    result = alert(
-    content="Dieser Service richtet sich ausschließlich an Vermieter von Ferienimmobilien. Trifft das auf Sie zu?",
-    title="Bestätigung berechtigtes Interesse nach DSVGO",
-    large=True,
-    buttons=[
-        ("Yes", "YES"),
-        ("No", "NO"),
-    ]
-    )
-    if result=='YES':
-      user = anvil.users.signup_with_form(allow_cancel=True)
-      if user:
-        anvil.server.call('send_registration_notification', user['email'])
-        open_form('dashboard')
+    user = anvil.users.signup_with_form(allow_cancel=True)
+    if user:
+      anvil.server.call('send_registration_notification', user['email'])
+      open_form('analytics')
     pass
 
   def impressum_link_click(self, **event_args):

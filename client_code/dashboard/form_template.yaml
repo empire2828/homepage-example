@@ -1,8 +1,0 @@
-components_by_slot:
-  slot_1:
-  - layout_properties: {}
-    name: pivot_1
-    properties: {}
-    type: form:dep_pa3otpma4dkzg:Pivot
-is_package: true
-layout: {type: 'form:layout'}

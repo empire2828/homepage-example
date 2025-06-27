@@ -6,76 +6,83 @@ import anvil.server
 import time
 from datetime import datetime, timedelta, timezone
 from . import routes # noqa: F401
+from supabase import create_client, Client
+import anvil.secrets
+
+supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.background_task
 def send_result_email(user_email, reservation_id):
-  time.sleep(60)
-  try:
-    booking = app_tables.bookings.get(reservation_id=reservation_id)
-  except AttributeError:
-    print("Keine Buchung gefunden",user_email, reservation_id)
+  # Buchung jetzt ausschließlich aus Supabase holen
+  booking = fetch_booking(user_email, reservation_id)
+  if not booking:
+    print("Keine Buchung gefunden", user_email, reservation_id)
     return False
-  
- # OpenAI Ergebnisse
-  openai_job = booking['screener_openai_job']
-  if openai_job is None:
-    email_text_ai = "OpenAI: Keine Ergebnisse<br>"
-  else:
-    email_text_ai = "OpenAI: " + openai_job + "<br><br>"
-  
-  # LinkedIn Ergebnisse
-  linkedin_check = booking['screener_google_linkedin']
-  if linkedin_check is None:
-    email_text_linkedin = "LinkedIn: Keine Ergebnisse<br>"
-  else:
-    email_text_linkedin = "LinkedIn: " + linkedin_check + "<br><br>"
-  
-  # Adresscheck Ergebnisse
-  address_check = booking['screener_address_check']
-  if address_check is None:
-    email_text_address = "Adresscheck: Keine Ergebnisse<br>"
-  else:
-    email_text_address = "Adresscheck: " + ("Erfolgreich" if address_check else "Fehlgeschlagen") + "<br><br>"
 
-    # Phone check Ergebnisse
-  phone_check = booking['screener_phone_check']
-  if phone_check is None:
-    email_text_phone = "Phone check: Keine Ergebnisse<br>"
-  else:
-    email_text_phone = "Phone check: " + ("Erfolgreich" if phone_check else "Fehlgeschlagen") + "<br><br>"
+  # -------- Ergebnis-Aufbereitung (unverändert) --------
+  openai_job = booking.get("screener_openai_job")
+  email_text_ai = (
+    "OpenAI: Keine Ergebnisse<br>"
+    if openai_job is None
+    else f"OpenAI: {openai_job}<br><br>"
+  )
 
-  #Buchungsdaten und Namen des Gastes
-  guestname= booking['guestname'] or ""
-  arrival= booking['arrival'] or ""
-  departure= booking['departure'] or ""
-  bookingdata = guestname + " " + str(arrival) + " - " + str(departure)
+  linkedin_check = booking.get("screener_google_linkedin")
+  email_text_linkedin = (
+    "LinkedIn: Keine Ergebnisse<br>"
+    if linkedin_check is None
+    else f"LinkedIn: {linkedin_check}<br><br>"
+  )
 
-  intro_text="Hier kommen die Lodginia Ergebnisse für die neue Buchung: "+ bookingdata+ "<br><br><br>"
-  disclaimer_text="Die Ergebnisse können insbesondere bei häufig vorkommenen Namen falsch sein."+"<br><br><br>"
-  url_text="Lodginia.com"
-  
-  email_text = intro_text+ email_text_ai + email_text_linkedin + email_text_address + email_text_phone+ disclaimer_text+ url_text
-  subject="Lodginia- Ergebnisse für: "+ bookingdata
-  print("send_email:", user_email, reservation_id, email_text)
-  try:
-    anvil.email.send(
-      to=user_email,
-      from_address="noreply@lodginia.com",  # Vollständige E-Mail-Adresse
-      from_name="Lodginia.com",
-      subject=subject,
-      html=email_text
-    )
-    print("email versendet: ",user_email,email_text)
-    return True
-  
-  except anvil.email.SendFailure as e:
-    print(f"Send-Fehler beim E-Mail-Versand: {str(e)}")
-  except Exception as e:
-    print(f"Allg.Fehler beim E-Mail-Versand: {str(e)}")
-    return False
+  address_check = booking.get("screener_address_check")
+  email_text_address = (
+    "Adresscheck: Keine Ergebnisse<br>"
+    if address_check is None
+    else f"Adresscheck: {'Erfolgreich' if address_check else 'Fehlgeschlagen'}<br><br>"
+  )
+
+  phone_check = booking.get("screener_phone_check")
+  email_text_phone = (
+    "Phone check: Keine Ergebnisse<br>"
+    if phone_check is None
+    else f"Phone check: {'Erfolgreich' if phone_check else 'Fehlgeschlagen'}<br><br>"
+  )
+
+  guestname = booking.get("guestname", "")
+  arrival = booking.get("arrival", "")
+  departure = booking.get("departure", "")
+  bookingdata = f"{guestname} {arrival} - {departure}"
+
+  intro_text = f"Hier kommen die Lodginia Ergebnisse für die neue Buchung: {bookingdata}<br><br><br>"
+  disclaimer_text = "Die Ergebnisse können insbesondere bei häufig vorkommenen Namen falsch sein.<br><br><br>"
+  url_text = "Lodginia.com"
+
+  html_body = (
+    intro_text
+    + email_text_ai
+    + email_text_linkedin
+    + email_text_address
+    + email_text_phone
+    + disclaimer_text
+    + url_text
+  )
+
+  subject = f"Lodginia – Ergebnisse für: {bookingdata}"
+
+  anvil.email.send(
+    to=user_email,
+    from_address="noreply@lodginia.com",
+    from_name="Lodginia.com",
+    subject=subject,
+    html=html_body,
+  )
+  print("E-Mail versendet:", user_email, reservation_id)
+  return True
 
 @anvil.server.callable
-def delete_bookings_by_email(email):
+def delete_bookings_by_email_old(email):
     matching_rows = app_tables.bookings.search(email=email)
     deleted_count = 0    
     # Lösche jede gefundene Zeile
@@ -84,6 +91,23 @@ def delete_bookings_by_email(email):
         deleted_count += 1
     print ("Buchungen von ",email," gelöscht. Anzahl: ",deleted_count)
     return deleted_count
+
+# Supabase-Client initialisieren
+supabase: Client = create_client(supabase_url, supabase_api_key)
+
+@anvil.server.callable
+def delete_bookings_by_email(user_email):
+  resp = (
+    supabase.table("bookings")
+      .delete()
+      .eq("email", user_email)
+      .execute()
+  )
+  return {
+    "status": "success",
+    "deleted_count": len(resp.data),
+    "deleted_data": resp.data,
+  }
 
 @anvil.server.callable
 def send_email(user_email,email_text):
@@ -134,18 +158,8 @@ def get_dashboard_data_dict():
   apartment_limit = 10 if user.get('subscription') == 'Pro-Subscription' else 3
 
   # Fetch alle Bookings mit optimiertem fetch_only
-  all_bookings = app_tables.bookings.search(
-    q.fetch_only(
-      "guestname", "arrival", "departure", "apartment",
-      "channel_name", "screener_google_linkedin", "address_street",
-      "address_postalcode", "address_city", "screener_address_check",
-      "screener_openai_job", "phone", "screener_phone_check",
-      "guest_email", "screener_disposable_email",
-      "adults", "children"
-    ),
-    email=user['email']
-  )
-
+  all_bookings = get_bookings_from_supabase(user['email'])
+  
   # Gruppiere und verarbeite Bookings in einem Durchgang
   apartments = {}
   for booking in all_bookings:
@@ -175,8 +189,10 @@ def get_dashboard_data_dict():
 
       serialized_bookings.append({
         'guestname': booking.get('guestname'),
-        'arrival': booking.get('arrival').isoformat() if booking.get('arrival') else None,
-        'departure': booking.get('departure').isoformat() if booking.get('departure') else None,
+        'arrival': booking.get('arrival') if booking.get('arrival') else None,
+       #'arrival': booking.get('arrival').isoformat() if booking.get('arrival') else None,
+        'departure': booking.get('departure') if booking.get('departure') else None,
+        'created_at': booking.get('created_at') if booking.get('created_at') else None,
         'apartment': apt_id_final,
         'channel_name': booking.get('channel_name'),
         'screener_google_linkedin': booking.get('screener_google_linkedin'),
@@ -190,9 +206,20 @@ def get_dashboard_data_dict():
         'guest_email': booking.get('guest_email'),
         'screener_disposable_email': booking.get('screener_disposable_email'),        
         'adults': booking.get('adults'),
-        'children': booking.get('children')
+        'children': booking.get('children'),
+        'language': booking.get('language'),
+        'type': booking.get('type'),
+        'price': booking.get('price'),
+        'prepayment': booking.get('prepayment'),
+        'deposit': booking.get('deposit'),
+        'commission_included': booking.get('commission_included'),
+        'price_paid': booking.get('price_paid'),
+        'prepayment_paid': booking.get('prepayment_paid'),
+        'deposit_paid': booking.get('deposit_paid'),
+        'guest_count': booking.get('guest_count'),
+        'revenue': booking.get('revenue'),
       })
-
+  
     # Sortiere nach Ankunftsdatum
   serialized_bookings.sort(key=lambda b: b.get('arrival') or "")
 
@@ -211,6 +238,16 @@ def get_dashboard_data_dict():
     'has_subscription': has_subscription,
     'server_data_last_update': user.get('server_data_last_update')
   }
+
+@anvil.server.callable
+def get_bookings_from_supabase(email):
+  return (
+    supabase.table("bookings")
+      .select("*")
+      .eq("email", email)
+      .execute()
+      .data
+  )
 
 @anvil.server.callable
 def call_server_wake_up():

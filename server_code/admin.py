@@ -74,3 +74,4 @@ def import_bookings_csv(csv_file):
 
   return f"{imported_count} Zeilen erfolgreich importiert"
 
+

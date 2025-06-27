@@ -1,14 +1,24 @@
 components_by_slot:
-  slot_1:
+  content:
   - event_bindings: {change: admin_file_loader_change}
     layout_properties: {}
     name: admin_file_loader
     properties: {}
     type: form:dep_g9k4toow7i44kq:_Components.FileLoader
-  - event_bindings: {click: navigation_link_1_click}
+  - components:
+    - layout_properties: {grid_position: 'ZHCEBT,NRLZKL'}
+      name: email_input_prompt
+      properties: {text: dirk.klemer@googlemail.com}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - event_bindings: {click: delete_supabase_data_button_click}
+      layout_properties: {grid_position: 'ZHCEBT,TMSGKG'}
+      name: delete_supabase_data_button
+      properties: {text: delete all bookings in supabase}
+      type: form:dep_g9k4toow7i44kq:_Components.Button
     layout_properties: {}
-    name: navigation_link_1
-    properties: {icon: 'mi:pivot_table_chart', navigate_to: pivot, text: Pivot}
-    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
+  slot_1: []
 is_package: true
-layout: {type: 'form:layout'}
+layout: {type: 'form:layout_template'}

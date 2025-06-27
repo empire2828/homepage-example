@@ -1,4 +1,4 @@
-from ._anvil_designer import AccountManagementTemplate
+from ._anvil_designer import settingsTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -9,11 +9,15 @@ from .ChangeName import ChangeName
 from .ChangeEmail import ChangeEmail
 from .DeleteAccountAlert import DeleteAccountAlert
 
-class AccountManagement(AccountManagementTemplate):
+class settings(settingsTemplate):
   def __init__(self, **properties):
     self.user = anvil.users.get_user()
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+
+  def form_show(self, **event_args):
+    # Hier kommt dein Code hin, der beim Anzeigen der Form ausgeführt werden soll
+    pass
   
   def change_name_link_click(self, **event_args):
     new_name = alert(ChangeName(item=self.user["name"]), title="Change name", buttons=None, dismissible=True, large=True)
@@ -49,15 +53,33 @@ class AccountManagement(AccountManagementTemplate):
   #  pass
 
   def account_delete_link_click(self, **event_args):
-    open_form('AccountManagement.DeleteAccountAlert')
-    pass
-
-  def subscription_manage_link_click(self, **event_args):
+    open_form('settings.DeleteAccountAlert')
     pass
 
   def password_reset_link_click(self, **event_args):
-    anvil.server.call('send_password_reset_email')
+    open_form('settings.reset_password')
     pass
 
-  def form_show(self, **event_args):
-    self.layout.reset_links()
+  def logout_navigation_link_click(self, **event_args):
+    result = alert(
+          content="Do you want to logout?",
+          title="Log out",
+          buttons=[
+            ("Yes", "YES"),
+            ("No", "NO"),
+          ])
+    if result == "YES":
+      anvil.users.logout()
+      open_form('homepage', force= True)
+      pass
+
+  def subscription_management_navigation_link_click(self, **event_args):
+    alert('Du wirst jetzt auf die Seite unseres Zahlungsanbieters Stripe weitergeleitet.')
+    anvil.js.window.open("https://billing.stripe.com/p/login/7sIeW3aAjf8CgIodQQ", "_blank")
+    #link ist unter: https://dashboard.stripe.com/settings/billing/portal
+    pass
+
+  def reset_password_navigation_link_click(self, **event_args):
+    """This method is called when the component is clicked"""
+    pass
+
