@@ -70,6 +70,7 @@ def sync_smoobu(user_email):
       return f"Fehler: {response.status_code} - {response.text}"
 
   bookings_added = 0
+  print (all_bookings)
   for booking in all_bookings:
     try:
       # Bestehende Buchung anhand der Reservierungs-ID abrufen
@@ -88,8 +89,8 @@ def sync_smoobu(user_email):
         "apartment": booking['apartment']['name'],
         "arrival": datetime.strptime(booking['arrival'], "%Y-%m-%d").date().isoformat(),
         "departure": datetime.strptime(booking['departure'], "%Y-%m-%d").date().isoformat(),
-        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").isoformat(),
-        "modified_at": datetime.strptime(booking['modified-at'], "%Y-%m-%d %H:%M").isoformat(),
+        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").isoformat(),  # Fixed format
+        "modified_at": datetime.strptime(booking['modifiedAt'], "%Y-%m-%d %H:%M:%S").isoformat(), 
         "guestname": booking['guest-name'],
         "channel_name": booking['channel']['name'],
         "guest_email": booking['email'],
