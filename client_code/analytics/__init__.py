@@ -32,7 +32,7 @@ class analytics(analyticsTemplate):
         self.pms_need_to_connect_text.visible = False
         self.chanel_manager_connect_button.visible = False
 
-    if user_has_subscription:
+    if user_has_subscription and user['smoobu_api_key'] is not None:
       self.iframe_flow_panel.visible = True
       email= user['email']
       self.init_iframe(email)
