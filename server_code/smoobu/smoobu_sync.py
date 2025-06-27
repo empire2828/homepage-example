@@ -89,6 +89,7 @@ def sync_smoobu(user_email):
         "arrival": datetime.strptime(booking['arrival'], "%Y-%m-%d").date().isoformat(),
         "departure": datetime.strptime(booking['departure'], "%Y-%m-%d").date().isoformat(),
         "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").isoformat(),
+        "modified_at": datetime.strptime(booking['modified-at'], "%Y-%m-%d %H:%M").isoformat(),
         "guestname": booking['guest-name'],
         "channel_name": booking['channel']['name'],
         "guest_email": booking['email'],
