@@ -19,7 +19,7 @@ class layout_template(layout_templateTemplate):
     self.dashboard_navigation_link.selected= False
     self.channel_manager_connect_navigation_link.selected = False
     self.upgrade_navigation_link.selected = False
-    self.settings_navigation_link.selected = False
+    self.my_account_navigation_link.selected = False
     self.admin_navigation_link.selected = False
 
   def dashboard_navigation_link_click(self, **event_args):
@@ -38,7 +38,7 @@ class layout_template(layout_templateTemplate):
     self.reset_links()
     pass
 
-  def settings_navigation_link_click(self, **event_args):
+  def my_account_navigation_link_click(self, **event_args):
     self.reset_links()
     pass
 

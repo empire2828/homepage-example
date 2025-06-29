@@ -19,10 +19,10 @@ components_by_slot:
     name: upgrade_navigation_link
     properties: {badge: false, icon: 'mi:upgrade', navigate_to: upgrade, text: Upgrade}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-  - event_bindings: {click: settings_navigation_link_click}
+  - event_bindings: {click: my_account_navigation_link_click}
     layout_properties: {}
-    name: settings_navigation_link
-    properties: {icon: 'mi:tools_wrench', navigate_to: settings, text: Settings}
+    name: my_account_navigation_link
+    properties: {icon: 'mi:manage_accounts', navigate_to: settings, text: My account}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: admin_navigation_link_click}
     layout_properties: {}
