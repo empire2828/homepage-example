@@ -2,9 +2,12 @@ import anvil.users
 from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
-from smoobu.smoobu_main import get_guest_details, guest_data_update
-from servermain import send_result_email
-from screener.screener_main import get_bookings_risk
+from supabase import create_client, Client
+
+# Supabase-Client initialisieren
+supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
 def smoobu_webhook_handler():
@@ -23,18 +26,10 @@ def smoobu_webhook_handler():
             # Die eigentlichen Buchungsdaten befinden sich im 'data'-Feld
             process_booking(booking_data, user_id)            
             print(f"Buchung verarbeitet: {booking_data.get('id')}")
-            
-            # Starte die Risikobewertung als Hintergrundaufgabe
-            anvil.server.launch_background_task('get_bookings_risk',user_email, reservation_id)
 
         elif action == 'cancelReservation':
             delete_booking(booking_data.get('id'), webhook_data.get('user'))
             print(f"Buchung gelöscht: {booking_data.get('id')} ",webhook_data.get('user'))
-
-        # Bei jedem Aufruf des Webhooks schauen, ob Gastdaten sich geändert haben
-        guest_data_update(user_email)  
-        if action=='newReservation':
-          anvil.server.launch_background_task('send_result_email',user_email,reservation_id) 
         
         user_row = app_tables.users.get(email=user_email)
         if user_row:
@@ -70,13 +65,6 @@ def process_booking(booking_data, user_id):
         "Api-Key": api_key,
         "Content-Type": "application/json"
     }
-    
-    guest_data = get_guest_details(booking_data['guestId'], headers)
-    address = guest_data.get('address', {})
-    street = address.get('street', '')
-    city = address.get('city', '')
-    postal_code = address.get('postalCode', '')
-    country = address.get('country', '')
 
     # Ignoriere Buchungen vom Blocked channel
     if booking_data['channel']['name'] == 'Blocked channel':
@@ -101,10 +89,6 @@ def process_booking(booking_data, user_id):
             children=booking_data.get('children'),
             language=booking_data.get('language'),
             guestid=booking_data.get('guestId'),
-            address_street=street,
-            address_postalcode=postal_code,
-            address_city=city,
-            address_country=country
         )
     else:
         # Füge eine neue Buchung hinzu
@@ -122,10 +106,6 @@ def process_booking(booking_data, user_id):
             children=booking_data.get('children'),
             language=booking_data.get('language'),
             guestid=booking_data.get('guestId'),
-            address_street=street,
-            address_postalcode=postal_code,
-            address_city=city,
-            address_country=country,
             email=user_email
         )
 

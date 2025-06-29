@@ -2,14 +2,65 @@ components:
 - components:
   - layout_properties: {grid_position: 'CNLUIY,XVCBKU'}
     name: headline_1
-    properties: {bold: true, role: headline, text: Datenschutz}
+    properties: {bold: true, role: headline, text: Data Protection}
     type: Label
-  - layout_properties: {grid_position: 'AVBNVA,BBKSRH'}
-    name: body_1
+  - layout_properties: {grid_position: 'ASVITJ,FMTXIA'}
+    name: rich_text_1
     properties:
-      role: body
-      text: "Allgemeine Informationen\n\nWir freuen uns über Ihr Interesse an unserem Lodginia-Service für Ferienhäuser. Der Schutz Ihrer personenbezogenen Daten ist uns ein wichtiges Anliegen. Nachfolgend informieren wir Sie ausführlich darüber, welche Daten wir erheben, wie wir diese verarbeiten und welche Rechte Ihnen zustehen.\nDiese Datenschutzerklärung gilt für alle Verarbeitungen personenbezogener Daten im Rahmen unseres Lodginia-Services, sowohl über unsere Website als auch bei der direkten Nutzung unserer Dienstleistungen.\n\nVerantwortlicher für die Datenverarbeitung\nSiehe Impressum\n\nWelche Daten wir erheben und verarbeiten\nIm Rahmen unseres Lodginia-Services erheben und verarbeiten wir folgende personenbezogene Daten:\nVon Vermietern:\n•\tName und Kontaktdaten (Anschrift, E-Mail, Telefonnummer)\n•\tInformationen zu den Ferienimmobilien\n•\tZugangsdaten zum Nutzerkonto\n•\tZahlungsinformationen (bei kostenpflichtigen Diensten)\nVon Gästen, die geprüft werden:\n•\tName und Kontaktdaten (Anschrift, E-Mail, Telefonnummer)\n•\tBuchungsinformationen (Zeitraum, Anzahl der Personen)\n•\tGgf. Ausweisdaten zur Identitätsüberprüfung\n\nWir verarbeiten diese Daten nach dem Prinzip der Datenminimierung und erheben nur Informationen, die für die Durchführung unseres Services zwingend erforderlich sind.\n\nZweck der Datenverarbeitung\nDie Verarbeitung Ihrer personenbezogenen Daten erfolgt zu folgenden Zwecken:\n•\tZur Bereitstellung unseres Gästeprüfer-Services\n•\tZur Abwicklung von Buchungen und Vermietungen\n•\tZur Identitätsüberprüfung von Gästen\n•\tZur Abrechnung unserer Dienstleistungen\n•\tZur Kommunikation mit Ihnen\n•\tZur Verbesserung unseres Angebots\n\nDie Rechtsgrundlage für die Verarbeitung ist in erster Linie die Erfüllung des Vertrags gemäß Art. 6 Abs. 1 lit. b DSGVO sowie die Erfüllung rechtlicher Verpflichtungen gemäß Art. 6 Abs. 1 lit. c DSGVO. Das berechtigte Interesse gemäß Art. 6 \nergibt sich aus dem Interesse der Vermieter ihr Eigentum vor Schaden zu schützen.\n\nSpeicherdauer\nWir speichern Ihre personenbezogenen Daten nur so lange, wie es für die Erfüllung der oben genannten Zwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten dies vorschreiben. Nach Ablauf dieser Fristen werden Ihre Daten gelöscht oder anonymisiert.\nFür steuerrelevante Daten gilt in der Regel eine Aufbewahrungsfrist von 10 Jahren, für andere geschäftliche Unterlagen von 6 Jahren.\n\nWeitergabe von Daten an Dritte\nIm Rahmen unseres Lodginia-Services kann es erforderlich sein, personenbezogene Daten an folgende Empfänger weiterzugeben:\n•\tZahlungsdienstleister (bei kostenpflichtigen Diensten)\n\nTechnische und organisatorische Sicherheitsmaßnahmen\nWir setzen geeignete technische und organisatorische Sicherheitsmaßnahmen ein, um Ihre personenbezogenen Daten gegen zufällige oder vorsätzliche Manipulationen, Verlust, Zerstörung oder den Zugriff unberechtigter Personen zu schützen. Unsere Sicherheitsmaßnahmen werden entsprechend der technologischen Entwicklung fortlaufend verbessert.\n\nUnsere Website nutzt eine SSL-Verschlüsselung, um die Übertragung personenbezogener Daten zu schützen.\n\nIhre Rechte als betroffene Person\nNach der DSGVO stehen Ihnen folgende Rechte zu:\n•\tAuskunftsrecht: Sie haben das Recht, Auskunft über die von uns gespeicherten personenbezogenen Daten zu erhalten.\n•\tRecht auf Berichtigung: Sie können die Berichtigung unrichtiger Daten verlangen.\n•\tRecht auf Löschung: Unter bestimmten Voraussetzungen können Sie die Löschung Ihrer Daten verlangen.\n•\tRecht auf Einschränkung der Verarbeitung: Sie können die Einschränkung der Verarbeitung Ihrer Daten verlangen.\n•\tRecht auf Datenübertragbarkeit: Sie können verlangen, dass wir Ihnen Ihre Daten in einem strukturierten, gängigen und maschinenlesbaren Format übermitteln.\n•\tWiderspruchsrecht: Sie haben das Recht, der Verarbeitung Ihrer Daten zu widersprechen.\n•\tWiderrufsrecht: Sie können eine erteilte Einwilligung jederzeit widerrufen.\nUm Ihre Rechte auszuüben, kontaktieren Sie uns bitte unter den oben angegebenen Kontaktdaten.\n\nCookies und Webanalyse\nEs werden Cookies zur Optimierung unseres Angebotes eingesetzt.\n\nExterne Dienste und Inhalte\nAuf unserer Website können externe Dienste wie Google Fonts, Google Maps oder Bewertungssiegel eingebunden sein. Bei der Nutzung dieser Dienste werden Ihre IP-Adresse und ggf. weitere Daten an die Anbieter dieser Dienste übermittelt. Wir bemühen uns, nur solche Dienste einzubinden, die Ihre Daten verantwortungsvoll behandeln.\n\nÄnderungen der Datenschutzerklärung\nWir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie stets den aktuellen rechtlichen Anforderungen anzupassen oder Änderungen unserer Leistungen zu berücksichtigen. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.\n\nBeschwerderecht bei der Aufsichtsbehörde\nSie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu beschweren.\n\nKontakt für Datenschutzfragen\nsiehe Impressum\n\n"
-    type: Label
+      content: |
+        <h2>General Information</h2>
+
+        <p>
+        Thank you for your interest in our Lodginia vacation rental service. The protection of your personal data is very important to us. Below, we provide detailed information about what data we collect, how we process it, and what rights you have.<br>
+        This privacy policy applies to all processing of personal data within the scope of our Lodginia service, both via our website and when using our services directly.
+        </p>
+
+        <h3>Data Controller</h3>
+        <p>See legal notice</p>
+
+        <h3>What Data We Collect and Process</h3>
+        <p>Within the scope of our Lodginia service, we collect and process the following personal data:</p>
+        <strong>From landlords:</strong>
+        <ul>
+          <li>Name and contact details (address, email, telephone number)</li>
+          <li>Information about the vacation properties</li>
+          <li>Access data for the user account</li>
+          <li>Payment information (for paid services)</li>
+        </ul>
+        <strong>From guests:</strong>
+        <ul>
+          <li>Name and postal code, email, telephone number</li>
+          <li>Booking information (period, number of people)</li>
+        </ul>
+        <p>
+        We process this data in accordance with the principle of data minimization and only collect information that is absolutely necessary for the performance of our services.
+        </p>
+
+        <h3>Purpose of Data Processing</h3>
+        <p>Your personal data is processed for the following purposes:</p>
+        <ul>
+          <li>To provide our analytics services</li>
+          <li>To process bookings and rentals</li>
+          <li>To verify the identity of guests</li>
+          <li>To bill for our services</li>
+          <li>To communicate with you</li>
+          <li>To improve our offering</li>
+        </ul>
+        <p>
+        The legal basis for processing is primarily the fulfillment of the contract in accordance with Art. 6 (1) lit. b GDPR and the fulfillment of legal obligations in accordance with Art. 6 (1) lit. c GDPR. The legitimate interest in accordance with Art. 6 arises from the interest of landlords in protecting their property from damage.
+        </p>
+
+        <h3>Storage Period</h3>
+        <p>
+        We only store your personal data for as long as is necessary to fulfill the above-mentioned purposes or as required by statutory retention obligations. After these periods have expired, your data will be deleted or anonymized.<br>
+        As a rule, a retention period of 10 years applies to tax-relevant data and 6 years to other business documents.
+        </p>
+
+        <h3>Transfer of Data to Third Parties</h3>
+        <p>
+        Within the scope of our Lodginia service, it may be necessary to transfer personal data to the following
+      format: restricted_html
+    type: RichText
   - event_bindings: {click: back_link_click}
     layout_properties: {grid_position: 'JPDVIB,VGQZLM'}
     name: back_link

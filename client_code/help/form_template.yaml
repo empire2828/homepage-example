@@ -2,7 +2,7 @@ components_by_slot:
   content:
   - layout_properties: {}
     name: body_2
-    properties: {font_size: 18, role: body, text: 'Beschreibe hier kurz Dein Problem oder Anregung (gerne mit ScreenShots):'}
+    properties: {font_size: 18, role: body, text: 'Tell us your problem or idea, a screenshot always helps:'}
     type: Label
   - layout_properties: {}
     name: help_text_area
@@ -27,7 +27,8 @@ components_by_slot:
     properties:
       font_size: 18
       role: body
-      text: "Hier kannst Du eine komplette Neusynchronisation zu Deinem\nChanel- Manager starten (normalerweise nicht notwendig). Der im Hintergrund laufende Prozess dauert ca. 10 Minuten. \n"
+      text: |
+        Here you can re-sync all your datas in case you experience any issues:
     type: Label
   - layout_properties: {}
     name: spacer_2

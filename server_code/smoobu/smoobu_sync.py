@@ -130,14 +130,6 @@ def sync_smoobu(user_email):
 
   return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten abgerufen und gespeichert."
 
-# Moved outside the sync_smoobu function
-#def get_guest_details(guest_id, headers):
-#    guest_url = f"https://login.smoobu.com/api/guests/{guest_id}"
-#    response = requests.get(guest_url, headers=headers)
-#    if response.status_code == 200:
-#        return response.json()
-#    return {}
-
 @anvil.server.callable
 def save_smoobu_userid(user_email):
     smoobu_userid = str(get_smoobu_userid(user_email))

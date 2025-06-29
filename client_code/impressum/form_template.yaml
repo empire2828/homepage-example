@@ -2,7 +2,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'MXVFMQ,EMEQXN'}
     name: headline_1
-    properties: {bold: true, font_size: 38, role: headline, text: Impressum}
+    properties: {bold: true, font_size: 38, role: headline, text: Legal notice}
     type: Label
   - layout_properties: {grid_position: 'GTUUXQ,EGQGAG'}
     name: spacer_1
