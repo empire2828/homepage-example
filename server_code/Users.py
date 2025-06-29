@@ -6,6 +6,7 @@ import anvil.server
 from anvil import users
 import stripe
 from datetime import datetime, timedelta, timezone
+import hashlib
 
 # Set your secret key. Remember to switch to your live secret key in production.
 # See your keys here: https://dashboard.stripe.com/apikeys
@@ -95,5 +96,23 @@ def save_user_api_key(api_key):
     user_row['smoobu_api_key'] = api_key
     
     return True
+  
+@anvil.server.callable
+def email_to_number():
+  # E-Mail in Kleinbuchstaben umwandeln und als Bytes kodieren
+  user = anvil.users.get_user()
+  if user is not None:
+    email = user['email']
+  lowercase_email = email.lower().encode('utf-8')
+  # SHA-256-Hash berechnen
+  hash_digest = hashlib.sha256(lowercase_email).hexdigest()
+  # Die ersten 12 Zeichen des Hashs als Zahl interpretieren (z. B. als int im Hex-Format)
+  number = int(hash_digest[:12], 16)
+  user['supabase_key']=number
+  return number
 
+# Beispiel
+#email = "user@example.com"
+#zahl = email_to_number(email)
+#print(zahl)
 

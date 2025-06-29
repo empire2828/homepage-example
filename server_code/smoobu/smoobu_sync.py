@@ -23,11 +23,12 @@ def launch_sync_smoobu():
   return result
 
 @anvil.server.background_task
-def sync_smoobu(user_email):
+def sync_smoobu(user_email, supabase_key):
   base_url = "https://login.smoobu.com/api/reservations"
   user= app_tables.users.get(email=user_email)
   if user:
     api_key= user['smoobu_api_key']
+    supabase_key = user['supabase_key']
   else:
     pass
 
@@ -45,7 +46,6 @@ def sync_smoobu(user_email):
     "excludeBlocked": True,
     "showCancellation": True,
   }
-  #"start_date": datetime.now().strftime("%Y-%m-%d"),
 
   all_bookings = []
   total_pages = 1
@@ -74,16 +74,6 @@ def sync_smoobu(user_email):
   for booking in all_bookings:
     try:
       # Bestehende Buchung anhand der Reservierungs-ID abrufen
-      #existing = app_tables.bookings.get(reservation_id=booking['id'], email=user_email)
-
-      # Gästedaten abrufen
-      guest_data = get_guest_details(booking['guestId'], headers)
-      address = guest_data.get('address', {})
-      street = address.get('street', '')
-      city = address.get('city', '')
-      postal_code = address.get('postalCode', '')
-      country = address.get('country', '')       
-
       row = {
         "reservation_id": booking['id'],
         "apartment": booking['apartment']['name'],
@@ -107,11 +97,11 @@ def sync_smoobu(user_email):
         "commission_included": booking['commission-included'],
         "guestid": booking['guestId'],
         "language": booking['language'],
-        "address_street": street,
         "address_postalcode": postal_code,
         "address_city": city,
         "address_country": country,
-        "email": user_email
+        "email": user_email,
+        "supabase_key": supabase_key
       }
 
       response = (
