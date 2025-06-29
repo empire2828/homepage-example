@@ -1,4 +1,4 @@
-from ._anvil_designer import analyticsTemplate
+from ._anvil_designer import dashboardTemplate
 from anvil import *
 from anvil.tables import app_tables
 from anvil import users
@@ -9,7 +9,7 @@ from anvil.js.window import jQuery
 from anvil.js import get_dom_node
 import json
 
-class analytics(analyticsTemplate):
+class dashboard(dashboardTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

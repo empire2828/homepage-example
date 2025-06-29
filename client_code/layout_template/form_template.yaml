@@ -4,10 +4,10 @@ components_by_slot:
     name: subscription_body
     properties: {align: center, font_size: 8, icon_size: 10, scale: small, style: label, visible: true}
     type: form:dep_g9k4toow7i44kq:_Components.Text
-  - event_bindings: {click: analytics_navigation_link_click}
+  - event_bindings: {click: dashboard_navigation_link_click}
     layout_properties: {}
-    name: analytics_navigation_link
-    properties: {icon: 'mi:attach_money', navigate_to: analytics, text: Analytics}
+    name: dashboard_navigation_link
+    properties: {icon: 'mi:dashboard', navigate_to: dashboard, text: Dashboard}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: channel_manager_connect_navigation_link_click}
     layout_properties: {}
@@ -18,11 +18,6 @@ components_by_slot:
     layout_properties: {}
     name: upgrade_navigation_link
     properties: {badge: false, icon: 'mi:upgrade', navigate_to: upgrade, text: Upgrade}
-    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-  - event_bindings: {click: help_navigation_link_click}
-    layout_properties: {}
-    name: help_navigation_link
-    properties: {icon: 'mi:question_mark', navigate_to: help, text: Help}
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: settings_navigation_link_click}
     layout_properties: {}

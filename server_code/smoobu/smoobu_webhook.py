@@ -22,14 +22,10 @@ def smoobu_webhook_handler():
         user_email = get_user_email(user_id)
         reservation_id = booking_data.get('id')
         
-        if action in ['newReservation', 'updateReservation']:
+        if action in ['newReservation', 'updateReservation', 'cancelReservation']:
             # Die eigentlichen Buchungsdaten befinden sich im 'data'-Feld
             process_booking(booking_data, user_id)            
             print(f"Buchung verarbeitet: {booking_data.get('id')}")
-
-        elif action == 'cancelReservation':
-            delete_booking(booking_data.get('id'), webhook_data.get('user'))
-            print(f"Buchung gelöscht: {booking_data.get('id')} ",webhook_data.get('user'))
         
         user_row = app_tables.users.get(email=user_email)
         if user_row:
@@ -60,8 +56,11 @@ def process_booking(booking_data, user_id):
   existing = supabase_client.table("bookings").select("*").eq("reservation_id", reservation_id).eq("email", user_email).execute().data
 
   data = {
+    "type": booking_data.get('type'),
     "arrival": booking_data.get('arrival'),
     "departure": booking_data.get('departure'),
+    "created_at": booking_data.get('created-at'),
+    "modified_at": booking_data.get('modifiedAt'),
     "apartment": booking_data.get('apartment', {}).get('name'),
     "guestname": booking_data.get('guest-name', ''),
     "channel_name": booking_data.get('channel', {}).get('name'),
@@ -72,6 +71,13 @@ def process_booking(booking_data, user_id):
     "language": booking_data.get('language'),
     "guestid": booking_data.get('guestId'),
     "email": user_email,
+    "price": booking_data.get('price'),
+    "price_paid": booking_data.get('price-paid'),
+    "commission_included": booking_data.get('commission_included'),
+    "prepayment": booking_data.get('prepayment'),
+    "prepayment_paid": booking_data.get('prepayment-paid'),
+    "deposit": booking_data.get('deposit'),
+    "deposit_paid": booking_data.get('deposit-paid'),
     "reservation_id": reservation_id
   }
 

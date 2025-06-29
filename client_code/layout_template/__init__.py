@@ -16,14 +16,13 @@ class layout_template(layout_templateTemplate):
     # Any code you write here will run before the form opens.
 
   def reset_links(self, **event_args):
-    self.analytics_navigation_link.selected= False
+    self.dashboard_navigation_link.selected= False
     self.channel_manager_connect_navigation_link.selected = False
     self.upgrade_navigation_link.selected = False
-    self.help_navigation_link.selected = False
     self.settings_navigation_link.selected = False
     self.admin_navigation_link.selected = False
 
-  def analytics_navigation_link_click(self, **event_args):
+  def dashboard_navigation_link_click(self, **event_args):
     self.reset_links()
     pass
 
