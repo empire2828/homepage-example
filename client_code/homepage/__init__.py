@@ -30,6 +30,7 @@ class homepage(homepageTemplate):
   def testen_button_click(self, **event_args):
     user = anvil.users.signup_with_form(allow_cancel=True)
     if user:
+      anvil.server.call('create_supabase_key')
       anvil.server.call('send_registration_notification', user['email'])
       open_form('dashboard')
     pass

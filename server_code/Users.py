@@ -98,7 +98,7 @@ def save_user_api_key(api_key):
     return True
   
 @anvil.server.callable
-def email_to_number():
+def create_supabase_key():
   # E-Mail in Kleinbuchstaben umwandeln und als Bytes kodieren
   user = anvil.users.get_user()
   if user is not None:

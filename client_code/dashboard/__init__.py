@@ -22,8 +22,6 @@ class dashboard(dashboardTemplate):
 
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
-      self.refresh_button.visible = False
-      self.resync_smoobu_button.visible = False
       self.chanel_manager_connect_button.visible = True
     else:
       if user_has_subscription is False:
