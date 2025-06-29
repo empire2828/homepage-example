@@ -43,96 +43,62 @@ def smoobu_webhook_handler():
 
 @anvil.server.background_task
 def process_booking(booking_data, user_id):
-    if not booking_data or 'id' not in booking_data:
-        print("Keine gültigen Buchungsdaten erhalten")
-        return
-    
-    user_email = get_user_email(user_id) or "unbekannt"
-    reservation_id = booking_data.get('id')
-    
-    # Füge einen Debug-Print hinzu, um die Werte zu sehen
-    print(f"Verarbeite Buchung: ID={reservation_id}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
-    
-    # Gästedaten abrufen
-    user = app_tables.users.get(email=user_email)
-    if user:
-        api_key = user['smoobu_api_key']
-    else:
-        print(f"Kein Benutzer mit E-Mail {user_email} gefunden")
-        return
+  if not booking_data or 'id' not in booking_data:
+    print("Keine gültigen Buchungsdaten erhalten")
+    return
 
-    headers = {
-        "Api-Key": api_key,
-        "Content-Type": "application/json"
-    }
+  user_email = get_user_email(user_id) or "unbekannt"
+  reservation_id = booking_data.get('id')
+  print(f"Verarbeite Buchung: ID={reservation_id}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
 
-    # Ignoriere Buchungen vom Blocked channel
-    if booking_data['channel']['name'] == 'Blocked channel':
-        print(f"Buchung {reservation_id} ist ein Blocked channel - wird übersprungen")
-        return
-    
-    # Prüfe, ob die Buchung bereits existiert
-    existing_booking = app_tables.bookings.get(reservation_id=reservation_id)
-    
-    if existing_booking:
-        # Aktualisiere die bestehende Buchung
-        print(f"Aktualisiere bestehende Buchung: {reservation_id}")
-        existing_booking.update(
-            arrival=datetime.strptime(booking_data['arrival'],"%Y-%m-%d").date(),
-            departure=datetime.strptime(booking_data['departure'],"%Y-%m-%d").date(),
-            apartment=booking_data.get('apartment', {}).get('name'),
-            guestname=booking_data.get('guest-name', ''),
-            channel_name=booking_data.get('channel', {}).get('name'),
-            guest_email=booking_data.get('email'),
-            phone=booking_data.get('phone'),
-            adults=booking_data.get('adults'),
-            children=booking_data.get('children'),
-            language=booking_data.get('language'),
-            guestid=booking_data.get('guestId'),
-        )
-    else:
-        # Füge eine neue Buchung hinzu
-        print(f"Füge neue Buchung hinzu: {reservation_id}")
-        app_tables.bookings.add_row(
-            arrival=datetime.strptime(booking_data['arrival'],"%Y-%m-%d").date(),
-            departure=datetime.strptime(booking_data['departure'],"%Y-%m-%d").date(),
-            apartment=booking_data.get('apartment', {}).get('name'),
-            guestname=booking_data.get('guest-name', ''),
-            reservation_id=reservation_id,
-            channel_name=booking_data.get('channel', {}).get('name'),
-            guest_email=booking_data.get('email'),  
-            phone=booking_data.get('phone'),
-            adults=booking_data.get('adults'),
-            children=booking_data.get('children'),
-            language=booking_data.get('language'),
-            guestid=booking_data.get('guestId'),
-            email=user_email
-        )
+  # Blocked channel überspringen
+  if booking_data.get('channel', {}).get('name') == 'Blocked channel':
+    print(f"Buchung {reservation_id} ist ein Blocked channel - wird übersprungen")
+    return
+
+    # Prüfe, ob Buchung mit reservation_id UND user_email existiert
+  existing = supabase_client.table("bookings").select("*").eq("reservation_id", reservation_id).eq("email", user_email).execute().data
+
+  data = {
+    "arrival": booking_data.get('arrival'),
+    "departure": booking_data.get('departure'),
+    "apartment": booking_data.get('apartment', {}).get('name'),
+    "guestname": booking_data.get('guest-name', ''),
+    "channel_name": booking_data.get('channel', {}).get('name'),
+    "guest_email": booking_data.get('email'),
+    "phone": booking_data.get('phone'),
+    "adults": booking_data.get('adults'),
+    "children": booking_data.get('children'),
+    "language": booking_data.get('language'),
+    "guestid": booking_data.get('guestId'),
+    "email": user_email,
+    "reservation_id": reservation_id
+  }
+
+  if existing:
+    print(f"Aktualisiere bestehende Buchung: {reservation_id} für {user_email}")
+    # Aktualisiere mit beiden Bedingungen
+    supabase_client.table("bookings").update(data).eq("reservation_id", reservation_id).eq("email", user_email).execute()
+  else:
+    print(f"Füge neue Buchung hinzu: {reservation_id} für {user_email}")
+    supabase_client.table("bookings").insert(data).execute()
 
 @anvil.server.background_task
 def delete_booking(reservation_id, user_id):
-    """Löscht eine Buchung aus der Datenbank anhand der Reservierungs-ID und Benutzer-ID"""
-    if not reservation_id or not user_id:
-        print("Ungültige Reservierungs-ID oder Benutzer-ID")
-        return
-    
-    # Hole die Benutzer-E-Mail anhand der Smoobu-Benutzer-ID
-    user_email = get_user_email(user_id)
-    if not user_email:
-        print(f"Keine E-Mail für Benutzer-ID {user_id} gefunden")
-        return
-    
-    # Suche nach der Buchung mit Reservierungs-ID UND Benutzer-E-Mail
-    booking = app_tables.bookings.get(
-        reservation_id=reservation_id,
-        email=user_email  # Voraussetzung: Spalte "email" in der Buchungstabelle
-    )
-    
-    if booking:
-        booking.delete()
-        print(f"Buchung {reservation_id} für Benutzer {user_email} gelöscht")
-    else:
-        print(f"Keine Buchung mit ID {reservation_id} für Benutzer {user_email} gefunden")
+  if not reservation_id or not user_id:
+    print("Ungültige Reservierungs-ID oder Benutzer-ID")
+    return
+
+  user_email = get_user_email(user_id)
+  if not user_email:
+    print(f"Keine E-Mail für Benutzer-ID {user_id} gefunden")
+    return
+
+  response = supabase_client.table("bookings").delete().eq("reservation_id", reservation_id).eq("email", user_email).execute()
+  if response.data:
+    print(f"Buchung {reservation_id} für Benutzer {user_email} gelöscht")
+  else:
+    print(f"Keine Buchung mit ID {reservation_id} für Benutzer {user_email} gefunden")
 
 @anvil.server.background_task
 def get_user_email(user_id):
