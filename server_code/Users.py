@@ -107,9 +107,9 @@ def create_supabase_key():
   # SHA-256-Hash berechnen
   hash_digest = hashlib.sha256(lowercase_email).hexdigest()
   # Die ersten 12 Zeichen des Hashs als Zahl interpretieren (z. B. als int im Hex-Format)
-  number = int(hash_digest[:12], 16)
-  user['supabase_key']=number
-  return number
+  key = str(int(hash_digest[:12], 16))
+  user['supabase_key']=key
+  return 
 
 # Beispiel
 #email = "user@example.com"

@@ -32,8 +32,9 @@ class dashboard(dashboardTemplate):
 
     if user_has_subscription and user['smoobu_api_key'] is not None:
       self.looker_flow_panel.visible = True
-      email= user['email']
-      self.init_iframe(email)
+      #email= user['email']
+      supabase_key= user['supabase_key']
+      self.init_iframe(supabase_key)
     else: 
       pass
 

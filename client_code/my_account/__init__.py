@@ -1,4 +1,4 @@
-from ._anvil_designer import settingsTemplate
+from ._anvil_designer import my_accountTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -9,7 +9,7 @@ from .ChangeName import ChangeName
 from .ChangeEmail import ChangeEmail
 from .DeleteAccountAlert import DeleteAccountAlert
 
-class settings(settingsTemplate):
+class my_account(my_accountTemplate):
   def __init__(self, **properties):
     self.user = anvil.users.get_user()
     # Set Form properties and Data Bindings.
@@ -53,11 +53,11 @@ class settings(settingsTemplate):
   #  pass
 
   def account_delete_link_click(self, **event_args):
-    open_form('settings.DeleteAccountAlert')
+    open_form('my_account.DeleteAccountAlert')
     pass
 
   def password_reset_link_click(self, **event_args):
-    open_form('settings.reset_password')
+    open_form('my_account.reset_password')
     pass
 
   def logout_navigation_link_click(self, **event_args):

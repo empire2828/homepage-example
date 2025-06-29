@@ -23,7 +23,7 @@ def launch_sync_smoobu():
   return result
 
 @anvil.server.background_task
-def sync_smoobu(user_email, supabase_key):
+def sync_smoobu(user_email):
   base_url = "https://login.smoobu.com/api/reservations"
   user= app_tables.users.get(email=user_email)
   if user:

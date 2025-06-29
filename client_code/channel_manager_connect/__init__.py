@@ -26,9 +26,8 @@ class channel_manager_connect(channel_manager_connectTemplate):
     pass
 
   def sync_smoobu_button_click(self, **event_args):
-    alert("Hintergrund- Synchronisation wird gestartet. Das dauert ca. 10 Minuten.")
+    alert("Hintergrund- Synchronisation wird gestartet. Das dauert ca. 5 Minuten.")
     anvil.server.call('launch_sync_smoobu')
-    anvil.server.call('launch_get_bookings_risk')
     pass
 
   def Data_protection_link_click(self, **event_args):
