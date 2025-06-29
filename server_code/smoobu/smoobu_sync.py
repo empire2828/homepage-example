@@ -74,6 +74,14 @@ def sync_smoobu(user_email, supabase_key):
   for booking in all_bookings:
     try:
       # Bestehende Buchung anhand der Reservierungs-ID abrufen
+
+      # Gästedaten abrufen
+      guest_data = get_guest_details(booking['guestId'], headers)
+      address = guest_data.get('address', {})
+      city = address.get('city', '')
+      postal_code = address.get('postalCode', '')
+      country = address.get('country', '')     
+      
       row = {
         "reservation_id": booking['id'],
         "apartment": booking['apartment']['name'],

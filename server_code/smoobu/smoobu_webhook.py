@@ -44,6 +44,7 @@ def process_booking(booking_data, user_id):
     return
 
   user_email = get_user_email(user_id) or "unbekannt"
+  supabase_key= get_supabase_key_for_user(user_email)
   reservation_id = booking_data.get('id')
   print(f"Verarbeite Buchung: ID={reservation_id}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
 
@@ -64,8 +65,6 @@ def process_booking(booking_data, user_id):
     "apartment": booking_data.get('apartment', {}).get('name'),
     "guestname": booking_data.get('guest-name', ''),
     "channel_name": booking_data.get('channel', {}).get('name'),
-    "guest_email": booking_data.get('email'),
-    "phone": booking_data.get('phone'),
     "adults": booking_data.get('adults'),
     "children": booking_data.get('children'),
     "language": booking_data.get('language'),
@@ -78,7 +77,8 @@ def process_booking(booking_data, user_id):
     "prepayment_paid": booking_data.get('prepayment-paid'),
     "deposit": booking_data.get('deposit'),
     "deposit_paid": booking_data.get('deposit-paid'),
-    "reservation_id": reservation_id
+    "reservation_id": reservation_id,
+    "supabase_key": supabase_key
   }
 
   if existing:
@@ -120,4 +120,10 @@ def get_user_email(user_id):
         print(f"Kein Benutzer mit Smoobu-ID {user_id} gefunden")
     return user_email
 
-
+def set_supabase_key_for_user(email):
+  user_row = app_tables.users.get(email=email)
+  if user_row:
+    result= user_row['supabase_key'] 
+    return result
+  else:
+    return None
