@@ -3,7 +3,7 @@ components_by_slot:
   - event_bindings: {change: admin_file_loader_change}
     layout_properties: {}
     name: admin_file_loader
-    properties: {}
+    properties: {align: center}
     type: form:dep_g9k4toow7i44kq:_Components.FileLoader
   - components:
     - layout_properties: {grid_position: 'ZHCEBT,NRLZKL'}

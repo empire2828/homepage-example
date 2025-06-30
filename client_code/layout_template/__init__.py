@@ -20,7 +20,6 @@ class layout_template(layout_templateTemplate):
     self.channel_manager_connect_navigation_link.selected = False
     self.upgrade_navigation_link.selected = False
     self.my_account_navigation_link.selected = False
-    self.admin_navigation_link.selected = False
 
   def dashboard_navigation_link_click(self, **event_args):
     self.reset_links()
@@ -43,16 +42,5 @@ class layout_template(layout_templateTemplate):
     pass
 
   def form_show(self, **event_args):
-    user = anvil.users.get_user()
-    if user is None:
-      self.subscription_body.text = 'Not logged in'
-    elif user.get('subscription') is None:
-      self.subscription_body.text = 'Trial subscription'
-    else:
-      self.subscription_body.text = user['subscription']
-      if user.get('admin') is True:
-        self.admin_navigation_link.visible= True
-
-  def admin_navigation_link_click(self, **event_args):
-    self.reset_links()
     pass
+ 

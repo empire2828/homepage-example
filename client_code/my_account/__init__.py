@@ -16,9 +16,17 @@ class my_account(my_accountTemplate):
     self.init_components(**properties)
 
   def form_show(self, **event_args):
-    # Hier kommt dein Code hin, der beim Anzeigen der Form ausgeführt werden soll
-    pass
-  
+    user = anvil.users.get_user()
+    if user is None:
+      self.subscription_body.text = 'Not logged in'
+    elif user.get('subscription') is None:
+      self.subscription_body.text = 'Trial subscription'
+    else:
+      self.subscription_body.text = user['subscription']
+      if user.get('admin') is True:
+        self.admin_navigation_link.visible= True
+  pass
+
   def change_name_link_click(self, **event_args):
     new_name = alert(ChangeName(item=self.user["name"]), title="Change name", buttons=None, dismissible=True, large=True)
     if new_name:
