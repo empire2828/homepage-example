@@ -120,7 +120,7 @@ def get_user_email(user_id):
         print(f"Kein Benutzer mit Smoobu-ID {user_id} gefunden")
     return user_email
 
-def set_supabase_key_for_user(email):
+def get_supabase_key_for_user(email):
   user_row = app_tables.users.get(email=email)
   if user_row:
     result= user_row['supabase_key'] 
