@@ -3,8 +3,6 @@ from anvil import *
 from anvil.tables import app_tables
 from anvil import users
 import anvil.server
-import time
-from datetime import datetime, timedelta
 from anvil.js.window import jQuery
 from anvil.js import get_dom_node
 import json
