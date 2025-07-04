@@ -87,10 +87,9 @@ def sync_smoobu(user_email):
       price_baseprice = price_cleaningfee = price_longstaydiscount = price_coupon = price_addon = price_curr = None 
       if reservation_id:
         price_elements_response = requests.get(
-          f"https://login.smoobu.com/api/reservations/{reservation_id}/priceElements",
+          f"https://login.smoobu.com/api/reservations/{reservation_id}/price-elements",
           headers=headers
         )
-        print("price_elements: ",price_elements_response)
         if price_elements_response.status_code == 200:
           price_baseprice = None
           price_cleaningfee = None
@@ -100,6 +99,7 @@ def sync_smoobu(user_email):
           price_curr = None
           if price_elements_response.status_code == 200:
             price_elements = price_elements_response.json().get("priceElements", [])
+            print("reservation id: ",reservation_id, " price_elements: ",price_elements)
             for pe in price_elements:
               if pe.get('type') == 'basePrice':
                 price_baseprice = pe.get('amount')
