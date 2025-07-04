@@ -41,10 +41,10 @@ def sync_smoobu(user_email):
     "status": "confirmed",
     "page": 1,
     "limit": 100,
-    "from": "2019-01-01",
-    "includePriceElements": True,
+    "from": "2019-01-01", 
     "excludeBlocked": True,
     "showCancellation": True,
+    "includePriceElements": True,
   }
 
   all_bookings = []
@@ -81,7 +81,37 @@ def sync_smoobu(user_email):
       city = address.get('city', '')
       postal_code = address.get('postalCode', '')
       country = address.get('country', '')     
-      
+
+      # Preis-Elemente separat abrufen
+      reservation_id = booking['id']
+      price_baseprice = price_cleaningfee = price_longstaydiscount = price_coupon = price_addon = price_curr = None 
+      if reservation_id:
+        price_elements_response = requests.get(
+          f"https://login.smoobu.com/api/reservations/{reservation_id}/price-elements",
+          headers=headers
+        )
+        if price_elements_response.status_code == 200:
+          price_baseprice = None
+          price_cleaningfee = None
+          price_longstaydiscount = None
+          price_coupon = None
+          price_addon = None
+          price_curr = None
+          if price_elements_response.status_code == 200:
+            price_elements = price_elements_response.json().get("priceElements", [])
+            print("reservation id: ",reservation_id, " price_elements: ",price_elements)
+            for pe in price_elements:
+              if pe.get('type') == 'basePrice':
+                price_baseprice = pe.get('amount')
+              elif pe.get('type') == 'cleaningFee':
+                price_cleaningfee = pe.get('amount')
+              elif pe.get('type') == 'longStayDiscount':
+                price_longstaydiscount = pe.get('amount')
+              elif pe.get('type') == 'addon':
+                price_addon = pe.get('amount')
+              elif pe.get('type') == 'coupon':
+                price_coupon = pe.get('coupon')
+              price_curr = pe.get('currencyCode')
       row = {
         "reservation_id": booking['id'],
         "apartment": booking['apartment']['name'],
@@ -109,7 +139,13 @@ def sync_smoobu(user_email):
         "address_city": city,
         "address_country": country,
         "email": user_email,
-        "supabase_key": supabase_key
+        "supabase_key": supabase_key,
+        "price_baseprice": price_baseprice,
+        "price_cleaningfee": price_cleaningfee,  
+        "price_longstaydiscount": price_longstaydiscount,
+        "price_coupon": price_coupon,
+        "price_addon": price_addon,
+        "price_curr": price_curr
       }
 
       response = (
