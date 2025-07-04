@@ -235,8 +235,6 @@ def process_price_element(price_element_data, user_id):
   else:
     print(f"Buchung {reservation_id} ({user_email}) nicht gefunden – kein Update möglich")
 
-
-
 # Supabase-Client initialisieren (wie in deinem Hauptcode)
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -246,9 +244,13 @@ supabase_client: Client = create_client(supabase_url, supabase_api_key)
 def fetch_and_store_price_elements(reservation_id, user_id):
   try:
     user_email = get_user_email(user_id) or "unbekannt"
-    supabase_key = get_supabase_key_for_user(user_email)
-    api_key = anvil.secrets.get_secret('smoobu_api_key')
-    url = f"https://login.smoobu.com/api/booking/{reservation_id}/price-elements"
+    user= app_tables.users.get(email=user_email)
+    if user:
+      api_key= user['smoobu_api_key']
+      supabase_key = user['supabase_key']
+    else:
+      pass
+    url = f"https://login.smoobu.com/api/reservations/{reservation_id}/price-elements"
     headers = {"Api-Key": api_key}
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
