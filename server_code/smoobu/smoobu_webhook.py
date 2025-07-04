@@ -104,12 +104,12 @@ def process_booking(booking_data, user_id):
     "deposit_paid": booking_data.get('deposit-paid'),
     "reservation_id": reservation_id,
     "supabase_key": supabase_key,
-    "price_baseprice": booking_data.get('price_baseprice'),
-    "price_cleaningfee": booking_data.get('price_cleaningfee'),
-    "price_longstaydiscount": booking_data.get('price_longstaydiscount'),
-    "price_addon": booking_data.get('price_addon'),
-    "price_coupon": booking_data.get('price_coupon'), 
-    "price_curr": booking_data.get('price_curr'),
+    "price_baseprice": price_baseprice,
+    "price_cleaningfee": price_cleaningfee,
+    "price_longstaydiscount": price_longstaydiscount,
+    "price_addon": price_addon,
+    "price_coupon": price_coupon, 
+    "price_curr": price_curr,
   }
 
   if existing:
