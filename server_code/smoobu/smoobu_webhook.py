@@ -3,6 +3,7 @@ from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
 from supabase import create_client, Client
+import requests
 
 # Supabase-Client initialisieren
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
@@ -30,6 +31,10 @@ def smoobu_webhook_handler():
         elif action in ['priceElementCreated', 'priceElementUpdated']:
           process_price_element(booking_data, user_id)
           print(f"PriceElement verarbeitet: {booking_data.get('id')}")
+
+        if action in ['newReservation']:
+          # bei NewReservation fehlen die priceElements, bei UpdateReservation kommen diese mit
+          fetch_and_store_price_elements(reservation_id, user_id)            
         
         user_row = app_tables.users.get(email=user_email)
         if user_row:
@@ -81,7 +86,7 @@ def process_booking(booking_data, user_id):
     elif pe.get('type') == 'coupon':
       price_coupon = pe.get('amount')
     price_curr = pe.get('currencyCode')
-  
+
   data = {
     "type": booking_data.get('type'),
     "arrival": booking_data.get('arrival'),
@@ -162,7 +167,7 @@ def get_supabase_key_for_user(email):
   else:
     return None
 
-# sind nie gekommen, nicht getestet
+# für CreatPriceElements oder UpdatePriceElements, sind NIE gekommen, nicht getestet
 @anvil.server.background_task
 def process_price_element(price_element_data, user_id):
   if not price_element_data or 'id' not in price_element_data:
@@ -230,3 +235,80 @@ def process_price_element(price_element_data, user_id):
   else:
     print(f"Buchung {reservation_id} ({user_email}) nicht gefunden – kein Update möglich")
 
+
+
+# Supabase-Client initialisieren (wie in deinem Hauptcode)
+supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+supabase_client: Client = create_client(supabase_url, supabase_api_key)
+
+@anvil.server.background_task
+def fetch_and_store_price_elements(reservation_id, user_id):
+  try:
+    user_email = get_user_email(user_id) or "unbekannt"
+    supabase_key = get_supabase_key_for_user(user_email)
+    api_key = anvil.secrets.get_secret('smoobu_api_key')
+    url = f"https://login.smoobu.com/api/booking/{reservation_id}/price-elements"
+    headers = {"Api-Key": api_key}
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+      print(f"Fehler beim Abrufen der priceElements: {response.status_code} - {response.text}")
+      return
+
+    price_elements = response.json().get("priceElements", [])
+
+    # Initialisiere alle Price-Element-Felder mit None
+    price_baseprice = None
+    price_cleaningfee = None
+    price_longstaydiscount = None
+    price_addon = None
+    price_coupon = None
+    price_curr = None
+
+    # Durchlauf und Zuweisung wie im bestehenden Code
+    for pe in price_elements:
+      if pe.get('type') == 'basePrice':
+        price_baseprice = pe.get('amount')
+      elif pe.get('type') == 'cleaningFee':
+        price_cleaningfee = pe.get('amount')
+      elif pe.get('type') == 'longStayDiscount':
+        price_longstaydiscount = pe.get('amount')
+      elif pe.get('type') == 'addon':
+        price_addon = pe.get('amount')
+      elif pe.get('type') == 'coupon':
+        price_coupon = pe.get('amount')
+      price_curr = pe.get('currencyCode')
+
+      # Daten für Supabase vorbereiten
+    data = {
+      "reservation_id": reservation_id,
+      "email": user_email,
+      "supabase_key": supabase_key,
+      "price_baseprice": price_baseprice,
+      "price_cleaningfee": price_cleaningfee,
+      "price_longstaydiscount": price_longstaydiscount,
+      "price_addon": price_addon,
+      "price_coupon": price_coupon,
+      "price_curr": price_curr,
+    }
+
+    # Buchung updaten (analog zu deinem Hauptcode)
+    existing = (
+      supabase_client
+        .table("bookings")
+        .select("*")
+        .eq("reservation_id", reservation_id)
+        .eq("email", user_email)
+        .execute()
+        .data
+    )
+
+    if existing:
+      print(f"Aktualisiere Buchung: {reservation_id} für {user_email} mit PriceElements")
+      supabase_client.table("bookings").update(data).eq("reservation_id", reservation_id).eq("email", user_email).execute()
+    else:
+      print(f"Füge neue Buchung hinzu: {reservation_id} für {user_email} mit PriceElements")
+      supabase_client.table("bookings").insert(data).execute()
+
+  except Exception as e:
+    print(f"Fehler in fetch_and_store_price_elements: {str(e)}")
