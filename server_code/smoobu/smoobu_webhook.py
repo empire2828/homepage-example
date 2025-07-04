@@ -28,8 +28,8 @@ def smoobu_webhook_handler():
             print(f"Buchung verarbeitet: {booking_data.get('id')}")
 
         elif action in ['priceElementCreated', 'priceElementUpdated']:
-          process_price_element(data, user_id)
-          print(f"PriceElement verarbeitet: {data.get('id')}")
+          process_price_element(booking_data, user_id)
+          print(f"PriceElement verarbeitet: {booking_data.get('id')}")
         
         user_row = app_tables.users.get(email=user_email)
         if user_row:
@@ -41,6 +41,7 @@ def smoobu_webhook_handler():
         print(f"Fehler beim Verarbeiten des Webhooks: {str(e)}")
         return {"status": "error", "message": str(e)}, 500
 
+# updatReservation liefert price_elements mit, newReservation nicht
 @anvil.server.background_task
 def process_booking(booking_data, user_id):
   if not booking_data or 'id' not in booking_data:
@@ -161,6 +162,7 @@ def get_supabase_key_for_user(email):
   else:
     return None
 
+# sind nie gekommen, nicht getestet
 @anvil.server.background_task
 def process_price_element(price_element_data, user_id):
   if not price_element_data or 'id' not in price_element_data:
