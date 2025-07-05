@@ -25,6 +25,7 @@ class my_account(my_accountTemplate):
       self.subscription_body.text = user['subscription']
       if user.get('admin') is True:
         self.admin_navigation_link.visible= True
+    self.email_body.text = user['email']
   pass
 
   def change_name_link_click(self, **event_args):
