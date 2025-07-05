@@ -103,7 +103,7 @@ def process_booking(booking_data, user_id):
     "email": user_email,
     "price": booking_data.get('price'),
     "price_paid": booking_data.get('price-paid'),
-    "commission_included": booking_data.get('commission_included'),
+    "commission_included": booking_data.get('commission-included'),
     "prepayment": booking_data.get('prepayment'),
     "prepayment_paid": booking_data.get('prepayment-paid'),
     "deposit": booking_data.get('deposit'),
