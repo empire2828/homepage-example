@@ -1,14 +1,22 @@
 components_by_slot:
   content:
   - components:
-    - layout_properties: {grid_position: 'FSZUAU,HHLVSJ'}
-      name: subscription_body
-      properties: {bold: false, role: body}
-      type: Label
-    - layout_properties: {grid_position: 'JFQYAN,XPCZSD'}
+    - layout_properties: {grid_position: 'BZIFFI,BHFSLT'}
+      name: heading_1_copy
+      properties: {bold: true, text: My account}
+      type: form:dep_g9k4toow7i44kq:_Components.Heading
+    - layout_properties: {grid_position: 'UYOBPO,JQAMUS BVRSTQ,HCYTND'}
       name: email_body
       properties: {bold: false, role: body}
       type: Label
+    - layout_properties: {grid_position: 'UYOBPO,JQAMUS VUVTBA,RPXSDF'}
+      name: subscription_body
+      properties: {bold: false, role: body}
+      type: Label
+    - layout_properties: {grid_position: 'UYOBPO,QPBRTJ'}
+      name: admin_navigation_link
+      properties: {background_color: 'theme:Secondary Container', icon: 'mi:admin_panel_settings', navigate_to: Admin, text: Admin, visible: false}
+      type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
     - layout_properties: {grid_position: 'HBUWKL,XGDGBV QGUJVP,DSIXCL'}
       name: spacer_3
       properties: {height: 43.33158874511719}
@@ -44,14 +52,38 @@ components_by_slot:
       name: logout_navigation_link
       properties: {background_color: 'theme:Secondary Container', icon: 'mi:logout', navigate_to: homepage, text: Logout}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-    - layout_properties: {grid_position: 'ORJCAO,XFBCPK'}
+    - layout_properties: {grid_position: 'YXJRKK,ONOQMO'}
       name: spacer_4
       properties: {height: 47.6363525390625}
       type: Spacer
-    - layout_properties: {grid_position: 'SSYJBR,ANDBCV'}
-      name: admin_navigation_link
-      properties: {background_color: 'theme:Secondary Container', icon: 'mi:admin_panel_settings', navigate_to: Admin, text: Admin, visible: false}
-      type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+    - layout_properties: {grid_position: 'FXBWSV,VICVFG'}
+      name: heading_1
+      properties: {bold: true, text: Parameter}
+      type: form:dep_g9k4toow7i44kq:_Components.Heading
+    - layout_properties: {grid_position: 'KEIZAJ,TDOKGA'}
+      name: text_1
+      properties: {text: Standard values which will be used in case fees are not properly handed over from Channel Manager}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
+    - layout_properties: {grid_position: 'XSVWVN,SSXBFT'}
+      name: spacer_7
+      properties: {height: 13.9556884765625}
+      type: Spacer
+    - layout_properties: {grid_position: 'JJBJOQ,TVVVUA'}
+      name: cleaning_fee_text_box
+      properties: {label: Cleaning fee per stay, text: '100'}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'JJBJOQ,IWWSYZ'}
+      name: linen_fee_text_box
+      properties: {label: Linen fees per person, text: '22'}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'HWVIYW,MBBNWQ'}
+      name: spacer_6
+      properties: {}
+      type: Spacer
+    - layout_properties: {grid_position: 'LDCCNJ,NWCTPW'}
+      name: spacer_5
+      properties: {}
+      type: Spacer
     - layout_properties: {grid_position: 'SSYJBR,BGJVVS'}
       name: spacer_2
       properties: {height: 66.45455932617188}

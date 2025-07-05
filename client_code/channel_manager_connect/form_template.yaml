@@ -2,7 +2,7 @@ components_by_slot:
   content:
   - layout_properties: {}
     name: title_4
-    properties: {role: title, text: Connect your channel manager}
+    properties: {align: left, bold: true, role: title, text: Connect your channel manager}
     type: Label
   - components:
     - layout_properties: {full_width_row: false, grid_position: 'ZNAITY,QKLJSB'}
