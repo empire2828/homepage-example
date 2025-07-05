@@ -185,6 +185,7 @@ def process_price_element(price_element_data, user_id):
   price_coupon = None
   price_addon = None
   price_curr = None
+  price_comm= None
 
   # Mapping nach Typ
   pe_type = price_element_data.get('type')
@@ -202,6 +203,8 @@ def process_price_element(price_element_data, user_id):
     price_addon = amount
   elif pe_type == 'coupon':
     price_coupon = coupon
+  elif pe_type == 'commission':
+    price_comm = amount
   price_curr = currency_code
 
   # Hole bestehende Buchung
@@ -223,7 +226,8 @@ def process_price_element(price_element_data, user_id):
     "price_coupon": price_coupon,
     "price_addon": price_addon,
     "price_curr": price_curr,
-    "supabase_key": supabase_key
+    "supabase_key": supabase_key,
+    "price_comm": price_comm
   }
 
   # Entferne None-Werte, damit nur das jeweilige Feld überschrieben wird
@@ -266,6 +270,7 @@ def fetch_and_store_price_elements(reservation_id, user_id):
     price_addon = None
     price_coupon = None
     price_curr = None
+    price_comm= None
 
     # Durchlauf und Zuweisung wie im bestehenden Code
     for pe in price_elements:
@@ -279,6 +284,8 @@ def fetch_and_store_price_elements(reservation_id, user_id):
         price_addon = pe.get('amount')
       elif pe.get('type') == 'coupon':
         price_coupon = pe.get('amount')
+      elif pe.get('type') == 'commission':
+        price_comm = pe.get('amount')
       price_curr = pe.get('currencyCode')
 
       # Daten für Supabase vorbereiten
@@ -292,6 +299,7 @@ def fetch_and_store_price_elements(reservation_id, user_id):
       "price_addon": price_addon,
       "price_coupon": price_coupon,
       "price_curr": price_curr,
+      "price_comm": price_comm
     }
 
     # Buchung updaten (analog zu deinem Hauptcode)

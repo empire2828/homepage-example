@@ -97,6 +97,7 @@ def sync_smoobu(user_email):
           price_coupon = None
           price_addon = None
           price_curr = None
+          price_comm= None
           if price_elements_response.status_code == 200:
             price_elements = price_elements_response.json().get("priceElements", [])
             print("reservation id: ",reservation_id, " price_elements: ",price_elements)
@@ -111,6 +112,8 @@ def sync_smoobu(user_email):
                 price_addon = pe.get('amount')
               elif pe.get('type') == 'coupon':
                 price_coupon = pe.get('coupon')
+                if pe.get('type') == 'commission':
+                  price_comm = pe.get('amount')
               price_curr = pe.get('currencyCode')
       row = {
         "reservation_id": booking['id'],
@@ -145,7 +148,8 @@ def sync_smoobu(user_email):
         "price_longstaydiscount": price_longstaydiscount,
         "price_coupon": price_coupon,
         "price_addon": price_addon,
-        "price_curr": price_curr
+        "price_curr": price_curr,
+        "price_comm": price_comm
       }
 
       response = (
