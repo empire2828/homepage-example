@@ -55,22 +55,22 @@ def send_email_to_support(text, file=None, email=None):
     print("send_email_to_support: ERROR", e)
 
 @anvil.server.callable
-def save_user_parameter(cleaning_fee=None, linen_fee=None,use_own_fees=False):
+def save_user_parameter(std_cleaning_fee=None, std_linen_fee=None,use_own_std_fees=False):
   current_user = anvil.users.get_user()
   email = current_user['email']
   supabase_key = current_user['supabase_key']
   try:
-    current_user['cleaning_fee']=  float(cleaning_fee)
-    current_user['linen_fee']= float(linen_fee)
-    current_user['use_own_fees']= use_own_fees
+    current_user['std_cleaning_fee']=  float(std_cleaning_fee)
+    current_user['std_linen_fee']= float(std_linen_fee)
+    current_user['use_own_std_fees']= use_own_std_fees
   except ValueError:
     return None
     
   data = {
     "supabase_key": supabase_key,
-    "cleaning_fee": cleaning_fee,
-    "linen_fee": linen_fee,
-    "use_own_fees": use_own_fees,
+    "std_cleaning_fee": std_cleaning_fee,
+    "std_linen_fee": std_linen_fee,
+    "use_own_std_fees": use_own_std_fees,
     "email": email
   }
   response = supabase.table("parameter").upsert(

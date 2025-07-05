@@ -69,15 +69,15 @@ components_by_slot:
       properties: {text: 'Standard values which will be used in case fees are not properly handed over from Channel Manager:'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'JJBJOQ,TVVVUA'}
-      name: cleaning_fee_text_box
+      name: std_cleaning_fee_text_box
       properties: {label: Cleaning fee per stay, text: '100'}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - layout_properties: {grid_position: 'JJBJOQ,IWWSYZ'}
-      name: linen_fee_text_box
+      name: std_linen_fee_text_box
       properties: {label: Linen fees per person, text: '22'}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - layout_properties: {grid_position: 'UQJVYE,ONJPDB'}
-      name: use_own_fees_checkbox
+      name: use_own_std_fees_checkbox
       properties: {text: Always use above values for all channels}
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - event_bindings: {click: save_button_click}

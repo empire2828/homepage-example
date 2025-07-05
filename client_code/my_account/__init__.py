@@ -27,9 +27,9 @@ class my_account(my_accountTemplate):
         if user.get('admin') is True:
           self.admin_navigation_link.visible= True
         self.email_body.text = user['email']
-        self.cleaning_fee_text_box.text=user['cleaning_fee']
-        self.linen_fee_text_box.text=user['linen_fee']
-        self.use_own_fees_checkbox.checked=user['use_own_fees']
+        self.std_cleaning_fee_text_box.text=user['std_cleaning_fee']
+        self.std_linen_fee_text_box.text=user['std_linen_fee']
+        self.use_own_std_fees_checkbox.checked=user['use_own_std_fees']
   pass
 
   def change_name_link_click(self, **event_args):
@@ -97,9 +97,9 @@ class my_account(my_accountTemplate):
     pass
 
   def save_button_click(self, **event_args):
-    cleaning_fee=self.cleaning_fee_text_box.text
-    linen_fee=self.linen_fee_text_box.text
-    use_own_fees=self.use_own_fees_checkbox.checked
-    anvil.server.call('save_user_parameter',cleaning_fee, linen_fee,use_own_fees)
+    std_cleaning_fee=self.std_cleaning_fee_text_box.text
+    std_linen_fee=self.std_linen_fee_text_box.text
+    use_own_std_fees=self.use_own_std_fees_checkbox.checked
+    anvil.server.call('save_user_parameter',std_cleaning_fee, std_linen_fee,use_own_std_fees)
     pass
 
