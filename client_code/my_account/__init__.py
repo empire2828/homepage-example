@@ -19,13 +19,17 @@ class my_account(my_accountTemplate):
     user = anvil.users.get_user()
     if user is None:
       self.subscription_body.text = 'Not logged in'
-    elif user.get('subscription') is None:
-      self.subscription_body.text = 'Trial subscription'
     else:
-      self.subscription_body.text = user['subscription']
-      if user.get('admin') is True:
-        self.admin_navigation_link.visible= True
-    self.email_body.text = user['email']
+      if user.get('subscription') is None:
+        self.subscription_body.text = 'Trial subscription'
+      else:
+        self.subscription_body.text = user['subscription']
+        if user.get('admin') is True:
+          self.admin_navigation_link.visible= True
+        self.email_body.text = user['email']
+        self.cleaning_fee_text_box.text=user['cleaning_fee']
+        self.linen_fee_text_box.text=user['linen_fee']
+        self.use_own_fees_checkbox.checked=user['use_own_fees']
   pass
 
   def change_name_link_click(self, **event_args):
@@ -90,5 +94,12 @@ class my_account(my_accountTemplate):
 
   def reset_password_navigation_link_click(self, **event_args):
     """This method is called when the component is clicked"""
+    pass
+
+  def save_button_click(self, **event_args):
+    cleaning_fee=self.cleaning_fee_text_box.text
+    linen_fee=self.linen_fee_text_box.text
+    use_own_fees=self.use_own_fees_checkbox.checked
+    anvil.server.call('save_user_parameter',cleaning_fee, linen_fee,use_own_fees)
     pass
 

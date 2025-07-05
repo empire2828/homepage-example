@@ -53,3 +53,31 @@ def send_email_to_support(text, file=None, email=None):
     print("send_email_to_support: success", email, text)
   except Exception as e:
     print("send_email_to_support: ERROR", e)
+
+@anvil.server.callable
+def save_user_parameter(cleaning_fee=None, linen_fee=None,use_own_fees=False):
+  current_user = anvil.users.get_user()
+  email = current_user['email']
+  supabase_key = current_user['supabase_key']
+  try:
+    current_user['cleaning_fee']=  float(cleaning_fee)
+    current_user['linen_fee']= float(linen_fee)
+    current_user['use_own_fees']= use_own_fees
+  except ValueError:
+    return None
+    
+  data = {
+    "supabase_key": supabase_key,
+    "cleaning_fee": cleaning_fee,
+    "linen_fee": linen_fee,
+    "use_own_fees": use_own_fees,
+    "email": email
+  }
+  response = supabase.table("parameter").upsert(
+    [data],
+    on_conflict="email"  # Konfliktspalte angeben!
+  ).execute()
+  return response.data  # oder True/False je nach Bedarf
+  
+  pass
+  
