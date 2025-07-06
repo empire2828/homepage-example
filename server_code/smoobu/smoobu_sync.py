@@ -70,8 +70,9 @@ def sync_smoobu(user_email):
       return f"Fehler: {response.status_code} - {response.text}"
 
   bookings_added = 0
-  print (all_bookings)
+
   for booking in all_bookings:
+    print(booking)
     try:
       # Bestehende Buchung anhand der Reservierungs-ID abrufen
 

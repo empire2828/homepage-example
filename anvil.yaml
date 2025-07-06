@@ -199,13 +199,7 @@ runtime_options:
   server_spec: {base: python310-standard}
   server_version: python3-full
   version: 3
-scheduled_tasks:
-- job_id: YPGPYLUN
-  task_name: download_and_store_blocklist
-  time_spec:
-    at: {day: 1, hour: 3, minute: 0}
-    every: week
-    n: 1
+scheduled_tasks: []
 secrets:
   PERPLEXITY_API_KEY:
     type: secret
