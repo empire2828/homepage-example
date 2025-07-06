@@ -7,6 +7,7 @@ from datetime import datetime
 import requests
 from smoobu.smoobu_main import get_guest_details, guest_data_update
 from supabase import create_client, Client
+from admin import log
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -72,7 +73,7 @@ def sync_smoobu(user_email):
   bookings_added = 0
 
   for booking in all_bookings:
-    print(booking)
+    log(str(booking))
     try:
       # Bestehende Buchung anhand der Reservierungs-ID abrufen
 
@@ -102,6 +103,7 @@ def sync_smoobu(user_email):
           if price_elements_response.status_code == 200:
             price_elements = price_elements_response.json().get("priceElements", [])
             print("reservation id: ",reservation_id, " price_elements: ",price_elements)
+            log(price_elements)
             for pe in price_elements:
               if pe.get('type') == 'basePrice':
                 price_baseprice = pe.get('amount')

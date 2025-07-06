@@ -102,14 +102,17 @@ db_schema:
       type: string
     server: full
     title: bookings
-  disposable_domains:
+  logs:
     client: none
     columns:
     - admin_ui: {order: 0, width: 200}
-      name: domain
+      name: timestamp
+      type: datetime
+    - admin_ui: {order: 1, width: 624}
+      name: message
       type: string
     server: full
-    title: disposable_domains
+    title: logs
   users:
     client: none
     columns:
@@ -199,7 +202,13 @@ runtime_options:
   server_spec: {base: python310-standard}
   server_version: python3-full
   version: 3
-scheduled_tasks: []
+scheduled_tasks:
+- job_id: CQUZRJYT
+  task_name: delete_old_logs
+  time_spec:
+    at: {hour: 3, minute: 0}
+    every: day
+    n: 1
 secrets:
   PERPLEXITY_API_KEY:
     type: secret

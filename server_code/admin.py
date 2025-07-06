@@ -1,4 +1,3 @@
-# Benötigte Libraries
 import anvil.email
 import anvil.secrets
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
@@ -10,7 +9,7 @@ from anvil.tables import app_tables
 import anvil.server
 import anvil.media
 import csv
-from datetime import datetime
+from datetime import datetime, timedelta
 
 @anvil.server.callable
 def import_bookings_csv(csv_file):
@@ -74,4 +73,19 @@ def import_bookings_csv(csv_file):
 
   return f"{imported_count} Zeilen erfolgreich importiert"
 
+@anvil.server.callable
+def log(message):
+  try:
+    app_tables.logs.add_row(
+      timestamp=datetime.now(),
+      message=str(message)
+    )
+    print("Log-Eintrag erfolgreich gespeichert.")
+  except Exception as e:
+    print("Fehler beim Loggen:", e)
 
+@anvil.server.background_task
+def delete_old_logs():
+  cutoff = datetime.now() - timedelta(days=2)
+  for row in app_tables.logs.search(timestamp=lambda t: t is not None and t < cutoff):
+    row.delete()
