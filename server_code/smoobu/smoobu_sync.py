@@ -115,8 +115,14 @@ def sync_smoobu(user_email):
                 price_addon = pe.get('amount')
               elif pe.get('type') == 'coupon':
                 price_coupon = pe.get('coupon')
-                if pe.get('type') == 'commission':
-                  price_comm = pe.get('amount')
+              if pe.get('type') == 'commission':
+                price_comm = pe.get('amount')
+              if pe.get('type') == 'channelCustom' and ( pe.get('name') == 'PASS_THROUGH_RESORT_FEE' or pe.get('name') == 'PASS_THROUGH_LINEN_FEE' ):
+                price_addon = price_addon + pe.get('amount')
+                #airbnb cleaning fee läuft richtig
+              if booking['channel']['name'] == 'booking.com' and pe.get('type') == 'channelCustom':
+                price_addon = price_addon + pe.get('amount')
+                #booking.com
               price_curr = pe.get('currencyCode')
       row = {
         "reservation_id": booking['id'],
