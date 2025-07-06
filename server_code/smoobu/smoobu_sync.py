@@ -94,15 +94,15 @@ def sync_smoobu(user_email):
         )
         if price_elements_response.status_code == 200:
           price_baseprice = None
-          price_cleaningfee = None
+          price_cleaningfee = 0
           price_longstaydiscount = None
           price_coupon = None
-          price_addon = None
+          price_addon = 0
           price_curr = None
           price_comm= None
           if price_elements_response.status_code == 200:
             price_elements = price_elements_response.json().get("priceElements", [])
-            print("reservation id: ",reservation_id, " price_elements: ",price_elements)
+            #print("reservation id: ",reservation_id, " price_elements: ",price_elements)
             log(price_elements)
             for pe in price_elements:
               if pe.get('type') == 'basePrice':
@@ -118,11 +118,10 @@ def sync_smoobu(user_email):
               if pe.get('type') == 'commission':
                 price_comm = pe.get('amount')
               if pe.get('type') == 'channelCustom' and ( pe.get('name') == 'PASS_THROUGH_RESORT_FEE' or pe.get('name') == 'PASS_THROUGH_LINEN_FEE' ):
-                price_addon = price_addon + pe.get('amount')
+                price_addon = price_addon + (pe.get('amount') or 0)
                 #airbnb cleaning fee läuft richtig
-              if booking['channel']['name'] == 'booking.com' and pe.get('type') == 'channelCustom':
-                price_addon = price_addon + pe.get('amount')
-                #booking.com
+              if booking['channel']['name'] == 'Booking.com' and pe.get('type') == 'channelCustom':
+                price_cleaningfee = price_cleaningfee + (pe.get('amount') or 0)
               price_curr = pe.get('currencyCode')
       row = {
         "reservation_id": booking['id'],

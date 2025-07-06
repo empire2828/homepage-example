@@ -80,7 +80,6 @@ def log(message):
       timestamp=datetime.now(),
       message=str(message)
     )
-    print("Log-Eintrag erfolgreich gespeichert.")
   except Exception as e:
     print("Fehler beim Loggen:", e)
 
