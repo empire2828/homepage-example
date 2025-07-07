@@ -1,3 +1,19 @@
-components: []
+components:
+- layout_properties: {column: WGVKHM}
+  name: timestamp_body
+  properties: {role: body}
+  type: Label
+- layout_properties: {column: VDIXAQ}
+  name: email_body
+  properties: {role: body}
+  type: Label
+- layout_properties: {column: WGVKHM}
+  name: message_body
+  properties: {}
+  type: RichText
+- layout_properties: {column: VDIXAQ}
+  name: function_body
+  properties: {role: body}
+  type: Label
 container: {type: DataRowPanel}
 is_package: true

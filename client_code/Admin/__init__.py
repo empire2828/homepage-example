@@ -53,6 +53,6 @@ class Admin(AdminTemplate):
 
   def log_filter_text_box_pressed_enter(self, **event_args):
     self.filtered_logs=anvil.server.call('search_logs',self.log_filter_text_box.text)
-    self.logs_data_grid.items= self.filtered_logs
+    self.logs_repeating_panel.items= self.filtered_logs
     pass
 

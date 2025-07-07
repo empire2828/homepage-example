@@ -133,4 +133,5 @@ def search_logs(search_term: str):
     # Optional: Prüfung, ob Daten vorhanden sind
   if not getattr(response, 'data', None):
     return []
+  print(response.data)
   return response.data

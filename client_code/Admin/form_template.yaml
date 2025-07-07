@@ -34,7 +34,8 @@ components_by_slot:
     properties: {}
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - components:
-    - name: repeating_panel_1
+    - data_bindings: []
+      name: logs_repeating_panel
       properties: {item_template: Admin.RowTemplate1}
       type: RepeatingPanel
     layout_properties: {}
