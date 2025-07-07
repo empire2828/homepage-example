@@ -12,5 +12,6 @@ class ItemTemplate1(ItemTemplate1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
-    # Any code you write here will run before the form opens.
+    self.message_text.content = str(self.item['message'])
+    self.email_text.text=str(self.item['email'])
+    self.created_at_text.text=str(self.item['created_at'])
