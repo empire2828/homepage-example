@@ -73,7 +73,7 @@ def sync_smoobu(user_email):
   bookings_added = 0
 
   for booking in all_bookings:
-    log(str(booking))
+    log(str(booking),user_email)
     try:
       # Bestehende Buchung anhand der Reservierungs-ID abrufen
 
@@ -103,7 +103,7 @@ def sync_smoobu(user_email):
           if price_elements_response.status_code == 200:
             price_elements = price_elements_response.json().get("priceElements", [])
             #print("reservation id: ",reservation_id, " price_elements: ",price_elements)
-            log(price_elements)
+            log(price_elements,user_email)
             for pe in price_elements:
               if pe.get('type') == 'basePrice':
                 price_baseprice = pe.get('amount')

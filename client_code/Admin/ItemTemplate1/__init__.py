@@ -15,4 +15,5 @@ class ItemTemplate1(ItemTemplate1Template):
     self.message_text.content = str(self.item['message'])
     self.email_text.text=str(self.item['email'])
     self.created_at_text.text=str(self.item['created_at'])
+    self.function_text.text=str(self.item['function'])
     self.id_text.text=str(self.item['id'])

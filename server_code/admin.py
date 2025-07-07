@@ -84,14 +84,18 @@ def import_bookings_csv(csv_file):
   return f"{imported_count} Zeilen erfolgreich importiert"
 
 @anvil.server.callable
-def log(message: str):
-  # Aktuelle Benutzerinformationen abrufen
-  user = anvil.users.get_user()
-  if user is not None:
-    email = user['email']
-  else:
-    email = None
-  # Name der aufrufenden Funktion ermitteln
+def log(message: str, email: str = None):
+
+  # Nur wenn keine E-Mail übergeben wurde, selbst nachschauen
+  if email is None:
+    user = anvil.users.get_user()
+    print('user', user)
+    if user is not None and 'email' in user:
+      email = user['email']
+    else:
+      email = None
+
+    # Name der aufrufenden Funktion ermitteln
   caller_function = inspect.stack()[1].function
 
   # Log-Eintrag vorbereiten
@@ -107,16 +111,21 @@ def log(message: str):
 
 @anvil.server.callable
 def delete_old_logs():
-  # Zeitstempel für "vor 3 Tagen"
+  from datetime import datetime, timedelta, timezone
   three_days_ago = datetime.now(timezone.utc) - timedelta(days=3)
-  # Lösche alle Zeilen mit created_at < three_days_ago
   response = (
     supabase_client.table("logs")
       .delete()
       .lt("created_at", three_days_ago.isoformat())
       .execute()
   )
-  return response
+  # Nur serialisierbare Infos zurückgeben
+  return {
+    "status_code": getattr(response, "status_code", None),
+    "data": getattr(response, "data", None),
+    "error": getattr(response, "error", None)
+  }
+
 
 @anvil.server.callable
 def search_logs(search_term: str):
