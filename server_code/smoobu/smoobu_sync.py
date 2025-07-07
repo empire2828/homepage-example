@@ -73,7 +73,7 @@ def sync_smoobu(user_email):
   bookings_added = 0
 
   for booking in all_bookings:
-    log(str(booking),user_email,'launch_sync_smoobu')
+    log(str(booking))
     try:
       # Bestehende Buchung anhand der Reservierungs-ID abrufen
 

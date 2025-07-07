@@ -1,10 +1,15 @@
 components_by_slot:
   content:
-  - event_bindings: {change: admin_file_loader_change}
+  - components:
+    - event_bindings: {change: admin_file_loader_change}
+      layout_properties: {grid_position: 'GBFJAL,UPVJYN'}
+      name: admin_file_loader
+      properties: {align: center}
+      type: form:dep_g9k4toow7i44kq:_Components.FileLoader
     layout_properties: {}
-    name: admin_file_loader
-    properties: {align: center}
-    type: form:dep_g9k4toow7i44kq:_Components.FileLoader
+    name: column_panel_3
+    properties: {}
+    type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'ZHCEBT,NRLZKL'}
       name: email_input_prompt
@@ -19,6 +24,28 @@ components_by_slot:
     name: column_panel_1
     properties: {}
     type: ColumnPanel
+  - layout_properties: {}
+    name: input_prompt_1
+    properties: {role: input-prompt, text: Suchbegriff}
+    type: Label
+  - event_bindings: {pressed_enter: log_filter_text_box_pressed_enter}
+    layout_properties: {}
+    name: log_filter_text_box
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+  - components:
+    - name: repeating_panel_1
+      properties: {item_template: Admin.RowTemplate1}
+      type: RepeatingPanel
+    layout_properties: {}
+    name: logs_data_grid
+    properties:
+      columns:
+      - {data_key: timestamp, expand: false, id: WGVKHM, title: timestamp, width: 129.63641357421875}
+      - {data_key: message, expand: false, id: XMAGCB, title: message, width: 831.1818237304688}
+      - {data_key: email, expand: false, id: VDIXAQ, title: email, width: 104.18182373046875}
+      - {data_key: function, id: CIVHUT, title: function}
+    type: DataGrid
   slot_1: []
 is_package: true
 layout: {type: 'form:layout_template'}

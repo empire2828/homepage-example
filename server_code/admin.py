@@ -9,7 +9,17 @@ from anvil.tables import app_tables
 import anvil.server
 import anvil.media
 import csv
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+import inspect
+from supabase import create_client
+import os
+
+supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+supabase_client: create_client(supabase_url, supabase_api_key)
+
+# Supabase-Client initialisieren
+supabase_client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.callable
 def import_bookings_csv(csv_file):
@@ -74,31 +84,53 @@ def import_bookings_csv(csv_file):
   return f"{imported_count} Zeilen erfolgreich importiert"
 
 @anvil.server.callable
-def log(message,email,function):
-  try:
-    app_tables.logs.add_row(
-      timestamp=datetime.now(),
-      message=str(message),
-      email=email,
-      function=str(function)
-    )
-  except Exception as e:
-    print("Fehler beim Loggen:", e)
+def log(message: str):
+  # Aktuelle Benutzerinformationen abrufen
+  user = anvil.users.get_user()
+  if user is not None:
+    email = user['email']
+  else:
+    email = None
+  # Name der aufrufenden Funktion ermitteln
+  caller_function = inspect.stack()[1].function
+
+  # Log-Eintrag vorbereiten
+  log_entry = {
+    'message': message,
+    'email': email,
+    'function': caller_function
+  }
+
+  # Log-Eintrag in die Tabelle 'logs' schreiben
+  response = supabase_client.table('logs').insert(log_entry).execute()
+  return response
 
 @anvil.server.callable
 def delete_old_logs():
-  cutoff = datetime.now() - timedelta(days=3)
-  logs_table = anvil.server.get_app_tables()['logs']
-  # Suche alle Logs, die älter als 3 Tage sind
-  old_logs = logs_table.search(timestamp=q.less_than(cutoff))
-  # Suche alle Logs, bei denen das Datum fehlt (None)
-  no_date_logs = logs_table.search(timestamp=None)
-  # Lösche alle gefundenen Logs
-  deleted_count = 0
-  for log in old_logs:
-    log.delete()
-    deleted_count += 1
-  for log in no_date_logs:
-    log.delete()
-    deleted_count += 1
-  return f"{deleted_count} Logs gelöscht (älter als 3 Tage oder ohne Datum)."
+  # Zeitstempel für "vor 3 Tagen"
+  three_days_ago = datetime.now(timezone.utc) - timedelta(days=3)
+  # Lösche alle Zeilen mit created_at < three_days_ago
+  response = (
+    supabase_client.table("logs")
+      .delete()
+      .lt("created_at", three_days_ago.isoformat())
+      .execute()
+  )
+  return response
+
+@anvil.server.callable
+def search_logs(search_term: str):
+  response = (
+    supabase_client.table("logs")
+      .select("*")
+      .ilike("message", f"%{search_term}%")
+      .order("created_at", desc=True)
+      .execute()
+  )
+  # Fehlerbehandlung über status_code
+  if hasattr(response, 'status_code') and response.status_code != 200:
+    return []
+    # Optional: Prüfung, ob Daten vorhanden sind
+  if not getattr(response, 'data', None):
+    return []
+  return response.data
