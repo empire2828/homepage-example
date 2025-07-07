@@ -74,17 +74,31 @@ def import_bookings_csv(csv_file):
   return f"{imported_count} Zeilen erfolgreich importiert"
 
 @anvil.server.callable
-def log(message):
+def log(message,email,function):
   try:
     app_tables.logs.add_row(
       timestamp=datetime.now(),
-      message=str(message)
+      message=str(message),
+      email=email,
+      function=str(function)
     )
   except Exception as e:
     print("Fehler beim Loggen:", e)
 
-@anvil.server.background_task
+@anvil.server.callable
 def delete_old_logs():
-  cutoff = datetime.now() - timedelta(days=2)
-  for row in app_tables.logs.search(timestamp=lambda t: t is not None and t < cutoff):
-    row.delete()
+  cutoff = datetime.now() - timedelta(days=3)
+  logs_table = anvil.server.get_app_tables()['logs']
+  # Suche alle Logs, die älter als 3 Tage sind
+  old_logs = logs_table.search(timestamp=q.less_than(cutoff))
+  # Suche alle Logs, bei denen das Datum fehlt (None)
+  no_date_logs = logs_table.search(timestamp=None)
+  # Lösche alle gefundenen Logs
+  deleted_count = 0
+  for log in old_logs:
+    log.delete()
+    deleted_count += 1
+  for log in no_date_logs:
+    log.delete()
+    deleted_count += 1
+  return f"{deleted_count} Logs gelöscht (älter als 3 Tage oder ohne Datum)."
