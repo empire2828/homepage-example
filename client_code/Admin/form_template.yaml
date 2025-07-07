@@ -35,6 +35,7 @@ components_by_slot:
     type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
   - components:
     - data_bindings: []
+      layout_properties: {}
       name: logs_repeating_panel
       properties: {item_template: Admin.RowTemplate1}
       type: RepeatingPanel
@@ -42,7 +43,7 @@ components_by_slot:
     name: logs_data_grid
     properties:
       columns:
-      - {data_key: timestamp, expand: false, id: WGVKHM, title: timestamp, width: 129.63641357421875}
+      - {data_key: created_at, expand: false, id: WGVKHM, title: created_at, width: 129.63641357421875}
       - {data_key: message, expand: false, id: XMAGCB, title: message, width: 831.1818237304688}
       - {data_key: email, expand: false, id: VDIXAQ, title: email, width: 104.18182373046875}
       - {data_key: function, id: CIVHUT, title: function}

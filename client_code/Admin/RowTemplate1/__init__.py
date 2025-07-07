@@ -15,10 +15,14 @@ class RowTemplate1(RowTemplate1Template):
 
   def form_show(self, **event_args):
     try:
-      self.timestamp_body.text = self.item['created_at']
-      self.message_body.text = self.item['message']
-      self.email_body.text = self.item['email']
-      self.function_body.text = self.item['function']
+      self.created_at_body.text = str(self.item.get('created_at', ''))
+      print('#####',str(self.item.get('created_at', '')))
+      self.message_body.text = str(self.item.get('message', ''))
+      print('#####',str(self.item.get('message', '')))
+      self.email_body.text = self.item.get('email', '')
+      print('#####',str(self.item.get('email', '')))
+      self.function_body.text = str(self.item.get('function', ''))
+      print('#####',str(self.item.get('function', '')))
     except Exception as e:
       print("Fehler im RowTemplate:", e)
       print("Item:", self.item)
