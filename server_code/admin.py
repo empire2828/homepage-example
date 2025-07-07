@@ -120,18 +120,35 @@ def delete_old_logs():
 
 @anvil.server.callable
 def search_logs(search_term: str):
+  filters = [
+    f"message.ilike.%{search_term}%",
+    f"email.ilike.%{search_term}%"
+  ]
+  # Suche nach exakter ID, falls numerisch
+  if search_term.isdigit():
+    filters.append(f"id.eq.{int(search_term)}")
+    # Suche nach exaktem Zeitstempel, falls das Suchwort ISO-Format hat
+  from dateutil.parser import parse
+  try:
+    # Prüft, ob Suchbegriff als Datum interpretierbar ist
+    parsed_date = parse(search_term)
+    filters.append(f"created_at.eq.{parsed_date.isoformat()}")
+  except Exception:
+    pass
+
+  or_condition = ",".join(filters)
   response = (
-    supabase_client.table("logs")
+    supabase_client
+      .table("logs")
       .select("*")
-      .ilike("message", f"%{search_term}%")
+      .or_(or_condition)
       .order("created_at", desc=True)
       .execute()
   )
-  # Fehlerbehandlung über status_code
   if hasattr(response, 'status_code') and response.status_code != 200:
     return []
-    # Optional: Prüfung, ob Daten vorhanden sind
   if not getattr(response, 'data', None):
     return []
-  print(response.data)
   return response.data
+
+

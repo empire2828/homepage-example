@@ -102,23 +102,6 @@ db_schema:
       type: string
     server: full
     title: bookings
-  logs:
-    client: none
-    columns:
-    - admin_ui: {order: 0, width: 200}
-      name: timestamp
-      type: datetime
-    - admin_ui: {order: 1, width: 676}
-      name: message
-      type: string
-    - admin_ui: {order: 2, width: 222}
-      name: email
-      type: string
-    - admin_ui: {order: 3, width: 200}
-      name: function
-      type: string
-    server: full
-    title: logs
   users:
     client: none
     columns:
