@@ -22,16 +22,17 @@ supabase_client: create_client(supabase_url, supabase_api_key)
 supabase_client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.callable
-def import_bookings_csv(csv_file):
+def import_csv(csv_file):
   imported_count = 0
 
   # 1. Hole die Spaltennamen und Typen aus der Tabelle
-  column_info = {c['name']: c['type'] for c in app_tables.bookings.list_columns()}  # z.B. {'email': 'string', ...}
+  column_info = {c['name']: c['type'] for c in app_tables.channels.list_columns()}  # z.B. {'email': 'string', ...}
 
   with anvil.media.TempFile(csv_file) as file_name:
-    with open(file_name, 'r', encoding='utf-8-sig') as f:
-      reader = csv.DictReader(f, quoting=csv.QUOTE_MINIMAL)
+    with open(file_name, 'r', encoding='latin-1') as f:
+      reader = csv.DictReader(f, delimiter=';')
       for row in reader:
+        print(row)
         processed_row = {}
         for col_name, value in row.items():
           clean_col_name = col_name.strip('"').strip()
@@ -78,7 +79,7 @@ def import_bookings_csv(csv_file):
           except Exception:
             continue  # Fehlerhafte Spalte überspringen
         if processed_row:
-          app_tables.bookings.add_row(**processed_row)
+          app_tables.channels.add_row(**processed_row)
           imported_count += 1
 
   return f"{imported_count} Zeilen erfolgreich importiert"

@@ -28,7 +28,7 @@ class Admin(AdminTemplate):
 
           # Loading-Indikator anzeigen
         with anvil.server.no_loading_indicator:
-         result = anvil.server.call('import_bookings_csv', csv_file)
+         result = anvil.server.call('import_csv', csv_file)
 
           # Erfolgsmeldung anzeigen
         alert(f"Import erfolgreich: {result}")

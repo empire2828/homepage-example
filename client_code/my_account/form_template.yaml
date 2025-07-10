@@ -62,7 +62,7 @@ components_by_slot:
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'YNQEZX,DSGJZF'}
       name: text_1
-      properties: {text: 'Standard values which will be used in case fees are not correct classified into the right pockets by Channel Manager (eg VRBO or all ical Connections):'}
+      properties: {text: 'For ical connections Commissions and Fees are not correcly put in the right pockets by Smoobu. For correct calculation of your base daily rate you can set here standard values for these connections to be taken if no fees or commission are found in the booking:'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'XSVWVN,SSXBFT'}
       name: spacer_7
@@ -89,27 +89,43 @@ components_by_slot:
       properties: {role: title, text: Commissions}
       type: Label
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG DBBPSB,EWPHRY'}
-      name: dropdown_menu_1
+      name: channel1_dropdown_menu
       properties: {}
       type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG MAALGA,RYWITO'}
-      name: dropdown_menu_1_copy
+      name: channel2_dropdown_menu
       properties: {}
       type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG BIFBEO,GGTIJM'}
-      name: dropdown_menu_1_copy_copy
+      name: channel3_dropdown_menu
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG NKEMRS,BVEFKU'}
+      name: channel4_dropdown_menu
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG MQVEMI,EFEEJW'}
+      name: channel5_dropdown_menu
       properties: {}
       type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH UQYWHG,GRUHYS'}
-      name: text_box_1
+      name: channel1_text_box
       properties: {}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH VSITDS,KEEGQT'}
-      name: text_box_1_copy
+      name: channel2_text_box
       properties: {}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH VUINOP,YSXIRH'}
-      name: text_box_1_copy_copy
+      name: channel3_text_box
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH WTCVLZ,LPCPMC'}
+      name: channel4_text_box
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH SPDNSJ,OZJQQQ'}
+      name: channel5_text_box
       properties: {}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - event_bindings: {click: save_button_click}
