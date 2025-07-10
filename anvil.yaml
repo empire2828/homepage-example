@@ -1,107 +1,17 @@
 allow_embedding: true
 correct_dependency_ids: {}
 db_schema:
-  bookings:
-    client: search
+  channels:
+    client: none
     columns:
-    - admin_ui: {width: 200}
-      name: email
-      type: string
-    - admin_ui: {width: 200}
-      name: apartment
-      type: string
-    - admin_ui: {width: 200}
-      name: channel_name
-      type: string
-    - admin_ui: {width: 200}
-      name: guestname
-      type: string
-    - admin_ui: {order: 7, width: 119}
-      name: adults
+    - admin_ui: {order: 0, width: 200}
+      name: id
       type: number
-    - admin_ui: {order: 8, width: 126}
-      name: children
-      type: number
-    - admin_ui: {width: 200}
-      name: language
-      type: string
-    - admin_ui: {width: 200}
-      name: type
-      type: string
-    - admin_ui: {width: 200}
-      name: reservation_id
-      type: number
-    - admin_ui: {order: 13, width: 200}
-      name: address_street
-      type: string
-    - admin_ui: {order: 14, width: 200}
-      name: address_postalcode
-      type: string
-    - admin_ui: {order: 15, width: 200}
-      name: address_city
-      type: string
-    - admin_ui: {order: 16, width: 200}
-      name: address_country
-      type: string
-    - admin_ui: {order: 17, width: 200}
-      name: screener_openai_job
-      type: string
-    - admin_ui: {order: 18, width: 200}
-      name: screener_address_check
-      type: bool
-    - admin_ui: {order: 19, width: 200}
-      name: screener_google_linkedin
-      type: string
-    - admin_ui: {order: 20, width: 200}
-      name: screener_openai_age
-      type: string
-    - admin_ui: {order: 12.5, width: 200}
-      name: guestid
-      type: number
-    - admin_ui: {order: 12.75, width: 200}
-      name: phone
-      type: string
-    - admin_ui: {order: 21, width: 200}
-      name: screener_phone_check
-      type: bool
-    - admin_ui: {order: 2.25, width: 200}
-      name: arrival
-      type: date
-    - admin_ui: {order: 3.625, width: 200}
-      name: departure
-      type: date
-    - admin_ui: {order: 12.625, width: 200}
-      name: guest_email
-      type: string
-    - admin_ui: {width: 200}
-      name: screener_disposable_email
-      type: bool
-    - admin_ui: {order: 4.3125, width: 200}
-      name: created_at
-      type: date
-    - admin_ui: {order: 23, width: 200}
-      name: price
-      type: number
-    - admin_ui: {order: 25, width: 200}
-      name: prepayment
-      type: number
-    - admin_ui: {order: 27, width: 200}
-      name: deposit
-      type: number
-    - admin_ui: {order: 29, width: 200}
-      name: commission_included
-      type: number
-    - admin_ui: {order: 30, width: 200}
-      name: price_paid
-      type: string
-    - admin_ui: {order: 31, width: 200}
-      name: prepayment_paid
-      type: string
-    - admin_ui: {order: 32, width: 200}
-      name: deposit_paid
+    - admin_ui: {order: 1, width: 200}
+      name: name
       type: string
     server: full
-    title: bookings
+    title: channels
   users:
     client: none
     columns:

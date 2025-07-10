@@ -60,14 +60,18 @@ components_by_slot:
       name: heading_1
       properties: {bold: true, text: Parameter}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
+    - layout_properties: {grid_position: 'YNQEZX,DSGJZF'}
+      name: text_1
+      properties: {text: 'Standard values which will be used in case fees are not correct classified into the right pockets by Channel Manager (eg VRBO or all ical Connections):'}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'XSVWVN,SSXBFT'}
       name: spacer_7
       properties: {height: 13.9556884765625}
       type: Spacer
-    - layout_properties: {grid_position: 'NECNFO,BVZULL'}
-      name: text_1
-      properties: {text: 'Standard values which will be used in case fees are not properly handed over from Channel Manager:'}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
+    - layout_properties: {grid_position: 'BCHDQL,JTLNIG'}
+      name: title_1
+      properties: {role: title, text: Fees}
+      type: Label
     - layout_properties: {grid_position: 'JJBJOQ,TVVVUA'}
       name: std_cleaning_fee_text_box
       properties: {label: Cleaning fee per stay, text: '100'}
@@ -80,6 +84,34 @@ components_by_slot:
       name: use_own_std_fees_checkbox
       properties: {text: Always use above values for all channels}
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+    - layout_properties: {grid_position: 'WBRPOD,REYWQK'}
+      name: title_1_copy
+      properties: {role: title, text: Commissions}
+      type: Label
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG DBBPSB,EWPHRY'}
+      name: dropdown_menu_1
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG MAALGA,RYWITO'}
+      name: dropdown_menu_1_copy
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG BIFBEO,GGTIJM'}
+      name: dropdown_menu_1_copy_copy
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH UQYWHG,GRUHYS'}
+      name: text_box_1
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH VSITDS,KEEGQT'}
+      name: text_box_1_copy
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH VUINOP,YSXIRH'}
+      name: text_box_1_copy_copy
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - event_bindings: {click: save_button_click}
       layout_properties: {grid_position: 'OTSBJF,MMPSAC'}
       name: save_button
