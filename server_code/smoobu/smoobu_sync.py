@@ -8,6 +8,7 @@ import requests
 from smoobu.smoobu_main import get_guest_details, guest_data_update
 from supabase import create_client, Client
 from admin import log
+from servermain import save_last_fees_as_std
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -21,6 +22,7 @@ def launch_sync_smoobu():
   save_smoobu_userid(user_email)
   guest_data_update(user_email)
   current_user['server_data_last_update'] = datetime.now()
+  save_last_fees_as_std(user_email)
   return result
 
 @anvil.server.background_task
