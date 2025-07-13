@@ -62,7 +62,7 @@ components_by_slot:
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'YNQEZX,DSGJZF'}
       name: text_1
-      properties: {text: 'For ical connections Commissions and Fees are not correcly put in the right pockets by Smoobu. For correct calculation of your base daily rate you can set here standard values for these connections to be taken if no fees or commission are found in the booking. No need to do here something for booking.com,  Airbnb or HomeToGo if you have connected them via API.'}
+      properties: {font_size: 18, text: 'For ical connections Commissions and Fees are not correcly put in the right pockets by Smoobu. For correct calculation of your base daily rate you can set here standard values for these connections to be taken if no fees or commission are found in the booking. No need to do here something for booking.com,  Airbnb or HomeToGo if you have connected them via API.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'XSVWVN,SSXBFT'}
       name: spacer_7
@@ -92,42 +92,43 @@ components_by_slot:
       name: channel1_dropdown_menu
       properties:
         items: []
+        label: Channel 1
       type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG MAALGA,RYWITO'}
       name: channel2_dropdown_menu
-      properties: {}
+      properties: {label: Channel 2}
       type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG BIFBEO,GGTIJM'}
       name: channel3_dropdown_menu
-      properties: {}
+      properties: {label: Channel 3}
       type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG NKEMRS,BVEFKU'}
       name: channel4_dropdown_menu
-      properties: {}
+      properties: {label: Channel 4}
       type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG MQVEMI,EFEEJW'}
       name: channel5_dropdown_menu
-      properties: {}
+      properties: {label: Channel 5}
       type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH UQYWHG,GRUHYS'}
       name: channel1_text_box
-      properties: {}
+      properties: {label: Channel 1 commission}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH VSITDS,KEEGQT'}
       name: channel2_text_box
-      properties: {}
+      properties: {label: Channel 2 commission}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH VUINOP,YSXIRH'}
       name: channel3_text_box
-      properties: {}
+      properties: {label: Channel 3 commission}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH WTCVLZ,LPCPMC'}
       name: channel4_text_box
-      properties: {}
+      properties: {label: Channel 4 commission}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH SPDNSJ,OZJQQQ'}
       name: channel5_text_box
-      properties: {}
+      properties: {label: Channel 5 commission}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - event_bindings: {click: save_button_click}
       layout_properties: {grid_position: 'OTSBJF,MMPSAC'}

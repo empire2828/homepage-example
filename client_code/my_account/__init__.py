@@ -31,14 +31,14 @@ class my_account(my_accountTemplate):
         self.std_linen_fee_text_box.text=user['std_linen_fee']
         self.use_own_std_fees_checkbox.checked=user['use_own_std_fees']
 
-      channels = [(row['name'], row.get_id()) for row in app_tables.channels.search()]
+      channels = [row['name'] for row in app_tables.channels.search()]
       self.channel1_dropdown_menu.items = channels
       self.channel2_dropdown_menu.items = channels
       self.channel3_dropdown_menu.items = channels
       self.channel4_dropdown_menu.items = channels
       self.channel5_dropdown_menu.items = channels
       self.channel1_dropdown_menu.selected_value = 'FeWo-direkt / HomeAway'
-      self.channel1_text_box.selected_value = '8'
+      self.channel1_text_box.text = '8'
   pass
 
   def change_name_link_click(self, **event_args):
