@@ -231,3 +231,4 @@ def save_user_apartment_count(user_email):
     else:
         # Optionally handle missing user
         raise Exception(f"User with email {user_email} not found")
+

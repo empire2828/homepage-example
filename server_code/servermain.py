@@ -80,4 +80,36 @@ def save_user_parameter(std_cleaning_fee=None, std_linen_fee=None,use_own_std_fe
   return response.data  # oder True/False je nach Bedarf
   
   pass
-  
+
+@anvil.server.background_task
+def save_last_fees_as_std(user_email):
+  # 1. Letzte Buchung des Nutzers im Kanal 'Direct booking' oder 'Website' holen
+  response = (
+    supabase_client.table("bookings")
+      .select("*")
+      .eq("email", user_email)
+      .in_("channel_name", ["Direct booking", "Website"])
+      .order("created_at", desc=True)
+      .limit(1)
+      .execute()
+  )
+  bookings = response.data
+  if not bookings:
+    return None
+
+  latest_booking = bookings[0]
+  # 2. Preiselemente auslesen (angenommen, als JSON oder Liste in 'price_elements')
+  price_elements = latest_booking.get("price_elements", [])
+  cleaning_fee = None
+  for element in price_elements:
+    if element.get("type") == "cleaningFee":
+      cleaning_fee = element.get("amount")
+      break
+
+    # 3. Wert in Anvil Users-Tabelle speichern
+  if cleaning_fee is not None:
+    user_row = app_tables.users.get(email=user_email)
+    if user_row is not None:
+      user_row['std_cleaning_fee'] = cleaning_fee
+
+  return cleaning_fee
