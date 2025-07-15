@@ -81,7 +81,7 @@ def save_user_parameter(std_cleaning_fee=None, std_linen_fee=None,use_own_std_fe
   
   pass
 
-#@anvil.server.background_task
+@anvil.server.background_task
 def save_last_fees_as_std(user_email):
   # 1. Hole alle Buchungen für diesen Nutzer in den relevanten Kanälen
   response = (
@@ -90,8 +90,8 @@ def save_last_fees_as_std(user_email):
       .select("*")
       .eq("email", user_email)
       .in_("channel_name", ["Direct booking", "Website"])
-      .order("apartment_id", asc=True)
-      .order("created_at", desc=True)
+      .order("apartment_id", "asc")
+      .order("created_at", "desc")
       .execute()
   )
   all_bookings = response.data
@@ -121,5 +121,6 @@ def save_last_fees_as_std(user_email):
     ).execute()
 
   return len(upserts)  # Anzahl aktualisierter Einträge
+
 
 
