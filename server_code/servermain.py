@@ -81,35 +81,45 @@ def save_user_parameter(std_cleaning_fee=None, std_linen_fee=None,use_own_std_fe
   
   pass
 
-@anvil.server.background_task
+#@anvil.server.background_task
 def save_last_fees_as_std(user_email):
-  # 1. Letzte Buchung des Nutzers im Kanal 'Direct booking' oder 'Website' holen
+  # 1. Hole alle Buchungen für diesen Nutzer in den relevanten Kanälen
   response = (
-    supabase_client.table("bookings")
+    supabase_client
+      .table("bookings")
       .select("*")
       .eq("email", user_email)
       .in_("channel_name", ["Direct booking", "Website"])
+      .order("apartment_id", asc=True)
       .order("created_at", desc=True)
-      .limit(1)
       .execute()
   )
-  bookings = response.data
-  if not bookings:
-    return None
+  all_bookings = response.data
 
-  latest_booking = bookings[0]
-  # 2. Preiselemente auslesen (angenommen, als JSON oder Liste in 'price_elements')
-  price_elements = latest_booking.get("price_elements", [])
-  cleaning_fee = None
-  for element in price_elements:
-    if element.get("type") == "cleaningFee":
-      cleaning_fee = element.get("amount")
-      break
+  # 2. Pro Apartment die neueste Buchung für diesen User bestimmen
+  latest_bookings = {}
+  for b in all_bookings:
+    apartment_id = b["apartment_id"]
+    if apartment_id not in latest_bookings:
+      latest_bookings[apartment_id] = b  # Nur erste nach created_at DESC
 
-    # 3. Wert in Anvil Users-Tabelle speichern
-  if cleaning_fee is not None:
-    user_row = app_tables.users.get(email=user_email)
-    if user_row is not None:
-      user_row['std_cleaning_fee'] = cleaning_fee
+    # 3. Upsert in 'apartment_last_bookings'
+  upserts = []
+  for apartment_id, booking in latest_bookings.items():
+    upserts.append({
+      "apartment_id": apartment_id,
+      "user_email": user_email,
+      "booking_id": booking["id"],
+      "created_at": booking["created_at"],
+      # Optional: Felder wie Cleaning Fee etc.
+    })
 
-  return cleaning_fee
+  if upserts:
+    supabase_client.table("apartment_last_bookings").upsert(
+      upserts,
+      on_conflict=["apartment_id", "user_email"]
+    ).execute()
+
+  return len(upserts)  # Anzahl aktualisierter Einträge
+
+
