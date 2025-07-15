@@ -5,7 +5,6 @@ from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
 import requests
-from smoobu.smoobu_main import get_guest_details, guest_data_update
 from supabase import create_client, Client
 from admin import log
 from servermain import save_last_fees_as_std
@@ -20,7 +19,6 @@ def launch_sync_smoobu():
   user_email = current_user['email'] 
   result= anvil.server.launch_background_task('sync_smoobu',user_email)
   save_smoobu_userid(user_email)
-  guest_data_update(user_email)
   current_user['server_data_last_update'] = datetime.now()
   save_last_fees_as_std(user_email)
   return result
@@ -77,15 +75,6 @@ def sync_smoobu(user_email):
   for booking in all_bookings:
     log(str(booking),user_email)
     try:
-      # Bestehende Buchung anhand der Reservierungs-ID abrufen
-
-      # Gästedaten abrufen
-      guest_data = get_guest_details(booking['guestId'], headers)
-      address = guest_data.get('address', {})
-      city = address.get('city', '')
-      postal_code = address.get('postalCode', '')
-      country = address.get('country', '')     
-
       # Preis-Elemente separat abrufen
       reservation_id = booking['id']
       price_baseprice = price_cleaningfee = price_longstaydiscount = price_coupon = price_addon = price_curr = None 

@@ -90,8 +90,8 @@ def save_last_fees_as_std(user_email):
       .select("*")
       .eq("email", user_email)
       .in_("channel_name", ["Direct booking", "Website"])
-      .order("apartment_id", "asc")
-      .order("created_at", "desc")
+      .order("apartment", desc=False)
+      .order("created_at", desc=True)
       .execute()
   )
   all_bookings = response.data
@@ -99,28 +99,28 @@ def save_last_fees_as_std(user_email):
   # 2. Pro Apartment die neueste Buchung für diesen User bestimmen
   latest_bookings = {}
   for b in all_bookings:
-    apartment_id = b["apartment_id"]
-    if apartment_id not in latest_bookings:
-      latest_bookings[apartment_id] = b  # Nur erste nach created_at DESC
+    apartment = b["apartment"]
+    if apartment not in latest_bookings:
+      latest_bookings[apartment] = b
 
-    # 3. Upsert in 'apartment_last_bookings'
+    # 3. Upsert in 'parameter'
   upserts = []
-  for apartment_id, booking in latest_bookings.items():
+  for apartment, booking in latest_bookings.items():
     upserts.append({
-      "apartment_id": apartment_id,
-      "user_email": user_email,
-      "booking_id": booking["id"],
-      "created_at": booking["created_at"],
-      # Optional: Felder wie Cleaning Fee etc.
+      "apartment": apartment,
+      "email": user_email,
+      "std_cleaning_fee": booking['price_cleaningfee'],
+      # Optional: weitere Felder wie Cleaning Fee etc.
     })
 
   if upserts:
-    supabase_client.table("apartment_last_bookings").upsert(
+    supabase_client.table("parameter").upsert(
       upserts,
-      on_conflict=["apartment_id", "user_email"]
+      on_conflict=["apartment", "email"]  # Auch hier 'apartment' verwenden!
     ).execute()
 
-  return len(upserts)  # Anzahl aktualisierter Einträge
+  return len(upserts)
+
 
 
 
