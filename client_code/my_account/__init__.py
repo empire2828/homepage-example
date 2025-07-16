@@ -115,6 +115,18 @@ class my_account(my_accountTemplate):
     channel_name= self.channel1_dropdown_menu.selected_value
     channel_commission= self.channel1_text_box.text
     anvil.server.call('save_std_commission', channel_name, channel_commission)
+    channel_name= self.channel2_dropdown_menu.selected_value
+    channel_commission= self.channel2_text_box.text
+    anvil.server.call('save_std_commission', channel_name, channel_commission)
+    channel_name= self.channel3_dropdown_menu.selected_value
+    channel_commission= self.channel3_text_box.text
+    anvil.server.call('save_std_commission', channel_name, channel_commission)
+    channel_name= self.channel4_dropdown_menu.selected_value
+    channel_commission= self.channel4_text_box.text
+    anvil.server.call('save_std_commission', channel_name, channel_commission)
+    channel_name= self.channel5_dropdown_menu.selected_value
+    channel_commission= self.channel5_text_box.text
+    anvil.server.call('save_std_commission', channel_name, channel_commission)
     pass
 
   
