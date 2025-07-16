@@ -109,18 +109,18 @@ def log(message: str, email: str = None):
   # Log-Eintrag in die Tabelle 'logs' schreiben
   response = supabase_client.table('logs').insert(log_entry).execute()
   return response
+pass
 
-@anvil.server.callable
+@anvil.server.background_task
 def delete_old_logs():
-  from datetime import datetime, timedelta, timezone
-  three_days_ago = datetime.now(timezone.utc) - timedelta(days=3)
+  x_days_ago = datetime.now(timezone.utc) - timedelta(days=5)
   response = (
     supabase_client.table("logs")
       .delete()
-      .lt("created_at", three_days_ago.isoformat())
+      .lt("created_at", x_days_ago.isoformat())
       .execute()
   )
-  # Nur serialisierbare Infos zurückgeben
+  print(response)
   return {
     "status_code": getattr(response, "status_code", None),
     "data": getattr(response, "data", None),
