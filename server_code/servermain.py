@@ -54,32 +54,7 @@ def send_email_to_support(text, file=None, email=None):
   except Exception as e:
     print("send_email_to_support: ERROR", e)
 
-@anvil.server.callable
-def save_user_parameter(std_cleaning_fee=None, std_linen_fee=None,use_own_std_fees=False):
-  current_user = anvil.users.get_user()
-  email = current_user['email']
-  supabase_key = current_user['supabase_key']
-  try:
-    current_user['std_cleaning_fee']=  float(std_cleaning_fee)
-    current_user['std_linen_fee']= float(std_linen_fee)
-    current_user['use_own_std_fees']= use_own_std_fees
-  except ValueError:
-    return None
-    
-  data = {
-    "supabase_key": supabase_key,
-    "std_cleaning_fee": std_cleaning_fee,
-    "std_linen_fee": std_linen_fee,
-    "use_own_std_fees": use_own_std_fees,
-    "email": email
-  }
-  response = supabase.table("parameter").upsert(
-    [data],
-    on_conflict="email"  # Konfliktspalte angeben!
-  ).execute()
-  return response.data  # oder True/False je nach Bedarf
-  
-  pass
+
 
 @anvil.server.background_task
 def save_last_fees_as_std(user_email):
@@ -90,7 +65,6 @@ def save_last_fees_as_std(user_email):
       .select("*")
       .eq("email", user_email)
       .in_("channel_name", ["Direct booking", "Website"])
-      .order("apartment", desc=False)
       .order("created_at", desc=True)
       .execute()
   )
@@ -116,7 +90,7 @@ def save_last_fees_as_std(user_email):
   if upserts:
     supabase_client.table("parameter").upsert(
       upserts,
-      on_conflict=["apartment", "email"]  # Auch hier 'apartment' verwenden!
+      on_conflict=["email"]  # Auch hier 'apartment' verwenden!
     ).execute()
 
   return len(upserts)

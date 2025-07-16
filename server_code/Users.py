@@ -7,6 +7,11 @@ from anvil import users
 import stripe
 from datetime import datetime, timedelta, timezone
 import hashlib
+from supabase import create_client, Client
+
+supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 # Set your secret key. Remember to switch to your live secret key in production.
 # See your keys here: https://dashboard.stripe.com/apikeys
@@ -116,3 +121,55 @@ def create_supabase_key():
 #zahl = email_to_number(email)
 #print(zahl)
 
+@anvil.server.callable
+def save_user_parameter(std_cleaning_fee=None, std_linen_fee=None,use_own_std_fees=False):
+  current_user = anvil.users.get_user()
+  email = current_user['email']
+  supabase_key = current_user['supabase_key']
+  data = {
+    "supabase_key": supabase_key,
+    "std_cleaning_fee": std_cleaning_fee,
+    "std_linen_fee": std_linen_fee,
+    "use_own_std_fees": use_own_std_fees,
+    "email": email
+  }
+  response = supabase_client.table("parameter").upsert(
+    [data],
+    on_conflict="email"  # Konfliktspalte angeben!
+  ).execute()
+  return response.data  # oder True/False je nach Bedarf
+
+  pass
+
+@anvil.server.callable
+def get_user_parameter():
+  current_user = anvil.users.get_user()
+  if not current_user:
+    return None  # No user is logged in
+  email = current_user['email']
+  # Fetch the parameter entry from Supabase by email
+  response = supabase_client.table("parameter").select("*").eq("email", email).execute()
+  if response.data:
+    # Return the first matching item (should be unique based on email)
+    return response.data[0]
+  else:
+    return None  # No parameter found for user
+
+@anvil.server.callable
+def save_std_commission(channel_name=None, channel_commission=None):
+  current_user = anvil.users.get_user()
+  email = current_user['email']
+  supabase_key = current_user['supabase_key']
+  data = {
+    "channel_name": channel_name,
+    "channel_commission": channel_commission,
+    "supabase_key": supabase_key,
+    "email": email
+  }
+  response = supabase_client.table("std_commission").upsert(
+    [data],
+    on_conflict="email"  # Konfliktspalte angeben!
+  ).execute()
+  return response.data  # oder True/False je nach Bedarf
+
+  pass

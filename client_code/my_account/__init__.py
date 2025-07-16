@@ -27,9 +27,11 @@ class my_account(my_accountTemplate):
         if user.get('admin') is True:
           self.admin_navigation_link.visible= True
         self.email_body.text = user['email']
-        self.std_cleaning_fee_text_box.text=user['std_cleaning_fee']
-        self.std_linen_fee_text_box.text=user['std_linen_fee']
-        self.use_own_std_fees_checkbox.checked=user['use_own_std_fees']
+        user_parameters = anvil.server.call_s('get_user_parameter')
+        if user_parameters:
+          self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))
+          self.std_linen_fee_text_box.text = str(user_parameters.get('std_linen_fee', ''))
+          self.use_own_std_fees_checkbox.checked = user_parameters.get('use_own_std_fees', False)
 
       channels = [row['name'] for row in app_tables.channels.search()]
       self.channel1_dropdown_menu.items = channels
@@ -110,6 +112,9 @@ class my_account(my_accountTemplate):
     std_linen_fee=self.std_linen_fee_text_box.text
     use_own_std_fees=self.use_own_std_fees_checkbox.checked
     anvil.server.call('save_user_parameter',std_cleaning_fee, std_linen_fee,use_own_std_fees)
+    channel= self.channel1_dropdown_menu.item
+    channel_commission= self.channel1_text_box.text
+    anvil.server.call('save_std_commission', channel, channel_commission)
     pass
 
   
