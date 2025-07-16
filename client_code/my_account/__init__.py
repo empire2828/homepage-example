@@ -112,9 +112,9 @@ class my_account(my_accountTemplate):
     std_linen_fee=self.std_linen_fee_text_box.text
     use_own_std_fees=self.use_own_std_fees_checkbox.checked
     anvil.server.call('save_user_parameter',std_cleaning_fee, std_linen_fee,use_own_std_fees)
-    channel= self.channel1_dropdown_menu.item
+    channel_name= self.channel1_dropdown_menu.selected_value
     channel_commission= self.channel1_text_box.text
-    anvil.server.call('save_std_commission', channel, channel_commission)
+    anvil.server.call('save_std_commission', channel_name, channel_commission)
     pass
 
   
