@@ -70,30 +70,23 @@ def save_last_fees_as_std(user_email):
   )
   all_bookings = response.data
 
-  # 2. Pro Apartment die neueste Buchung für diesen User bestimmen
-  latest_bookings = {}
-  for b in all_bookings:
-    apartment = b["apartment"]
-    if apartment not in latest_bookings:
-      latest_bookings[apartment] = b
+  # 2. Die neueste Buchung bestimmen (ohne Apartment-Bezug)
+  latest_booking = all_bookings[0] if all_bookings else None
 
-    # 3. Upsert in 'parameter'
-  upserts = []
-  for apartment, booking in latest_bookings.items():
-    upserts.append({
-      "apartment": apartment,
+  if latest_booking:
+    cleaning_fee = latest_booking.get('price_cleaningfee')
+    upsert_data = {
       "email": user_email,
-      "std_cleaning_fee": booking['price_cleaningfee'],
-      # Optional: weitere Felder wie Cleaning Fee etc.
-    })
-
-  if upserts:
+      "std_cleaning_fee": float(cleaning_fee) if cleaning_fee not in ("", None) else None
+    }
     supabase_client.table("parameter").upsert(
-      upserts,
-      on_conflict=["email"]  # Auch hier 'apartment' verwenden!
+      [upsert_data],
+      on_conflict=["email"]
     ).execute()
+    return 1
+  else:
+    return 0
 
-  return len(upserts)
 
 
 

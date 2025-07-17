@@ -160,9 +160,13 @@ def save_std_commission(channel_name=None, channel_commission=None):
   current_user = anvil.users.get_user()
   email = current_user['email']
   supabase_key = current_user['supabase_key']
+  if channel_commission == "" or channel_commission is None:
+    channel_commission_value = None
+  else:
+    channel_commission_value = float(channel_commission)  
   data = {
     "channel_name": channel_name,
-    "channel_commission": channel_commission,
+    "channel_commission": channel_commission_value,
     "supabase_key": supabase_key,
     "email": email
   }
