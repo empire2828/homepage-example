@@ -183,29 +183,24 @@ def save_std_commission(channel_name=None, channel_commission=None):
 
 @anvil.server.background_task
 def save_user_apartment_count(user_email):
-  # Step 1: Hole alle Buchungen für den Nutzer, bei denen 'apartment' nicht leer ist
+  # Step 1: Hole alle Buchungen für den Nutzer (es werden alle mit "apartment" geladen)
   response = (
     supabase_client
       .table("bookings")
       .select("apartment")
       .eq("email", user_email)
-      .not_("apartment", "is", None)
       .execute()
   )
-  if not response.data:
-    count = 0
-  else:
-    # Einzigartige Apartments ermitteln
-    unique_apartments = set(row['apartment'] for row in response.data if row.get('apartment'))
-    count = len(unique_apartments)
+  # Apartments aus Zeilen mit Wert extrahieren (keine Nulls)
+  apartments = [row['apartment'] for row in response.data if row.get('apartment')]
+  unique_apartments = set(apartments)
+  count = len(unique_apartments)
 
-  # Step 2: Find the user row in the user table
+  # Step 2: User-Row in Anvil-Table finden und speichern
   user_row = app_tables.users.get(email=user_email)
   if user_row is not None:
-    # Step 3: Store the count in the user row (assume column is 'apartment_count')
     user_row['apartment_count'] = count
-    print()
+    print(f"Apartment count for {user_email}: {count}")
     return count
   else:
-    # Optionally handle missing user
     raise Exception(f"User with email {user_email} not found")

@@ -116,12 +116,12 @@ def save_all_channels_for_user(user_email):
       "channel_name": channel_name,
       "channel_commission": None  # Kann später gepflegt werden
     })
-
+    print('std channels added:',channel_name, 0)
     # 4. Upsert in std_commission pro Channel (E-Mail + Channel muss UNIQUE sein)
   if upserts:
     supabase_client.table("std_commission").upsert(
       upserts,
-      on_conflict=["email", "channel_name"]
+      on_conflict="email,channel_name" 
     ).execute()
     print("Channels gespeichert:", user_email, list(unique_channels))
     return len(upserts)
