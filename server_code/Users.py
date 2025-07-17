@@ -164,16 +164,48 @@ def save_std_commission(channel_name=None, channel_commission=None):
     channel_commission_value = None
   else:
     channel_commission_value = float(channel_commission)  
+  if not channel_name:
+    return None  # oder False, je nach Bedarf
   data = {
     "channel_name": channel_name,
     "channel_commission": channel_commission_value,
     "supabase_key": supabase_key,
     "email": email
   }
+  print('std_commissions saved',data)
   response = supabase_client.table("std_commission").upsert(
     [data],
-    on_conflict="email"  # Konfliktspalte angeben!
+    on_conflict="email, channel_name"  # Konfliktspalte angeben!
   ).execute()
   return response.data  # oder True/False je nach Bedarf
 
   pass
+
+@anvil.server.background_task
+def save_user_apartment_count(user_email):
+  # Step 1: Hole alle Buchungen für den Nutzer, bei denen 'apartment' nicht leer ist
+  response = (
+    supabase_client
+      .table("bookings")
+      .select("apartment")
+      .eq("email", user_email)
+      .not_("apartment", "is", None)
+      .execute()
+  )
+  if not response.data:
+    count = 0
+  else:
+    # Einzigartige Apartments ermitteln
+    unique_apartments = set(row['apartment'] for row in response.data if row.get('apartment'))
+    count = len(unique_apartments)
+
+  # Step 2: Find the user row in the user table
+  user_row = app_tables.users.get(email=user_email)
+  if user_row is not None:
+    # Step 3: Store the count in the user row (assume column is 'apartment_count')
+    user_row['apartment_count'] = count
+    print()
+    return count
+  else:
+    # Optionally handle missing user
+    raise Exception(f"User with email {user_email} not found")

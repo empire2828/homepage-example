@@ -8,6 +8,7 @@ import requests
 from supabase import create_client, Client
 from admin import log
 from servermain import save_last_fees_as_std
+from Users import save_user_apartment_count
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -37,7 +38,6 @@ def sync_smoobu(user_email):
     "Api-Key": api_key,
     "Content-Type": "application/json"
   }
-
   params = {
     "status": "confirmed",
     "page": 1,
@@ -47,7 +47,6 @@ def sync_smoobu(user_email):
     "showCancellation": True,
     "includePriceElements": True,
   }
-
   all_bookings = []
   total_pages = 1
   current_page = 1
@@ -148,20 +147,20 @@ def sync_smoobu(user_email):
         "price_curr": price_curr,
         "price_comm": price_comm
       }
-
       response = (
         supabase_client
           .from_("bookings")
           .upsert(row, on_conflict="reservation_id,email")
           .execute()
       )
-
       bookings_added += 1
     except KeyError as e:
       print(f"Missing key in booking data: {e}")
       continue
 
   anvil.server.launch_background_task('save_user_apartment_count',user_email)
+
+  anvil.server.launch_background_task('save_all_channels_for_user',user_email)
 
   return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten abgerufen und gespeichert."
 
@@ -177,21 +176,17 @@ def get_smoobu_userid(user_email):
     user = app_tables.users.get(email=user_email)
     if not user:
         print(f"Kein Benutzer mit der E-Mail {user_email} gefunden")
-        return None
-        
+        return None        
     api_key = user['smoobu_api_key']
     if not api_key:
         print(f"Kein API-Key für Benutzer {user_email} gefunden")
-        return None
-    
+        return None    
     headers = {
         "Api-Key": api_key,
         "Cache-Control": "no-cache"
-    }
-    
+    }    
     try:
         response = requests.get("https://login.smoobu.com/api/me", headers=headers)
-        
         if response.status_code == 200:
             data = response.json()
             print("get_smoobu_userid: ", data['id'])
@@ -203,21 +198,5 @@ def get_smoobu_userid(user_email):
         print(f"Fehler bei der API-Anfrage: {str(e)}")
         return None
 
-@anvil.server.background_task
-def save_user_apartment_count(user_email):
-    # Step 1: Get distinct apartments for the user from bookings
-    rows = app_tables.bookings.search(email=user_email, apartment=q.not_(None))
-    unique_apartments = set(row['apartment'] for row in rows)
-    count = len(unique_apartments)
 
-    # Step 2: Find the user row in the user table
-    user_row = app_tables.users.get(email=user_email)
-    if user_row is not None:
-        # Step 3: Store the count in the user row (assume column is 'apartment_count')
-        user_row['apartment_count'] = count
-        print()
-        return count
-    else:
-        # Optionally handle missing user
-        raise Exception(f"User with email {user_email} not found")
 
