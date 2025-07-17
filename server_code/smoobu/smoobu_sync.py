@@ -75,6 +75,7 @@ def sync_smoobu(user_email):
   for booking in all_bookings:
     log(str(booking),user_email)
     try:
+           
       # Preis-Elemente separat abrufen
       reservation_id = booking['id']
       price_baseprice = price_cleaningfee = price_longstaydiscount = price_coupon = price_addon = price_curr = None 
@@ -137,9 +138,6 @@ def sync_smoobu(user_email):
         "commission_included": booking['commission-included'],
         "guestid": booking['guestId'],
         "language": booking['language'],
-        "address_postalcode": postal_code,
-        "address_city": city,
-        "address_country": country,
         "email": user_email,
         "supabase_key": supabase_key,
         "price_baseprice": price_baseprice,
