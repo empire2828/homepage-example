@@ -88,46 +88,7 @@ def save_last_fees_as_std(user_email):
   else:
     return 0
 
-@anvil.server.background_task
-def save_all_channels_for_user(user_email):
-  # 1. Lade alle Buchungen für den Nutzer
-  response = (
-    supabase_client
-      .table("bookings")
-      .select("channel_name")
-      .eq("email", user_email)
-      .order("created_at", desc=True)
-      .execute()
-  )
-  bookings = response.data
-
-  # 2. Extrahiere alle einzigartigen genutzten channel_names (keine None/Leere)
-  unique_channels = set()
-  for booking in bookings:
-    channel = booking.get("channel_name")
-    if channel:
-      unique_channels.add(channel)
-
-    # 3. Erstelle Upsert-Objekte für std_commission (ohne Provision als Startwert)
-  upserts = []
-  for channel_name in unique_channels:
-    upserts.append({
-      "email": user_email,
-      "channel_name": channel_name,
-      "channel_commission": None  # Kann später gepflegt werden
-    })
-    print('std channels added:',channel_name, 0)
-    # 4. Upsert in std_commission pro Channel (E-Mail + Channel muss UNIQUE sein)
-  if upserts:
-    supabase_client.table("std_commission").upsert(
-      upserts,
-      on_conflict="email,channel_name" 
-    ).execute()
-    print("Channels gespeichert:", user_email, list(unique_channels))
-    return len(upserts)
-  else:
-    print("Keine Channels für", user_email, "gefunden.")
-    return 0
+ç
 
 
 
