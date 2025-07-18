@@ -61,6 +61,9 @@ def process_booking(booking_data, user_id):
       supabase_key = user['supabase_key']
     else:
       pass
+  except Exception as e:
+    print(f"Fehler im Benutzerabruf: {e}")
+    return
   reservation_id = booking_data.get('id')
   print(f"Verarbeite Buchung: ID={reservation_id}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
 
@@ -85,8 +88,7 @@ def process_booking(booking_data, user_id):
   # Always use the get_price_elements function
   price_data = get_price_elements(
     reservation_id=reservation_id,
-    headers=headers,
-    price_elements=booking_data.get('priceElements', None)  # Pass if present, else None
+    headers=headers
   )
 
   data = {
