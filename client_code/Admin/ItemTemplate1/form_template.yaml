@@ -15,6 +15,10 @@ components:
   name: email_text
   properties: {role: body}
   type: Label
+- layout_properties: {grid_position: 'OHZMIA,HLNPCF'}
+  name: ref_id_text
+  properties: {role: body}
+  type: Label
 - data_bindings: []
   layout_properties: {grid_position: 'BHDSHT,FFNFLL'}
   name: message_text

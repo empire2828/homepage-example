@@ -85,7 +85,7 @@ def import_csv(csv_file):
   return f"{imported_count} Zeilen erfolgreich importiert"
 
 @anvil.server.callable
-def log(message: str, email: str = None):
+def log(message: str, email: str = None , ref_id: str = None):
 
   # Nur wenn keine E-Mail übergeben wurde, selbst nachschauen
   if email is None:
@@ -103,7 +103,8 @@ def log(message: str, email: str = None):
   log_entry = {
     'message': message,
     'email': email,
-    'function': caller_function
+    'function': caller_function,
+    'ref_id': ref_id
   }
 
   # Log-Eintrag in die Tabelle 'logs' schreiben

@@ -71,7 +71,7 @@ def sync_smoobu(user_email):
   bookings_added = 0
 
   for booking in all_bookings:
-    log(str(booking), user_email)
+    log(str(booking), user_email, '')
     try:
       reservation_id = booking.get('id')
       channel_name = booking.get('channel', {}).get('name')

@@ -17,3 +17,4 @@ class ItemTemplate1(ItemTemplate1Template):
     self.created_at_text.text=str(self.item['created_at'])
     self.function_text.text=str(self.item['function'])
     self.id_text.text=str(self.item['id'])
+    self.ref_id_text.text=str(self.item['ref_id'])

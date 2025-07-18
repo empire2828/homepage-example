@@ -3,6 +3,7 @@ import anvil.tables as tables
 from anvil.tables import app_tables
 import requests
 from supabase import create_client, Client
+from admin import log
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -19,7 +20,7 @@ def get_price_elements(reservation_id, headers):
     'price_curr': None,
     'price_comm': None
   }
-
+  
   if reservation_id:
     price_elements_response = requests.get(
       f"https://login.smoobu.com/api/reservations/{reservation_id}/price-elements",
