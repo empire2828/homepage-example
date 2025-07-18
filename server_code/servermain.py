@@ -101,11 +101,13 @@ def save_all_channels_for_user(user_email):
   )
   bookings = response.data
 
-  # 2. Extrahiere alle einzigartigen genutzten channel_names (keine None/Leere)
+  # 2. Extrahiere alle einzigartigen genutzten channel_names
+  #    (keine None/Leere, keine 'blocked channel')
   unique_channels = set()
   for booking in bookings:
     channel = booking.get("channel_name")
-    if channel:
+    # Ignoriere leere Werte UND 'blocked channel'
+    if channel and channel.lower() != "Blocked channel":
       unique_channels.add(channel)
 
     # 3. Für jeden Channel: Hole std_commission_rate aus Anvil Tabelle 'channels'
@@ -121,7 +123,7 @@ def save_all_channels_for_user(user_email):
     })
     print('std channels added:', channel_name, std_commission_rate)
 
-    # 4. Upsert in std_commission pro Channel (E-Mail + Channel muss UNIQUE sein)
+    # 4. Upsert in std_commission pro Channel
   if upserts:
     supabase_client.table("std_commission").upsert(
       upserts,
@@ -132,6 +134,7 @@ def save_all_channels_for_user(user_email):
   else:
     print("Keine Channels für", user_email, "gefunden.")
     return 0
+
 
 
 

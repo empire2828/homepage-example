@@ -1,4 +1,3 @@
-#import anvil.email
 import anvil.secrets
 import anvil.users
 from anvil.tables import app_tables
@@ -116,11 +115,6 @@ def create_supabase_key():
   user['supabase_key']=key
   return 
 
-# Beispiel
-#email = "user@example.com"
-#zahl = email_to_number(email)
-#print(zahl)
-
 @anvil.server.callable
 def save_user_parameter(std_cleaning_fee=None, std_linen_fee=None,use_own_std_fees=False):
   current_user = anvil.users.get_user()
@@ -138,7 +132,6 @@ def save_user_parameter(std_cleaning_fee=None, std_linen_fee=None,use_own_std_fe
     on_conflict="email"  # Konfliktspalte angeben!
   ).execute()
   return response.data  # oder True/False je nach Bedarf
-
   pass
 
 @anvil.server.callable
@@ -178,7 +171,6 @@ def save_std_commission(channel_name=None, channel_commission=None):
     on_conflict="email, channel_name"  # Konfliktspalte angeben!
   ).execute()
   return response.data  # oder True/False je nach Bedarf
-
   pass
 
 @anvil.server.background_task
@@ -204,3 +196,10 @@ def save_user_apartment_count(user_email):
     return count
   else:
     raise Exception(f"User with email {user_email} not found")
+
+@anvil.server.callable
+def get_user_channels_from_std_commission(email):
+  r = supabase_client.table('std_commission')\
+    .select('channel_name, channel_commission').eq('email', email).execute()
+  return r.data  # Sollte eine Liste von Dicts sein!
+

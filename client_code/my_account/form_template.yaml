@@ -84,10 +84,18 @@ components_by_slot:
       name: use_own_std_fees_checkbox
       properties: {text: Always use above values for all channels}
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+    - layout_properties: {grid_position: 'DCCQTI,TZOHFW'}
+      name: spacer_2
+      properties: {}
+      type: Spacer
     - layout_properties: {grid_position: 'WBRPOD,REYWQK'}
       name: title_1_copy
       properties: {role: title, text: Commissions}
       type: Label
+    - layout_properties: {grid_position: 'MOAZGR,SQIPTN'}
+      name: text_1_copy
+      properties: {font_size: 18, text: Here you can set commission percentages to be used where no commission is handed over to your channel mamager (all ical connections). Enter numbers without % sign (eg 8 for 8 %).}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG DBBPSB,EWPHRY'}
       name: channel1_dropdown_menu
       properties:
@@ -110,9 +118,31 @@ components_by_slot:
       name: channel5_dropdown_menu
       properties: {label: Channel 5}
       type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG CEILHN,RNMAQO'}
+      name: channel6_dropdown_menu
+      properties:
+        items: []
+        label: Channel 6
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG VXEUBA,XQRIOG'}
+      name: channel7_dropdown_menu
+      properties: {label: Channel 7}
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG JLANBA,GOXUKH'}
+      name: channel8_dropdown_menu
+      properties: {label: Channel 8}
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG IZDXZX,KYGEPT'}
+      name: channel9_dropdown_menu
+      properties: {label: Channel 9}
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
+    - layout_properties: {grid_position: 'KBUMXL,CZHAOG REWYAE,QEKUPU'}
+      name: channel10_dropdown_menu
+      properties: {label: Channel 10}
+      type: form:dep_g9k4toow7i44kq:_Components.DropdownMenu
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH UQYWHG,GRUHYS'}
       name: channel1_text_box
-      properties: {label: Channel 1 commission}
+      properties: {label: Channel 1 commission, placeholder: ''}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH VSITDS,KEEGQT'}
       name: channel2_text_box
@@ -129,6 +159,26 @@ components_by_slot:
     - layout_properties: {grid_position: 'KBUMXL,LFQVRH SPDNSJ,OZJQQQ'}
       name: channel5_text_box
       properties: {label: Channel 5 commission}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH NLHKGP,PMBDIB'}
+      name: channel6_text_box
+      properties: {label: Channel 6 commission}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH DODFTM,IMCGJA'}
+      name: channel7_text_box
+      properties: {label: Channel 7 commission}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH CFWWER,MGHMRU'}
+      name: channel8_text_box
+      properties: {label: Channel 8 commission}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH AIXURE,KKLUCN'}
+      name: channel9_text_box
+      properties: {label: Channel 9 commission}
+      type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+    - layout_properties: {grid_position: 'KBUMXL,LFQVRH QQVQOF,IXWSPH'}
+      name: channel10_text_box
+      properties: {label: Channel 10 commission}
       type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
     - event_bindings: {click: save_button_click}
       layout_properties: {grid_position: 'OTSBJF,MMPSAC'}

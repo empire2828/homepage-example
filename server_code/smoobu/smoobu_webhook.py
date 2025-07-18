@@ -167,7 +167,7 @@ def get_supabase_key_for_user(email):
   else:
     return None
 
-# für CreatPriceElements oder UpdatePriceElements, sind NIE gekommen, nicht getestet
+################################ für CreatPriceElements oder UpdatePriceElements, sind NIE gekommen, nicht getestet
 @anvil.server.background_task
 def process_price_element(price_element_data, user_id):
   if not price_element_data or 'id' not in price_element_data:
@@ -238,11 +238,6 @@ def process_price_element(price_element_data, user_id):
     supabase_client.table("bookings").update(update_data).eq("reservation_id", reservation_id).eq("email", user_email).execute()
   else:
     print(f"Buchung {reservation_id} ({user_email}) nicht gefunden – kein Update möglich")
-
-# Supabase-Client initialisieren (wie in deinem Hauptcode)
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.background_task
 def fetch_and_store_price_elements(reservation_id, user_id):

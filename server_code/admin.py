@@ -111,23 +111,6 @@ def log(message: str, email: str = None):
   return response
 pass
 
-@anvil.server.background_task
-def delete_old_logs():
-  x_days_ago = datetime.now(timezone.utc) - timedelta(days=5)
-  response = (
-    supabase_client.table("logs")
-      .delete()
-      .lt("created_at", x_days_ago.isoformat())
-      .execute()
-  )
-  print(response)
-  return {
-    "status_code": getattr(response, "status_code", None),
-    "data": getattr(response, "data", None),
-    "error": getattr(response, "error", None)
-  }
-
-
 @anvil.server.callable
 def search_logs(search_term: str):
   filters = [
