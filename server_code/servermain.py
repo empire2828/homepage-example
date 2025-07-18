@@ -108,26 +108,31 @@ def save_all_channels_for_user(user_email):
     if channel:
       unique_channels.add(channel)
 
-    # 3. Erstelle Upsert-Objekte für std_commission (ohne Provision als Startwert)
+    # 3. Für jeden Channel: Hole std_commission_rate aus Anvil Tabelle 'channels'
   upserts = []
   for channel_name in unique_channels:
+    row = anvil.tables.app_tables.channels.get(name=channel_name)
+    std_commission_rate = row.get('std_commission_rate') if row else None
+
     upserts.append({
       "email": user_email,
       "channel_name": channel_name,
-      "channel_commission": None  # Kann später gepflegt werden
+      "channel_commission": std_commission_rate
     })
-    print('std channels added:',channel_name, 0)
+    print('std channels added:', channel_name, std_commission_rate)
+
     # 4. Upsert in std_commission pro Channel (E-Mail + Channel muss UNIQUE sein)
   if upserts:
     supabase_client.table("std_commission").upsert(
       upserts,
-      on_conflict="email,channel_name" 
+      on_conflict="email,channel_name"
     ).execute()
     print("Channels gespeichert:", user_email, list(unique_channels))
     return len(upserts)
   else:
     print("Keine Channels für", user_email, "gefunden.")
     return 0
+
 
 
 
