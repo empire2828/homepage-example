@@ -9,6 +9,7 @@ from supabase import create_client, Client
 from admin import log
 from servermain import save_last_fees_as_std
 from Users import save_user_apartment_count
+from smoobu.smoobu_main import get_price_elements
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -27,12 +28,12 @@ def launch_sync_smoobu():
 @anvil.server.background_task
 def sync_smoobu(user_email):
   base_url = "https://login.smoobu.com/api/reservations"
-  user= app_tables.users.get(email=user_email)
+  user = app_tables.users.get(email=user_email)
   if user:
-    api_key= user['smoobu_api_key']
+    api_key = user['smoobu_api_key']
     supabase_key = user['supabase_key']
   else:
-    pass
+    return "User not found."
 
   headers = {
     "Api-Key": api_key,
@@ -42,7 +43,7 @@ def sync_smoobu(user_email):
     "status": "confirmed",
     "page": 1,
     "limit": 100,
-    "from": "2019-01-01", 
+    "from": "2019-01-01",
     "excludeBlocked": True,
     "showCancellation": True,
     "includePriceElements": True,
@@ -56,9 +57,7 @@ def sync_smoobu(user_email):
     response = requests.get(base_url, headers=headers, params=params)
     if response.status_code == 200:
       data = response.json()
-      # ACHTUNG: Die API liefert page_count und bookings
       total_pages = data.get("pagination", {}).get("totalPages", 1)
-      # oder manchmal page_count
       if "page_count" in data:
         total_pages = data["page_count"]
       if "bookings" in data:
@@ -72,57 +71,21 @@ def sync_smoobu(user_email):
   bookings_added = 0
 
   for booking in all_bookings:
-    log(str(booking),user_email)
+    log(str(booking), user_email)
     try:
-           
-      # Preis-Elemente separat abrufen
-      reservation_id = booking['id']
-      price_baseprice = price_cleaningfee = price_longstaydiscount = price_coupon = price_addon = price_curr = None 
-      if reservation_id:
-        price_elements_response = requests.get(
-          f"https://login.smoobu.com/api/reservations/{reservation_id}/price-elements",
-          headers=headers
-        )
-        if price_elements_response.status_code == 200:
-          price_baseprice = None
-          price_cleaningfee = 0
-          price_longstaydiscount = None
-          price_coupon = None
-          price_addon = 0
-          price_curr = None
-          price_comm= None
-          if price_elements_response.status_code == 200:
-            price_elements = price_elements_response.json().get("priceElements", [])
-            #print("reservation id: ",reservation_id, " price_elements: ",price_elements)
-            log(price_elements,user_email)
-            for pe in price_elements:
-              if pe.get('type') == 'basePrice':
-                price_baseprice = pe.get('amount')
-              elif pe.get('type') == 'cleaningFee':
-                price_cleaningfee = pe.get('amount')
-              elif pe.get('type') == 'longStayDiscount':
-                price_longstaydiscount = pe.get('amount')
-              elif pe.get('type') == 'addon':
-                price_addon = pe.get('amount')
-              elif pe.get('type') == 'coupon':
-                price_coupon = pe.get('coupon')
-              if pe.get('type') == 'commission':
-                price_comm = pe.get('amount')
-              if pe.get('type') == 'channelCustom' and ( pe.get('name') == 'PASS_THROUGH_RESORT_FEE' or pe.get('name') == 'PASS_THROUGH_LINEN_FEE' ):
-                price_addon = price_addon + (pe.get('amount') or 0)
-                #airbnb cleaning fee läuft richtig
-              if booking['channel']['name'] == 'Booking.com' and pe.get('type') == 'channelCustom':
-                price_cleaningfee = price_cleaningfee + (pe.get('amount') or 0)
-              price_curr = pe.get('currencyCode')
+      reservation_id = booking.get('id')
+      channel_name = booking.get('channel', {}).get('name')
+      # Use the refactored price extraction function
+      price_data = get_price_elements(reservation_id, headers)
       row = {
-        "reservation_id": booking['id'],
+        "reservation_id": reservation_id,
         "apartment": booking['apartment']['name'],
         "arrival": datetime.strptime(booking['arrival'], "%Y-%m-%d").date().isoformat(),
         "departure": datetime.strptime(booking['departure'], "%Y-%m-%d").date().isoformat(),
-        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").isoformat(),  # Fixed format
-        "modified_at": datetime.strptime(booking['modifiedAt'], "%Y-%m-%d %H:%M:%S").isoformat(), 
+        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").isoformat(),
+        "modified_at": datetime.strptime(booking['modifiedAt'], "%Y-%m-%d %H:%M:%S").isoformat(),
         "guestname": booking['guest-name'],
-        "channel_name": booking['channel']['name'],
+        "channel_name": channel_name,
         "guest_email": booking['email'],
         "phone": booking['phone'],
         "adults": booking['adults'],
@@ -139,13 +102,13 @@ def sync_smoobu(user_email):
         "language": booking['language'],
         "email": user_email,
         "supabase_key": supabase_key,
-        "price_baseprice": price_baseprice,
-        "price_cleaningfee": price_cleaningfee,  
-        "price_longstaydiscount": price_longstaydiscount,
-        "price_coupon": price_coupon,
-        "price_addon": price_addon,
-        "price_curr": price_curr,
-        "price_comm": price_comm
+        "price_baseprice": price_data['price_baseprice'],
+        "price_cleaningfee": price_data['price_cleaningfee'],
+        "price_longstaydiscount": price_data['price_longstaydiscount'],
+        "price_coupon": price_data['price_coupon'],
+        "price_addon": price_data['price_addon'],
+        "price_curr": price_data['price_curr'],
+        "price_comm": price_data['price_comm']
       }
       response = (
         supabase_client
@@ -158,9 +121,8 @@ def sync_smoobu(user_email):
       print(f"Missing key in booking data: {e}")
       continue
 
-  anvil.server.launch_background_task('save_user_apartment_count',user_email)
-
-  anvil.server.launch_background_task('save_all_channels_for_user',user_email)
+  anvil.server.launch_background_task('save_user_apartment_count', user_email)
+  anvil.server.launch_background_task('save_all_channels_for_user', user_email)
 
   return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten abgerufen und gespeichert."
 
