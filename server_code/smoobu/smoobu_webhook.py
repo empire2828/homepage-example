@@ -4,6 +4,7 @@ import anvil.server
 from datetime import datetime
 from supabase import create_client, Client
 import requests
+from smoobu.smoobu_main import get_price_elements
 
 # Supabase-Client initialisieren
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
@@ -52,40 +53,41 @@ def process_booking(booking_data, user_id):
   if not booking_data or 'id' not in booking_data:
     print("Keine gültigen Buchungsdaten erhalten")
     return
-
-  user_email = get_user_email(user_id) or "unbekannt"
-  supabase_key= get_supabase_key_for_user(user_email)
+  try:
+    user_email = get_user_email(user_id) or "unbekannt"
+    user= app_tables.users.get(email=user_email)
+    if user:
+      smoobu_api_key= user['smoobu_api_key']
+      supabase_key = user['supabase_key']
+    else:
+      pass
   reservation_id = booking_data.get('id')
   print(f"Verarbeite Buchung: ID={reservation_id}, Ankunft={booking_data.get('arrival')}, E-Mail={user_email}")
 
-  # Blocked channel überspringen
+  # Skip blocked channels
   if booking_data.get('channel', {}).get('name') == 'Blocked channel':
     print(f"Buchung {reservation_id} ist ein Blocked channel - wird übersprungen")
     return
 
-    # Prüfe, ob Buchung mit reservation_id UND user_email existiert
-  existing = supabase_client.table("bookings").select("*").eq("reservation_id", reservation_id).eq("email", user_email).execute().data
+    # Check for existing booking
+  existing = supabase_client.table("bookings") \
+    .select("*") \
+    .eq("reservation_id", reservation_id) \
+    .eq("email", user_email) \
+    .execute().data
 
-  price_baseprice = None
-  price_cleaningfee = None
-  price_longstaydiscount = None
-  price_addon = None
-  price_coupon = None
-  price_curr= None
-  
-  # Schritt 2: Durchlauf und Zuweisung
-  for pe in booking_data.get('priceElements', []):
-    if pe.get('type') == 'basePrice':
-      price_baseprice = pe.get('amount')
-    elif pe.get('type') == 'cleaningFee':
-      price_cleaningfee = pe.get('amount')
-    elif pe.get('type') == 'longStayDiscount':
-      price_longstaydiscount = pe.get('amount')
-    elif pe.get('type') == 'addon':
-      price_addon = pe.get('amount')
-    elif pe.get('type') == 'coupon':
-      price_coupon = pe.get('amount')
-    price_curr = pe.get('currencyCode')
+  channel_name = booking_data.get('channel', {}).get('name')
+  headers = {
+    "Api-Key": smoobu_api_key,
+    "Content-Type": "application/json"
+  }
+
+  # Always use the get_price_elements function
+  price_data = get_price_elements(
+    reservation_id=reservation_id,
+    headers=headers,
+    price_elements=booking_data.get('priceElements', None)  # Pass if present, else None
+  )
 
   data = {
     "type": booking_data.get('type'),
@@ -95,7 +97,7 @@ def process_booking(booking_data, user_id):
     "modified_at": booking_data.get('modifiedAt'),
     "apartment": booking_data.get('apartment', {}).get('name'),
     "guestname": booking_data.get('guest-name', ''),
-    "channel_name": booking_data.get('channel', {}).get('name'),
+    "channel_name": channel_name,
     "adults": booking_data.get('adults'),
     "children": booking_data.get('children'),
     "language": booking_data.get('language'),
@@ -110,23 +112,27 @@ def process_booking(booking_data, user_id):
     "deposit_paid": booking_data.get('deposit-paid'),
     "reservation_id": reservation_id,
     "supabase_key": supabase_key,
-    "price_baseprice": price_baseprice,
-    "price_cleaningfee": price_cleaningfee,
-    "price_longstaydiscount": price_longstaydiscount,
-    "price_addon": price_addon,
-    "price_coupon": price_coupon, 
-    "price_curr": price_curr,
+    "price_baseprice": price_data.get('price_baseprice'),
+    "price_cleaningfee": price_data.get('price_cleaningfee'),
+    "price_longstaydiscount": price_data.get('price_longstaydiscount'),
+    "price_addon": price_data.get('price_addon'),
+    "price_coupon": price_data.get('price_coupon'),
+    "price_curr": price_data.get('price_curr'),
+    "price_comm": price_data.get('price_comm'),
   }
 
   if existing:
     print(f"Aktualisiere bestehende Buchung: {reservation_id} für {user_email}")
     print(data)
-    # Aktualisiere mit beiden Bedingungen
-    supabase_client.table("bookings").update(data).eq("reservation_id", reservation_id).eq("email", user_email).execute()
+    supabase_client.table("bookings").update(data) \
+      .eq("reservation_id", reservation_id) \
+      .eq("email", user_email) \
+      .execute()
   else:
     print(f"Füge neue Buchung hinzu: {reservation_id} für {user_email}")
     print(data)
     supabase_client.table("bookings").insert(data).execute()
+
 
 @anvil.server.background_task
 def delete_booking(reservation_id, user_id):
@@ -167,153 +173,3 @@ def get_supabase_key_for_user(email):
   else:
     return None
 
-################################ für CreatPriceElements oder UpdatePriceElements, sind NIE gekommen, nicht getestet
-@anvil.server.background_task
-def process_price_element(price_element_data, user_id):
-  if not price_element_data or 'id' not in price_element_data:
-    print("Keine gültigen PriceElement-Daten erhalten")
-    return
-
-  reservation_id = price_element_data.get('reservationId')
-  user_email = get_user_email(user_id) or "unbekannt"
-  supabase_key = get_supabase_key_for_user(user_email)
-
-  # Initialisiere alle Price-Element-Felder mit None
-  price_baseprice = None
-  price_cleaningfee = None
-  price_longstaydiscount = None
-  price_coupon = None
-  price_addon = None
-  price_curr = None
-  price_comm= None
-
-  # Mapping nach Typ
-  pe_type = price_element_data.get('type')
-  amount = price_element_data.get('amount')
-  coupon = price_element_data.get('coupon')
-  currency_code = price_element_data.get('currencyCode')
-
-  if pe_type == 'basePrice':
-    price_baseprice = amount
-  elif pe_type == 'cleaningFee':
-    price_cleaningfee = amount
-  elif pe_type == 'longStayDiscount':
-    price_longstaydiscount = amount
-  elif pe_type == 'addon':
-    price_addon = amount
-  elif pe_type == 'coupon':
-    price_coupon = coupon
-  elif pe_type == 'commission':
-    price_comm = amount
-  price_curr = currency_code
-
-  # Hole bestehende Buchung
-  existing = (
-    supabase_client
-      .table("bookings")
-      .select("*")
-      .eq("reservation_id", reservation_id)
-      .eq("email", user_email)
-      .execute()
-      .data
-  )
-
-  # Nur die relevanten Felder updaten
-  update_data = {
-    "price_baseprice": price_baseprice,
-    "price_cleaningfee": price_cleaningfee,
-    "price_longstaydiscount": price_longstaydiscount,
-    "price_coupon": price_coupon,
-    "price_addon": price_addon,
-    "price_curr": price_curr,
-    "supabase_key": supabase_key,
-    "price_comm": price_comm
-  }
-
-  # Entferne None-Werte, damit nur das jeweilige Feld überschrieben wird
-  update_data = {k: v for k, v in update_data.items() if v is not None}
-
-  if existing:
-    print(f"Aktualisiere Buchung {reservation_id} ({user_email}) mit PriceElement {pe_type}")
-    supabase_client.table("bookings").update(update_data).eq("reservation_id", reservation_id).eq("email", user_email).execute()
-  else:
-    print(f"Buchung {reservation_id} ({user_email}) nicht gefunden – kein Update möglich")
-
-@anvil.server.background_task
-def fetch_and_store_price_elements(reservation_id, user_id):
-  try:
-    user_email = get_user_email(user_id) or "unbekannt"
-    user= app_tables.users.get(email=user_email)
-    if user:
-      api_key= user['smoobu_api_key']
-      supabase_key = user['supabase_key']
-    else:
-      pass
-    url = f"https://login.smoobu.com/api/reservations/{reservation_id}/price-elements"
-    headers = {"Api-Key": api_key}
-    response = requests.get(url, headers=headers)
-    if response.status_code != 200:
-      print(f"Fehler beim Abrufen der priceElements: {response.status_code} - {response.text}")
-      return
-
-    price_elements = response.json().get("priceElements", [])
-
-    # Initialisiere alle Price-Element-Felder mit None
-    price_baseprice = None
-    price_cleaningfee = None
-    price_longstaydiscount = None
-    price_addon = None
-    price_coupon = None
-    price_curr = None
-    price_comm= None
-
-    # Durchlauf und Zuweisung wie im bestehenden Code
-    for pe in price_elements:
-      if pe.get('type') == 'basePrice':
-        price_baseprice = pe.get('amount')
-      elif pe.get('type') == 'cleaningFee':
-        price_cleaningfee = pe.get('amount')
-      elif pe.get('type') == 'longStayDiscount':
-        price_longstaydiscount = pe.get('amount')
-      elif pe.get('type') == 'addon':
-        price_addon = pe.get('amount')
-      elif pe.get('type') == 'coupon':
-        price_coupon = pe.get('amount')
-      elif pe.get('type') == 'commission':
-        price_comm = pe.get('amount')
-      price_curr = pe.get('currencyCode')
-
-      # Daten für Supabase vorbereiten
-    data = {
-      "reservation_id": reservation_id,
-      "email": user_email,
-      "supabase_key": supabase_key,
-      "price_baseprice": price_baseprice,
-      "price_cleaningfee": price_cleaningfee,
-      "price_longstaydiscount": price_longstaydiscount,
-      "price_addon": price_addon,
-      "price_coupon": price_coupon,
-      "price_curr": price_curr,
-      "price_comm": price_comm
-    }
-
-    # Buchung updaten (analog zu deinem Hauptcode)
-    existing = (
-      supabase_client
-        .table("bookings")
-        .select("*")
-        .eq("reservation_id", reservation_id)
-        .eq("email", user_email)
-        .execute()
-        .data
-    )
-
-    if existing:
-      print(f"Aktualisiere Buchung: {reservation_id} für {user_email} mit PriceElements")
-      supabase_client.table("bookings").update(data).eq("reservation_id", reservation_id).eq("email", user_email).execute()
-    else:
-      print(f"Füge neue Buchung hinzu: {reservation_id} für {user_email} mit PriceElements")
-      supabase_client.table("bookings").insert(data).execute()
-
-  except Exception as e:
-    print(f"Fehler in fetch_and_store_price_elements: {str(e)}")

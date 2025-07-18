@@ -15,6 +15,16 @@ supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
 supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
+@anvil.server.callable
+def launch_sync_smoobu():
+  current_user = anvil.users.get_user()
+  user_email = current_user['email'] 
+  result= anvil.server.launch_background_task('sync_smoobu',user_email)
+  save_smoobu_userid(user_email)
+  current_user['server_data_last_update'] = datetime.now()
+  save_last_fees_as_std(user_email)
+  return result
+
 @anvil.server.background_task
 def sync_smoobu(user_email):
   base_url = "https://login.smoobu.com/api/reservations"
