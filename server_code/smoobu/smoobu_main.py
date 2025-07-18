@@ -48,6 +48,16 @@ def get_price_elements(reservation_id, headers):
 
         price_data['price_curr'] = pe.get('currencyCode')
 
+        terms = ['reinigung', 'cleaning']
+        if price_data['price_cleaningfee'] == 0:
+          if pe.get('name', '').lower() in [term.lower() for term in terms]:
+            price_data['price_cleaningfee'] = pe.get('amount', 0) + price_data['price_cleaningfee']
+
+        terms = ['wäsche', 'linen', 'strom', 'electricity', 'heizung', 'heating' , 'tax' , 'tourism']
+        if price_data['price_addon'] == 0:
+          if pe.get('name', '').lower() in [term.lower() for term in terms]:
+            price_data['price_addon'] = pe.get('amount', 0) + price_data['price_addon']
+
   return price_data
 
 
