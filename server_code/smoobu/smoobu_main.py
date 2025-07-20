@@ -9,6 +9,8 @@ supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
 supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
+#https://legacy.developers.booking.com/api/commercial/index.html?page_url=possible-values
+
 @anvil.server.background_task
 def get_price_elements(reservation_id, headers):
   price_data = {
