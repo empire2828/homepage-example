@@ -23,6 +23,10 @@ def get_price_elements(reservation_id, headers):
     if price_elements_response.status_code == 200:
       price_elements = price_elements_response.json().get("priceElements", [])
       print(price_elements)
+
+      has_addon = any(pe.get('type') == 'addon' for pe in price_elements)
+      has_cleaningFee = any(pe.get('type') == 'cleaningFee' for pe in price_elements)
+
       for pe in price_elements:
         if pe.get('type') == 'basePrice':
           price_data['price_baseprice'] = pe.get('amount')
@@ -41,19 +45,17 @@ def get_price_elements(reservation_id, headers):
 
         price_data['price_curr'] = pe.get('currencyCode')
 
+        name_lower = (pe.get('name') or '').lower()
+
         cleaning_terms = ['reinigung', 'cleaning']
-        has_cleaningFee = any(pe.get('type') == 'cleaningFee' for pe in price_elements)
         if not has_cleaningFee:
-          name_lower = (pe.get('name') or '').lower()
           if any(term in name_lower for term in cleaning_terms):
             price_data['price_cleaningfee'] += pe.get('amount') or 0
 
         #alles andere in None Type außer Reinigung und Cleaning zu Addon
-        #addon_terms = ['wäsche','linen','strom','electricity','heizung', 'heating','tax' ,'tourism','resort', 'handtuch','towel','service','resort']
-        has_addon = any(pe.get('type') == 'addon' for pe in price_elements)
+        addon_terms = ['wäsche','linen','strom','electricity','heizung', 'heating','tax' ,'tourism','resort', 'handtuch','towel','service','resort']        
         if not has_addon:
-          name_lower = (pe.get('name') or '').lower()
-          if not any(term in name_lower for term in cleaning_terms) and pe.get('type') == 'None':
+          if any(term in name_lower for term in addon_terms):
             price_data['price_addon'] += pe.get('amount') or 0
 
   return price_data
