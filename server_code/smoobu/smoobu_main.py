@@ -2,27 +2,19 @@ import anvil.server
 import anvil.tables as tables
 from anvil.tables import app_tables
 import requests
-from supabase import create_client, Client
-from admin import log
-
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: Client = create_client(supabase_url, supabase_api_key)
-
-#https://legacy.developers.booking.com/api/commercial/index.html?page_url=possible-values
+import anvil.secrets
 
 @anvil.server.background_task
 def get_price_elements(reservation_id, headers):
   price_data = {
-    'price_baseprice': None,
+    'price_baseprice': 0,
     'price_cleaningfee': 0,
-    'price_longstaydiscount': None,
-    'price_coupon': None,
+    'price_longstaydiscount': 0,
+    'price_coupon': 0,
     'price_addon': 0,
     'price_curr': None,
-    'price_comm': None
+    'price_comm': 0
   }
-  
   if reservation_id:
     price_elements_response = requests.get(
       f"https://login.smoobu.com/api/reservations/{reservation_id}/price-elements",
@@ -30,6 +22,7 @@ def get_price_elements(reservation_id, headers):
     )
     if price_elements_response.status_code == 200:
       price_elements = price_elements_response.json().get("priceElements", [])
+      print(price_elements)
       for pe in price_elements:
         if pe.get('type') == 'basePrice':
           price_data['price_baseprice'] = pe.get('amount')
@@ -42,28 +35,35 @@ def get_price_elements(reservation_id, headers):
         elif pe.get('type') == 'coupon':
           price_data['price_coupon'] = pe.get('coupon')
 
-        if pe.get('type') == 'commission':
-          price_data['price_comm'] = pe.get('amount')
-
-        if pe.get('type') == 'channelCustom' and \
-        (pe.get('name') == 'PASS_THROUGH_RESORT_FEE' or pe.get('name') == 'PASS_THROUGH_LINEN_FEE'):
-          price_data['price_addon'] += pe.get('amount') or 0
+        #Paymentcharge nur wenn selber angelegt manuell in Smoobu
+        if pe.get('type') == 'commission' or pe.get('name') == 'PaymentCharge':
+          price_data['price_comm'] += round(abs(pe.get('amount') or 0),2)
 
         price_data['price_curr'] = pe.get('currencyCode')
 
-        terms = ['reinigung', 'cleaning']
-        if price_data['price_cleaningfee'] == 0:
-          if pe.get('name', '').lower() in [term.lower() for term in terms]:
-            price_data['price_cleaningfee'] = pe.get('amount', 0) + price_data['price_cleaningfee']
+        cleaning_terms = ['reinigung', 'cleaning']
+        has_cleaningFee = any(pe.get('type') == 'cleaningFee' for pe in price_elements)
+        if not has_cleaningFee:
+          name_lower = (pe.get('name') or '').lower()
+          if any(term in name_lower for term in cleaning_terms):
+            price_data['price_cleaningfee'] += pe.get('amount') or 0
 
-        terms = ['wäsche', 'linen', 'strom', 'electricity', 'heizung', 'heating' , 'tax' , 'tourism']
-        if price_data['price_addon'] == 0:
-          if pe.get('name', '').lower() in [term.lower() for term in terms]:
-            price_data['price_addon'] = pe.get('amount', 0) + price_data['price_addon']
+        #alles andere in None Type außer Reinigung und Cleaning zu Addon
+        #addon_terms = ['wäsche','linen','strom','electricity','heizung', 'heating','tax' ,'tourism','resort', 'handtuch','towel','service','resort']
+        has_addon = any(pe.get('type') == 'addon' for pe in price_elements)
+        if not has_addon:
+          name_lower = (pe.get('name') or '').lower()
+          if not any(term in name_lower for term in cleaning_terms) and pe.get('type') == 'None':
+            price_data['price_addon'] += pe.get('amount') or 0
 
   return price_data
 
 
+#https://developers.booking.com/demand/docs/development-guide/rate-limiting
 
-
+#headers = {
+#  "Api-Key": anvil.secrets.get_secret('smoobu_api_key'),
+#  "Content-Type": "application/json"
+#}
+#print('function_call:',get_price_elements('70507371',headers))
 
