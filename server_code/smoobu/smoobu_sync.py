@@ -52,6 +52,7 @@ def launch_sync_smoobu():
 
 @anvil.server.background_task
 def sync_smoobu(user_email):
+  print('starte sync_smoobu')
   base_url = "https://login.smoobu.com/api/reservations"
   user = app_tables.users.get(email=user_email)
   if user:
@@ -106,7 +107,7 @@ def sync_smoobu(user_email):
 
   # Buchungsdaten für BigQuery vorbereiten
   for booking in all_bookings:
-    log(str(booking), user_email, '')
+    print(str(booking), user_email, '')
     try:
       reservation_id = booking.get('id')
       channel_name = booking.get('channel', {}).get('name')
@@ -121,25 +122,25 @@ def sync_smoobu(user_email):
         "arrival": booking['arrival'],  # BigQuery erwartet String im Format YYYY-MM-DD
         "departure": booking['departure'],
         "created_at": booking['created-at'] + ":00",  # Sekunden hinzufügen falls nötig
-        "modified_at": booking['modifiedAt'],
+        "modified_at": booking['modifiedAt'] if booking['modifiedAt'] else '',
         "guestname": booking['guest-name'],
         "channel_name": channel_name if channel_name else '',
         "guest_email": booking['email'] if booking['email'] else '',
         "phone": booking['phone'] if booking['phone'] else '',
-        "adults": booking['adults'],
-        "children": booking['children'],
-        "type": booking['type'],
+        "adults": booking['adults'] if booking['adults'] else 0,
+        "children": booking['children'] if booking['children'] else 0,
+        "type": booking['type'] if booking['type'] else '',
         "price": float(booking['price']) if booking['price'] else 0.0,
-        "price_paid": float(booking['price-paid']) if booking['price-paid'] else 0.0,
+        "price_paid": booking['price-paid'] if booking['price-paid'] else '',
         "prepayment": float(booking['prepayment']) if booking['prepayment'] else 0.0,
-        "prepayment_paid": float(booking['prepayment-paid']) if booking['prepayment-paid'] else 0.0,
+        "prepayment_paid": booking['prepayment-paid'] if booking['prepayment-paid'] else '',
         "deposit": float(booking['deposit']) if booking['deposit'] else 0.0,
-        "deposit_paid": float(booking['deposit-paid']) if booking['deposit-paid'] else 0.0,
-        "commission_included": float(booking['commission-included']),
+        "deposit_paid": booking['deposit-paid'] if booking['deposit-paid'] else '',
+        "commission_included": float(booking['commission-included']) if booking['commission-included'] else 0,
         "guestid": str(booking['guestId']) if booking['guestId'] else '',
         "language": booking['language'] if booking['language'] else '',
-        "email": user_email,
-        # supabase_key entfernt da nicht mehr benötigt
+        "email": user_email if user_email else '',
+        "supabase_key": booking['supabase_key'] if booking['supabase_key'] else '',
         "price_baseprice": float(price_data['price_baseprice']) if price_data['price_baseprice'] else 0.0,
         "price_cleaningfee": float(price_data['price_cleaningfee']) if price_data['price_cleaningfee'] else 0.0,
         "price_longstaydiscount": float(price_data['price_longstaydiscount']) if price_data['price_longstaydiscount'] else 0.0,
@@ -149,6 +150,7 @@ def sync_smoobu(user_email):
         "price_comm": float(price_data['price_comm']) if price_data['price_comm'] else 0.0
       }
 
+      print(rows_for_bigquery)
       rows_for_bigquery.append(row)
 
     except KeyError as e:
