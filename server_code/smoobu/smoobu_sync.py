@@ -38,7 +38,7 @@ def get_bigquery_client():
 BIGQUERY_PROJECT_ID = "lodginia"
 BIGQUERY_DATASET_ID = "lodginia" 
 BIGQUERY_TABLE_ID = "bookings"
-FULL_TABLE_ID = f"{BIGQUERY_PROJECT_ID}.{BIGQUERY_DATASET_ID}.{BIGQUERY_TABLE_ID}"
+FULL_TABLE_ID = "lodginia.lodginia.bookings"
 
 @anvil.server.callable
 def launch_sync_smoobu():
@@ -57,8 +57,7 @@ def sync_smoobu(user_email):
   user = app_tables.users.get(email=user_email)
   if user:
     api_key = user['smoobu_api_key']
-    # Entfernen von supabase_key da nicht mehr benötigt für BigQuery
-    # supabase_key = user['supabase_key']
+    supabase_key = user['supabase_key']
   else:
     return "User not found."
 
@@ -107,7 +106,7 @@ def sync_smoobu(user_email):
 
   # Buchungsdaten für BigQuery vorbereiten
   for booking in all_bookings:
-    print(str(booking), user_email, '')
+    #print(str(booking), user_email, '')
     try:
       reservation_id = booking.get('id')
       channel_name = booking.get('channel', {}).get('name')
@@ -140,7 +139,7 @@ def sync_smoobu(user_email):
         "guestid": str(booking['guestId']) if booking['guestId'] else '',
         "language": booking['language'] if booking['language'] else '',
         "email": user_email if user_email else '',
-        "supabase_key": booking['supabase_key'] if booking['supabase_key'] else '',
+        "supabase_key": supabase_key,
         "price_baseprice": float(price_data['price_baseprice']) if price_data['price_baseprice'] else 0.0,
         "price_cleaningfee": float(price_data['price_cleaningfee']) if price_data['price_cleaningfee'] else 0.0,
         "price_longstaydiscount": float(price_data['price_longstaydiscount']) if price_data['price_longstaydiscount'] else 0.0,
@@ -150,7 +149,6 @@ def sync_smoobu(user_email):
         "price_comm": float(price_data['price_comm']) if price_data['price_comm'] else 0.0
       }
 
-      print(rows_for_bigquery)
       rows_for_bigquery.append(row)
 
     except KeyError as e:
@@ -166,6 +164,7 @@ def sync_smoobu(user_email):
       # BigQuery verwendet automatisch "Upsert"-ähnliches Verhalten mit Streaming Inserts
       # Für echtes Upsert müssten Sie eine Merge-Abfrage verwenden
       table = bq_client.get_table(FULL_TABLE_ID)
+      print(table)
       errors = bq_client.insert_rows_json(table, rows_for_bigquery)
 
       if errors:
