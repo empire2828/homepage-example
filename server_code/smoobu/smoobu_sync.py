@@ -102,7 +102,8 @@ def sync_smoobu(user_email):
     return "Fehler: BigQuery Client konnte nicht erstellt werden"
 
   datasets = list(bq_client.list_datasets())
-  print(datasets)
+  for dataset in datasets:
+    print(f"BQ Dataset-ID: {dataset.dataset_id}, Vollständig: {dataset.full_dataset_id}")
   
   bookings_added = 0
   rows_for_bigquery = []
@@ -123,7 +124,7 @@ def sync_smoobu(user_email):
         "apartment": booking['apartment']['name'],
         "arrival": booking['arrival'],  # BigQuery erwartet String im Format YYYY-MM-DD
         "departure": booking['departure'],
-        "created_at": booking['created-at'] + ":00",  # Sekunden hinzufügen falls nötig
+        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M"), 
         "modified_at": booking['modifiedAt'] if booking['modifiedAt'] else '',
         "guestname": booking['guest-name'],
         "channel_name": channel_name if channel_name else '',
