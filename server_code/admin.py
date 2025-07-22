@@ -144,3 +144,83 @@ def search_logs(search_term: str):
   return response.data
 
 
+import anvil.server
+from datetime import datetime, timedelta
+from smoobu.smoobu_main import get_bigquery_client
+from google.cloud import bigquery
+
+# BigQuery Configuration
+FULL_TABLE_ID = "lodginia.lodginia.bookings"
+
+@anvil.server.background_task
+def cleanup_deleted_bookings():
+  """
+    Overnight cleanup task to permanently delete rows where is_deleted = TRUE
+    This runs when streaming buffer has cleared (avoiding the 90-minute restriction)
+    """
+  print(f"Starting cleanup task at {datetime.now()}")
+
+  try:
+    # Initialize BigQuery client
+    bq_client = get_bigquery_client()
+    if not bq_client:
+      print("Error: BigQuery Client could not be created")
+      return {"status": "error", "message": "BigQuery client initialization failed"}
+
+      # Check if table has streaming buffer (optional safety check)
+    table_ref = bq_client.get_table(FULL_TABLE_ID)
+    if hasattr(table_ref, 'streaming_buffer') and table_ref.streaming_buffer:
+      print("Warning: Table still has streaming buffer - cleanup may fail")
+
+      # Count rows to be deleted (for logging)
+    count_query = f"""
+            SELECT COUNT(*) as deleted_count
+            FROM `{FULL_TABLE_ID}`
+            WHERE is_deleted = TRUE
+        """
+
+    count_result = list(bq_client.query(count_query).result())
+    rows_to_delete = count_result[0].deleted_count if count_result else 0
+
+    print(f"Found {rows_to_delete} rows marked for deletion")
+
+    if rows_to_delete == 0:
+      return {"status": "success", "message": "No rows to delete", "deleted_count": 0}
+
+      # Execute the DELETE statement
+    delete_query = f"""
+            DELETE FROM `{FULL_TABLE_ID}`
+            WHERE is_deleted = TRUE
+        """
+
+    # Run the delete job
+    delete_job = bq_client.query(delete_query)
+    delete_job.result()  # Wait for completion
+
+    # Log results
+    rows_affected = delete_job.num_dml_affected_rows
+    print(f"Cleanup completed successfully. Deleted {rows_affected} rows")
+
+    return {
+      "status": "success", 
+      "message": f"Successfully deleted {rows_affected} rows",
+      "deleted_count": rows_affected,
+      "completed_at": datetime.now().isoformat()
+    }
+
+  except Exception as e:
+    error_msg = f"Cleanup task failed: {str(e)}"
+    print(error_msg)
+    return {"status": "error", "message": error_msg}
+
+# Optional: Manual trigger function for testing
+@anvil.server.callable
+def trigger_manual_cleanup():
+    # Launch the cleanup task
+  task = anvil.server.launch_background_task('cleanup_deleted_bookings')
+
+  return {
+    "status": "launched", 
+    "task_id": task.get_id(),
+    "message": "Cleanup task launched successfully"
+  }

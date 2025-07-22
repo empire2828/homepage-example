@@ -4,7 +4,7 @@ import anvil.server
 from datetime import datetime
 from supabase import create_client, Client
 import requests
-from smoobu.smoobu_main import get_price_elements, get_bigquery_client
+from smoobu.smoobu_main import get_price_elements, get_bigquery_client, delete_booking
 from google.cloud import bigquery 
 from Users import get_supabase_key_for_user
 
@@ -103,53 +103,14 @@ def process_booking(booking_data, user_id):
   bq_client = get_bigquery_client()
   if not bq_client:
     return "Fehler: BigQuery Client konnte nicht erstellt werden"
-  
-  # --------- “Poor-man’s UPSERT” in BigQuery ------------------------
-  # 1️⃣ delete possible existing record
-  delete_stmt = """
-        DELETE FROM `{table}`
-        WHERE reservation_id = @res_id AND email = @mail
-    """.format(table=FULL_TABLE_ID)
 
-  bq_client.query(
-    delete_stmt,
-    job_config = bigquery.QueryJobConfig(
-      query_parameters=[
-        bigquery.ScalarQueryParameter("res_id", "INT64", int(booking_data['id'])),
-        bigquery.ScalarQueryParameter("mail",   "STRING", user_email)
-      ]
-    )
-  ).result()   # wait for completion
+  # 1 delete old row
+  delete_booking(reservation_id, user_email)
 
-  # 2️⃣ insert fresh row
+  # 2️ insert fresh row
   errors = bq_client.insert_rows_json(FULL_TABLE_ID, [row])
   if errors:
     raise RuntimeError(errors)
-
-@anvil.server.background_task
-def delete_booking(reservation_id, user_id):
-  user_email = get_user_email(user_id)
-  stmt = f"""
-        DELETE FROM `{FULL_TABLE_ID}`
-        WHERE reservation_id = @res_id AND email = @mail
-    """
-  
-  # BigQuery Client initialisieren
-  bq_client = get_bigquery_client()
-  if not bq_client:
-    return "Fehler: BigQuery Client konnte nicht erstellt werden"
-  
-  job = bq_client.query(
-    stmt,
-    job_config = bigquery.QueryJobConfig(
-      query_parameters=[
-        bigquery.ScalarQueryParameter("res_id", "STRING", reservation_id),
-        bigquery.ScalarQueryParameter("mail",   "STRING", user_email)
-      ]
-    )
-  )
-  job.result()   # wait
-  print(f"BigQuery-Rows affected: {job.num_dml_affected_rows}")
 
 @anvil.server.background_task
 def get_user_email(user_id):
@@ -233,21 +194,8 @@ def sync_booking_by_price_element_webhook(reservation_id, user_email):
   if not bq_client:
     print("Fehler: BigQuery Client konnte nicht erstellt werden")
     return
-
-    # Optional: Vorherigen Eintrag löschen (wie in process_booking)
-  delete_stmt = f"""
-        DELETE FROM `{FULL_TABLE_ID}`
-        WHERE reservation_id = @res_id AND email = @mail
-    """
-  bq_client.query(
-    delete_stmt,
-    job_config=bigquery.QueryJobConfig(
-      query_parameters=[
-        bigquery.ScalarQueryParameter("res_id", "INT64", int(reservation_id)),
-        bigquery.ScalarQueryParameter("mail", "STRING", user_email)
-      ]
-    )
-  ).result()
+  
+  delete_booking(reservation_id, user_email)
 
   errors = bq_client.insert_rows_json(FULL_TABLE_ID, [row])
   if errors:
