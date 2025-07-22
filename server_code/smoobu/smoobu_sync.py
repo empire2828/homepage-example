@@ -101,6 +101,9 @@ def sync_smoobu(user_email):
   if not bq_client:
     return "Fehler: BigQuery Client konnte nicht erstellt werden"
 
+  datasets = list(bq_client.list_datasets())
+  print(datasets)
+  
   bookings_added = 0
   rows_for_bigquery = []
 
@@ -150,7 +153,7 @@ def sync_smoobu(user_email):
       }
 
       rows_for_bigquery.append(row)
-
+    
     except KeyError as e:
       print(f"Missing key in booking data: {e}")
       continue
@@ -160,11 +163,11 @@ def sync_smoobu(user_email):
 
     # Batch Insert in BigQuery (effizienter als einzelne Inserts)
   if rows_for_bigquery:
+    print('yes')
     try:
       # BigQuery verwendet automatisch "Upsert"-ähnliches Verhalten mit Streaming Inserts
       # Für echtes Upsert müssten Sie eine Merge-Abfrage verwenden
       table = bq_client.get_table(FULL_TABLE_ID)
-      print(table)
       errors = bq_client.insert_rows_json(table, rows_for_bigquery)
 
       if errors:
