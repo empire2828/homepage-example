@@ -2,3 +2,4 @@ stripe
 openai
 phonenumbers
 supabase
+google-cloud-bigquery

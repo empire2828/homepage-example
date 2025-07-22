@@ -3,6 +3,9 @@ import anvil.tables as tables
 from anvil.tables import app_tables
 import requests
 import anvil.secrets
+from google.cloud import bigquery
+from google.oauth2 import service_account
+import json
 
 @anvil.server.background_task
 def get_price_elements(reservation_id, headers):
@@ -22,7 +25,7 @@ def get_price_elements(reservation_id, headers):
     )
     if price_elements_response.status_code == 200:
       price_elements = price_elements_response.json().get("priceElements", [])
-      print(price_elements)
+      #print(price_elements)
 
       has_addon = any(pe.get('type') == 'addon' for pe in price_elements)
       has_cleaningFee = any(pe.get('type') == 'cleaningFee' for pe in price_elements)
@@ -69,3 +72,20 @@ def get_price_elements(reservation_id, headers):
 #}
 #print('function_call:',get_price_elements('70507371',headers))
 
+def get_bigquery_client():
+  """Erstellt einen BigQuery Client mit Service Account Authentifizierung"""
+  try:
+    service_account_json = anvil.secrets.get_secret('bigquery_api_key')
+    service_account_info = json.loads(service_account_json)
+    credentials = service_account.Credentials.from_service_account_info(
+      service_account_info,
+      scopes=['https://www.googleapis.com/auth/bigquery']
+    )
+    client = bigquery.Client(
+      credentials=credentials,
+      project=service_account_info['project_id']
+    )
+    return client
+  except Exception as e:
+    print(f"Fehler beim BigQuery Client Setup: {str(e)}")
+    return None
