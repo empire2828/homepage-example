@@ -124,8 +124,8 @@ def sync_smoobu(user_email):
         "apartment": booking['apartment']['name'],
         "arrival": datetime.strptime(booking['arrival'], "%Y-%m-%d").date().isoformat(),
         "departure": datetime.strptime(booking['departure'], "%Y-%m-%d").date().isoformat(),
-        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d").date().isoformat(),
-        "modified_at": datetime.strptime(booking['modifiedAt'], "%Y-%m-%d").date().isoformat(),
+        "created_at": booking['created-at'][:10],
+        "modified_at": booking['modifiedAt'][:10],
         "guestname": booking['guest-name'],
         "channel_name": channel_name if channel_name else '',
         "guest_email": booking['email'] if booking['email'] else '',
@@ -150,12 +150,12 @@ def sync_smoobu(user_email):
         "price_coupon": float(price_data['price_coupon']) if price_data['price_coupon'] else 0.0,
         "price_addon": float(price_data['price_addon']) if price_data['price_addon'] else 0.0,
         "price_curr": price_data['price_curr'] if price_data['price_curr'] else '',
-        "price_comm": float(price_data['price_comm']) if price_data['price_comm'] else 0.0
+        "price_comm": float(price_data['price_comm']) if price_data['price_comm'] else 0.0,
+        "id": f"{user_email}_{reservation_id}"
       }
 
-      print(row)
       rows_for_bigquery.append(row)
-     
+    
     except KeyError as e:
       print(f"Missing key in booking data: {e}")
       continue
@@ -163,6 +163,8 @@ def sync_smoobu(user_email):
       print(f"Fehler beim Verarbeiten der Buchung {reservation_id}: {str(e)}")
       continue
 
+  print('1. row:',rows_for_bigquery[0])
+  print(' Anzahl rows:',len(rows_for_bigquery))
     # Batch Insert in BigQuery (effizienter als einzelne Inserts)
   if rows_for_bigquery:
     print('yes')
