@@ -203,3 +203,10 @@ def get_user_channels_from_std_commission(email):
     .select('channel_name, channel_commission').eq('email', email).execute()
   return r.data  # Sollte eine Liste von Dicts sein!
 
+def get_supabase_key_for_user(email):
+  user_row = app_tables.users.get(email=email)
+  if user_row:
+    result= user_row['supabase_key'] 
+    return result
+  else:
+    return None

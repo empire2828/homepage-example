@@ -13,7 +13,7 @@ from google.oauth2 import service_account
 from admin import log
 from servermain import save_last_fees_as_std
 from Users import save_user_apartment_count
-from smoobu.smoobu_main import get_price_elements, get_bigquery_client()
+from smoobu.smoobu_main import get_price_elements, get_bigquery_client
 
 # BigQuery Konfiguration
 BIGQUERY_PROJECT_ID = "lodginia"
