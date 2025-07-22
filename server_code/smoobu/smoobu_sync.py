@@ -122,10 +122,10 @@ def sync_smoobu(user_email):
       row = {
         "reservation_id": str(reservation_id),
         "apartment": booking['apartment']['name'],
-        "arrival": booking['arrival'],  # BigQuery erwartet String im Format YYYY-MM-DD
-        "departure": booking['departure'],
-        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M"), 
-        "modified_at": booking['modifiedAt'] if booking['modifiedAt'] else '',
+        "arrival": datetime.strptime(booking['arrival'], "%Y-%m-%d").date().isoformat(),
+        "departure": datetime.strptime(booking['departure'], "%Y-%m-%d").date().isoformat(),
+        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d").date().isoformat(),
+        "modified_at": datetime.strptime(booking['modifiedAt'], "%Y-%m-%d").date().isoformat(),
         "guestname": booking['guest-name'],
         "channel_name": channel_name if channel_name else '',
         "guest_email": booking['email'] if booking['email'] else '',
@@ -140,7 +140,7 @@ def sync_smoobu(user_email):
         "deposit": float(booking['deposit']) if booking['deposit'] else 0.0,
         "deposit_paid": booking['deposit-paid'] if booking['deposit-paid'] else '',
         "commission_included": float(booking['commission-included']) if booking['commission-included'] else 0,
-        "guestid": str(booking['guestId']) if booking['guestId'] else '',
+        "guestid": int(booking['guestId']) if booking.get('guestId') else None,
         "language": booking['language'] if booking['language'] else '',
         "email": user_email if user_email else '',
         "supabase_key": supabase_key,
