@@ -140,7 +140,7 @@ def sync_smoobu(user_email):
         "deposit": float(booking['deposit']) if booking['deposit'] else 0.0,
         "deposit_paid": booking['deposit-paid'] if booking['deposit-paid'] else '',
         "commission_included": float(booking['commission-included']) if booking['commission-included'] else 0,
-        "guestid": int(booking['guestId']) if booking.get('guestId') else None,
+        "guestid": int(booking['guestId']) if booking.get('guestId') else 0,
         "language": booking['language'] if booking['language'] else '',
         "email": user_email if user_email else '',
         "supabase_key": supabase_key,
@@ -153,8 +153,9 @@ def sync_smoobu(user_email):
         "price_comm": float(price_data['price_comm']) if price_data['price_comm'] else 0.0
       }
 
+      print(row)
       rows_for_bigquery.append(row)
-    
+     
     except KeyError as e:
       print(f"Missing key in booking data: {e}")
       continue
