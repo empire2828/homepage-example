@@ -15,6 +15,10 @@ from servermain import save_last_fees_as_std
 from Users import save_user_apartment_count
 from smoobu.smoobu_main import get_price_elements, get_bigquery_client
 
+import csv
+import tempfile
+from google.cloud import storage
+
 # BigQuery Konfiguration
 BIGQUERY_PROJECT_ID = "lodginia"
 BIGQUERY_DATASET_ID = "lodginia" 
@@ -32,7 +36,7 @@ def launch_sync_smoobu():
   return result
 
 @anvil.server.background_task
-def sync_smoobu(user_email):
+def sync_smoobu_old(user_email):
   print('starte sync_smoobu')
   base_url = "https://login.smoobu.com/api/reservations"
   user = app_tables.users.get(email=user_email)
@@ -206,5 +210,166 @@ def get_smoobu_userid(user_email):
         print(f"Fehler bei der API-Anfrage: {str(e)}")
         return None
 
+##########################################################################################################
 
+def write_bookings_to_csv(rows, fieldnames):
+  tmpfile = tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False, newline='', encoding='utf-8')
+  writer = csv.DictWriter(tmpfile, fieldnames=fieldnames)
+  writer.writeheader()
+  for row in rows:
+    writer.writerow(row)
+  tmpfile.close()
+  return tmpfile.name
 
+def upload_to_gcs(tmp_csv_path, bucket_name, destination_blob_name):
+  storage_client = storage.Client()
+  bucket = storage_client.bucket(bucket_name)
+  blob = bucket.blob(destination_blob_name)
+  blob.upload_from_filename(tmp_csv_path)
+  return f"gs://{bucket_name}/{destination_blob_name}"
+
+def load_csv_to_bigquery(bq_client, table_id, gcs_uri):
+  job_config = bigquery.LoadJobConfig(
+    source_format=bigquery.SourceFormat.CSV,
+    skip_leading_rows=1,
+    autodetect=True,         # Oder schema explizit angeben!
+    write_disposition='WRITE_APPEND',  # Alternativen: WRITE_TRUNCATE, WRITE_EMPTY
+  )
+  load_job = bq_client.load_table_from_uri(
+    gcs_uri, table_id, job_config=job_config
+  )
+  load_job.result()  # Warten bis fertig
+  return load_job
+
+@anvil.server.background_task
+def sync_smoobu(user_email):
+  print('starte sync_smoobu')
+  base_url = "https://login.smoobu.com/api/reservations"
+  user = app_tables.users.get(email=user_email)
+  if user:
+    api_key = user['smoobu_api_key']
+    supabase_key = user['supabase_key']
+  else:
+    return "User not found."
+
+  headers = {
+    "Api-Key": api_key,
+    "Content-Type": "application/json"
+  }
+  params = {
+    "status": "confirmed",
+    "page": 1,
+    "limit": 100,
+    "from": "2019-01-01",
+    "excludeBlocked": True,
+    "showCancellation": True,
+    "includePriceElements": True,
+  }
+
+  all_bookings = []
+  total_pages = 1
+  current_page = 1
+
+  # Buchungsdaten von Smoobu API abrufen
+  while current_page <= total_pages:
+    params["page"] = current_page
+    response = requests.get(base_url, headers=headers, params=params)
+    if response.status_code == 200:
+      data = response.json()
+      total_pages = data.get("pagination", {}).get("totalPages", 1)
+      if "page_count" in data:
+        total_pages = data["page_count"]
+      if "bookings" in data:
+        all_bookings.extend(data["bookings"])
+      else:
+        return "Error: Unexpected API response structure"
+      current_page += 1
+    else:
+      return f"Fehler: {response.status_code} - {response.text}"
+
+    # BigQuery Client initialisieren
+  bq_client = get_bigquery_client()
+  if not bq_client:
+    return "Fehler: BigQuery Client konnte nicht erstellt werden"
+
+  datasets = list(bq_client.list_datasets())
+  for dataset in datasets:
+    print(f"BQ Dataset-ID: {dataset.dataset_id}, Vollständig: {dataset.full_dataset_id}")
+
+  bookings_added = 0
+  rows_for_bigquery = []
+
+  # Buchungsdaten für BigQuery vorbereiten
+  for booking in all_bookings:
+    #print(str(booking), user_email, '')
+    try:
+      reservation_id = booking.get('id')
+      channel_name = booking.get('channel', {}).get('name')
+
+      # Preisdaten mit der bestehenden Funktion abrufen
+      price_data = get_price_elements(reservation_id, headers)
+
+      # Row für BigQuery vorbereiten
+      row = {
+        "reservation_id": str(reservation_id),
+        "apartment": booking['apartment']['name'],
+        "arrival": datetime.strptime(booking['arrival'], "%Y-%m-%d").date().isoformat(),
+        "departure": datetime.strptime(booking['departure'], "%Y-%m-%d").date().isoformat(),
+        "created_at": booking['created-at'][:10],
+        "modified_at": booking['modifiedAt'][:10],
+        "guestname": booking['guest-name'],
+        "channel_name": channel_name if channel_name else '',
+        "guest_email": booking['email'] if booking['email'] else '',
+        "phone": booking['phone'] if booking['phone'] else '',
+        "adults": booking['adults'] if booking['adults'] else 0,
+        "children": booking['children'] if booking['children'] else 0,
+        "type": booking['type'] if booking['type'] else '',
+        "price": float(booking['price']) if booking['price'] else 0.0,
+        "price_paid": booking['price-paid'] if booking['price-paid'] else '',
+        "prepayment": float(booking['prepayment']) if booking['prepayment'] else 0.0,
+        "prepayment_paid": booking['prepayment-paid'] if booking['prepayment-paid'] else '',
+        "deposit": float(booking['deposit']) if booking['deposit'] else 0.0,
+        "deposit_paid": booking['deposit-paid'] if booking['deposit-paid'] else '',
+        "commission_included": float(booking['commission-included']) if booking['commission-included'] else 0,
+        "guestid": int(booking['guestId']) if booking.get('guestId') else 0,
+        "language": booking['language'] if booking['language'] else '',
+        "email": user_email if user_email else '',
+        "supabase_key": supabase_key,
+        "price_baseprice": float(price_data['price_baseprice']) if price_data['price_baseprice'] else 0.0,
+        "price_cleaningfee": float(price_data['price_cleaningfee']) if price_data['price_cleaningfee'] else 0.0,
+        "price_longstaydiscount": float(price_data['price_longstaydiscount']) if price_data['price_longstaydiscount'] else 0.0,
+        "price_coupon": float(price_data['price_coupon']) if price_data['price_coupon'] else 0.0,
+        "price_addon": float(price_data['price_addon']) if price_data['price_addon'] else 0.0,
+        "price_curr": price_data['price_curr'] if price_data['price_curr'] else '',
+        "price_comm": float(price_data['price_comm']) if price_data['price_comm'] else 0.0,
+        "id": f"{user_email}_{reservation_id}"
+      }
+
+      rows_for_bigquery.append(row)
+
+    except KeyError as e:
+      print(f"Missing key in booking data: {e}")
+      continue
+    except Exception as e:
+      print(f"Fehler beim Verarbeiten der Buchung {reservation_id}: {str(e)}")
+      continue
+
+  print('1. row:',rows_for_bigquery[0])
+  print(' Anzahl rows:',len(rows_for_bigquery))
+  # Batch Insert in BigQuery (effizienter als einzelne Inserts)
+  
+  if rows_for_bigquery:
+    fieldnames = list(rows_for_bigquery[0].keys())
+  tmp_csv_path = write_bookings_to_csv(rows_for_bigquery, fieldnames)
+  bucket_name = 'lodginia-daten-bucket'  # Muss existieren!
+  destination_blob_name = f'smoobu_sync/{user_email}_bookings.csv'
+  gcs_uri = upload_to_gcs(tmp_csv_path, bucket_name, destination_blob_name)
+  load_job = load_csv_to_bigquery(bq_client, FULL_TABLE_ID, gcs_uri)
+  bookings_added = load_job.output_rows
+  print(f"{bookings_added} Buchungen in BigQuery geladen (kein Streaming Insert).")
+ 
+    # Background Tasks für weitere Verarbeitungen starten
+  anvil.server.launch_background_task('save_user_apartment_count', user_email)
+  anvil.server.launch_background_task('save_all_channels_for_user', user_email)
+
+  return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten in BigQuery gespeichert."

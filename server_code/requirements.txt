@@ -1,5 +1,4 @@
 stripe
 openai
-phonenumbers
-supabase
 google-cloud-bigquery
+google-cloud-storage
