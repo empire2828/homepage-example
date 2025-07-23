@@ -11,6 +11,16 @@ from datetime import datetime, timedelta, timezone
 import inspect
 from supabase import create_client
 import os
+from google.cloud import bigquery
+from google.oauth2 import service_account
+import json
+from servermain import get_bigquery_client
+
+# BigQuery Konfiguration
+BIGQUERY_PROJECT_ID = "lodginia"
+BIGQUERY_DATASET_ID = "lodginia" 
+BIGQUERY_TABLE_ID = "bookings"
+FULL_TABLE_ID = "lodginia.lodginia.bookings"
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -218,3 +228,4 @@ def trigger_manual_cleanup():
     "task_id": task.get_id(),
     "message": "Cleanup task launched successfully"
   }
+

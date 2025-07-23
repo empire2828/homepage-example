@@ -8,6 +8,15 @@ from datetime import datetime, timedelta, timezone
 from . import routes # noqa: F401
 from supabase import create_client, Client
 import anvil.secrets
+from google.cloud import bigquery
+from google.oauth2 import service_account
+import json
+
+# BigQuery Konfiguration
+BIGQUERY_PROJECT_ID = "lodginia"
+BIGQUERY_DATASET_ID = "lodginia" 
+BIGQUERY_TABLE_ID = "bookings"
+FULL_TABLE_ID = "lodginia.lodginia.bookings"
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -17,18 +26,31 @@ supabase_client: Client = create_client(supabase_url, supabase_api_key)
 supabase: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.callable
-def delete_bookings_by_email(user_email):
-  resp = (
-    supabase.table("bookings")
-      .delete()
-      .eq("email", user_email)
-      .execute()
+def delete_bookings_by_email(email):
+
+  client = get_bigquery_client()
+  if client is None:
+    return {"status": "error", "message": "BigQuery client setup failed."}
+
+  table_ref = FULL_TABLE_ID  # uses "lodginia.lodginia.bookings"
+  query = f"""
+        UPDATE `{table_ref}`
+        SET is_deleted = TRUE
+        WHERE email = @user_email
+    """
+  job_config = bigquery.QueryJobConfig(
+    query_parameters=[bigquery.ScalarQueryParameter("user_email", "STRING", email)]
   )
+
+  query_job = client.query(query, job_config=job_config)
+  result = query_job.result()  # Wait for job to complete
+
   return {
     "status": "success",
-    "deleted_count": len(resp.data),
-    "deleted_data": resp.data,
+    "updated_count": result.num_dml_affected_rows,
+    "email": email,
   }
+
 
 @anvil.server.callable
 def send_registration_notification(user_email):
@@ -135,8 +157,65 @@ def save_all_channels_for_user(user_email):
     print("Keine Channels für", user_email, "gefunden.")
     return 0
 
+def get_bigquery_client():
+  """Erstellt einen BigQuery Client mit Service Account Authentifizierung"""
+  try:
+    service_account_json = anvil.secrets.get_secret('bigquery_api_key')
+    service_account_info = json.loads(service_account_json)
+    credentials = service_account.Credentials.from_service_account_info(
+      service_account_info,
+      scopes=['https://www.googleapis.com/auth/bigquery']
+    )
+    client = bigquery.Client(
+      credentials=credentials,
+      project=service_account_info['project_id']
+    )
+    return client
+  except Exception as e:
+    print(f"Fehler beim BigQuery Client Setup: {str(e)}")
+    return None
 
+@anvil.server.background_task
+def delete_booking(reservation_id, user_email):
+  if not user_email:
+    print("Fehler: Benutzer-E-Mail konnte nicht ermittelt werden")
+    return "Fehler: Benutzer nicht gefunden"
 
+  bq_client = get_bigquery_client()
+  if not bq_client:
+    print("Fehler: BigQuery Client konnte nicht erstellt werden")
+    return "Fehler: BigQuery Client Setup"
 
+    # Typ prüfen für reservation_id (INT64 oder STRING)
+  try:
+    res_id = int(reservation_id)
+    param_type = "INT64"
+  except (ValueError, TypeError):
+    res_id = reservation_id
+    param_type = "STRING"
+
+    # Soft Delete: Nur das is_deleted Flag setzen
+  update_stmt = f"""
+        UPDATE `{FULL_TABLE_ID}`
+        SET is_deleted = TRUE
+        WHERE reservation_id = @res_id AND email = @mail
+    """
+  try:
+    job = bq_client.query(
+      update_stmt,
+      job_config=bigquery.QueryJobConfig(
+        query_parameters=[
+          bigquery.ScalarQueryParameter("res_id", param_type, res_id),
+          bigquery.ScalarQueryParameter("mail", "STRING", user_email)
+        ]
+      )
+    )
+    job.result()  # Warten bis Abschluss
+    rows_affected = job.num_dml_affected_rows
+    print(f"Soft delete ausgeführt. BigQuery-Rows affected: {rows_affected}")
+    return f"Soft delete erfolgreich. {rows_affected} Zeile(n) aktualisiert."
+  except Exception as e:
+    print(f"Soft delete fehlgeschlagen: {e}")
+    return f"Fehler bei löschen: {e}"
 
 

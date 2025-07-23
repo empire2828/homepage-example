@@ -4,9 +4,10 @@ import anvil.server
 from datetime import datetime
 from supabase import create_client, Client
 import requests
-from smoobu.smoobu_main import get_price_elements, get_bigquery_client, delete_booking
+from smoobu.smoobu_main import get_price_elements
 from google.cloud import bigquery 
 from Users import get_supabase_key_for_user
+from servermain import get_bigquery_client, delete_booking
 
 # BigQuery Konfiguration
 BIGQUERY_PROJECT_ID = "lodginia"
