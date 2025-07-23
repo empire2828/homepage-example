@@ -143,12 +143,6 @@ def search_logs(search_term: str):
     return []
   return response.data
 
-
-import anvil.server
-from datetime import datetime, timedelta
-from smoobu.smoobu_main import get_bigquery_client
-from google.cloud import bigquery
-
 # BigQuery Configuration
 FULL_TABLE_ID = "lodginia.lodginia.bookings"
 
