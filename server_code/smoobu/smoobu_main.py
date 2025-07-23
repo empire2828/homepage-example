@@ -22,7 +22,6 @@ def get_price_elements(reservation_id, headers):
     )
     if price_elements_response.status_code == 200:
       price_elements = price_elements_response.json().get("priceElements", [])
-      print(price_elements)
 
       has_addon = any(pe.get('type') == 'addon' for pe in price_elements)
       has_cleaningFee = any(pe.get('type') == 'cleaningFee' for pe in price_elements)
