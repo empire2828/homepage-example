@@ -15,6 +15,8 @@ from servermain import save_last_fees_as_std
 from Users import save_user_apartment_count
 from smoobu.smoobu_main import get_price_elements, get_bigquery_client
 
+import time
+import sys
 import csv
 import tempfile
 from google.cloud import storage
@@ -222,24 +224,34 @@ def write_bookings_to_csv(rows, fieldnames):
   return tmpfile.name
 
 def upload_to_gcs(tmp_csv_path, bucket_name, destination_blob_name):
-  storage_client = storage.Client()
-  bucket = storage_client.bucket(bucket_name)
-  blob = bucket.blob(destination_blob_name)
-  blob.upload_from_filename(tmp_csv_path)
-  return f"gs://{bucket_name}/{destination_blob_name}"
+  print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Starte Upload nach GCS: {tmp_csv_path} → gs://{bucket_name}/{destination_blob_name}")
+  try:
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+    blob.upload_from_filename(tmp_csv_path)
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Upload erfolgreich! Datei verfügbar unter: gs://{bucket_name}/{destination_blob_name}")
+    return f"gs://{bucket_name}/{destination_blob_name}"
+  except Exception as e:
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Fehler beim GCS-Upload: {e}")
+    raise
 
 def load_csv_to_bigquery(bq_client, table_id, gcs_uri):
-  job_config = bigquery.LoadJobConfig(
-    source_format=bigquery.SourceFormat.CSV,
-    skip_leading_rows=1,
-    autodetect=True,         # Oder schema explizit angeben!
-    write_disposition='WRITE_APPEND',  # Alternativen: WRITE_TRUNCATE, WRITE_EMPTY
-  )
-  load_job = bq_client.load_table_from_uri(
-    gcs_uri, table_id, job_config=job_config
-  )
-  load_job.result()  # Warten bis fertig
-  return load_job
+  print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Starte Load-Job: {gcs_uri} → {table_id}")
+  try:
+    job_config = bigquery.LoadJobConfig(
+      source_format=bigquery.SourceFormat.CSV,
+      skip_leading_rows=1,
+      autodetect=True,
+      write_disposition='WRITE_APPEND',
+    )
+    load_job = bq_client.load_table_from_uri(gcs_uri, table_id, job_config=job_config)
+    load_job.result()
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Load-Job abgeschlossen. Geladene Zeilen: {load_job.output_rows}")
+    return load_job
+  except Exception as e:
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Fehler beim BigQuery Load-Job: {e}")
+    raise
 
 @anvil.server.background_task
 def sync_smoobu(user_email):
