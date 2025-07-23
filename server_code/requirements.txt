@@ -3,3 +3,4 @@ openai
 google-cloud-bigquery
 google-cloud-storage
 supabase
+google-cloud-bigquery-storage
