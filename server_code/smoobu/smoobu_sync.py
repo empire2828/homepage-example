@@ -14,6 +14,8 @@ import requests
 from datetime import datetime
 from google.cloud import bigquery
 from servermain import get_bigquery_client
+import json
+import textwrap
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -72,7 +74,7 @@ def sync_smoobu(user_email):
     current_page += 1
   if not all_bookings:
     return "Keine Buchungen gefunden."
-
+  
   row_dicts = []
   for b in all_bookings:
     price_data = get_price_elements(b['id'], headers)
@@ -114,49 +116,56 @@ def sync_smoobu(user_email):
       "price_comm": float(price_data['price_comm'])
     }
     row_dicts.append(rd)
-
-    # Reihenfolge und Typen müssen BigQuery-Schema entsprechen!
-  struct_fields = [
-    "email", "apartment", "arrival", "departure", "created_at", "channel_name", "guestname",
-    "adults", "children", "language", "type", "reservation_id", "guestid", "guest_email", "phone",
-    "address_postalcode", "address_city", "address_country", "price", "prepayment",
-    "deposit", "commission_included", "price_paid", "prepayment_paid", "deposit_paid", "address_street", 
-    "mth_adj", "stay_mth", "id", "modified_at", "supabase_key", "price_baseprice", "price_cleaningfee",
-    "price_longstaydiscount", "price_coupon", "price_addon", "price_curr", "price_comm"
+    
+  REQUIRED_FIELDS = [
+    "email","apartment","arrival","departure","created_at","channel_name",
+    "guestname","adults","children","language","type","reservation_id",
+    "guestid","guest_email","phone","price","prepayment","deposit",
+    "commission_included","price_paid","prepayment_paid","deposit_paid",
+    "id","modified_at","supabase_key",
+    "price_baseprice","price_cleaningfee","price_longstaydiscount",
+    "price_coupon","price_addon","price_curr","price_comm"
   ]
-  tuple_list = [tuple(rd.get(f) for f in struct_fields) for rd in row_dicts]
+
+  for rd in row_dicts:
+    for f in REQUIRED_FIELDS:
+      rd.setdefault(f, None)
 
   struct_def = (
     "STRUCT<email STRING, apartment STRING, arrival DATE, departure DATE, created_at DATE,"
     "channel_name STRING, guestname STRING, adults INT64, children INT64, language STRING, type STRING,"
-    "reservation_id INT64, guestid INT64, guest_email STRING, phone STRING, address_postalcode STRING,"
-    "address_city STRING, address_country STRING, price FLOAT64,"
+    "reservation_id INT64, guestid INT64, guest_email STRING, phone STRING,"
+    "price FLOAT64,"
     "prepayment FLOAT64, deposit FLOAT64, commission_included FLOAT64, price_paid STRING, prepayment_paid STRING,"
-    "deposit_paid STRING, address_street STRING, mth_adj STRING, stay_mth DATE, id STRING, modified_at DATE,"
+    "deposit_paid STRING, id STRING, modified_at DATE,"
     "supabase_key STRING, price_baseprice FLOAT64, price_cleaningfee FLOAT64, price_longstaydiscount FLOAT64,"
     "price_coupon FLOAT64, price_addon FLOAT64, price_curr STRING, price_comm FLOAT64>"
   )
 
-  example = row_dicts[0]
-  for f in struct_fields:
-    print(f"{f}: '{example.get(f)}' ({type(example.get(f))})")
-
-    query = (
-    "INSERT INTO `lodginia.lodginia.bookings` "
-    "SELECT * FROM UNNEST(@bookings)"
-  )
-
-  print(query)
+  query = "INSERT INTO `lodginia.lodginia.bookings` SELECT * FROM UNNEST(@bookings)"
   
+  # Pass the list of dictionaries directly - no tuple conversion
   query_params = [
     bigquery.ArrayQueryParameter(
       "bookings",
       struct_def,
-      tuple_list
+      row_dicts  # Use dictionaries directly, not tuples
     )
   ]
+
+  #print(json.dumps(row_dicts[0], indent=2, default=str))
+  #print(struct_def)
+  #print("\n" + "="*60)
+  print("STRUCT_DEFINITION:")
+  print(textwrap.fill(struct_def, width=100))  # für bessere Lesbarkeit umbrochen
+  print("\nSAMPLE ROW_DICT (index 0):")
+  print(json.dumps(row_dicts[0], indent=2, default=str))
+  print("="*60 + "\n")
+  #print(query_params)
+  
   job_config = bigquery.QueryJobConfig(query_parameters=query_params)
   client.query(query, job_config=job_config).result()
+  
   return f"{len(row_dicts)} Buchungen in BigQuery importiert."
 
 @anvil.server.callable
