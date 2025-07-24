@@ -10,6 +10,7 @@ from supabase import create_client, Client
 import anvil.secrets
 from google.cloud import bigquery
 import json
+from google.oauth2 import service_account
 
 # BigQuery Konfiguration
 BIGQUERY_PROJECT_ID = "lodginia"
@@ -154,7 +155,7 @@ def get_bigquery_client():
     )
     client = bigquery.Client(
       credentials=credentials,
-      project=service_account_info['project_id']
+      project=service_account_info['BIGQUERY_PROJECT_ID']
     )
     return client
   except Exception as e:
