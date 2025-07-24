@@ -29,20 +29,20 @@ def launch_sync_smoobu():
   save_last_fees_as_std(user_email)
   return result
 
+supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+supabase_client: Client = create_client(supabase_url, supabase_api_key)
+
 @anvil.server.background_task
 def sync_smoobu(user_email):
-  # Set up credentials/env separately, z.B. via GOOGLE_APPLICATION_CREDENTIALS
   client = get_bigquery_client()
   if client is None:
     return "BigQuery-Client konnte nicht erstellt werden. Prüfe Service Account-Konfiguration!"
   base_url = "https://login.smoobu.com/api/reservations"
   user = app_tables.users.get(email=user_email)
-  if user:
-    api_key = user['smoobu_api_key']
-    supabase_key = user['supabase_key']
-  else:
+  if not user:
     return "User not found."
-
+  api_key = user['smoobu_api_key']
   headers = {
     "Api-Key": api_key,
     "Content-Type": "application/json"
@@ -56,12 +56,9 @@ def sync_smoobu(user_email):
     "showCancellation": True,
     "includePriceElements": True,
   }
-
-  # --- Smoobu Paging ---
   all_bookings = []
   current_page = 1
   total_pages = 1
-
   while current_page <= total_pages:
     params["page"] = current_page
     resp = requests.get(base_url, headers=headers, params=params)
@@ -72,71 +69,104 @@ def sync_smoobu(user_email):
     for booking in data.get("bookings", []):
       all_bookings.append(booking)
     current_page += 1
-
   if not all_bookings:
     return "Keine Buchungen gefunden."
 
-    # --- Transformiere Buchungsdaten ins BigQuery-Format ---
   row_dicts = []
   for b in all_bookings:
     price_data = get_price_elements(b['id'], headers)
-    row_dicts.append({
-      "reservation_id": b.get("id"),
+    # BigQuery-Typen: Strings, INT, FLOAT, BOOL, DATE, TIMESTAMP 
+    rd = {
+      "email": b.get("email"),
       "apartment": b.get("apartment", {}).get("name"),
-      "arrival": datetime.strptime(b["arrival"], "%Y-%m-%d").date().isoformat() if b.get("arrival") else None,
-      "departure": datetime.strptime(b["departure"], "%Y-%m-%d").date().isoformat() if b.get("departure") else None,
-      "created_at": datetime.strptime(b["created-at"], "%Y-%m-%d %H:%M").isoformat() if b.get("created-at") else None,
-      "modified_at": datetime.strptime(b["modifiedAt"], "%Y-%m-%d %H:%M:%S").isoformat() if b.get("modifiedAt") else None,
-      "guestname": b.get("guest-name"),
+      "arrival": b.get("arrival"),  # im ISO Format
+      "departure": b.get("departure"),
+      "created_at": b.get("created-at", None) or b.get("created_at")[:10],
       "channel_name": b.get("channel", {}).get("name"),
+      "guestname": b.get("guest-name"),
+      "adults": int(b.get("adults", 0)) if b.get("adults") is not None else 0,
+      "children": int(b.get("children", 0)) if b.get("children") is not None else 0,
+      "language": b.get("language"),
+      "type": b.get("type"),
+      "reservation_id": int(b.get("id", 0)) if b.get("id") is not None else None,
+      "guestid": int(b.get("guestId", 0)) if b.get("guestId") is not None else None,
       "guest_email": b.get("email"),
       "phone": b.get("phone"),
-      "adults": b.get("adults"),
-      "children": b.get("children"),
-      "type": b.get("type"),
-      "price": b.get("price"),
-      "price_paid": b.get("price-paid"),
-      "prepayment": b.get("prepayment"),
-      "prepayment_paid": b.get("prepayment-paid"),
-      "deposit": b.get("deposit"),
-      "deposit_paid": b.get("deposit-paid"),
-      "commission_included": b.get("commission-included"),
-      "guestid": b.get("guestId"),
-      "language": b.get("language"),
-      "user_email": user_email,
-      "price_baseprice": price_data.get("price_baseprice"),
-      "price_cleaningfee": price_data.get("price_cleaningfee"),
-      "price_longstaydiscount": price_data.get("price_longstaydiscount"),
-      "price_coupon": price_data.get("price_coupon"),
-      "price_addon": price_data.get("price_addon"),
+      "address_postalcode": b.get("address_postalcode"),
+      "address_city": b.get("address_city"),
+      "address_country": b.get("address_country"),
+      "screener_openai_job": None,
+      "screener_address_check": None,
+      "screener_google_linkedin": None,
+      "screener_phone_check": None,
+      "screener_disposable_email": b.get("screener_disposable_email"),
+      "price": float(b.get("price", 0.0)) if b.get("price", 0.0) is not None else 0,
+      "prepayment": float(b.get("prepayment", 0.0)) if b.get("prepayment", 0.0) is not None else 0,
+      "deposit": float(b.get("deposit") or 0.0),
+      "commission_included": float(b.get("commission-included", 0.0) or 0.0),
+      "price_paid": str(b.get("price-paid", "")),
+      "prepayment_paid": str(b.get("prepayment-paid", "")),
+      "deposit_paid": str(b.get("deposit-paid", "")),
+      "address_street": b.get("address_street"),
+      "mth_adj": b.get("mth_adj", "bookings"),
+      "stay_mth": b.get("stay_mth"),
+      "id": str(b.get("id")),  # REQUIRED in BigQuery
+      "modified_at": b.get("modifiedAt")[:10] or b.get("modified_at", None),
+      "supabase_key": user.get("supabase_key"),
+      "price_baseprice": float(price_data.get("price_baseprice", 0.0)),
+      "price_cleaningfee": float(price_data.get("price_cleaningfee", 0.0)),
+      "price_longstaydiscount": float(price_data.get("price_longstaydiscount", 0.0)),
+      "price_coupon": float(price_data.get("price_coupon", 0.0)),
+      "price_addon": float(price_data.get("price_addon", 0.0)),
       "price_curr": price_data.get("price_curr"),
-      "price_comm": price_data.get("price_comm")
-    })
+      "price_comm": float(price_data.get("price_comm", 0.0))
+    }
+    row_dicts.append(rd)
 
-    # --- Einfache Batch-Inserts mit UNNEST ---
-  query = """
-    INSERT INTO `my_project.bookings.dim_reservation`
-    SELECT *
-    FROM UNNEST(@bookings)
-    """
-  # Achte auf die Reihenfolge/Typen der Felder!
+    # Reihenfolge und Typen müssen BigQuery-Schema entsprechen!
+  struct_fields = [
+    "email", "apartment", "arrival", "departure", "created_at", "channel_name", "guestname",
+    "adults", "children", "language", "type", "reservation_id", "guestid", "guest_email", "phone",
+    "address_postalcode", "address_city", "address_country", "screener_openai_job", "screener_address_check",
+    "screener_google_linkedin", "screener_phone_check", "screener_disposable_email", "price", "prepayment",
+    "deposit", "commission_included", "price_paid", "prepayment_paid", "deposit_paid", "address_street", 
+    "mth_adj", "stay_mth", "id", "modified_at", "supabase_key", "price_baseprice", "price_cleaningfee",
+    "price_longstaydiscount", "price_coupon", "price_addon", "price_curr", "price_comm"
+  ]
+  tuple_list = [tuple(rd.get(f) for f in struct_fields) for rd in row_dicts]
+
+  struct_def = (
+    "STRUCT<email STRING, apartment STRING, arrival DATE, departure DATE, created_at DATE,"
+    "channel_name STRING, guestname STRING, adults INT64, children INT64, language STRING, type STRING,"
+    "reservation_id INT64, guestid INT64, guest_email STRING, phone STRING, address_postalcode STRING,"
+    "address_city STRING, address_country STRING, screener_openai_job STRING, screener_address_check BOOL,"
+    "screener_google_linkedin STRING, screener_phone_check BOOL, screener_disposable_email BOOL, price FLOAT64,"
+    "prepayment FLOAT64, deposit FLOAT64, commission_included FLOAT64, price_paid STRING, prepayment_paid STRING,"
+    "deposit_paid STRING, address_street STRING, mth_adj STRING, stay_mth DATE, id STRING, modified_at DATE,"
+    "supabase_key STRING, price_baseprice FLOAT64, price_cleaningfee FLOAT64, price_longstaydiscount FLOAT64,"
+    "price_coupon FLOAT64, price_addon FLOAT64, price_curr STRING, price_comm FLOAT64>"
+  )
+
+  example = row_dicts[0]
+  for f in struct_fields:
+    print(f"{f}: '{example.get(f)}' ({type(example.get(f))})")
+
+    query = (
+    "INSERT INTO `my_project.bookings.dim_reservation` "
+    "SELECT * FROM UNNEST(@bookings)"
+  )
+
+  print(query)
+  
   query_params = [
     bigquery.ArrayQueryParameter(
       "bookings",
-      "STRUCT<reservation_id STRING, apartment STRING, arrival DATE, departure DATE,"
-      "created_at DATETIME, modified_at DATETIME, guestname STRING, channel_name STRING,"
-      "guest_email STRING, phone STRING, adults INT64, children INT64, type STRING, price NUMERIC,"
-      "price_paid NUMERIC, prepayment NUMERIC, prepayment_paid NUMERIC, deposit NUMERIC,"
-      "deposit_paid NUMERIC, commission_included BOOL, guestid STRING, language STRING,"
-      "user_email STRING, price_baseprice NUMERIC, price_cleaningfee NUMERIC,"
-      "price_longstaydiscount NUMERIC, price_coupon NUMERIC, price_addon NUMERIC,"
-      "price_curr STRING, price_comm NUMERIC",
-      [tuple(rd.values()) for rd in row_dicts]
+      struct_def,
+      tuple_list
     )
   ]
   job_config = bigquery.QueryJobConfig(query_parameters=query_params)
   client.query(query, job_config=job_config).result()
-
   return f"{len(row_dicts)} Buchungen in BigQuery importiert."
 
 @anvil.server.callable
