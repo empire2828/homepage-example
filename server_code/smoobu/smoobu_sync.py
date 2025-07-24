@@ -117,24 +117,12 @@ def sync_smoobu(user_email):
 
     # Reihenfolge und Typen müssen BigQuery-Schema entsprechen!
   struct_fields = [
-    "email", "apartment", "arrival", "departure", "created_at", "channel_name", "guestname",
-    "adults", "children", "language", "type", "reservation_id", "guestid", "guest_email", "phone",
-    "address_postalcode", "address_city", "address_country", "price", "prepayment",
-    "deposit", "commission_included", "price_paid", "prepayment_paid", "deposit_paid", "address_street", 
-    "mth_adj", "stay_mth", "id", "modified_at", "supabase_key", "price_baseprice", "price_cleaningfee",
-    "price_longstaydiscount", "price_coupon", "price_addon", "price_curr", "price_comm"
+    "id"
   ]
   tuple_list = [tuple(rd.get(f) for f in struct_fields) for rd in row_dicts]
 
   struct_def = (
-    "STRUCT<email STRING, apartment STRING, arrival DATE, departure DATE, created_at DATE,"
-    "channel_name STRING, guestname STRING, adults INT64, children INT64, language STRING, type STRING,"
-    "reservation_id INT64, guestid INT64, guest_email STRING, phone STRING, address_postalcode STRING,"
-    "address_city STRING, address_country STRING, price FLOAT64,"
-    "prepayment FLOAT64, deposit FLOAT64, commission_included FLOAT64, price_paid STRING, prepayment_paid STRING,"
-    "deposit_paid STRING, address_street STRING, mth_adj STRING, stay_mth DATE, id STRING, modified_at DATE,"
-    "supabase_key STRING, price_baseprice FLOAT64, price_cleaningfee FLOAT64, price_longstaydiscount FLOAT64,"
-    "price_coupon FLOAT64, price_addon FLOAT64, price_curr STRING, price_comm FLOAT64>"
+    "STRUCT<id STRING>"
   )
 
   example = row_dicts[0]
@@ -194,4 +182,25 @@ def get_smoobu_userid(user_email):
         return None
 
 
+######
+  # Reihenfolge und Typen müssen BigQuery-Schema entsprechen!
+#  struct_fields = [
+#    "email", "apartment", "arrival", "departure", "created_at", "channel_name", "guestname",
+#    "adults", "children", "language", "type", "reservation_id", "guestid", "guest_email", "phone",
+#    "address_postalcode", "address_city", "address_country", "price", "prepayment",
+#    "deposit", "commission_included", "price_paid", "prepayment_paid", "deposit_paid", "address_street", 
+#    "mth_adj", "stay_mth", "id", "modified_at", "supabase_key", "price_baseprice", "price_cleaningfee",
+#    "price_longstaydiscount", "price_coupon", "price_addon", "price_curr", "price_comm"
+#  ]
+#tuple_list = [tuple(rd.get(f) for f in struct_fields) for rd in row_dicts]
 
+#struct_def = (
+#  "STRUCT<email STRING, apartment STRING, arrival DATE, departure DATE, created_at DATE,"
+#  "channel_name STRING, guestname STRING, adults INT64, children INT64, language STRING, type STRING,"
+#  "reservation_id INT64, guestid INT64, guest_email STRING, phone STRING, address_postalcode STRING,"
+#  "address_city STRING, address_country STRING, price FLOAT64,"
+#  "prepayment FLOAT64, deposit FLOAT64, commission_included FLOAT64, price_paid STRING, prepayment_paid STRING,"
+#  "deposit_paid STRING, address_street STRING, mth_adj STRING, stay_mth DATE, id STRING, modified_at DATE,"
+#  "supabase_key STRING, price_baseprice FLOAT64, price_cleaningfee FLOAT64, price_longstaydiscount FLOAT64,"
+#  "price_coupon FLOAT64, price_addon FLOAT64, price_curr STRING, price_comm FLOAT64>"
+#)
