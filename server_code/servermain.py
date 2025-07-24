@@ -8,6 +8,14 @@ from datetime import datetime, timedelta, timezone
 from . import routes # noqa: F401
 from supabase import create_client, Client
 import anvil.secrets
+from google.cloud import bigquery
+import json
+
+# BigQuery Konfiguration
+BIGQUERY_PROJECT_ID = "lodginia"
+BIGQUERY_DATASET_ID = "lodginia" 
+BIGQUERY_TABLE_ID = "bookings"
+FULL_TABLE_ID = "lodginia.lodginia.bookings"
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -135,7 +143,23 @@ def save_all_channels_for_user(user_email):
     print("Keine Channels für", user_email, "gefunden.")
     return 0
 
-
+def get_bigquery_client():
+  """Erstellt einen BigQuery Client mit Service Account Authentifizierung"""
+  try:
+    service_account_json = anvil.secrets.get_secret('bigquery_api_key')
+    service_account_info = json.loads(service_account_json)
+    credentials = service_account.Credentials.from_service_account_info(
+      service_account_info,
+      scopes=['https://www.googleapis.com/auth/bigquery']
+    )
+    client = bigquery.Client(
+      credentials=credentials,
+      project=service_account_info['project_id']
+    )
+    return client
+  except Exception as e:
+    print(f"Fehler beim BigQuery Client Setup: {str(e)}")
+    return None
 
 
 
