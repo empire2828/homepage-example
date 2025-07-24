@@ -13,6 +13,7 @@ from smoobu.smoobu_main import get_price_elements
 import requests
 from datetime import datetime
 from google.cloud import bigquery
+from servermain import get_bigquery_client
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -30,7 +31,7 @@ def launch_sync_smoobu():
 
 def sync_smoobu(user_email):
   # Set up credentials/env separately, z.B. via GOOGLE_APPLICATION_CREDENTIALS
-  client = bigquery.Client(project="lodginia")
+  client = get_bigquery_client()
   base_url = "https://login.smoobu.com/api/reservations"
   user = app_tables.users.get(email=user_email)
   if user:
