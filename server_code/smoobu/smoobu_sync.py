@@ -32,10 +32,13 @@ def sync_smoobu(user_email):
   # Set up credentials/env separately, z.B. via GOOGLE_APPLICATION_CREDENTIALS
   client = bigquery.Client(project="lodginia")
   base_url = "https://login.smoobu.com/api/reservations"
+  user = app_tables.users.get(email=user_email)
+  if user:
+    api_key = user['smoobu_api_key']
+    supabase_key = user['supabase_key']
+  else:
+    return "User not found."
 
-  # Hole Nutzerdaten (aus z.B. Supabase/users)
-  # Pseudocode: user = app_tables.users.get(email=user_email)
-  api_key = "DEIN_SMOOBU_API_KEY"
   headers = {
     "Api-Key": api_key,
     "Content-Type": "application/json"
