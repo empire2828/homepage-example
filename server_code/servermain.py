@@ -13,9 +13,9 @@ import json
 from google.oauth2 import service_account
 
 # BigQuery Konfiguration
-BIGQUERY_PROJECT_ID = "lodginia"
-BIGQUERY_DATASET_ID = "lodginia" 
-BIGQUERY_TABLE_ID = "bookings"
+PROJECT_ID = "lodginia"
+DATASET_ID = "lodginia" 
+TABLE_ID = "bookings"
 FULL_TABLE_ID = "lodginia.lodginia.bookings"
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
@@ -155,7 +155,7 @@ def get_bigquery_client():
     )
     client = bigquery.Client(
       credentials=credentials,
-      project=service_account_info['BIGQUERY_PROJECT_ID']
+      project=service_account_info['PROJECT_ID']
     )
     # Projektname abfragen (Test-Query)
     query_job = client.query('SELECT CURRENT_PROJECT() AS project_name')

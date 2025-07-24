@@ -33,6 +33,8 @@ def launch_sync_smoobu():
 def sync_smoobu(user_email):
   # Set up credentials/env separately, z.B. via GOOGLE_APPLICATION_CREDENTIALS
   client = get_bigquery_client()
+  if client is None:
+    return "BigQuery-Client konnte nicht erstellt werden. Prüfe Service Account-Konfiguration!"
   base_url = "https://login.smoobu.com/api/reservations"
   user = app_tables.users.get(email=user_email)
   if user:
