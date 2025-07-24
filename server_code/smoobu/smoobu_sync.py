@@ -29,6 +29,7 @@ def launch_sync_smoobu():
   save_last_fees_as_std(user_email)
   return result
 
+@anvil.server.background_task
 def sync_smoobu(user_email):
   # Set up credentials/env separately, z.B. via GOOGLE_APPLICATION_CREDENTIALS
   client = get_bigquery_client()
@@ -107,8 +108,7 @@ def sync_smoobu(user_email):
       "price_coupon": price_data.get("price_coupon"),
       "price_addon": price_data.get("price_addon"),
       "price_curr": price_data.get("price_curr"),
-      "price_comm": price_data.get("price_comm"),
-      "ingestion_timestamp": datetime.utcnow().isoformat()
+      "price_comm": price_data.get("price_comm")
     })
 
     # --- Einfache Batch-Inserts mit UNNEST ---
@@ -128,7 +128,7 @@ def sync_smoobu(user_email):
       "deposit_paid NUMERIC, commission_included BOOL, guestid STRING, language STRING,"
       "user_email STRING, price_baseprice NUMERIC, price_cleaningfee NUMERIC,"
       "price_longstaydiscount NUMERIC, price_coupon NUMERIC, price_addon NUMERIC,"
-      "price_curr STRING, price_comm NUMERIC, ingestion_timestamp TIMESTAMP>",
+      "price_curr STRING, price_comm NUMERIC",
       [tuple(rd.values()) for rd in row_dicts]
     )
   ]
