@@ -155,14 +155,15 @@ def get_bigquery_client():
     )
     client = bigquery.Client(
       credentials=credentials,
-      project=service_account_info['PROJECT_ID']
+      project=service_account_info['project_id']
     )
     # Projektname abfragen (Test-Query)
-    query_job = client.query('SELECT CURRENT_PROJECT() AS project_name')
-    results = query_job.result()
-    for row in results:
-      project_name = row.project_name
-    print(f"Verbindung zu BigQuery-Projekt erfolgreich: {project_name}")
+    project_id = service_account_info['project_id']
+    client = bigquery.Client(
+      credentials=credentials,
+      project=project_id
+    )
+    print(f"Verbindung zu BigQuery-Projekt erfolgreich: {project_id}")
     return client
   except Exception as e:
     print(f"Fehler beim BigQuery Client Setup: {str(e)}")
