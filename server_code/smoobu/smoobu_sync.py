@@ -43,6 +43,7 @@ def sync_smoobu(user_email):
   if not user:
     return "User not found."
   api_key = user['smoobu_api_key']
+  supabase_key = user['supabase_key']  
   headers = {
     "Api-Key": api_key,
     "Content-Type": "application/json"
