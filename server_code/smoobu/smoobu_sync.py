@@ -10,6 +10,9 @@ from admin import log
 from servermain import save_last_fees_as_std
 from Users import save_user_apartment_count
 from smoobu.smoobu_main import get_price_elements
+import requests
+from datetime import datetime
+from google.cloud import bigquery
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -25,16 +28,14 @@ def launch_sync_smoobu():
   save_last_fees_as_std(user_email)
   return result
 
-@anvil.server.background_task
 def sync_smoobu(user_email):
+  # Set up credentials/env separately, z.B. via GOOGLE_APPLICATION_CREDENTIALS
+  client = bigquery.Client(project="lodginia")
   base_url = "https://login.smoobu.com/api/reservations"
-  user = app_tables.users.get(email=user_email)
-  if user:
-    api_key = user['smoobu_api_key']
-    supabase_key = user['supabase_key']
-  else:
-    return "User not found."
 
+  # Hole Nutzerdaten (aus z.B. Supabase/users)
+  # Pseudocode: user = app_tables.users.get(email=user_email)
+  api_key = "DEIN_SMOOBU_API_KEY"
   headers = {
     "Api-Key": api_key,
     "Content-Type": "application/json"
@@ -48,83 +49,89 @@ def sync_smoobu(user_email):
     "showCancellation": True,
     "includePriceElements": True,
   }
+
+  # --- Smoobu Paging ---
   all_bookings = []
-  total_pages = 1
   current_page = 1
+  total_pages = 1
 
   while current_page <= total_pages:
     params["page"] = current_page
-    response = requests.get(base_url, headers=headers, params=params)
-    if response.status_code == 200:
-      data = response.json()
-      total_pages = data.get("pagination", {}).get("totalPages", 1)
-      if "page_count" in data:
-        total_pages = data["page_count"]
-      if "bookings" in data:
-        all_bookings.extend(data["bookings"])
-      else:
-        return "Error: Unexpected API response structure"
-      current_page += 1
-    else:
-      return f"Fehler: {response.status_code} - {response.text}"
+    resp = requests.get(base_url, headers=headers, params=params)
+    if resp.status_code != 200:
+      return f"Fehler: {resp.status_code} - {resp.text}"
+    data = resp.json()
+    total_pages = data.get("pagination", {}).get("totalPages", 1)
+    for booking in data.get("bookings", []):
+      all_bookings.append(booking)
+    current_page += 1
 
-  bookings_added = 0
+  if not all_bookings:
+    return "Keine Buchungen gefunden."
 
-  for booking in all_bookings:
-    log(str(booking), user_email, '')
-    try:
-      reservation_id = booking.get('id')
-      channel_name = booking.get('channel', {}).get('name')
-      # Use the refactored price extraction function
-      price_data = get_price_elements(reservation_id, headers)
-      row = {
-        "reservation_id": reservation_id,
-        "apartment": booking['apartment']['name'],
-        "arrival": datetime.strptime(booking['arrival'], "%Y-%m-%d").date().isoformat(),
-        "departure": datetime.strptime(booking['departure'], "%Y-%m-%d").date().isoformat(),
-        "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").isoformat(),
-        "modified_at": datetime.strptime(booking['modifiedAt'], "%Y-%m-%d %H:%M:%S").isoformat(),
-        "guestname": booking['guest-name'],
-        "channel_name": channel_name,
-        "guest_email": booking['email'],
-        "phone": booking['phone'],
-        "adults": booking['adults'],
-        "children": booking['children'],
-        "type": booking['type'],
-        "price": booking['price'],
-        "price_paid": booking['price-paid'],
-        "prepayment": booking['prepayment'],
-        "prepayment_paid": booking['prepayment-paid'],
-        "deposit": booking['deposit'],
-        "deposit_paid": booking['deposit-paid'],
-        "commission_included": booking['commission-included'],
-        "guestid": booking['guestId'],
-        "language": booking['language'],
-        "email": user_email,
-        "supabase_key": supabase_key,
-        "price_baseprice": price_data['price_baseprice'],
-        "price_cleaningfee": price_data['price_cleaningfee'],
-        "price_longstaydiscount": price_data['price_longstaydiscount'],
-        "price_coupon": price_data['price_coupon'],
-        "price_addon": price_data['price_addon'],
-        "price_curr": price_data['price_curr'],
-        "price_comm": price_data['price_comm']
-      }
-      response = (
-        supabase_client
-          .from_("bookings")
-          .upsert(row, on_conflict="reservation_id,email")
-          .execute()
-      )
-      bookings_added += 1
-    except KeyError as e:
-      print(f"Missing key in booking data: {e}")
-      continue
+    # --- Transformiere Buchungsdaten ins BigQuery-Format ---
+  row_dicts = []
+  for b in all_bookings:
+    price_data = get_price_elements(b['id'], headers)
+    row_dicts.append({
+      "reservation_id": b.get("id"),
+      "apartment": b.get("apartment", {}).get("name"),
+      "arrival": datetime.strptime(b["arrival"], "%Y-%m-%d").date().isoformat() if b.get("arrival") else None,
+      "departure": datetime.strptime(b["departure"], "%Y-%m-%d").date().isoformat() if b.get("departure") else None,
+      "created_at": datetime.strptime(b["created-at"], "%Y-%m-%d %H:%M").isoformat() if b.get("created-at") else None,
+      "modified_at": datetime.strptime(b["modifiedAt"], "%Y-%m-%d %H:%M:%S").isoformat() if b.get("modifiedAt") else None,
+      "guestname": b.get("guest-name"),
+      "channel_name": b.get("channel", {}).get("name"),
+      "guest_email": b.get("email"),
+      "phone": b.get("phone"),
+      "adults": b.get("adults"),
+      "children": b.get("children"),
+      "type": b.get("type"),
+      "price": b.get("price"),
+      "price_paid": b.get("price-paid"),
+      "prepayment": b.get("prepayment"),
+      "prepayment_paid": b.get("prepayment-paid"),
+      "deposit": b.get("deposit"),
+      "deposit_paid": b.get("deposit-paid"),
+      "commission_included": b.get("commission-included"),
+      "guestid": b.get("guestId"),
+      "language": b.get("language"),
+      "user_email": user_email,
+      "price_baseprice": price_data.get("price_baseprice"),
+      "price_cleaningfee": price_data.get("price_cleaningfee"),
+      "price_longstaydiscount": price_data.get("price_longstaydiscount"),
+      "price_coupon": price_data.get("price_coupon"),
+      "price_addon": price_data.get("price_addon"),
+      "price_curr": price_data.get("price_curr"),
+      "price_comm": price_data.get("price_comm"),
+      "ingestion_timestamp": datetime.utcnow().isoformat()
+    })
 
-  anvil.server.launch_background_task('save_user_apartment_count', user_email)
-  anvil.server.launch_background_task('save_all_channels_for_user', user_email)
+    # --- Einfache Batch-Inserts mit UNNEST ---
+  query = """
+    INSERT INTO `my_project.bookings.dim_reservation`
+    SELECT *
+    FROM UNNEST(@bookings)
+    """
+  # Achte auf die Reihenfolge/Typen der Felder!
+  query_params = [
+    bigquery.ArrayQueryParameter(
+      "bookings",
+      "STRUCT<reservation_id STRING, apartment STRING, arrival DATE, departure DATE,"
+      "created_at DATETIME, modified_at DATETIME, guestname STRING, channel_name STRING,"
+      "guest_email STRING, phone STRING, adults INT64, children INT64, type STRING, price NUMERIC,"
+      "price_paid NUMERIC, prepayment NUMERIC, prepayment_paid NUMERIC, deposit NUMERIC,"
+      "deposit_paid NUMERIC, commission_included BOOL, guestid STRING, language STRING,"
+      "user_email STRING, price_baseprice NUMERIC, price_cleaningfee NUMERIC,"
+      "price_longstaydiscount NUMERIC, price_coupon NUMERIC, price_addon NUMERIC,"
+      "price_curr STRING, price_comm NUMERIC, ingestion_timestamp TIMESTAMP>",
+      [tuple(rd.values()) for rd in row_dicts]
+    )
+  ]
+  job_config = bigquery.QueryJobConfig(query_parameters=query_params)
+  client.query(query, job_config=job_config).result()
 
-  return f"Erfolgreich {bookings_added} Buchungen mit Adressdaten abgerufen und gespeichert."
+  return f"{len(row_dicts)} Buchungen in BigQuery importiert."
 
 @anvil.server.callable
 def save_smoobu_userid(user_email):
