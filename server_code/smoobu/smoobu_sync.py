@@ -76,14 +76,17 @@ def sync_smoobu(user_email):
   row_dicts = []
   for b in all_bookings:
     price_data = get_price_elements(b['id'], headers)
+    reservation_id = booking.get('id')
+    channel_name = booking.get('channel', {}).get('name')
     # BigQuery-Typen: Strings, INT, FLOAT, BOOL, DATE, TIMESTAMP 
     rd = {
       "reservation_id": reservation_id,
+      "id": user_email+"_"+str(reservation_id),
       "apartment": booking['apartment']['name'],
-      "arrival": datetime.strptime(booking['arrival'], "%Y-%m-%d").date().isoformat(),
-      "departure": datetime.strptime(booking['departure'], "%Y-%m-%d").date().isoformat(),
-      "created_at": datetime.strptime(booking['created-at'], "%Y-%m-%d %H:%M").isoformat(),
-      "modified_at": datetime.strptime(booking['modifiedAt'], "%Y-%m-%d %H:%M:%S").isoformat(),
+      "arrival": booking['arrival'],
+      "departure": booking['departure'],
+      "created_at": booking['created-at'][:10] if booking.get('created-at') else None,
+      "modified_at": booking['modifiedAt'][:10] if booking.get('modifiedAt') else None,
       "guestname": booking['guest-name'],
       "channel_name": channel_name,
       "guest_email": booking['email'],
@@ -91,24 +94,24 @@ def sync_smoobu(user_email):
       "adults": booking['adults'],
       "children": booking['children'],
       "type": booking['type'],
-      "price": booking['price'],
+      "price": float(booking['price']),
       "price_paid": booking['price-paid'],
-      "prepayment": booking['prepayment'],
+      "prepayment": float(booking['prepayment']),
       "prepayment_paid": booking['prepayment-paid'],
-      "deposit": booking['deposit'],
+      "deposit": float(booking['deposit']),
       "deposit_paid": booking['deposit-paid'],
-      "commission_included": booking['commission-included'],
+      "commission_included": float(booking['commission-included']) if booking['commission-included'] is not None else 0.0,
       "guestid": booking['guestId'],
       "language": booking['language'],
       "email": user_email,
       "supabase_key": supabase_key,
-      "price_baseprice": price_data['price_baseprice'],
-      "price_cleaningfee": price_data['price_cleaningfee'],
-      "price_longstaydiscount": price_data['price_longstaydiscount'],
-      "price_coupon": price_data['price_coupon'],
-      "price_addon": price_data['price_addon'],
+      "price_baseprice": float(price_data['price_baseprice']),
+      "price_cleaningfee": float(price_data['price_cleaningfee']),
+      "price_longstaydiscount": float(price_data['price_longstaydiscount']),
+      "price_coupon": float(price_data['price_coupon']),
+      "price_addon": float(price_data['price_addon']),
       "price_curr": price_data['price_curr'],
-      "price_comm": price_data['price_comm']
+      "price_comm": float(price_data['price_comm'])
     }
     row_dicts.append(rd)
 
@@ -116,8 +119,7 @@ def sync_smoobu(user_email):
   struct_fields = [
     "email", "apartment", "arrival", "departure", "created_at", "channel_name", "guestname",
     "adults", "children", "language", "type", "reservation_id", "guestid", "guest_email", "phone",
-    "address_postalcode", "address_city", "address_country", "screener_openai_job", "screener_address_check",
-    "screener_google_linkedin", "screener_phone_check", "screener_disposable_email", "price", "prepayment",
+    "address_postalcode", "address_city", "address_country", "price", "prepayment",
     "deposit", "commission_included", "price_paid", "prepayment_paid", "deposit_paid", "address_street", 
     "mth_adj", "stay_mth", "id", "modified_at", "supabase_key", "price_baseprice", "price_cleaningfee",
     "price_longstaydiscount", "price_coupon", "price_addon", "price_curr", "price_comm"
@@ -128,8 +130,7 @@ def sync_smoobu(user_email):
     "STRUCT<email STRING, apartment STRING, arrival DATE, departure DATE, created_at DATE,"
     "channel_name STRING, guestname STRING, adults INT64, children INT64, language STRING, type STRING,"
     "reservation_id INT64, guestid INT64, guest_email STRING, phone STRING, address_postalcode STRING,"
-    "address_city STRING, address_country STRING, screener_openai_job STRING, screener_address_check BOOL,"
-    "screener_google_linkedin STRING, screener_phone_check BOOL, screener_disposable_email BOOL, price FLOAT64,"
+    "address_city STRING, address_country STRING, price FLOAT64,"
     "prepayment FLOAT64, deposit FLOAT64, commission_included FLOAT64, price_paid STRING, prepayment_paid STRING,"
     "deposit_paid STRING, address_street STRING, mth_adj STRING, stay_mth DATE, id STRING, modified_at DATE,"
     "supabase_key STRING, price_baseprice FLOAT64, price_cleaningfee FLOAT64, price_longstaydiscount FLOAT64,"
@@ -141,7 +142,7 @@ def sync_smoobu(user_email):
     print(f"{f}: '{example.get(f)}' ({type(example.get(f))})")
 
     query = (
-    "INSERT INTO `my_project.bookings.dim_reservation` "
+    "INSERT INTO `lodginia.lodginia.bookings` "
     "SELECT * FROM UNNEST(@bookings)"
   )
 
