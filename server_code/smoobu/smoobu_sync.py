@@ -54,37 +54,36 @@ def sync_smoobu(user_email):
   }
   params = {
     "status": "confirmed",
-    "page": 1,
-    "limit": 100,
     "from": "2019-01-01",
     "excludeBlocked": True,
     "showCancellation": True,
     "includePriceElements": True,
+    "page": 1,
+    "limit": 25,   # API-limit: Nicht größer setzen!
   }
-  all_bookings = []
-  current_page = 1
-  total_pages = 1
 
-  while current_page <= total_pages:
-    params["page"] = current_page
+  all_bookings = []
+  while True:
     resp = requests.get(base_url, headers=headers, params=params)
     if resp.status_code != 200:
       return f"Fehler: {resp.status_code} - {resp.text}"
     data = resp.json()
-    total_pages = data.get("pagination", {}).get("totalPages", 1)
-    all_bookings.extend(data.get("bookings", []))
-    current_page += 1
+    bookings = data.get("bookings", [])
+    all_bookings.extend(bookings)
+    if len(bookings) < params["limit"]:
+      break
+    params["page"] += 1
 
   if not all_bookings:
     return "Keine Buchungen gefunden."
 
-    # Datensätze vorbereiten
+    # Daten für BigQuery vorbereiten
   rows_to_insert = []
   for booking in all_bookings:
     price_data = get_price_elements(booking['id'], headers)
     row = {
       "reservation_id": booking.get('id'),
-      "id": user_email + "_" + str(booking.get('id')),
+      "id": f"{user_email}_{booking.get('id')}",
       "apartment": booking['apartment']['name'],
       "arrival": booking['arrival'],
       "departure": booking['departure'],
@@ -94,8 +93,8 @@ def sync_smoobu(user_email):
       "channel_name": booking.get('channel', {}).get('name'),
       "guest_email": booking['email'],
       "phone": booking['phone'],
-      "adults": booking['adults'],
-      "children": booking['children'],
+      "adults": booking['adults'] if booking['adults'] is not None else 0,
+      "children": booking['children'] if booking['children'] is not None else 0,
       "type": booking['type'],
       "price": float(booking['price']) if booking['price'] is not None else 0,
       "price_paid": booking['price-paid'],
@@ -103,30 +102,53 @@ def sync_smoobu(user_email):
       "prepayment_paid": booking['prepayment-paid'],
       "deposit": float(booking['deposit']) if booking['deposit'] is not None else 0,
       "deposit_paid": booking['deposit-paid'] if booking['deposit-paid'] is not None else "",
-      "commission_included": float(booking['commission-included']) if booking['commission-included'] else 0.0,
+      "commission_included": float(booking.get('commission-included') or 0.0),
       "guestid": booking['guestId'],
       "language": booking['language'],
       "email": user_email,
       "supabase_key": supabase_key,
-      "price_baseprice": float(price_data['price_baseprice']),
-      "price_cleaningfee": float(price_data['price_cleaningfee']),
-      "price_longstaydiscount": float(price_data['price_longstaydiscount']),
-      "price_coupon": float(price_data['price_coupon']),
-      "price_addon": float(price_data['price_addon']),
-      "price_curr": price_data['price_curr'],
-      "price_comm": float(price_data['price_comm']),
+      "price_baseprice": float(price_data.get('price_baseprice', 0)),
+      "price_cleaningfee": float(price_data.get('price_cleaningfee', 0)),
+      "price_longstaydiscount": float(price_data.get('price_longstaydiscount', 0)),
+      "price_coupon": float(price_data.get('price_coupon')) if price_data.get('price_coupon') is not None else 0,
+      "price_addon": float(price_data.get('price_addon')) if price_data.get('price_addon') is not None else 0,
+      "price_curr": price_data.get('price_curr', ''),
+      "price_comm": float(price_data.get('price_comm')) if price_data.get('price_comm') is not None else 0
     }
-    # Fehlende Felder ergänzen wie nötig
     rows_to_insert.append(row)
 
-    # Streaming Insert: Direkt in die finale Tabelle schreiben
-  table_id = "lodginia.lodginia.bookings"
-  errors = client.insert_rows_json(table_id, rows_to_insert)
-  if errors:
-    return f"Fehler beim Einfügen: {errors}"
+  if not rows_to_insert:
+    return "Keine Buchungen zur Übertragung."
 
-  print(f"{len(rows_to_insert)} Buchungen erfolgreich direkt in BigQuery importiert.")
+  table = "lodginia.lodginia.bookings"
+  columns = [
+    "reservation_id", "id", "apartment", "arrival", "departure", "created_at",
+    "modified_at", "guestname", "channel_name", "guest_email", "phone", "adults",
+    "children", "type", "price", "price_paid", "prepayment", "prepayment_paid",
+    "deposit", "deposit_paid", "commission_included", "guestid", "language", "email",
+    "supabase_key", "price_baseprice", "price_cleaningfee", "price_longstaydiscount",
+    "price_coupon", "price_addon", "price_curr", "price_comm"
+  ]
+
+  value_rows = []
+  for row in rows_to_insert:
+    values = []
+    for col in columns:
+      val = row[col]
+      if val is None:
+        values.append("NULL")
+      elif isinstance(val, (int, float)):
+        values.append(str(val))
+      else:
+        values.append("'" + str(val).replace("'", "''") + "'")
+    value_rows.append(f"({', '.join(values)})")
+
+  sql = (f"INSERT INTO `{table}` ({', '.join(columns)}) VALUES\n" +
+         ",\n".join(value_rows))
+  client.query(sql).result()
+  print(f"{len(rows_to_insert)} bookings imported into BigQuery.")
   return 
+
 
 
 @anvil.server.callable

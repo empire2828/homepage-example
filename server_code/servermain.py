@@ -27,16 +27,26 @@ supabase: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.callable
 def delete_bookings_by_email(user_email):
-  resp = (
-    supabase.table("bookings")
-      .delete()
-      .eq("email", user_email)
-      .execute()
+  client = get_bigquery_client()
+  sql = f"""
+        DELETE FROM `{FULL_TABLE_ID}`
+        WHERE email = @user_email
+    """
+
+  job_config = bigquery.QueryJobConfig(
+    query_parameters=[
+      bigquery.ScalarQueryParameter("user_email", "STRING", user_email)
+    ]
   )
+  query_job = client.query(sql, job_config=job_config)
+  query_job.result()  # Wait for the job to finish
+
+  deleted_count = query_job.num_dml_affected_rows
+  print('gelösche Buchungen',deleted_count,' von ',user_email)
+
   return {
     "status": "success",
-    "deleted_count": len(resp.data),
-    "deleted_data": resp.data,
+    "deleted_count": deleted_count,
   }
 
 @anvil.server.callable
