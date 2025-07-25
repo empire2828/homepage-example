@@ -73,39 +73,58 @@ def send_email_to_support(text, file=None, email=None):
   except Exception as e:
     print("send_email_to_support: ERROR", e)
 
-@anvil.server.background_task
 def save_last_fees_as_std(user_email):
-  # 1. Hole alle Buchungen für diesen Nutzer in den relevanten Kanälen
-  response = (
-    supabase_client
-      .table("bookings")
-      .select("*")
-      .eq("email", user_email)
-      .in_("channel_name", ["Direct booking", "Website"])
-      .order("created_at", desc=True)
-      .execute()
+  client = get_bigquery_client()
+  # Suche letzte Buchung des Users für die gewünschten Kanäle
+  query = """
+      SELECT price_cleaningfee, price_addon
+      FROM `lodginia.lodginia.bookings`
+      WHERE email = @user_email
+        AND channel_name IN ('Direct booking', 'Website')
+      ORDER BY created_at DESC
+      LIMIT 1
+    """
+  job_config = bigquery.QueryJobConfig(
+    query_parameters=[bigquery.ScalarQueryParameter("user_email", "STRING", user_email)]
   )
-  all_bookings = response.data
-
-  # 2. Die neueste Buchung bestimmen (ohne Apartment-Bezug)
-  latest_booking = all_bookings[0] if all_bookings else None
-
-  if latest_booking:
-    cleaning_fee = latest_booking.get('price_cleaningfee')
-    addon_fee = latest_booking.get('price_addon')
-    upsert_data = {
-      "email": user_email,
-      "std_cleaning_fee": float(cleaning_fee) if cleaning_fee not in ("", None) else None,
-      "std_linen_fee": float(addon_fee) if addon_fee not in ("", None) else None
-    }
-    supabase_client.table("parameter").upsert(
-      [upsert_data],
-      on_conflict=["email"]
-    ).execute()
-    print('last fees saved as std',user_email,' ',cleaning_fee,' ',addon_fee)
-    return 1
-  else:
+  query_job = client.query(query, job_config=job_config)
+  rows = list(query_job)
+  if not rows:
     return 0
+  cleaning_fee = rows[0]['price_cleaningfee']
+  addon_fee = rows[0]['price_addon']
+
+  # 2. Versuche Update – überschreibe bestehenden Eintrag
+  update_query = """
+      UPDATE `lodginia.lodginia.parameter`
+      SET std_cleaning_fee = @std_cleaning_fee,
+          std_linen_fee = @std_linen_fee
+      WHERE email = @user_email
+    """
+  update_config = bigquery.QueryJobConfig(
+    query_parameters=[
+      bigquery.ScalarQueryParameter("std_cleaning_fee", "FLOAT64", float(cleaning_fee) if cleaning_fee not in ("", None) else None),
+      bigquery.ScalarQueryParameter("std_linen_fee", "FLOAT64", float(addon_fee) if addon_fee not in ("", None) else None),
+      bigquery.ScalarQueryParameter("user_email", "STRING", user_email)
+    ]
+  )
+  result = client.query(update_query, job_config=update_config).result()
+  if result.num_dml_affected_rows == 0:
+    # 3. Falls kein Update (Row existiert NICHT), dann INSERT
+    insert_query = """
+          INSERT INTO `your_project.your_dataset.parameter` (email, std_cleaning_fee, std_linen_fee)
+          VALUES (@user_email, @std_cleaning_fee, @std_linen_fee)
+        """
+    insert_config = bigquery.QueryJobConfig(
+      query_parameters=[
+        bigquery.ScalarQueryParameter("user_email", "STRING", user_email),
+        bigquery.ScalarQueryParameter("std_cleaning_fee", "FLOAT64", float(cleaning_fee) if cleaning_fee not in ("", None) else None),
+        bigquery.ScalarQueryParameter("std_linen_fee", "FLOAT64", float(addon_fee) if addon_fee not in ("", None) else None),
+      ]
+    )
+    client.query(insert_query, job_config=insert_config).result()
+  print('last fees saved as std', user_email, cleaning_fee, addon_fee)
+  return 1
 
 @anvil.server.background_task
 def save_all_channels_for_user(user_email):

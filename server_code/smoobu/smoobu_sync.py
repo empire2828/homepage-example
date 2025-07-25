@@ -149,8 +149,6 @@ def sync_smoobu(user_email):
   print(f"{len(rows_to_insert)} bookings imported into BigQuery.")
   return 
 
-
-
 @anvil.server.callable
 def save_smoobu_userid(user_email):
     smoobu_userid = str(get_smoobu_userid(user_email))
