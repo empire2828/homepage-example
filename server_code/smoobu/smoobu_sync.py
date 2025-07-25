@@ -40,12 +40,14 @@ def sync_smoobu(user_email):
   client = get_bigquery_client()
   if client is None:
     return "BigQuery-Client konnte nicht erstellt werden. Prüfe Service Account-Konfiguration!"
+
   base_url = "https://login.smoobu.com/api/reservations"
   user = app_tables.users.get(email=user_email)
   if not user:
     return "User not found."
+
   api_key = user['smoobu_api_key']
-  supabase_key = user['supabase_key']  
+  supabase_key = user['supabase_key']
   headers = {
     "Api-Key": api_key,
     "Content-Type": "application/json"
@@ -62,6 +64,7 @@ def sync_smoobu(user_email):
   all_bookings = []
   current_page = 1
   total_pages = 1
+
   while current_page <= total_pages:
     params["page"] = current_page
     resp = requests.get(base_url, headers=headers, params=params)
@@ -69,28 +72,26 @@ def sync_smoobu(user_email):
       return f"Fehler: {resp.status_code} - {resp.text}"
     data = resp.json()
     total_pages = data.get("pagination", {}).get("totalPages", 1)
-    for booking in data.get("bookings", []):
-      all_bookings.append(booking)
+    all_bookings.extend(data.get("bookings", []))
     current_page += 1
+
   if not all_bookings:
     return "Keine Buchungen gefunden."
-  
-  row_dicts = []
-  for b in all_bookings:
-    price_data = get_price_elements(b['id'], headers)
-    reservation_id = booking.get('id')
-    channel_name = booking.get('channel', {}).get('name')
-    # BigQuery-Typen: Strings, INT, FLOAT, BOOL, DATE, TIMESTAMP 
-    rd = {
-      "reservation_id": reservation_id,
-      "id": user_email+"_"+str(reservation_id),
+
+    # Datensätze vorbereiten
+  rows_to_insert = []
+  for booking in all_bookings:
+    price_data = get_price_elements(booking['id'], headers)
+    row = {
+      "reservation_id": booking.get('id'),
+      "id": user_email + "_" + str(booking.get('id')),
       "apartment": booking['apartment']['name'],
       "arrival": booking['arrival'],
       "departure": booking['departure'],
-      "created_at": booking['created-at'][:10] if booking.get('created-at') else None,
-      "modified_at": booking['modifiedAt'][:10] if booking.get('modifiedAt') else None,
+      "created_at": booking.get('created-at', '')[:10] if booking.get('created-at') else None,
+      "modified_at": booking.get('modifiedAt', '')[:10] if booking.get('modifiedAt') else None,
       "guestname": booking['guest-name'],
-      "channel_name": channel_name,
+      "channel_name": booking.get('channel', {}).get('name'),
       "guest_email": booking['email'],
       "phone": booking['phone'],
       "adults": booking['adults'],
@@ -102,7 +103,7 @@ def sync_smoobu(user_email):
       "prepayment_paid": booking['prepayment-paid'],
       "deposit": float(booking['deposit']),
       "deposit_paid": booking['deposit-paid'],
-      "commission_included": float(booking['commission-included']) if booking['commission-included'] is not None else 0.0,
+      "commission_included": float(booking['commission-included']) if booking['commission-included'] else 0.0,
       "guestid": booking['guestId'],
       "language": booking['language'],
       "email": user_email,
@@ -113,60 +114,19 @@ def sync_smoobu(user_email):
       "price_coupon": float(price_data['price_coupon']),
       "price_addon": float(price_data['price_addon']),
       "price_curr": price_data['price_curr'],
-      "price_comm": float(price_data['price_comm'])
+      "price_comm": float(price_data['price_comm']),
     }
-    row_dicts.append(rd)
-    
-  REQUIRED_FIELDS = [
-    "email","apartment","arrival","departure","created_at","channel_name",
-    "guestname","adults","children","language","type","reservation_id",
-    "guestid","guest_email","phone","price","prepayment","deposit",
-    "commission_included","price_paid","prepayment_paid","deposit_paid",
-    "id","modified_at","supabase_key",
-    "price_baseprice","price_cleaningfee","price_longstaydiscount",
-    "price_coupon","price_addon","price_curr","price_comm"
-  ]
+    # Fehlende Felder ergänzen wie nötig
+    rows_to_insert.append(row)
 
-  for rd in row_dicts:
-    for f in REQUIRED_FIELDS:
-      rd.setdefault(f, None)
+    # Streaming Insert: Direkt in die finale Tabelle schreiben
+  table_id = "lodginia.lodginia.bookings"
+  errors = client.insert_rows_json(table_id, rows_to_insert)
+  if errors:
+    return f"Fehler beim Einfügen: {errors}"
 
-  struct_def = (
-    "STRUCT<email STRING, apartment STRING, arrival DATE, departure DATE, created_at DATE,"
-    "channel_name STRING, guestname STRING, adults INT64, children INT64, language STRING, type STRING,"
-    "reservation_id INT64, guestid INT64, guest_email STRING, phone STRING,"
-    "price FLOAT64,"
-    "prepayment FLOAT64, deposit FLOAT64, commission_included FLOAT64, price_paid STRING, prepayment_paid STRING,"
-    "deposit_paid STRING, id STRING, modified_at DATE,"
-    "supabase_key STRING, price_baseprice FLOAT64, price_cleaningfee FLOAT64, price_longstaydiscount FLOAT64,"
-    "price_coupon FLOAT64, price_addon FLOAT64, price_curr STRING, price_comm FLOAT64>"
-  )
+  return f"{len(rows_to_insert)} Buchungen erfolgreich direkt in BigQuery importiert."
 
-  query = "INSERT INTO `lodginia.lodginia.bookings` SELECT * FROM UNNEST(@bookings)"
-  
-  # Pass the list of dictionaries directly - no tuple conversion
-  query_params = [
-    bigquery.ArrayQueryParameter(
-      "bookings",
-      struct_def,
-      row_dicts  # Use dictionaries directly, not tuples
-    )
-  ]
-
-  #print(json.dumps(row_dicts[0], indent=2, default=str))
-  #print(struct_def)
-  #print("\n" + "="*60)
-  print("STRUCT_DEFINITION:")
-  print(textwrap.fill(struct_def, width=100))  # für bessere Lesbarkeit umbrochen
-  print("\nSAMPLE ROW_DICT (index 0):")
-  print(json.dumps(row_dicts[0], indent=2, default=str))
-  print("="*60 + "\n")
-  #print(query_params)
-  
-  job_config = bigquery.QueryJobConfig(query_parameters=query_params)
-  client.query(query, job_config=job_config).result()
-  
-  return f"{len(row_dicts)} Buchungen in BigQuery importiert."
 
 @anvil.server.callable
 def save_smoobu_userid(user_email):
