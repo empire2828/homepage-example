@@ -34,9 +34,13 @@ def sync_smoobu(user_email):
     }
     
     params = {
-        "status": "confirmed",
-        "page": 1,
-        "limit": 100
+      "status": "confirmed",
+      "page": 1,
+      "limit": 100,
+      "from": "2019-01-01",
+      "excludeBlocked": True,
+      "showCancellation": True,
+      "includePriceElements": True,
     }
           #"start_date": datetime.now().strftime("%Y-%m-%d"),
     
