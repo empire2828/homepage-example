@@ -97,11 +97,11 @@ def sync_smoobu(user_email):
       "adults": booking['adults'],
       "children": booking['children'],
       "type": booking['type'],
-      "price": float(booking['price']),
+      "price": float(booking['price']) if booking['price'] is not None else 0,
       "price_paid": booking['price-paid'],
-      "prepayment": float(booking['prepayment']),
+      "prepayment": float(booking['prepayment']) if booking['prepayment'] is not None else 0,
       "prepayment_paid": booking['prepayment-paid'],
-      "deposit": float(booking['deposit']),
+      "deposit": float(booking['deposit']) if booking['deposit'] is not None else 0,
       "deposit_paid": booking['deposit-paid'] if booking['deposit-paid'] is not None else "",
       "commission_included": float(booking['commission-included']) if booking['commission-included'] else 0.0,
       "guestid": booking['guestId'],
@@ -125,7 +125,8 @@ def sync_smoobu(user_email):
   if errors:
     return f"Fehler beim Einfügen: {errors}"
 
-  return f"{len(rows_to_insert)} Buchungen erfolgreich direkt in BigQuery importiert."
+  print(f"{len(rows_to_insert)} Buchungen erfolgreich direkt in BigQuery importiert.")
+  return 
 
 
 @anvil.server.callable
