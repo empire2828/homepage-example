@@ -102,7 +102,7 @@ def sync_smoobu(user_email):
       "prepayment": float(booking['prepayment']),
       "prepayment_paid": booking['prepayment-paid'],
       "deposit": float(booking['deposit']),
-      "deposit_paid": booking['deposit-paid'],
+      "deposit_paid": booking['deposit-paid'] if booking['deposit-paid'] is not None else "",
       "commission_included": float(booking['commission-included']) if booking['commission-included'] else 0.0,
       "guestid": booking['guestId'],
       "language": booking['language'],
