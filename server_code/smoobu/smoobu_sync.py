@@ -67,13 +67,18 @@ def sync_smoobu(user_email):
 
   while current_page <= total_pages:
     params["page"] = current_page
-    resp = requests.get(base_url, headers=headers, params=params)
-    if resp.status_code != 200:
-      return f"Fehler: {resp.status_code} - {resp.text}"
-    data = resp.json()
-    total_pages = data.get("pagination", {}).get("totalPages", 1)
-    all_bookings.extend(data.get("bookings", []))
-    current_page += 1
+    response = requests.get(base_url, headers=headers, params=params)
+    if response.status_code == 200:
+      data = response.json()
+      if "pagination" in data and "totalPages" in data["pagination"]:
+        total_pages = data["pagination"]["totalPages"]
+      if "bookings" in data:
+        all_bookings.extend(data["bookings"])
+      else:
+        return "Error: Unexpected API response structure"
+      current_page += 1
+    else:
+      return f"Fehler: {response.status_code} - {response.text}"
 
   if not all_bookings:
     return "Keine Buchungen gefunden."
@@ -97,11 +102,11 @@ def sync_smoobu(user_email):
       "adults": booking['adults'],
       "children": booking['children'],
       "type": booking['type'],
-      "price": float(booking['price']),
+      "price": float(booking['price']) if booking['price'] is not None else 0.0,
       "price_paid": booking['price-paid'],
-      "prepayment": float(booking['prepayment']),
+      "prepayment": float(booking['prepayment']) if booking['prepayment'] is not None else 0.0,
       "prepayment_paid": booking['prepayment-paid'],
-      "deposit": float(booking['deposit']),
+      "deposit": float(booking['deposit']) if booking['deposit'] is not None else 0.0,
       "deposit_paid": booking['deposit-paid'] if booking['deposit-paid'] is not None else "",
       "commission_included": float(booking['commission-included']) if booking['commission-included'] else 0.0,
       "guestid": booking['guestId'],
@@ -118,6 +123,7 @@ def sync_smoobu(user_email):
     }
     # Fehlende Felder ergänzen wie nötig
     rows_to_insert.append(row)
+    print(row)
 
     # Streaming Insert: Direkt in die finale Tabelle schreiben
   table_id = "lodginia.lodginia.bookings"
