@@ -38,11 +38,7 @@ class help(helpTemplate):
         ]
       )
       if result == "YES":
-        local_storage.clear()
-        anvil.server.call('delete_bookings_by_email',anvil.users.get_user()['email'])
-        
         open_form('dashboard')
-        
         anvil.server.call_s('launch_sync_smoobu')
         pass
       else:

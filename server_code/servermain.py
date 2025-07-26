@@ -73,7 +73,9 @@ def send_email_to_support(text, file=None, email=None):
   except Exception as e:
     print("send_email_to_support: ERROR", e)
 
+@anvil.server.background_task
 def save_last_fees_as_std(user_email):
+  # to be startet from sync_smoobu, sonst zu schnell und keine Daten da
   client = get_bigquery_client()
   # Suche letzte Buchung des Users für die gewünschten Kanäle
   query = """
@@ -88,8 +90,10 @@ def save_last_fees_as_std(user_email):
     query_parameters=[bigquery.ScalarQueryParameter("user_email", "STRING", user_email)]
   )
   query_job = client.query(query, job_config=job_config)
+  print(query_job)
   rows = list(query_job)
   if not rows:
+    print('save last fees as std: Keine direkt oder Website Buchungen gefunden ',user_email)
     return 0
   cleaning_fee = rows[0]['price_cleaningfee']
   addon_fee = rows[0]['price_addon']
@@ -109,6 +113,8 @@ def save_last_fees_as_std(user_email):
     ]
   )
   result = client.query(update_query, job_config=update_config).result()
+  print(update_query,update_config)
+  print('save_std_fees_update_result',result)
   if result.num_dml_affected_rows == 0:
     # 3. Falls kein Update (Row existiert NICHT), dann INSERT
     insert_query = """
@@ -122,7 +128,9 @@ def save_last_fees_as_std(user_email):
         bigquery.ScalarQueryParameter("std_linen_fee", "FLOAT64", float(addon_fee) if addon_fee not in ("", None) else None),
       ]
     )
-    client.query(insert_query, job_config=insert_config).result()
+    result=client.query(insert_query, job_config=insert_config).result()
+    print(insert_query,insert_config)
+    print('save_std_fees_insert_result',result)
   print('last fees saved as std', user_email, cleaning_fee, addon_fee)
   return 1
 
@@ -192,7 +200,7 @@ def get_bigquery_client():
       credentials=credentials,
       project=project_id
     )
-    print(f"Verbindung zu BigQuery-Projekt erfolgreich: {project_id}")
+    #print(f"Verbindung zu BigQuery-Projekt erfolgreich: {project_id}")
     return client
   except Exception as e:
     print(f"Fehler beim BigQuery Client Setup: {str(e)}")

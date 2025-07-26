@@ -13,7 +13,7 @@ from smoobu.smoobu_main import get_price_elements
 import requests
 from datetime import datetime
 from google.cloud import bigquery
-from servermain import get_bigquery_client
+from servermain import get_bigquery_client, delete_bookings_by_email
 import json
 import textwrap
 
@@ -28,7 +28,6 @@ def launch_sync_smoobu():
   result= anvil.server.launch_background_task('sync_smoobu',user_email)
   save_smoobu_userid(user_email)
   current_user['server_data_last_update'] = datetime.now()
-  save_last_fees_as_std(user_email)
   return result
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
@@ -38,6 +37,9 @@ supabase_client: Client = create_client(supabase_url, supabase_api_key)
 @anvil.server.background_task
 def sync_smoobu(user_email):
   client = get_bigquery_client()
+  
+  delete_bookings_by_email(user_email)
+  
   if client is None:
     return "BigQuery-Client konnte nicht erstellt werden. Prüfe Service Account-Konfiguration!"
 
@@ -147,6 +149,9 @@ def sync_smoobu(user_email):
          ",\n".join(value_rows))
   client.query(sql).result()
   print(f"{len(rows_to_insert)} bookings imported into BigQuery.")
+
+  save_last_fees_as_std(user_email)
+  
   return 
 
 @anvil.server.callable
