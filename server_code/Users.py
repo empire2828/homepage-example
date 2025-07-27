@@ -133,10 +133,10 @@ def save_user_parameter(std_cleaning_fee=None,
   row_struct = (
     f"STRUCT({to_sql_value(row_id)}           AS id, "
     f"       {to_sql_value(email)}            AS email, "
-    f"       {to_sql_value(std_cleaning_fee)} AS std_cleaning_fee, "
-    f"       {to_sql_value(std_linen_fee)}    AS std_linen_fee, "
-    f"       {to_sql_value(use_own_std_fees)} AS use_own_std_fees, "
-    f"       {to_sql_value(supabase_key)}     AS supabase_key)"
+    f"       {to_sql_value(std_cleaning_fee)}     AS std_cleaning_fee, "
+    f"       {to_sql_value(std_linen_fee)}        AS std_linen_fee, "
+    f"       {to_sql_value(use_own_std_fees)}          AS use_own_std_fees, "
+    f"       {to_sql_value(str(supabase_key))} AS supabase_key)"   # <-- str() erzwingt STRING
   )
 
   merge_sql = f"""
