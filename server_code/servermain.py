@@ -34,10 +34,23 @@ def to_sql_value(v):
   if isinstance(v, bool):
     return "TRUE" if v else "FALSE"
   if isinstance(v, numbers.Real):            # int, float, Decimal
-    return repr(v)                         # unverändert → Zahl
+    return repr(v)                         # No quotes → numeric literal
 
-    # Strings: einfaches Hochkomma und evtl. vorhandene Hochkommas escapen
-  escaped = str(v).replace("'", r"\'")        #  <-- KEIN Backslash in der f-String-Expression
+    # Convert string numerics to actual numbers
+  if isinstance(v, str):
+    # Try to convert string to number
+    try:
+      # Try integer first
+      if '.' not in v and 'e' not in v.lower():
+        return str(int(v))
+      else:
+        return str(float(v))
+    except (ValueError, TypeError):
+      # Not a number, treat as string
+      pass
+
+    # For strings: escape quotes properly
+  escaped = str(v).replace("'", r"\'")
   return f"'{escaped}'"
 
 @anvil.server.callable
