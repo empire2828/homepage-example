@@ -119,45 +119,68 @@ def create_supabase_key():
 
 @anvil.server.callable
 def save_user_parameter(std_cleaning_fee=None,
-                        std_linen_fee=None,
+                        std_l_fee=None,
                         use_own_std_fees=False):
+  client = get_bigquery_client()
   user = anvil.users.get_user()
-  if not user:  # extra guard
+  if not user:
     raise anvil.server.UnauthorizedRequest("No logged-in user")
 
-  email         = user["email"]
-  supabase_key  = user.get("supabase_key", None)     # keep if still used
-  row_id        = f"{email}_param"                   # composite key
+  email = user["email"]
+  supabase_key = user.get("supabase_key", None)
 
-  # Build MERGE ► single-row UNNEST
-  row_struct = (
-    f"STRUCT({to_sql_value(row_id)}           AS id, "
-    f"       {to_sql_value(email)}            AS email, "
-    f"       {to_sql_value(std_cleaning_fee)}     AS std_cleaning_fee, "
-    f"       {to_sql_value(std_linen_fee)}        AS std_linen_fee, "
-    f"       {to_sql_value(use_own_std_fees)}          AS use_own_std_fees, "
-    f"       {to_sql_value(supabase_key, force_string=True)} AS supabase_key)"   # <-- str() erzwingt STRING
-  )
+  # Helper to convert empty or invalid strings to floats
+  def safe_float(value):
+    if value is None or value == "":
+      return None
+    try:
+      return float(value)
+    except (TypeError, ValueError):
+      return None
 
-  merge_sql = f"""
-    MERGE `lodginia.lodginia.parameter` T
-    USING UNNEST([ {row_struct} ]) S
-    ON T.email = S.email
-    WHEN MATCHED THEN
-      UPDATE SET
-        std_cleaning_fee = S.std_cleaning_fee,
-        std_linen_fee    = S.std_linen_fee,
-        use_own_std_fees = S.use_own_std_fees,
-        supabase_key     = S.supabase_key
-    WHEN NOT MATCHED THEN
-      INSERT (id, email, std_cleaning_fee, std_linen_fee,
-              use_own_std_fees, supabase_key)
-      VALUES(S.id, S.email, S.std_cleaning_fee, S.std_linen_fee,
-             S.use_own_std_fees, S.supabase_key)
+  merge_sql = """
+      MERGE `lodginia.lodginia.parameter` T
+      USING UNNEST([STRUCT(
+          @email AS email,
+          @cl_fee AS std_cleaning_fee,
+          @ln_fee AS std_linen_fee,
+          @use_own AS use_own_std_fees,
+          @sb_key AS supabase_key
+      )]) S
+      ON T.email = S.email
+      WHEN MATCHED THEN
+        UPDATE SET
+          std_cleaning_fee = S.std_cleaning_fee,
+          std_linen_fee    = S.std_linen_fee,
+          use_own_std_fees = S.use_own_std_fees,
+          supabase_key     = S.supabase_key
+      WHEN NOT MATCHED THEN
+        INSERT (email,
+                std_cleaning_fee,
+                std_linen_fee,
+                use_own_std_fees,
+                supabase_key)
+        VALUES (
+          S.email,
+          S.std_cleaning_fee,
+          S.std_linen_fee,
+          S.use_own_std_fees,
+          S.supabase_key
+        )
     """
 
-  get_bigquery_client().query(merge_sql).result()   # DML ⇒ immediately visible
-  return True
+  job_config = bigquery.QueryJobConfig(
+    query_parameters=[
+      bigquery.ScalarQueryParameter("email",   "STRING",  email),
+      bigquery.ScalarQueryParameter("cl_fee",  "FLOAT64", safe_float(std_cleaning_fee)),
+      bigquery.ScalarQueryParameter("ln_fee",  "FLOAT64", safe_float(std_linen_fee)),
+      bigquery.ScalarQueryParameter("use_own", "BOOL",    bool(use_own_std_fees)),
+      bigquery.ScalarQueryParameter("sb_key",  "STRING",  supabase_key),
+    ]
+  )
+
+  client.query(merge_sql, job_config=job_config).result()  # DML ⇒ immediately visible
+  return True 
 
 # ---------------------------------------------------------------------------
 # 2. get_user_parameter  (Pure read)
