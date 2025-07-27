@@ -34,7 +34,7 @@ def get_price_elements(reservation_id, headers):
         elif pe.get('type') == 'longStayDiscount':
           price_data['price_longstaydiscount'] = pe.get('amount')
         elif pe.get('type') == 'addon':
-          price_data['price_addon'] = pe.get('amount')
+          price_data['price_addon'] = pe.get('amount')* (pe.get('quantity') or 0)
         elif pe.get('type') == 'coupon':
           price_data['price_coupon'] = pe.get('coupon')
 

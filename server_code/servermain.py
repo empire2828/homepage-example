@@ -25,6 +25,16 @@ supabase_client: Client = create_client(supabase_url, supabase_api_key)
 # Supabase-Client initialisieren
 supabase: Client = create_client(supabase_url, supabase_api_key)
 
+def to_sql_value(val):
+  """Return BigQuery literal for v (safe for string interpolation)."""
+  if val is None:
+    return "NULL"
+  if isinstance(val, bool):
+    return "TRUE" if val else "FALSE"
+  if isinstance(val, (int, float)):
+    return str(val)
+  return "'" + str(val).replace("'", "\\'") + "'"
+
 @anvil.server.callable
 def delete_bookings_by_email(user_email):
   client = get_bigquery_client()

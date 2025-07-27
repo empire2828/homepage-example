@@ -4,14 +4,7 @@ import anvil.server
 from datetime import datetime
 from google.cloud import bigquery
 from smoobu.smoobu_main import get_price_elements
-from servermain import get_bigquery_client
-
-def to_sql_value(val):
-  if val is None:
-    return "NULL"
-  if isinstance(val, str):
-    return "'" + val.replace("'", "\\'") + "'"
-  return str(val)
+from servermain import get_bigquery_client, to_sql_value
 
 @anvil.server.http_endpoint('/smoobu/webhook', methods=['POST'])
 def smoobu_webhook_handler():

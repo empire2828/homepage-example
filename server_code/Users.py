@@ -7,6 +7,7 @@ import stripe
 from datetime import datetime, timedelta, timezone
 import hashlib
 from supabase import create_client, Client
+from servermain import get_bigquery_client, to_sql_value
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -116,90 +117,152 @@ def create_supabase_key():
   return 
 
 @anvil.server.callable
-def save_user_parameter(std_cleaning_fee=None, std_linen_fee=None,use_own_std_fees=False):
-  current_user = anvil.users.get_user()
-  email = current_user['email']
-  supabase_key = current_user['supabase_key']
-  data = {
-    "supabase_key": supabase_key,
-    "std_cleaning_fee": std_cleaning_fee,
-    "std_linen_fee": std_linen_fee,
-    "use_own_std_fees": use_own_std_fees,
-    "email": email
-  }
-  response = supabase_client.table("parameter").upsert(
-    [data],
-    on_conflict="email"  # Konfliktspalte angeben!
-  ).execute()
-  return response.data  # oder True/False je nach Bedarf
-  pass
+def save_user_parameter(std_cleaning_fee=None,
+                        std_linen_fee=None,
+                        use_own_std_fees=False):
+  user = anvil.users.get_user()
+  if not user:  # extra guard
+    raise anvil.server.UnauthorizedRequest("No logged-in user")
 
+  email         = user["email"]
+  supabase_key  = user.get("supabase_key", None)     # keep if still used
+  row_id        = f"{email}_param"                   # composite key
+
+  # Build MERGE ► single-row UNNEST
+  row_struct = (
+    f"STRUCT({to_sql_value(row_id)}           AS id, "
+    f"       {to_sql_value(email)}            AS email, "
+    f"       {to_sql_value(std_cleaning_fee)} AS std_cleaning_fee, "
+    f"       {to_sql_value(std_linen_fee)}    AS std_linen_fee, "
+    f"       {to_sql_value(use_own_std_fees)} AS use_own_std_fees, "
+    f"       {to_sql_value(supabase_key)}     AS supabase_key)"
+  )
+
+  merge_sql = f"""
+    MERGE `lodginia.lodginia.parameter` T
+    USING UNNEST([ {row_struct} ]) S
+    ON T.email = S.email
+    WHEN MATCHED THEN
+      UPDATE SET
+        std_cleaning_fee = S.std_cleaning_fee,
+        std_linen_fee    = S.std_linen_fee,
+        use_own_std_fees = S.use_own_std_fees,
+        supabase_key     = S.supabase_key
+    WHEN NOT MATCHED THEN
+      INSERT (id, email, std_cleaning_fee, std_linen_fee,
+              use_own_std_fees, supabase_key)
+      VALUES(S.id, S.email, S.std_cleaning_fee, S.std_linen_fee,
+             S.use_own_std_fees, S.supabase_key)
+    """
+
+  get_bigquery_client().query(merge_sql).result()   # DML ⇒ immediately visible
+  return True
+
+# ---------------------------------------------------------------------------
+# 2. get_user_parameter  (Pure read)
+# ---------------------------------------------------------------------------
 @anvil.server.callable
 def get_user_parameter():
-  current_user = anvil.users.get_user()
-  if not current_user:
-    return None  # No user is logged in
-  email = current_user['email']
-  # Fetch the parameter entry from Supabase by email
-  response = supabase_client.table("parameter").select("*").eq("email", email).execute()
-  if response.data:
-    # Return the first matching item (should be unique based on email)
-    return response.data[0]
-  else:
-    return None  # No parameter found for user
+  user = anvil.users.get_user()
+  if not user:
+    return None
+  email = user["email"]
 
+  sql = """
+      SELECT *
+      FROM `lodginia.lodginia.parameter`
+      WHERE email = @user_email
+      LIMIT 1
+    """
+  cfg = bigquery.QueryJobConfig(
+    query_parameters=[
+      bigquery.ScalarQueryParameter("user_email", "STRING", email)
+    ]
+  )
+  rows = list(get_bigquery_client().query(sql, job_config=cfg).result())
+  return dict(rows[0]) if rows else None
+
+# ---------------------------------------------------------------------------
+# 3. save_std_commission  (Upsert via MERGE)
+# ---------------------------------------------------------------------------
 @anvil.server.callable
 def save_std_commission(channel_name=None, channel_commission=None):
-  current_user = anvil.users.get_user()
-  email = current_user['email']
-  supabase_key = current_user['supabase_key']
-  if channel_commission == "" or channel_commission is None:
-    channel_commission_value = None
-  else:
-    channel_commission_value = float(channel_commission)  
   if not channel_name:
-    return None  # oder False, je nach Bedarf
-  data = {
-    "channel_name": channel_name,
-    "channel_commission": channel_commission_value,
-    "supabase_key": supabase_key,
-    "email": email
-  }
-  print('std_commissions saved',data)
-  response = supabase_client.table("std_commission").upsert(
-    [data],
-    on_conflict="email, channel_name"  # Konfliktspalte angeben!
-  ).execute()
-  return response.data  # oder True/False je nach Bedarf
-  pass
+    return None
 
+  user = anvil.users.get_user()
+  if not user:
+    raise anvil.server.UnauthorizedRequest("No logged-in user")
+
+  email         = user["email"]
+  supabase_key  = user.get("supabase_key", None)
+  commission    = None if channel_commission in ("", None) else float(channel_commission)
+  row_id        = f"{email}_{channel_name}"    # composite key
+
+  row_struct = (
+    f"STRUCT({to_sql_value(row_id)}        AS id, "
+    f"       {to_sql_value(email)}         AS email, "
+    f"       {to_sql_value(channel_name)}  AS channel_name, "
+    f"       {to_sql_value(commission)}    AS channel_commission, "
+    f"       {to_sql_value(supabase_key)}  AS supabase_key)"
+  )
+
+  merge_sql = f"""
+    MERGE `lodginia.lodginia.std_commission` T
+    USING UNNEST([ {row_struct} ]) S
+    ON T.email = S.email AND T.channel_name = S.channel_name
+    WHEN MATCHED THEN
+      UPDATE SET
+        channel_commission = S.channel_commission,
+        supabase_key       = S.supabase_key
+    WHEN NOT MATCHED THEN
+      INSERT (id, email, channel_name, channel_commission, supabase_key)
+      VALUES(S.id, S.email, S.channel_name, S.channel_commission, S.supabase_key)
+    """
+  get_bigquery_client().query(merge_sql).result()
+  return True
+
+# ---------------------------------------------------------------------------
+# 4. save_user_apartment_count  (background task)
+# ---------------------------------------------------------------------------
 @anvil.server.background_task
 def save_user_apartment_count(user_email):
-  # Step 1: Hole alle Buchungen für den Nutzer (es werden alle mit "apartment" geladen)
-  response = (
-    supabase_client
-      .table("bookings")
-      .select("apartment")
-      .eq("email", user_email)
-      .execute()
+  # 1️⃣ Count distinct, non-null apartments in bookings
+  count_sql = """
+      SELECT COUNT(DISTINCT apartment) AS c
+      FROM `lodginia.lodginia.bookings`
+      WHERE email = @user_email
+        AND apartment IS NOT NULL
+    """
+  cfg = bigquery.QueryJobConfig(
+    query_parameters=[bigquery.ScalarQueryParameter("user_email", "STRING", user_email)]
   )
-  # Apartments aus Zeilen mit Wert extrahieren (keine Nulls)
-  apartments = [row['apartment'] for row in response.data if row.get('apartment')]
-  unique_apartments = set(apartments)
-  count = len(unique_apartments)
+  count_result = list(get_bigquery_client().query(count_sql, job_config=cfg).result())[0]["c"]
 
-  # Step 2: User-Row in Anvil-Table finden und speichern
+  # 2️⃣ Save back into Anvil table
   user_row = app_tables.users.get(email=user_email)
-  if user_row is not None:
-    user_row['apartment_count'] = count
-    print(f"Apartment count for {user_email}: {count}")
-    return count
-  else:
+  if not user_row:
     raise Exception(f"User with email {user_email} not found")
+  user_row["apartment_count"] = count_result
+  print(f"Apartment count for {user_email}: {count_result}")
+  return count_result
 
+# ---------------------------------------------------------------------------
+# 5. get_user_channels_from_std_commission  (Pure read)
+# ---------------------------------------------------------------------------
 @anvil.server.callable
 def get_user_channels_from_std_commission(email):
-  r = supabase_client.table('std_commission')\
-    .select('channel_name, channel_commission').eq('email', email).execute()
-  return r.data  # Sollte eine Liste von Dicts sein!
+  sql = """
+      SELECT channel_name, channel_commission
+      FROM `lodginia.lodginia.std_commission`
+      WHERE email = @email
+      ORDER BY channel_name
+    """
+  cfg = bigquery.QueryJobConfig(
+    query_parameters=[bigquery.ScalarQueryParameter("email", "STRING", email)]
+  )
+  rows = get_bigquery_client().query(sql, job_config=cfg).result()
+  return [dict(r) for r in rows]
+
+
 
