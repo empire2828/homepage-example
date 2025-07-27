@@ -231,7 +231,7 @@ def save_std_commission(channel_name=None, channel_commission=None):
     f"       {to_sql_value(email)}         AS email, "
     f"       {to_sql_value(channel_name)}  AS channel_name, "
     f"       {to_sql_value(commission)}    AS channel_commission, "
-    f"       {to_sql_value(supabase_key)}  AS supabase_key)"
+    f"       {to_sql_value(supabase_key, force_string=True)}       AS supabase_key)"
   )
 
   merge_sql = f"""
