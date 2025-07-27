@@ -4,6 +4,7 @@ from anvil.tables import app_tables
 import time
 from datetime import datetime, timedelta, timezone
 from supabase import create_client
+from servermain import get_bigquery_client
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -15,16 +16,23 @@ supabase_client = create_client(supabase_url, supabase_api_key)
 @anvil.server.background_task
 def delete_old_logs():
   x_days_ago = datetime.now(timezone.utc) - timedelta(days=5)
-  response = (
-    supabase_client.table("logs")
-      .delete()
-      .lt("created_at", x_days_ago.isoformat())
-      .execute()
+  # BigQuery client holen
+  bq_client = get_bigquery_client()
+  # Löschen per DML-DELETE-Query (kein Streaming Buffer)
+  query = f"""
+        DELETE FROM `{BQ_PROJECT}.{BQ_DATASET}.{BQ_TABLE}`
+        WHERE created_at < @older_than
+    """
+  job_config = bigquery.QueryJobConfig(
+    query_parameters=[
+      bigquery.ScalarQueryParameter("older_than", "TIMESTAMP", x_days_ago)
+    ]
   )
-  print(response)
+  job = bq_client.query(query, job_config=job_config)
+  result = job.result()
+  print(f"Deleted {job.num_dml_affected_rows} rows.")
   return {
-    "status_code": getattr(response, "status_code", None),
-    "data": getattr(response, "data", None),
-    "error": getattr(response, "error", None)
+    "deleted_rows": job.num_dml_affected_rows,
+    "done": True
   }
 
