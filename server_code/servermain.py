@@ -133,68 +133,60 @@ def save_last_fees_as_std(user_email):
 def save_all_channels_for_user(user_email):
   client = get_bigquery_client()
 
-  # 1. Lade alle Buchungen für den Nutzer aus BigQuery
-  bookings_query = """
+  # 1. Fetch all relevant channels for user from bookings
+  sql = """
         SELECT channel_name
         FROM `lodginia.lodginia.bookings`
         WHERE email = @user_email
         ORDER BY created_at DESC
     """
   job_config = bigquery.QueryJobConfig(
-    query_parameters=[
-      bigquery.ScalarQueryParameter("user_email", "STRING", user_email)
-    ]
+    query_parameters=[bigquery.ScalarQueryParameter("user_email", "STRING", user_email)]
   )
-  query_job = client.query(bookings_query, job_config=job_config)
-  bookings = [dict(row) for row in query_job.result()]
-
-  # 2. Extrahiere alle einzigartigen genutzten channel_names
-  unique_channels = set()
-  for booking in bookings:
-    channel = booking.get("channel_name")
-    if channel and channel.lower() != "blocked channel":
-      unique_channels.add(channel)
-
-    # 3. Für jeden Channel: Hole std_commission_rate aus Anvil Tabelle 'channels'
-  upserts = []
-  for channel_name in unique_channels:
-    row = anvil.tables.app_tables.channels.get(name=channel_name)
-    std_commission_rate = row['std_commission_rate'] if row else None
-
-    upserts.append({
-      "email": user_email,
-      "channel_name": channel_name,
-      "channel_commission": std_commission_rate
-    })
-
-  if not upserts:
+  bookings = client.query(sql, job_config=job_config).result()
+  unique_channels = {row['channel_name'] for row in bookings
+                     if row['channel_name'] and row['channel_name'].lower() != "blocked channel"}
+  if not unique_channels:
     print("save_all_channels_for_user: Keine Channels für", user_email, "gefunden.")
     return 0
 
-    # 4. Upsert als Batch mit BigQuery DML (MERGE), KEIN Streaming, KEIN Buffer Lock!
-  rows = ',\n        '.join([
-    f"STRUCT('{r['email']}' AS email, '{r['channel_name']}' AS channel_name, {r['channel_commission']} AS channel_commission)"
-    for r in upserts
-  ])
+    # 2. Prepare data for batch insert with commission rates from Anvil
+  def to_sql_value(val):
+    if val is None:
+      return "NULL"
+    if isinstance(val, str):
+      return "'" + val.replace("'", "\\'") + "'"
+    return str(val)
 
-  sql = f"""
-    MERGE `lodginia.lodginia.std_commission` T
-    USING UNNEST([
-        {rows}
-    ]) AS S
-    ON T.email = S.email AND T.channel_name = S.channel_name
-    WHEN MATCHED THEN
-      UPDATE SET channel_commission = S.channel_commission
-    WHEN NOT MATCHED THEN
-      INSERT (email, channel_name, channel_commission)
-      VALUES(S.email, S.channel_name, S.channel_commission)
+  rows = []
+  for channel_name in unique_channels:
+    row = anvil.tables.app_tables.channels.get(name=channel_name)
+    std_commission = row['std_commission_rate'] if row else None
+    entry = "({}, {}, {})".format(
+      to_sql_value(user_email),
+      to_sql_value(channel_name),
+      to_sql_value(std_commission)
+    )
+    rows.append(entry)
+  values_sql = ',\n        '.join(rows)
+
+  # 3. DML: First DELETE, then INSERT—all in SQL, no streaming API used!
+  #       (Optionally wrap these in a transaction for atomicity.)
+  delete_sql = """
+        DELETE FROM `lodginia.lodginia.std_commission`
+        WHERE email = @user_email
     """
+  client.query(delete_sql, job_config=job_config).result()
 
-  print(sql)
-  client.query(sql).result()
-  
+  insert_sql = f"""
+        INSERT INTO `lodginia.lodginia.std_commission` (email, channel_name, channel_commission)
+        VALUES
+        {values_sql}
+    """
+  client.query(insert_sql).result()
+
   print("save_all_channels_for_user: Channels gespeichert:", user_email, list(unique_channels))
-  return len(upserts)
+  return len(rows)
 
 def get_bigquery_client():
   """Erstellt einen BigQuery Client mit Service Account Authentifizierung"""
