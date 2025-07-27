@@ -27,14 +27,18 @@ supabase: Client = create_client(supabase_url, supabase_api_key)
 
 def to_sql_value(v):
   """Turn a Python value into a BigQuery literal."""
-  import numbers, json
+  import numbers
+
   if v is None:
     return "NULL"
   if isinstance(v, bool):
     return "TRUE" if v else "FALSE"
-  if isinstance(v, numbers.Real):          # int, float, Decimal
-    return repr(v)                       # no quotes ⇒ numeric literal
-  return f"'{str(v).replace('\'', r'\\\'')}'"     # safely quoted string
+  if isinstance(v, numbers.Real):            # int, float, Decimal
+    return repr(v)                         # unverändert → Zahl
+
+    # Strings: einfaches Hochkomma und evtl. vorhandene Hochkommas escapen
+  escaped = str(v).replace("'", r"\'")        #  <-- KEIN Backslash in der f-String-Expression
+  return f"'{escaped}'"
 
 @anvil.server.callable
 def delete_bookings_by_email(user_email):
