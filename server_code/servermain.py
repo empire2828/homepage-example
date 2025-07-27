@@ -190,7 +190,9 @@ def save_all_channels_for_user(user_email):
       VALUES(S.email, S.channel_name, S.channel_commission)
     """
 
+  print(sql)
   client.query(sql).result()
+  
   print("save_all_channels_for_user: Channels gespeichert:", user_email, list(unique_channels))
   return len(upserts)
 
