@@ -119,7 +119,7 @@ def create_supabase_key():
 
 @anvil.server.callable
 def save_user_parameter(std_cleaning_fee=None,
-                        std_l_fee=None,
+                        std_linen_fee=None,
                         use_own_std_fees=False):
   client = get_bigquery_client()
   user = anvil.users.get_user()
@@ -142,10 +142,10 @@ def save_user_parameter(std_cleaning_fee=None,
       MERGE `lodginia.lodginia.parameter` T
       USING UNNEST([STRUCT(
           @email AS email,
-          @cl_fee AS std_cleaning_fee,
-          @ln_fee AS std_linen_fee,
-          @use_own AS use_own_std_fees,
-          @sb_key AS supabase_key
+          @std_cleaning_fee AS std_cleaning_fee,
+          @std_linen_fee AS std_linen_fee,
+          @use_own_std_fees AS use_own_std_fees,
+          @supabase_key AS supabase_key
       )]) S
       ON T.email = S.email
       WHEN MATCHED THEN
@@ -172,10 +172,10 @@ def save_user_parameter(std_cleaning_fee=None,
   job_config = bigquery.QueryJobConfig(
     query_parameters=[
       bigquery.ScalarQueryParameter("email",   "STRING",  email),
-      bigquery.ScalarQueryParameter("cl_fee",  "FLOAT64", safe_float(std_cleaning_fee)),
-      bigquery.ScalarQueryParameter("ln_fee",  "FLOAT64", safe_float(std_linen_fee)),
-      bigquery.ScalarQueryParameter("use_own", "BOOL",    bool(use_own_std_fees)),
-      bigquery.ScalarQueryParameter("sb_key",  "STRING",  supabase_key),
+      bigquery.ScalarQueryParameter("std_cleaning_fee",  "FLOAT64", safe_float(std_cleaning_fee)),
+      bigquery.ScalarQueryParameter("std_linen_fee",  "FLOAT64", safe_float(std_linen_fee)),
+      bigquery.ScalarQueryParameter("use_own_std_fees", "BOOL",    bool(use_own_std_fees)),
+      bigquery.ScalarQueryParameter("supabase_key",  "STRING",  supabase_key),
     ]
   )
 
