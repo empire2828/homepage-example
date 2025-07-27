@@ -10,8 +10,6 @@ from admin import log
 from servermain import save_last_fees_as_std
 from Users import save_user_apartment_count
 from smoobu.smoobu_main import get_price_elements
-import requests
-from datetime import datetime
 from google.cloud import bigquery
 from servermain import get_bigquery_client, delete_bookings_by_email
 import json
