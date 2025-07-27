@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 import hashlib
 from supabase import create_client, Client
 from servermain import get_bigquery_client, to_sql_value
+from google.cloud import bigquery
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -163,6 +164,7 @@ def save_user_parameter(std_cleaning_fee=None,
 # ---------------------------------------------------------------------------
 @anvil.server.callable
 def get_user_parameter():
+  client=get_bigquery_client()
   user = anvil.users.get_user()
   if not user:
     return None
@@ -174,12 +176,14 @@ def get_user_parameter():
       WHERE email = @user_email
       LIMIT 1
     """
-  cfg = bigquery.QueryJobConfig(
+  job_config = bigquery.QueryJobConfig(
     query_parameters=[
       bigquery.ScalarQueryParameter("user_email", "STRING", email)
     ]
   )
-  rows = list(get_bigquery_client().query(sql, job_config=cfg).result())
+  
+  # 4. Run the query and return the first row as a dict (if any).
+  rows = list(client.query(sql, job_config=job_config).result())
   return dict(rows[0]) if rows else None
 
 # ---------------------------------------------------------------------------

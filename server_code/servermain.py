@@ -25,15 +25,16 @@ supabase_client: Client = create_client(supabase_url, supabase_api_key)
 # Supabase-Client initialisieren
 supabase: Client = create_client(supabase_url, supabase_api_key)
 
-def to_sql_value(val):
-  """Return BigQuery literal for v (safe for string interpolation)."""
-  if val is None:
+def to_sql_value(v):
+  """Turn a Python value into a BigQuery literal."""
+  import numbers, json
+  if v is None:
     return "NULL"
-  if isinstance(val, bool):
-    return "TRUE" if val else "FALSE"
-  if isinstance(val, (int, float)):
-    return str(val)
-  return "'" + str(val).replace("'", "\\'") + "'"
+  if isinstance(v, bool):
+    return "TRUE" if v else "FALSE"
+  if isinstance(v, numbers.Real):          # int, float, Decimal
+    return repr(v)                       # no quotes ⇒ numeric literal
+  return f"'{str(v).replace('\'', r'\\\'')}'"     # safely quoted string
 
 @anvil.server.callable
 def delete_bookings_by_email(user_email):
