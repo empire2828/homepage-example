@@ -25,7 +25,7 @@ supabase_client: Client = create_client(supabase_url, supabase_api_key)
 # Supabase-Client initialisieren
 supabase: Client = create_client(supabase_url, supabase_api_key)
 
-def to_sql_value(v):
+def to_sql_value(v, force_string=False):
   """Turn a Python value into a BigQuery literal."""
   import numbers
 
@@ -33,23 +33,26 @@ def to_sql_value(v):
     return "NULL"
   if isinstance(v, bool):
     return "TRUE" if v else "FALSE"
-  if isinstance(v, numbers.Real):            # int, float, Decimal
-    return repr(v)                         # No quotes → numeric literal
 
-    # Convert string numerics to actual numbers
+    # Wenn force_string=True, behandle als String auch wenn numerisch
+  if force_string:
+    escaped = str(v).replace("'", r"\'")
+    return f"'{escaped}'"
+
+  if isinstance(v, numbers.Real):
+    return repr(v)
+
+    # String-zu-Zahl-Konvertierung nur wenn nicht explizit als String gewünscht
   if isinstance(v, str):
-    # Try to convert string to number
     try:
-      # Try integer first
       if '.' not in v and 'e' not in v.lower():
         return str(int(v))
       else:
         return str(float(v))
     except (ValueError, TypeError):
-      # Not a number, treat as string
       pass
 
-    # For strings: escape quotes properly
+    # Standard String-Behandlung
   escaped = str(v).replace("'", r"\'")
   return f"'{escaped}'"
 

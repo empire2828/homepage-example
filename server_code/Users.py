@@ -136,7 +136,7 @@ def save_user_parameter(std_cleaning_fee=None,
     f"       {to_sql_value(std_cleaning_fee)}     AS std_cleaning_fee, "
     f"       {to_sql_value(std_linen_fee)}        AS std_linen_fee, "
     f"       {to_sql_value(use_own_std_fees)}          AS use_own_std_fees, "
-    f"       {to_sql_value(str(supabase_key))} AS supabase_key)"   # <-- str() erzwingt STRING
+    f"       {to_sql_value(supabase_key, force_string=True)} AS supabase_key)"   # <-- str() erzwingt STRING
   )
 
   merge_sql = f"""
