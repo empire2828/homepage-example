@@ -11,7 +11,7 @@ from servermain import save_last_fees_as_std
 from Users import save_user_apartment_count
 from smoobu.smoobu_main import get_price_elements
 from google.cloud import bigquery
-from servermain import get_bigquery_client, delete_bookings_by_email
+from servermain import get_bigquery_client, delete_bookings_by_email, save_all_channels_for_user
 import json
 import textwrap
 
@@ -39,7 +39,8 @@ def sync_smoobu(user_email):
   delete_bookings_by_email(user_email)
   
   if client is None:
-    return "BigQuery-Client konnte nicht erstellt werden. Prüfe Service Account-Konfiguration!"
+    print("sync_smoobu: BigQuery-Client konnte nicht erstellt werden", user_email)
+    return 
 
   base_url = "https://login.smoobu.com/api/reservations"
   user = app_tables.users.get(email=user_email)
@@ -75,7 +76,8 @@ def sync_smoobu(user_email):
     params["page"] += 1
 
   if not all_bookings:
-    return "Keine Buchungen gefunden."
+    print("sync_smoobu: Keine Buchung gefunden ",user_email)
+    return 
 
     # Daten für BigQuery vorbereiten
   rows_to_insert = []
@@ -118,7 +120,8 @@ def sync_smoobu(user_email):
     rows_to_insert.append(row)
 
   if not rows_to_insert:
-    return "Keine Buchungen zur Übertragung."
+    print("sync_smoobu: Keine Buchung zur Übertragung ",user_email)
+    return 
 
   table = "lodginia.lodginia.bookings"
   columns = [
@@ -146,9 +149,10 @@ def sync_smoobu(user_email):
   sql = (f"INSERT INTO `{table}` ({', '.join(columns)}) VALUES\n" +
          ",\n".join(value_rows))
   client.query(sql).result()
-  print(f"{len(rows_to_insert)} bookings imported into BigQuery.")
+  print(f"sync smoobu: {len(rows_to_insert)} bookings imported into BigQuery.")
 
   save_last_fees_as_std(user_email)
+  save_all_channels_for_user(user_email)
   
   return 
 
@@ -163,11 +167,11 @@ def save_smoobu_userid(user_email):
 def get_smoobu_userid(user_email):
     user = app_tables.users.get(email=user_email)
     if not user:
-        print(f"Kein Benutzer mit der E-Mail {user_email} gefunden")
+        print(f"get_smoobu_userid: Kein Benutzer mit der E-Mail {user_email} gefunden")
         return None        
     api_key = user['smoobu_api_key']
     if not api_key:
-        print(f"Kein API-Key für Benutzer {user_email} gefunden")
+        print(f"get_smoobu_userid: Kein API-Key für Benutzer {user_email} gefunden")
         return None    
     headers = {
         "Api-Key": api_key,
@@ -183,7 +187,7 @@ def get_smoobu_userid(user_email):
             print(f"API request failed: {response.status_code} - {response.text}")
             return None
     except Exception as e:
-        print(f"Fehler bei der API-Anfrage: {str(e)}")
+        print(f"get_smoobu_userid: Fehler bei der API-Anfrage: {str(e)}")
         return None
 
 
