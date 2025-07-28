@@ -97,7 +97,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'QSBKIL,ZUWODJ'}
       name: text_1
-      properties: {font_size: 18, text: 'Die initiale Synchronisation und Analyse erfolgt im Hintergrund und dauert ca. 10 Minuten. '}
+      properties: {font_size: 18, text: 'Die initiale Synchronisation und Analyse erfolgt im Hintergrund und dauert ca. 2 Minuten. '}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: ''}
       name: text_2
