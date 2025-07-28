@@ -43,10 +43,15 @@ class Admin(AdminTemplate):
     email = self.email_input_prompt.text
     if email:
       try:
-        result = anvil.server.call('delete_bookings_by_email', email)
+        result = anvil.server.call('delete_userparameter_in_bigquery', email)
         alert(f"{result['count']} Buchungen mit der E-Mail {email} wurden gelöscht.")
       except Exception as e:
         alert(f"Fehler beim Löschen: {str(e)}")
+      try:
+        result = anvil.server.call('delete_bookings_by_email', email)
+        alert(f"{result['count']} Buchungen mit der E-Mail {email} wurden gelöscht.")
+      except Exception as e:
+        alert(f"Fehler beim Parameter löschen in Bigquery: {str(e)}")  
     else:
       alert("Kein Nutzer angemeldet oder E-Mail nicht verfügbar.")
     pass

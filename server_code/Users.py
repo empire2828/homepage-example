@@ -315,3 +315,13 @@ def delete_userparameter_in_bigquery(email):
     client.query(sql, job_config=job_config).result()
 
   return True
+
+@anvil.server.callable(require_user=True)
+def delete_user_from_users_table(email):
+  # Look up the user row by email
+  user_row = app_tables.users.get(email=email)
+  if user_row is not None:
+    user_row.delete()
+    return True
+  else:
+    return False  # User not found
