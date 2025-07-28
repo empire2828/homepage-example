@@ -292,4 +292,26 @@ def get_user_channels_from_std_commission(email):
   return [dict(r) for r in rows]
 
 
+@anvil.server.callable(require_user=True)
+def delete_userparameter_in_bigquery(email):
+  client = get_bigquery_client()
+  # Table names (change if schema/project differs)
+  parameter_table = "lodginia.lodginia.parameter"
+  commission_table = "lodginia.lodginia.std_commission"
 
+  queries = [
+    (
+      f"DELETE FROM `{parameter_table}` WHERE email = @user_email",
+      [bigquery.ScalarQueryParameter("user_email", "STRING", email)]
+    ),
+    (
+      f"DELETE FROM `{commission_table}` WHERE email = @user_email",
+      [bigquery.ScalarQueryParameter("user_email", "STRING", email)]
+    )
+  ]
+
+  for sql, params in queries:
+    job_config = bigquery.QueryJobConfig(query_parameters=params)
+    client.query(sql, job_config=job_config).result()
+
+  return True

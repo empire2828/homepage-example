@@ -39,7 +39,7 @@ class Admin(AdminTemplate):
       except Exception as e:
         alert(f"Fehler beim Import: {str(e)}")
 
-  def delete_supabase_data_button_click(self, **event_args):
+  def delete_bq_data_button_click(self, **event_args):
     email = self.email_input_prompt.text
     if email:
       try:
