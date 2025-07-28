@@ -49,9 +49,12 @@ class Admin(AdminTemplate):
         alert(f"Fehler beim Löschen: {str(e)}")
       try:
         result = anvil.server.call('delete_bookings_by_email', email)
-        alert(f"{result['count']} Buchungen mit der E-Mail {email} wurden gelöscht.")
       except Exception as e:
         alert(f"Fehler beim Parameter löschen in Bigquery: {str(e)}")  
+      try:
+        result = anvil.server.call('delete_user_from_users_table', email)
+      except Exception as e:
+        alert(f"Fehler beim User löschen in Bigquery: {str(e)}")  
     else:
       alert("Kein Nutzer angemeldet oder E-Mail nicht verfügbar.")
     pass
