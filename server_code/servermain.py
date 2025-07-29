@@ -106,14 +106,19 @@ def send_email_to_support(text, file=None, email=None):
 
 @anvil.server.background_task
 def save_last_fees_as_std(user_email):
-  # to be startet from sync_smoobu, sonst zu schnell und keine Daten da
   client = get_bigquery_client()
-  # Suche letzte Buchung des Users für die gewünschten Kanäle
+  # Fetch last booking, including adults and children columns
   query = """
-      SELECT price_cleaningfee, price_addon
+      SELECT 
+        price_cleaningfee, 
+        price_addon,
+        adults,
+        children,
+        guestname
       FROM `lodginia.lodginia.bookings`
       WHERE email = @user_email
         AND channel_name IN ('Direct booking', 'Website')
+        AND arrival < '2099-01-01'
       ORDER BY created_at DESC
       LIMIT 1
     """
@@ -123,42 +128,52 @@ def save_last_fees_as_std(user_email):
   query_job = client.query(query, job_config=job_config)
   rows = list(query_job)
   if not rows:
-    print('save last fees as std: Keine direkt oder Website Buchungen gefunden ',user_email)
+    print('save last fees as std: Keine direkt oder Website Buchungen gefunden ', user_email)
     return 0
   cleaning_fee = rows[0]['price_cleaningfee']
-  addon_fee = rows[0]['price_addon']
+  linen_fee = rows[0]['price_addon']
+  adults = rows[0].get('adults', 0)
+  children = rows[0].get('children', 0)
+  guestname= rows[0].get('guestname', "")
+  n_guests = (adults or 0) + (children or 0)
+  if n_guests:
+    std_linen_fee = float(linen_fee) / n_guests if linen_fee not in ("", None) else None
+    print(std_linen_fee)
+  else:
+    std_linen_fee = None
 
-  # 2. Versuche Update – überschreibe bestehenden Eintrag
+  # Update existing entry
   update_query = """
-      UPDATE `lodginia.lodginia.parameter`
-      SET std_cleaning_fee = @std_cleaning_fee,
-          std_linen_fee = @std_linen_fee
-      WHERE email = @user_email
-    """
+        UPDATE `lodginia.lodginia.parameter`
+        SET std_cleaning_fee = @std_cleaning_fee,
+            std_linen_fee = @std_linen_fee
+        WHERE email = @user_email
+      """
   update_config = bigquery.QueryJobConfig(
     query_parameters=[
       bigquery.ScalarQueryParameter("std_cleaning_fee", "FLOAT64", float(cleaning_fee) if cleaning_fee not in ("", None) else None),
-      bigquery.ScalarQueryParameter("std_linen_fee", "FLOAT64", float(addon_fee) if addon_fee not in ("", None) else None),
+      bigquery.ScalarQueryParameter("std_linen_fee", "FLOAT64", std_linen_fee),
       bigquery.ScalarQueryParameter("user_email", "STRING", user_email)
     ]
   )
   result = client.query(update_query, job_config=update_config).result()
   if result.num_dml_affected_rows == 0:
-    # 3. Falls kein Update (Row existiert NICHT), dann INSERT
+    # Insert new entry if update affected no rows
     insert_query = """
-          INSERT INTO `your_project.your_dataset.parameter` (email, std_cleaning_fee, std_linen_fee)
-          VALUES (@user_email, @std_cleaning_fee, @std_linen_fee)
-        """
+              INSERT INTO `lodginia.lodginia.parameter` (email, std_cleaning_fee, std_linen_fee)
+              VALUES (@user_email, @std_cleaning_fee, @std_linen_fee)
+            """
     insert_config = bigquery.QueryJobConfig(
       query_parameters=[
         bigquery.ScalarQueryParameter("user_email", "STRING", user_email),
         bigquery.ScalarQueryParameter("std_cleaning_fee", "FLOAT64", float(cleaning_fee) if cleaning_fee not in ("", None) else None),
-        bigquery.ScalarQueryParameter("std_linen_fee", "FLOAT64", float(addon_fee) if addon_fee not in ("", None) else None),
+        bigquery.ScalarQueryParameter("std_linen_fee", "FLOAT64", std_linen_fee),
       ]
     )
-    result=client.query(insert_query, job_config=insert_config).result()
-  print('save_last_fees_as_std: ', user_email, cleaning_fee, addon_fee)
+    result = client.query(insert_query, job_config=insert_config).result()
+  print('save_last_fees_as_std: ', user_email, cleaning_fee, std_linen_fee)
   return 1
+
 
 @anvil.server.background_task
 def save_all_channels_for_user(user_email):
