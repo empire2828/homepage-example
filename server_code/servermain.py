@@ -138,7 +138,6 @@ def save_last_fees_as_std(user_email):
   n_guests = (adults or 0) + (children or 0)
   if n_guests:
     std_linen_fee = float(linen_fee) / n_guests if linen_fee not in ("", None) else None
-    print(std_linen_fee)
   else:
     std_linen_fee = None
 
@@ -171,7 +170,7 @@ def save_last_fees_as_std(user_email):
       ]
     )
     result = client.query(insert_query, job_config=insert_config).result()
-  print('save_last_fees_as_std: ', user_email, cleaning_fee, std_linen_fee)
+  print('save_last_fees_as_std: ', user_email, cleaning_fee, std_linen_fee, guestname)
   return 1
 
 
