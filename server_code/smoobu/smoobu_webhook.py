@@ -81,7 +81,7 @@ def process_booking(booking_data, user_id):
     "deposit": booking_data.get('deposit'),
     "deposit_paid": booking_data.get('deposit-paid'),
     "reservation_id": reservation_id,
-    "supabase_key": user.get('supabase_key', None),
+    "supabase_key": str(user.get('supabase_key', '') or ''),
     "price_baseprice": price_data.get('price_baseprice'),
     "price_cleaningfee": price_data.get('price_cleaningfee'),
     "price_longstaydiscount": price_data.get('price_longstaydiscount'),
