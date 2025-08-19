@@ -20,7 +20,7 @@ def delete_old_logs():
   bq_client = get_bigquery_client()
   # Löschen per DML-DELETE-Query (kein Streaming Buffer)
   query = f"""
-        DELETE FROM `{BQ_PROJECT}.{BQ_DATASET}.{BQ_TABLE}`
+        DELETE FROM `lodginia.lodginia.bookings`
         WHERE created_at < @older_than
     """
   job_config = bigquery.QueryJobConfig(
