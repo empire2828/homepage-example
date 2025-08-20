@@ -109,8 +109,17 @@ def process_booking(booking_data, user_id):
   print("row_count:",row_count)
 
   fields = ', '.join(data.keys())
-  values = ', '.join([to_sql_value(v) for v in data.values()])
-  set_clause = ', '.join([f"{k}={to_sql_value(v)}" for k, v in data.items()])
+  #values = ', '.join([to_sql_value(v) for v in data.values()])
+  #set_clause = ', '.join([f"{k}={to_sql_value(v)}" for k, v in data.items()])
+  string_fields = ["supabase_key", ...]
+  values = ', '.join([
+    to_sql_value(v, force_string=(k in string_fields)) 
+    for k, v in data.items()
+  ])
+  set_clause = ', '.join([
+    f"{k}={to_sql_value(v, force_string=(k in string_fields))}" 
+    for k, v in data.items()
+  ])
 
   if row_count:
     # Update with DML
