@@ -28,6 +28,7 @@ supabase: Client = create_client(supabase_url, supabase_api_key)
 def to_sql_value(v, force_string=False):
   """Turn a Python value into a BigQuery literal."""
   import numbers
+  from decimal import Decimal
 
   if v is None:
     return "NULL"
@@ -39,8 +40,8 @@ def to_sql_value(v, force_string=False):
     escaped = str(v).replace("'", r"\'")
     return f"'{escaped}'"
 
-  if isinstance(v, numbers.Real):
-    return repr(v)
+  if isinstance(v, numbers.Real) or isinstance(v, Decimal):
+    return str(v)
 
     # String-zu-Zahl-Konvertierung nur wenn nicht explizit als String gewünscht
   if isinstance(v, str):
@@ -53,7 +54,7 @@ def to_sql_value(v, force_string=False):
       pass
 
     # Standard String-Behandlung
-  escaped = str(v).replace("'", r"\'")
+  escaped = str(v).replace("'", r"\'").replace("\\", "\\\\")
   return f"'{escaped}'"
 
 @anvil.server.callable
