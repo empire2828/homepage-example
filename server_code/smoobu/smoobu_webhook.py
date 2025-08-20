@@ -55,7 +55,6 @@ def process_booking(booking_data, user_id):
     # Get price data
   headers = {"Api-Key": smoobu_api_key, "Content-Type": "application/json"}
   price_data = get_price_elements(reservation_id=reservation_id, headers=headers)
-  # NEUE ID-DEFINITION: user_email + "_" + booking_id
   composite_id = f"{user_email}_{reservation_id}"
 
   data = {
@@ -105,12 +104,18 @@ def process_booking(booking_data, user_id):
     ]
   )
   row_count = list(client.query(check_sql, job_config=job_config).result())[0]["count"]
-  #print("check_sql:",check_sql)
+  print("check_sql:",check_sql)
   print("row_count:",row_count)
 
-  fields = ', '.join(data.keys())
-  values = ', '.join([to_sql_value(v) for v in data.values()])
-  set_clause = ', '.join([f"{k}={to_sql_value(v)}" for k, v in data.items()])
+string_fields = ["supabase_key", ...]
+values = ', '.join([
+  to_sql_value(v, force_string=(k in string_fields)) 
+  for k, v in data.items()
+])
+set_clause = ', '.join([
+  f"{k}={to_sql_value(v, force_string=(k in string_fields))}" 
+  for k, v in data.items()
+])
 
   if row_count:
     # Update with DML
@@ -119,7 +124,7 @@ def process_booking(booking_data, user_id):
         SET {set_clause}
         WHERE id = @composite_id
         """
-    #print("update_sql:",update_sql)
+    print("update_sql:",update_sql)
     client.query(update_sql, job_config=job_config).result()
     print(f"process_booking: Aktualisiere bestehende Buchung: {composite_id}")
   else:
