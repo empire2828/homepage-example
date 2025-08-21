@@ -3,26 +3,107 @@ components_by_slot:
   - event_bindings: {click: dashboard_navigation_link_click}
     layout_properties: {}
     name: dashboard_navigation_link
-    properties: {icon: 'mi:dashboard', navigate_to: dashboard, text: Dashboard}
+    properties:
+      badge: false
+      icon: mi:dashboard
+      navigate_to: dashboard
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Dashboard
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-  - event_bindings: {click: channel_manager_connect_navigation_link_click}
-    layout_properties: {}
-    name: channel_manager_connect_navigation_link
-    properties: {icon: 'mi:cable', navigate_to: channel_manager_connect, text: Connect}
+  - layout_properties: {}
+    name: profitability_navigation_link
+    properties:
+      icon: mi:attach_money
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Profitability
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-  - event_bindings: {click: upgrade_navigation_link_click}
-    layout_properties: {}
-    name: upgrade_navigation_link
-    properties: {badge: false, icon: 'mi:upgrade', navigate_to: upgrade, text: Upgrade}
+  - layout_properties: {}
+    name: bookings_navigation_link
+    properties:
+      icon: mi:reset_tv
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Bookings
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - layout_properties: {}
+    name: cancellations_navigation_link
+    properties:
+      icon: mi:cancel
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Cancellations
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - layout_properties: {}
+    name: occupancy_navigation_link
+    properties:
+      icon: mi:calendar_month
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Occupancy
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - layout_properties: {}
+    name: navigation_link_1
+    properties:
+      icon: mi:developer_mode_tv
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Lead time
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - layout_properties: {}
+    name: guest_insights_navigation_link
+    properties:
+      icon: mi:people_outline
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Guest insights
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - layout_properties: {}
+    name: all_bookings_navigation_link
+    properties:
+      icon: mi:zoom_in
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: All bookings
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - layout_properties: {}
+    name: navigation_link_2
+    properties:
+      icon: mi:trending_up
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Long trends
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - layout_properties: {}
+    name: spacer_1
+    properties: {}
+    type: Spacer
+  - layout_properties: {}
+    name: connect_navigation_link
+    properties:
+      icon: mi:cable
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Connect
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: my_account_navigation_link_click}
     layout_properties: {}
     name: my_account_navigation_link
-    properties: {icon: 'mi:manage_accounts', navigate_to: my_account, text: My account}
+    properties:
+      icon: mi:manage_accounts
+      navigate_to: my_account
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: My account
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
 is_package: true
 layout:
-  properties: {navigation_rail_collapse_to: bottom_app_bar, show_sidesheet: false}
+  properties:
+    content_padding: ['8', '8', '8', '8']
+    navigation_rail_collapse_to: modal_navigation_drawer
+    navigation_rail_vertical_align: top
+    show_sidesheet: false
   type: form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout
 slots:
   content:

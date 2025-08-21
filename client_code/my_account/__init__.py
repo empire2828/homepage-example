@@ -110,8 +110,8 @@ class my_account(my_accountTemplate):
     #link ist unter: https://dashboard.stripe.com/settings/billing/portal
     pass
 
-  def reset_password_navigation_link_click(self, **event_args):
-    """This method is called when the component is clicked"""
+  def connect_navigation_link_click(self, **event_args):
+    open_form('channel_manager_connect')
     pass
 
   def save_button_click(self, **event_args):
@@ -134,6 +134,10 @@ class my_account(my_accountTemplate):
     channel_name= self.channel5_dropdown_menu.selected_value
     channel_commission= self.channel5_text_box.text
     anvil.server.call('save_std_commission', channel_name, channel_commission)
+    pass
+
+  def upgrade_navigation_link_link_click(self, **event_args):
+    open_form('upgrade')
     pass
 
   
