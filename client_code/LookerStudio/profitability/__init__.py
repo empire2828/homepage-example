@@ -16,7 +16,7 @@ class profitability(profitabilityTemplate):
     print('User Logged in: ',user['email'])
 
     user_has_subscription= anvil.server.call('get_user_has_subscription')
-    self.profitability_looker_flow_panel.visible = False
+    self.looker_flow_panel.visible = False
 
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
@@ -29,7 +29,7 @@ class profitability(profitabilityTemplate):
         self.chanel_manager_connect_button.visible = False
 
     if user_has_subscription and user['smoobu_api_key'] is not None:
-      self.profitability_looker_flow_panel.visible = True
+      self.looker_flow_panel.visible = True
       #email= user['email']
       supabase_key= user['supabase_key']
       self.init_iframe(supabase_key)
@@ -37,8 +37,7 @@ class profitability(profitabilityTemplate):
       pass
 
   def init_iframe(self, supabase_key):
-    base_url = "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_tilmy6zhtd"
-    #https://lookerstudio.google.com/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de
+    base_url = "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td"
     #<iframe width="600" height="443" src="https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_tilmy6zhtd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
     params = {"supabase_key_url": supabase_key}    
 
@@ -56,7 +55,7 @@ class profitability(profitabilityTemplate):
       "frameborder": "0"
     })
     #iframe = jQuery("<iframe class='anvil-role-looker-iframe flex-column-fill'>").attr("src", iframe_url)
-    iframe.appendTo(get_dom_node(self.profitability_looker_flow_panel))# Any code you write here will run before the form opens.
+    iframe.appendTo(get_dom_node(self.looker_flow_panel))# Any code you write here will run before the form opens.
 
   def channel_manager_connect_button_click(self, **event_args):
     """This method is called when the component is clicked."""

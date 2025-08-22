@@ -1,12 +1,11 @@
 from ._anvil_designer import long_trendsTemplate
 from anvil import *
-import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
 from anvil.tables import app_tables
+from anvil import users
+import anvil.server
+from anvil.js.window import jQuery
+from anvil.js import get_dom_node
+import json
 
 class long_trends(long_trendsTemplate):
   def __init__(self, **properties):
@@ -38,7 +37,7 @@ class long_trends(long_trendsTemplate):
       pass
 
   def init_iframe(self, supabase_key):
-    base_url = "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/qmCOF"
+    base_url = "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_4dt5tycuud"
     #https://lookerstudio.google.com/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de
     params = {"supabase_key_url": supabase_key}    
 
@@ -52,7 +51,7 @@ class long_trends(long_trendsTemplate):
       "src": iframe_url,
       "width": "100%",
       #"height": "100%",
-      "height": "1400px",
+      "height": "1800px",
       "frameborder": "0"
     })
     #iframe = jQuery("<iframe class='anvil-role-looker-iframe flex-column-fill'>").attr("src", iframe_url)
@@ -62,6 +61,9 @@ class long_trends(long_trendsTemplate):
     open_form('upgrade')
     pass
 
-  def chanel_manager_connect_button_click(self, **event_args):
+  def channel_manager_connect_button_click(self, **event_args):
     open_form('channel_manager_connect')
     pass
+
+
+

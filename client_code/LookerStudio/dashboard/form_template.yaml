@@ -33,7 +33,7 @@ components_by_slot:
     properties: {}
     type: FlowPanel
   - layout_properties: {}
-    name: dashboard_looker_flow_panel
+    name: looker_flow_panel
     properties: {}
     type: FlowPanel
   navigation: []
