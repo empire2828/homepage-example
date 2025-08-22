@@ -24,7 +24,7 @@ class homepage(homepageTemplate):
   def login_button_click(self, **event_args):
     user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
     if user:
-      open_form('dashboard')
+      open_form('LookerStudio.dashboard')
     pass
 
   def testen_button_click(self, **event_args):
@@ -32,7 +32,7 @@ class homepage(homepageTemplate):
     if user:
       anvil.server.call('create_supabase_key')
       anvil.server.call('send_registration_notification', user['email'])
-      open_form('dashboard')
+      open_form('LookerStudio.dashboard')
     pass
 
   def impressum_link_click(self, **event_args):

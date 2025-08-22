@@ -17,23 +17,26 @@ class layout_template(layout_templateTemplate):
 
   def reset_links(self, **event_args):
     self.dashboard_navigation_link.selected= False
-    self.channel_manager_connect_navigation_link.selected = False
-    self.upgrade_navigation_link.selected = False
+    self.profitability_navigation_link.selected= False
+    self.bookings_navigation_link.selected= False
+    self.cancellations_navigation_link.selected= False
+    self.occupancy_navigation_link.selected= False
+    self.lead_time_navigation_link.selected= False
+    self.guest_insights_navigation_link.selected= False
+    self.detailed_bookings_navigation_link.selected= False
+    self.long_trends_navigation_link.selected= False
+    self.connect_navigation_link.selected = False
     self.my_account_navigation_link.selected = False
 
   def dashboard_navigation_link_click(self, **event_args):
     self.reset_links()
     pass
 
-  def channel_manager_connect_navigation_link_click(self, **event_args):
+  def connect_navigation_link_click(self, **event_args):
     self.reset_links()
     pass
 
   def upgrade_navigation_link_click(self, **event_args):
-    self.reset_links()
-    pass
-
-  def help_navigation_link_click(self, **event_args):
     self.reset_links()
     pass
 
@@ -43,4 +46,42 @@ class layout_template(layout_templateTemplate):
 
   def form_show(self, **event_args):
     pass
+
+  def profitability_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def bookings_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def cancellations_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def occupancy_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def lead_time_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def guest_insights_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def detailed_bookings_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  def long_trends_navigation_link_click(self, **event_args):
+    self.reset_links()
+    pass
+
+  
+
+  
+
+  
  
