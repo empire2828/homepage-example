@@ -61,7 +61,4 @@ class detailed_bookings(detailed_bookingsTemplate):
     open_form('upgrade')
     pass
 
-  def channel_manager_connect_button_click(self, **event_args):
-    open_form('channel_manager_connect')
-    pass
 

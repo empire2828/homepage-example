@@ -4,7 +4,7 @@ components_by_slot:
     - name: pms_need_to_connect_text_copy
       properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to connect your channel manager first:', visible: false}
       type: Label
-    - event_bindings: {click: chanel_manager_connect_button_click}
+    - event_bindings: {click: channel_manager_connect_button_click}
       name: channel_manager_connect_button
       properties: {text: Connect Channel Manager, visible: false}
       type: form:dep_g9k4toow7i44kq:_Components.Button
