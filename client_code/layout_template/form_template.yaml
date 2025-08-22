@@ -6,7 +6,7 @@ components_by_slot:
     properties:
       badge: false
       icon: mi:dashboard
-      navigate_to: dashboard
+      navigate_to: LookerStudio.dashboard
       spacing:
         margin: ['-5', null, '-5', null]
       text: Dashboard

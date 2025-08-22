@@ -16,7 +16,7 @@ class dashboard(dashboardTemplate):
     print('User Logged in: ',user['email'])
 
     user_has_subscription= anvil.server.call('get_user_has_subscription')
-    self.looker_flow_panel.visible = False
+    self.dashboard_looker_flow_panel.visible = False
 
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
@@ -29,7 +29,7 @@ class dashboard(dashboardTemplate):
         self.chanel_manager_connect_button.visible = False
 
     if user_has_subscription and user['smoobu_api_key'] is not None:
-      self.looker_flow_panel.visible = True
+      self.dashboard_looker_flow_panel.visible = True
       #email= user['email']
       supabase_key= user['supabase_key']
       self.init_iframe(supabase_key)
@@ -55,12 +55,12 @@ class dashboard(dashboardTemplate):
       "frameborder": "0"
     })
     #iframe = jQuery("<iframe class='anvil-role-looker-iframe flex-column-fill'>").attr("src", iframe_url)
-    iframe.appendTo(get_dom_node(self.looker_flow_panel))# Any code you write here will run before the form opens.
+    iframe.appendTo(get_dom_node(self.dashboard_looker_flow_panel))# Any code you write here will run before the form opens.
 
   def dashboard_upgrade_button_click(self, **event_args):
     open_form('upgrade')
     pass
 
-  def chanel_manager_connect_button_click(self, **event_args):
+  def channel_manager_connect_button_click(self, **event_args):
     open_form('channel_manager_connect')
     pass
