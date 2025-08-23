@@ -30,6 +30,7 @@ class layout_template(layout_templateTemplate):
 
   def dashboard_navigation_link_click(self, **event_args):
     self.reset_links()
+    self.lookerstudio.show_view("dashboard")
     pass
 
   def connect_navigation_link_click(self, **event_args):
@@ -79,7 +80,17 @@ class layout_template(layout_templateTemplate):
     self.reset_links()
     pass
 
-  
+  def go_dashboard_button_click(self, **event_args):
+    lookerstudio.main = get_open_form()
+  if hasattr(main_form, "show_view"):
+    main_form.show_view("dashboard")
+  else:
+    # Fallback: if Main isn't open yet, open it and then show dashboard
+    from ..Main import Main
+    m = Main()
+    open_form(m)
+    m.show_view("dashboard")
+
 
   
 
