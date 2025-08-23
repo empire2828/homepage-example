@@ -8,12 +8,14 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..LookerStudio.multiframe import multiframe
+from ..LookerStudio.bookings import bookings
 
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)    
-    self.multiframe_form = multiframe()
+    #self.multiframe_form = multiframe()
+    self.bookings_form= bookings()
 
     # Füge die multiframe Form zu einem ContentPanel hinzu (z.B. main_content_panel)
     # Annahme: Du hast ein ContentPanel namens "content_panel" oder ähnlich
@@ -54,12 +56,14 @@ class layout_template(layout_templateTemplate):
 
   def profitability_navigation_link_click(self, **event_args):
     self.reset_links()
-    self.multiframe_form.setze_sichtbares_iframe(1)  # Index 1 für Profitability
     pass
 
   def bookings_navigation_link_click(self, **event_args):
     self.reset_links()
-    self.b
+    if get_open_form().LookerStudio.bookings.visible:
+      get_open_form().LookerStudio.bookings.visible = False
+    else:
+      get_open_form().LookerStudio.bookings.visible = True
     pass
 
   def cancellations_navigation_link_click(self, **event_args):
