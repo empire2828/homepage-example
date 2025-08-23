@@ -52,6 +52,7 @@ class dashboard(dashboardTemplate):
       "width": "100%",
       #"height": "100%",
       "height": "1800px",
+      "min-height": "750px",
       "frameborder": "0"
     })
     #iframe = jQuery("<iframe class='anvil-role-looker-iframe flex-column-fill'>").attr("src", iframe_url)
