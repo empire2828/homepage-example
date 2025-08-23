@@ -49,6 +49,7 @@ class layout_template(layout_templateTemplate):
 
   def profitability_navigation_link_click(self, **event_args):
     self.reset_links()
+    multiframe.looker_flow_panel_copy.visible
     pass
 
   def bookings_navigation_link_click(self, **event_args):
