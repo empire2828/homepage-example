@@ -33,7 +33,40 @@ components_by_slot:
     properties: {}
     type: FlowPanel
   - layout_properties: {}
-    name: looker_flow_panel
+    name: dashboard_looker_flow_panel
+    properties: {}
+    type: FlowPanel
+  - components: []
+    layout_properties: {}
+    name: profitability_looker_flow_panel
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: bookings_looker_flow_panel
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: looker_flow_panel_copy_2_copy
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: looker_flow_panel_copy_2_copy_2
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: looker_flow_panel_copy_2_copy_3
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: looker_flow_panel_copy_2_copy_4
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: looker_flow_panel_copy_2_copy_5
+    properties: {}
+    type: FlowPanel
+  - layout_properties: {}
+    name: looker_flow_panel_copy_2_copy_6
     properties: {}
     type: FlowPanel
   navigation: []
