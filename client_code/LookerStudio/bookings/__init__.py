@@ -12,29 +12,11 @@ class bookings(bookingsTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    user = users.get_user()
-    print('User Logged in: ',user['email'])
-
-    user_has_subscription= anvil.server.call('get_user_has_subscription')
-    self.looker_flow_panel.visible = False
-
-    if user['smoobu_api_key'] is None:
-      self.pms_need_to_connect_text.visible = True
-      self.chanel_manager_connect_button.visible = True
-    else:
-      if user_has_subscription is False:
-        self.dashboard_upgrade_needed_text.visible = True
-        self.dashboard_upgrade_button.visible = True
-        self.pms_need_to_connect_text.visible = False
-        self.chanel_manager_connect_button.visible = False
-
-    if user_has_subscription and user['smoobu_api_key'] is not None:
-      self.looker_flow_panel.visible = True
+    
+    self.looker_flow_panel.visible = True
       #email= user['email']
-      supabase_key= user['supabase_key']
-      self.init_iframe(supabase_key)
-    else: 
-      pass
+    supabase_key= user['supabase_key']
+    self.init_iframe(supabase_key)
 
   def init_iframe(self, supabase_key):
     base_url = "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_9euf3853td"

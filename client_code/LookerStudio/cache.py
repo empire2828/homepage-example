@@ -1,15 +1,16 @@
-import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
+from ._anvil_designer import dashboardTemplate
+from anvil import *
 from anvil.tables import app_tables
+from anvil import users
+import anvil.server
+from anvil.js.window import jQuery
+from anvil.js import get_dom_node
+import json
 
 # Globale Cache-Variablen (außerhalb der Klasse)
 _iframe_cache = {}
 
-class dashboard(dashboardTemplate):
+class cache():
   def __init__(self, **properties):
     self.init_components(**properties)
     # ... rest des Codes bleibt gleich
