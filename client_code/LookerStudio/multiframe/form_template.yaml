@@ -29,15 +29,40 @@ components_by_slot:
     properties: {}
     type: FlowPanel
   - layout_properties: {}
-    name: looker_flow_panel
+    name: looker_flow_panel_1
     properties: {}
     type: FlowPanel
   - layout_properties: {}
-    name: looker_flow_panel_copy
+    name: looker_flow_panel_2
+    properties: {}
+    type: FlowPanel
+  - components: []
+    layout_properties: {}
+    name: looker_flow_panel_3
+    properties: {}
+    type: FlowPanel
+  - components: []
+    layout_properties: {}
+    name: looker_flow_panel_4
+    properties: {}
+    type: FlowPanel
+  - components: []
+    layout_properties: {}
+    name: looker_flow_panel_5
+    properties: {}
+    type: FlowPanel
+  - components: []
+    layout_properties: {}
+    name: looker_flow_panel_6
+    properties: {}
+    type: FlowPanel
+  - components: []
+    layout_properties: {}
+    name: looker_flow_panel_7
     properties: {}
     type: FlowPanel
   - layout_properties: {}
-    name: looker_flow_panel_copy_2
+    name: looker_flow_panel_8
     properties: {}
     type: FlowPanel
 is_package: true

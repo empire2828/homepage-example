@@ -16,7 +16,7 @@ components_by_slot:
     name: profitability_navigation_link
     properties:
       icon: mi:attach_money
-      navigate_to: LookerStudio.profitability
+      navigate_to: LookerStudio.multiframe
       spacing:
         margin: ['-5', null, '-5', null]
       text: Profitability
@@ -26,7 +26,7 @@ components_by_slot:
     name: bookings_navigation_link
     properties:
       icon: mi:reset_tv
-      navigate_to: LookerStudio.bookings
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Bookings
@@ -36,7 +36,7 @@ components_by_slot:
     name: cancellations_navigation_link
     properties:
       icon: mi:cancel
-      navigate_to: LookerStudio.cancellations
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Cancellations

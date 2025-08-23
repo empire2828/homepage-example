@@ -13,6 +13,10 @@ class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)    
+    self.multiframe_form = multiframe()
+
+    # Füge die multiframe Form zu einem ContentPanel hinzu (z.B. main_content_panel)
+    # Annahme: Du hast ein ContentPanel namens "content_panel" oder ähnlich
     self.form_show()
     # Any code you write here will run before the form opens.
 
@@ -50,15 +54,17 @@ class layout_template(layout_templateTemplate):
 
   def profitability_navigation_link_click(self, **event_args):
     self.reset_links()
-    multiframe.looker_flow_panel.visible
+    self.multiframe_form.setze_sichtbares_iframe(1)  # Index 1 für Profitability
     pass
 
   def bookings_navigation_link_click(self, **event_args):
     self.reset_links()
+    self.b
     pass
 
   def cancellations_navigation_link_click(self, **event_args):
     self.reset_links()
+    self.multiframe_form.setze_sichtbares_iframe(3)  # Index 1 für Profitability
     pass
 
   def occupancy_navigation_link_click(self, **event_args):

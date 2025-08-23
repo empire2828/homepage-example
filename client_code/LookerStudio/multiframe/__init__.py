@@ -15,27 +15,33 @@ class multiframe(multiframeTemplate):
 
     # Liste deiner 8 unterschiedlichen URLs
     self.iframe_urls = [
-      "https://lookerstudio.google.com/embed/reporting/URL1",
-      "https://lookerstudio.google.com/embed/reporting/URL2",
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/qmCOF",
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td"
       # ... bis URL8
     ]
 
     # Panels für 8 IFrames im Editor anlegen (z. B. flow_panel_1 ... flow_panel_8)
     panels = [
-      self.flow_panel_1,
-      self.flow_panel_2,
-      self.flow_panel_3,
-      self.flow_panel_4,
-      self.flow_panel_5,
-      self.flow_panel_6,
-      self.flow_panel_7,
-      self.flow_panel_8,
+      self.looker_flow_panel_1,
+      self.looker_flow_panel_2,
+      self.looker_flow_panel_3,
+      self.looker_flow_panel_4,
+      self.looker_flow_panel_5,
+      self.looker_flow_panel_6,
+      self.looker_flow_panel_7,
+      self.looker_flow_panel_8,
     ]
     self.panels = panels
 
     # Initial: alle unsichtbar
     for panel in panels:
-      panel.visible = False
+      panel.visible = True
 
     # alle IFrames einmalig hineinlegen (das ist performant, da sie im DOM bleiben)
     for url, panel in zip(self.iframe_urls, panels):
@@ -48,6 +54,7 @@ class multiframe(multiframeTemplate):
         "height": "1800px",
         "frameborder": "0"
       })
+      print(panel)
       iframe.appendTo(get_dom_node(panel))
 
   # zentrale Steuerfunktion:
