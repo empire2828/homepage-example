@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..lookerstudio.dashboard import dashboard
 
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
@@ -17,7 +18,7 @@ class layout_template(layout_templateTemplate):
   def show_view(self, name: str):
     if name not in self._views:
       self._views[name] = self._create_view(name)
-      self.content_panel.add_component(self._views[name])
+      self.flow_panel.add_component(self._views[name])
 
     for key, view in self._views.items():
       view.visible = (key == name)

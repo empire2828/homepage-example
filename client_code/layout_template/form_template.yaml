@@ -1,4 +1,9 @@
 components_by_slot:
+  content:
+  - layout_properties: {}
+    name: flow_panel
+    properties: {}
+    type: FlowPanel
   navigation:
   - event_bindings: {click: dashboard_navigation_link_click}
     layout_properties: {}
