@@ -7,7 +7,7 @@ from anvil.js.window import jQuery
 from anvil.js import get_dom_node
 import json
 
-class MultiIFrameForm(multiframeTemplate):
+class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     user = users.get_user()

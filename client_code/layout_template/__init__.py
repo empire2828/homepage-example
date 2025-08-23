@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..LookerStudio.multiframe import multiframe
 
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
@@ -49,7 +50,7 @@ class layout_template(layout_templateTemplate):
 
   def profitability_navigation_link_click(self, **event_args):
     self.reset_links()
-    multiframe.looker_flow_panel_copy.visible
+    multiframe.looker_flow_panel.visible
     pass
 
   def bookings_navigation_link_click(self, **event_args):
