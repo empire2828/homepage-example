@@ -1,4 +1,3 @@
-# dashboard.py (child with iframe)
 from ._anvil_designer import dashboardTemplate
 from anvil import *
 from anvil import users

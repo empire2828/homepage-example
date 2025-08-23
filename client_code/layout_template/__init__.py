@@ -7,14 +7,12 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import lookerstudio.factory
 
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     self._views = {}
     self.show_view("dashboard")
-    Module1.say_hello()
 
   def show_view(self, name: str):
     if name not in self._views:
@@ -28,7 +26,7 @@ class layout_template(layout_templateTemplate):
 
   def _create_view(self, name: str):
     # Import the factory function from lookerstudio module
-    from lookerstudio.factory import get_form
+    from ..lookerstudio.frames import get_form
     return get_form(name)
 
   def reset_links(self, **event_args):
