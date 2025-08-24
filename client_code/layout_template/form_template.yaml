@@ -93,9 +93,9 @@ components_by_slot:
       text: Long trends
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - layout_properties: {}
-    name: spacer_1
-    properties: {height: '24'}
-    type: Spacer
+    name: divider_1
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.Divider
   - layout_properties: {}
     name: connect_navigation_link
     properties:
@@ -119,7 +119,7 @@ is_package: true
 layout:
   properties:
     content_padding: ['8', '8', '8', '8']
-    navigation_rail_collapse_to: modal_navigation_drawer
+    navigation_rail_collapse_to: bottom_app_bar
     navigation_rail_vertical_align: top
     show_sidesheet: false
   type: form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout
