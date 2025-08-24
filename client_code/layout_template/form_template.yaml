@@ -47,7 +47,7 @@ components_by_slot:
     name: occupancy_navigation_link
     properties:
       icon: mi:calendar_month
-      navigate_to: LookerStudio.occupancy
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Occupancy
@@ -57,7 +57,7 @@ components_by_slot:
     name: lead_time_navigation_link
     properties:
       icon: mi:developer_mode_tv
-      navigate_to: LookerStudio.lead_time
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Lead time
@@ -67,7 +67,7 @@ components_by_slot:
     name: guest_insights_navigation_link
     properties:
       icon: mi:people_outline
-      navigate_to: LookerStudio.guest_insights
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Guest insights
@@ -77,7 +77,7 @@ components_by_slot:
     name: detailed_bookings_navigation_link
     properties:
       icon: mi:zoom_in
-      navigate_to: LookerStudio.detailed_bookings
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Detailed bookings
@@ -87,7 +87,7 @@ components_by_slot:
     name: long_trends_navigation_link
     properties:
       icon: mi:trending_up
-      navigate_to: LookerStudio.long_trends
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Long trends
@@ -119,8 +119,8 @@ is_package: true
 layout:
   properties:
     content_padding: ['8', '8', '8', '8']
-    navigation_rail_collapse_to: modal_navigation_drawer
-    navigation_rail_vertical_align: top
+    navigation_rail_collapse_to: bottom_app_bar
+    navigation_rail_vertical_align: center
     show_sidesheet: false
   type: form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout
 slots:
