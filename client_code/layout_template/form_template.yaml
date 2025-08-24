@@ -1,4 +1,5 @@
 components_by_slot:
+  content: []
   navigation:
   - event_bindings: {click: dashboard_navigation_link_click}
     layout_properties: {}
@@ -6,7 +7,7 @@ components_by_slot:
     properties:
       badge: false
       icon: mi:dashboard
-      navigate_to: LookerStudio.dashboard
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Dashboard
