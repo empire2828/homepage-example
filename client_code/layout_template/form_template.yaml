@@ -16,7 +16,7 @@ components_by_slot:
     name: profitability_navigation_link
     properties:
       icon: mi:attach_money
-      navigate_to: LookerStudio.multiframe
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Profitability
