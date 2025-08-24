@@ -24,7 +24,16 @@ class homepage(homepageTemplate):
   def login_button_click(self, **event_args):
     user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
     if user:
-      open_form('LookerStudio.multiframe')
+      # Layout Template öffnen
+      layout_form = open_form('layout_template')
+  
+      # Dashboard automatisch laden
+      multiframe_form = layout_form.open_multiframe_form()
+      multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
+  
+      # Navigation Link als aktiv markieren
+      layout_form.reset_links()
+      layout_form.dashboard_navigation_link.selected = True
     pass
 
   def testen_button_click(self, **event_args):

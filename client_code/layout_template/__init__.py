@@ -8,7 +8,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..LookerStudio.multiframe import multiframe
-from ..LookerStudio.bookings import bookings
 
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
@@ -99,7 +98,7 @@ class layout_template(layout_templateTemplate):
     self.reset_links()
     self.long_trends_navigation_link.selected = True
     multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(2)  # Long Trends
+    multiframe_form.lade_und_zeige_iframe(8)  # Long Trends
 
   def connect_navigation_link_click(self, **event_args):
     self.reset_links()
