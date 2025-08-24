@@ -10,9 +10,8 @@ import json
 class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
-    self.user = users.get_user()
-    print(self.user)
-    self.supabase_key = self.user['supabase_key']
+    user = users.get_user()
+    supabase_key = user['supabase_key']
 
     # Liste deiner 8 unterschiedlichen URLs
     self.iframe_urls = [
@@ -57,7 +56,7 @@ class multiframe(multiframeTemplate):
     panel = self.panels[index]
 
     # Parameter für Supabase Key hinzufügen
-    params = {"supabase_key_url": self.supabase_key}
+    params = {"supabase_key_url": supabase_key}
     encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
     iframe_url = url + encoded_params
 
