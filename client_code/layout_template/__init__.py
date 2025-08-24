@@ -50,72 +50,54 @@ class layout_template(layout_templateTemplate):
   def dashboard_navigation_link_click(self, **event_args):
     self.reset_links()
     self.dashboard_navigation_link.selected = True
-    print("🎯 Dashboard Navigation geklickt")
-
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(0)  # Dashboard
 
   def profitability_navigation_link_click(self, **event_args):
     self.reset_links()
     self.profitability_navigation_link.selected = True
-    print("🎯 Profitability Navigation geklickt")
-
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(1)  # Profitability
 
   def bookings_navigation_link_click(self, **event_args):
     self.reset_links()
     self.bookings_navigation_link.selected = True
-    print("🎯 Bookings Navigation geklickt")
-
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(2)  # Long Trends
 
   def cancellations_navigation_link_click(self, **event_args):
     self.reset_links()
     self.cancellations_navigation_link.selected = True
-    print("🎯 Cancellations Navigation geklickt")
-
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(3)  # Cancellations
 
   def occupancy_navigation_link_click(self, **event_args):
     self.reset_links()
     self.occupancy_navigation_link.selected = True
-    print("🎯 Occupancy Navigation geklickt")
-
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(4)  # Occupancy
 
   def lead_time_navigation_link_click(self, **event_args):
     self.reset_links()
     self.lead_time_navigation_link.selected = True
-    print("🎯 Lead Time Navigation geklickt")
-
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(5)  # Lead Time
 
   def guest_insights_navigation_link_click(self, **event_args):
     self.reset_links()
     self.guest_insights_navigation_link.selected = True
-    print("🎯 Guest Insights Navigation geklickt")
-
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(6)  # Guest Insights
 
   def detailed_bookings_navigation_link_click(self, **event_args):
     self.reset_links()
     self.detailed_bookings_navigation_link.selected = True
-    print("🎯 Detailed Bookings Navigation geklickt")
-
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(7)  # Detailed Bookings
 
   def long_trends_navigation_link_click(self, **event_args):
     self.reset_links()
     self.long_trends_navigation_link.selected = True
-    print("🎯 Long Trends Navigation geklickt")
-
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(2)  # Long Trends
 
