@@ -41,7 +41,7 @@ class multiframe(multiframeTemplate):
 
     # Initial: alle unsichtbar
     for panel in panels:
-      panel.visible = True
+      panel.visible = False
 
     # alle IFrames einmalig hineinlegen (das ist performant, da sie im DOM bleiben)
     for url, panel in zip(self.iframe_urls, panels):
