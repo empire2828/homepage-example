@@ -132,7 +132,7 @@ class my_account(my_accountTemplate):
     anvil.server.call('save_std_commission', channel_name, channel_commission)
     pass
 
-  def upgrade_navigation_link_link_click(self, **event_args):
+  def upgrade_navigation_link_click(self, **event_args):
     open_form('upgrade')
     pass
 

@@ -21,7 +21,7 @@ components_by_slot:
       name: spacer_1_copy_copy
       properties: {height: 21.272552490234375}
       type: Spacer
-    - event_bindings: {click: reset_password_navigation_link_click}
+    - event_bindings: {click: connect_navigation_link_click}
       layout_properties: {grid_position: 'HBUWKL,XGDGBV TBGLUN,CHPZUE'}
       name: connect_navigation_link
       properties: {background_color: 'theme:Secondary Container', bold: true, icon: 'mi:cable', navigate_to: settings.reset_password, text: Connect}
@@ -52,7 +52,7 @@ components_by_slot:
       name: spacer_1_copy
       properties: {height: 21.272552490234375}
       type: Spacer
-    - event_bindings: {click: reset_password_navigation_link_click}
+    - event_bindings: {click: upgrade_navigation_link_click}
       layout_properties: {grid_position: 'HBUWKL,XDJRDF ETVDTY,NPLJBK'}
       name: upgrade_navigation_link
       properties:

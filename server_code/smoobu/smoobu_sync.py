@@ -28,12 +28,10 @@ def launch_sync_smoobu():
   current_user['server_data_last_update'] = datetime.now()
   return result
 
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: Client = create_client(supabase_url, supabase_api_key)
-
 @anvil.server.background_task
 def sync_smoobu(user_email):
+
+  save_smoobu_userid(user_email)
   anvil.server.task_state['message'] = 'Starte Sync...'
   
   client = get_bigquery_client()

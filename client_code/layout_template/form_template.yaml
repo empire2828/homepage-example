@@ -97,7 +97,8 @@ components_by_slot:
     properties:
       margin: ['5', null, '5', null]
     type: form:dep_g9k4toow7i44kq:_Components.Divider
-  - layout_properties: {}
+  - event_bindings: {click: connect_navigation_link_click}
+    layout_properties: {}
     name: connect_navigation_link
     properties:
       icon: mi:cable

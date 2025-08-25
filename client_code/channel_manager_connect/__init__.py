@@ -27,7 +27,11 @@ class channel_manager_connect(channel_manager_connectTemplate):
 
   def sync_smoobu_button_click(self, **event_args):
     alert("Background sync started- this will take around 2 minutes.")
-    anvil.server.call('launch_sync_smoobu')
+    current_user = anvil.users.get_user()
+    user_email = current_user['email'] 
+    print('user_email')
+    self.task = anvil.server.launch_background_task('sync_smoobu', user_email)
+    #anvil.server.call('launch_sync_smoobu')
     self.progress_bar.value = 0
     self.progress_bar.visible = True
     self.timer_1.interval = 0.5
