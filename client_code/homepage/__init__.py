@@ -26,10 +26,12 @@ class homepage(homepageTemplate):
     if user:
       # Layout Template öffnen
       layout_form = open_form('layout_template')
+      multiframe_form_preload = open_form('LookerStudio.multiframe')
   
       # Dashboard automatisch laden
-      multiframe_form = layout_form.open_multiframe_form()
+      multiframe_form = multiframe_form_preload.open_multiframe_form()
       multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
+      open_form('LookerStudio.multiframe')
   
       # Navigation Link als aktiv markieren
       layout_form.reset_links()
@@ -43,9 +45,11 @@ class homepage(homepageTemplate):
       anvil.server.call('send_registration_notification', user['email'])
       # Layout Template öffnen
       layout_form = open_form('layout_template')
+      multiframe_form_preload = open_form('LookerStudio.multiframe')
       # Dashboard automatisch laden
-      multiframe_form = layout_form.open_multiframe_form()
+      multiframe_form = multiframe_form_preload.open_multiframe_form()
       multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
+      open_form('LookerStudio.multiframe')
       # Navigation Link als aktiv markieren
       layout_form.reset_links()
       layout_form.dashboard_navigation_link.selected = True

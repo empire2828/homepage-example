@@ -1,5 +1,9 @@
 components_by_slot:
   content:
+  - layout_properties: {}
+    name: text_1
+    properties: {text: multiframe}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
   - components:
     - name: pms_need_to_connect_text
       properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to connect your channel manager first:', visible: false}
@@ -73,7 +77,7 @@ components_by_slot:
       type: FlowPanel
     layout_properties: {}
     name: content_panel
-    properties: {}
+    properties: {visible: false}
     type: ColumnPanel
 is_package: true
 layout: {type: 'form:layout_template'}
