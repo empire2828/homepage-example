@@ -41,7 +41,7 @@ class multiframe(multiframeTemplate):
       self.looker_flow_panel_9,
     ]
 
-    print(f"✅ Gefundene Panels im content_panel: {len(self.panels)}")
+    #print(f"✅ Gefundene Panels im content_panel: {len(self.panels)}")
 
     # Status-Tracking welche IFrames bereits geladen wurden
     self.geladene_iframes = [False] * len(self.iframe_urls)
@@ -57,7 +57,7 @@ class multiframe(multiframeTemplate):
 
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
-    print(f"🔨 Erstelle IFrame {index}...")
+    #print(f"🔨 Erstelle IFrame {index}...")
     if index < 0 or index >= len(self.iframe_urls):
       print(f"❌ Ungültiger Index: {index}")
       return
