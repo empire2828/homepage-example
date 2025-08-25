@@ -34,9 +34,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
     self.task = anvil.server.call('launch_sync_smoobu')
     self.progress_bar.value = 10
     print(self.progress_bar.value)
-    self.status_label.text = 'Starting syncronisation'
     self.progress_bar.visible = True
-    self.status_label.visible
     self.timer_1.interval = 1
     self.timer_1.enabled = True
     self.timer_1.visible = True
@@ -57,7 +55,6 @@ class channel_manager_connect(channel_manager_connectTemplate):
       try:
         state = self.task.get_state() or {}            # {'progress': int, 'total': int, 'message': str}
         progress = state.get('progress', 0)
-        print(progress)
         self.progress_bar.progress = progress
         # Optionally reflect messages:
         self.status_label.text = state.get('message', '')

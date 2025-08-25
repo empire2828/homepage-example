@@ -21,14 +21,10 @@ components_by_slot:
       name: spacer_1_copy_copy
       properties: {height: 21.272552490234375}
       type: Spacer
-    - event_bindings: {click: reset_password_navigation_link_click}
-      layout_properties: {grid_position: 'HBUWKL,XGDGBV TBGLUN,CHPZUE'}
+    - event_bindings: {click: connect_navigation_link_click}
+      layout_properties: {grid_position: 'HBUWKL,XGDGBV HSGWEW,OASXTE', row_background: ''}
       name: connect_navigation_link
-      properties: {background_color: 'theme:Secondary Container', bold: true, icon: 'mi:cable', navigate_to: settings.reset_password, text: Connect}
-      type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-    - layout_properties: {grid_position: 'HBUWKL,XGDGBV HSGWEW,OASXTE'}
-      name: navigation_link_1
-      properties: {icon: 'mi:cable', navigate_to: channel_manager_connect, text: Connect Channel Manager}
+      properties: {background_color: 'theme:Secondary Container', icon: 'mi:cable', navigate_to: channel_manager_connect, text: Connect Channel Manager}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
     - layout_properties: {grid_position: 'HBUWKL,XGDGBV QGUJVP,DSIXCL'}
       name: spacer_3
@@ -56,14 +52,14 @@ components_by_slot:
       name: spacer_1_copy
       properties: {height: 21.272552490234375}
       type: Spacer
-    - event_bindings: {click: reset_password_navigation_link_click}
+    - event_bindings: {}
       layout_properties: {grid_position: 'HBUWKL,XDJRDF ETVDTY,NPLJBK'}
       name: upgrade_navigation_link
       properties:
         background_color: theme:Secondary Container
         bold: true
         icon: mi:arrow_upward_alt
-        navigate_to: settings.reset_password
+        navigate_to: upgrade
         spacing:
           margin: ['0', null, '0', null]
         text: Upgrade
@@ -72,7 +68,8 @@ components_by_slot:
       name: spacer_1
       properties: {height: 21.272552490234375}
       type: Spacer
-    - layout_properties: {grid_position: 'HBUWKL,XDJRDF VBMUSW,ALBEWA'}
+    - event_bindings: {click: help_navigation_link_click}
+      layout_properties: {grid_position: 'HBUWKL,XDJRDF VBMUSW,ALBEWA'}
       name: help_navigation_link
       properties: {background_color: 'theme:Secondary Container', icon: 'mi:question_mark', navigate_to: help, text: Help}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink

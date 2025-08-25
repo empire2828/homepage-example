@@ -70,13 +70,11 @@ def sync_smoobu(user_email):
     params["page"] += 1
 
   total = len(all_bookings)
-  anvil.server.task_state.update({'message': f'{total} Buchungen geladen...', 'progress': 0.5})
+  anvil.server.task_state.update({'message': f'{total} Bookings received. Now syncing prices...', 'progress': 0.4})
   
   if not all_bookings:
     print("sync_smoobu: Keine Buchung gefunden ",user_email)
     return 
-
-  anvil.server.task_state.update({'message': 'Sync Pricing...', 'progress': 0.7})
   
     # Daten für BigQuery vorbereiten
   rows_to_insert = []
@@ -123,6 +121,8 @@ def sync_smoobu(user_email):
     anvil.server.task_state['message'] = 'Keine Buchung zur Übertragung'
     return 
 
+  anvil.server.task_state.update({'message': 'Analyzing prices...', 'progress': 0.8})
+  
   table = "lodginia.lodginia.bookings"
   columns = [
     "reservation_id", "id", "apartment", "arrival", "departure", "created_at",
@@ -151,10 +151,12 @@ def sync_smoobu(user_email):
   client.query(sql).result()
   print(f"sync smoobu: {len(rows_to_insert)} bookings imported into BigQuery.")
 
+  anvil.server.task_state.update({'message': 'Calculating standard fees and commission...', 'progress': 0.8})
+  
   save_last_fees_as_std(user_email)
   save_all_channels_for_user(user_email)
 
-  anvil.server.task_state.update({'message': 'Prices synced...', 'progress': 0.9})
+  anvil.server.task_state.update({'message': 'Prices synced...', 'progress': 0.95})
   
   return 
 

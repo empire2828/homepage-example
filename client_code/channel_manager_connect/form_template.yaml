@@ -108,13 +108,23 @@ components_by_slot:
       name: sync_smoobu_button
       properties: {role: filled-button, text: Sync Smoobu}
       type: Button
+    - layout_properties: {grid_position: 'UZNLCS,BLLWKN'}
+      name: spacer_3
+      properties: {height: 10.57391357421875}
+      type: Spacer
     - layout_properties: {grid_position: 'WBOOCT,EBXQIS'}
       name: progress_bar
       properties: {progress: 40}
       type: form:dep_pa3otpma4dkzg:ProgressBar.Determinate
     - layout_properties: {grid_position: 'NUGLPR,EPCWGT'}
       name: status_label
-      properties: {font_size: 18, icon_size: 20, italic: true, scale: medium, text: '', visible: true}
+      properties:
+        font_size: 18
+        icon_size: 20
+        italic: true
+        scale: medium
+        text: " \n"
+        visible: true
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {}
     name: outlined_card_4
