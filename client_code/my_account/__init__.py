@@ -87,10 +87,6 @@ class my_account(my_accountTemplate):
     open_form('my_account.DeleteAccountAlert')
     pass
 
-  def password_reset_link_click(self, **event_args):
-    open_form('my_account.reset_password')
-    pass
-
   def logout_navigation_link_click(self, **event_args):
     result = alert(
           content="Do you want to logout?",
@@ -138,6 +134,10 @@ class my_account(my_accountTemplate):
 
   def upgrade_navigation_link_link_click(self, **event_args):
     open_form('upgrade')
+    pass
+
+  def reset_password_navigation_link_click(self, **event_args):
+    open_form('my_account.reset_password')
     pass
 
   
