@@ -19,7 +19,6 @@ class layout_template(layout_templateTemplate):
   def open_multiframe_form(self):
     #"""Öffnet die multiframe Form als Hauptinhalt"""
 
-
     # Schließe vorherige multiframe falls vorhanden
     if self.current_multiframe:
       self.current_multiframe.remove_from_parent()

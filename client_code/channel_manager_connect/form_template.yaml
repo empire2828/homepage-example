@@ -114,7 +114,7 @@ components_by_slot:
       type: Spacer
     - layout_properties: {grid_position: 'WBOOCT,EBXQIS'}
       name: progress_bar
-      properties: {progress: 40}
+      properties: {progress: 0}
       type: form:dep_pa3otpma4dkzg:ProgressBar.Determinate
     - layout_properties: {grid_position: 'NUGLPR,EPCWGT'}
       name: status_label

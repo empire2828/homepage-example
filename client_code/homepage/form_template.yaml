@@ -63,6 +63,7 @@ components:
       role: title
       spacing:
         margin: [null, '6', null, '6']
+      spacing_above: small
       text: Stop guessing about your vacation rental performance. Get crystal-clear insights that help you maximize revenue, optimize pricing, and outperform your competition—all in one beautiful dashboard.
     type: Label
   layout_properties: {grid_position: 'ISUFTJ,PYQQRP'}
