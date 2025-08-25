@@ -17,7 +17,6 @@ class multiframe(multiframeTemplate):
       self.supabase_key = ""
       print("Warnung: Kein supabase_key verfügbar")
 
-    # Liste deiner 8 unterschiedlichen URLs
     self.iframe_urls = [
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/qmCOF",          # Dashboard
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",    # Profitability
@@ -26,11 +25,10 @@ class multiframe(multiframeTemplate):
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_1idplf63td",     # Occupancy
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8hyzd253td",     # Lead Time
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_tilmy6zhtd", # Guest Insights
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_cc0slxgtud" # Detailed Bookings
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_9euf3853td",    # Long Trends
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_cc0slxgtud", # Detailed Bookings
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_4dt5tycuud",    # Long Trends
     ]
 
-    # Panels für 8 IFrames - verwende das content_panel aus dem Designer
     self.panels = [
       self.looker_flow_panel_1,
       self.looker_flow_panel_2,
@@ -40,9 +38,10 @@ class multiframe(multiframeTemplate):
       self.looker_flow_panel_6,
       self.looker_flow_panel_7,
       self.looker_flow_panel_8,
+      self.looker_flow_panel_9,
     ]
 
-    #print(f"✅ Gefundene Panels im content_panel: {len(self.panels)}")
+    print(f"✅ Gefundene Panels im content_panel: {len(self.panels)}")
 
     # Status-Tracking welche IFrames bereits geladen wurden
     self.geladene_iframes = [False] * len(self.iframe_urls)
@@ -56,11 +55,9 @@ class multiframe(multiframeTemplate):
       panel.height = 1850  # Explizite Höhe
       #print(f"Panel {i}: visible={panel.visible}, height={panel.height}")
 
-    #print("🔧 multiframe mit content_panel initialisiert")
-
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
-    #print(f"🔨 Erstelle IFrame {index}...")
+    print(f"🔨 Erstelle IFrame {index}...")
     if index < 0 or index >= len(self.iframe_urls):
       print(f"❌ Ungültiger Index: {index}")
       return
@@ -111,7 +108,6 @@ class multiframe(multiframeTemplate):
       return
 
     # SCHRITT 1: Alle Panels verstecken
-    #print("👀 Verstecke alle Panels...")
     for i, panel in enumerate(self.panels):
       if panel.visible:
         print(f"   Panel {i} war sichtbar -> verstecke")
@@ -125,7 +121,6 @@ class multiframe(multiframeTemplate):
       print(f"♻️ IFrame {index} bereits geladen")
 
     # SCHRITT 3: Gewünschtes Panel anzeigen
-    #print(f"🔛 Zeige Panel {index}...")
     self.panels[index].visible = True
     self.aktueller_index = index
 
@@ -135,12 +130,6 @@ class multiframe(multiframeTemplate):
     # Debug: Finale Status-Ausgabe
     #sichtbare_panels = [i for i, p in enumerate(self.panels) if p.visible]
     #print(f"📊 Sichtbare Panels: {sichtbare_panels}")
-
-  # Backward compatibility - alte Methode
-  # def setze_sichtbares_iframe(self, index):
-  #  """Wrapper für Rückwärtskompatibilität"""
-  #  print(f"🔄 setze_sichtbares_iframe({index}) -> lade_und_zeige_iframe")
-  #  self.lade_und_zeige_iframe(index)
 
   def verstecke_alle_iframes(self):
     """Versteckt alle IFrames ohne sie zu entladen"""
