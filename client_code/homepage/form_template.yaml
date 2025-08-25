@@ -36,7 +36,11 @@ components:
   type: Spacer
 - layout_properties: {grid_position: 'DCEYRM,FQZQIK'}
   name: headline_1
-  properties: {align: center, bold: true, font_size: 54, foreground: 'theme:Primary', role: headline, text: Turn Your Booking Data Into Profit}
+  properties: {align: center, bold: true, font_size: 54, foreground: 'theme:Primary', role: headline, text: Turn Your Booking Data Into}
+  type: Label
+- layout_properties: {grid_position: 'DCEYRM,EJCQNV'}
+  name: headline_1_2
+  properties: {align: center, bold: true, font_size: 54, foreground: '#ffa200', italic: true, role: headline, text: Profit}
   type: Label
 - layout_properties: {grid_position: 'UZFTYE,NGOVFK'}
   name: rich_text_1
@@ -80,15 +84,15 @@ components:
   type: Spacer
 - layout_properties: {grid_position: 'EPFGQR,WXTVFO'}
   name: checkbox_3
-  properties: {align: center, checked: true, font_size: 18, text: No credit card required for trial}
+  properties: {align: left, checked: true, font_size: 18, text: No credit card required for trial}
   type: form:dep_g9k4toow7i44kq:_Components.Checkbox
 - layout_properties: {grid_position: 'EPFGQR,THKDVQ'}
   name: checkbox_1
-  properties: {align: center, checked: true, font_size: 18, text: Setup in under 5 minutes}
+  properties: {align: left, checked: true, font_size: 18, text: Setup in under 5 minutes}
   type: form:dep_g9k4toow7i44kq:_Components.Checkbox
 - layout_properties: {grid_position: 'EPFGQR,PWARMZ'}
   name: checkbox_2
-  properties: {align: center, checked: true, font_size: 18, text: Cancel anytime}
+  properties: {align: left, checked: true, font_size: 18, text: Cancel anytime}
   type: form:dep_g9k4toow7i44kq:_Components.Checkbox
 - layout_properties: {grid_position: 'HKXVNZ,XZBPGF'}
   name: spacer_3
@@ -208,7 +212,7 @@ components:
       type: Label
     - layout_properties: {grid_position: 'KVCFJA,JSDRTD'}
       name: text_3
-      properties: {font_size: 18, text: 'Monitor occupancy rates, ADR, RevPAR, and other key metrics that matter to your rental business.'}
+      properties: {font_size: 18, text: 'Monitor occupancy rates, ADR excluding commission and fees and other key metrics that matter.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,KBSMLA'}
     name: outlined_card_9
@@ -267,51 +271,51 @@ components:
   name: spacer_12
   properties: {height: 123.4417724609375}
   type: Spacer
-- components:
-  - layout_properties: {grid_position: 'BXYRXS,VZDGBI'}
-    name: title_2
-    properties: {font_size: 28, role: title, text: Why Vacation Rental Owners Choose Lodginia}
-    type: Label
-  - layout_properties: {grid_position: 'ZSYVVX,VDQGZZ'}
-    name: spacer_6
-    properties: {height: 10.21783447265625}
-    type: Spacer
-  - layout_properties: {grid_position: 'TREXXF,NFJBJJ'}
-    name: body_2
-    properties: {font_size: 18, role: body, text: We understand the unique challenges of managing vacation rentals because we've been there. Our platform is built by property owners who know what metrics actually matter.}
-    type: Label
-  - layout_properties: {grid_position: 'TYFLZW,XUJSIW'}
-    name: spacer_9
-    properties: {height: 12.5511474609375}
-    type: Spacer
-  - layout_properties: {grid_position: 'AJJQPA,VGXLKH'}
-    name: checkbox_4
-    properties: {checked: true, font_size: 18, text: Increase revenue by data-driven pricing}
-    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
-  - layout_properties: {grid_position: 'GYEZHR,FLRMFU'}
-    name: checkbox_5
-    properties: {checked: true, font_size: 18, text: Reduce vacancy periods with optimized availibility planning}
-    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
-  - layout_properties: {grid_position: 'REVGLU,HAIBMX'}
-    name: checkbox_6
-    properties: {checked: true, font_size: 18, text: Save hours of work on manual analysis}
-    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
-  - layout_properties: {grid_position: 'IWBOBG,ZWNSZC'}
-    name: checkbox_7
-    properties: {checked: true, font_size: 18, text: Outperform competitors}
-    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
-  layout_properties: {grid_position: 'UTJDOT,MFHHRO'}
-  name: column_panel_4
-  properties: {}
-  type: ColumnPanel
-- layout_properties: {grid_position: 'UTJDOT,NMNDYD UWYEPM,GKNMWS'}
-  name: flow_panel_1
-  properties: {}
-  type: FlowPanel
-- layout_properties: {grid_position: 'UTJDOT,NMNDYD HIJDYF,BMGLUF'}
+- layout_properties: {grid_position: ''}
   name: spacer_14
   properties: {height: 54.2977294921875}
   type: Spacer
+- components:
+  - components:
+    - layout_properties: {grid_position: 'BXYRXS,VZDGBI'}
+      name: title_2
+      properties: {font_size: 28, role: title, text: Why Vacation Rental Owners Choose Lodginia}
+      type: Label
+    - layout_properties: {grid_position: 'ZSYVVX,VDQGZZ'}
+      name: spacer_6
+      properties: {height: 10.21783447265625}
+      type: Spacer
+    - layout_properties: {grid_position: 'TREXXF,NFJBJJ'}
+      name: body_2
+      properties: {font_size: 18, role: body, text: We understand the unique challenges of managing vacation rentals because we've been there. Our platform is built by property owners who know what metrics actually matter.}
+      type: Label
+    - layout_properties: {grid_position: 'TYFLZW,XUJSIW'}
+      name: spacer_9
+      properties: {height: 12.5511474609375}
+      type: Spacer
+    - layout_properties: {grid_position: 'AJJQPA,VGXLKH'}
+      name: checkbox_4
+      properties: {checked: true, font_size: 18, text: Increase revenue by data-driven pricing}
+      type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+    - layout_properties: {grid_position: 'GYEZHR,FLRMFU'}
+      name: checkbox_5
+      properties: {checked: true, font_size: 18, text: Reduce vacancy periods with optimized availibility planning}
+      type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+    - layout_properties: {grid_position: 'REVGLU,HAIBMX'}
+      name: checkbox_6
+      properties: {checked: true, font_size: 18, text: Save hours of work on manual analysis}
+      type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+    - layout_properties: {grid_position: 'IWBOBG,ZWNSZC'}
+      name: checkbox_7
+      properties: {checked: true, font_size: 18, text: Outperform competitors}
+      type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+    name: column_panel_4
+    properties: {}
+    type: ColumnPanel
+  layout_properties: {grid_position: 'UWYEPM,GKNMWS'}
+  name: flow_panel_1
+  properties: {}
+  type: FlowPanel
 - layout_properties: {grid_position: 'OVHKCM,GNOJHF'}
   name: spacer_18
   properties: {height: 105.6041259765625}
@@ -326,7 +330,7 @@ components:
   type: Label
 - layout_properties: {grid_position: 'AYVCYO,MFRVCM'}
   name: rich_text_1_copy
-  properties: {align: center, content: Built with ❤️ by vacation rental owners., font_size: 16}
+  properties: {align: center, content: Built with ❤️ by vacation rental owners., font_size: 18, foreground: '#f9a94a'}
   type: RichText
 - layout_properties: {grid_position: 'GZOFNN,GSWMBD'}
   name: spacer_11
@@ -451,6 +455,7 @@ components:
       margin: [null, null, null, '6']
       padding: [null, null, null, '6']
     text: Cancel anytime
+    text_color: '#f9a94a'
   type: form:dep_g9k4toow7i44kq:_Components.Text
 - layout_properties: {grid_position: 'CQUFIO,GVEAZT'}
   name: spacer_7
@@ -488,6 +493,9 @@ components:
   properties: {align: center, text: data protection}
   type: Link
 container:
-  properties: {col_widths: '{}'}
+  properties:
+    col_widths: '{"FQZQIK":45,"EJCQNV":15}'
+    spacing:
+      margin: [null, '5', null, '5']
   type: ColumnPanel
 is_package: true
