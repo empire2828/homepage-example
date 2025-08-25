@@ -26,6 +26,10 @@ components_by_slot:
       name: connect_navigation_link
       properties: {background_color: 'theme:Secondary Container', bold: true, icon: 'mi:cable', navigate_to: settings.reset_password, text: Connect}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+    - layout_properties: {grid_position: 'HBUWKL,XGDGBV HSGWEW,OASXTE'}
+      name: navigation_link_1
+      properties: {icon: 'mi:cable', navigate_to: channel_manager_connect, text: Connect Channel Manager}
+      type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
     - layout_properties: {grid_position: 'HBUWKL,XGDGBV QGUJVP,DSIXCL'}
       name: spacer_3
       properties: {height: 22.45831298828125}
