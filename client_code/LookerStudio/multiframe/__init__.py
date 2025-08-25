@@ -153,20 +153,6 @@ class multiframe(multiframeTemplate):
         self.erstelle_iframe(i)
     #print("✅ Alle IFrames geladen")
 
-  #def debug_info(self):
-  #  """Gibt Debug-Informationen aus"""
-  #  print("\n=== 🔍 MULTIFRAME DEBUG INFO ===")
-  #  print(f"content_panel vorhanden: {hasattr(self, 'content_panel')}")
-  #  print(f"Panels: {len(self.panels)}")
-  #  print(f"URLs: {len(self.iframe_urls)}")
-  #  print(f"Aktueller Index: {self.aktueller_index}")
-
-    #for i, panel in enumerate(self.panels):
-      #status = "✅ SICHTBAR" if panel.visible else "❌ versteckt"
-      #geladen = "✅ geladen" if self.geladene_iframes[i] else "❌ nicht geladen"
-      #print(f"Panel {i}: {status}, {geladen}, height={getattr(panel, 'height', 'unknown')}")
-    #print("================================\n")
-
   # Event Handler für fehlende Buttons (um Warnungen zu vermeiden)
   def channel_manager_connect_button_click(self, **event_args):
     open_form('channel_manager_connect')
