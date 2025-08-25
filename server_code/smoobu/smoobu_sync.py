@@ -15,29 +15,19 @@ from servermain import get_bigquery_client, delete_bookings_by_email, save_all_c
 import json
 import textwrap
 
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: Client = create_client(supabase_url, supabase_api_key)
-
 @anvil.server.callable
 def launch_sync_smoobu():
   current_user = anvil.users.get_user()
   user_email = current_user['email'] 
-  result= anvil.server.launch_background_task('sync_smoobu',user_email)
+  task = anvil.server.launch_background_task('sync_smoobu',user_email)
   save_smoobu_userid(user_email)
   current_user['server_data_last_update'] = datetime.now()
-  return result
-
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: Client = create_client(supabase_url, supabase_api_key)
+  return task
 
 @anvil.server.background_task
 def sync_smoobu(user_email):
-  anvil.server.task_state['message'] = 'Starte Sync...'
-  
-  client = get_bigquery_client()
-  
+  anvil.server.task_state.update({'message': 'Contacting your channel manager...', 'progress': 0.1})  
+  client = get_bigquery_client()  
   delete_bookings_by_email(user_email)
   
   if client is None:
@@ -65,6 +55,8 @@ def sync_smoobu(user_email):
     "limit": 25,   # API-limit: Nicht größer setzen!
   }
 
+  anvil.server.task_state.update({'message': 'Retrieving bookings...', 'progress': 0.2})
+  
   all_bookings = []
   while True:
     resp = requests.get(base_url, headers=headers, params=params)
@@ -78,12 +70,14 @@ def sync_smoobu(user_email):
     params["page"] += 1
 
   total = len(all_bookings)
-  anvil.server.task_state.update({'message': f'{total} Buchungen geladen', 'progress': 0, 'total': total})
+  anvil.server.task_state.update({'message': f'{total} Buchungen geladen...', 'progress': 0.5})
   
   if not all_bookings:
     print("sync_smoobu: Keine Buchung gefunden ",user_email)
     return 
 
+  anvil.server.task_state.update({'message': 'Sync Pricing...', 'progress': 0.7})
+  
     # Daten für BigQuery vorbereiten
   rows_to_insert = []
   for booking in all_bookings:
@@ -160,7 +154,7 @@ def sync_smoobu(user_email):
   save_last_fees_as_std(user_email)
   save_all_channels_for_user(user_email)
 
-  anvil.server.task_state.update({'progress': total, 'total': total, 'message': 'Fertig'})
+  anvil.server.task_state.update({'message': 'Prices synced...', 'progress': 0.9})
   
   return 
 

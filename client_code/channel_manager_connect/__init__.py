@@ -12,6 +12,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.task = None
    # Any code you write here will run before the form opens.
  
   def save_api_key_button_click(self, **event_args):
@@ -26,15 +27,21 @@ class channel_manager_connect(channel_manager_connectTemplate):
     pass
 
   def sync_smoobu_button_click(self, **event_args):
+    self.task = None #init
+    self._navigate_when_done = False  # init
+    
     alert("Background sync started- this will take around 2 minutes.")
-    anvil.server.call('launch_sync_smoobu')
-    self.progress_bar.value = 0
+    self.task = anvil.server.call('launch_sync_smoobu')
+    self.progress_bar.value = 10
+    print(self.progress_bar.value)
+    self.status_label.text = 'Starting syncronisation'
     self.progress_bar.visible = True
-    self.timer_1.interval = 0.5
+    self.status_label.visible
+    self.timer_1.interval = 1
     self.timer_1.enabled = True
     self.timer_1.visible = True
-    alert("You will be forwarded to the settings.")
-    open_form('my_account')
+   
+    self._navigate_when_done = True
     pass
 
   def Data_protection_link_click(self, **event_args):
@@ -44,31 +51,29 @@ class channel_manager_connect(channel_manager_connectTemplate):
   def timer_1_tick(self, **event_args):
     if not self.task:
       return
-    try:
-      state = self.task.get_state() or {}     # {'progress': int, 'total': int, 'message': str}
-      progress = state.get('progress', 0)
-      total = max(1, state.get('total', 100)) # Schutz gegen Division durch 0
-      pct = int(round(progress * 100.0 / total))
-      self.progress_bar.value = pct
-
-      # Optional: Nachricht anzeigen, z. B. in einem Label
-      # self.status_label.text = state.get('message', '')
-
-      if self.task.is_completed():
-        self.timer_1.enabled = False
-        self.sync_smoobu_button.enabled = True
-        self.sync_smoobu_button.text = "Sync abgeschlossen"
-        self.progress_bar.value = 100
-        # Weiterleitung oder UI-Update erst nach Abschluss:
-        # open_form('my_account')
-    except Exception:
-      # Fehlerfall: Task-Fehler auswerten
+  
+      # Poll without spinner to avoid UI interruption
+    with anvil.server.no_loading_indicator:
       try:
-        self.task.get_error()  # re-throw Server-Fehler, falls vorhanden
-      except Exception as task_err:
-        alert(f"Task-Fehler: {task_err}")
-      finally:
+        state = self.task.get_state() or {}            # {'progress': int, 'total': int, 'message': str}
+        progress = state.get('progress', 0)
+        print(progress)
+        self.progress_bar.progress = progress
+        # Optionally reflect messages:
+        self.status_label.text = state.get('message', '')
+  
+        if self.task.is_completed():                   # raises if the task failed
+          self.timer_1.enabled = False
+          self.progress_bar.progress = 1
+          if self._navigate_when_done:
+            alert("You will now be forwarded to the settings.")
+            open_form('my_account')                    # navigate only after completion
+      except Exception:
+        # Surface server-side errors and stop polling
         self.timer_1.enabled = False
-        self.sync_smoobu_button.enabled = True
-        self.sync_smoobu_button.text = "Sync starten"
         self.progress_bar.visible = False
+        try:
+          # Re-throw original server error if present
+          self.task.get_error()
+        except Exception as e:
+          alert(f"Task-Fehler: {e}")
