@@ -169,9 +169,9 @@ class multiframe(multiframeTemplate):
 
   # Event Handler für fehlende Buttons (um Warnungen zu vermeiden)
   def channel_manager_connect_button_click(self, **event_args):
-    """Platzhalter für fehlenden Event Handler"""
+    open_form('channel_manager_connect')
     pass
 
   def dashboard_upgrade_button_click(self, **event_args):
-    """Platzhalter für fehlenden Event Handler"""
+    open_form('upgrade')
     pass

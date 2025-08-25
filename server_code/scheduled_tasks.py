@@ -16,7 +16,7 @@ supabase_client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.background_task
 def delete_old_logs():
-  x_days_ago = datetime.now(datetime.timezone.utc) - datetime.timedelta(days=5)
+  x_days_ago = datetime.now(timezone.utc) - timedelta(days=5)
   bq_client = get_bigquery_client()
   query = """
         DELETE FROM `lodginia.lodginia.bookings`
