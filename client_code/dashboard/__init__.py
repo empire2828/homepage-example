@@ -11,7 +11,8 @@ class dashboard(dashboardTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-
+    user = users.get_user()
+    if user and 'supabase_key' in user:
       supabase_key= user['supabase_key']
       self.init_iframe(supabase_key)
     else: 
