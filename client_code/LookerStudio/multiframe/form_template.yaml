@@ -1,5 +1,9 @@
 components_by_slot:
   content:
+  - layout_properties: {}
+    name: text_1
+    properties: {text: multiframe}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
   - components:
     - name: pms_need_to_connect_text_copy
       properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to connect your channel manager first:', visible: false}

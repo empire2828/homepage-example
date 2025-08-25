@@ -10,6 +10,7 @@ import json
 class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
+    self.current_multiframe = None
     user = users.get_user()
     if user and 'supabase_key' in user:
       self.supabase_key = user['supabase_key']
@@ -124,13 +125,6 @@ class multiframe(multiframeTemplate):
     self.panels[index].visible = True
     self.aktueller_index = index
 
-    # SCHRITT 4: Bestätigung
-    #print(f"✅ Panel {index} Status: visible={self.panels[index].visible}")
-
-    # Debug: Finale Status-Ausgabe
-    #sichtbare_panels = [i for i, p in enumerate(self.panels) if p.visible]
-    #print(f"📊 Sichtbare Panels: {sichtbare_panels}")
-
   def verstecke_alle_iframes(self):
     """Versteckt alle IFrames ohne sie zu entladen"""
     print("🙈 Verstecke alle IFrames...")
@@ -153,20 +147,6 @@ class multiframe(multiframeTemplate):
         self.erstelle_iframe(i)
     #print("✅ Alle IFrames geladen")
 
-  #def debug_info(self):
-  #  """Gibt Debug-Informationen aus"""
-  #  print("\n=== 🔍 MULTIFRAME DEBUG INFO ===")
-  #  print(f"content_panel vorhanden: {hasattr(self, 'content_panel')}")
-  #  print(f"Panels: {len(self.panels)}")
-  #  print(f"URLs: {len(self.iframe_urls)}")
-  #  print(f"Aktueller Index: {self.aktueller_index}")
-
-    #for i, panel in enumerate(self.panels):
-      #status = "✅ SICHTBAR" if panel.visible else "❌ versteckt"
-      #geladen = "✅ geladen" if self.geladene_iframes[i] else "❌ nicht geladen"
-      #print(f"Panel {i}: {status}, {geladen}, height={getattr(panel, 'height', 'unknown')}")
-    #print("================================\n")
-
   # Event Handler für fehlende Buttons (um Warnungen zu vermeiden)
   def channel_manager_connect_button_click(self, **event_args):
     open_form('channel_manager_connect')
@@ -175,3 +155,19 @@ class multiframe(multiframeTemplate):
   def dashboard_upgrade_button_click(self, **event_args):
     open_form('upgrade')
     pass
+
+  def open_multiframe_form(self):
+    #"""Öffnet die multiframe Form als Hauptinhalt"""
+
+  # Schließe vorherige multiframe falls vorhanden
+    if self.current_multiframe:
+      self.current_multiframe.remove_from_parent()
+
+    # Erstelle neue multiframe Instanz
+    self.current_multiframe = multiframe()
+  
+    # Öffne als neue Form
+    open_form(self.current_multiframe)
+    #print("✅ multiframe Form geöffnet")
+  
+    return self.current_multiframe

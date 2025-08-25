@@ -14,24 +14,24 @@ class layout_template(layout_templateTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)    
     # Keine multiframe Initialisierung hier!
-    self.current_multiframe = None
+    #self.current_multiframe = None
 
-  def open_multiframe_form(self):
-    #"""Öffnet die multiframe Form als Hauptinhalt"""
-    #print("🚀 Öffne multiframe Form...")
+  #def open_multiframe_form(self):
+  #  #"""Öffnet die multiframe Form als Hauptinhalt"""
+  #  #print("🚀 Öffne multiframe Form...")
 
     # Schließe vorherige multiframe falls vorhanden
-    if self.current_multiframe:
-      self.current_multiframe.remove_from_parent()
+  #  if self.current_multiframe:
+  #    self.current_multiframe.remove_from_parent()
 
     # Erstelle neue multiframe Instanz
-    self.current_multiframe = multiframe()
+  #  self.current_multiframe = multiframe()
 
     # Öffne als neue Form
-    open_form(self.current_multiframe)
+   # open_form(self.current_multiframe)
     #print("✅ multiframe Form geöffnet")
 
-    return self.current_multiframe
+   # return self.current_multiframe
 
   def reset_links(self, **event_args):
     self.dashboard_navigation_link.selected = False
@@ -51,7 +51,7 @@ class layout_template(layout_templateTemplate):
     self.reset_links()
     self.dashboard_navigation_link.selected = True
     self.layout.hide_nav_drawer()
-    multiframe_form = self.open_multiframe_form()
+    multiframe_form = self.multiframe.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(0)  # Dashboard
 
   def profitability_navigation_link_click(self, **event_args):

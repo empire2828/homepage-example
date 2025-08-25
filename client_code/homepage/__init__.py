@@ -26,9 +26,10 @@ class homepage(homepageTemplate):
     if user:
       # Layout Template öffnen
       layout_form = open_form('layout_template')
+      multiframe_form_preload= open_form('LookerStudio.multiframe')
   
       # Dashboard automatisch laden
-      multiframe_form = layout_form.open_multiframe_form()
+      multiframe_form = multiframe_form_preload.open_multiframe_form()
       multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
   
       # Navigation Link als aktiv markieren
