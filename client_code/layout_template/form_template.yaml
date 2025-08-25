@@ -1,4 +1,5 @@
 components_by_slot:
+  content: []
   navigation:
   - event_bindings: {click: dashboard_navigation_link_click}
     layout_properties: {}
@@ -6,7 +7,7 @@ components_by_slot:
     properties:
       badge: false
       icon: mi:dashboard
-      navigate_to: LookerStudio.dashboard
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Dashboard
@@ -16,7 +17,7 @@ components_by_slot:
     name: profitability_navigation_link
     properties:
       icon: mi:attach_money
-      navigate_to: LookerStudio.profitability
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Profitability
@@ -26,7 +27,7 @@ components_by_slot:
     name: bookings_navigation_link
     properties:
       icon: mi:reset_tv
-      navigate_to: LookerStudio.bookings
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Bookings
@@ -36,7 +37,7 @@ components_by_slot:
     name: cancellations_navigation_link
     properties:
       icon: mi:cancel
-      navigate_to: LookerStudio.cancellations
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Cancellations
@@ -46,7 +47,7 @@ components_by_slot:
     name: occupancy_navigation_link
     properties:
       icon: mi:calendar_month
-      navigate_to: LookerStudio.occupancy
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Occupancy
@@ -56,7 +57,7 @@ components_by_slot:
     name: lead_time_navigation_link
     properties:
       icon: mi:developer_mode_tv
-      navigate_to: LookerStudio.lead_time
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Lead time
@@ -66,7 +67,7 @@ components_by_slot:
     name: guest_insights_navigation_link
     properties:
       icon: mi:people_outline
-      navigate_to: LookerStudio.guest_insights
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Guest insights
@@ -76,7 +77,7 @@ components_by_slot:
     name: detailed_bookings_navigation_link
     properties:
       icon: mi:zoom_in
-      navigate_to: LookerStudio.detailed_bookings
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Detailed bookings
@@ -86,20 +87,21 @@ components_by_slot:
     name: long_trends_navigation_link
     properties:
       icon: mi:trending_up
-      navigate_to: LookerStudio.long_trends
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: Long trends
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - layout_properties: {}
-    name: spacer_1
-    properties: {height: '24'}
-    type: Spacer
+    name: divider_1
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.Divider
   - layout_properties: {}
     name: connect_navigation_link
     properties:
       icon: mi:cable
       navigate_to: channel_manager_connect
+      selected: false
       spacing:
         margin: ['-5', null, '-5', null]
       text: Connect

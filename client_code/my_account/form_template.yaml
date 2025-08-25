@@ -17,6 +17,10 @@ components_by_slot:
       name: admin_navigation_link
       properties: {background_color: 'theme:Secondary Container', icon: 'mi:admin_panel_settings', navigate_to: Admin, text: Admin, visible: false}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+    - layout_properties: {grid_position: 'HBUWKL,XGDGBV NGWKFX,OQUWXP'}
+      name: spacer_1_copy_copy
+      properties: {height: 21.272552490234375}
+      type: Spacer
     - event_bindings: {click: reset_password_navigation_link_click}
       layout_properties: {grid_position: 'HBUWKL,XGDGBV TBGLUN,CHPZUE'}
       name: connect_navigation_link
@@ -40,10 +44,25 @@ components_by_slot:
       name: subscription_management_navigation_link
       properties: {background_color: 'theme:Secondary Container', icon: 'mi:subscriptions', text: Subscription Management (via Stripe)}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+    - layout_properties: {grid_position: 'HBUWKL,XGDGBV'}
+      name: spacer_3_copy_copy_2
+      properties: {height: 22.45831298828125}
+      type: Spacer
+    - layout_properties: {grid_position: 'HBUWKL,XDJRDF QIFWZI,OMPDBH'}
+      name: spacer_1_copy
+      properties: {height: 21.272552490234375}
+      type: Spacer
     - event_bindings: {click: reset_password_navigation_link_click}
       layout_properties: {grid_position: 'HBUWKL,XDJRDF ETVDTY,NPLJBK'}
       name: upgrade_navigation_link
-      properties: {background_color: 'theme:Secondary Container', bold: true, icon: 'mi:arrow_upward_alt', navigate_to: settings.reset_password, text: Upgrade}
+      properties:
+        background_color: theme:Secondary Container
+        bold: true
+        icon: mi:arrow_upward_alt
+        navigate_to: settings.reset_password
+        spacing:
+          margin: ['0', null, '0', null]
+        text: Upgrade
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
     - layout_properties: {grid_position: 'HBUWKL,XDJRDF KDRIUZ,GECMOL'}
       name: spacer_1
@@ -62,9 +81,9 @@ components_by_slot:
       name: logout_navigation_link
       properties: {background_color: 'theme:Secondary Container', icon: 'mi:logout', navigate_to: homepage, text: Logout}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-    - layout_properties: {grid_position: 'YXJRKK,ONOQMO'}
-      name: spacer_4
-      properties: {height: 47.6363525390625}
+    - layout_properties: {grid_position: 'HBUWKL,XDJRDF SXHHSC,YOSINX'}
+      name: spacer_3_copy_copy_3
+      properties: {height: 22.45831298828125}
       type: Spacer
     - layout_properties: {grid_position: 'FXBWSV,VICVFG'}
       name: heading_1
@@ -198,6 +217,10 @@ components_by_slot:
     - layout_properties: {grid_position: 'HWVIYW,MBBNWQ'}
       name: spacer_6
       properties: {}
+      type: Spacer
+    - layout_properties: {grid_position: 'HWVIYW,TUZGAT'}
+      name: spacer_4_copy
+      properties: {height: 28.64990234375}
       type: Spacer
     layout_properties: {}
     name: column_panel_1
