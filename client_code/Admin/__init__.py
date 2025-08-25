@@ -41,23 +41,32 @@ class Admin(AdminTemplate):
 
   def delete_bq_data_button_click(self, **event_args):
     email = self.email_input_prompt.text
-    if email:
-      try:
-        result = anvil.server.call('delete_userparameter_in_bigquery', email)
-        alert(f"{result['count']} Buchungen mit der E-Mail {email} wurden gelöscht.")
-      except Exception as e:
-        alert(f"Fehler beim Löschen: {str(e)}")
-      try:
-        result = anvil.server.call('delete_bookings_by_email', email)
-      except Exception as e:
-        alert(f"Fehler beim Parameter löschen in Bigquery: {str(e)}")  
-      try:
-        result = anvil.server.call('delete_user_from_users_table', email)
-      except Exception as e:
-        alert(f"Fehler beim User löschen in Bigquery: {str(e)}")  
-    else:
+    if not email:
       alert("Kein Nutzer angemeldet oder E-Mail nicht verfügbar.")
-    pass
+      return
+  
+    try:
+      result = anvil.server.call('delete_userparameter_in_bigquery', email)
+      if isinstance(result, dict) and 'count' in result:
+        alert(f"{result['count']} Datensätze mit der E-Mail {email} wurden gelöscht.")
+      else:
+        alert(f"Parameter-Daten für {email} wurden gelöscht.")
+    except Exception as e:
+      alert(f"Fehler beim Löschen: {e}")
+  
+    try:
+      result = anvil.server.call('delete_bookings_by_email', email)
+      if isinstance(result, dict) and 'count' in result:
+        alert(f"{result['count']} Buchungen mit der E-Mail {email} wurden gelöscht.")
+    except Exception as e:
+      alert(f"Fehler beim Parameter löschen in Bigquery: {e}")
+  
+    try:
+      user_deleted = anvil.server.call('delete_user_from_users_table', email)
+      if user_deleted:
+        alert(f"User {email} aus der Users-Tabelle gelöscht.")
+    except Exception as e:
+      alert(f"Fehler beim User löschen in Bigquery: {e}")
 
   def log_filter_text_box_pressed_enter(self, **event_args):
     # Logs vom Server holen
