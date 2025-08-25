@@ -45,10 +45,12 @@ class layout_template(layout_templateTemplate):
     self.long_trends_navigation_link.selected = False
     self.connect_navigation_link.selected = False
     self.my_account_navigation_link.selected = False
+    self.layout.hide_nav_drawer()
 
   def dashboard_navigation_link_click(self, **event_args):
     self.reset_links()
     self.dashboard_navigation_link.selected = True
+    self.layout.hide_nav_drawer()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(0)  # Dashboard
 

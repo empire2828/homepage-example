@@ -101,6 +101,7 @@ components_by_slot:
     properties:
       icon: mi:cable
       navigate_to: channel_manager_connect
+      selected: false
       spacing:
         margin: ['-5', null, '-5', null]
       text: Connect
@@ -119,7 +120,7 @@ is_package: true
 layout:
   properties:
     content_padding: ['8', '8', '8', '8']
-    navigation_rail_collapse_to: bottom_app_bar
+    navigation_rail_collapse_to: modal_navigation_drawer
     navigation_rail_vertical_align: top
     show_sidesheet: false
   type: form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout
