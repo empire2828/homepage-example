@@ -34,6 +34,8 @@ supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.background_task
 def sync_smoobu(user_email):
+  anvil.server.task_state['message'] = 'Starte Sync...'
+  
   client = get_bigquery_client()
   
   delete_bookings_by_email(user_email)
@@ -75,6 +77,9 @@ def sync_smoobu(user_email):
       break
     params["page"] += 1
 
+  total = len(all_bookings)
+  anvil.server.task_state.update({'message': f'{total} Buchungen geladen', 'progress': 0, 'total': total})
+  
   if not all_bookings:
     print("sync_smoobu: Keine Buchung gefunden ",user_email)
     return 
@@ -121,6 +126,7 @@ def sync_smoobu(user_email):
 
   if not rows_to_insert:
     print("sync_smoobu: Keine Buchung zur Übertragung ",user_email)
+    anvil.server.task_state['message'] = 'Keine Buchung zur Übertragung'
     return 
 
   table = "lodginia.lodginia.bookings"
@@ -153,6 +159,8 @@ def sync_smoobu(user_email):
 
   save_last_fees_as_std(user_email)
   save_all_channels_for_user(user_email)
+
+  anvil.server.task_state.update({'progress': total, 'total': total, 'message': 'Fertig'})
   
   return 
 

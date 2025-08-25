@@ -26,6 +26,7 @@ class homepage(homepageTemplate):
     if user:
       # Layout Template öffnen
       layout_form = open_form('layout_template')
+      mul = open_form('layout_template')
   
       # Dashboard automatisch laden
       multiframe_form = layout_form.open_multiframe_form()
@@ -41,7 +42,14 @@ class homepage(homepageTemplate):
     if user:
       anvil.server.call('create_supabase_key')
       anvil.server.call('send_registration_notification', user['email'])
-      open_form('LookerStudio.dashboard')
+      # Layout Template öffnen
+      layout_form = open_form('layout_template')
+      # Dashboard automatisch laden
+      multiframe_form = layout_form.open_multiframe_form()
+      multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
+      # Navigation Link als aktiv markieren
+      layout_form.reset_links()
+      layout_form.dashboard_navigation_link.selected = True
     pass
 
   def impressum_link_click(self, **event_args):
