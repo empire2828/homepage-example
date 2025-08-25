@@ -10,23 +10,42 @@ import json
 class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
-    user = users.get_user()
-    if user and 'supabase_key' in user:
-      self.supabase_key = user['supabase_key']
+    user = users.get_user()    
+    print('User Logged in: ',user['email'])
+
+    user_has_subscription= anvil.server.call('get_user_has_subscription')
+    #self.content_panel.visible = False   ... standard auf not visible
+
+    if user['smoobu_api_key'] is None:
+      self.pms_need_to_connect_text.visible = True
+      self.chanel_manager_connect_button.visible = True
     else:
-      self.supabase_key = ""
-      print("Warnung: Kein supabase_key verfügbar")
+      if user_has_subscription is False:
+        self.dashboard_upgrade_needed_text.visible = True
+        self.dashboard_upgrade_button.visible = True
+        self.pms_need_to_connect_text.visible = False
+        self.chanel_manager_connect_button.visible = False
+
+    if user_has_subscription and user['smoobu_api_key'] is not None:
+      self.content_panel.visible = True
+      if user and 'supabase_key' in user:
+        self.supabase_key = user['supabase_key']
+      else:
+        self.supabase_key = ""
+      print("Warnung: Kein supabase_key verfügbar")      
+    else: 
+      pass      
 
     self.iframe_urls = [
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/qmCOF",          # Dashboard
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",    # Profitability
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_9euf3853td",    # Bookings
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_knw9h153td", # Cancellations
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/qmCOF",            # Dashboard
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",     # Profitability
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_9euf3853td",     # Bookings
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_knw9h153td",     # Cancellations
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_1idplf63td",     # Occupancy
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8hyzd253td",     # Lead Time
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_tilmy6zhtd", # Guest Insights
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_cc0slxgtud", # Detailed Bookings
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_4dt5tycuud",    # Long Trends
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_tilmy6zhtd",     # Guest Insights
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_cc0slxgtud",     # Detailed Bookings
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_4dt5tycuud",     # Long Trends
     ]
 
     self.panels = [
@@ -41,8 +60,6 @@ class multiframe(multiframeTemplate):
       self.looker_flow_panel_9,
     ]
 
-    #print(f"✅ Gefundene Panels im content_panel: {len(self.panels)}")
-
     # Status-Tracking welche IFrames bereits geladen wurden
     self.geladene_iframes = [False] * len(self.iframe_urls)
 
@@ -53,19 +70,15 @@ class multiframe(multiframeTemplate):
     for i, panel in enumerate(self.panels):
       panel.visible = False
       panel.height = 1850  # Explizite Höhe
-      #print(f"Panel {i}: visible={panel.visible}, height={panel.height}")
 
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
-    #print(f"🔨 Erstelle IFrame {index}...")
     if index < 0 or index >= len(self.iframe_urls):
-      print(f"❌ Ungültiger Index: {index}")
+      print(f"Ungültiger Index: {index}")
       return
 
     url = self.iframe_urls[index]
     panel = self.panels[index]
-
-    #print(f"📋 Panel {index}: {type(panel)}, visible={panel.visible}")
 
     # Parameter für Supabase Key hinzufügen
     if self.supabase_key:
@@ -75,9 +88,7 @@ class multiframe(multiframeTemplate):
     else:
       iframe_url = url
 
-    #print(f"🌐 IFrame URL: {iframe_url[:80]}...")
-
-    # Vorheriges IFrame entfernen falls vorhanden
+     # Vorheriges IFrame entfernen falls vorhanden
     jQuery(get_dom_node(panel)).empty()
 
     # IFrame erstellen mit expliziten Attributen
@@ -96,44 +107,33 @@ class multiframe(multiframeTemplate):
 
     # Als geladen markieren
     self.geladene_iframes[index] = True
-    #print(f"✅ IFrame {index} erfolgreich geladen")
 
   def lade_und_zeige_iframe(self, index):
     """Lädt IFrame falls noch nicht geladen und zeigt es an"""
-    #print(f"\n🎯 lade_und_zeige_iframe({index}) aufgerufen")
-    #print(f"   Aktueller Index: {self.aktueller_index}")
-
     if index < 0 or index >= len(self.iframe_urls):
-      print(f"❌ Ungültiger Index: {index}")
+      print(f"Ungültiger Index: {index}")
       return
 
     # SCHRITT 1: Alle Panels verstecken
     for i, panel in enumerate(self.panels):
-      if panel.visible:
-        print(f"   Panel {i} war sichtbar -> verstecke")
+      #if panel.visible:
+      #  print(f"Panel {i} war sichtbar -> verstecke")
       panel.visible = False
 
     # SCHRITT 2: IFrame laden falls nötig
     if not self.geladene_iframes[index]:
-      #print(f"📥 IFrame {index} wird erstmalig geladen...")
+      #print(f"IFrame {index} wird erstmalig geladen...")
       self.erstelle_iframe(index)
     else:
-      print(f"♻️ IFrame {index} bereits geladen")
+      print(f"IFrame {index} bereits geladen")
 
     # SCHRITT 3: Gewünschtes Panel anzeigen
     self.panels[index].visible = True
     self.aktueller_index = index
 
-    # SCHRITT 4: Bestätigung
-    #print(f"✅ Panel {index} Status: visible={self.panels[index].visible}")
-
-    # Debug: Finale Status-Ausgabe
-    #sichtbare_panels = [i for i, p in enumerate(self.panels) if p.visible]
-    #print(f"📊 Sichtbare Panels: {sichtbare_panels}")
-
   def verstecke_alle_iframes(self):
     """Versteckt alle IFrames ohne sie zu entladen"""
-    print("🙈 Verstecke alle IFrames...")
+    print("Verstecke alle IFrames...")
     for i, panel in enumerate(self.panels):
       panel.visible = False
       #print(f"   Panel {i} versteckt")
@@ -147,11 +147,11 @@ class multiframe(multiframeTemplate):
 
   def lade_alle_iframes(self):
     """Lädt alle IFrames im Voraus (falls gewünscht für bessere Performance)"""
-    #print("📦 Lade alle IFrames im Voraus...")
+    #print("Lade alle IFrames im Voraus...")
     for i in range(len(self.iframe_urls)):
       if not self.geladene_iframes[i]:
         self.erstelle_iframe(i)
-    #print("✅ Alle IFrames geladen")
+    #print("Alle IFrames geladen")
 
   # Event Handler für fehlende Buttons (um Warnungen zu vermeiden)
   def channel_manager_connect_button_click(self, **event_args):

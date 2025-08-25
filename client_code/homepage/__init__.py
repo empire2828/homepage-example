@@ -26,6 +26,7 @@ class homepage(homepageTemplate):
     if user:
       # Layout Template öffnen
       layout_form = open_form('layout_template')
+      mul = open_form('layout_template')
   
       # Dashboard automatisch laden
       multiframe_form = layout_form.open_multiframe_form()
