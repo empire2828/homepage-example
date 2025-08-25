@@ -330,7 +330,7 @@ components:
   type: Label
 - layout_properties: {grid_position: 'AYVCYO,MFRVCM'}
   name: rich_text_1_copy
-  properties: {align: center, content: Built with ❤️ by vacation rental owners., font_size: 18, foreground: '#f9a94a'}
+  properties: {align: center, content: Built with ❤️ by vacation rental owners., font_size: 19, foreground: '#f9a94a'}
   type: RichText
 - layout_properties: {grid_position: 'GZOFNN,GSWMBD'}
   name: spacer_11
