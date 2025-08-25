@@ -80,7 +80,7 @@ components_by_slot:
       navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
-      text: Detailed bookings
+      text: Zoom details
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: long_trends_navigation_link_click}
     layout_properties: {}
@@ -94,7 +94,8 @@ components_by_slot:
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - layout_properties: {}
     name: divider_1
-    properties: {}
+    properties:
+      margin: ['5', null, '5', null]
     type: form:dep_g9k4toow7i44kq:_Components.Divider
   - layout_properties: {}
     name: connect_navigation_link
