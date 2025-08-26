@@ -27,27 +27,26 @@ class my_account(my_accountTemplate):
         self.subscription_body.text = user['subscription']
         if user.get('admin') is True:
           self.admin_navigation_link.visible= True
-        self.email_body.text = user['email']
-        print(user['email'])
         user_parameters = anvil.server.call_s('get_user_parameter')
         if user_parameters:
           self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))
           self.std_linen_fee_text_box.text = str(user_parameters.get('std_linen_fee', ''))
           self.use_own_std_fees_checkbox.checked = user_parameters.get('use_own_std_fees', False)
         
-        user_email = user.get('email')
-        channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
+      user_email = user.get('email')
+      self.email_body.text = user_email
+      print(user_email)
+      channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
       
         # Populate dropdowns and textboxes for up to 5 channels
-        for i in range(1, 10):
-          d = getattr(self, f'channel{i}_dropdown_menu')
-          t = getattr(self, f'channel{i}_text_box')
-          name = channel_data[i-1]['channel_name'] if i-1 < len(channel_data) else ''
-          comm = channel_data[i-1]['channel_commission'] if i-1 < len(channel_data) else ''
-          d.items = [c['channel_name'] for c in channel_data]
-          d.selected_value = name or None
-          t.text = str(comm) if comm else ''
-
+      for i in range(1, 10):
+        d = getattr(self, f'channel{i}_dropdown_menu')
+        t = getattr(self, f'channel{i}_text_box')
+        name = channel_data[i-1]['channel_name'] if i-1 < len(channel_data) else ''
+        comm = channel_data[i-1]['channel_commission'] if i-1 < len(channel_data) else ''
+        d.items = [c['channel_name'] for c in channel_data]
+        d.selected_value = name or None
+        t.text = str(comm) if comm else ''
   pass
 
   def change_name_link_click(self, **event_args):
