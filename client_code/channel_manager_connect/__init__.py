@@ -21,24 +21,26 @@ class channel_manager_connect(channel_manager_connectTemplate):
     try:
       erfolg = anvil.server.call('save_user_api_key', api_key)
       if erfolg:
-        anvil.Notification("API-Key erfolgreich gespeichert").show()
+        anvil.Notification("API-Key sucessfully saved").show()
     except Exception as e:
-      anvil.alert(f"Fehler beim Speichern des API-Keys: {str(e)}")
+      anvil.alert(f"Error on saving API-Key: {str(e)}")
     pass
 
   def sync_smoobu_button_click(self, **event_args):
     self.task = None #init
     self._navigate_when_done = False  # init
-    
+    current_user = anvil.users.get_user()
+    result = anvil.server.call('validate_smoobu_api_key',current_user['email'])
+    if not result.get("valid"):
+      anvil.alert('API Key is not correct or not yet saved. It should look like this one: jgfKvbu1Sdrqu5INRO0kwjV07fed1xrls22FJIFABY',large=True)
+      return
     alert("Background sync started- this will take around 2 minutes.")
     self.task = anvil.server.call('launch_sync_smoobu')
-    self.progress_bar.value = 10
-    print(self.progress_bar.value)
+    self.progress_bar.value = 5
     self.progress_bar.visible = True
     self.timer_1.interval = 1
     self.timer_1.enabled = True
-    self.timer_1.visible = True
-   
+    self.timer_1.visible = True   
     self._navigate_when_done = True
     pass
 

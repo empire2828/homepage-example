@@ -70,7 +70,7 @@ def sync_smoobu(user_email):
     params["page"] += 1
 
   total = len(all_bookings)
-  anvil.server.task_state.update({'message': f'{total} Bookings received. Now syncing prices...', 'progress': 0.4})
+  anvil.server.task_state.update({'message': f'{total} Bookings received. Now syncing prices... be patient, get a coffee', 'progress': 0.4})
   
   if not all_bookings:
     print("sync_smoobu: Keine Buchung gefunden ",user_email)
