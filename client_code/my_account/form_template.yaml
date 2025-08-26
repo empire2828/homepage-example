@@ -92,7 +92,10 @@ components_by_slot:
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'YNQEZX,DSGJZF'}
       name: text_1
-      properties: {bold: false, font_size: 18, text: 'For ical connections Commissions and Fees are not correctly set into the right pockets by Smoobu. For correct calculation of your base daily rate you can set here standard values for these connections to be taken if no fees or commission are found. No need to do something for booking.com,  Airbnb or HomeToGo if you have connected them via API.'}
+      properties:
+        bold: false
+        font_size: 18
+        text: "For ical connections Commissions and Fees are not correctly set into the right pockets by Smoobu. \n\nFor correct calculation of your base daily rate you can set here standard values for these connections to be taken if no fees or commission are found. \n\nNo need to do something for booking.com,  Airbnb or HomeToGo if you have connected them via API."
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'XSVWVN,SSXBFT'}
       name: spacer_7
