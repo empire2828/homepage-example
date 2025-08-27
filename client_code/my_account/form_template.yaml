@@ -57,7 +57,7 @@ components_by_slot:
       name: upgrade_navigation_link
       properties:
         background_color: theme:Secondary Container
-        bold: true
+        bold: false
         icon: mi:arrow_upward_alt
         navigate_to: upgrade
         spacing:
