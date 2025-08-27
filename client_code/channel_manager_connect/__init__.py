@@ -51,28 +51,24 @@ class channel_manager_connect(channel_manager_connectTemplate):
   def timer_1_tick(self, **event_args):
     if not self.task:
       return
-  
-      # Poll without spinner to avoid UI interruption
-    with anvil.server.no_loading_indicator:
-      try:
-        state = self.task.get_state() or {}            # {'progress': int, 'total': int, 'message': str}
-        progress = state.get('progress', 0)
-        self.progress_bar.progress = progress
-        # Optionally reflect messages:
-        self.status_label.text = state.get('message', '')
-  
-        if self.task.is_completed():                   # raises if the task failed
-          self.timer_1.enabled = False
-          self.progress_bar.progress = 1
-          if self._navigate_when_done:
-            alert("You will now be forwarded to the settings.")
-            open_form('my_account')                    # navigate only after completion
-      except Exception:
-        # Surface server-side errors and stop polling
+  # Fortschritt um 0.5 erhöhen (maximal 1)
+  new_progress = min(progress_bar.progress + 0.5, 1.0)
+  progress_bar.progress = new_progress
+  # Optionale Statusmeldung des Tasks abfragen
+  with anvil.server.no_loading_indicator:
+    try:
+      state = self.task.get_state() or {}
+      self.status_label.text = state.get('message', '')
+      if self.task.is_completed():
         self.timer_1.enabled = False
-        self.progress_bar.visible = False
-        try:
-          # Re-throw original server error if present
-          self.task.get_error()
-        except Exception as e:
-          alert(f"Task-Fehler: {e}")
+        self.progress_bar.progress = 1
+        if self._navigate_when_done:
+          alert("You will now be forwarded to the settings.")
+          open_form('my_account')
+    except Exception:
+      self.timer_1.enabled = False
+      self.progress_bar.visible = False
+      try:
+        self.task.get_error()
+      except Exception as e:
+        alert(f"Task-Fehler: {e}")
