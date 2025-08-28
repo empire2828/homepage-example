@@ -62,9 +62,29 @@ def get_price_elements(reservation_id, headers):
 
 #https://developers.booking.com/demand/docs/development-guide/rate-limiting
 
-#headers = {
-#  "Api-Key": anvil.secrets.get_secret('smoobu_api_key'),
-#  "Content-Type": "application/json"
-#}
-#print('function_call:',get_price_elements('70507371',headers))
+@anvil.server.callable
+def validate_smoobu_api_key(user_email):
+  user = app_tables.users.get(email=user_email)
+  if not user:
+    return {"valid": False, "error": "Benutzer nicht gefunden"}
+  api_key = user['smoobu_api_key']
+  if not api_key:
+    return {"valid": False, "error": "Kein API-Key hinterlegt"}
+
+  headers = {
+    "Api-Key": api_key,
+    "Cache-Control": "no-cache"
+  }    
+  try:
+    response = requests.get("https://login.smoobu.com/api/me", headers=headers)
+    if response.status_code == 200:
+      data = response.json()
+      return {"valid": True, "user_id": data['id']}
+    elif response.status_code == 401:
+      return {"valid": False, "error": "API-Key ist ungültig oder abgelaufen"}
+    else:
+      return {"valid": False, "error": f"API-Fehler: {response.status_code}"}
+  except Exception as e:
+    return {"valid": False, "error": f"Verbindungsfehler: {str(e)}"}
+
 

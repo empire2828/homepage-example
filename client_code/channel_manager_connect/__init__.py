@@ -13,6 +13,8 @@ class channel_manager_connect(channel_manager_connectTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.task = None
+    self.last_progress_from_task = 0
+    self.last_progress_seen = 0
    # Any code you write here will run before the form opens.
  
   def save_api_key_button_click(self, **event_args):
@@ -21,24 +23,26 @@ class channel_manager_connect(channel_manager_connectTemplate):
     try:
       erfolg = anvil.server.call('save_user_api_key', api_key)
       if erfolg:
-        anvil.Notification("API-Key erfolgreich gespeichert").show()
+        anvil.Notification("API-Key sucessfully saved").show()
     except Exception as e:
-      anvil.alert(f"Fehler beim Speichern des API-Keys: {str(e)}")
+      anvil.alert(f"Error on saving API-Key: {str(e)}")
     pass
 
   def sync_smoobu_button_click(self, **event_args):
     self.task = None #init
     self._navigate_when_done = False  # init
-    
+    current_user = anvil.users.get_user()
+    result = anvil.server.call('validate_smoobu_api_key',current_user['email'])
+    if not result.get("valid"):
+      anvil.alert('API Key is not correct or not yet saved. It should look like this one: jgfKvbu1Sdrqu5INRO0kwjV07fed1xrls22FJIFABY',large=True)
+      return
     alert("Background sync started- this will take around 2 minutes.")
     self.task = anvil.server.call('launch_sync_smoobu')
-    self.progress_bar.value = 10
-    print(self.progress_bar.value)
+    self.progress_bar.value = 3
     self.progress_bar.visible = True
-    self.timer_1.interval = 1
+    self.timer_1.interval = 2
     self.timer_1.enabled = True
-    self.timer_1.visible = True
-   
+    self.timer_1.visible = True   
     self._navigate_when_done = True
     pass
 
@@ -49,28 +53,30 @@ class channel_manager_connect(channel_manager_connectTemplate):
   def timer_1_tick(self, **event_args):
     if not self.task:
       return
-  
-      # Poll without spinner to avoid UI interruption
+    # Robust: Fehlerbehandlung schützt UI
     with anvil.server.no_loading_indicator:
       try:
-        state = self.task.get_state() or {}            # {'progress': int, 'total': int, 'message': str}
-        progress = state.get('progress', 0)
-        self.progress_bar.progress = progress
-        # Optionally reflect messages:
+        state = self.task.get_state() or {}
+        progress_from_task = state.get('progress', None)
+        # Wenn neue Taskdaten kommen, diese übernehmen
+        if progress_from_task is not None and progress_from_task > self.last_progress_from_task:
+          self.last_progress_from_task = progress_from_task
+          self.progress_bar.progress = progress_from_task
+        else:
+          # Kein neues Progress, inkrementiere sanft
+          self.progress_bar.progress = min(self.progress_bar.progress + 0.005, 1.0)
+        # Optional: Statuslabel wie gehabt
         self.status_label.text = state.get('message', '')
-  
-        if self.task.is_completed():                   # raises if the task failed
+        if self.task.is_completed():
           self.timer_1.enabled = False
           self.progress_bar.progress = 1
           if self._navigate_when_done:
             alert("You will now be forwarded to the settings.")
-            open_form('my_account')                    # navigate only after completion
+            open_form('my_account')
       except Exception:
-        # Surface server-side errors and stop polling
         self.timer_1.enabled = False
         self.progress_bar.visible = False
         try:
-          # Re-throw original server error if present
           self.task.get_error()
         except Exception as e:
           alert(f"Task-Fehler: {e}")

@@ -16,6 +16,7 @@ class my_account(my_accountTemplate):
     self.init_components(**properties)
 
   def form_show(self, **event_args):
+    self.my_account_heading.scroll_into_view(smooth=True)
     user = anvil.users.get_user()
     if user is None:
       self.subscription_body.text = 'Not logged in'
@@ -26,28 +27,26 @@ class my_account(my_accountTemplate):
         self.subscription_body.text = user['subscription']
         if user.get('admin') is True:
           self.admin_navigation_link.visible= True
-        self.email_body.text = user['email']
         user_parameters = anvil.server.call_s('get_user_parameter')
         if user_parameters:
           self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))
           self.std_linen_fee_text_box.text = str(user_parameters.get('std_linen_fee', ''))
           self.use_own_std_fees_checkbox.checked = user_parameters.get('use_own_std_fees', False)
         
-        # Load used channels for the user from Supabase std_commission
-        # Load channels and commissions from Supabase
-        user_email = user.get('email')
-        channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
+      user_email = user.get('email')
+      self.email_body.text = user_email
+      print(user_email)
+      channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
       
         # Populate dropdowns and textboxes for up to 5 channels
-        for i in range(1, 10):
-          d = getattr(self, f'channel{i}_dropdown_menu')
-          t = getattr(self, f'channel{i}_text_box')
-          name = channel_data[i-1]['channel_name'] if i-1 < len(channel_data) else ''
-          comm = channel_data[i-1]['channel_commission'] if i-1 < len(channel_data) else ''
-          d.items = [c['channel_name'] for c in channel_data]
-          d.selected_value = name or None
-          t.text = str(comm) if comm else ''
-
+      for i in range(1, 10):
+        d = getattr(self, f'channel{i}_dropdown_menu')
+        t = getattr(self, f'channel{i}_text_box')
+        name = channel_data[i-1]['channel_name'] if i-1 < len(channel_data) else ''
+        comm = channel_data[i-1]['channel_commission'] if i-1 < len(channel_data) else ''
+        d.items = [c['channel_name'] for c in channel_data]
+        d.selected_value = name or None
+        t.text = str(comm) if comm else ''
   pass
 
   def change_name_link_click(self, **event_args):
@@ -135,6 +134,7 @@ class my_account(my_accountTemplate):
   def reset_password_navigation_link_click(self, **event_args):
     open_form('my_account.reset_password')
     pass
+
 
 
 

@@ -34,17 +34,17 @@ components:
   name: spacer_4
   properties: {}
   type: Spacer
-- layout_properties: {grid_position: 'DCEYRM,FQZQIK'}
+- layout_properties: {grid_position: 'YCLUPW,MFNRGX'}
   name: headline_1
-  properties: {align: center, bold: true, font_size: 54, foreground: 'theme:Primary', role: headline, text: Turn Your Booking Data Into}
+  properties: {align: center, bold: true, font_size: 54, foreground: 'theme:Primary', role: headline, text: Unlock Your Rental's}
   type: Label
-- layout_properties: {grid_position: 'DCEYRM,EJCQNV'}
+- layout_properties: {grid_position: 'RPYCGD,PKWTZV'}
   name: headline_1_2
-  properties: {align: center, bold: true, font_size: 54, foreground: '#ffa200', italic: true, role: headline, text: Profit}
+  properties: {align: center, bold: true, font_size: 54, foreground: '#ffa200', italic: false, role: headline, text: True Revenue Potential}
   type: Label
 - layout_properties: {grid_position: 'UZFTYE,NGOVFK'}
   name: rich_text_1
-  properties: {align: center, content: 'By owners, for owners', font_size: 19, foreground: '', format: markdown}
+  properties: {align: center, content: 'By owners, for owners', font_size: 20, foreground: '', format: markdown}
   type: RichText
 - layout_properties: {grid_position: 'BFJGOD,SUSODA'}
   name: spacer_1
@@ -59,11 +59,14 @@ components:
     name: title_1
     properties:
       align: center
-      font_size: 28
+      bold: false
+      font: ''
+      font_size: 20
       role: title
       spacing:
         margin: [null, '6', null, '6']
-      text: Stop guessing about your vacation rental performance. Get crystal-clear insights that help you maximize revenue, optimize pricing, and outperform your competition—all in one beautiful dashboard.
+      spacing_above: small
+      text: Connect your channel managers and get deep insights into your vacation rental performance. See your true daily rates, understand your guests, and optimize your revenue like never before.
     type: Label
   layout_properties: {grid_position: 'ISUFTJ,PYQQRP'}
   name: column_panel_2
@@ -84,15 +87,15 @@ components:
   type: Spacer
 - layout_properties: {grid_position: 'EPFGQR,WXTVFO'}
   name: checkbox_3
-  properties: {align: left, checked: true, font_size: 18, text: No credit card required for trial}
+  properties: {align: left, checked: true, font_size: 20, text: No credit card required for trial}
   type: form:dep_g9k4toow7i44kq:_Components.Checkbox
 - layout_properties: {grid_position: 'EPFGQR,THKDVQ'}
   name: checkbox_1
-  properties: {align: left, checked: true, font_size: 18, text: Setup in under 5 minutes}
+  properties: {align: left, checked: true, font_size: 20, text: Setup in under 5 minutes}
   type: form:dep_g9k4toow7i44kq:_Components.Checkbox
 - layout_properties: {grid_position: 'EPFGQR,PWARMZ'}
   name: checkbox_2
-  properties: {align: left, checked: true, font_size: 18, text: Cancel anytime}
+  properties: {align: left, checked: true, font_size: 20, text: Cancel anytime}
   type: form:dep_g9k4toow7i44kq:_Components.Checkbox
 - layout_properties: {grid_position: 'HKXVNZ,XZBPGF'}
   name: spacer_3
@@ -271,7 +274,7 @@ components:
   name: spacer_12
   properties: {height: 123.4417724609375}
   type: Spacer
-- layout_properties: {grid_position: ''}
+- layout_properties: {grid_position: ',undefined'}
   name: spacer_14
   properties: {height: 54.2977294921875}
   type: Spacer
@@ -494,7 +497,7 @@ components:
   type: Link
 container:
   properties:
-    col_widths: '{"FQZQIK":45,"EJCQNV":15}'
+    col_widths: '{"FQZQIK":45}'
     spacing:
       margin: [null, '5', null, '5']
   type: ColumnPanel
