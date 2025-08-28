@@ -1,11 +1,15 @@
 components:
 - components:
-  - layout_properties: {full_width_row: false, grid_position: 'NWWWHR,MXQIJK'}
+  - layout_properties: {grid_position: 'TMQWLA,OAZSGJ'}
     name: image_2
     properties: {display_mode: shrink_to_fit, height: 105.37643432617188, horizontal_align: left, source: _/theme/Lodginia_orange_transparent_klein.png, vertical_align: top}
     type: Image
+  - layout_properties: {grid_position: 'TMQWLA,RLZHEC'}
+    name: column_panel_3_copy
+    properties: {}
+    type: ColumnPanel
   - event_bindings: {click: login_button_click}
-    layout_properties: {grid_position: 'NWWWHR,LCJZRW'}
+    layout_properties: {grid_position: 'TMQWLA,CCTJXC'}
     name: login_button
     properties:
       align: right
@@ -106,7 +110,7 @@ components:
     type: RichText
   layout_properties: {grid_position: 'VMDRYK,BYTTJO'}
   name: column_panel_5
-  properties: {}
+  properties: {wrap_on: never}
   type: ColumnPanel
 - layout_properties: {grid_position: 'BFJGOD,SUSODA'}
   name: spacer_1
@@ -162,7 +166,11 @@ components:
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,BVVWXW'}
     name: elevated_card_2
-    properties: {background: '#e2e8e9', role: elevated-card}
+    properties:
+      background: '#e2e8e9'
+      role: elevated-card
+      spacing:
+        margin: ['8', null, '8', null]
     type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'HMARQC,HIKVKW'}
@@ -197,7 +205,11 @@ components:
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,RFFNST'}
     name: elevated_card_3
-    properties: {background: '#e2e8e9', role: elevated-card}
+    properties:
+      background: '#e2e8e9'
+      role: elevated-card
+      spacing:
+        margin: ['8', null, '8', null]
     type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'QDWUXW,VKDLWZ'}
@@ -232,7 +244,11 @@ components:
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,NLMISD'}
     name: elevated_card_4
-    properties: {background: '#e2e8e9', role: elevated-card}
+    properties:
+      background: '#e2e8e9'
+      role: elevated-card
+      spacing:
+        margin: ['8', null, '8', null]
     type: ColumnPanel
   - components:
     - layout_properties: {grid_position: 'MVLKBL,GBMQKF'}
@@ -266,7 +282,11 @@ components:
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,AVWZRH'}
     name: elevated_card_7
-    properties: {background: '#e2e8e9', role: elevated-card}
+    properties:
+      background: '#e2e8e9'
+      role: elevated-card
+      spacing:
+        margin: ['8', null, '8', null]
     type: ColumnPanel
   layout_properties: {grid_position: 'FHTEHQ,ZABGTF'}
   name: outlined_card_2
@@ -290,10 +310,10 @@ components:
       name: spacer_6
       properties: {height: 10.21783447265625}
       type: Spacer
-    - layout_properties: {grid_position: 'TREXXF,NFJBJJ'}
-      name: body_2
-      properties: {font_size: 20, role: body, text: We understand the unique challenges of managing vacation rentals because we rent vacation homes ourselves. We know the questions and what metrics actually matter.}
-      type: Label
+    - layout_properties: {grid_position: 'LTADAQ,YXLCSK'}
+      name: text_5
+      properties: {font_size: 20, line_height: '1', text: We understand the unique challenges of managing vacation rentals because we rent vacation homes ourselves. We know the questions and what metrics actually matter.}
+      type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'TYFLZW,XUJSIW'}
       name: spacer_9
       properties: {height: 12.5511474609375}
@@ -324,15 +344,6 @@ components:
         spacing:
           margin: ['9', null, '9', null]
         text: Save hours of work on manual analysis, one Graphic can show more than thousend words
-      type: form:dep_g9k4toow7i44kq:_Components.Checkbox
-    - layout_properties: {grid_position: 'IWBOBG,ZWNSZC'}
-      name: checkbox_7
-      properties:
-        checked: true
-        font_size: 20
-        spacing:
-          margin: ['9', null, '9', null]
-        text: 'See long trends '
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'QIINLM,BTPGGG'}
       name: checkbox_7_copy
@@ -369,7 +380,14 @@ components:
     type: Label
   - layout_properties: {grid_position: 'CWEDQE,MHCKLS'}
     name: body_3
-    properties: {align: center, font_size: 20, role: body, text: Join other successful rental owners who trust Lodginia}
+    properties:
+      align: center
+      font_size: 20
+      role: body
+      spacing:
+        margin: [null, '4', null, '4']
+        padding: ['4', '4', '4', '4']
+      text: Join other successful rental owners who trust Lodginia
     type: Label
   - components:
     - layout_properties: {}
@@ -400,11 +418,11 @@ components:
         type: Label
       - layout_properties: {grid_position: 'ZEGUXJ,HVJHZC'}
         name: label_9
-        properties: {align: center, bold: true, font_size: 20, foreground: 'theme:On Primary Container', text: Subscription}
+        properties: {align: center, bold: false, font_size: 20, foreground: 'theme:On Primary Container', text: Subscription}
         type: Label
       - layout_properties: {grid_position: 'ZEGUXJ,DVQCGG'}
         name: label_10
-        properties: {align: center, bold: true, font_size: 20, foreground: 'theme:On Primary Container', text: Pro- Subscription}
+        properties: {align: center, bold: false, font_size: 20, foreground: 'theme:On Primary Container', text: Pro- Subscription}
         type: Label
       - components:
         - layout_properties: {grid_position: 'KNVGKM,TWRMQK'}
@@ -475,10 +493,14 @@ components:
             margin: [null, null, '4', null]
           text: € 4,99
         type: Label
+      - layout_properties: {grid_position: 'KNKCAK,DBXMXN'}
+        name: spacer_7
+        properties: {height: 40.78765869140625}
+        type: Spacer
       - layout_properties: {grid_position: 'KNKCAK,SRQMBF'}
         name: text_8
         properties:
-          align: left
+          align: center
           bold: false
           font_size: 18
           spacing:
@@ -487,10 +509,18 @@ components:
           text: Cancel anytime
           text_color: theme:On Primary Container
         type: form:dep_g9k4toow7i44kq:_Components.Text
-      - layout_properties: {grid_position: 'FHQXPX,JFVCCK'}
-        name: spacer_7
-        properties: {height: 40.78765869140625}
-        type: Spacer
+      - layout_properties: {grid_position: 'KNKCAK,HCBYXI'}
+        name: text_8_copy
+        properties:
+          align: center
+          bold: false
+          font_size: 18
+          spacing:
+            margin: [null, null, null, '6']
+            padding: [null, null, null, '6']
+          text: Cancel anytime
+          text_color: theme:On Primary Container
+        type: form:dep_g9k4toow7i44kq:_Components.Text
       name: outlined_card_4
       properties:
         role: null
@@ -500,7 +530,14 @@ components:
       type: ColumnPanel
     layout_properties: {grid_position: 'NEHNBE,LFGBZL'}
     name: rich_text_1_copy
-    properties: {align: center, content: Built with ❤️ by vacation rental owners., font_size: 20, foreground: '#f9a94a'}
+    properties:
+      align: center
+      content: Built with ❤️ by vacation rental owners.
+      font_size: 20
+      foreground: '#f9a94a'
+      spacing:
+        margin: [null, '4', null, '4']
+        padding: [null, '4', null, '4']
     type: RichText
   layout_properties: {full_width_row: true, grid_position: 'HRNNGI,DATVEI'}
   name: column_panel_2
@@ -532,6 +569,7 @@ container:
   properties:
     col_widths: '{}'
     spacing:
-      margin: [null, '8', null, '8']
+      margin: [null, '10', null, '10']
+      padding: [null, '5', null, '5']
   type: ColumnPanel
 is_package: true
