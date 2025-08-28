@@ -1,41 +1,29 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'RTKWUA,QBFPMW'}
+  - layout_properties: {full_width_row: false, grid_position: 'NWWWHR,MXQIJK'}
     name: image_2
-    properties: {display_mode: shrink_to_fit, height: 96.04191589355469, horizontal_align: left, source: _/theme/Lodginia_orange_transparent.png}
+    properties: {display_mode: shrink_to_fit, height: 105.37643432617188, horizontal_align: left, source: _/theme/Lodginia_orange_transparent.png, vertical_align: top}
     type: Image
-  - layout_properties: {grid_position: 'RTKWUA,RWXWXA XBWPKJ,RVIHIY'}
-    name: spacer_13
-    properties: {height: 28.0433349609375}
-    type: Spacer
-  - layout_properties: {grid_position: 'RTKWUA,RWXWXA IWJFDD,KECDNA NBEOOA,NVXBIW'}
-    name: spacer_14
-    properties: {height: 5.301849365234375}
-    type: Spacer
-  - event_bindings: {click: pricing_link_click}
-    layout_properties: {grid_position: 'RTKWUA,RWXWXA IWJFDD,KECDNA EAMYOL,WQAIVE'}
-    name: pricing_link
-    properties: {align: right, text: Pricing, underline: false}
-    type: form:dep_g9k4toow7i44kq:_Components.Link
   - event_bindings: {click: login_button_click}
-    layout_properties: {grid_position: 'RTKWUA,RWXWXA IWJFDD,CFNXMP'}
+    layout_properties: {grid_position: 'NWWWHR,LCJZRW'}
     name: login_button
     properties:
       align: right
       background: theme:Primary
       bold: true
       foreground: theme:On Primary
-      icon_align: top
+      icon_align: right_edge
       role: outlined-button
       spacing:
         padding: [null, '24', null, '24']
       spacing_below: large
       text: '  Login  '
     type: Button
-  - layout_properties: {grid_position: 'ARUTKJ,YRCEBI'}
-    name: spacer_15
-    properties: {height: 22.667633056640625}
-    type: Spacer
+  - event_bindings: {click: pricing_link_click}
+    layout_properties: {grid_position: 'FLNVSB,WUTUVF'}
+    name: pricing_link
+    properties: {align: right, text: Pricing, underline: false}
+    type: form:dep_g9k4toow7i44kq:_Components.Link
   - layout_properties: {grid_position: 'VBGUWO,ERJTKL'}
     name: headline_1
     properties: {align: center, bold: true, font_size: 54, foreground: 'theme:Primary', role: headline, text: Unlock Your Rental's}
@@ -121,7 +109,7 @@ components:
     name: rich_text_1
     properties: {align: center, content: 'By owners, for owners', font_size: 20, foreground: '', format: markdown}
     type: RichText
-  layout_properties: {full_width_row: true, grid_position: 'DSBWZR,LVDWVN', row_background: '#e2e8e9'}
+  layout_properties: {grid_position: 'VMDRYK,BYTTJO'}
   name: column_panel_5
   properties: {}
   type: ColumnPanel
@@ -525,6 +513,6 @@ container:
   properties:
     col_widths: '{}'
     spacing:
-      margin: [null, '5', null, '5']
+      margin: [null, '8', null, '8']
   type: ColumnPanel
 is_package: true
