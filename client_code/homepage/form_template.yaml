@@ -39,7 +39,8 @@ components:
     - name: spacer_4
       properties: {}
       type: Spacer
-    - name: title_1
+    - layout_properties: {}
+      name: title_1
       properties:
         align: center
         bold: false
@@ -48,8 +49,10 @@ components:
         role: title
         spacing:
           margin: [null, '6', null, '6']
+          padding: [null, null, 8, null]
         spacing_above: small
         text: Connect your channel managers and get deep insights into your vacation rental performance. See your true daily rates, understand your guests, and optimize your revenue like never before.
+        underline: false
       type: Label
     - components:
       - layout_properties: {grid_position: 'HLPHYD,ULIWZE'}
@@ -94,7 +97,7 @@ components:
     name: rich_text_1
     properties: {align: center, content: 'By owners, for owners', font_size: 20, foreground: '', format: markdown}
     type: RichText
-  layout_properties: {full_width_row: true, grid_position: 'DSBWZR,LVDWVN', row_background: 'theme:Surface Variant'}
+  layout_properties: {full_width_row: true, grid_position: 'DSBWZR,LVDWVN', row_background: '#e2e8e9'}
   name: column_panel_5
   properties: {}
   type: ColumnPanel
@@ -108,11 +111,11 @@ components:
   type: Spacer
 - layout_properties: {grid_position: 'NLHCJU,DWKFXP'}
   name: headline_2
-  properties: {align: center, bold: true, font_size: 28, role: headline, text: Everything You Need to Maximize Your Rental Income}
+  properties: {align: center, bold: true, font_size: 28, role: headline, text: Powerful Analytics for Smart Hosts}
   type: Label
 - layout_properties: {grid_position: 'ORIWXP,MJHYFO'}
   name: body_1
-  properties: {align: center, font_size: 18, role: body, text: Powerful analytics and insights designed specifically for vacation rental owners who want to grow their business.}
+  properties: {align: center, font_size: 20, role: body, text: Powerful analytics and insights designed specifically for vacation rental owners who want to grow their business.}
   type: Label
 - layout_properties: {grid_position: 'LGETWC,ZVOLBE'}
   name: spacer_2
