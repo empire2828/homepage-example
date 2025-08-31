@@ -70,7 +70,7 @@ class multiframe(multiframeTemplate):
     # Initial: alle Panels unsichtbar
     for i, panel in enumerate(self.panels):
       panel.visible = False
-      panel.height = 1850  # Explizite Höhe
+      panel.height = 2000  # Explizite Höhe
 
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
