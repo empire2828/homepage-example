@@ -106,7 +106,15 @@ components:
       type: ColumnPanel
     layout_properties: {grid_position: 'MQOWBB,DCEWXY'}
     name: rich_text_1
-    properties: {align: center, content: 'By owners, for owners', font_size: 20, foreground: '', format: markdown}
+    properties:
+      align: center
+      content: By owners, for owners
+      font_size: 20
+      foreground: ''
+      format: markdown
+      spacing:
+        margin: ['4', null, '12', null]
+        padding: [null, null, null, null]
     type: RichText
   layout_properties: {full_width_row: true, grid_position: 'VMDRYK,BYTTJO'}
   name: column_panel_5
@@ -365,42 +373,42 @@ components:
   name: spacer_18
   properties: {height: 46.00213623046875}
   type: Spacer
-- layout_properties: {grid_position: 'AZRPBV,WUDLGA'}
-  name: spacer_5
-  properties: {height: 34.22216796875}
-  type: Spacer
-- layout_properties: {grid_position: 'ZZCSPC,XHTKKN'}
-  name: title_3
-  properties: {align: center, font_size: 28, role: title, text: Loved by Property Owners Worldwide}
-  type: Label
-- layout_properties: {grid_position: 'BFLCUM,SRZQHE'}
-  name: body_3
-  properties:
-    align: center
-    font_size: 20
-    role: body
-    spacing:
-      margin: [null, '4', null, '4']
-      padding: ['4', '4', '4', '4']
-    text: Join other successful rental owners who trust Lodginia
-  type: Label
 - components:
-  - layout_properties: {}
+  - layout_properties: {grid_position: 'FDVLBP,ELDEGB'}
+    name: spacer_5
+    properties: {height: 34.22216796875}
+    type: Spacer
+  - layout_properties: {grid_position: 'UAXMVD,EYJFSH'}
+    name: title_3
+    properties: {align: center, font_size: 28, role: title, text: Loved by Property Owners Worldwide}
+    type: Label
+  - layout_properties: {grid_position: 'LJIMCJ,QSXIBH'}
+    name: body_3
+    properties:
+      align: center
+      font_size: 20
+      role: body
+      spacing:
+        margin: [null, '4', null, '4']
+        padding: ['4', '4', '4', '4']
+      text: Join other successful rental owners who trust Lodginia
+    type: Label
+  - components: []
+    layout_properties: {grid_position: 'XHLTOI,PSOXIR'}
+    name: rich_text_1_copy
+    properties:
+      align: center
+      content: Built with ❤️ by vacation rental owners.
+      font_size: 20
+      foreground: '#f9a94a'
+      spacing:
+        margin: [null, '4', null, '4']
+        padding: [null, '4', null, '4']
+    type: RichText
+  - layout_properties: {grid_position: 'NDPMIC,AUUFNZ'}
     name: spacer_11
     properties: {height: 33.31964111328125}
     type: Spacer
-  layout_properties: {grid_position: 'CXVLNR,ERIKKG'}
-  name: rich_text_1_copy
-  properties:
-    align: center
-    content: Built with ❤️ by vacation rental owners.
-    font_size: 20
-    foreground: '#f9a94a'
-    spacing:
-      margin: [null, '4', null, '4']
-      padding: [null, '4', null, '4']
-  type: RichText
-- components:
   - layout_properties: {grid_position: 'CVAWKF,NYQUBE'}
     name: title_3_copy
     properties: {align: center, font_size: 28, foreground: 'theme:On Primary Container', role: title, text: Pricing}
