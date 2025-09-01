@@ -7,6 +7,8 @@ from anvil.js.window import jQuery
 from anvil.js import get_dom_node
 import datetime
 import json
+from anvil.js.window import navigator
+import re
 
 class multiframe(multiframeTemplate):
   def __init__(self, **properties):
@@ -92,11 +94,24 @@ class multiframe(multiframeTemplate):
      # Vorheriges IFrame entfernen falls vorhanden
     jQuery(get_dom_node(panel)).empty()
 
-    # IFrame erstellen mit expliziten Attributen
+    # Mobile Detection über User Agent
+    mobile_devices = "Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini"
+    is_mobile = re.search(mobile_devices, navigator.userAgent) is not None
+    
+    # IFrame erstellen mit bedingter Höhe
+    height = 1200 if is_mobile else 2600
+
+    # Panel CSS-Style setzen
+    panel_dom = get_dom_node(panel)
+    jQuery(panel_dom).css({
+      "height": f"{height}px",
+      "min-height": f"{height}px"
+    })
+
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "2300px",
+      "height": f"{height}px",
       "frameborder": "0",
       "style": "border: none; background: white;",
       "allow": "fullscreen",
