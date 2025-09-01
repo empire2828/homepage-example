@@ -70,7 +70,7 @@ class multiframe(multiframeTemplate):
     # Initial: alle Panels unsichtbar
     for i, panel in enumerate(self.panels):
       panel.visible = False
-      panel.height = 2300  # Explizite Höhe
+      #panel.height = 2300  # Explizite Höhe
 
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
@@ -96,12 +96,11 @@ class multiframe(multiframeTemplate):
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "2300px",
       "frameborder": "0",
       "style": "border: none; background: white;",
       "allow": "fullscreen",
       "loading": "lazy"
-    })
+    }).addClass("responsive-iframe")
 
     # IFrame zum Panel hinzufügen
     iframe.appendTo(get_dom_node(panel))

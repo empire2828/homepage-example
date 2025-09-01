@@ -1041,3 +1041,11 @@ div.plot-container.plotly svg.main-svg {
     --anvil-spinner-bg: %color:Surface Variant%;
 }
 
+/* Example: Mobile gets shorter, desktop longer */
+.responsive-iframe { width: 100%; border: 0; }
+@media (max-width: 600px) {
+  .responsive-iframe { height: 900px !important; }
+}
+@media (min-width: 601px) {
+  .responsive-iframe { height: 2300px !important; }
+}
