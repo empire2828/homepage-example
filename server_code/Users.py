@@ -68,21 +68,37 @@ def send_password_reset_email():
         return "Failed to send password reset email."
 
 # Server-Modul DKL
+#@anvil.server.callable
+#def get_user_has_subscription():
+#    user = anvil.users.get_user()    
+#    if not user:
+#        return False   
+#    if user['subscription'] == ('Subscription' or 'Pro-Subscription' or 'Canceled'):    
+#        return True   
+#    signed_up_date = user['signed_up']  
+#    if signed_up_date:
+#        # Konvertiere naive Zeit zu UTC-aware Zeit
+#        signed_up_aware = signed_up_date.replace(tzinfo=timezone.utc)
+#        trial_end = signed_up_aware + timedelta(days=30)
+#        now_utc = datetime.now(timezone.utc)  # Korrekte UTC-Zeit
+#        return now_utc <= trial_end   
+#    return False
+
 @anvil.server.callable
-def get_user_has_subscription():
-    user = anvil.users.get_user()    
-    if not user:
-        return False   
-    if user['subscription'] == ('Subscription' or 'Pro-Subscription' or 'Canceled'):    
-        return True   
-    signed_up_date = user['signed_up']  
-    if signed_up_date:
-        # Konvertiere naive Zeit zu UTC-aware Zeit
-        signed_up_aware = signed_up_date.replace(tzinfo=timezone.utc)
-        trial_end = signed_up_aware + timedelta(days=30)
-        now_utc = datetime.now(timezone.utc)  # Korrekte UTC-Zeit
-        return now_utc <= trial_end   
+def get_user_has_subscription_for_email(email):
+  user = app_tables.users.get(email=email)
+  if not user:
     return False
+  subscription_status = user.get('subscription')
+  if subscription_status in ['Subscription', 'Pro-Subscription', 'Canceled']:
+    return True
+  signup = user.get('signed_up')
+  if signup:
+    signed_up_aware = signup.replace(tzinfo=timezone.utc)
+    trial_end = signed_up_aware + timedelta(days=30)
+    now_utc = datetime.now(timezone.utc)
+    return now_utc <= trial_end
+  return False
 
 @anvil.server.callable
 def save_user_api_key(api_key):

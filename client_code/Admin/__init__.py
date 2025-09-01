@@ -7,6 +7,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import time
 
 class Admin(AdminTemplate):
   def __init__(self, **properties):
@@ -72,4 +73,9 @@ class Admin(AdminTemplate):
     # Logs vom Server holen
     self.filtered_logs = anvil.server.call('search_logs', self.log_filter_text_box.text)
     self.logs_repeating_panel.items = self.filtered_logs
+
+  def sync_all_smoobu_users_button_click(self, **event_args):
+    results= anvil.server.call('sync_smoobu_for_all_smoobu_subscribers')
+    pass
+
 

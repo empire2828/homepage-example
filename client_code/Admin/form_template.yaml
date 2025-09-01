@@ -29,6 +29,15 @@ components_by_slot:
     properties: {}
     type: ColumnPanel
   - layout_properties: {}
+    name: spacer_3
+    properties: {}
+    type: Spacer
+  - event_bindings: {click: sync_all_smoobu_users_button_click}
+    layout_properties: {}
+    name: sync_all_smoobu_users_button
+    properties: {role: filled-button, text: Sync all smoobu users}
+    type: Button
+  - layout_properties: {}
     name: spacer_1
     properties: {}
     type: Spacer

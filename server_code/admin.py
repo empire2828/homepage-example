@@ -16,6 +16,8 @@ import os
 from google.cloud import bigquery
 from servermain import get_bigquery_client
 from dateutil.parser import parse
+from Users import get_user_has_subscription_for_email
+import time
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -94,4 +96,23 @@ def search_logs(search_term: str):
       "ref_id":     row["ref_id"],
       "created_at": row["created_at"].isoformat()
     })
+  return results
+
+@anvil.server.callable
+def sync_smoobu_for_all_smoobu_subscribers():
+  results = []
+  for user in app_tables.users.search():
+    # Use the subscription checker function for each user to avoid duplicate logic
+    has_subscription = anvil.server.call('get_user_has_subscription_for_email', user['email'])
+    if has_subscription:
+      if not user.get('smoobu_api_key'):
+        results.append({'email': user['email'], 'status': 'No API key'})
+        continue
+      try:
+        task = anvil.server.launch_background_task('sync_smoobu', user['email'])
+        results.append({'email': user['email'], 'status': 'Task launched', 'task_id': task.task_id})
+        time.sleep(60)
+      except Exception as e:
+        results.append({'email': user['email'], 'status': f'Error: {e}'})
+  print (results)
   return results
