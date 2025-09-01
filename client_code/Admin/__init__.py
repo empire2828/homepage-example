@@ -73,3 +73,25 @@ class Admin(AdminTemplate):
     self.filtered_logs = anvil.server.call('search_logs', self.log_filter_text_box.text)
     self.logs_repeating_panel.items = self.filtered_logs
 
+@anvil.server.callable
+def sync_smoobu_for_all_subscribers():
+  # Get users with valid subscription or trial_subscription
+  users = app_tables.users.search(
+    tables.or_(
+      subscription=True,
+      trial_subscription=True
+    )
+  )
+  results = []
+  for user in users:
+    try:
+      # Optionally check if API key or other credential is set
+      if not user.get('smoobu_api_key'):
+        results.append({'email': user['email'], 'status': 'No API key'})
+        continue
+        # Launch the background task for this user
+      task = anvil.server.launch_background_task('sync_smoobu_for_user', user['email'])
+      results.append({'email': user['email'], 'status': 'Task launched', 'task_id': task.task_id})
+    except Exception as e:
+      results.append({'email': user['email'], 'status': f'Error: {e}'})
+  return results
