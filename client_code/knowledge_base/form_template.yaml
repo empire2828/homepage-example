@@ -13,5 +13,10 @@ components_by_slot:
     name: column_panel_1
     properties: {}
     type: ColumnPanel
+  - components: []
+    layout_properties: {}
+    name: column_panel_2
+    properties: {}
+    type: ColumnPanel
 is_package: true
 layout: {type: 'form:layout_template'}
