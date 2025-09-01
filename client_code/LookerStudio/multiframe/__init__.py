@@ -15,7 +15,7 @@ class multiframe(multiframeTemplate):
     user = users.get_user()    
     print('User Logged in: ',user['email'])
 
-    user_has_subscription= anvil.server.call('get_user_has_subscription')
+    user_has_subscription= anvil.server.call('get_user_has_subscription_for_email',user['email'])
     #self.content_panel.visible = False   ... standard auf not visible
 
     if user['smoobu_api_key'] is None:
