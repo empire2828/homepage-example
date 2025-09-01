@@ -19,6 +19,7 @@ components:
       icon_align: right_edge
       role: outlined-button
       spacing:
+        margin: ['14', null, null, null]
         padding: [null, '24', null, '24']
       spacing_below: large
       text: '  Login  '
