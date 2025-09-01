@@ -1,0 +1,8 @@
+components_by_slot:
+  content:
+  - layout_properties: {}
+    name: image_1
+    properties: {}
+    type: Image
+is_package: true
+layout: {type: 'form:layout_template'}
