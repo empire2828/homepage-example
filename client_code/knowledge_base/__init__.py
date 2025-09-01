@@ -1,4 +1,4 @@
-from ._anvil_designer import help_centerTemplate
+from ._anvil_designer import knowledge_baseTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class help_center(help_centerTemplate):
+class knowledge_base(knowledge_baseTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
