@@ -96,7 +96,7 @@ class multiframe(multiframeTemplate):
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "1800px",
+      "height": "2000px",
       "frameborder": "0",
       "style": "border: none; background: white;",
       "allow": "fullscreen",
