@@ -39,14 +39,15 @@ class multiframe(multiframeTemplate):
 
     self.iframe_urls = [
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/qmCOF",            # Dashboard
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_frni7wm2vd",     # To same time last year
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",     # Profitability
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_9euf3853td",     # Bookings
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_knw9h153td",     # Cancellations
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_1idplf63td",     # Occupancy
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8hyzd253td",     # Lead Time
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_tilmy6zhtd",     # Guest Insights
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_4dt5tycuud",     # Long Trends     
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_cc0slxgtud",     # Detailed Bookings
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_4dt5tycuud",     # Long Trends
     ]
 
     self.panels = [
@@ -59,6 +60,7 @@ class multiframe(multiframeTemplate):
       self.looker_flow_panel_7,
       self.looker_flow_panel_8,
       self.looker_flow_panel_9,
+      self.looker_flow_panel_10,
     ]
 
     # Status-Tracking welche IFrames bereits geladen wurden
