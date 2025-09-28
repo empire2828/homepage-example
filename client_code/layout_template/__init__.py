@@ -44,6 +44,7 @@ class layout_template(layout_templateTemplate):
     self.detailed_bookings_navigation_link.selected = False
     self.long_trends_navigation_link.selected = False
     self.connect_navigation_link.selected = False
+    self.knowledge_hub_link.selected = False
     self.my_account_navigation_link.selected = False
     self.layout.hide_nav_drawer()
 
