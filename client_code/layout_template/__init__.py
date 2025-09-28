@@ -34,6 +34,7 @@ class layout_template(layout_templateTemplate):
 
   def reset_links(self, **event_args):
     self.dashboard_navigation_link.selected = False
+    self.to_same_time_last_year_navigation_link.selected = False
     self.profitability_navigation_link.selected = False
     self.bookings_navigation_link.selected = False
     self.cancellations_navigation_link.selected = False
@@ -53,53 +54,60 @@ class layout_template(layout_templateTemplate):
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(0)  # Dashboard
 
+  def to_same_time_last_year_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.to_same_time_last_year_navigation_link.selected = True
+    self.layout.hide_nav_drawer()
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(1)  # Dashboard
+
   def profitability_navigation_link_click(self, **event_args):
     self.reset_links()
     self.profitability_navigation_link.selected = True
     multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(1)  # Profitability
+    multiframe_form.lade_und_zeige_iframe(2)  # Profitability
 
   def bookings_navigation_link_click(self, **event_args):
     self.reset_links()
     self.bookings_navigation_link.selected = True
     multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(2)  # Long Trends
+    multiframe_form.lade_und_zeige_iframe(3)  # Long Trends
 
   def cancellations_navigation_link_click(self, **event_args):
     self.reset_links()
     self.cancellations_navigation_link.selected = True
     multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(3)  # Cancellations
+    multiframe_form.lade_und_zeige_iframe(4)  # Cancellations
 
   def occupancy_navigation_link_click(self, **event_args):
     self.reset_links()
     self.occupancy_navigation_link.selected = True
     multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(4)  # Occupancy
+    multiframe_form.lade_und_zeige_iframe(5)  # Occupancy
 
   def lead_time_navigation_link_click(self, **event_args):
     self.reset_links()
     self.lead_time_navigation_link.selected = True
     multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(5)  # Lead Time
+    multiframe_form.lade_und_zeige_iframe(6)  # Lead Time
 
   def guest_insights_navigation_link_click(self, **event_args):
     self.reset_links()
     self.guest_insights_navigation_link.selected = True
     multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(6)  # Guest Insights
-
-  def detailed_bookings_navigation_link_click(self, **event_args):
-    self.reset_links()
-    self.detailed_bookings_navigation_link.selected = True
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(7)  # Detailed Bookings
+    multiframe_form.lade_und_zeige_iframe(7)  # Guest Insights
 
   def long_trends_navigation_link_click(self, **event_args):
     self.reset_links()
     self.long_trends_navigation_link.selected = True
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(8)  # Long Trends
+
+  def detailed_bookings_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.detailed_bookings_navigation_link.selected = True
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(9)  # Detailed Bookings
 
   def connect_navigation_link_click(self, **event_args):
     self.reset_links()

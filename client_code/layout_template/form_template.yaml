@@ -12,9 +12,9 @@ components_by_slot:
         margin: ['-5', null, '-5', null]
       text: Dashboard
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-  - event_bindings: {click: dashboard_navigation_link_click}
+  - event_bindings: {click: to_same_time_last_year_navigation_link_click}
     layout_properties: {}
-    name: dashboard_navigation_link_copy
+    name: to_same_time_last_year_navigation_link
     properties:
       badge: false
       icon: mi:timer
