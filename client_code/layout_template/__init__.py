@@ -124,5 +124,9 @@ class layout_template(layout_templateTemplate):
     self.my_account_navigation_link.selected = True
     pass
 
+  def knowledge_hub_link_click(self, **event_args):
+    """This method is called when the component is clicked"""
+    pass
+
 
 
