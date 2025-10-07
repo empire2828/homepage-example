@@ -113,6 +113,7 @@ class layout_template(layout_templateTemplate):
   def connect_navigation_link_click(self, **event_args):
     self.reset_links()
     self.connect_navigation_link.selected = True
+    open_form('channel_manager_connect')
     pass
 
   def upgrade_navigation_link_click(self, **event_args):
@@ -122,10 +123,13 @@ class layout_template(layout_templateTemplate):
   def my_account_navigation_link_click(self, **event_args):
     self.reset_links()
     self.my_account_navigation_link.selected = True
+    open_form('my_account')
     pass
 
   def knowledge_hub_link_click(self, **event_args):
-    """This method is called when the component is clicked"""
+    self.reset_links()
+    self.knowledge_hub_link.selected = True   
+    open_form('knowledge_hub')
     pass
 
 

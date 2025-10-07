@@ -108,11 +108,12 @@ components_by_slot:
     properties:
       margin: ['5', null, '5', null]
     type: form:dep_g9k4toow7i44kq:_Components.Divider
-  - layout_properties: {}
+  - event_bindings: {click: connect_navigation_link_click}
+    layout_properties: {}
     name: connect_navigation_link
     properties:
       icon: mi:cable
-      navigate_to: channel_manager_connect
+      navigate_to: null
       selected: false
       spacing:
         margin: ['-5', null, '-5', null]
@@ -123,7 +124,7 @@ components_by_slot:
     name: knowledge_hub_link
     properties:
       icon: mi:question_mark
-      navigate_to: knowledge_hub
+      navigate_to: null
       selected: false
       spacing:
         margin: ['-5', null, '-5', null]
@@ -134,7 +135,7 @@ components_by_slot:
     name: my_account_navigation_link
     properties:
       icon: mi:manage_accounts
-      navigate_to: my_account
+      navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
       text: My account
