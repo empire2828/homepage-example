@@ -19,11 +19,17 @@ components_by_slot:
         properties: {bold: true, scale: large, text: 'Why last 12 months (LTM)?'}
         type: form:dep_g9k4toow7i44kq:_Components.Text
       - components:
-        - layout_properties: {}
+        - components:
+          - name: image_1
+            properties: {height: 43.68255615234375, source: _/theme/stay_date.jpg}
+            type: Image
+          layout_properties: {}
           name: rich_text_2
           properties:
-            content: |
+            content: |-
               How to adjust?
+
+              You will find in each screen at the top left a date selector. On the left side in blue it is defined which date you can change (stay date, reservation date, cancellation date etc.):
           type: RichText
         layout_properties: {slot: card-content-container-slot}
         name: rich_text_1
@@ -55,7 +61,7 @@ components_by_slot:
           name: rich_text_2_copy
           properties:
             content: |
-              How to adjust?
+              The only screen which uses same time last year comparison is the Monthly Outlook screen.
           type: RichText
         layout_properties: {slot: card-content-container-slot}
         name: rich_text_1_copy
