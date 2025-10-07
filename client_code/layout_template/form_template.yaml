@@ -12,16 +12,16 @@ components_by_slot:
         margin: ['-5', null, '-5', null]
       text: Dashboard
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-  - event_bindings: {click: to_same_time_last_year_navigation_link_click}
+  - event_bindings: {click: monthly_outlook_navigation_link_click}
     layout_properties: {}
-    name: to_same_time_last_year_navigation_link
+    name: monthly_outlook_navigation_link
     properties:
       badge: false
-      icon: mi:timer
+      icon: mi:next_plan
       navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
-      text: To same time last year
+      text: Monthly Outlook
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: profitability_navigation_link_click}
     layout_properties: {}

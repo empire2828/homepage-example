@@ -34,7 +34,7 @@ class layout_template(layout_templateTemplate):
 
   def reset_links(self, **event_args):
     self.dashboard_navigation_link.selected = False
-    self.to_same_time_last_year_navigation_link.selected = False
+    self.monthly_outlook_navigation_link.selected = False
     self.profitability_navigation_link.selected = False
     self.bookings_navigation_link.selected = False
     self.cancellations_navigation_link.selected = False
@@ -55,9 +55,9 @@ class layout_template(layout_templateTemplate):
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(0)  # Dashboard
 
-  def to_same_time_last_year_navigation_link_click(self, **event_args):
+  def monthly_outlook_navigation_link_click(self, **event_args):
     self.reset_links()
-    self.to_same_time_last_year_navigation_link.selected = True
+    self.monthly_outlook_navigation_link.selected = True
     self.layout.hide_nav_drawer()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(1)  # Dashboard
@@ -123,3 +123,6 @@ class layout_template(layout_templateTemplate):
     self.reset_links()
     self.my_account_navigation_link.selected = True
     pass
+
+
+
