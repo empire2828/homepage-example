@@ -48,6 +48,7 @@ class multiframe(multiframeTemplate):
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_tilmy6zhtd",     # Guest Insights
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_4dt5tycuud",     # Long Trends     
       "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_cc0slxgtud",     # Detailed Bookings
+      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_396qlut0wd",     # Knowledge hub
     ]
 
     self.panels = [
@@ -61,6 +62,7 @@ class multiframe(multiframeTemplate):
       self.looker_flow_panel_8,
       self.looker_flow_panel_9,
       self.looker_flow_panel_10,
+      self.looker_flow_panel_11,
     ]
 
     # Status-Tracking welche IFrames bereits geladen wurden

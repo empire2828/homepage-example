@@ -104,6 +104,21 @@ components_by_slot:
       text: Zoom details
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - layout_properties: {}
+    name: divider_2
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.Divider
+  - event_bindings: {click: knowledge_hub_link_click}
+    layout_properties: {}
+    name: knowledge_hub_link
+    properties:
+      icon: mi:question_mark
+      navigate_to: null
+      selected: false
+      spacing:
+        margin: ['-5', null, '-5', null]
+      text: Knowledge
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - layout_properties: {}
     name: divider_1
     properties:
       margin: ['5', null, '5', null]
@@ -118,17 +133,6 @@ components_by_slot:
       spacing:
         margin: ['-5', null, '-5', null]
       text: Connect
-    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
-  - event_bindings: {click: knowledge_hub_link_click}
-    layout_properties: {}
-    name: knowledge_hub_link
-    properties:
-      icon: mi:question_mark
-      navigate_to: null
-      selected: false
-      spacing:
-        margin: ['-5', null, '-5', null]
-      text: Knowledge
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: my_account_navigation_link_click}
     layout_properties: {}

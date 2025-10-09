@@ -128,9 +128,9 @@ class layout_template(layout_templateTemplate):
 
   def knowledge_hub_link_click(self, **event_args):
     self.reset_links()
-    self.knowledge_hub_link.selected = True   
-    open_form('knowledge_hub')
-    pass
+    self.knowledge_hub_link.selected = True
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(10)  # Knowledge Hub
 
 
 

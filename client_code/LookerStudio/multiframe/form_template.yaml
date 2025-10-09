@@ -72,8 +72,13 @@ components_by_slot:
       name: looker_flow_panel_9
       properties: {}
       type: FlowPanel
-    - layout_properties: {full_width_row: true, grid_position: 'ACOXPH,XUIMVI'}
+    - components: []
+      layout_properties: {full_width_row: true, grid_position: 'ACOXPH,XUIMVI'}
       name: looker_flow_panel_10
+      properties: {}
+      type: FlowPanel
+    - layout_properties: {full_width_row: true, grid_position: 'RNXMCB,YRYXJR'}
+      name: looker_flow_panel_11
       properties: {}
       type: FlowPanel
     layout_properties: {}
