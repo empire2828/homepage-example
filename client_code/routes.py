@@ -12,3 +12,6 @@ class data_protection_route(Route):
     path = "/data_protection"
     form = "data_protection"
 
+class knowledge_hub(Route):
+  path = "/knowledge_hub"
+  form = "knowledge_hub"
