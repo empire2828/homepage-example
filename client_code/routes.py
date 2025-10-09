@@ -8,7 +8,5 @@ class homepage_route(Route):
     #cache_form = True
     #cache_data = True
 
-class data_protection_route(Route):
-    path = "/data_protection"
-    form = "data_protection"
+ç
 
