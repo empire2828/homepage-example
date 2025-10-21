@@ -361,7 +361,7 @@ components:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Act early on low occupancy and avoid high last minute reductions
+        text: Able to compare future month against same time last year not finals and avoid high last minute reductions
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     name: column_panel_4
     properties: {}
@@ -534,18 +534,10 @@ components:
       text: Cancel anytime
       text_color: theme:On Primary Container
     type: form:dep_g9k4toow7i44kq:_Components.Text
-  - layout_properties: {grid_position: 'XHKKPH,YMVKIE'}
-    name: text_8
-    properties:
-      align: center
-      bold: false
-      font_size: 18
-      spacing:
-        margin: [null, null, null, '6']
-        padding: [null, null, null, '6']
-      text: Cancel anytime
-      text_color: theme:On Primary Container
-    type: form:dep_g9k4toow7i44kq:_Components.Text
+  - layout_properties: {grid_position: 'XHKKPH,UDBQYA'}
+    name: spacer_7_copy
+    properties: {height: 40.78765869140625}
+    type: Spacer
   - layout_properties: {grid_position: 'RAIZNG,ONBFGO'}
     name: spacer_8
     properties: {height: 32}
