@@ -361,7 +361,7 @@ components:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Able to compare future month against same time last year not finals and avoid high last minute reductions
+        text: Able to compare future month against same time last year (not finals) to avoid discounting too early
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     name: column_panel_4
     properties: {}
