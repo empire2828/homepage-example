@@ -19,7 +19,7 @@ class homepage(homepageTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     
-    user_lang = 'en'
+    user_lang = anvil.server.call('get_preferred_locale')
     print(user_lang)
     if user_lang and not user_lang.startswith("en"):
       Translations.set_dictionary('GE', GERMAN_LOCALE)

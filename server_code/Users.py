@@ -343,14 +343,7 @@ def delete_user_from_users_table(email):
     return False  # User not found
 
 @anvil.server.callable
-def get_user_language_from_header():
-  """Returns the user's preferred language from Accept-Language header"""
-  request = anvil.server.request
-  accept_lang = request.headers.get('Accept-Language', 'en')
-  # Parse the first language (highest priority)
-  # Example: "de-DE,de;q=0.9,en;q=0.8" -> "de-DE"
-  if accept_lang:
-    primary_lang = accept_lang.split(',')[0].strip()
-    return primary_lang
-
-  return 'en'
+def get_preferred_locale():
+  if anvil.server.context.client.location.country in ['Germany', 'Austria', 'Switzerland']:
+    return 'DE'
+  return 'EN'
