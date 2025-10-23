@@ -48,7 +48,7 @@ components:
           margin: [null, '6', null, '6']
           padding: [null, null, 8, null]
         spacing_above: small
-        text: Connect Smoobu and get deep insights into your vacation rental performance in minutes. Get your revenue after commission & fees, compare with fully flexible time lines and learn now to avoid cancellations.
+        text: Best Smoobu analytics in minutes. Easy setup, simple graphics.
         underline: false
       type: Label
     - components:
@@ -131,7 +131,7 @@ components:
   type: Spacer
 - layout_properties: {grid_position: 'NLHCJU,DWKFXP'}
   name: headline_2
-  properties: {align: center, bold: true, font_size: 28, role: headline, text: Powerful Analytics for Smart Hosts}
+  properties: {align: center, bold: true, font_size: 28, role: headline, text: Powerful Analytics for Smart Smoobu Hosts}
   type: Label
 - layout_properties: {grid_position: 'ORIWXP,MJHYFO'}
   name: body_1
@@ -210,7 +210,7 @@ components:
       type: Label
     - layout_properties: {grid_position: 'DOVNZB,BLUQAX'}
       name: text_2
-      properties: {font_size: 18, text: Be able to compare against same time last year - and not finals - and avoid giving discounts to early.}
+      properties: {font_size: 18, text: Be able to compare against same time last year - not only finals - and avoid giving discounts to early.}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,RFFNST'}
     name: elevated_card_3
@@ -321,7 +321,7 @@ components:
       type: Spacer
     - layout_properties: {grid_position: 'LTADAQ,YXLCSK'}
       name: text_5
-      properties: {font_size: 20, line_height: '1', text: We understand the unique challenges of managing vacation rentals because we rent vacation homes ourselves. We know the questions and what metrics actually matter.}
+      properties: {font_size: 20, line_height: '1', text: We understand the unique challenges of managing vacation rentals because we rent vacation homes ourselves. We know the questions and what analytics actually matter.}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'TYFLZW,XUJSIW'}
       name: spacer_9
@@ -401,7 +401,7 @@ components:
       spacing:
         margin: [null, '4', null, '4']
         padding: ['4', '4', '4', '4']
-      text: Join other successful rental owners who trust Lodginia
+      text: Join other successful Smoobu rental owners who trust Lodginia
     type: Label
   - components: []
     layout_properties: {grid_position: 'XHLTOI,PSOXIR'}
@@ -551,28 +551,42 @@ components:
     name: spacer_8
     properties: {height: 32}
     type: Spacer
+  - components:
+    - layout_properties: {grid_position: 'VHPALD,TOOELK'}
+      name: review_widget_1
+      properties: {}
+      type: form:reviewWidget
+    layout_properties: {full_width_row: true, grid_position: 'JQTKLF,UZPWTU', row_background: 'theme:On Secondary'}
+    name: column_panel_3
+    properties: {}
+    type: ColumnPanel
   layout_properties: {full_width_row: true, grid_position: 'HRNNGI,DATVEI'}
   name: column_panel_2
   properties: {background: 'theme:Primary Overlay 3'}
   type: ColumnPanel
-- layout_properties: {grid_position: 'LGMCZK,EJOWWM'}
-  name: linear_panel_2
+- components:
+  - layout_properties: {grid_position: 'OATDMJ,KFVZSG'}
+    name: linear_panel_1
+    properties: {}
+    type: LinearPanel
+  - layout_properties: {grid_position: 'OATDMJ,QHLPFO'}
+    name: linear_panel_2
+    properties: {}
+    type: LinearPanel
+  - event_bindings: {click: impressum_link_click}
+    layout_properties: {grid_position: 'OATDMJ,HNZSLF'}
+    name: impressum_link
+    properties: {align: center, text: Impressum}
+    type: Link
+  - event_bindings: {click: data_protection_link_click}
+    layout_properties: {grid_position: 'OATDMJ,DNSOOE'}
+    name: data_protection_link
+    properties: {align: center, text: data protection}
+    type: Link
+  layout_properties: {full_width_row: true, grid_position: 'SHSNEN,TNWQLR', row_background: 'theme:Primary Overlay 3'}
+  name: column_panel_6
   properties: {}
-  type: LinearPanel
-- layout_properties: {grid_position: 'LGMCZK,VXUSJN'}
-  name: linear_panel_1
-  properties: {}
-  type: LinearPanel
-- event_bindings: {click: impressum_link_click}
-  layout_properties: {grid_position: 'LGMCZK,JPCWHK'}
-  name: impressum_link
-  properties: {align: center, text: Impressum}
-  type: Link
-- event_bindings: {click: data_protection_link_click}
-  layout_properties: {grid_position: 'LGMCZK,HWMGPD'}
-  name: data_protection_link
-  properties: {align: center, text: data protection}
-  type: Link
+  type: ColumnPanel
 container:
   properties:
     col_widths: '{}'

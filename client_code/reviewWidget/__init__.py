@@ -1,4 +1,4 @@
-from ._anvil_designer import widgetTemplate
+from ._anvil_designer import reviewWidgetTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class widget(widgetTemplate):
+class reviewWidget(reviewWidgetTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
