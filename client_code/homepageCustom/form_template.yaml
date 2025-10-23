@@ -1,10 +1,12 @@
 components: []
 container:
   properties:
-    html: |-
+    html: |+
       <center style="font-style:italic; color:#888; margin: 3em;">
-        <div class="elfsight-app-6c128fb2-257d-4d2c-856e-b980e4451bfd" data-elfsight-app-lazy></div>
       </center>
       <div anvil-slot="default"></div>
+      <div class="elfsight-app-6c128fb2-257d-4d2c-856e-b980e4451bfd" data-elfsight-app-lazy></div>
+
+
   type: HtmlTemplate
 is_package: true
