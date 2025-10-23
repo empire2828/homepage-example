@@ -572,3 +572,4 @@ container:
       padding: [null, '5', null, '5']
   type: ColumnPanel
 is_package: true
+slots: {}
