@@ -12,19 +12,24 @@ GERMAN_LOCALE = {
   "OK": "OK",
   "Title": "Titel",
   "Unlock Your Rental's": "Öffnen Sie das",
-  "True Revenue Potential": "wahre Potenzial"
+  "True Revenue Potential": "wahre Potenzial",
+  "By owners, for owners": "Von Vermietern, für Vermieter"
+  """Connect your channel manager and get deep insights into your vacation rental performance. 
+  See your true daily rates, understand your guests, and optimize your occupancy like never before.""":r"""Verbinden Sie Ihren 
 }
 
 class homepage(homepageTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     
-    user_lang = anvil.server.call('get_preferred_locale')
+    user_lang = anvil.js.call_js('get_user_language')
     print(user_lang)
     if user_lang and not user_lang.startswith("en"):
       Translations.set_dictionary('GE', GERMAN_LOCALE)
       Translations.register_translation(self.headline_1, 'text')
       Translations.register_translation(self.headline_1_2, 'text')
+      Translations.register_translation(self.rich_text_1, 'text')
+      Translations.register_translation(self.title_1, 'text')
       Translations.set_locale(user_lang)
 
   def login_button_click(self, **event_args):
