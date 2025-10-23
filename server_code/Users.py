@@ -341,3 +341,9 @@ def delete_user_from_users_table(email):
     return True
   else:
     return False  # User not found
+
+@anvil.server.callable
+def get_preferred_locale():
+  if anvil.server.context.client.location.country in ['Germany', 'Austria', 'Switzerland']:
+    return 'DE'
+  return 'EN'
