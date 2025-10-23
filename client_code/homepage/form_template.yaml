@@ -48,7 +48,7 @@ components:
           margin: [null, '6', null, '6']
           padding: [null, null, 8, null]
         spacing_above: small
-        text: Connect your channel manager and get deep insights into your vacation rental performance. See your true daily rates, understand your guests, and optimize your occupancy like never before.
+        text: Connect Smoobu and get deep insights into your vacation rental performance in minutes. Get your revenue after commission & fees, compare with fully flexible time lines and learn now to avoid cancellations.
         underline: false
       type: Label
     - components:
@@ -210,7 +210,7 @@ components:
       type: Label
     - layout_properties: {grid_position: 'DOVNZB,BLUQAX'}
       name: text_2
-      properties: {font_size: 18, text: 'Understand your booking trends, seasonal variations, and guest behavior to maximize occupancy.'}
+      properties: {font_size: 18, text: Be able to compare against same time last year - and not finals - and avoid giving discounts to early.}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {grid_position: 'GXCIUU,RFFNST'}
     name: elevated_card_3
@@ -362,6 +362,15 @@ components:
         spacing:
           margin: ['9', null, '9', null]
         text: Able to compare future month against same time last year (not finals) to avoid discounting too early
+      type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+    - layout_properties: {grid_position: 'XWNAAK,FFFCRW'}
+      name: checkbox_7_copy_copy
+      properties:
+        checked: true
+        font_size: 20
+        spacing:
+          margin: ['9', null, '9', null]
+        text: Fully flexible time line for comparisons
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     name: column_panel_4
     properties: {}
