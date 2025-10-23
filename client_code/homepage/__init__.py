@@ -2,6 +2,7 @@ from ._anvil_designer import homepageTemplate
 from anvil import *
 import anvil.server
 import anvil.users
+import Translations
 
 class homepage(homepageTemplate):
   def __init__(self, **properties):
