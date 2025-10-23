@@ -90,12 +90,18 @@ dependencies:
 metadata: {description: lodginia.com, logo_img: 'asset:Lodginia_orange_transparent-logo.jpeg', title: lodginia.com}
 name: lodginia.com
 native_deps:
-  head_html: |
+  head_html: |+
     <script>
       window.get_user_language = function() {
-        return navigator.language || navigator.userLanguage;
+        // navigator.languages gibt ein Array zurück
+        if (navigator.languages && navigator.languages.length > 0) {
+          return navigator.languages[0]; // Erste = bevorzugte Sprache
+        }
+        // Fallback für ältere Browser
+        return navigator.language || navigator.userLanguage || 'en';
       }
     </script>
+
 package_name: lodginia
 renamed: true
 runtime_options:
