@@ -2,10 +2,28 @@ from ._anvil_designer import homepageTemplate
 from anvil import *
 import anvil.server
 import anvil.users
+from Translations import Translations
+import anvil.js
+
+GERMAN_LOCALE = {
+  "Cancel": "Abbrechen",
+  "Close": "Schließen",
+  "Open": "Öffnen",
+  "OK": "OK",
+  "Title": "Titel",
+  "Unlock Your Rental's": "Öffnen Sie das",
+  "True Revenue Potential": "wahre Potenzial"
+}
 
 class homepage(homepageTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
+    
+    Translations.set_dictionary('GE', GERMAN_LOCALE)
+    Translations.register_translation(self.headline_1, 'text')
+    Translations.register_translation(self.headline_1_2, 'text')
+    user_lang = anvil.js.call_js('get_user_language')
+    Translations.set_locale(user_lang)
 
   def login_button_click(self, **event_args):
     user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
