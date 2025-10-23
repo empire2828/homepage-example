@@ -84,9 +84,6 @@ dependencies:
 - dep_id: dep_pa3otpma4dkzg
   resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
   version: {version_tag: v3.1.0}
-- dep_id: dep_lj482gndvxqdj
-  resolution_hints: {app_id: UHLC7WE6TELL25TO, name: fluent_anvil, package_name: fluent_anvil}
-  version: {version_tag: v1.0.0}
 metadata: {description: lodginia.com, logo_img: 'asset:Lodginia_orange_transparent-logo.jpeg', title: lodginia.com}
 name: lodginia.com
 native_deps: null
