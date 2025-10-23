@@ -4,20 +4,11 @@ components_by_slot:
     name: body_2
     properties: {font_size: 18, role: body, text: 'Tell us your problem or idea, a screenshot always helps:'}
     type: Label
-  - layout_properties: {}
-    name: help_text_area
-    properties: {background_color: 'theme:Secondary Container', error: false, height: 128, label: '', supporting_text: '', text: ''}
-    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextArea
-  - data_bindings: []
+  - event_bindings: {click: link_1_click}
     layout_properties: {}
-    name: help_file_loader
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.FileLoader
-  - event_bindings: {click: help_send_button_click}
-    layout_properties: {}
-    name: help_send_button
-    properties: {role: filled-button, text: Send}
-    type: Button
+    name: link_1
+    properties: {text: lodginia@gmail.com, url: 'mailto:lodginia@gmail.com'}
+    type: form:dep_g9k4toow7i44kq:_Components.Link
   - layout_properties: {}
     name: spacer_1
     properties: {height: 102.95657348632812}
