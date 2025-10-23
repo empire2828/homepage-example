@@ -86,7 +86,10 @@ dependencies:
   version: {version_tag: v3.1.0}
 metadata: {description: lodginia.com, logo_img: 'asset:Lodginia_orange_transparent-logo.jpeg', title: lodginia.com}
 name: lodginia.com
-native_deps: null
+native_deps:
+  head_html: |+
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+
 package_name: lodginia
 renamed: true
 runtime_options:
