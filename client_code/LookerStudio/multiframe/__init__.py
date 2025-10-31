@@ -38,17 +38,17 @@ class multiframe(multiframeTemplate):
       pass      
 
     self.iframe_urls = [
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/qmCOF",            # Dashboard
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_frni7wm2vd",     # Monthly outlook
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8l5lnc13td",     # Profitability
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_9euf3853td",     # Bookings
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_knw9h153td",     # Cancellations
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_1idplf63td",     # Occupancy
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_8hyzd253td",     # Lead Time
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_tilmy6zhtd",     # Guest Insights
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_4dt5tycuud",     # Long Trends     
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_cc0slxgtud",     # Detailed Bookings
-      "https://lookerstudio.google.com/embed/reporting/d1557a62-b6f7-470e-93b1-42e5c54ef3de/page/p_396qlut0wd",     # Knowledge hub
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/qmCOF",            # Dashboard
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_frni7wm2vd",     # Monthly outlook
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_8l5lnc13td",     # Profitability
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_9euf3853td",     # Bookings
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_knw9h153td",     # Cancellations
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_1idplf63td",     # Occupancy
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_8hyzd253td",     # Lead Time
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_tilmy6zhtd",     # Guest Insights
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_4dt5tycuud",     # Long Trends     
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_cc0slxgtud",     # Detailed Bookings
+      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_396qlut0wd",     # Knowledge hub
     ]
 
     self.panels = [
