@@ -41,18 +41,18 @@ class multiframe(multiframeTemplate):
     else: 
       pass      
 
-    self.iframe_urls = [
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/qmCOF",            # Dashboard
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_frni7wm2vd",     # Monthly outlook
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_8l5lnc13td",     # Profitability
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_9euf3853td",     # Bookings
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_knw9h153td",     # Cancellations
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_1idplf63td",     # Occupancy
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_8hyzd253td",     # Lead Time
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_tilmy6zhtd",     # Guest Insights
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_4dt5tycuud",     # Long Trends     
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_cc0slxgtud",     # Detailed Bookings
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_396qlut0wd",     # Knowledge hub
+    self.page_ids = [
+      "qmCOF",          # Dashboard
+      "p_frni7wm2vd",   # Monthly outlook
+      "p_8l5lnc13td",   # Profitability
+      "p_9euf3853td",   # Bookings
+      "p_knw9h153td",   # Cancellations
+      "p_1idplf63td",   # Occupancy
+      "p_8hyzd253td",   # Lead Time
+      "p_tilmy6zhtd",   # Guest Insights
+      "p_4dt5tycuud",   # Long Trends
+      "p_cc0slxgtud",   # Detailed Bookings
+      "p_396qlut0wd",   # Knowledge hub
     ]
 
     self.panels = [
@@ -80,13 +80,22 @@ class multiframe(multiframeTemplate):
       panel.visible = False
       panel.height = 2300  # Explizite Höhe
 
+  def _build_iframe_url(self, page_id: str) -> str:
+    base = f"{self.BASE_URL}{page_id}"
+    if self.supabase_key:
+      params = {"supabase_key_url": self.supabase_key}
+      encoded = anvil.js.window.encodeURIComponent(json.dumps(params))
+      return f"{base}?params={encoded}"
+    return base
+  
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
     if index < 0 or index >= len(self.iframe_urls):
       print(f"Ungültiger Index: {index}")
       return
 
-    url = self.iframe_urls[index]
+    page_id = self.page_ids[index]
+    url = self._build_iframe_url(page_id)
     panel = self.panels[index]
 
     # Parameter für Supabase Key hinzufügen
