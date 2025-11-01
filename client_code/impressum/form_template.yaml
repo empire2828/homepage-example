@@ -16,7 +16,7 @@ components:
         Dirk Kle mer
         Soden kamp 4e
         22337 Ham burg
-        lodginia@gmail.com
+        info@lodginia.com
     type: Label
   - event_bindings: {click: back_link_click}
     layout_properties: {grid_position: 'FVBYGR,AKUEJR'}
