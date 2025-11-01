@@ -10,8 +10,7 @@ import json
 
 class multiframe(multiframeTemplate):
 
-  REPORT_ID = "efcf540e-57b0-4e1f-9b17-609eeecc6ff7"
-  BASE_URL = f"https://lookerstudio.google.com/embed/reporting/{REPORT_ID}/page/"
+  Locker_Version = "https://lookerstudio.google.com/embed/reporting/7e54db2e-4513-4224-a957-23cfb96ee3e3/page/"
   
   def __init__(self, **properties):
     self.init_components(**properties)
@@ -42,17 +41,17 @@ class multiframe(multiframeTemplate):
       pass      
 
     self.iframe_urls = [
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/qmCOF",            # Dashboard
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_frni7wm2vd",     # Monthly outlook
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_8l5lnc13td",     # Profitability
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_9euf3853td",     # Bookings
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_knw9h153td",     # Cancellations
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_1idplf63td",     # Occupancy
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_8hyzd253td",     # Lead Time
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_tilmy6zhtd",     # Guest Insights
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_4dt5tycuud",     # Long Trends     
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_cc0slxgtud",     # Detailed Bookings
-      "https://lookerstudio.google.com/embed/reporting/efcf540e-57b0-4e1f-9b17-609eeecc6ff7/page/p_396qlut0wd",     # Knowledge hub
+      "{self.Locker_Version}/qmCOF",            # Dashboard
+      "{self.Locker_Version}/p_frni7wm2vd",     # Monthly outlook
+      "{self.Locker_Version}/p_8l5lnc13td",     # Profitability
+      "{self.Locker_Version}/p_9euf3853td",     # Bookings
+      "{self.Locker_Version}/p_knw9h153td",     # Cancellations
+      "{self.Locker_Version}/p_1idplf63td",     # Occupancy
+      "{self.Locker_Version}/p_8hyzd253td",     # Lead Time
+      "{self.Locker_Version}/p_tilmy6zhtd",     # Guest Insights
+      "{self.Locker_Version}/p_4dt5tycuud",     # Long Trends     
+      "{self.Locker_Version}/p_cc0slxgtud",     # Detailed Bookings
+      "{self.Locker_Version}/p_396qlut0wd",     # Knowledge hub
     ]
 
     self.panels = [
