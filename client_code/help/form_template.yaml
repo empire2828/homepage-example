@@ -7,7 +7,7 @@ components_by_slot:
   - event_bindings: {click: link_1_click}
     layout_properties: {}
     name: link_1
-    properties: {text: lodginia@gmail.com, url: 'mailto:lodginia@gmail.com'}
+    properties: {icon: 'mi:email', text: info@lodginia.com, url: 'mailto:info@lodginia.com'}
     type: form:dep_g9k4toow7i44kq:_Components.Link
   - layout_properties: {}
     name: spacer_1
