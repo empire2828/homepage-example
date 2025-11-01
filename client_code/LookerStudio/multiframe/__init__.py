@@ -9,6 +9,10 @@ import datetime
 import json
 
 class multiframe(multiframeTemplate):
+
+  REPORT_ID = "efcf540e-57b0-4e1f-9b17-609eeecc6ff7"
+  BASE_URL = f"https://lookerstudio.google.com/embed/reporting/{REPORT_ID}/page/"
+  
   def __init__(self, **properties):
     self.init_components(**properties)
     self.supabase_key= ""
