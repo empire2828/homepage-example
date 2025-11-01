@@ -37,43 +37,35 @@ components_by_slot:
       name: looker_flow_panel_2
       properties: {}
       type: FlowPanel
-    - components: []
-      layout_properties: {full_width_row: true, grid_position: 'KBYVMD,JAPFAL'}
+    - layout_properties: {full_width_row: true, grid_position: 'KBYVMD,JAPFAL'}
       name: looker_flow_panel_3
       properties: {}
       type: FlowPanel
-    - components: []
-      layout_properties: {full_width_row: true, grid_position: 'DPSMEU,OUBFEM'}
+    - layout_properties: {full_width_row: true, grid_position: 'DPSMEU,OUBFEM'}
       name: looker_flow_panel_4
       properties: {}
       type: FlowPanel
-    - components: []
-      layout_properties: {full_width_row: true, grid_position: 'TDVIMI,DUOBOW'}
+    - layout_properties: {full_width_row: true, grid_position: 'TDVIMI,DUOBOW'}
       name: looker_flow_panel_5
       properties: {}
       type: FlowPanel
-    - components: []
-      layout_properties: {full_width_row: true, grid_position: 'NSXGMB,TRBDBO'}
+    - layout_properties: {full_width_row: true, grid_position: 'NSXGMB,TRBDBO'}
       name: looker_flow_panel_6
       properties: {}
       type: FlowPanel
-    - components: []
-      layout_properties: {full_width_row: true, grid_position: 'BICETF,TVDGIZ'}
+    - layout_properties: {full_width_row: true, grid_position: 'BICETF,TVDGIZ'}
       name: looker_flow_panel_7
       properties: {}
       type: FlowPanel
-    - components: []
-      layout_properties: {full_width_row: true, grid_position: 'RRSCZL,QFBIAG'}
+    - layout_properties: {full_width_row: true, grid_position: 'RRSCZL,QFBIAG'}
       name: looker_flow_panel_8
       properties: {}
       type: FlowPanel
-    - components: []
-      layout_properties: {full_width_row: true, grid_position: 'TGLWLN,OTEGXC'}
+    - layout_properties: {full_width_row: true, grid_position: 'TGLWLN,OTEGXC'}
       name: looker_flow_panel_9
       properties: {}
       type: FlowPanel
-    - components: []
-      layout_properties: {full_width_row: true, grid_position: 'ACOXPH,XUIMVI'}
+    - layout_properties: {full_width_row: true, grid_position: 'ACOXPH,XUIMVI'}
       name: looker_flow_panel_10
       properties: {}
       type: FlowPanel

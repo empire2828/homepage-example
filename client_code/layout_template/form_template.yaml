@@ -21,7 +21,7 @@ components_by_slot:
       navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
-      text: Monthly Outlook
+      text: Outlook
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: profitability_navigation_link_click}
     layout_properties: {}
