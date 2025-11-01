@@ -41,17 +41,17 @@ class multiframe(multiframeTemplate):
       pass      
 
     self.iframe_urls = [
-      "{self.Locker_Version}/qmCOF",            # Dashboard
-      "{self.Locker_Version}/p_frni7wm2vd",     # Monthly outlook
-      "{self.Locker_Version}/p_8l5lnc13td",     # Profitability
-      "{self.Locker_Version}/p_9euf3853td",     # Bookings
-      "{self.Locker_Version}/p_knw9h153td",     # Cancellations
-      "{self.Locker_Version}/p_1idplf63td",     # Occupancy
-      "{self.Locker_Version}/p_8hyzd253td",     # Lead Time
-      "{self.Locker_Version}/p_tilmy6zhtd",     # Guest Insights
-      "{self.Locker_Version}/p_4dt5tycuud",     # Long Trends     
-      "{self.Locker_Version}/p_cc0slxgtud",     # Detailed Bookings
-      "{self.Locker_Version}/p_396qlut0wd",     # Knowledge hub
+      f"{self.Locker_Version}qmCOF",            # Dashboard
+      f"{self.Locker_Version}p_frni7wm2vd",     # Monthly outlook
+      f"{self.Locker_Version}p_8l5lnc13td",     # Profitability
+      f"{self.Locker_Version}p_9euf3853td",     # Bookings
+      f"{self.Locker_Version}p_knw9h153td",     # Cancellations
+      f"{self.Locker_Version}p_1idplf63td",     # Occupancy
+      f"{self.Locker_Version}p_8hyzd253td",     # Lead Time
+      f"{self.Locker_Version}p_tilmy6zhtd",     # Guest Insights
+      f"{self.Locker_Version}p_4dt5tycuud",     # Long Trends     
+      f"{self.Locker_Version}p_cc0slxgtud",     # Detailed Bookings
+      f"{self.Locker_Version}p_396qlut0wd",     # Knowledge hub
     ]
 
     self.panels = [
@@ -93,6 +93,7 @@ class multiframe(multiframeTemplate):
       params = {"supabase_key_url": self.supabase_key}
       encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
       iframe_url = url + encoded_params
+      print(iframe_url)
     else:
       iframe_url = url
 
