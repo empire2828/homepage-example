@@ -42,7 +42,7 @@ class multiframe(multiframeTemplate):
 
     self.iframe_urls = [
       f"{self.Locker_Version}qmCOF",            # Dashboard
-      f"{self.Locker_Version}p_frni7wm2vd",     # Monthly outlook
+      f"{self.Locker_Version}p_frni7wm2vd",     # Outlook
       f"{self.Locker_Version}p_8l5lnc13td",     # Profitability
       f"{self.Locker_Version}p_9euf3853td",     # Bookings
       f"{self.Locker_Version}p_knw9h153td",     # Cancellations
