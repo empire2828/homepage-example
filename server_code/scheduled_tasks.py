@@ -23,7 +23,7 @@ def delete_old_logs():
   bq_client = get_bigquery_client()
   query = """
         DELETE FROM `lodginia.lodginia.logs`
-        WHERE created_at < @older_than
+        WHERE DATE(created_at) < @older_than
     """
   job_config = bigquery.QueryJobConfig(
     query_parameters=[
