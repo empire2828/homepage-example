@@ -10,7 +10,7 @@ import json
 
 class multiframe(multiframeTemplate):
 
-  Locker_Version = "https://lookerstudio.google.com/embed/reporting/d7be2ecb-56de-4f2e-9c63-84cb509f21eb/page/"
+  Locker_Version = "https://lookerstudio.google.com/embed/reporting/58f20116-8301-4a25-be98-406feb9a598f/page/"
   
   def __init__(self, **properties):
     self.init_components(**properties)
