@@ -53,3 +53,4 @@ class homepage(homepageTemplate):
     self.pricing_label.scroll_into_view()
     pass
 
+

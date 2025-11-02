@@ -142,6 +142,15 @@ components:
   properties: {height: 17.85443115234375}
   type: Spacer
 - components:
+  - layout_properties: {slot: card-content-container-slot}
+    name: image_1
+    properties: {source: _/theme/Folie11.JPG}
+    type: Image
+  layout_properties: {grid_position: 'ZKYKQQ,WERCMR'}
+  name: card_content_container_1
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+- components:
   - components:
     - layout_properties: {grid_position: 'MEEFUU,TQIMBB'}
       name: label_2
