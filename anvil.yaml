@@ -102,8 +102,8 @@ scheduled_tasks:
 - job_id: XRUIAFLI
   task_name: delete_old_logs
   time_spec:
-    at: {hour: 3, minute: 0}
-    every: day
+    at: {day: 1, hour: 3, minute: 7}
+    every: week
     n: 1
 secrets:
   PERPLEXITY_API_KEY:
