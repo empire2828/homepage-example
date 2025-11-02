@@ -63,7 +63,7 @@ components_by_slot:
     - components:
       - layout_properties: {slot: card-content-container-slot}
         name: text_1_copy
-        properties: {bold: true, scale: large, text: 'Why to compare coming months best to same time last year (STLY)?'}
+        properties: {bold: true, scale: large, text: 'Why to compare coming months best to same time last year (STLY) and not to finals?'}
         type: form:dep_g9k4toow7i44kq:_Components.Text
       - components:
         - layout_properties: {}
