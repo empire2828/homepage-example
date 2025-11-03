@@ -323,7 +323,7 @@ components:
       italic: false
       spacing:
         margin: ['4', null, '4', null]
-      text: 'Profitability measures: revenue and daily rates after commission& fees'
+      text: 'Profitability: revenue and daily rates after commission& fees'
     type: form:dep_g9k4toow7i44kq:_Components.Checkbox
   - layout_properties: {slot: card-content-container-slot}
     name: checkbox_4_copy_copy_2_copy_copy_2_copy
