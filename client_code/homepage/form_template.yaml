@@ -2,7 +2,7 @@ components:
 - components:
   - layout_properties: {grid_position: 'TMQWLA,OAZSGJ'}
     name: image_2
-    properties: {display_mode: shrink_to_fit, height: 105.37643432617188, horizontal_align: left, source: _/theme/Lodginia_orange_transparent_klein.png, vertical_align: top}
+    properties: {display_mode: shrink_to_fit, height: 105.37643432617188, horizontal_align: left, source: _/theme/homepage/Lodginia_orange_transparent_klein.png, vertical_align: top}
     type: Image
   - layout_properties: {grid_position: 'TMQWLA,RLZHEC'}
     name: column_panel_3_copy
@@ -142,172 +142,241 @@ components:
   properties: {height: 17.85443115234375}
   type: Spacer
 - components:
-  - components:
-    - layout_properties: {grid_position: 'MEEFUU,TQIMBB'}
-      name: label_2
-      properties:
-        align: center
-        bold: true
-        font_size: 18
-        foreground: theme:Error
-        icon: fa:dollar
-        spacing:
-          margin: ['6', null, '6', null]
-          padding: ['6', null, '6', null]
-        text: ''
-      type: Label
-    - layout_properties: {grid_position: 'RYQOWK,FYZGKX'}
-      name: label_2_copy
-      properties:
-        align: center
-        bold: true
-        font_size: 18
-        foreground: theme:Error
-        icon: ''
-        spacing:
-          margin: ['6', null, '6', null]
-          padding: ['6', null, '6', null]
-        text: Revenue Analytics
-      type: Label
-    - layout_properties: {grid_position: 'UXGXZU,SWFGVA'}
-      name: text_1
-      properties: {font_size: 18, text: Track your revenue excluding fees and commissions against fully flexible comparison timelines}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
-    layout_properties: {grid_position: 'GXCIUU,BVVWXW'}
-    name: elevated_card_2
-    properties:
-      background: '#e2e8e9'
-      role: elevated-card
-      spacing:
-        margin: ['8', null, '8', null]
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'HMARQC,HIKVKW'}
-      name: label_4
-      properties:
-        align: center
-        bold: true
-        font_size: 18
-        foreground: theme:Primary
-        icon: fa:book
-        spacing:
-          margin: ['6', null, '6', null]
-          padding: ['6', null, '6', null]
-        text: ''
-      type: Label
-    - layout_properties: {grid_position: 'NMWNLH,QYJDDW'}
-      name: label_4_copy
-      properties:
-        align: center
-        bold: true
-        font_size: 18
-        foreground: theme:Primary
-        icon: ''
-        spacing:
-          margin: ['6', null, '6', null]
-          padding: ['6', null, '6', null]
-        text: Booking Patterns
-      type: Label
-    - layout_properties: {grid_position: 'DOVNZB,BLUQAX'}
-      name: text_2
-      properties: {font_size: 18, text: Be able to compare against same time last year - not only finals - and avoid giving discounts to early.}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
-    layout_properties: {grid_position: 'GXCIUU,RFFNST'}
-    name: elevated_card_3
-    properties:
-      background: '#e2e8e9'
-      role: elevated-card
-      spacing:
-        margin: ['8', null, '8', null]
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'QDWUXW,VKDLWZ'}
-      name: label_1
-      properties:
-        align: center
-        bold: true
-        font_size: 18
-        foreground: theme:Tertiary
-        icon: fa:bar-chart
-        spacing:
-          margin: ['6', '6', '6', '6']
-          padding: ['6', '4', '6', '4']
-        text: ''
-      type: Label
-    - layout_properties: {grid_position: 'QGIXTK,ANMFOE'}
-      name: label_1_copy
-      properties:
-        align: center
-        bold: true
-        font_size: 18
-        foreground: theme:Tertiary
-        icon: ''
-        spacing:
-          margin: ['6', '6', '6', '6']
-          padding: ['6', '4', '6', '4']
-        text: Performance Metrics
-      type: Label
-    - layout_properties: {grid_position: 'NQNPRE,FUVFHR'}
-      name: text_3
-      properties: {font_size: 18, text: 'Monitor occupancy rates, daily rates, commissions and fees and other key metrics that matter.'}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
-    layout_properties: {grid_position: 'GXCIUU,NLMISD'}
-    name: elevated_card_4
-    properties:
-      background: '#e2e8e9'
-      role: elevated-card
-      spacing:
-        margin: ['8', null, '8', null]
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'MVLKBL,GBMQKF'}
-      name: label_5_copy
-      properties:
-        align: center
-        bold: true
-        font_size: 18
-        foreground: theme:Inverse Surface
-        icon: fa:odnoklassniki
-        spacing:
-          margin: ['6', null, '6', null]
-          padding: ['6', null, '6', null]
-        text: ''
-      type: Label
-    - layout_properties: {grid_position: 'RBGCJV,QUIWTE'}
-      name: label_5
-      properties:
-        align: center
-        bold: true
-        font_size: 18
-        icon: ''
-        spacing:
-          margin: ['6', null, '6', null]
-          padding: ['6', null, '6', null]
-        text: Guest Insights
-      type: Label
-    - layout_properties: {grid_position: 'WXLICU,SUGGMN'}
-      name: text_4
-      properties: {font_size: 18, text: 'Analyze guest demographics, booking lead times, and stay patterns to improve your marketing.'}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
-    layout_properties: {grid_position: 'GXCIUU,AVWZRH'}
-    name: elevated_card_7
-    properties:
-      background: '#e2e8e9'
-      role: elevated-card
-      spacing:
-        margin: ['8', null, '8', null]
-    type: ColumnPanel
-  layout_properties: {grid_position: 'FHTEHQ,ZABGTF'}
-  name: outlined_card_2
-  properties:
-    role: null
-    spacing:
-      margin: [null, '6', null, '6']
-      padding: [null, '6', null, '6']
-  type: ColumnPanel
+  - layout_properties: {slot: card-content-container-slot}
+    name: heading_1
+    properties: {bold: true, text: See who is cancelling}
+    type: form:dep_g9k4toow7i44kq:_Components.Heading
+  - layout_properties: {slot: card-content-container-slot}
+    name: image_1
+    properties: {display_mode: shrink_to_fit, height: 248.45672607421875, source: _/theme/homepage/cancellations.jpeg}
+    type: Image
+  layout_properties: {grid_position: 'OWQWFT,NSXMFF'}
+  name: card_content_container_2
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+- components:
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_13_copy
+    properties: {height: 101.64773559570312}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: text_6_copy_copy_4
+    properties: {font_size: 20, text: Increase/Decrease your booking window depending on when most of your cancellations occure}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_13
+    properties: {height: 39.87286376953125}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: text_6_copy
+    properties: {font_size: 20, text: Increase for certain guest group sizes surcharges to cover higher cancellation risks}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  layout_properties: {grid_position: 'OWQWFT,QHCGSR'}
+  name: card_content_container_1
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
 - layout_properties: {grid_position: 'RHAAWF,ESIYCQ'}
   name: spacer_12
   properties: {height: 47.171173095703125}
+  type: Spacer
+- components:
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_14
+    properties: {height: 67.0625}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: text_6_copy_copy
+    properties: {font_size: 20, text: Easy overview of all major numbers in one view- you will see the developments instantly}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_14_copy
+    properties: {height: 51.489349365234375}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: text_6_copy_copy_copy
+    properties: {font_size: 20, text: 'Is your revenue after deduction of commission & fees growth at least higher than inflation?'}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  layout_properties: {grid_position: 'LYWEJL,DLDTZM'}
+  name: card_content_container_3
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+- components:
+  - layout_properties: {slot: card-content-container-slot}
+    name: heading_1_copy
+    properties: {bold: true, text: Spot instantly long term trends}
+    type: form:dep_g9k4toow7i44kq:_Components.Heading
+  - layout_properties: {slot: card-content-container-slot}
+    name: image_1_copy
+    properties: {display_mode: shrink_to_fit, height: 248.45672607421875, source: _/theme/homepage/long_term.jpeg}
+    type: Image
+  layout_properties: {grid_position: 'LYWEJL,SHGSBO'}
+  name: card_content_container_2_copy
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+- layout_properties: {grid_position: 'DZXVWT,WEZJIQ'}
+  name: spacer_12_copy
+  properties: {height: 47.171173095703125}
+  type: Spacer
+- components:
+  - layout_properties: {slot: card-content-container-slot}
+    name: heading_1_copy_copy
+    properties: {bold: true, text: Fully flexible time comparisons}
+    type: form:dep_g9k4toow7i44kq:_Components.Heading
+  - layout_properties: {slot: card-content-container-slot}
+    name: image_1_copy_copy
+    properties: {display_mode: shrink_to_fit, height: 221.969482421875, source: _/theme/homepage/ltm_stly.jpeg}
+    type: Image
+  layout_properties: {grid_position: 'LSJUOC,DJDFME'}
+  name: card_content_container_2_copy_copy
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+- components:
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_15
+    properties: {}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: text_6_copy_copy_copy_copy
+    properties: {font_size: 20, text: 'On top of normal comparisons you can choose:'}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_15_copy_copy
+    properties: {height: 8.53271484375}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: checkbox_4_copy
+    properties:
+      checked: true
+      font_size: 18
+      italic: false
+      spacing:
+        margin: ['9', null, '9', null]
+      text: Rolling last 12 months to avoid having seasonal impacts and comparing apples with peaches
+    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_15_copy
+    properties: {height: 8.53271484375}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: checkbox_4_copy_copy
+    properties:
+      checked: true
+      font_size: 18
+      spacing:
+        margin: ['9', null, '9', null]
+      text: Same time last year to avoid discounting too early as some bookings will still come
+    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+  layout_properties: {grid_position: 'LSJUOC,EVYLXI'}
+  name: card_content_container_4
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+- layout_properties: {grid_position: 'HIMCYP,DLGRXA'}
+  name: spacer_17
+  properties: {height: 37.798309326171875}
+  type: Spacer
+- components:
+  - layout_properties: {slot: card-content-container-slot}
+    name: heading_1_copy_copy_copy
+    properties: {align: center, bold: true, text: Know your profitability}
+    type: form:dep_g9k4toow7i44kq:_Components.Heading
+  - layout_properties: {slot: card-content-container-slot}
+    name: image_1_copy_copy_copy
+    properties: {display_mode: shrink_to_fit, height: 221.969482421875, source: _/theme/homepage/profitability.jpeg}
+    type: Image
+  - layout_properties: {slot: card-content-container-slot}
+    name: text_6_copy_copy_copy_copy_2
+    properties: {align: center, font_size: 20, text: 'How much is your revenue after deduction of commission and fees?'}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_22
+    properties: {height: 7.3515625}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: text_6_copy_copy_copy_copy_2_copy
+    properties: {align: center, font_size: 20, text: 'Are the revenues on booking.com worth paying the commission?'}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
+  layout_properties: {grid_position: 'EOMRTU,XVISLN'}
+  name: card_content_container_2_copy_copy_copy
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+- layout_properties: {grid_position: 'DAHPAK,DIVTEY'}
+  name: spacer_20
+  properties: {}
+  type: Spacer
+- components:
+  - layout_properties: {slot: card-content-container-slot}
+    name: heading_1_copy_copy_copy_copy
+    properties: {align: center, bold: true, text: Adjust your marketing to your guests}
+    type: form:dep_g9k4toow7i44kq:_Components.Heading
+  - layout_properties: {slot: card-content-container-slot}
+    name: image_1_copy_copy_copy_copy
+    properties: {display_mode: shrink_to_fit, height: 293.79620361328125, source: _/theme/homepage/guest_insights.jpeg}
+    type: Image
+  layout_properties: {grid_position: 'UKGUNY,RVUUVC'}
+  name: card_content_container_2_copy_copy_copy_copy
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+- components:
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_19
+    properties: {height: 137.33309936523438}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: checkbox_4_copy_copy_2
+    properties:
+      align: left
+      checked: true
+      font_size: 18
+      italic: false
+      spacing:
+        margin: ['9', null, '9', null]
+      text: Repeating guests reports to enable direct marketing
+    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+  - layout_properties: {slot: card-content-container-slot}
+    name: spacer_21
+    properties: {height: 21.5362548828125}
+    type: Spacer
+  - layout_properties: {slot: card-content-container-slot}
+    name: checkbox_4_copy_copy_2_copy
+    properties:
+      align: left
+      checked: true
+      font_size: 18
+      italic: false
+      spacing:
+        margin: ['9', null, '9', null]
+      text: Guest types and group sizes
+    type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+  layout_properties: {grid_position: 'UKGUNY,VLGZUA'}
+  name: card_content_container_6
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+- layout_properties: {grid_position: 'HINTOW,ZQADEE'}
+  name: spacer_23
+  properties: {}
+  type: Spacer
+- layout_properties: {grid_position: 'YJALAR,SCUMRJ'}
+  name: heading_1_copy_copy_copy_copy_copy
+  properties: {align: center, bold: true, text: It is your time- work while travelling}
+  type: form:dep_g9k4toow7i44kq:_Components.Heading
+- layout_properties: {grid_position: 'HQCUFD,MQCMWL'}
+  name: image_3
+  properties: {source: _/theme/homepage/iphone.jpg}
+  type: Image
+- layout_properties: {grid_position: 'MNRSFY,JGZEAP'}
+  name: checkbox_4_copy_copy_2_copy_copy
+  properties:
+    align: center
+    checked: true
+    font_size: 18
+    italic: false
+    spacing:
+      margin: ['9', null, '9', null]
+    text: Developed for mobile and desktop view
+  type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+- layout_properties: {grid_position: 'KMKOOT,DGWPVN'}
+  name: spacer_16
+  properties: {}
   type: Spacer
 - components:
   - components:
@@ -372,6 +441,10 @@ components:
           margin: ['9', null, '9', null]
         text: Fully flexible time line for comparisons
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+    - layout_properties: {grid_position: 'XWNAAK,KZJNPL'}
+      name: spacer_12_copy_copy
+      properties: {height: 47.171173095703125}
+      type: Spacer
     name: column_panel_4
     properties: {}
     type: ColumnPanel
@@ -589,6 +662,7 @@ components:
   type: ColumnPanel
 container:
   properties:
+    background: theme:On Primary
     col_widths: '{}'
     spacing:
       margin: [null, '10', null, '10']
