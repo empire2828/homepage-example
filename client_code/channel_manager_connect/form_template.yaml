@@ -24,7 +24,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'GQFREB,HRRAKD'}
       name: image_1
-      properties: {height: 421.85589599609375, horizontal_align: left, source: _/theme/smoobu_api_key.jpg}
+      properties: {height: 421.85589599609375, horizontal_align: left, source: _/theme/connect/help smoobu_api_key.jpg}
       type: Image
     - layout_properties: {grid_position: 'DNDMCA,HZWTWI'}
       name: spacer_1
@@ -36,11 +36,11 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'ATWVSR,SKSOYN'}
       name: image_2
-      properties: {height: 374.06939697265625, horizontal_align: left, source: _/theme/smoobu_user.jpg}
+      properties: {height: 374.06939697265625, horizontal_align: left, source: _/theme/connect/help smoobu_user.jpg}
       type: Image
     - layout_properties: {grid_position: 'ATWVSR,HCNOFY'}
       name: image_3
-      properties: {height: 321.56854248046875, source: _/theme/smoobu_profildaten.jpg}
+      properties: {height: 321.56854248046875, source: _/theme/connect/help smoobu_profildaten.jpg}
       type: Image
     - layout_properties: {grid_position: 'TFPJJC,YDJXGD'}
       name: spacer_2
@@ -70,7 +70,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'WHQTWL,KZTOCT'}
       name: image_4
-      properties: {height: 386.09027099609375, horizontal_align: left, source: _/theme/smoobu_webhook.jpg}
+      properties: {height: 386.09027099609375, horizontal_align: left, source: _/theme/connect/help smoobu_webhook.jpg}
       type: Image
     - layout_properties: {grid_position: 'HYRDJS,EKNZVQ'}
       name: body_2
