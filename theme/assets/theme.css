@@ -1041,3 +1041,16 @@ div.plot-container.plotly svg.main-svg {
     --anvil-spinner-bg: %color:Surface Variant%;
 }
 
+/* rechte Buttons/Links in der App Bar mittig ausrichten */
+.anvil-role-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* rechte Buttons/Links in der App Bar mittig ausrichten */
+.anvil-role-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
