@@ -96,7 +96,7 @@ class my_account(my_accountTemplate):
           ])
     if result == "YES":
       anvil.users.logout()
-      open_form('homepage', force= True)
+      open_form('home', force= True)
       pass
 
   def subscription_management_navigation_link_click(self, **event_args):
