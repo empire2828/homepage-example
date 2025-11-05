@@ -9,24 +9,40 @@ components:
     name: login_button
     properties:
       align: right
+      background: theme:Secondary Container
+      bold: true
+      foreground: theme:Primary
+      icon_align: top
+      role: filled-button
+      spacing:
+        margin: ['15', null, '15', null]
+        padding: ['10', '24', '10', '24']
+      spacing_below: large
+      text: '   Blog    '
+    type: Button
+  - event_bindings: {click: login_button_click}
+    layout_properties: {}
+    name: login_button_copy
+    properties:
+      align: right
       background: theme:Primary
       bold: true
       foreground: theme:On Primary
-      icon_align: right_edge
+      icon_align: top
       role: outlined-button
       spacing:
-        margin: ['30', null, '30', null]
+        margin: ['15', null, '15', null]
         padding: ['10', '24', '10', '24']
       spacing_below: large
       text: '  Login  '
     type: Button
   layout_properties: {slot: nav-right}
   name: navbar_links
-  properties: {}
+  properties: {gap: small, vertical_align: top}
   type: FlowPanel
 - layout_properties: {slot: title}
   name: image_2
-  properties: {display_mode: shrink_to_fit, height: 85.11109924316406, horizontal_align: left, source: _/theme/homepage/Lodginia_orange_transparent_klein.png, vertical_align: top}
+  properties: {display_mode: shrink_to_fit, height: 63.5555419921875, horizontal_align: left, source: _/theme/homepage/Lodginia_orange_transparent_klein.png, vertical_align: center}
   type: Image
 container:
   properties: {background: '', html: '@theme:standard-page.html'}

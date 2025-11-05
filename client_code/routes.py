@@ -4,7 +4,7 @@ from routing.router import Route #, debug_logging
 
 class homepage_route(Route):
     path = "/"
-    form = "homepage"
+    form = "home"
     #cache_form = True
     #cache_data = True
 
