@@ -12,8 +12,6 @@ class home_template(home_templateTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.navbar_links.role= "navbar-right"
-    self.image_2.role="nav-logo"
 
     # Any code you write here will run before the form opens.
 
