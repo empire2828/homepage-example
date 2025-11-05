@@ -40,12 +40,12 @@ components:
   layout_properties: {slot: nav-right}
   name: navbar_links
   properties:
-    align: right
+    align: justify
     gap: small
     spacing:
       margin: ['0', null, null, null]
     spacing_above: none
-    vertical_align: full
+    vertical_align: bottom
   type: FlowPanel
 - layout_properties: {slot: title}
   name: heading_1
