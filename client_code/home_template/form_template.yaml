@@ -50,12 +50,8 @@ components:
   type: FlowPanel
 - layout_properties: {slot: title}
   name: heading_1
-  properties: {font_size: 18, icon_size: 18, scale: small, text: ''}
+  properties: {font_size: 18, icon_size: 18, scale: small, text: Lodginia}
   type: form:dep_g9k4toow7i44kq:_Components.Heading
-- layout_properties: {slot: top-left-btn}
-  name: image_2
-  properties: {alt_text: Lodginia Logo, display_mode: shrink_to_fit, height: 49.0390625, horizontal_align: left, source: _/theme/homepage/Lodginia_orange_transparent_klein.png, vertical_align: center}
-  type: Image
 container:
   properties: {background: '', html: '@theme:standard-page.html'}
   type: HtmlTemplate
