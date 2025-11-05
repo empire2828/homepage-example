@@ -13,7 +13,7 @@ components:
       background: theme:Secondary Container
       bold: true
       foreground: theme:Primary
-      icon_align: top
+      icon_align: right_edge
       role: filled-button
       spacing:
         margin: ['15', null, '15', null]
@@ -29,7 +29,7 @@ components:
       background: theme:Primary
       bold: true
       foreground: theme:On Primary
-      icon_align: top
+      icon_align: right_edge
       role: outlined-button
       spacing:
         margin: ['15', null, '15', null]
@@ -42,10 +42,11 @@ components:
   properties:
     align: right
     gap: small
+    role: null
     spacing:
       margin: ['0', null, null, null]
-    spacing_above: none
-    vertical_align: full
+    spacing_above: small
+    vertical_align: middle
   type: FlowPanel
 - layout_properties: {slot: title}
   name: heading_1
@@ -53,7 +54,7 @@ components:
   type: form:dep_g9k4toow7i44kq:_Components.Heading
 - layout_properties: {slot: top-left-btn}
   name: image_2
-  properties: {display_mode: shrink_to_fit, height: 48.3779296875, horizontal_align: left, source: _/theme/homepage/Lodginia_orange_transparent_klein.png, vertical_align: top}
+  properties: {alt_text: Lodginia Logo, display_mode: shrink_to_fit, height: 49.0390625, horizontal_align: left, source: _/theme/homepage/Lodginia_orange_transparent_klein.png, vertical_align: center}
   type: Image
 container:
   properties: {background: '', html: '@theme:standard-page.html'}
