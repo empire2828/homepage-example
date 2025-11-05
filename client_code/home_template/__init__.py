@@ -29,3 +29,11 @@ class home_template(home_templateTemplate):
       layout_form.reset_links()
       layout_form.dashboard_navigation_link.selected = True
     pass
+
+  def blog_button_click(self, **event_args):
+    open_form("blog")
+    pass
+
+  def lodginia_button_click(self, **event_args):
+    open_form("home")
+    pass

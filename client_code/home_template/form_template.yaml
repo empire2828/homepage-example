@@ -5,9 +5,9 @@ components:
   properties: {}
   type: ColumnPanel
 - components:
-  - event_bindings: {click: login_button_click}
+  - event_bindings: {click: blog_button_click}
     layout_properties: {}
-    name: login_button
+    name: blog_button
     properties:
       align: right
       background: theme:Secondary Container
@@ -30,7 +30,7 @@ components:
       bold: true
       foreground: theme:On Primary
       icon_align: right_edge
-      role: outlined-button
+      role: filled-button
       spacing:
         margin: ['15', null, '15', null]
         padding: ['10', '24', '10', '24']
@@ -48,10 +48,20 @@ components:
     spacing_above: small
     vertical_align: middle
   type: FlowPanel
-- layout_properties: {slot: top-left-btn}
-  name: heading_1
-  properties: {bold: true, font_size: 18, icon_size: 18, scale: small, text: Lodginia, text_color: '#ffa200'}
-  type: form:dep_g9k4toow7i44kq:_Components.Heading
+- event_bindings: {click: lodginia_button_click}
+  layout_properties: {slot: top-left-btn}
+  name: lodginia_button
+  properties:
+    background: theme:Light Overlay 1
+    bold: true
+    font_size: 18
+    foreground: '#ffa200'
+    role: null
+    spacing:
+      margin: ['15', null, '15', null]
+    text: Lodginia
+    visible: true
+  type: Button
 container:
   properties: {background: '', html: '@theme:standard-page.html'}
   type: HtmlTemplate
