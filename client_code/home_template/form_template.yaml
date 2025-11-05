@@ -3,12 +3,41 @@ components:
   name: content_panel
   properties: {}
   type: ColumnPanel
-- layout_properties: {slot: nav-right}
+- components:
+  - event_bindings: {click: login_button_click}
+    layout_properties: {}
+    name: login_button
+    properties:
+      align: right
+      background: theme:Primary
+      bold: true
+      foreground: theme:On Primary
+      icon_align: right_edge
+      role: outlined-button
+      spacing:
+        margin: ['30', null, '30', null]
+        padding: ['10', '24', '10', '24']
+      spacing_below: large
+      text: '  Login  '
+    type: Button
+  layout_properties: {slot: nav-right}
   name: navbar_links
   properties: {}
   type: FlowPanel
+- layout_properties: {slot: title}
+  name: image_2
+  properties: {display_mode: shrink_to_fit, height: 85.11109924316406, horizontal_align: left, source: _/theme/homepage/Lodginia_orange_transparent_klein.png, vertical_align: top}
+  type: Image
 container:
-  properties: {html: '@theme:standard-page.html'}
+  properties: {background: '', html: '@theme:standard-page.html'}
   type: HtmlTemplate
 is_package: true
-slots: {}
+slots:
+  slot_1:
+    index: 0
+    set_layout_properties: {full_width_row: true, grid_position: 'SPVYXG,KXRALN'}
+    target: {name: content_panel, type: container}
+  slot_2:
+    index: 0
+    set_layout_properties: {grid_position: 'IPVDIA,VJWPLA'}
+    target: {name: content_panel, type: container}
