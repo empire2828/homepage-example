@@ -27,7 +27,7 @@ class home(homeTemplate):
     pass
  
   def home_link_click(self, **event_args):
-    open_form('homepage')
+    open_form('home')
     pass
   
   def pricing_link_click(self, **event_args):

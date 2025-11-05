@@ -48,9 +48,9 @@ components:
     spacing_above: small
     vertical_align: middle
   type: FlowPanel
-- layout_properties: {slot: title}
+- layout_properties: {slot: top-left-btn}
   name: heading_1
-  properties: {font_size: 18, icon_size: 18, scale: small, text: Lodginia}
+  properties: {bold: true, font_size: 18, icon_size: 18, scale: small, text: Lodginia, text_color: '#ffa200'}
   type: form:dep_g9k4toow7i44kq:_Components.Heading
 container:
   properties: {background: '', html: '@theme:standard-page.html'}
