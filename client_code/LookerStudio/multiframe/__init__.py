@@ -11,6 +11,7 @@ import json
 class multiframe(multiframeTemplate):
 
   Locker_Version = "https://lookerstudio.google.com/embed/reporting/58f20116-8301-4a25-be98-406feb9a598f/page/"
+  #share unlisted anyone can listen, embed ohne menu
   
   def __init__(self, **properties):
     self.init_components(**properties)
