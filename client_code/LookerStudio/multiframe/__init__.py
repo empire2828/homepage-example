@@ -10,7 +10,7 @@ import json
 
 class multiframe(multiframeTemplate):
 
-  Locker_Version = "https://lookerstudio.google.com/embed/reporting/58f20116-8301-4a25-be98-406feb9a598f/page/"
+  Locker_Version = "https://lookerstudio.google.com/embed/u/0/reporting/58f20116-8301-4a25-be98-406feb9a598f/page/"
   
   def __init__(self, **properties):
     self.init_components(**properties)
@@ -108,7 +108,9 @@ class multiframe(multiframeTemplate):
       "frameborder": "0",
       "style": "border: none; background: white;",
       "allow": "fullscreen",
-      "loading": "lazy"
+      "loading": "lazy",
+      "referrerpolicy": "origin-when-cross-origin",
+      "credentialless": "" 
     })
 
     # IFrame zum Panel hinzufügen
