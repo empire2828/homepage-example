@@ -12,6 +12,10 @@ class home_de(Route):
   path = "/de"
   form = "home_de"
 
+class home_en(Route):
+  path = "/en"
+  form = "home_en"
+
 class data_protection_route(Route):
     path = "/data_protection"
     form = "data_protection"
