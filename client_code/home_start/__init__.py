@@ -13,4 +13,3 @@ class home_start(home_startTemplate):
       open_form('home_de')
     else:
       open_form('home_en')
-    print(user_locale)
