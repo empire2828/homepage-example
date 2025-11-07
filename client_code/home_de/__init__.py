@@ -33,7 +33,7 @@ class home_de(home_deTemplate):
     pass
 
   def home_link_click(self, **event_args):
-    open_form("home")
+    open_form("home_start")
     pass
 
   def pricing_link_click(self, **event_args):
