@@ -455,7 +455,7 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Die Möglichkeit, den kommenden Monat mit dem gleichen Zeitraum des Vorjahres zu vergleichen (keine endgültigen Zahlen), um eine zu frühe Rabattierung zu vermeiden
+        text: Die Möglichkeit, kommende Monate mit dem gleichen Zeitraum des Vorjahres zu vergleichen
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'XWNAAK,FFFCRW'}
       name: checkbox_18
