@@ -27,9 +27,9 @@ class home_en(home_enTemplate):
     open_form('impressum')
     pass
  
-  def home_link_click(self, **event_args):
-    open_form('home_start')
-    pass
+  #def home_link_click(self, **event_args):
+  #  open_form('home_start')
+  #  pass
   
   def pricing_link_click(self, **event_args):
     self.pricing_label.scroll_into_view()
