@@ -2,10 +2,13 @@ from ._anvil_designer import homeTemplate
 from anvil import *
 import anvil.server
 import anvil.users
+import anvil.js
 
 class home(homeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
+    user_locale = anvil.js.window.navigator.language
+    print(user_locale)
   
   def testen_button_click(self, **event_args):
     user = anvil.users.signup_with_form(allow_cancel=True)
