@@ -11,11 +11,11 @@ components_by_slot:
         role: headline
         spacing:
           margin: ['8', null, null, null]
-        text: Unlock Your Rental's
+        text: Smoobu Analysen
       type: Label
     - layout_properties: {grid_position: 'BUXZAW,MIPLQT'}
-      name: headline_1_2
-      properties: {align: center, bold: true, font_size: 54, foreground: '#ffa200', italic: false, role: headline, text: True Revenue Potential}
+      name: headline_2
+      properties: {align: center, bold: true, font_size: 54, foreground: '#ffa200', italic: false, role: headline, text: Einfach.Schnell.Graphisch., visible: true}
       type: Label
     - components:
       - layout_properties: {}
@@ -34,7 +34,7 @@ components_by_slot:
             margin: [null, '6', null, '6']
             padding: [null, null, 8, null]
           spacing_above: small
-          text: Best Smoobu analytics in minutes. Easy setup, simple graphics.
+          text: Smarte Smoobu Auswertungen. Einfacher Setup, simple Graphiken.
           underline: false
         type: Label
       - components:
@@ -54,7 +54,7 @@ components_by_slot:
         - components:
           - layout_properties: {grid_position: 'MTHMSH,PKOMHH'}
             name: checkbox_3
-            properties: {align: left, checked: true, font_size: 20, text: No credit card for trial}
+            properties: {align: left, checked: true, font_size: 20, text: Keine Kreditkarte für Testversion}
             type: form:dep_g9k4toow7i44kq:_Components.Checkbox
           layout_properties: {grid_position: 'QCSDVZ,BMJGRB'}
           name: elevated_card_1
@@ -69,7 +69,7 @@ components_by_slot:
               font_size: 20
               spacing:
                 margin: [null, '-', null, null]
-              text: Setup in under 5 minutes
+              text: Einrichtung in unter 5 Minuten
             type: form:dep_g9k4toow7i44kq:_Components.Checkbox
           layout_properties: {grid_position: 'QCSDVZ,IHCYYL'}
           name: elevated_card_1_copy
@@ -78,7 +78,7 @@ components_by_slot:
         - components:
           - layout_properties: {grid_position: 'WKLVAD,UCYNDI'}
             name: checkbox_2
-            properties: {align: left, checked: true, font_size: 20, text: Cancel anytime}
+            properties: {align: left, checked: true, font_size: 20, text: Jederzeit kündbar bei Nichtgefallen}
             type: form:dep_g9k4toow7i44kq:_Components.Checkbox
           layout_properties: {grid_position: 'QCSDVZ,CYOJER'}
           name: elevated_card_1_copy_copy
@@ -95,7 +95,7 @@ components_by_slot:
       name: rich_text_1
       properties:
         align: center
-        content: By hosts, for hosts
+        content: Von Vermietern, für Vermieter
         font_size: 20
         foreground: ''
         format: markdown
@@ -118,12 +118,12 @@ components_by_slot:
     type: Spacer
   - components:
     - layout_properties: {grid_position: ''}
-      name: headline_2
-      properties: {align: center, bold: true, font_size: 28, role: headline, text: Powerful Analytics for Smart Smoobu Hosts}
+      name: headline_3
+      properties: {align: center, bold: true, font_size: 28, role: headline, text: Leistungsstarke Analysen für smarte Vermieter}
       type: Label
     - layout_properties: {grid_position: 'OUPFVY,RMCQSM'}
       name: body_1
-      properties: {align: center, font_size: 20, role: body, text: Powerful analytics and insights designed specifically for vacation rental owners who want to grow their business.}
+      properties: {align: center, font_size: 20, role: body, text: 'Leistungsstarke Einblicke, die speziell für Vermieter von Ferienwohnungen entwickelt wurden, die ihr Geschäft weiter ausbauen und besser verstehen möchten.', visible: true}
       type: Label
     layout_properties: {}
     name: column_panel_2
@@ -136,27 +136,27 @@ components_by_slot:
   - components:
     - layout_properties: {grid_position: 'RZSMCX,GFBRJL'}
       name: heading_1
-      properties: {bold: true, text: See who is cancelling}
+      properties: {bold: true, text: Erfahre welche Gästegruppen häufig stornieren und was Du tun kannst}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'WDCHWZ,WSVIBI'}
-      name: text_6_copy_copy_copy_copy_2_copy
-      properties: {align: center, font_size: 20, text: 'Are the revenues on booking.com worth paying the commission?'}
+      name: text_2
+      properties: {align: left, font_size: 20, text: ''}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'DCNSWL,LGPAFB'}
-      name: image_1
+      name: image_2
       properties: {display_mode: shrink_to_fit, height: 248.45672607421875, horizontal_align: left, source: _/theme/homepage/cancellations.jpeg}
       type: Image
     - layout_properties: {grid_position: 'BUNUUS,GBWIQF'}
-      name: text_6_copy_copy_4
-      properties: {font_size: 20, text: Increase/Decrease your booking window depending on when most of your cancellations occure}
+      name: text_3
+      properties: {font_size: 20, text: 'Verändere das Buchungsfenster je nachdem, wann die meisten Stornierungen auftreten.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'SVFLNC,YYMIGP'}
       name: spacer_13
       properties: {height: 9.289794921875}
       type: Spacer
     - layout_properties: {grid_position: 'AWTSHY,KWEJBN'}
-      name: text_6_copy
-      properties: {font_size: 20, text: Increase for certain guest group sizes surcharges to cover higher cancellation risks}
+      name: text_4
+      properties: {font_size: 20, text: 'Erhöhe die Zuschläge für die Gruppengrößen, die am meisten stornieren'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {}
     name: column_panel_3
@@ -167,25 +167,25 @@ components_by_slot:
     properties: {height: 47.171173095703125}
     type: Spacer
   - components:
-    - layout_properties: {grid_position: 'XJSCPN,JLENGH'}
-      name: heading_1_copy
-      properties: {align: right, bold: true, text: Spot instantly long term trends}
+    - layout_properties: {grid_position: 'XJNRJV,QNKVGU'}
+      name: heading_3
+      properties: {align: center, bold: true, text: Erkenne auf einem Blick langfristige Trends}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'KYJGDK,JWTQGP'}
-      name: image_1_copy
-      properties: {display_mode: shrink_to_fit, height: 248.45672607421875, horizontal_align: right, source: _/theme/homepage/long_term.jpeg}
+      name: image_4
+      properties: {display_mode: shrink_to_fit, height: 248.45672607421875, horizontal_align: center, source: _/theme/homepage/long_term.jpeg}
       type: Image
     - layout_properties: {grid_position: 'EHPEGL,UUXJUU'}
-      name: text_6_copy_copy
-      properties: {align: right, font_size: 20, text: Easy overview of all major numbers in one view- you will see the developments instantly.}
+      name: text_6
+      properties: {align: center, font_size: 20, text: Einfacher Überblick über alle wichtigen Zahlen auf einen Blick – Du siehst die Entwicklungen sofort.}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'HHPDCF,KBHOBB'}
       name: spacer_14_copy
       properties: {height: 8.6683349609375}
       type: Spacer
     - layout_properties: {grid_position: 'UDTETJ,JFMZTA'}
-      name: text_6_copy_copy_copy
-      properties: {align: right, font_size: 20, text: 'Is your revenue after deduction of commission & fees growth at least higher than inflation?'}
+      name: text_7
+      properties: {align: center, font_size: 20, text: 'Ist Dein Umsatz nach Abzug von Provisionen und Gebühren höher als die Inflationsrate?'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {}
     name: column_panel_6
@@ -201,19 +201,19 @@ components_by_slot:
     type: Spacer
   - components:
     - layout_properties: {grid_position: 'DVOREJ,BBQLEN'}
-      name: heading_1_copy_copy
-      properties: {align: left, bold: true, text: Fully flexible time comparisons}
+      name: heading_4
+      properties: {align: left, bold: true, text: Vollständig flexible Zeitvergleiche}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'IWBGGP,BKWYQK'}
-      name: image_1_copy_copy
+      name: image_5
       properties: {display_mode: shrink_to_fit, height: 221.969482421875, horizontal_align: left, source: _/theme/homepage/ltm_stly.jpeg}
       type: Image
     - layout_properties: {grid_position: 'CWHSCA,PGEQSH'}
-      name: text_6_copy_copy_copy_copy
-      properties: {align: left, font_size: 20, text: 'On top of normal comparisons you can choose:'}
+      name: text_8
+      properties: {align: left, font_size: 20, text: 'Zusätzlich zu den normalen Vergleichen kannst Du wählen zwischen:'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'IKOFDQ,QHACWU'}
-      name: checkbox_4_copy
+      name: checkbox_7
       properties:
         align: left
         checked: true
@@ -221,17 +221,17 @@ components_by_slot:
         italic: false
         spacing:
           margin: ['4', null, '4', null]
-        text: Rolling last 12 months to avoid having seasonal impacts and comparing apples with peaches
+        text: Rollierend 12 Monats- Betrachtungen ermöglichen es saisonale Einflüsse herauszuhalten
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'CYMAVB,GCTNXQ'}
-      name: checkbox_4_copy_copy
+      name: checkbox_8
       properties:
         align: left
         checked: true
         font_size: 18
         spacing:
           margin: ['4', null, '4', null]
-        text: Same time last year to avoid discounting too early as some bookings will still come
+        text: Vergleiche zum gleichen Zeitpunkt letzten Jahres (und nicht zu den finalen Zahlen) verhindern dass Du zu früh Rabatte gibst
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     layout_properties: {}
     name: column_panel_8
@@ -243,16 +243,16 @@ components_by_slot:
     type: Spacer
   - components:
     - layout_properties: {grid_position: 'HCWIQK,WYUTEL'}
-      name: heading_1_copy_copy_copy
-      properties: {align: right, bold: true, text: Know your profitability}
+      name: heading_5
+      properties: {align: center, bold: true, text: Kenne Deine Profitabilität}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'TROHBF,IBKBJX'}
-      name: image_1_copy_copy_copy
-      properties: {display_mode: shrink_to_fit, height: 231.17901611328125, horizontal_align: right, source: _/theme/homepage/profitability.jpeg}
+      name: image_6
+      properties: {display_mode: shrink_to_fit, height: 231.17901611328125, horizontal_align: center, source: _/theme/homepage/profitability.jpeg}
       type: Image
     - layout_properties: {grid_position: 'BEJHLX,QOHOLD'}
-      name: text_6_copy_copy_copy_copy_2
-      properties: {align: right, font_size: 20, text: 'How much is left for you after deduction of commission and fees?'}
+      name: text_9
+      properties: {align: center, font_size: 20, text: 'Wieviel Umsatz bleibt Dir übrig nach Abzug der Provisionen und Gebühren?'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {}
     name: column_panel_7
@@ -264,15 +264,15 @@ components_by_slot:
     type: Spacer
   - components:
     - layout_properties: {grid_position: 'VQFBAX,UTNVSQ'}
-      name: heading_1_copy_copy_copy_copy
-      properties: {align: left, bold: true, text: Adjust your marketing to your guests}
+      name: heading_6
+      properties: {align: left, bold: true, text: Passe Dein Marketing an Deine Gäste an}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'BWQBLT,LSXUFC'}
-      name: image_1_copy_copy_copy_copy
+      name: image_7
       properties: {display_mode: shrink_to_fit, height: 293.79620361328125, horizontal_align: left, source: _/theme/homepage/guest_insights.jpeg}
       type: Image
     - layout_properties: {grid_position: 'TMYRCG,WEANRD'}
-      name: checkbox_4_copy_copy_2
+      name: checkbox_9
       properties:
         align: left
         allow_indeterminate: false
@@ -281,10 +281,10 @@ components_by_slot:
         italic: false
         spacing:
           margin: ['9', null, '9', null]
-        text: Repeating guests reports to enable direct marketing
+        text: Wiederholgäste können ausgewertet werden
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'GPOJWQ,WXFYJE'}
-      name: checkbox_4_copy_copy_2_copy
+      name: checkbox_10
       properties:
         align: left
         checked: true
@@ -292,7 +292,7 @@ components_by_slot:
         italic: false
         spacing:
           margin: ['9', null, '9', null]
-        text: Guest types and group sizes
+        text: Gästetypen und Gruppengrößen
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     layout_properties: {}
     name: column_panel_9
@@ -304,11 +304,11 @@ components_by_slot:
     type: Spacer
   - components:
     - layout_properties: {grid_position: 'HQNUOE,COZHUT'}
-      name: heading_1_copy_copy_copy_copy_copy_2
-      properties: {align: left, bold: true, text: All measures in one place}
+      name: heading_7
+      properties: {align: left, bold: true, text: 'Alle wichtigen Kennzahlen an einem Ort:'}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'XJNRAQ,LWCZZG'}
-      name: checkbox_4_copy_copy_2_copy_2
+      name: checkbox_11
       properties:
         align: left
         allow_indeterminate: false
@@ -317,10 +317,10 @@ components_by_slot:
         italic: false
         spacing:
           margin: ['4', null, '4', null]
-        text: 'Profitability: revenue and daily rates after commission& fees'
+        text: 'Rentabilität: Einnahmen und Tagespreise nach Provisionen und Gebühren'
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'ZUPGFN,VRZHHK'}
-      name: checkbox_4_copy_copy_2_copy_copy_2_copy
+      name: checkbox_12
       properties:
         align: left
         checked: true
@@ -328,10 +328,10 @@ components_by_slot:
         italic: false
         spacing:
           margin: ['4', null, '4', null]
-        text: 'Occupancy: occupancy rate and nights'
+        text: 'Auslastung: Auslastungsrate und Übernachtungen'
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'MCTUGS,AZEKDU'}
-      name: checkbox_4_copy_copy_2_copy_copy_2
+      name: checkbox_13
       properties:
         align: left
         checked: true
@@ -339,10 +339,10 @@ components_by_slot:
         italic: false
         spacing:
           margin: ['4', null, '4', null]
-        text: 'Guest insights: guest by types and group sizes'
+        text: 'Gästeeinblicke: Gäste nach Typ und Gruppengröße'
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'DBUUQL,KAHPQZ'}
-      name: checkbox_4_copy_copy_2_copy_copy_2_copy_2
+      name: checkbox_14
       properties:
         align: left
         checked: true
@@ -350,10 +350,10 @@ components_by_slot:
         italic: false
         spacing:
           margin: ['4', null, '4', null]
-        text: 'Cancellations: cancelled numbers, values and ratios '
+        text: 'Stornierungen: stornierte Zahlen, Werte und Verhältnisse '
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'VEFKEJ,PBYKAC'}
-      name: checkbox_4_copy_copy_2_copy_copy_2_copy_2_copy
+      name: checkbox_15
       properties:
         align: left
         checked: true
@@ -361,7 +361,7 @@ components_by_slot:
         italic: false
         spacing:
           margin: ['4', null, '4', null]
-        text: 'Marketing: Direct booking rate, guest types, group sizes'
+        text: 'Marketing: Direktbuchungsrate, Gästetypen, Gruppengrößen'
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     layout_properties: {}
     name: column_panel_10
@@ -373,15 +373,15 @@ components_by_slot:
     type: Spacer
   - components:
     - layout_properties: {grid_position: 'INAXYP,MIQEGM'}
-      name: heading_1_copy_copy_copy_copy_copy
-      properties: {align: center, bold: true, text: It is your time- work while travelling}
+      name: heading_8
+      properties: {align: center, bold: true, text: Es ist Deine Zeit – arbeite von unterwegs}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'FLFDOL,MMSKLP'}
       name: image_3
       properties: {horizontal_align: center, source: _/theme/homepage/iphone.jpg}
       type: Image
     - layout_properties: {grid_position: 'WRZLGN,NKNFMI'}
-      name: checkbox_4_copy_copy_2_copy_copy
+      name: checkbox_16
       properties:
         align: center
         checked: true
@@ -389,7 +389,7 @@ components_by_slot:
         italic: false
         spacing:
           margin: ['9', null, '9', null]
-        text: Developed for mobile and desktop view
+        text: Entwickelt für die Anzeige auf Handys und Desktop-Computern
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     layout_properties: {}
     name: column_panel_11
@@ -402,7 +402,7 @@ components_by_slot:
   - components:
     - layout_properties: {grid_position: 'BXYRXS,VZDGBI'}
       name: title_2
-      properties: {align: center, font_size: 28, role: title, text: Why Vacation Rental Owners Choose Lodginia}
+      properties: {align: center, font_size: 28, role: title, text: Warum Vermieter von Ferienwohnungen sich für Lodginia entscheiden}
       type: Label
     - layout_properties: {grid_position: 'ZSYVVX,VDQGZZ'}
       name: spacer_6
@@ -410,7 +410,7 @@ components_by_slot:
       type: Spacer
     - layout_properties: {grid_position: 'LTADAQ,YXLCSK'}
       name: text_5
-      properties: {font_size: 20, line_height: '1', text: We understand the unique challenges of managing vacation rentals because we rent vacation homes ourselves. We know the questions and what analytics actually matter.}
+      properties: {font_size: 20, line_height: '1', text: 'Wir verstehen die besonderen Herausforderungen bei der Verwaltung von Ferienwohnungen, da wir selbst Ferienhäuser vermieten. Wir kennen die Fragen und wissen, welche Analysen wirklich wichtig sind.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'TYFLZW,XUJSIW'}
       name: spacer_9
@@ -423,7 +423,7 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Just connect Smoobu and say goodbye to Excel
+        text: Verbinde einfach Smoobu und verabschiede Dich von Excel
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'GYEZHR,FLRMFU'}
       name: checkbox_5
@@ -432,7 +432,7 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: 'Reduce cancellations by knowing which guest type is cancelling when their bookings '
+        text: 'Reduziere Stornierungen, indem Du weißt, welcher Gasttyp wann seine Buchungen storniert. '
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'REVGLU,HAIBMX'}
       name: checkbox_6
@@ -441,25 +441,25 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Save hours of work on manual analysis, one Graphic can show more than thousend words
+        text: Sparen Dir stundenlange manuelle Analysen – ein Bild sagt mehr als tausend Worte.
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'QIINLM,BTPGGG'}
-      name: checkbox_7_copy
+      name: checkbox_17
       properties:
         checked: true
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Able to compare future month against same time last year (not finals) to avoid discounting too early
+        text: Die Möglichkeit, den kommenden Monat mit dem gleichen Zeitraum des Vorjahres zu vergleichen (keine endgültigen Zahlen), um eine zu frühe Rabattierung zu vermeiden
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'XWNAAK,FFFCRW'}
-      name: checkbox_7_copy_copy
+      name: checkbox_18
       properties:
         checked: true
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Fully flexible time line for comparisons
+        text: Vollständig flexible Zeitachse für Vergleiche
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'XWNAAK,KZJNPL'}
       name: spacer_12_copy_copy_copy_2
@@ -480,7 +480,7 @@ components_by_slot:
       type: Spacer
     - layout_properties: {grid_position: 'UAXMVD,EYJFSH'}
       name: title_3
-      properties: {align: center, font_size: 28, role: title, text: Loved by Property Owners Worldwide}
+      properties: {align: center, font_size: 28, role: title, text: Von Vermietern weltweit geschätzt}
       type: Label
     - layout_properties: {grid_position: 'LJIMCJ,QSXIBH'}
       name: body_3
@@ -491,13 +491,13 @@ components_by_slot:
         spacing:
           margin: [null, '4', null, '4']
           padding: ['4', '4', '4', '4']
-        text: Join other successful Smoobu rental owners who trust Lodginia
+        text: Schließen Sie sich anderen erfolgreichen Smoobu-Vermietern an, die Lodginia vertrauen.
       type: Label
     - layout_properties: {grid_position: 'XHLTOI,PSOXIR'}
-      name: rich_text_1_copy
+      name: rich_text_2
       properties:
         align: center
-        content: Built with ❤️ by vacation rental owners.
+        content: Mit ❤️ von Vermietern von Ferienwohnungen erstellt..
         font_size: 20
         foreground: '#f9a94a'
         spacing:
@@ -509,8 +509,8 @@ components_by_slot:
       properties: {height: 33.31964111328125}
       type: Spacer
     - layout_properties: {grid_position: 'CVAWKF,NYQUBE'}
-      name: title_3_copy
-      properties: {align: center, font_size: 28, foreground: 'theme:On Primary Container', role: title, text: Pricing}
+      name: title_4
+      properties: {align: center, font_size: 28, foreground: 'theme:On Primary Container', role: title, text: Preise}
       type: Label
     - event_bindings: {click: testen_button_click}
       layout_properties: {grid_position: 'EKMTCN,IZIQPM'}
@@ -533,11 +533,11 @@ components_by_slot:
         type: Label
       - layout_properties: {grid_position: 'ZEGUXJ,HVJHZC'}
         name: label_9
-        properties: {align: center, bold: false, font_size: 20, foreground: 'theme:On Primary Container', text: Subscription}
+        properties: {align: center, bold: false, font_size: 20, foreground: 'theme:On Primary Container', text: Abo}
         type: Label
       - layout_properties: {grid_position: 'ZEGUXJ,DVQCGG'}
         name: label_10
-        properties: {align: center, bold: false, font_size: 20, foreground: 'theme:On Primary Container', text: Pro- Subscription}
+        properties: {align: center, bold: false, font_size: 20, foreground: 'theme:On Primary Container', text: Pro-Abo}
         type: Label
       - components:
         - layout_properties: {grid_position: 'KNVGKM,TWRMQK'}
@@ -547,7 +547,7 @@ components_by_slot:
             foreground: theme:On Primary Container
             spacing:
               margin: [null, null, '6', null]
-            text: Connection via API (Smoobu)
+            text: Verbindung via API (Smoobu)
           type: Label
         - layout_properties: {grid_position: 'KNVGKM,SPVMYZ'}
           name: check_box_3
@@ -568,7 +568,7 @@ components_by_slot:
       - components:
         - layout_properties: {grid_position: 'YLUPJR,ENXFFK'}
           name: label_13
-          properties: {font_size: 20, foreground: 'theme:On Primary Container', text: Number of objects}
+          properties: {font_size: 20, foreground: 'theme:On Primary Container', text: Anzahl Objekte}
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
           name: label_14
@@ -591,7 +591,7 @@ components_by_slot:
           spacing:
             margin: [null, null, null, '6']
             padding: [null, null, null, '6']
-          text: Monthly price
+          text: Monatlicher Preis
         type: Label
       - layout_properties: {grid_position: 'MTHCMM,KISFYQ'}
         name: label_16
@@ -629,7 +629,7 @@ components_by_slot:
         spacing:
           margin: [null, null, null, '6']
           padding: [null, null, null, '6']
-        text: Cancel anytime
+        text: Jederzeit kündbar
         text_color: theme:On Primary Container
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'XHKKPH,UDBQYA'}
