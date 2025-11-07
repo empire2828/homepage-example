@@ -89,6 +89,10 @@ name: lodginia.com
 native_deps:
   head_html: |+
     <script src="https://elfsightcdn.com/platform.js" async></script>
+    <link rel="alternate" hreflang="de" href="https://lodginia.com/de/" />
+    <link rel="alternate" hreflang="en" href="https://lodginia.com/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://lodginia.com/" />
+
 
 package_name: lodginia
 renamed: true
