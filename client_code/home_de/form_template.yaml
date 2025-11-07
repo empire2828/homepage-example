@@ -169,15 +169,15 @@ components_by_slot:
   - components:
     - layout_properties: {grid_position: 'XJNRJV,QNKVGU'}
       name: heading_3
-      properties: {align: center, bold: true, text: Erkenne auf einem Blick langfristige Trends}
+      properties: {align: right, bold: true, text: Erkenne auf einem Blick langfristige Trends}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'KYJGDK,JWTQGP'}
       name: image_4
-      properties: {display_mode: shrink_to_fit, height: 248.45672607421875, horizontal_align: center, source: _/theme/homepage/long_term.jpeg}
+      properties: {display_mode: shrink_to_fit, height: 248.45672607421875, horizontal_align: right, source: _/theme/homepage/long_term.jpeg}
       type: Image
     - layout_properties: {grid_position: 'EHPEGL,UUXJUU'}
       name: text_6
-      properties: {align: center, font_size: 20, text: Einfacher Überblick über alle wichtigen Zahlen auf einen Blick – Du siehst die Entwicklungen sofort.}
+      properties: {align: right, font_size: 20, text: Einfacher Überblick über alle wichtigen Zahlen auf einen Blick – Du siehst die Entwicklungen sofort.}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'HHPDCF,KBHOBB'}
       name: spacer_14_copy
@@ -185,7 +185,7 @@ components_by_slot:
       type: Spacer
     - layout_properties: {grid_position: 'UDTETJ,JFMZTA'}
       name: text_7
-      properties: {align: center, font_size: 20, text: 'Ist Dein Umsatz nach Abzug von Provisionen und Gebühren höher als die Inflationsrate?'}
+      properties: {align: right, font_size: 20, text: 'Ist Dein Umsatz nach Abzug von Provisionen und Gebühren höher als die Inflationsrate?'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {}
     name: column_panel_6
@@ -249,15 +249,15 @@ components_by_slot:
   - components:
     - layout_properties: {grid_position: 'HCWIQK,WYUTEL'}
       name: heading_5
-      properties: {align: center, bold: true, text: Kenne Deine Profitabilität}
+      properties: {align: right, bold: true, text: Kenne Deine Profitabilität}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'TROHBF,IBKBJX'}
       name: image_6
-      properties: {display_mode: shrink_to_fit, height: 231.17901611328125, horizontal_align: center, source: _/theme/homepage/profitability.jpeg}
+      properties: {display_mode: shrink_to_fit, height: 231.17901611328125, horizontal_align: right, source: _/theme/homepage/profitability.jpeg}
       type: Image
     - layout_properties: {grid_position: 'BEJHLX,QOHOLD'}
       name: text_9
-      properties: {align: center, font_size: 20, text: 'Wieviel Umsatz bleibt Dir übrig nach Abzug der Provisionen und Gebühren?'}
+      properties: {align: right, font_size: 20, text: 'Wieviel Umsatz bleibt Dir übrig nach Abzug der Provisionen und Gebühren?'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     layout_properties: {}
     name: column_panel_7
