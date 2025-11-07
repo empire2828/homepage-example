@@ -3,11 +3,22 @@ from anvil import *
 import anvil.server
 import anvil.users
 import anvil.js
+from anvil_labs.Translations import Translations
+
+DE_LOCALE = {
+  "Hello, World!": "Hallo, Welt!",
+  # only overwrite this key, ignore all others
+}
+Translations.set_dictionary('DE', DE_LOCALE)
+# Register for translation (done once during setup)
+Translations.register_translation(self.label_hello, 'text')
 
 class home(homeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     user_locale = anvil.js.window.navigator.language
+    if user_locale.lower().startswith("de"):
+      Translations.set_locale("DE")  # Now only different text is replaced
     print(user_locale)
   
   def testen_button_click(self, **event_args):
