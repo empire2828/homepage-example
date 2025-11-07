@@ -123,7 +123,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'OUPFVY,RMCQSM'}
       name: body_1
-      properties: {align: center, font_size: 20, role: body, text: 'Leistungsstarke Einblicke, die speziell für Vermieter von Ferienwohnungen entwickelt wurden, die ihr Geschäft ausbauen möchten.', visible: true}
+      properties: {align: center, font_size: 20, role: body, text: 'Leistungsstarke Einblicke, die speziell für Vermieter von Ferienwohnungen entwickelt wurden, die ihr Geschäft weiter ausbauen und besser verstehen möchten.', visible: true}
       type: Label
     layout_properties: {}
     name: column_panel_2
@@ -423,7 +423,7 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Verbinden Sie einfach Smoobu und verabschieden Sie sich von Excel
+        text: Verbinde einfach Smoobu und verabschiede Dich von Excel
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'GYEZHR,FLRMFU'}
       name: checkbox_5
@@ -432,7 +432,7 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: 'Reduzieren Sie Stornierungen, indem Sie wissen, welcher Gasttyp wann seine Buchungen storniert. '
+        text: 'Reduziere Stornierungen, indem Du weißt, welcher Gasttyp wann seine Buchungen storniert. '
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'REVGLU,HAIBMX'}
       name: checkbox_6
@@ -441,7 +441,7 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Sparen Sie sich stundenlange manuelle Analysen – ein Bild sagt mehr als tausend Worte.
+        text: Sparen Dir stundenlange manuelle Analysen – ein Bild sagt mehr als tausend Worte.
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'QIINLM,BTPGGG'}
       name: checkbox_17
@@ -450,7 +450,7 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['9', null, '9', null]
-        text: Möglichkeit, den kommenden Monat mit dem gleichen Zeitraum des Vorjahres zu vergleichen (keine endgültigen Zahlen), um eine zu frühe Rabattierung zu vermeiden
+        text: Die Möglichkeit, den kommenden Monat mit dem gleichen Zeitraum des Vorjahres zu vergleichen (keine endgültigen Zahlen), um eine zu frühe Rabattierung zu vermeiden
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'XWNAAK,FFFCRW'}
       name: checkbox_18
