@@ -1,8 +1,16 @@
 components_by_slot:
   slot_1:
   - layout_properties: {}
-    name: rich_text_1
+    name: heading_1
+    properties: {text: Über uns}
+    type: form:dep_g9k4toow7i44kq:_Components.Heading
+  - layout_properties: {}
+    name: image_1
     properties: {}
+    type: Image
+  - layout_properties: {}
+    name: rich_text_1
+    properties: {content: Wir haben 2022 ein Ferienhaus auf der Insel Poel gekauft.}
     type: RichText
 is_package: true
 layout: {type: 'form:home_template'}
