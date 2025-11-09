@@ -21,5 +21,9 @@ components_by_slot:
         Gäste- Engagement
         By Country
     type: RichText
+  - layout_properties: {}
+    name: rich_text_3
+    properties: {}
+    type: RichText
 is_package: true
 layout: {type: 'form:home_template'}

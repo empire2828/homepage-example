@@ -14,23 +14,32 @@ class how_to_avoid_booking_cancellations(how_to_avoid_booking_cancellationsTempl
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    channels = ["Booking.com", "Airbnb", "Vrbo"]
-    cancel_pct = [42, 12, 15.9]  # Beispielwerte in %
+    channels = ["Booking.com", "Airbnb", "Vrbo/Fewo-Direkt", "Direkt"]
+    cancel_pct = [42, 25, 25, 10]  # Beispielwerte in %
+    
+    # Definiere die Farben je Kanal (Farbcodes im Plotly-Format: Strings)
+    channel_colors = [
+      "#0071CE",  # Booking.com Blau
+      "#FF5A5F",  # Airbnb Rot
+      "#FF9900",  # Vrbo/Fewo-Direkt Orange
+      "#2ECC40"   # Direkt Grün
+    ]
     
     fig = go.Figure(
-      data=[go.Bar(
-        x=channels,
-        y=cancel_pct,
-        text=[f"{p:.1f}%" for p in cancel_pct],
-        textposition="auto"  # Werte sichtbar ohne y-Achse
-      )]
+      data=[
+        go.Bar(
+          x=channels,
+          y=cancel_pct,
+          text=[f"{p:.1f}%" for p in cancel_pct],
+          textposition="auto",
+          marker_color=channel_colors
+        )
+      ]
     )
     fig.update_layout(
       title="Stornierungsraten nach Kanal",
       xaxis_title="Buchungskanal",
-      # y-Achse ausblenden
       yaxis=dict(visible=False),
-      # optional etwas weniger linker Rand, wenn gewünscht
       margin=dict(l=10, r=10, t=50, b=40)
     )
     
