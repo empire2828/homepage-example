@@ -1,0 +1,29 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: heading_1
+    properties: {text: Wie man Stornierungen analytisch vermeidet, text_color: ''}
+    type: form:dep_g9k4toow7i44kq:_Components.Heading
+  - layout_properties: {}
+    name: plot_channel_cancellations
+    properties: {height: 306.8984375}
+    type: Plot
+  - layout_properties: {}
+    name: rich_text_1
+    properties: {content: (booking.com Europa 2024}
+    type: RichText
+  - layout_properties: {}
+    name: rich_text_2
+    properties:
+      content: |-
+        Booking.com Payments
+        Smartflex Programm
+        Gäste- Engagement
+        By Country
+    type: RichText
+  - layout_properties: {}
+    name: rich_text_3
+    properties: {}
+    type: RichText
+is_package: true
+layout: {type: 'form:home_template'}
