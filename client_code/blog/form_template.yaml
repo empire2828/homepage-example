@@ -1,2 +1,8 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: navigation_link_1
+    properties: {navigate_to: blog.how_to_avoid_booking_cancellations}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
 is_package: true
 layout: {type: 'form:home_template'}
