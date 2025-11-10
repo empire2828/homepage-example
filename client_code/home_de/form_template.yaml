@@ -496,7 +496,7 @@ components_by_slot:
         spacing:
           margin: [null, '4', null, '4']
           padding: ['4', '4', '4', '4']
-        text: Schließen Sie sich anderen erfolgreichen Smoobu-Vermietern an, die Lodginia vertrauen.
+        text: Werde Teil der erfolgreichen Lodginia-Community  – wie zahlreiche andere Vermieter, die bereits von unserem Service profitieren.
       type: Label
     - layout_properties: {grid_position: 'XHLTOI,PSOXIR'}
       name: rich_text_2

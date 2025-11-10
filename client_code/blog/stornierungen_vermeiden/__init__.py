@@ -1,4 +1,4 @@
-from ._anvil_designer import how_to_avoid_booking_cancellationsTemplate
+from ._anvil_designer import stornierungen_vermeidenTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from plotly import graph_objects as go
 
-class how_to_avoid_booking_cancellations(how_to_avoid_booking_cancellationsTemplate):
+class stornierungen_vermeiden(stornierungen_vermeidenTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
