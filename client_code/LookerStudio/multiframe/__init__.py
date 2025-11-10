@@ -10,8 +10,9 @@ import json
 
 class multiframe(multiframeTemplate):
 
-  Locker_Version = "https://lookerstudio.google.com/embed/reporting/58f20116-8301-4a25-be98-406feb9a598f/page/"
+  Locker_Version = "https://lookerstudio.google.com/embed/reporting/8d21e6e6-e5b3-4409-bb66-a079365db5d1/page"
   #share unlisted anyone can listen, embed ohne menu
+  # Lodginia 1.0.04
   
   def __init__(self, **properties):
     self.init_components(**properties)
