@@ -26,4 +26,4 @@ components_by_slot:
     properties: {}
     type: RichText
 is_package: true
-layout: {type: 'form:home_template'}
+layout: {type: 'form:home_start.home_template'}

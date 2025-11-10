@@ -13,4 +13,4 @@ components_by_slot:
     properties: {content: Wir haben 2022 ein Ferienhaus auf der Insel Poel gekauft.}
     type: RichText
 is_package: true
-layout: {type: 'form:home_template'}
+layout: {type: 'form:home_start.home_template'}
