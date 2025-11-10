@@ -80,7 +80,7 @@ components_by_slot:
     - event_bindings: {click: logout_navigation_link_click}
       layout_properties: {grid_position: 'HBUWKL,XDJRDF EPJOSA,MHSISG'}
       name: logout_navigation_link
-      properties: {background_color: 'theme:Secondary Container', icon: 'mi:logout', navigate_to: home, text: Logout}
+      properties: {background_color: 'theme:Secondary Container', icon: 'mi:logout', navigate_to: home_start, text: Logout}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
     - layout_properties: {grid_position: 'HBUWKL,XDJRDF SXHHSC,YOSINX'}
       name: spacer_3_copy_copy_3
