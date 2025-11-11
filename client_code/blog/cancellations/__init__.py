@@ -1,4 +1,4 @@
-from ._anvil_designer import about_us_enTemplate
+from ._anvil_designer import cancellationsTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -7,11 +7,11 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from plotly import graph_objects as go
 
-
-class about_us_en(about_us_enTemplate):
+class cancellations(cancellationsTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    # Any code you write here will run before the form opens.
+    
