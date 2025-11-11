@@ -92,6 +92,10 @@ def get_user_has_subscription_for_email(email):
   subscription_status = user.get('subscription')
   if subscription_status in ['Subscription', 'Pro-Subscription', 'Canceled']:
     return True
+  tester_status = user.get('tester')
+  if tester_status:
+    print(user," has tester status")
+    return True    
   signup = user.get('signed_up')
   if signup:
     signed_up_aware = signup.replace(tzinfo=timezone.utc)

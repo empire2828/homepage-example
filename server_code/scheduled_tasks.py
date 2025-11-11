@@ -7,12 +7,12 @@ from supabase import create_client
 from servermain import get_bigquery_client
 from google.cloud import bigquery
 
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: create_client(supabase_url, supabase_api_key)
+# supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+# supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+# supabase_client: create_client(supabase_url, supabase_api_key)
 
 # Supabase-Client initialisieren
-supabase_client = create_client(supabase_url, supabase_api_key)
+# supabase_client = create_client(supabase_url, supabase_api_key)
 
 @anvil.server.background_task
 def delete_old_logs():
