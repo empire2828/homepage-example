@@ -1,4 +1,2 @@
-components_by_slot:
-  slot_1: []
 is_package: true
 layout: {type: 'form:home.home_template'}

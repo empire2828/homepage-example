@@ -60,4 +60,4 @@ components_by_slot:
         By Country
     type: RichText
 is_package: true
-layout: {type: 'form:home_start.home_template'}
+layout: {type: 'form:home.home_template'}

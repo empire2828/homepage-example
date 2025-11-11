@@ -10,6 +10,6 @@ class home_start(home_startTemplate):
     self.init_components(**properties)
     user_locale = anvil.js.window.navigator.language
     if user_locale.lower().startswith("de"):
-      open_form('home_de')
+      open_form('home.home_de')
     else:
-      open_form('home_en')
+      open_form('home.home_en')

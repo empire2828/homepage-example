@@ -15,5 +15,5 @@ class impressum(impressumTemplate):
     # Any code you write here will run before the form opens.
 
   def back_link_click(self, **event_args):
-    open_form('home_start')
+    open_form('home.home_start')
     pass
