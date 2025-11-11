@@ -6,7 +6,7 @@ components_by_slot:
     type: form:dep_g9k4toow7i44kq:_Components.Heading
   - layout_properties: {}
     name: image_1
-    properties: {}
+    properties: {horizontal_align: left, source: _/theme/homepage/dirk.jpg}
     type: Image
   - layout_properties: {}
     name: rich_text_1
