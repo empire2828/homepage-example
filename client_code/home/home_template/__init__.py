@@ -35,5 +35,5 @@ class home_template(home_templateTemplate):
     pass
 
   def lodginia_button_click(self, **event_args):
-    open_form("home_start")
+    open_form("home.home_start")
     pass
