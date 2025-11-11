@@ -17,5 +17,5 @@ class data_protection(data_protectionTemplate):
     # Any code you write here will run before the form opens.
 
   def back_link_click(self, **event_args):
-    open_form('home')
+    open_form('home_start')
     pass
