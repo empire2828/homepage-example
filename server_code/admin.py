@@ -54,7 +54,6 @@ def log(message: str, email: str = None, ref_id: str = None):
   job.result()
   return {"inserted_rows": job.num_dml_affected_rows}
 
-
 @anvil.server.callable
 def search_logs(search_term: str):
   conditions = [

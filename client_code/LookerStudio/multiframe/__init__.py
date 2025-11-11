@@ -19,6 +19,7 @@ class multiframe(multiframeTemplate):
     self.supabase_key= ""
     user = users.get_user()    
     print('User Logged in: ',user['email'])
+    anvil.server.call('log',"user logged in",user['email'],"multiframe")
 
     user_has_subscription= anvil.server.call('get_user_has_subscription_for_email',user['email'])
     #self.content_panel.visible = False   ... standard auf not visible
