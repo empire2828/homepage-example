@@ -16,7 +16,7 @@ import os
 from google.cloud import bigquery
 from servermain import get_bigquery_client
 from dateutil.parser import parse
-from Users import get_user_has_subscription_for_email
+from userfunctions import get_user_has_subscription_for_email
 import time
 
 supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
@@ -31,23 +31,23 @@ BQ_DATASET = "lodginia"
 BQ_TABLE   = "logs"
 
 @anvil.server.callable
-def log(message: str, email: str = None, ref_id: str = None):
+def log(message: str, email: str = None, function: str = None):
   if email is None:
     user = anvil.users.get_user()
     email = user.get("email") if user and "email" in user else None
-  caller_function = inspect.stack()[1].function
+
   bq_client = get_bigquery_client()
+
   query = f"""
         INSERT INTO `{BQ_PROJECT}.{BQ_DATASET}.{BQ_TABLE}`
-        (message, email, function, ref_id)
-        VALUES (@msg, @email, @func, @ref)
+        (message, email, function)
+        VALUES (@msg, @email, @func)
     """
   job_config = bigquery.QueryJobConfig(
     query_parameters=[
-      bigquery.ScalarQueryParameter("msg",   "STRING", message),
+      bigquery.ScalarQueryParameter("msg", "STRING", message),
       bigquery.ScalarQueryParameter("email", "STRING", email),
-      bigquery.ScalarQueryParameter("func",  "STRING", caller_function),
-      bigquery.ScalarQueryParameter("ref",   "STRING", ref_id),
+      bigquery.ScalarQueryParameter("func", "STRING", function)
     ]
   )
   job = bq_client.query(query, job_config=job_config)
