@@ -16,15 +16,15 @@ import os
 from google.cloud import bigquery
 from servermain import get_bigquery_client
 from dateutil.parser import parse
-from userfunctions import get_user_has_subscription_for_email
+#from userfunctions import get_user_has_subscription_for_email
 import time
 
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: create_client(supabase_url, supabase_api_key)
+#supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+#supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+#supabase_client: create_client(supabase_url, supabase_api_key)
 
 # Supabase-Client initialisieren
-supabase_client = create_client(supabase_url, supabase_api_key)
+#supabase_client = create_client(supabase_url, supabase_api_key)
 
 BQ_PROJECT = "lodginia"
 BQ_DATASET = "lodginia"
@@ -36,6 +36,8 @@ def log(message: str, email: str = None, function: str = None):
     user = anvil.users.get_user()
     email = user.get("email") if user and "email" in user else None
 
+  print(email, message,function)
+  
   bq_client = get_bigquery_client()
 
   query = f"""

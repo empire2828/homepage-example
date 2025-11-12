@@ -6,10 +6,9 @@ from anvil import users
 import stripe
 from datetime import datetime, timedelta, timezone
 import hashlib
-from supabase import create_client, Client
+#from supabase import create_client, Client
 from servermain import get_bigquery_client, to_sql_value
 from google.cloud import bigquery
-from admin import log
 
 #supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
 #supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
@@ -228,7 +227,7 @@ def get_user_parameter():
   
   # 4. Run the query and return the first row as a dict (if any).
   rows = list(client.query(sql, job_config=job_config).result())
-  log(str(rows),function="get_user_parameter")
+  anvil.server.call_s('log',str(rows),email="dirk.klemer@gmail.com",function="get_user_parameter")
   return dict(rows[0]) if rows else None
 
 # ---------------------------------------------------------------------------
