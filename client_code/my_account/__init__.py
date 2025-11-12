@@ -8,6 +8,7 @@ from anvil.tables import app_tables
 from .ChangeName import ChangeName
 from .ChangeEmail import ChangeEmail
 from .DeleteAccountAlert import DeleteAccountAlert
+from Admin import log
 
 class my_account(my_accountTemplate):
   def __init__(self, **properties):
@@ -29,6 +30,7 @@ class my_account(my_accountTemplate):
           self.admin_navigation_link.visible= True
         user_parameters = anvil.server.call_s('get_user_parameter')
         if user_parameters:
+          log(user_parameters)
           self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))
           self.std_linen_fee_text_box.text = str(user_parameters.get('std_linen_fee', ''))
           self.use_own_std_fees_checkbox.checked = user_parameters.get('use_own_std_fees', False)
