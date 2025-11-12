@@ -10,9 +10,9 @@ from supabase import create_client, Client
 from servermain import get_bigquery_client, to_sql_value
 from google.cloud import bigquery
 
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: Client = create_client(supabase_url, supabase_api_key)
+#supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
+#supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
+#supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 # Set your secret key. Remember to switch to your live secret key in production.
 # See your keys here: https://dashboard.stripe.com/apikeys
