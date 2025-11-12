@@ -2,12 +2,12 @@ components_by_slot:
   slot_1:
   - layout_properties: {}
     name: heading_1
-    properties: {bold: true, font_size: 28, text: Über uns}
+    properties: {bold: true, font_size: 28, text: About us}
     type: form:dep_g9k4toow7i44kq:_Components.Heading
   - components:
     - layout_properties: {slot: card-content-container-slot}
       name: rich_text_3
-      properties: {content: 'Meine Frau und ich haben uns 2022 unseren Traum von einem Ferienhaus am Meer auf der Insel Poel erfüllt. Mit viel Liebe und Detailversessenheit haben wir es geschafft unser Ferienhaus, obwohl nicht in erster Reihe und auch nicht das größte, zu dem Ferienhaus mit dem höchsten Umsatz auf der Insel Poel (lt. Pricelabs Daten) zu machen. ', font_size: 18}
+      properties: {content: 'In 2022, my wife and I fulfilled our dream of owning a vacation home by the sea on the island of Poel. With a lot of love and attention to detail, we managed to turn our vacation home, although not in the front row and not the largest, into the vacation home with the highest turnover on the island of Poel (according to Pricelabs data). ', font_size: 18}
       type: RichText
     layout_properties: {}
     name: card_content_container_1
@@ -21,7 +21,7 @@ components_by_slot:
     - layout_properties: {slot: card-content-slot}
       name: rich_text_2
       properties:
-        content: "**Dirk**\n\nIch bin in meinem Hauptberuf langjähriger kaufmännischer Leiter bei einem produzierenden Mittelständler.\n \nMit viel Freude habe ich dort digitalisiert,  das Berichtswesen mit Power BI automatisiert und mit Python ein KI Modell implementiert. \n\nWährend meiner Zeit dort hat das Team das Unternehmensergebnis verdreifacht und über das Niveau von Apple gehoben."
+        content: "**Dirk** \n\nMy main job is as a long-standing finance manager at a medium-sized manufacturing company. \n\nI have greatly enjoyed digitizing the company, automating reporting with Power BI, and implementing an AI model with Python. \n\nDuring my time there, the team tripled the company's earnings and raised them above the level of Apple."
         font_size: 18
         spacing:
           margin: [null, null, null, '4']
@@ -34,7 +34,7 @@ components_by_slot:
   - layout_properties: {}
     name: rich_text_2_copy
     properties:
-      content: Mit im Team sind weiterhin noch eine Digital- Produktspezialistin und ein Entwickler.
+      content: The team also includes a digital product specialist and a developer.
       font_size: 18
       spacing:
         margin: [null, null, null, '4']
