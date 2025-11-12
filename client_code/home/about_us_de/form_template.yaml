@@ -7,7 +7,7 @@ components_by_slot:
   - components:
     - layout_properties: {slot: card-content-container-slot}
       name: rich_text_3
-      properties: {content: 'Meine Frau und ich haben uns 2022 unseren Traum von einem Ferienhaus am Meer auf der Insel Poel erfüllt. Mit viel Liebe und zugegeben auch beruflicher Vorbelastung haben wir es geschafft unser Ferienhaus, obwohl nicht in erster Reihe und auch nicht das größte von der Bettenanzahl, zu dem Ferienhaus mit dem höchsten Umsatz auf der Insel Poel lt. Pricelabs- Daten zu machen. Wir wir das geschafft haben? Schaut mal rein bei Lodginia und auch mal in den Blog!', font_size: 18}
+      properties: {content: 'Meine Frau und ich haben uns 2022 unseren Traum von einem Ferienhaus am Meer auf der Insel Poel erfüllt. Mit viel Liebe und zugegeben auch beruflicher Vorbelastung haben wir es geschafft unser Ferienhaus, obwohl nicht in erster Reihe und auch nicht das größte von der Bettenanzahl, zu dem Ferienhaus mit dem höchsten Umsatz auf der Insel Poel lt. Pricelabs- Daten zu machen. ', font_size: 18}
       type: RichText
     layout_properties: {}
     name: card_content_container_1
@@ -34,7 +34,7 @@ components_by_slot:
   - layout_properties: {}
     name: rich_text_2_copy
     properties:
-      content: Mit ihm Team sind weiterhin eine Digital Product Spezialisting sowie
+      content: Mit im Team sind weiterhin eine Digital- Produktspezialistin und ein Entwickler.
       font_size: 18
       spacing:
         margin: [null, null, null, '4']
