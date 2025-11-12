@@ -7,7 +7,7 @@ components_by_slot:
   - components:
     - layout_properties: {slot: card-content-container-slot}
       name: rich_text_3
-      properties: {content: 'Wir haben uns 2022 unseren Traum von einem Ferienhaus am Meer auf der Insel Poel erfüllt. Mit viel Liebe und zugegeben auch beruflicher Vorbelastung haben wir es geschafft unser Ferienhaus, obwohl nicht in erster Reihe und auch nicht das größte von der Bettenanzahl, zu dem Ferienhaus mit dem höchsten Umsatz auf der Insel Poel lt. Pricelabs- Daten zu machen. Wir wir das geschafft haben? Schaut mal rein bei Lodginia und auch mal in den Blog!', font_size: 18}
+      properties: {content: 'Meine Frau und ich haben uns 2022 unseren Traum von einem Ferienhaus am Meer auf der Insel Poel erfüllt. Mit viel Liebe und zugegeben auch beruflicher Vorbelastung haben wir es geschafft unser Ferienhaus, obwohl nicht in erster Reihe und auch nicht das größte von der Bettenanzahl, zu dem Ferienhaus mit dem höchsten Umsatz auf der Insel Poel lt. Pricelabs- Daten zu machen. Wir wir das geschafft haben? Schaut mal rein bei Lodginia und auch mal in den Blog!', font_size: 18}
       type: RichText
     layout_properties: {}
     name: card_content_container_1
@@ -21,7 +21,7 @@ components_by_slot:
     - layout_properties: {slot: card-content-slot}
       name: rich_text_2
       properties:
-        content: "**Dirk Klemer**\n\nIch bin in meinem Hauptberuf langjähriger kaufmännischer Leiter bei einem produzierenden Mittelständler.\n \nMit viel Freude habe ich dort digitalisiert,  das Berichtswesen mit Power BI automatisiert und mit Python ein KI Modell implementiert. \n\nWährend meiner Zeit dort hat das Team das Unternehmensergebnis verdreifacht und über das Niveau von Google und Apple gehoben."
+        content: "**Dirk**\n\nIch bin in meinem Hauptberuf langjähriger kaufmännischer Leiter bei einem produzierenden Mittelständler.\n \nMit viel Freude habe ich dort digitalisiert,  das Berichtswesen mit Power BI automatisiert und mit Python ein KI Modell implementiert. \n\nWährend meiner Zeit dort hat das Team das Unternehmensergebnis verdreifacht und über das Niveau von Google und Apple gehoben."
         font_size: 18
         spacing:
           margin: [null, null, null, '4']
@@ -31,5 +31,14 @@ components_by_slot:
     name: card_1
     properties: {appearance: outlined, orientation: row}
     type: form:dep_g9k4toow7i44kq:_Components.Card
+  - layout_properties: {}
+    name: rich_text_2_copy
+    properties:
+      content: Mit ihm Team sind weiterhin eine Digital Product Spezialisting sowie
+      font_size: 18
+      spacing:
+        margin: [null, null, null, '4']
+        padding: [null, null, null, '4']
+    type: RichText
 is_package: true
 layout: {type: 'form:home.home_template'}
