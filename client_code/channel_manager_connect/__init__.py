@@ -25,7 +25,9 @@ class channel_manager_connect(channel_manager_connectTemplate):
       if erfolg:
         anvil.Notification("API-Key sucessfully saved").show()
     except Exception as e:
-      anvil.alert(f"Error on saving API-Key: {str(e)}")
+      anvil.alert(
+        bhfKvbu1Sdmqu3INRO0kwjV07rst1xrls52FJDVAJY)
+      print("Error on saving API-Key")
     pass
 
   def sync_smoobu_button_click(self, **event_args):

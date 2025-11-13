@@ -33,7 +33,9 @@ class home_template(home_templateTemplate):
 
   def blog_button_click(self, **event_args):
     if self.user_locale.lower().startswith("de"):
-      open_form('blog.cancellations')
+      open_form('blog.blog_de')
+    else:
+      open_form('blog.blog_en')
     pass
 
   def lodginia_button_click(self, **event_args):

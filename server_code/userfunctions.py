@@ -227,7 +227,7 @@ def get_user_parameter():
   
   # 4. Run the query and return the first row as a dict (if any).
   rows = list(client.query(sql, job_config=job_config).result())
-  anvil.server.call_s('log',str(rows),email="dirk.klemer@gmail.com",function="get_user_parameter")
+  anvil.server.call_s('log',str(rows),email="dirk.klemer@gmail.com",function="userfunctions.get_user_parameter")
   return dict(rows[0]) if rows else None
 
 # ---------------------------------------------------------------------------

@@ -35,7 +35,7 @@ class my_account(my_accountTemplate):
         
       user_email = user.get('email')
       self.email_body.text = user_email
-      print(user_email)
+      #print(user_email)
       channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
       
         # Populate dropdowns and textboxes for up to 5 channels
