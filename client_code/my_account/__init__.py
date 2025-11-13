@@ -27,15 +27,15 @@ class my_account(my_accountTemplate):
         self.subscription_body.text = user['subscription']
         if user.get('admin') is True:
           self.admin_navigation_link.visible= True
-        user_parameters = anvil.server.call_s('get_user_parameter')
-        if user_parameters:
-          self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))
-          self.std_linen_fee_text_box.text = str(user_parameters.get('std_linen_fee', ''))
-          self.use_own_std_fees_checkbox.checked = user_parameters.get('use_own_std_fees', False)
+      user_parameters = anvil.server.call('get_user_parameter')
+      if user_parameters:
+        self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))
+        self.std_linen_fee_text_box.text = str(user_parameters.get('std_linen_fee', ''))
+        self.use_own_std_fees_checkbox.checked = user_parameters.get('use_own_std_fees', False)
         
       user_email = user.get('email')
       self.email_body.text = user_email
-      print(user_email)
+      #print(user_email)
       channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
       
         # Populate dropdowns and textboxes for up to 5 channels

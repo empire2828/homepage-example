@@ -1,0 +1,74 @@
+conflicting_items:
+- app_path:
+  - SETTINGS
+  - []
+  edits:
+  - b_value:
+    - admin_ui: {width: 200}
+      name: email
+      type: string
+    - admin_ui: {width: 200}
+      name: stripe_id
+      type: string
+    - admin_ui: {order: 0.5, width: 150}
+      name: subscription
+      type: string
+    - admin_ui: {width: 200}
+      name: enabled
+      type: bool
+    - admin_ui: {width: 200}
+      name: last_login
+      type: datetime
+    - admin_ui: {order: 3, width: 209}
+      name: password_hash
+      type: string
+    - admin_ui: {width: 200}
+      name: n_password_failures
+      type: number
+    - admin_ui: {width: 200}
+      name: signed_up
+      type: datetime
+    - admin_ui: {width: 200}
+      name: remembered_logins
+      type: simpleObject
+    - admin_ui: {width: 200}
+      name: email_confirmation_key
+      type: string
+    - admin_ui: {width: 200}
+      name: name
+      type: string
+    - admin_ui: {width: 200}
+      name: cancel_subscription_at_period_end
+      type: bool
+    - admin_ui: {order: 12.5, width: 307}
+      name: smoobu_api_key
+      type: string
+    - admin_ui: {order: 14, width: 200}
+      name: smoobu_userid
+      type: string
+    - admin_ui: {order: 15, width: 200}
+      name: apartment_count
+      type: number
+    - admin_ui: {order: 17, width: 200}
+      name: server_data_last_update
+      type: datetime
+    - admin_ui: {order: 18, width: 200}
+      name: admin
+      type: bool
+    - admin_ui: {order: 0.125, width: 200}
+      name: supabase_key
+      type: string
+    - admin_ui: {order: 19, width: 200}
+      name: Tester
+      type: bool
+    path: [db_schema, users, columns]
+    type: [edit, edit]
+  - b_value: Smoobu analytics. Easy. Fast. Simple.
+    path: [metadata, description]
+    type: [edit, edit]
+  item:
+  - config
+  - - []
+merge:
+  base: d15dff86b62c0c9281bc3052df40a4c214a034c4
+  parents: [ad9d6f03a43b62ab8d5f8fa7bf9eb4d7e586cda8, 3bb3fc81616d990b6da616ea7f9b6c11313dc42b]

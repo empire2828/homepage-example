@@ -6,13 +6,8 @@ from anvil import users
 import stripe
 from datetime import datetime, timedelta, timezone
 import hashlib
-from supabase import create_client, Client
 from servermain import get_bigquery_client, to_sql_value
 from google.cloud import bigquery
-
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: Client = create_client(supabase_url, supabase_api_key)
 
 # Set your secret key. Remember to switch to your live secret key in production.
 # See your keys here: https://dashboard.stripe.com/apikeys
@@ -67,23 +62,6 @@ def send_password_reset_email():
         print(f"Error sending password reset email: {e}")
         return "Failed to send password reset email."
 
-# Server-Modul DKL
-#@anvil.server.callable
-#def get_user_has_subscription():
-#    user = anvil.users.get_user()    
-#    if not user:
-#        return False   
-#    if user['subscription'] == ('Subscription' or 'Pro-Subscription' or 'Canceled'):    
-#        return True   
-#    signed_up_date = user['signed_up']  
-#    if signed_up_date:
-#        # Konvertiere naive Zeit zu UTC-aware Zeit
-#        signed_up_aware = signed_up_date.replace(tzinfo=timezone.utc)
-#        trial_end = signed_up_aware + timedelta(days=30)
-#        now_utc = datetime.now(timezone.utc)  # Korrekte UTC-Zeit
-#        return now_utc <= trial_end   
-#    return False
-
 @anvil.server.callable
 def get_user_has_subscription_for_email(email):
   user = app_tables.users.get(email=email)
@@ -94,7 +72,7 @@ def get_user_has_subscription_for_email(email):
     return True
   tester_status = user.get('tester')
   if tester_status:
-    print(user," has tester status")
+    print(user['email']," has tester status")
     return True    
   signup = user.get('signed_up')
   if signup:
@@ -227,6 +205,7 @@ def get_user_parameter():
   
   # 4. Run the query and return the first row as a dict (if any).
   rows = list(client.query(sql, job_config=job_config).result())
+  anvil.server.call_s('log',str(rows),email="dirk.klemer@gmail.com",function="userfunctions.get_user_parameter")
   return dict(rows[0]) if rows else None
 
 # ---------------------------------------------------------------------------

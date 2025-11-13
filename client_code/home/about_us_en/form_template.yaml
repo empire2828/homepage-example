@@ -1,2 +1,46 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: heading_1
+    properties: {bold: true, font_size: 28, text: About us}
+    type: form:dep_g9k4toow7i44kq:_Components.Heading
+  - components:
+    - layout_properties: {slot: card-content-container-slot}
+      name: rich_text_3
+      properties:
+        content: "In 2022, my wife and I fulfilled our dream of owning a vacation home by the sea on the island of Poel. With a lot of love and attention to detail, we managed to turn our vacation home, although not in the front row and not the largest, into the vacation home with the highest turnover on the island of Poel (according to Pricelabs data). \n\nWe are using Smoobu with Pricelabs, but we always feel that Smoobu lacks analysis features. That's how the idea for Lodginia came about."
+        font_size: 18
+      type: RichText
+    layout_properties: {}
+    name: card_content_container_1
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+  - components:
+    - layout_properties: {slot: card-content-slot}
+      name: image_1
+      properties: {horizontal_align: left, source: _/theme/homepage/dirk.jpg}
+      type: Image
+    - layout_properties: {slot: card-content-slot}
+      name: rich_text_2
+      properties:
+        content: "**Dirk** \n\nMy main job is as a long-standing finance manager at a medium-sized manufacturing company. \n\nI have greatly enjoyed digitizing the company, automating reporting with Power BI, and implementing an AI model with Python. \n\nDuring my time there, the team tripled the company's earnings and raised them above the level of Apple."
+        font_size: 18
+        spacing:
+          margin: [null, null, null, '4']
+          padding: [null, null, null, '4']
+      type: RichText
+    layout_properties: {}
+    name: card_1
+    properties: {appearance: outlined, background_color: 'theme:Background', orientation: row, role: null, visible: true}
+    type: form:dep_g9k4toow7i44kq:_Components.Card
+  - layout_properties: {}
+    name: rich_text_2_copy
+    properties:
+      content: The team also includes a digital product specialist and a developer.
+      font_size: 18
+      spacing:
+        margin: [null, null, null, '4']
+        padding: [null, null, null, '4']
+    type: RichText
 is_package: true
 layout: {type: 'form:home.home_template'}
