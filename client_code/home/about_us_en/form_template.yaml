@@ -7,7 +7,9 @@ components_by_slot:
   - components:
     - layout_properties: {slot: card-content-container-slot}
       name: rich_text_3
-      properties: {content: 'In 2022, my wife and I fulfilled our dream of owning a vacation home by the sea on the island of Poel. With a lot of love and attention to detail, we managed to turn our vacation home, although not in the front row and not the largest, into the vacation home with the highest turnover on the island of Poel (according to Pricelabs data). ', font_size: 18}
+      properties:
+        content: "In 2022, my wife and I fulfilled our dream of owning a vacation home by the sea on the island of Poel. With a lot of love and attention to detail, we managed to turn our vacation home, although not in the front row and not the largest, into the vacation home with the highest turnover on the island of Poel (according to Pricelabs data). \n\nWe are using Smoobu with Pricelabs, but we always feel that Smoobu lacks analysis features. That's how the idea for Lodginia came about."
+        font_size: 18
       type: RichText
     layout_properties: {}
     name: card_content_container_1
@@ -29,7 +31,7 @@ components_by_slot:
       type: RichText
     layout_properties: {}
     name: card_1
-    properties: {appearance: outlined, orientation: row}
+    properties: {appearance: outlined, background_color: 'theme:Background', orientation: row, role: null, visible: true}
     type: form:dep_g9k4toow7i44kq:_Components.Card
   - layout_properties: {}
     name: rich_text_2_copy

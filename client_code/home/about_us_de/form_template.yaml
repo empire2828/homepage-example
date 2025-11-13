@@ -7,7 +7,9 @@ components_by_slot:
   - components:
     - layout_properties: {slot: card-content-container-slot}
       name: rich_text_3
-      properties: {content: 'Meine Frau und ich haben uns 2022 unseren Traum von einem Ferienhaus am Meer auf der Insel Poel erfüllt. Mit viel Liebe und Detailversessenheit haben wir es geschafft unser Ferienhaus, obwohl nicht in erster Reihe und auch nicht das größte, zu dem Ferienhaus mit dem höchsten Umsatz auf der Insel Poel (lt. Pricelabs Daten) zu machen. ', font_size: 18}
+      properties:
+        content: "Meine Frau und ich haben uns 2022 unseren Traum von einem Ferienhaus am Meer auf der Insel Poel erfüllt. Mit viel Liebe und Detailversessenheit haben wir es geschafft unser Ferienhaus, obwohl nicht in erster Reihe und auch nicht das größte, zu dem Ferienhaus mit dem höchsten Umsatz auf der Insel Poel (lt. Pricelabs Daten) zu machen. \n\nIm Einsatz haben wir Smoobu mit Pricelabs- uns hat es aber immer an Auswertungen gefehlt in Smoobu. So entstand die Idee mit Lodginia."
+        font_size: 18
       type: RichText
     layout_properties: {}
     name: card_content_container_1
@@ -29,12 +31,12 @@ components_by_slot:
       type: RichText
     layout_properties: {}
     name: card_1
-    properties: {appearance: outlined, orientation: row}
+    properties: {appearance: filled, background_color: 'theme:Background', border: '', orientation: row, role: null, visible: true}
     type: form:dep_g9k4toow7i44kq:_Components.Card
   - layout_properties: {}
     name: rich_text_2_copy
     properties:
-      content: Mit im Team sind weiterhin noch eine Digital- Produktspezialistin und ein Entwickler.
+      content: Mit helfen tun weiterhin noch eine Digital- Produktspezialistin und ein Entwickler.
       font_size: 18
       spacing:
         margin: [null, null, null, '4']
