@@ -2,7 +2,7 @@ components_by_slot:
   content:
   - layout_properties: {}
     name: title_4
-    properties: {align: left, bold: true, role: title, text: Connect your channel manager}
+    properties: {align: center, bold: true, font_size: 24, role: title, text: Connect your channel manager}
     type: Label
   - components:
     - layout_properties: {full_width_row: false, grid_position: 'ZNAITY,QKLJSB'}
@@ -32,7 +32,7 @@ components_by_slot:
       type: Spacer
     - layout_properties: {grid_position: 'JODJQE,IQNWRW'}
       name: body_4
-      properties: {font_size: 18, role: body, text: 'If you have not yet enabled two-factor authentication in Smoobu, you will need to activate it briefly under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. You can disable two-factor authentication again after you have entered the API key here:'}
+      properties: {font_size: 18, role: body, text: 'If you have not yet enabled two-factor authentication in Smoobu, you will need to activate it under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. '}
       type: Label
     - layout_properties: {grid_position: 'ATWVSR,SKSOYN'}
       name: image_2
@@ -82,7 +82,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'XDGOPW,IPEIVW'}
       name: webhook_label
-      properties: {bold: false, font_size: 14, italic: true, role: null, text: 'https://lodginia.com/_/api/smoobu/webhook', visible: true}
+      properties: {bold: false, font_size: 18, foreground: 'theme:Primary', italic: true, role: null, text: 'https://lodginia.com/_/api/smoobu/webhook', visible: true}
       type: Label
     layout_properties: {}
     name: outlined_card_3
@@ -96,10 +96,6 @@ components_by_slot:
     - layout_properties: {grid_position: 'QSBKIL,ZUWODJ'}
       name: text_1
       properties: {font_size: 18, text: The initial synchronization and analysis takes place in the background and takes approximately 2 minutes.}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
-    - layout_properties: {grid_position: ''}
-      name: text_2
-      properties: {font_size: 18, text: 'The results will then appear in the dashboard, accessible via the top left menu bar.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - event_bindings: {click: sync_smoobu_button_click}
       layout_properties: {grid_position: 'JKQSKF,OCEIBY'}

@@ -12,6 +12,7 @@ class home_template(home_templateTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.user_locale = anvil.js.window.navigator.language
 
     # Any code you write here will run before the form opens.
 
@@ -31,9 +32,17 @@ class home_template(home_templateTemplate):
     pass
 
   def blog_button_click(self, **event_args):
-    open_form("blog")
+    if self.user_locale.lower().startswith("de"):
+      open_form('blog.blog_de')
+    else:
+      open_form('blog.blog_en')
     pass
 
   def lodginia_button_click(self, **event_args):
     open_form("home.home_start")
+    pass
+
+  def about_us_button_click(self, **event_args):
+    if self.user_locale.lower().startswith("de"):
+      open_form('home.about_us_de')
     pass

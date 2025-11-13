@@ -18,7 +18,8 @@ class channel_manager_connect(channel_manager_connectTemplate):
    # Any code you write here will run before the form opens.
  
   def save_api_key_button_click(self, **event_args):
-    api_key = self.api_key_text_box.text       
+    api_key = self.api_key_text_box.text   
+    current_user = anvil.users.get_user()
         # Serveraufruf zum Speichern des API-Keys
     try:
       erfolg = anvil.server.call('save_user_api_key', api_key)
@@ -26,15 +27,22 @@ class channel_manager_connect(channel_manager_connectTemplate):
         anvil.Notification("API-Key sucessfully saved").show()
     except Exception as e:
       anvil.alert(f"Error on saving API-Key: {str(e)}")
+      print(current_user['email'],f"Error on saving API-Key: {str(e)}")    
+    result = anvil.server.call('validate_smoobu_api_key',current_user['email'])    
+    if not result.get("valid"):
+      anvil.alert('Smoobu said API Key is not correct. It should look like: jgfKvbu1Sdrqu5INRO0kwjV07fed1xrls22FJIFABY. If correct, just press save again as Smoobu is sometimes slow...',large=True)
+      print(current_user['email']," API Key not correct", result)
+      return
     pass
 
   def sync_smoobu_button_click(self, **event_args):
     self.task = None #init
     self._navigate_when_done = False  # init
     current_user = anvil.users.get_user()
-    result = anvil.server.call('validate_smoobu_api_key',current_user['email'])
+    result = anvil.server.call('validate_smoobu_api_key',current_user['email'])    
     if not result.get("valid"):
       anvil.alert('API Key is not correct or not yet saved. It should look like this one: jgfKvbu1Sdrqu5INRO0kwjV07fed1xrls22FJIFABY',large=True)
+      print(current_user['email']," API Key not correct", result)
       return
     alert("Background sync started- this will take around 2 minutes.")
     self.task = anvil.server.call('launch_sync_smoobu')

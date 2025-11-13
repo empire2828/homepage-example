@@ -10,16 +10,32 @@ components:
     name: blog_button
     properties:
       align: right
-      background: theme:Secondary Container
+      background: ''
       bold: true
       foreground: theme:Primary
       icon_align: right_edge
-      role: filled-button
+      role: null
       spacing:
         margin: ['15', null, '15', null]
         padding: ['10', '24', '10', '24']
       spacing_below: large
       text: ' Blog '
+    type: Button
+  - event_bindings: {click: about_us_button_click}
+    layout_properties: {}
+    name: about_us_button
+    properties:
+      align: right
+      background: ''
+      bold: true
+      foreground: theme:Primary
+      icon_align: right_edge
+      role: null
+      spacing:
+        margin: ['15', null, '15', null]
+        padding: ['10', '24', '10', '24']
+      spacing_below: large
+      text: About us
     type: Button
   - event_bindings: {click: login_button_click}
     layout_properties: {}

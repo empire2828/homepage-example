@@ -16,11 +16,11 @@ components_by_slot:
         ### Die Stornierungsquote unterscheidet sich je nach Buchungskanal massiv:
 
         - Über **booking.com** liegt die durchschnittliche Stornierungsquote oft bei 40 % oder mehr. Viele Gäste nutzen die meist kostenfreien Stornierungsbedingungen und buchen mehrere Unterkünfte parallel.
-        - Bei **Airbnb** beträgt die Stornierungsrate häufig nur 5–15 %. Das liegt an restriktiveren Regeln, sofortiger Bezahlung und einer Community-Orientierung.
-        - **fewo-direkt** (Vrbo) liegt zwischen beiden Plattformen — hier muss meist direkt angezahlt werden, dennoch gibt es flexiblere Stornomöglichkeiten als bei Airbnb.
-        - Die **eigene Homepage** liegt analytisch gesehen oft am besten. Stornierungsraten unter 5 % sind keine Seltenheit, da Gäste gezielt buchen und häufig direkte Konditionen akzeptieren.
+        - Bei **Airbnb** beträgt die Stornierungsrate häufig nur 5–15 %. Das liegt vor allem am gegenseitigen Bewertungssystem, auch wenn man die Stornierenden gar nicht mehr bewertet kann als Gastgeber.
+        - **fewo-direkt** (Vrbo) liegt auf ähnlicher Höhe wie Airbnb.
+        - Die **eigene Homepage** liegt analytisch gesehen oft am besten. Stornierungsraten unter 5 % sind keine Seltenheit, da Gäste gezielt buchen und persönliche Interaktion die Bindung deutlich erhöht.
 
-          Bei {Lodginia} sieht das so aus:
+          Bei {Lodginia} sieht das für Euer Ferienobjekt so aus:
 
           {cancellations.jpeg}
 
@@ -49,6 +49,7 @@ components_by_slot:
         ### Fazit
 
         Ein analytischer Zugang zu Buchungsdaten hilft, Muster und Risiken frühzeitig zu entdecken. So kannst du gezielt auf problematische Kanäle und Zeiträume reagieren und die Anzahl der Stornierungen nachhaltig senken.
+      font_size: 18
     type: RichText
   - layout_properties: {}
     name: rich_text_2
