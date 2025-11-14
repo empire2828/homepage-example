@@ -26,4 +26,4 @@ class knowledge_hub(Route):
 
 class cancellations_de(Route):
   path = "/stornierungen_analytisch_vermeiden"
-  form = "blog.cancellations_de"
+  form = "blog/cancellations_de"
