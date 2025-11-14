@@ -6,7 +6,7 @@ class homepage_route(Route):
 
 class home_de(Route):
   path = "/de"
-  form = "home_de"
+  form = "home.home_de"
 
 class home_en(Route):
   path = "/en"
