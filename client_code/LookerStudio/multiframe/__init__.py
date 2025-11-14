@@ -1,5 +1,6 @@
 from ._anvil_designer import multiframeTemplate
 from anvil import *
+import m3.components as m3
 from anvil.tables import app_tables
 from anvil import users
 import anvil.server

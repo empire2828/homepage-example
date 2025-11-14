@@ -1,5 +1,6 @@
 from ._anvil_designer import impressumTemplate
 from anvil import *
+import m3.components as m3
 import anvil.server
 import anvil.google.auth
 import anvil.users

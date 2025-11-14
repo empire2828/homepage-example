@@ -83,7 +83,7 @@ dependencies:
   version: {version_tag: v1.2.6}
 - dep_id: dep_i8vdrigkugb23n
   resolution_hints: {app_id: 3PIDO5P3H4VPEMPL, name: routing, package_name: routing}
-  version: {version_tag: v0.3.5}
+  version: {version_tag: v0.5.0}
 - dep_id: dep_pa3otpma4dkzg
   resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
   version: {version_tag: v3.1.0}

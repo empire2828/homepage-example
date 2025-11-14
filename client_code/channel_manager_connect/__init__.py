@@ -1,5 +1,6 @@
 from ._anvil_designer import channel_manager_connectTemplate
 from anvil import *
+import m3.components as m3
 import anvil.server
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
