@@ -1,6 +1,6 @@
 from ._anvil_designer import home_startTemplate
 from anvil import *
-from routing import router
+#from . import routes
 import m3.components as m3
 import anvil.server
 import anvil.users

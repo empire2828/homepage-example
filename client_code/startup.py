@@ -1,6 +1,7 @@
-#from routing import router
+import routing
 from routing.router import launch
-import routes  # noqa: F401
+import routes
 
 if __name__ == "__main__":
-    launch()
+  launch()
+
