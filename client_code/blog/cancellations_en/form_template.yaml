@@ -36,7 +36,7 @@ components_by_slot:
         - **fewo-direkt** (Vrbo) is at a similar level to Airbnb.
         - The **own website** usually performs best analytically. Cancellation rates below 5% are not uncommon because guests book deliberately and personal interaction significantly increases commitment.
 
-        At {Lodginia}, it looks like this for your property:
+        At Lodginia, it looks like this for your property:
 
         {cancellations.jpeg}
 
@@ -54,11 +54,11 @@ components_by_slot:
 
         One key insight from cancellation analysis: the further in the future the stay is booked, the higher the cancellation risk. Guests often book “just in case” and later change their plans. This behavior is especially common on booking.com, while short-term bookings (especially on your own website) carry much lower risk.
 
-        At {Lodginia}, it might look like this for your holiday home:
+        At Lodginia, it might look like this for your holiday home:
 
         {cancellations_booking_window.jpeg}
 
-        In this example, bookings made more than one year in advance were canceled with a probability of 67% – in this case, two bookings. At {Lodginia}, you can also analyze exactly which booking channel it was. Usually, booking.com stands out here.
+        In this example, bookings made more than one year in advance were canceled with a probability of 67% – in this case, two bookings. At Lodginia, you can also analyze exactly which booking channel it was. Usually, booking.com stands out here.
 
         **What to do?**
 
@@ -70,7 +70,7 @@ components_by_slot:
 
         Another factor increases the likelihood of cancellation: when guests book a property that doesn’t really fit their needs. For example, when two people book a house for six, the risk of cancellation rises. Such bookings are often canceled later because the accommodation ultimately doesn’t meet individual expectations.
 
-        At {Lodginia}, you can analyze this for your property as follows:
+        At Lodginia, you can analyze this for your property as follows:
 
         {cancellations_guest_count.jpeg}
 
