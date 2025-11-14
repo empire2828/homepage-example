@@ -1,3 +1,4 @@
+from routing import router
 from routing.router import Route #, debug_logging
 
 # debug_logging(True)

@@ -1,3 +1,4 @@
+from routing import router
 from routing.router import launch
 from . import routes  # noqa: F401
 

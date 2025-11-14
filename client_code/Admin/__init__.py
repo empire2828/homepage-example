@@ -1,5 +1,6 @@
 from ._anvil_designer import AdminTemplate
 from anvil import *
+from routing import router
 import m3.components as m3
 import anvil.server
 import anvil.google.auth, anvil.google.drive
