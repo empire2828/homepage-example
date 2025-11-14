@@ -5,6 +5,10 @@ components_by_slot:
       name: image_1
       properties: {height: 151.02734375, source: _/theme/blog/cancellations.jpg}
       type: Image
+    - layout_properties: {slot: Lodginia}
+      name: image_2
+      properties: {}
+      type: Image
     layout_properties: {}
     name: rich_text_1
     properties:
@@ -20,7 +24,7 @@ components_by_slot:
         - **fewo-direkt** (Vrbo) liegt auf ähnlicher Höhe wie Airbnb.
         - Die **eigene Homepage** liegt analytisch gesehen oft am besten. Stornierungsraten unter 5 % sind keine Seltenheit, da Gäste gezielt buchen und persönliche Interaktion die Bindung deutlich erhöht.
 
-          Bei {Lodginia} sieht das für Euer Ferienobjekt so aus:
+          Bei {Lodginia} kannst Du das für Dein Ferienobjekt schnell so ermitteln:
 
           {cancellations.jpeg}
 
