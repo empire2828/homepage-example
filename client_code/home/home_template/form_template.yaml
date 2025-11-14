@@ -16,8 +16,8 @@ components:
       icon_align: right_edge
       role: null
       spacing:
-        margin: ['15', null, '15', null]
-        padding: ['10', '24', '10', '24']
+        margin: ['15', '2', '15', '2']
+        padding: ['10', '6', '10', '6']
       spacing_below: large
       text: ' Blog '
     type: Button
@@ -32,8 +32,8 @@ components:
       icon_align: right_edge
       role: null
       spacing:
-        margin: ['15', null, '15', null]
-        padding: ['10', '24', '10', '24']
+        margin: ['15', '2', '15', '2']
+        padding: ['10', '6', '10', '6']
       spacing_below: large
       text: About us
     type: Button
@@ -48,7 +48,7 @@ components:
       icon_align: right_edge
       role: filled-button
       spacing:
-        margin: ['15', null, '15', null]
+        margin: ['15', '2', '15', '2']
         padding: ['10', '24', '10', '24']
       spacing_below: large
       text: Login
@@ -74,7 +74,8 @@ components:
     foreground: '#ffa200'
     role: null
     spacing:
-      margin: ['15', null, '15', null]
+      margin: ['15', '2', '15', '2']
+      padding: [null, '6', null, '6']
     text: Lodginia
     visible: true
   type: Button
