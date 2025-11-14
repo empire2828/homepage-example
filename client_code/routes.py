@@ -1,13 +1,9 @@
-from routing import router
+#from routing import router
 from routing.router import Route #, debug_logging
-
-# debug_logging(True)
 
 class homepage_route(Route):
     path = "/"
     form = "home_start"
-    #cache_form = True
-    #cache_data = True
 
 class home_de(Route):
   path = "/de"
@@ -27,4 +23,4 @@ class knowledge_hub(Route):
 
 class cancellations_de(Route):
   path = "/stornierungen_analytisch_vermeiden"
-  form = "/blog/cancellations_de"
+  form = "cancellations_de"
