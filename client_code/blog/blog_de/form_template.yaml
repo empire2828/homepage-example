@@ -1,2 +1,13 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: image_1
+    properties: {alt_text: Wie man Stornierungen vermeiden kann, horizontal_align: left, source: _/theme/blog/cancellations_booking_cancelled_sad_person.jpg}
+    type: Image
+  - event_bindings: {click: cancellations_link_click}
+    layout_properties: {}
+    name: cancellations_link
+    properties: {font_size: 18, text: Wie man Stornierungen analytisch vermeiden kann}
+    type: form:dep_g9k4toow7i44kq:_Components.Link
 is_package: true
 layout: {type: 'form:home.home_template'}

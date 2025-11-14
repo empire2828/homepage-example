@@ -23,3 +23,7 @@ class data_protection_route(Route):
 class knowledge_hub(Route):
   path = "/knowledge_hub"
   form = "knowledge_hub"
+
+class cancellations_de(Route):
+  path = "blog/ferienhaus_stornierungen_analytisch_vermeiden"
+  form = "cancellations_de"

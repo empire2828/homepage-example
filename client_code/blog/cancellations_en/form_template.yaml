@@ -1,0 +1,100 @@
+components_by_slot:
+  slot_1:
+  - components:
+    - layout_properties: {slot: cancellations.jpeg, width: 422.0390625}
+      name: image_1
+      properties: {height: 151.02734375, source: _/theme/blog/cancellations.jpg}
+      type: Image
+    - layout_properties: {slot: cancellations_booking_window.jpeg, width: 545.9726259765625}
+      name: image_2
+      properties: {height: 333.22216796875, source: _/theme/blog/cancellations_booking_window.jpg}
+      type: Image
+    - layout_properties: {slot: smoobu_booking_window.jpeg, width: 720.875083984375}
+      name: image_3
+      properties: {height: 527.9999389648438, source: _/theme/blog/Smoobu booking window.jpg}
+      type: Image
+    - layout_properties: {slot: cancellations_guest_count.jpeg, width: 630.9929389648438}
+      name: image_4
+      properties: {height: 418.5555419921875, source: _/theme/blog/cancellations_guest_count.jpg}
+      type: Image
+    - layout_properties: {slot: booking_link_preis_gaesteanzahl}
+      name: link_1
+      properties: {text: 'https://partner.booking.com/de/hilfe/Setting up and updating pricing per guest', url: 'https://partner.booking.com/en-gb/help/rates-availability/rates-special-offers/setting-and-updating-pricing-guestngen/einrichtung-und-aktualisierung-der-preiseinstellung'}
+      type: form:dep_g9k4toow7i44kq:_Components.Link
+    layout_properties: {}
+    name: rich_text_1
+    properties:
+      content: |
+        # Avoid cancellations analytically – here’s how
+
+        Cancellations are among the biggest annoyances for hosts. They mean empty beds, lost revenue, and a lot of organizational effort. But cancellations are not random: those who understand them and take targeted action can reduce their rate significantly.
+
+        ### Cancellation rates differ drastically depending on the booking channel:
+
+        - On **booking.com**, the average cancellation rate is often 40% or more. Many guests take advantage of the usually free cancellation policies and book several accommodations in parallel.
+        - On **Airbnb**, the cancellation rate is often only 5–15%. This is mainly due to the mutual review system, even though hosts can no longer rate guests who cancel.
+        - **fewo-direkt** (Vrbo) is at a similar level to Airbnb.
+        - The **own website** usually performs best analytically. Cancellation rates below 5% are not uncommon because guests book deliberately and personal interaction significantly increases commitment.
+
+        At {Lodginia}, it looks like this for your property:
+
+        {cancellations.jpeg}
+
+        ### The trick: Reflect risk in your pricing
+
+        The key trick is not to completely avoid bookings with higher cancellation risk. Instead, the higher risk should be compensated through pricing. Booking.com values the financial risk of a cancellable booking at around 10% compared to a non-refundable one, with the average cancellation rate on booking.com being around 40%. If your direct bookings have a cancellation rate of 10%, a possible price markup would be:
+
+        10% price markup / 40% cancellation rate = 0.25% markup per additional percentage point of cancellation rate
+
+        30% higher cancellation rate on booking.com vs. your website * 0.25% = 7.5% price markup
+
+        Simply add this on top of your commission fees in Smoobu to cover your cancellation risk.
+
+        ### Why longer booking windows lead to more cancellations
+
+        One key insight from cancellation analysis: the further in the future the stay is booked, the higher the cancellation risk. Guests often book “just in case” and later change their plans. This behavior is especially common on booking.com, while short-term bookings (especially on your own website) carry much lower risk.
+
+        At {Lodginia}, it might look like this for your holiday home:
+
+        {cancellations_booking_window.jpeg}
+
+        In this example, bookings made more than one year in advance were canceled with a probability of 67% – in this case, two bookings. At {Lodginia}, you can also analyze exactly which booking channel it was. Usually, booking.com stands out here.
+
+        **What to do?**
+
+        Simple: reduce the booking window for the channel responsible for high long-term cancellations and allow early bookings (e.g. more than one year in advance) only on channels with low cancellation rates (especially your own website). In Smoobu, you can adjust this under “Pricing/Availability Settings”:
+
+        {smoobu_booking_window.jpeg}
+
+        ### Match between guest count and accommodation
+
+        Another factor increases the likelihood of cancellation: when guests book a property that doesn’t really fit their needs. For example, when two people book a house for six, the risk of cancellation rises. Such bookings are often canceled later because the accommodation ultimately doesn’t meet individual expectations.
+
+        At {Lodginia}, you can analyze this for your property as follows:
+
+        {cancellations_guest_count.jpeg}
+
+        In this example, there is a problem with guest groups of seven or more people – 56% of bookings with seven guests and every second booking with eight guests were canceled.
+
+        ### The trick: Reflect risk in your pricing
+
+        Again, don’t try to avoid riskier bookings altogether – charge for the risk instead! On booking.com, for example, you can adjust your daily rate depending on the number of guests. You can find out how to do that here:
+
+        {booking_link_preis_gaesteanzahl}
+
+        If you also have cancellation issues for direct bookings with higher guest numbers, you can increase prices in Smoobu via the Booking Engine and the “Extra Guests Fee,” in addition to possible linen package charges.
+
+        ### Additional recommendations for avoiding cancellations
+
+        - Every personal interaction reduces the cancellation risk. Send a booking confirmation with a personal introduction and ask about preferences, etc.
+        - Deposits significantly reduce cancellation risk. Enable payments on booking.com, even though it costs around 1.4%. The financial risk is much higher when no credit card is required.
+        - Use the new seasonal cancellation policies on fewo-direkt and Airbnb starting in 2026.
+        - Join the SmartFlex program on booking.com if offered to you. It’s free for you! Booking.com provides additional flexibility to guests at its own cost. It’s worth it for booking.com because this flexibility is offered only to guests who rarely cancel, resulting in more commission revenue.
+
+        ### Conclusion
+
+        An analytical approach to booking data helps detect patterns and risks early. This way, you can proactively address problematic channels and time frames. It’s better to have your guests pay for cancellation risk than to try avoiding it completely.
+      font_size: 18
+    type: RichText
+is_package: true
+layout: {type: 'form:home.home_template'}
