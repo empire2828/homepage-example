@@ -5,60 +5,27 @@ components_by_slot:
       name: image_1
       properties: {height: 151.02734375, source: _/theme/blog/cancellations.jpg}
       type: Image
+    - layout_properties: {slot: cancellations_booking_window.jpeg, width: 545.9726259765625}
+      name: image_2
+      properties: {height: 333.22216796875, source: _/theme/blog/cancellations_booking_window.jpg}
+      type: Image
+    - layout_properties: {slot: smoobu_booking_window.jpeg, width: 720.875083984375}
+      name: image_3
+      properties: {height: 527.9999389648438, source: _/theme/blog/Smoobu booking window.jpg}
+      type: Image
+    - layout_properties: {slot: cancellations_guest_count.jpeg, width: 630.9929389648438}
+      name: image_4
+      properties: {height: 418.5555419921875, source: _/theme/blog/cancellations_guest_count.jpg}
+      type: Image
+    - layout_properties: {slot: booking_link_preis_gaesteanzahl}
+      name: link_1
+      properties: {text: 'https://partner.booking.com/de/hilfe/raten-verfügbarkeiten/zimmereinstellungen/einrichtung-und-aktualisierung-der-preiseinstellung', url: 'https://partner.booking.com/de/hilfe/raten-verf%C3%BCgbarkeiten/zimmereinstellungen/einrichtung-und-aktualisierung-der-preiseinstellung'}
+      type: form:dep_g9k4toow7i44kq:_Components.Link
     layout_properties: {}
     name: rich_text_1
     properties:
-      content: |
-        # Stornierungen analytisch vermeiden – so geht’s
-
-        Stornierungen gehören zu den größten Ärgernissen für Gastgeber. Sie bedeuten leere Betten, verpasste Umsätze und viel Organisationsaufwand. Doch Stornierungen sind kein Zufall: Wer sie versteht und gezielt gegensteuert, kann ihre Quote erheblich senken.
-
-        ### Die Stornierungsquote unterscheidet sich je nach Buchungskanal massiv:
-
-        - Über **booking.com** liegt die durchschnittliche Stornierungsquote oft bei 40 % oder mehr. Viele Gäste nutzen die meist kostenfreien Stornierungsbedingungen und buchen mehrere Unterkünfte parallel.
-        - Bei **Airbnb** beträgt die Stornierungsrate häufig nur 5–15 %. Das liegt vor allem am gegenseitigen Bewertungssystem, auch wenn man die Stornierenden gar nicht mehr bewertet kann als Gastgeber.
-        - **fewo-direkt** (Vrbo) liegt auf ähnlicher Höhe wie Airbnb.
-        - Die **eigene Homepage** liegt analytisch gesehen oft am besten. Stornierungsraten unter 5 % sind keine Seltenheit, da Gäste gezielt buchen und persönliche Interaktion die Bindung deutlich erhöht.
-
-          Bei {Lodginia} sieht das für Euer Ferienobjekt so aus:
-
-          {cancellations.jpeg}
-
-        ### Warum längere Buchungsfenster zu mehr Stornierungen führen
-
-        Eine Erkenntnis aus der Stornierungsanalyse: Je weiter der Aufenthaltszeitraum in der Zukunft liegt, desto höher ist das Stornorisiko. Gäste buchen auf Vorrat und ändern später doch noch ihre Pläne. Besonders auf booking.com ist dieses Verhalten verbreitet, während kurzfristige Buchungen (vor allem auf der eigenen Website) mit deutlich weniger Risiko einhergehen.
-
-        =
-
-        ### Passung zwischen Gästezahl und Unterkunft
-
-        Ein zusätzlicher Faktor erhöht die Stornierungswahrscheinlichkeit: Wenn Gäste ein eigentlich nicht passendes Haus buchen, wie etwa wenn 2 Personen ein Ferienhaus für 6 Personen wählen, steigt das Risiko einer Stornierung. Solche Buchungen werden häufig storniert, da die Unterkunft letztlich nicht den individuellen Bedürfnissen entspricht und die Gäste nachträglich ihre Entscheidung überdenken.
-
-        ### Der Trick: Risiko im Preis abbilden
-
-        Der entscheidende Trick ist nicht, Buchungen mit erhöhtem Stornierungsrisiko komplett zu vermeiden. Stattdessen sollte das höhere Risiko aktiv über den Preis ausgeglichen werden. Das bedeutet: Flexible Buchungen, lange Buchungsvorlaufzeiten oder unpassende Gästekonstellationen erhalten einen entsprechenden Risikoaufschlag im Preis. So bleibt das Angebot attraktiv, aber der wirtschaftliche Nachteil durch Stornierungen wird kompensiert.
-
-        ### Handlungsempfehlungen zur Vermeidung von Stornierungen
-
-        - Setze auf Direktbuchungen über deine eigene Homepage und kommuniziere klare, aber faire Stornierungsbedingungen.
-        - Implementiere eine Anzahlung — das verringert die Wahrscheinlichkeit von Spontanstornierungen massiv.
-        - Reduziere auf Plattformen wie booking.com kostenlose Stornierungsoptionen oder schränke sie zeitlich stark ein.
-        - Beobachte die durchschnittlichen Buchungsfenster je Kanal und passe deine Bedingungen im Zeitverlauf an: Je früher gebucht wird, desto strenger können Stornoregeln sein.
-        - Biete Anreize wie kleine Rabatte für nicht-stornierbare Buchungen an, vor allem auf Kanälen mit hoher Stornoquote.
-
-        ### Fazit
-
-        Ein analytischer Zugang zu Buchungsdaten hilft, Muster und Risiken frühzeitig zu entdecken. So kannst du gezielt auf problematische Kanäle und Zeiträume reagieren und die Anzahl der Stornierungen nachhaltig senken.
+      content: "# Stornierungen analytisch vermeiden – so geht’s\n\nStornierungen gehören zu den größten Ärgernissen für Gastgeber. Sie bedeuten leere Betten, verpasste Umsätze und viel Organisationsaufwand. Doch Stornierungen sind kein Zufall: Wer sie versteht und gezielt gegensteuert, kann ihre Quote erheblich senken.\n\n### Die Stornierungsquote unterscheidet sich je nach Buchungskanal massiv:\n\n- Über **booking.com** liegt die durchschnittliche Stornierungsquote oft bei 40 % oder mehr. Viele Gäste nutzen die meist kostenfreien Stornierungsbedingungen und buchen mehrere Unterkünfte parallel.\n- Bei **Airbnb** beträgt die Stornierungsrate häufig nur 5–15 %. Das liegt vor allem am gegenseitigen Bewertungssystem, auch wenn man die Stornierenden gar nicht mehr bewertet kann als Gastgeber.\n- **fewo-direkt** (Vrbo) liegt auf ähnlicher Höhe wie Airbnb.\n- Die **eigene Homepage** liegt analytisch gesehen oft am besten. Stornierungsraten unter 5 % sind keine Seltenheit, da Gäste gezielt buchen und persönliche Interaktion die Bindung deutlich erhöht.\n\n  Bei {Lodginia} sieht das für Dein Ferienobjekt so aus:\n\n  {cancellations.jpeg}\n\n### Der Trick: Risiko im Preis abbilden\n\nDer entscheidende Trick ist nicht, Buchungen mit erhöhtem Stornierungsrisiko komplett zu vermeiden. Stattdessen sollte das höhere Risiko aktiv über den Preis ausgeglichen werden. Booking.com bewertet das geldliche Risiko einer Stornierung mit ca. 10% zu einer nicht stornierbaren Buchung, wobei die durchschnittliche Stornierungsrate bei booking.com ca. 40% ist. Hast Du bei Direktbuchungen eine Stornierungsrate von 10% wäre ein möglicher Preisaufschlag:\n\n10% Preisaufschlag / 40% Stornierungsquote = 0,25% Preisaufschlag ist jeder zusätzlichem Stornierungsprozent \"wert\"\n\n30% höhere Stornierungsquote bei booking.com vs. Deiner Homepage * 0,25% =  7,5% Preisaufschlag\n\nSchlage das einfach auf die Provisionsgebühren in Smoobu auf um Dein Stornierungsrisiko abzudecken.\n\n### Warum längere Buchungsfenster zu mehr Stornierungen führen\n\nEine Erkenntnis aus der Stornierungsanalyse: Je weiter der Aufenthaltszeitraum in der Zukunft liegt, desto höher ist das Stornorisiko. Gäste buchen auf Vorrat und ändern später doch noch ihre Pläne. Besonders auf booking.com ist dieses Verhalten verbreitet, während kurzfristige Buchungen (vor allem auf der eigenen Website) mit deutlich weniger Risiko einhergehen.\n\nBei {Lodginia} könnte das so für Dein Ferienhaus aussehen:\n\n {cancellations_booking_window.jpeg}\n\nIn diesem Beispiel werden Buchungen mit Vorlauf von mehr als 1 Jahr mit einer Wahrscheinlichkeit von 67% storniert- hier waren das 2 Buchungen. Bei {Lodginia} kannst Du auch genau analysieren, welche Buchungskanal das war. In der Regel sticht hier booking.com hervor.\n\n**Was tun?**\n\nGanz einfach: Reduziert das Buchungsfenster für den Kanal der für die hohen Stornierungen mit langem Vorlauf verantwortlich ist und lasst Frühbucher z.B. länger als 1 Jahr nur für Kanäle zu die niedrige Stornierungsraten haben (insbesondere Deine Homepage). In Smoobu kannst Du das unter Pricing/ Availibility Settings einstellen:\n\n {smoobu_booking_window.jpeg}\n\n### Passung zwischen Gästezahl und Unterkunft\n\nEin zusätzlicher Faktor erhöht die Stornierungswahrscheinlichkeit: Wenn Gäste ein eigentlich nicht passendes Haus buchen, wie etwa wenn 2 Personen ein Ferienhaus für 6 Personen wählen, steigt das Risiko einer Stornierung. Solche Buchungen werden häufig storniert, da die Unterkunft letztlich nicht den individuellen Bedürfnissen entspricht und die Gäste nachträglich ihre Entscheidung überdenken.\n\nBei {Lodginia} kannst Du das für Dein Ferienhaus so auswerten:\n\n{cancellations_guest_count.jpeg}\n\nIn diesem Beispiel gibt es ein Problem bei Gästegruppe mit 7 und mehr  Personen- 56% der Buchungen mit 7 Personen und jede zweite Buchung mit 8 Personen wurde storniert.\n\n### Der Trick: Risiko im Preis abbilden\n\nHier solltest Du nicht versuchen die risikoreicheren Buchungen komplett zu vermeiden, sondern lasse Dir das Risiko bezahlen!  Bei booking.com kannst Du z.B. die Tagesrate je nach Gästeanzahl anpassen. Wie das geht steht hier beschrieben: \n\n{booking_link_preis_gaesteanzahl}\n\nHast Du auch ein Problem bei Direktbuchungen bei höheren Personenzahlen kannst Du die Preise bei Smoobu über die Booking Engine und Extra Guests fee zusätzlich zu evtl. Wäschepaketen erhöhen.\n\n### Zusätzliche Handlungsempfehlungen zur Vermeidung von Stornierungen\n- Jede persönliche Interaktion reduziert das Stornierungsrisiko. Sende eine Buchungsbestätigung mit persönlicher Vorstellung- frage nach Vorlieben etc.\n- Anzahlungen reduzieren das Stornierungsrisiko deutlich. Stelle payments bei booking.com an, auch wenn dieses ~1.4% kostet. Das Risiko ist geldlich bewertet deutlich höher, wenn keine Kreditkarte eingegeben werden muss.\n- Nutze die neuen saisonalen Stornierungsbedingungen bei fewo-direkt und bei Airbnb ab 2026\n- Tritt dem Smarflex Programm bei booking.com, wenn es Dir angeboten wird. Es ist für Dich kostenlos! Booking.com gewährt auf eigene Kosten zusätzliche Stornierungsflexibilität für die Gäste. Für booking.com lohnt sich das, da Sie die zusätzliche Stornierungsflexibilität nur Gästen anbieten, die bisher sowieso kaum storniert haben und so mehr Provisionen generieren kännen.\n\n### Fazit\n\nEin analytischer Zugang zu Buchungsdaten hilft, Muster und Risiken frühzeitig zu entdecken. So kannst du gezielt auf problematische Kanäle und Zeiträume reagieren. Lasse Dir das Stornierungsrisiko lieber bezahlen, als zu versuchen diese komplett zu vermeiden.\n"
       font_size: 18
-    type: RichText
-  - layout_properties: {}
-    name: rich_text_2
-    properties:
-      content: |-
-        Booking.com Payments
-        Smartflex Programm
-        Gäste- Engagement
-        By Country
     type: RichText
 is_package: true
 layout: {type: 'form:home.home_template'}
