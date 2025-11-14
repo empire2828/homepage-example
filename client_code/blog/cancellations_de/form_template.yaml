@@ -1,7 +1,7 @@
 components_by_slot:
   slot_1:
   - components:
-    - layout_properties: {slot: cancellations.jpeg, width: 366.016}
+    - layout_properties: {slot: cancellations.jpeg, width: 330.016}
       name: image_1
       properties: {height: 130, source: _/theme/blog/cancellations.jpg}
       type: Image
@@ -9,11 +9,11 @@ components_by_slot:
       name: image_2
       properties: {height: 262, source: _/theme/blog/cancellations_booking_window.jpg}
       type: Image
-    - layout_properties: {slot: smoobu_booking_window.jpeg, width: 383.875}
+    - layout_properties: {slot: smoobu_booking_window.jpeg, width: 374.875}
       name: image_3
-      properties: {height: 289, source: _/theme/blog/cancellations Smoobu booking window.jpg}
+      properties: {height: 278, source: _/theme/blog/cancellations Smoobu booking window.jpg}
       type: Image
-    - layout_properties: {slot: cancellations_guest_count.jpeg, width: 395.98400000000004}
+    - layout_properties: {slot: cancellations_guest_count.jpeg, width: 370.969}
       name: image_4
       properties: {height: 253, source: _/theme/blog/cancellations_guest_count.jpg}
       type: Image
