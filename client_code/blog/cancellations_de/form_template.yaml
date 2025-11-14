@@ -11,7 +11,7 @@ components_by_slot:
       type: Image
     - layout_properties: {slot: smoobu_booking_window.jpeg, width: 720.875083984375}
       name: image_3
-      properties: {height: 527.9999389648438, source: _/theme/blog/Smoobu booking window.jpg}
+      properties: {height: 527.9999389648438, source: _/theme/blog/cancellations Smoobu booking window.jpg}
       type: Image
     - layout_properties: {slot: cancellations_guest_count.jpeg, width: 630.9929389648438}
       name: image_4
