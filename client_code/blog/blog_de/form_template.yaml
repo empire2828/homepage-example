@@ -13,7 +13,7 @@ components_by_slot:
       spacing:
         margin: [null, null, '18', null]
         padding: [null, null, null, null]
-      text: Why comparing your booking status with Smoobu is dangerous
+      text: Wieso Vergleiche des Buchungsstandes in Smoobu gefährlich sein können
     type: form:dep_g9k4toow7i44kq:_Components.Link
   - layout_properties: {}
     name: cancellations_image

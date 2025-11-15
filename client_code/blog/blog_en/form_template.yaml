@@ -13,7 +13,7 @@ components_by_slot:
       spacing:
         margin: [null, null, '18', null]
         padding: [null, null, null, null]
-      text: Warum Buchungsstand- Vergleiche in Smoobu gefährlich sind
+      text: Why comparing booking status in Smoobu can be dangerous
     type: form:dep_g9k4toow7i44kq:_Components.Link
   - layout_properties: {}
     name: image_1
