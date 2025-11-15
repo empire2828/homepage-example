@@ -3,7 +3,7 @@ components_by_slot:
   - components:
     - layout_properties: {slot: lodginia.jpeg, width: 433.76685498046874}
       name: image_1
-      properties: {height: 231.7777099609375, source: _/theme/blog/stly_revenue_lodginia.jpg}
+      properties: {height: 199.44439697265625, source: _/theme/blog/stly_revenue_lodginia.jpg}
       type: Image
     layout_properties: {}
     name: rich_text_1
