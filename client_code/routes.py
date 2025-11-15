@@ -14,7 +14,7 @@ class home_en(Route):
 
 class data_protection_route(Route):
     path = "/data_protection"
-    form = "data_protection"
+    form = "home.data_protection"
 
 class knowledge_hub(Route):
   path = "/knowledge_hub"
@@ -27,3 +27,11 @@ class cancellations_de(Route):
 class cancellations_en(Route):
   path = "/how_to_avoid_cancellations_analytical"
   form = "blog.cancellations_en"
+
+class stly_de(Route):
+  path = "/warum_vergleiche_des_buchungsstandes_in_smoobu_gefaehrlich_sind"
+  form = "blog.stly_de"
+
+class stly_en(Route):
+  path = "/why_comparing_booking_status_in_smoobu_is_dangerous"
+  form = "blog.stly_en"

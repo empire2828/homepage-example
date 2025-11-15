@@ -21,3 +21,8 @@ class blog_de(blog_deTemplate):
   def cancellations_link_click(self, **event_args):
     open_form('blog.cancellations_de')
     pass
+
+  def stly_link_click(self, **event_args):
+    open_form('blog.stly_de')
+    pass
+

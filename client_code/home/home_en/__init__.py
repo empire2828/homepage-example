@@ -26,7 +26,7 @@ class home_en(home_enTemplate):
     pass
   
   def impressum_link_click(self, **event_args):
-    open_form('impressum')
+    open_form('home.impressum')
     pass
  
   #def home_link_click(self, **event_args):
@@ -38,7 +38,7 @@ class home_en(home_enTemplate):
     pass
 
   def data_protection_link_click(self, **event_args):
-    open_form('data_protection')
+    open_form('home.data_protection')
     pass
 
 
