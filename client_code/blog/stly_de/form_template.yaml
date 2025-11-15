@@ -1,9 +1,9 @@
 components_by_slot:
   slot_1:
   - components:
-    - layout_properties: {slot: lodginia.jpeg, width: 540.7607709960937}
+    - layout_properties: {slot: lodginia.jpeg, width: 539.96916796875}
       name: image_1
-      properties: {height: 273.77777099609375, horizontal_align: left, source: _/theme/blog/stly_revenue_lodginia.jpg}
+      properties: {height: 221.99993896484375, horizontal_align: left, source: _/theme/blog/stly_revenue_lodginia.jpg}
       type: Image
     layout_properties: {}
     name: rich_text_1
