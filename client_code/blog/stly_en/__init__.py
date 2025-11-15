@@ -1,19 +1,22 @@
-from ._anvil_designer import home_deTemplate
+from ._anvil_designer import stly_enTemplate
 from anvil import *
+import anvil.server
 from routing import router
 import m3.components as m3
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
+import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import anvil.server
-import anvil.users
-import anvil.js
 
-class home_de(home_deTemplate):
+
+class stly_en(stly_enTemplate):
   def __init__(self, **properties):
+    # Set Form properties and Data Bindings.
     self.init_components(**properties)
+
+    # Any code you write here will run before the form opens.
 
   def testen_button_click(self, **event_args):
     user = anvil.users.signup_with_form(allow_cancel=True)
@@ -28,20 +31,4 @@ class home_de(home_deTemplate):
       # Navigation Link als aktiv markieren
       layout_form.reset_links()
       layout_form.dashboard_navigation_link.selected = True
-    pass
-
-  def impressum_link_click(self, **event_args):
-    open_form("home.impressum")
-    pass
-
-  #def home_link_click(self, **event_args):
-  #  open_form("home_start")
-  #  pass
-
-  def pricing_link_click(self, **event_args):
-    self.pricing_label.scroll_into_view()
-    pass
-
-  def data_protection_link_click(self, **event_args):
-    open_form("home.data_protection")
     pass
