@@ -1,0 +1,8 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: rich_text_1
+    properties: {font_size: 18}
+    type: RichText
+is_package: true
+layout: {type: 'form:home.home_template'}
