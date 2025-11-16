@@ -16,6 +16,14 @@ class channel_manager_connect(Route):
   path = "/channel_manager_connect"
   form = "channel_manager_connect"
 
+class blog_de(Route):
+  path = "/blog_de"
+  form = "blog.blog_de"
+
+class blog_en(Route):
+  path = "/blog_en"
+  form = "blog.blog_en"
+
 class data_protection_route(Route):
     path = "/data_protection"
     form = "home.data_protection"
