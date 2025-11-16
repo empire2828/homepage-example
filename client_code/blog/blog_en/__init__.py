@@ -25,3 +25,7 @@ class blog_en(blog_enTemplate):
   def stly_link_click(self, **event_args):
     open_form('blog.stly_en')
     pass
+
+  def vrbo_link_click(self, **event_args):
+    open_form('blog.vrbo_en')
+    pass

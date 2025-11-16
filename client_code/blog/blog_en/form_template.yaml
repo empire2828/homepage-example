@@ -1,6 +1,11 @@
 components_by_slot:
   slot_1:
   - components:
+    - event_bindings: {}
+      layout_properties: {slot: card-content-container-slot}
+      name: stly_image
+      properties: {height: 474.77777099609375, horizontal_align: left, source: _/theme/blog/stly_intro_pic.jpg}
+      type: Image
     - event_bindings: {click: stly_link_click}
       layout_properties: {slot: card-content-container-slot}
       name: stly_link
@@ -12,11 +17,6 @@ components_by_slot:
           padding: [null, null, null, null]
         text: Why comparing booking status in Smoobu can be dangerous
       type: form:dep_g9k4toow7i44kq:_Components.Link
-    - event_bindings: {}
-      layout_properties: {slot: card-content-container-slot}
-      name: stly_image
-      properties: {height: 474.77777099609375, horizontal_align: left, source: _/theme/blog/stly_intro_pic.jpg}
-      type: Image
     layout_properties: {}
     name: card_content_container_1
     properties: {}
@@ -26,15 +26,33 @@ components_by_slot:
     properties: {}
     type: Spacer
   - components:
+    - layout_properties: {slot: card-content-container-slot}
+      name: image_1
+      properties: {alt_text: Wie man Stornierungen vermeiden kann, horizontal_align: left, source: _/theme/blog/cancellations_booking_cancelled_sad_person.jpg}
+      type: Image
     - event_bindings: {click: cancellations_link_click}
       layout_properties: {slot: card-content-container-slot}
       name: cancellations_link
       properties: {bold: true, font_size: 24, text: How to avoid cancellations analytical}
       type: form:dep_g9k4toow7i44kq:_Components.Link
     - layout_properties: {slot: card-content-container-slot}
-      name: image_1
-      properties: {alt_text: Wie man Stornierungen vermeiden kann, horizontal_align: left, source: _/theme/blog/cancellations_booking_cancelled_sad_person.jpg}
-      type: Image
+      name: spacer_2
+      properties: {}
+      type: Spacer
+    - components:
+      - layout_properties: {slot: card-content-container-slot}
+        name: vrbo_image
+        properties: {alt_text: Wie man Stornierungen vermeiden kann, horizontal_align: left, source: _/theme/blog/vrbo_intro.jpg}
+        type: Image
+      - event_bindings: {click: vrbo_link_click}
+        layout_properties: {slot: card-content-container-slot}
+        name: vrbo_link
+        properties: {bold: true, font_size: 24, text: Connect VRBO to Smoobu with price sync}
+        type: form:dep_g9k4toow7i44kq:_Components.Link
+      layout_properties: {slot: card-content-container-slot}
+      name: card_content_container_2_copy
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
     layout_properties: {}
     name: card_content_container_2
     properties: {}
