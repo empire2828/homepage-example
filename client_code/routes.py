@@ -12,6 +12,10 @@ class home_en(Route):
   path = "/en"
   form = "home.home_en"
 
+class channel_manager_connect(Route):
+  path = "/channel_manager_connect"
+  form = "channel_manager_connect"
+
 class data_protection_route(Route):
     path = "/data_protection"
     form = "home.data_protection"
