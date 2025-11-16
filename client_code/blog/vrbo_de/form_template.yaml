@@ -1,0 +1,34 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: rich_text_1
+    properties:
+      content: |
+        ### Wie du Fewo‑Direkt mit Smoobu über PriceLabs auch die Preise synchronisieren kannst
+
+        &nbsp;
+        Viele Vermieter kennen das Problem: Während Portale wie Airbnb oder Booking.com Preisänderungen direkt über die Smoobu‑Schnittstelle übernehmen, bietet Fewo‑Direkt (HomeAway/VRBO) bisher keine direkte Preissynchronisierung über Smoobu. Wer seine Preise jedoch bereits mit PriceLabs steuert, kann dieses Hindernis elegant umgehen.
+
+        Pricelabs kann zugleich Smoobu mit Preisen versorgen, als auch Fewo-Direkt. Smoobu bleibt weiterhin wie bisher per iCal mit Fewo-Direkt verbunden.
+
+        &nbsp;
+        #### Unterkonto (Child Account) in PriceLabs anlegen
+        Damit Fewo‑Direkt separat angebunden werden kann, legt man in PriceLabs ein sogenanntes „Unterkonto“ (Child Account) an. Dieses Unterkonto fungiert als eigenständige Verbindung, über die Fewo‑Direkt aktiviert werden kann, ohne dass es zu Konflikten mit der Smoobu‑iCal‑Synchronisation kommt.
+
+        Das Unterkonto wird über das Hauptmenü von PriceLabs erstellt "Add/ Reconnect Listings"- am besten mit Usernamen und Passwort. Dabei lassen sich dieselben Preisstrategien übernehmen oder auch eigene Regeln speziell für Fewo‑Direkt festlegen. **Wichtig:** Danach gleich unter Manage Listings das neue Child Element dem Parent Element zuordnen, dann kostet es nur 1$.
+
+        &nbsp;
+        #### Fewo‑Direkt mit PriceLabs verbinden
+        Nachdem das Unterkonto angelegt wurde, lässt sich dort direkt die Verbindung zu Fewo‑Direkt (VRBO) herstellen. Eine detaillierte Anleitung dazu findest du in der offiziellen PriceLabs‑Dokumentation:
+
+        [PriceLabs‑Hilfeartikel – VRBO verbinden](https://help.pricelabs.co/portal/en/kb/articles/vrbo#Reconnecting_Your_Vrbo_Account)
+
+        Über diese Verbindung werden dynamische Preise automatisch auf Fewo‑Direkt übertragen. Die Verfügbarkeiten bleiben weiterhin durch Smoobu per iCal synchronisiert. Dadurch ergänzen sich beide Systeme ideal: PriceLabs sorgt für die Preisdynamik, Smoobu steuert den Kalender und die Buchungsverwaltung.
+
+        &nbsp;
+        #### Fazit
+        Auch ohne eine direkte Preis‑API zwischen Smoobu und Fewo‑Direkt lässt sich mit PriceLabs eine vollautomatische Lösung realisieren. So spiegeln sich dieselben dynamischen Preisstrategien, die du bereits auf Airbnb oder Booking nutzt, auch auf Fewo‑Direkt wider – ganz ohne zusätzlichen Pflegeaufwand.
+      font_size: 18
+    type: RichText
+is_package: true
+layout: {type: 'form:home.home_template'}
