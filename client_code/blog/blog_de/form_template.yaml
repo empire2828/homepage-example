@@ -1,29 +1,44 @@
 components_by_slot:
   slot_1:
-  - event_bindings: {}
+  - components:
+    - event_bindings: {click: stly_link_click}
+      layout_properties: {slot: card-content-container-slot}
+      name: stly_link
+      properties:
+        bold: true
+        font_size: 24
+        spacing:
+          margin: [null, null, '', null]
+          padding: [null, null, null, null]
+        text: Wieso Vergleiche des Buchungsstandes in Smoobu gefährlich sein können
+      type: form:dep_g9k4toow7i44kq:_Components.Link
+    - event_bindings: {}
+      layout_properties: {slot: card-content-container-slot}
+      name: stly_image
+      properties: {height: 474.77777099609375, horizontal_align: left, source: _/theme/blog/stly_intro_pic.jpg}
+      type: Image
     layout_properties: {}
-    name: stly_image
-    properties: {height: 474.77777099609375, horizontal_align: left, source: _/theme/blog/stly_intro_pic.jpg}
-    type: Image
-  - event_bindings: {click: stly_link_click}
-    layout_properties: {}
-    name: stly_link
-    properties:
-      font_size: 18
-      spacing:
-        margin: [null, null, '18', null]
-        padding: [null, null, null, null]
-      text: Wieso Vergleiche des Buchungsstandes in Smoobu gefährlich sein können
-    type: form:dep_g9k4toow7i44kq:_Components.Link
+    name: card_content_container_1
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
   - layout_properties: {}
-    name: cancellations_image
-    properties: {alt_text: Wie man Stornierungen vermeiden kann, horizontal_align: left, source: _/theme/blog/cancellations_booking_cancelled_sad_person.jpg}
-    type: Image
-  - components: []
-    event_bindings: {click: cancellations_link_click}
+    name: spacer_1
+    properties: {}
+    type: Spacer
+  - components:
+    - components: []
+      event_bindings: {click: cancellations_link_click}
+      layout_properties: {slot: card-content-container-slot}
+      name: cancellations_link
+      properties: {bold: true, font_size: 24, text: Wie man Stornierungen analytisch vermeiden kann}
+      type: form:dep_g9k4toow7i44kq:_Components.Link
+    - layout_properties: {slot: card-content-container-slot}
+      name: cancellations_image
+      properties: {alt_text: Wie man Stornierungen vermeiden kann, horizontal_align: left, source: _/theme/blog/cancellations_booking_cancelled_sad_person.jpg}
+      type: Image
     layout_properties: {}
-    name: cancellations_link
-    properties: {font_size: 18, text: Wie man Stornierungen analytisch vermeiden kann}
-    type: form:dep_g9k4toow7i44kq:_Components.Link
+    name: card_content_container_2
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
 is_package: true
 layout: {type: 'form:home.home_template'}
