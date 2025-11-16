@@ -1,6 +1,6 @@
 from ._anvil_designer import home_templateTemplate
 from anvil import *
-#from routing import router
+from routing import router
 import m3.components as m3
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -35,9 +35,11 @@ class home_template(home_templateTemplate):
 
   def blog_button_click(self, **event_args):
     if self.user_locale.lower().startswith("de"):
-      open_form('blog.blog_de')
+      #open_form('blog.blog_de')
+      router.navigate('/blog_de')
     else:
-      open_form('blog.blog_en')
+      #open_form('blog.blog_en')
+      router.navigate('/blog_de')
     pass
 
   def lodginia_button_click(self, **event_args):
