@@ -4,7 +4,7 @@ from anvil import *
 import m3.components as m3
 import anvil.server
 import anvil.users
-from anvil.tables import app_tables
+#from anvil.tables import app_tables
 
 class home_start(home_startTemplate):
   def __init__(self, **properties):
