@@ -16,7 +16,7 @@ components_by_slot:
       - components:
         - layout_properties: {slot: card-content-container-slot}
           name: image_1
-          properties: {height: 298.22216796875, horizontal_align: left, source: _/theme/homepage/dirk.jpg, vertical_align: top}
+          properties: {height: 215.88885498046875, horizontal_align: left, source: _/theme/homepage/dirk.jpg, vertical_align: top}
           type: Image
         layout_properties: {slot: card-content-slot}
         name: card_content_container_1
