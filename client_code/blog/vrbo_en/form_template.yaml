@@ -1,43 +1,48 @@
 components_by_slot:
   slot_1:
-  - layout_properties: {}
-    name: rich_text_1
-    properties:
-      content: |+
-        ### How you can also synchronize prices with Fewo-Direkt using Smoobu via PriceLabs
+  - components:
+    - layout_properties: {grid_position: 'WHAOYI,TCNSOZ'}
+      name: rich_text_1
+      properties:
+        content: |+
+          ### How you can also synchronize prices with Fewo-Direkt using Smoobu via PriceLabs
 
-        &nbsp;
-        Many Smoobu landlords are familiar with the problem: while portals such as Airbnb or Booking.com apply price changes directly via the Smoobu interface, Fewo-Direkt (HomeAway/VRBO) does not yet offer direct price synchronization with Smoobu. However, those who already manage their prices with PriceLabs can elegantly circumvent this obstacle.
+          &nbsp;
+          Many Smoobu landlords are familiar with the problem: while portals such as Airbnb or Booking.com apply price changes directly via the Smoobu interface, Fewo-Direkt (HomeAway/VRBO) does not yet offer direct price synchronization with Smoobu. However, those who already manage their prices with PriceLabs can elegantly circumvent this obstacle.
 
-        Pricelabs can simultaneously supply Smoobu with prices, as well as Fewo-Direkt. Fewo-Direkt will then continue to receive the calendar data via iCal connection from Smoobu as before, and additionally the prices from Pricelabs.
+          Pricelabs can simultaneously supply Smoobu with prices, as well as Fewo-Direkt. Fewo-Direkt will then continue to receive the calendar data via iCal connection from Smoobu as before, and additionally the prices from Pricelabs.
 
-        &nbsp;
-        **Here's how to do it:**
+          &nbsp;
+          **Here's how to do it:**
 
-        &nbsp;
-        #### 1. Connect Fewo-Direkt with PriceLabs
-        A new additional account is created via the main menu of PriceLabs “Add/Reconnect Listings” – preferably with a username and password. Detailed instructions can be found in the official PriceLabs documentation:
+          &nbsp;
+          #### 1. Connect Fewo-Direkt with PriceLabs
+          A new additional account is created via the main menu of PriceLabs “Add/Reconnect Listings” – preferably with a username and password. Detailed instructions can be found in the official PriceLabs documentation:
 
-        [PriceLabs help article – Connect VRBO](https://help.pricelabs.co/portal/en/kb/articles/vrbo#Reconnecting_Your_Vrbo_Account)
+          [PriceLabs help article – Connect VRBO](https://help.pricelabs.co/portal/en/kb/articles/vrbo#Reconnecting_Your_Vrbo_Account)
 
-        &nbsp;
-        #### 2. Create the account as a child account in PriceLabs
+          &nbsp;
+          #### 2. Create the account as a child account in PriceLabs
 
-        In order for the prices to be taken over from the parent account, the new account must be defined as a child account. Each account categorized as a child account costs only an additional $1 per month.
+          In order for the prices to be taken over from the parent account, the new account must be defined as a child account. Each account categorized as a child account costs only an additional $1 per month.
 
-        [PriceLabs help article – Mapping Listings](https://help.pricelabs.co/portal/en/kb/articles/mapping-listings#Before_You_Start)
-
-
-        &nbsp;
-        #### 3. Set pricing offset
-        Under Dynamic Pricing/Customizations per account, set your pricing offset for the new account, i.e., the price surcharge you want to apply to compensate for the commission.
-
-        &nbsp;
-        #### Conclusion
-        Even without a direct pricing API between Smoobu and Fewo-Direkt, PriceLabs allows you to implement a fully automated solution. This means that the same dynamic pricing strategies you already use on Airbnb or Booking are also reflected on Fewo-Direkt – without any additional maintenance effort.
+          [PriceLabs help article – Mapping Listings](https://help.pricelabs.co/portal/en/kb/articles/mapping-listings#Before_You_Start)
 
 
-      font_size: 18
-    type: RichText
+          &nbsp;
+          #### 3. Set pricing offset
+          Under Dynamic Pricing/Customizations per account, set your pricing offset for the new account, i.e., the price surcharge you want to apply to compensate for the commission.
+
+          &nbsp;
+          #### Conclusion
+          Even without a direct pricing API between Smoobu and Fewo-Direkt, PriceLabs allows you to implement a fully automated solution. This means that the same dynamic pricing strategies you already use on Airbnb or Booking are also reflected on Fewo-Direkt – without any additional maintenance effort.
+
+
+        font_size: 18
+      type: RichText
+    layout_properties: {}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
 is_package: true
 layout: {type: 'form:home.home_template'}

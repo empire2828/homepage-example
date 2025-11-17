@@ -50,4 +50,6 @@ class home_template(home_templateTemplate):
   def about_us_button_click(self, **event_args):
     if self.user_locale.lower().startswith("de"):
       open_form('home.about_us_de')
+    else:
+      open_form('home.about_us_en')
     pass

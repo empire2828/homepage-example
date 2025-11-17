@@ -1,41 +1,46 @@
 components_by_slot:
   slot_1:
-  - layout_properties: {}
-    name: rich_text_1
-    properties:
-      content: |
-        ### Wie du Fewo‑Direkt mit Smoobu über PriceLabs auch die Preise synchronisieren kannst
+  - components:
+    - layout_properties: {grid_position: 'HSGHCX,ZGBUYH'}
+      name: rich_text_1
+      properties:
+        content: |
+          ### Wie du Fewo‑Direkt mit Smoobu über PriceLabs auch die Preise synchronisieren kannst
 
-        &nbsp;
-        Viele Smoobu- Vermieter kennen das Problem: Während Portale wie Airbnb oder Booking.com Preisänderungen direkt über die Smoobu‑Schnittstelle übernehmen, bietet Fewo‑Direkt (HomeAway/VRBO) bisher keine direkte Preissynchronisierung mit Smoobu. Wer seine Preise jedoch bereits mit PriceLabs steuert, kann dieses Hindernis elegant umgehen.
+          &nbsp;
+          Viele Smoobu- Vermieter kennen das Problem: Während Portale wie Airbnb oder Booking.com Preisänderungen direkt über die Smoobu‑Schnittstelle übernehmen, bietet Fewo‑Direkt (HomeAway/VRBO) bisher keine direkte Preissynchronisierung mit Smoobu. Wer seine Preise jedoch bereits mit PriceLabs steuert, kann dieses Hindernis elegant umgehen.
 
-        Pricelabs kann zeitgleich Smoobu mit Preisen versorgen, als auch zusätzlich Fewo-Direkt. Fewo-Direkt erhält dann weiterhin wie bisher die Kalenderdaten per iCal Verbindung von Smoobu und zusätzlich die Preise von Pricelabs.
+          Pricelabs kann zeitgleich Smoobu mit Preisen versorgen, als auch zusätzlich Fewo-Direkt. Fewo-Direkt erhält dann weiterhin wie bisher die Kalenderdaten per iCal Verbindung von Smoobu und zusätzlich die Preise von Pricelabs.
 
-        &nbsp;
-        **So wird es gemacht:**
+          &nbsp;
+          **So wird es gemacht:**
 
-        &nbsp;
-        #### 1. Fewo‑Direkt mit PriceLabs verbinden
-        Ein neues zusätzliches Konto wird über das Hauptmenü von PriceLabs erstellt "Add/ Reconnect Listings"- am besten mit Usernamen und Passwort. Eine detaillierte Anleitung dazu findest du in der offiziellen PriceLabs‑Dokumentation:
+          &nbsp;
+          #### 1. Fewo‑Direkt mit PriceLabs verbinden
+          Ein neues zusätzliches Konto wird über das Hauptmenü von PriceLabs erstellt "Add/ Reconnect Listings"- am besten mit Usernamen und Passwort. Eine detaillierte Anleitung dazu findest du in der offiziellen PriceLabs‑Dokumentation:
 
-        [PriceLabs‑Hilfeartikel – VRBO verbinden](https://help.pricelabs.co/portal/en/kb/articles/vrbo#Reconnecting_Your_Vrbo_Account)
+          [PriceLabs‑Hilfeartikel – VRBO verbinden](https://help.pricelabs.co/portal/en/kb/articles/vrbo#Reconnecting_Your_Vrbo_Account)
 
-        &nbsp;
-        #### 2. Das Konto als Unterkonto (Child Account) in PriceLabs anlegen
+          &nbsp;
+          #### 2. Das Konto als Unterkonto (Child Account) in PriceLabs anlegen
 
-        Damit die Preise vom Oberkonto "Parent" übernommen werden, muss das neue Konto als Kind "Child" definiert werden. Jedes als "Child" kategorisierte Konto kostet monatlich nur weitere 1$.
+          Damit die Preise vom Oberkonto "Parent" übernommen werden, muss das neue Konto als Kind "Child" definiert werden. Jedes als "Child" kategorisierte Konto kostet monatlich nur weitere 1$.
 
-        [PriceLabs‑Hilfeartikel – Mapping Listings](https://help.pricelabs.co/portal/en/kb/articles/mapping-listings#Before_You_Start)
+          [PriceLabs‑Hilfeartikel – Mapping Listings](https://help.pricelabs.co/portal/en/kb/articles/mapping-listings#Before_You_Start)
 
 
-        &nbsp;
-        #### 3. Pricing Offset einstellen
-        Stellt unter Dynamic Pricing/ Customizations pro Account Dein Pricing Offset für das neue Konto ein, also den Preisaufschlag den Du nehmen willst, um die Provision zu kompensieren.
+          &nbsp;
+          #### 3. Pricing Offset einstellen
+          Stellt unter Dynamic Pricing/ Customizations pro Account Dein Pricing Offset für das neue Konto ein, also den Preisaufschlag den Du nehmen willst, um die Provision zu kompensieren.
 
-        &nbsp;
-        #### Fazit
-        Auch ohne eine direkte Preis‑API zwischen Smoobu und Fewo‑Direkt lässt sich mit PriceLabs eine vollautomatische Lösung realisieren. So spiegeln sich dieselben dynamischen Preisstrategien, die du bereits auf Airbnb oder Booking nutzt, auch auf Fewo‑Direkt wider – ganz ohne zusätzlichen Pflegeaufwand.
-      font_size: 18
-    type: RichText
+          &nbsp;
+          #### Fazit
+          Auch ohne eine direkte Preis‑API zwischen Smoobu und Fewo‑Direkt lässt sich mit PriceLabs eine vollautomatische Lösung realisieren. So spiegeln sich dieselben dynamischen Preisstrategien, die du bereits auf Airbnb oder Booking nutzt, auch auf Fewo‑Direkt wider – ganz ohne zusätzlichen Pflegeaufwand.
+        font_size: 18
+      type: RichText
+    layout_properties: {}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
 is_package: true
 layout: {type: 'form:home.home_template'}
