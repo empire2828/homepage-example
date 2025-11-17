@@ -1,16 +1,11 @@
 components_by_slot:
   content:
-  - components: []
-    layout_properties: {}
-    name: outlined_card_2
-    properties: {col_spacing: small, role: outlined-card}
-    type: ColumnPanel
   - components:
-    - layout_properties: {grid_position: 'BQOETF,OBVSKD'}
+    - layout_properties: {grid_position: 'BYUGNP,SYIHAR'}
       name: title_4
       properties: {align: center, bold: true, font_size: 24, role: title, text: Connect your channel manager}
       type: Label
-    - layout_properties: {grid_position: 'BKQMAY,PXSHWY'}
+    - layout_properties: {grid_position: 'XRGYOV,WYZMXC'}
       name: body_1
       properties:
         bold: false
@@ -18,6 +13,15 @@ components_by_slot:
         role: body
         text: "We currently support an API for Smoobu. Additional channel managers are in development. \n\nThe following steps are necessary for integration:   \n"
       type: Label
+    layout_properties: {}
+    name: column_panel_3
+    properties: {}
+    type: ColumnPanel
+  - layout_properties: {}
+    name: spacer_4
+    properties: {}
+    type: Spacer
+  - components:
     - layout_properties: {grid_position: 'SASQUG,TGXJBN'}
       name: title_1
       properties: {bold: true, role: title, text: 1. Get the API key from Smoobu}
@@ -40,7 +44,7 @@ components_by_slot:
       type: Image
     - layout_properties: {grid_position: 'QFDDYF,HGBYFR'}
       name: image_3
-      properties: {height: 321.56854248046875, source: _/theme/connect/help smoobu_profildaten.jpg}
+      properties: {height: 321.56854248046875, horizontal_align: left, source: _/theme/connect/help smoobu_profildaten.jpg}
       type: Image
     - layout_properties: {grid_position: 'SVCGPI,WPWKWD'}
       name: spacer_2
@@ -59,6 +63,10 @@ components_by_slot:
       name: save_api_key_button
       properties: {role: filled-button, text: Save}
       type: Button
+    - layout_properties: {grid_position: 'WZIMBD,KKFDKY'}
+      name: spacer_5
+      properties: {}
+      type: Spacer
     - layout_properties: {grid_position: 'SZTIDB,SSOEMU'}
       name: title_2
       properties: {bold: true, role: title, text: 2. Register webhook with Smoobu}
@@ -75,47 +83,36 @@ components_by_slot:
         text: |
           This will automatically transfer new bookings. Please enter the following:
       type: Label
-    layout_properties: {}
-    name: column_panel_2
-    properties: {}
-    type: ColumnPanel
-  - components: []
-    layout_properties: {}
-    name: outlined_card_1
-    properties: {role: outlined-card}
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'XDGOPW,IPEIVW'}
+    - layout_properties: {grid_position: 'ZNAOLS,DOCKBY'}
       name: webhook_label
       properties: {bold: false, font_size: 18, foreground: 'theme:Primary', italic: true, role: null, text: 'https://lodginia.com/_/api/smoobu/webhook', visible: true}
       type: Label
-    layout_properties: {}
-    name: outlined_card_3
-    properties: {role: outlined-card}
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'PXPUNP,SDBUBM'}
+    - layout_properties: {grid_position: 'CWEIOE,WOASFL'}
+      name: spacer_6
+      properties: {}
+      type: Spacer
+    - layout_properties: {grid_position: 'CEXJMB,ZOYTJH'}
       name: title_3
       properties: {align: left, bold: true, role: title, text: '3. Start initial synchronization:', underline: false}
       type: Label
-    - layout_properties: {grid_position: 'QSBKIL,ZUWODJ'}
+    - layout_properties: {grid_position: 'WSHFIR,FOQEGV'}
       name: text_1
       properties: {font_size: 18, text: The initial synchronization and analysis takes place in the background and takes approximately 2 minutes.}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - event_bindings: {click: sync_smoobu_button_click}
-      layout_properties: {grid_position: 'JKQSKF,OCEIBY'}
+      layout_properties: {grid_position: 'TCJYLX,CLTZVL'}
       name: sync_smoobu_button
       properties: {role: filled-button, text: Sync Smoobu}
       type: Button
-    - layout_properties: {grid_position: 'UZNLCS,BLLWKN'}
-      name: spacer_3
-      properties: {height: 10.57391357421875}
-      type: Spacer
-    - layout_properties: {grid_position: 'WBOOCT,EBXQIS'}
+    - layout_properties: {grid_position: 'GSIZKN,QFRDSZ'}
       name: progress_bar
       properties: {progress: 0}
       type: form:dep_pa3otpma4dkzg:ProgressBar.Determinate
-    - layout_properties: {grid_position: 'NUGLPR,EPCWGT'}
+    - layout_properties: {grid_position: 'JXUWEY,RUPCQH'}
+      name: spacer_3
+      properties: {height: 10.57391357421875}
+      type: Spacer
+    - layout_properties: {grid_position: 'JHLWVI,MDXMRH'}
       name: status_label
       properties:
         font_size: 18
@@ -125,17 +122,12 @@ components_by_slot:
         text: " \n"
         visible: true
       type: form:dep_g9k4toow7i44kq:_Components.Text
+    - layout_properties: {grid_position: 'WOHTZI,KEXOKB'}
+      name: spacer_7
+      properties: {}
+      type: Spacer
     layout_properties: {}
-    name: outlined_card_4
-    properties: {col_spacing: small, role: outlined-card}
-    type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'UAEKUD,EHAEZR'}
-      name: timer
-      properties: {interval: 20}
-      type: Timer
-    layout_properties: {}
-    name: column_panel_1
+    name: column_panel_2
     properties: {}
     type: ColumnPanel
   - event_bindings: {tick: timer_1_tick}
