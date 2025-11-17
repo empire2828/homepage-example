@@ -1,16 +1,21 @@
 components_by_slot:
   slot_1:
   - components:
-    - layout_properties: {slot: lodginia.jpeg, width: 433.76685498046874}
-      name: image_1
-      properties: {height: 199.44439697265625, source: _/theme/blog/stly_revenue_lodginia.jpg}
-      type: Image
+    - components:
+      - layout_properties: {slot: lodginia.jpeg, width: 433.76685498046874}
+        name: image_1
+        properties: {height: 199.44439697265625, source: _/theme/blog/stly_revenue_lodginia.jpg}
+        type: Image
+      layout_properties: {grid_position: 'CZHBYN,BGNNCK'}
+      name: rich_text_1
+      properties:
+        content: "### Why comparing your booking status with Smoobu is dangerous\n\n&nbsp;\n\nDoes this sound familiar? You look at your calendar in spring and think, “Oh dear, summer is looking pretty empty!” Don't worry—many guests simply book at short notice these days. It's completely normal for many bookings to still be open for a month, even though the period is approaching.\n\n&nbsp;\n**What really matters:**  \n\nAlways compare your booking status with the status on the same day last year (“Same time last year (STLY)”) and not with the final result. For example: On March 1 last year, you had 3 bookings for June, but in the end you had 12. If you already have 4 on March 1 this year, you're actually in a slightly better position!\n\nThe real “last-minute waves” usually roll in shortly before the travel date – that was the case last year and will be no different this year.\n\n&nbsp;\n\n**Problem**: In Smoobu, you can only compare with the final figures and run the risk of giving discounts too early because you think the booking situation is bad.\n\n&nbsp;\n\n**The solution** is **Lodginia.com**!\n&nbsp;\n\nWith **Lodginia.com**, you can compare your current booking situation with exactly the same day last year (Same time last year = STLY).\n\nYou can look 12 months into the future and compare revenue, daily rates, or nights with the same day last year. It is also possible to evaluate which booking channel has changed and how. Here is an example:\n\n\n{lodginia.jpeg}\n\n&nbsp;\n\n**Conclusion:**  \n\nDon't look at the final booking figures – these will only be available at the end of the year anyway. Much more important is the actual pace at which your bookings are developing compared to exactly the same time last year. This is the only way to keep track of things!\n"
+        font_size: 18
+      type: RichText
     layout_properties: {}
-    name: rich_text_1
-    properties:
-      content: "### Why comparing your booking status with Smoobu is dangerous\n\n&nbsp;\n\nDoes this sound familiar? You look at your calendar in spring and think, “Oh dear, summer is looking pretty empty!” Don't worry—many guests simply book at short notice these days. It's completely normal for many bookings to still be open for a month, even though the period is approaching.\n\n&nbsp;\n**What really matters:**  \n\nAlways compare your booking status with the status on the same day last year (“Same time last year (STLY)”) and not with the final result. For example: On March 1 last year, you had 3 bookings for June, but in the end you had 12. If you already have 4 on March 1 this year, you're actually in a slightly better position!\n\nThe real “last-minute waves” usually roll in shortly before the travel date – that was the case last year and will be no different this year.\n\n&nbsp;\n\n**Problem**: In Smoobu, you can only compare with the final figures and run the risk of giving discounts too early because you think the booking situation is bad.\n\n&nbsp;\n\n**The solution** is **Lodginia.com**!\n&nbsp;\n\nWith **Lodginia.com**, you can compare your current booking situation with exactly the same day last year (Same time last year = STLY).\n\nYou can look 12 months into the future and compare revenue, daily rates, or nights with the same day last year. It is also possible to evaluate which booking channel has changed and how. Here is an example:\n\n\n{lodginia.jpeg}\n\n&nbsp;\n\n**Conclusion:**  \n\nDon't look at the final booking figures – these will only be available at the end of the year anyway. Much more important is the actual pace at which your bookings are developing compared to exactly the same time last year. This is the only way to keep track of things!\n"
-      font_size: 18
-    type: RichText
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
   - layout_properties: {}
     name: spacer_1
     properties: {}
