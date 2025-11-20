@@ -87,11 +87,13 @@ def get_user_has_subscription_for_email(email):
   return False
 
 @anvil.server.callable
-def is_user_below_request_count(email):
-  user = app_tables.users.get(email=email)
-  if not user:
+def is_user_below_request_count():
+  current_user = users.get_user()
+  if current_user is None:
+    raise Exception("Kein Benutzer angemeldet")
+  if not current_user:
     return False
-  request_count = user.get('requect_count')
+  request_count = current_user.get('requect_count')
   if request_count is None or request_count < 10:
     return True
   return False
@@ -107,6 +109,15 @@ def add_request_count():
   current_user['request_count'] = request_count + 1
   print(current_user['email']," add_request_count: ",request_count)
   return
+
+@anvil.server.background_task
+def reset_request_count_for_all_users():
+  for user in app_tables.users.search():
+    user['request_count'] = 0
+
+@anvil.server.callable
+def trigger_reset_request_count():
+  anvil.server.launch_background_task('reset_request_count_for_all_users')
 
 @anvil.server.callable
 def save_user_api_key(api_key):
