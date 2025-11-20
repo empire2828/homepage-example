@@ -63,9 +63,9 @@ def send_password_reset_email():
         return "Failed to send password reset email."
 
 @anvil.server.callable
-def get_user_has_subscription_for_email():
-  user = anvil.users.get_user()
-  #user = app_tables.users.get(email=email)
+def get_user_has_subscription_for_email(email):
+  #user = anvil.users.get_user()
+  user = app_tables.users.get(email=email)
   if not user:
     return False
   

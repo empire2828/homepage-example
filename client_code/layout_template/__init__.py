@@ -17,11 +17,14 @@ class layout_template(layout_templateTemplate):
     self.init_components(**properties)    
     # Keine multiframe Initialisierung hier!
     self.current_multiframe = None
-    user_has_subscription = anvil.server.call_s('get_user_has_subscription_for_email')
-    if user_has_subscription is False:
-      self.my_account_navigation_link.badge = True
-      request_count = anvil.server.call_s('get_request_count')
-      self.my_account_navigation_link.badge_count = request_count
+    user = anvil.users.get_user()    
+    if user is not None:
+      email = user['email']
+      user_has_subscription = anvil.server.call_s('get_user_has_subscription_for_email',email)
+      if user_has_subscription is False:
+        self.my_account_navigation_link.badge = True
+        request_count = anvil.server.call_s('get_request_count')
+        self.my_account_navigation_link.badge_count = request_count
 
   def open_multiframe_form(self):
     #"""Öffnet die multiframe Form als Hauptinhalt"""
@@ -57,7 +60,7 @@ class layout_template(layout_templateTemplate):
 
   def dashboard_navigation_link_click(self, **event_args):
     self.reset_links()
-    self.my_account_navigation_link.badge_count = anvil.server.call_s('add_request_count')
+    #self.my_account_navigation_link.badge_count = anvil.server.call_s('add_request_count')
     if self.my_account_navigation_link.badge is False:
       is_user_below_request_count = anvil.server.call_s('is_user_below_request_count')
       if is_user_below_request_count is False:
