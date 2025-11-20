@@ -24,11 +24,13 @@ class my_account(my_accountTemplate):
       self.subscription_body.text = 'Not logged in'
     else:
       if user.get('subscription') is None:
-        self.subscription_body.text = 'Trial subscription'
+        self.subscription_body.text = 'Free subscription'
       else:
         self.subscription_body.text = user['subscription']
         if user.get('admin') is True:
           self.admin_navigation_link.visible= True
+      if user.get('request_count') is not None:
+        self.request_count_body.text = user.get('request_count')
       user_parameters = anvil.server.call('get_user_parameter')
       if user_parameters:
         self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))

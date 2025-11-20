@@ -30,10 +30,12 @@ class multiframe(multiframeTemplate):
       self.channel_manager_connect_button.visible = True
     else:
       if user_has_subscription is False:
-        self.dashboard_upgrade_needed_text.visible = True
-        self.dashboard_upgrade_button.visible = True
-        self.pms_need_to_connect_text.visible = False
-        self.channel_manager_connect_button.visible = False
+        is_user_below_request_count= anvil.server.call('is_user_below_request_count')
+        if is_user_below_request_count is False:
+          self.dashboard_upgrade_needed_text.visible = True
+          self.dashboard_upgrade_button.visible = True
+          self.pms_need_to_connect_text.visible = False
+          self.channel_manager_connect_button.visible = False
     if user_has_subscription and user['smoobu_api_key'] is not None:      
       if user and 'supabase_key' in user:
         self.supabase_key = user['supabase_key']
