@@ -70,6 +70,7 @@ def get_user_has_subscription_for_email():
     return False
   
   subscription_status = user.get('subscription')
+  print(subscription_status)
   if subscription_status in ['Subscription', 'Pro-Subscription', 'Canceled']:
     return True
   
