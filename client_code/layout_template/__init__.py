@@ -21,7 +21,6 @@ class layout_template(layout_templateTemplate):
     if user is not None:
       #email = user['email']
       user_has_subscription = anvil.server.call('get_user_has_subscription_for_email')
-      print(user['email']," __init__layout_template user_has_subscription :",user_has_subscription)
       if user_has_subscription is False:
         self.my_account_navigation_link.badge = True
         request_count = anvil.server.call_s('get_request_count')
@@ -61,8 +60,8 @@ class layout_template(layout_templateTemplate):
 
   def dashboard_navigation_link_click(self, **event_args):
     self.reset_links()
-    #self.my_account_navigation_link.badge_count = anvil.server.call_s('add_request_count')
-    if self.my_account_navigation_link.badge is False:
+    self.my_account_navigation_link.badge_count = anvil.server.call_s('add_request_count')
+    if self.my_account_navigation_link.badge is True:
       is_user_below_request_count = anvil.server.call_s('is_user_below_request_count')
       if is_user_below_request_count is False:
         open_form('upgrade')

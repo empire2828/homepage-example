@@ -72,10 +72,12 @@ def get_user_has_subscription_for_email():
   subscription_status = user.get('subscription')
   if subscription_status in ['Subscription', 'Pro-Subscription', 'Canceled']:
     return True
+  else:
+    subscription_status = False
   
   tester_status = user.get('tester')  
   if tester_status:
-    print(user['email']," has tester status")
+    subscription_status = "tester"
     return True  
     
   #signup = user.get('signed_up')
@@ -83,8 +85,9 @@ def get_user_has_subscription_for_email():
   #  signed_up_aware = signup.replace(tzinfo=timezone.utc)
   #  trial_end = signed_up_aware + timedelta(days=7)
   #  now_utc = datetime.now(timezone.utc)
-    return now_utc <= trial_end  
-  
+  #  return now_utc <= trial_end  
+
+  print(user['email']," get_user_has_subscription_for_email: ",subscription_status)
   return False
 
 @anvil.server.callable

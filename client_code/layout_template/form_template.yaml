@@ -38,9 +38,11 @@ components_by_slot:
     name: bookings_navigation_link
     properties:
       icon: mi:reset_tv
+      icon_size: ''
       navigate_to: null
       spacing:
         margin: ['-5', null, '-5', null]
+        padding: ['0', null, null, null]
       text: Bookings
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
   - event_bindings: {click: cancellations_navigation_link_click}
