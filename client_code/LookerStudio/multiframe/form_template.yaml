@@ -16,17 +16,22 @@ components_by_slot:
     name: flow_panel_1
     properties: {}
     type: FlowPanel
+  - layout_properties: {}
+    name: dashboard_upgrade_needed_text_1
+    properties: {font_size: 18, role: body, spacing_above: large, text: 'Your daily request limit is reached - come back tomorrow or ', visible: false}
+    type: Label
+  - layout_properties: {}
+    name: dashboard_upgrade_needed_text_2
+    properties: {font_size: 18, role: body, spacing_above: large, text: 'Subscribe for just €2.99 per month. Cancel any time: ', visible: false}
+    type: Label
   - components:
-    - name: dashboard_upgrade_needed_text
-      properties: {font_size: 18, role: body, spacing_above: large, text: 'You need to upgrade now to use Lodginia full power:', visible: false}
-      type: Label
     - event_bindings: {click: dashboard_upgrade_button_click}
-      name: dashboard_upgrade_button_copy
+      name: dashboard_upgrade_button
       properties: {text: Upgrade, visible: false}
       type: form:dep_g9k4toow7i44kq:_Components.Button
     layout_properties: {}
     name: flow_panel_2
-    properties: {}
+    properties: {align: center}
     type: FlowPanel
   - components:
     - layout_properties: {full_width_row: true, grid_position: 'IKGPXC,HMQELB'}

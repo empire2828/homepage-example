@@ -138,6 +138,8 @@ components_by_slot:
     layout_properties: {}
     name: my_account_navigation_link
     properties:
+      badge: false
+      badge_count: 0
       icon: mi:manage_accounts
       navigate_to: null
       spacing:

@@ -21,9 +21,8 @@ class multiframe(multiframeTemplate):
     self.supabase_key= ""
     user = users.get_user()    
     print('User Logged in: ',user['email'])
-    #anvil.server.call('log',"user logged in",user['email'],"multiframe")
 
-    user_has_subscription= anvil.server.call('get_user_has_subscription_for_email',user['email'])
+    user_has_subscription= anvil.server.call('get_user_has_subscription_for_email')
 
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
@@ -32,7 +31,8 @@ class multiframe(multiframeTemplate):
       if user_has_subscription is False:
         is_user_below_request_count= anvil.server.call('is_user_below_request_count')
         if is_user_below_request_count is False:
-          self.dashboard_upgrade_needed_text.visible = True
+          self.dashboard_upgrade_needed_text_1.visible = True
+          self.dashboard_upgrade_needed_text_2.visible = True
           self.dashboard_upgrade_button.visible = True
           self.pms_need_to_connect_text.visible = False
           self.channel_manager_connect_button.visible = False
@@ -180,3 +180,4 @@ class multiframe(multiframeTemplate):
   def dashboard_upgrade_button_click(self, **event_args):
     open_form('upgrade')
     pass
+

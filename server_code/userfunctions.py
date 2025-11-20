@@ -63,8 +63,9 @@ def send_password_reset_email():
         return "Failed to send password reset email."
 
 @anvil.server.callable
-def get_user_has_subscription_for_email(email):
-  user = app_tables.users.get(email=email)
+def get_user_has_subscription_for_email():
+  user = anvil.users.get_user()
+  #user = app_tables.users.get(email=email)
   if not user:
     return False
   
@@ -93,8 +94,8 @@ def is_user_below_request_count():
     raise Exception("Kein Benutzer angemeldet")
   if not current_user:
     return False
-  request_count = current_user.get('requect_count')
-  if request_count is None or request_count < 10:
+  request_count = current_user.get('request_count')
+  if request_count is None or request_count < 5:
     return True
   return False
 
@@ -108,7 +109,18 @@ def add_request_count():
     request_count = 0
   current_user['request_count'] = request_count + 1
   print(current_user['email']," add_request_count: ",request_count)
-  return
+  return request_count
+
+@anvil.server.callable
+def get_request_count():
+  current_user = users.get_user()
+  if current_user is None:
+    raise Exception("Kein Benutzer angemeldet")
+  request_count = current_user.get('request_count')
+  if request_count is None:
+    request_count = 0  
+  print(current_user['email']," get_request_count: ",request_count)
+  return request_count
 
 @anvil.server.background_task
 def reset_request_count_for_all_users():
