@@ -92,7 +92,20 @@ def is_user_below_request_count(email):
   if not user:
     return False
   request_count = user.get('requect_count')
+  if request_count is None or request_count < 30:
+    return True
+  return False
 
+@anvil.server.callable
+def add_request_count(email):
+  user = app_tables.users.get(email=email)
+  if not user:
+    return False
+  request_count = user.get('request_count')
+  if request_count is None:
+    request_count = 0
+  user['request_count'] = request_count + 1
+  return True
 
 @anvil.server.callable
 def save_user_api_key(api_key):
