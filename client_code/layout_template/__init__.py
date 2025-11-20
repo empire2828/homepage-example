@@ -19,8 +19,9 @@ class layout_template(layout_templateTemplate):
     self.current_multiframe = None
     user = anvil.users.get_user()    
     if user is not None:
-      email = user['email']
-      user_has_subscription = anvil.server.call_s('get_user_has_subscription_for_email')
+      #email = user['email']
+      user_has_subscription = anvil.server.call('get_user_has_subscription_for_email')
+      print(user['email']," __init__layout_template user_has_subscription :",user_has_subscription)
       if user_has_subscription is False:
         self.my_account_navigation_link.badge = True
         request_count = anvil.server.call_s('get_request_count')

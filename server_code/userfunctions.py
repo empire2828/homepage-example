@@ -70,7 +70,6 @@ def get_user_has_subscription_for_email():
     return False
   
   subscription_status = user.get('subscription')
-  print(subscription_status)
   if subscription_status in ['Subscription', 'Pro-Subscription', 'Canceled']:
     return True
   
@@ -79,11 +78,11 @@ def get_user_has_subscription_for_email():
     print(user['email']," has tester status")
     return True  
     
-  signup = user.get('signed_up')
-  if signup:
-    signed_up_aware = signup.replace(tzinfo=timezone.utc)
-    trial_end = signed_up_aware + timedelta(days=7)
-    now_utc = datetime.now(timezone.utc)
+  #signup = user.get('signed_up')
+  #if signup:
+  #  signed_up_aware = signup.replace(tzinfo=timezone.utc)
+  #  trial_end = signed_up_aware + timedelta(days=7)
+  #  now_utc = datetime.now(timezone.utc)
     return now_utc <= trial_end  
   
   return False

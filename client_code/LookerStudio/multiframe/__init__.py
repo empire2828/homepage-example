@@ -23,7 +23,7 @@ class multiframe(multiframeTemplate):
     print('User Logged in: ',user['email'])
 
     user_has_subscription= anvil.server.call('get_user_has_subscription_for_email')
-
+    
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       self.channel_manager_connect_button.visible = True
@@ -34,8 +34,8 @@ class multiframe(multiframeTemplate):
           self.dashboard_upgrade_needed_text_1.visible = True
           self.dashboard_upgrade_needed_text_2.visible = True
           self.dashboard_upgrade_button.visible = True
-          self.pms_need_to_connect_text.visible = False
-          self.channel_manager_connect_button.visible = False
+          #self.pms_need_to_connect_text.visible = False
+          #self.channel_manager_connect_button.visible = False
     if user_has_subscription and user['smoobu_api_key'] is not None:      
       if user and 'supabase_key' in user:
         self.supabase_key = user['supabase_key']

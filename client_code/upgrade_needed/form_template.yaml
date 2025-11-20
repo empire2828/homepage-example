@@ -23,7 +23,7 @@ components_by_slot:
         name: dashboard_upgrade_button
         properties: {text: Upgrade, visible: true}
         type: form:dep_g9k4toow7i44kq:_Components.Button
-      layout_properties: {grid_position: 'AIXXTL,ACNKQU'}
+      layout_properties: {full_width_row: false, grid_position: 'AIXXTL,ACNKQU'}
       name: flow_panel_2
       properties: {align: center}
       type: FlowPanel
