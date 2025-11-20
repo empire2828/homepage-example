@@ -67,20 +67,29 @@ def get_user_has_subscription_for_email(email):
   user = app_tables.users.get(email=email)
   if not user:
     return False
+  
   subscription_status = user.get('subscription')
   if subscription_status in ['Subscription', 'Pro-Subscription', 'Canceled']:
     return True
-  tester_status = user.get('tester')
+  
+  tester_status = user.get('tester')  
   if tester_status:
     print(user['email']," has tester status")
-    return True    
+    return True  
+    
   signup = user.get('signed_up')
   if signup:
     signed_up_aware = signup.replace(tzinfo=timezone.utc)
-    trial_end = signed_up_aware + timedelta(days=30)
+    trial_end = signed_up_aware + timedelta(days=7)
     now_utc = datetime.now(timezone.utc)
-    return now_utc <= trial_end
+    return now_utc <= trial_end  
+  
   return False
+
+@anvil.server.callable
+def get_user_request_count(email):
+
+
 
 @anvil.server.callable
 def save_user_api_key(api_key):
