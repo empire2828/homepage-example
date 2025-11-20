@@ -104,8 +104,8 @@ def sync_smoobu_for_all_smoobu_subscribers():
   results = []
   for user in app_tables.users.search():
     # Use the subscription checker function for each user to avoid duplicate logic
-    has_subscription = anvil.server.call('get_user_has_subscription_for_email', user['email'])
-    if has_subscription:
+    #has_subscription = anvil.server.call('get_user_has_subscription_for_email', user['email'])
+    #if has_subscription:
       if not user.get('smoobu_api_key'):
        results.append({'email': user['email'], 'status': 'No API key'})
        continue
