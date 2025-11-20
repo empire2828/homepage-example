@@ -87,8 +87,11 @@ def get_user_has_subscription_for_email(email):
   return False
 
 @anvil.server.callable
-def get_user_request_count(email):
-
+def is_user_below_request_count(email):
+  user = app_tables.users.get(email=email)
+  if not user:
+    return False
+  request_count = user.get('requect_count')
 
 
 @anvil.server.callable
