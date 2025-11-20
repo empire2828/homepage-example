@@ -29,7 +29,8 @@ class multiframe(multiframeTemplate):
       self.pms_need_to_connect_text.visible = True
       self.channel_manager_connect_button.visible = True
     else:
-      if user_has_subscription is False:
+      is_user_below_request_count= anvil.server.call('is_user_below_request_count',user['email'])
+      if user_has_subscription is False and is_user_below_request_count is False:
         self.dashboard_upgrade_needed_text.visible = True
         self.dashboard_upgrade_button.visible = True
         self.pms_need_to_connect_text.visible = False

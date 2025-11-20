@@ -20,22 +20,6 @@ class my_account(my_accountTemplate):
   def form_show(self, **event_args):
     self.my_account_heading.scroll_into_view(smooth=True)
     user = anvil.users.get_user()
-    if user is None:
-      self.subscription_body.text = 'Not logged in'
-    else:
-      if user.get('subscription') is None:
-        self.subscription_body.text = 'Trial subscription'
-      else:
-        self.subscription_body.text = user['subscription']
-        if user.get('admin') is True:
-          self.admin_navigation_link.visible= True
-      user_parameters = anvil.server.call('get_user_parameter')
-      if user_parameters:
-        self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))
-        self.std_linen_fee_text_box.text = str(user_parameters.get('std_linen_fee', ''))
-        self.use_own_std_fees_checkbox.checked = user_parameters.get('use_own_std_fees', False)
-        
-      user_email = user.get('email')
       self.email_body.text = user_email
       #print(user_email)
       channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)

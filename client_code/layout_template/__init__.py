@@ -18,6 +18,7 @@ class layout_template(layout_templateTemplate):
     # Keine multiframe Initialisierung hier!
     self.current_multiframe = None
 
+
   def open_multiframe_form(self):
     #"""Öffnet die multiframe Form als Hauptinhalt"""
 
@@ -56,6 +57,7 @@ class layout_template(layout_templateTemplate):
     self.layout.hide_nav_drawer()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(0)  # Dashboard
+    anvil.server.call_s('add_request_count')
 
   def monthly_outlook_navigation_link_click(self, **event_args):
     self.reset_links()
