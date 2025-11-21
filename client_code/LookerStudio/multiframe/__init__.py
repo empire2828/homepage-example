@@ -9,6 +9,7 @@ from anvil.js.window import jQuery
 from anvil.js import get_dom_node
 import datetime
 import json
+from ... import globals
 
 class multiframe(multiframeTemplate):
 
@@ -23,13 +24,13 @@ class multiframe(multiframeTemplate):
     print('User Logged in: ',user['email'])
 
     is_user_below_request_count = None
-    user_has_subscription= anvil.server.call('get_user_has_subscription_for_email')
+    #user_has_subscription= anvil.server.call('get_user_has_subscription_for_email')
     
     if user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       self.channel_manager_connect_button.visible = True
     else:
-      if user_has_subscription is False:
+      if globals.user_has_subscription is False:
         is_user_below_request_count= anvil.server.call('is_user_below_request_count')
         if is_user_below_request_count is False:
           self.dashboard_upgrade_needed_text_1.visible = True
@@ -37,7 +38,7 @@ class multiframe(multiframeTemplate):
           self.dashboard_upgrade_button.visible = True
           #self.pms_need_to_connect_text.visible = False
           #self.channel_manager_connect_button.visible = False
-    if (is_user_below_request_count or user_has_subscription) and user['smoobu_api_key'] is not None:      
+    if (is_user_below_request_count or globals.user_has_subscription) and user['smoobu_api_key'] is not None:      
       if user and 'supabase_key' in user:
         self.supabase_key = user['supabase_key']
         self.content_panel.visible = True

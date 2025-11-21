@@ -10,6 +10,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..LookerStudio.multiframe import multiframe
+from .. import globals
 
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
@@ -20,8 +21,8 @@ class layout_template(layout_templateTemplate):
     user = anvil.users.get_user()    
     if user is not None:
       #email = user['email']
-      user_has_subscription = anvil.server.call('get_user_has_subscription_for_email')
-      if user_has_subscription is False:
+      globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email')
+      if globals.user_has_subscription is False:
         self.my_account_navigation_link.badge = True
         request_count = anvil.server.call_s('get_request_count')
         self.my_account_navigation_link.badge_count = request_count
