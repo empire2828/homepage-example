@@ -28,7 +28,7 @@ components_by_slot:
         name: flow_panel_2
         properties: {align: center}
         type: FlowPanel
-      layout_properties: {full_width_row: true, grid_position: 'QWYXQV,GGHMSQ'}
+      layout_properties: {full_width_row: false, grid_position: 'QWYXQV,GGHMSQ'}
       name: column_panel_1
       properties: {col_spacing: large, spacing_above: medium, spacing_below: medium}
       type: ColumnPanel
