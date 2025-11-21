@@ -8,7 +8,7 @@ import anvil.google.auth
 #from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
-import anvil.tables.query as q
+#import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..LookerStudio.multiframe import multiframe
 from .. import globals
@@ -16,12 +16,11 @@ from .. import globals
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)    
-    # Keine multiframe Initialisierung hier!
     self.current_multiframe = None
     globals.current_user = anvil.users.get_user()    
     if globals.current_user is not None:
       #email = user['email']
-      globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email')
+      globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email',globals.current_user)
       if globals.user_has_subscription is False:
         self.upgrade_navigation_link.badge = True
         #request_count = anvil.server.call_s('get_request_count')
@@ -155,8 +154,9 @@ class layout_template(layout_templateTemplate):
     pass
 
   def check_if_upgrade_needed(self, **event_args):
-    self.upgrade_navigation_link.badge_count = anvil.server.call_s('launch_add_request_count',globals.current_user)
+    anvil.server.call_s('launch_add_request_count',globals.current_user)
     globals.request_count += 1
+    self.upgrade_navigation_link.badge_count = globals.request_count
     if globals.request_count>20:
       open_form('upgrade_needed')
     return

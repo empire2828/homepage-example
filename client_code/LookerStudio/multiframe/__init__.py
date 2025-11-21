@@ -20,31 +20,33 @@ class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     self.supabase_key= ""
-    user = users.get_user()    
-    print('User Logged in: ',user['email'])
+    #user = users.get_user()    
+    print('User Logged in: ',globals.current_user['email'])
 
     is_user_below_request_count = None
     #user_has_subscription= anvil.server.call('get_user_has_subscription_for_email')
     
-    if user['smoobu_api_key'] is None:
+    if globals.current_user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       self.channel_manager_connect_button.visible = True
     else:
       if globals.user_has_subscription is False:
-        is_user_below_request_count= anvil.server.call('is_user_below_request_count')
-        if is_user_below_request_count is False:
+        if globals.request_count>20:
+          is_user_below_request_count = True
+        #is_user_below_request_count= anvil.server.call('is_user_below_request_count')
+        #if is_user_below_request_count is False:
           self.dashboard_upgrade_needed_text_1.visible = True
           self.dashboard_upgrade_needed_text_2.visible = True
           self.dashboard_upgrade_button.visible = True
           #self.pms_need_to_connect_text.visible = False
           #self.channel_manager_connect_button.visible = False
-    if (is_user_below_request_count or globals.user_has_subscription) and user['smoobu_api_key'] is not None:      
-      if user and 'supabase_key' in user:
-        self.supabase_key = user['supabase_key']
+    if (is_user_below_request_count or globals.user_has_subscription) and globals.current_user['smoobu_api_key'] is not None:      
+      if globals.current_user and 'supabase_key' in globals.current_user:
+        self.supabase_key = globals.current_user['supabase_key']
         self.content_panel.visible = True
       else:
         self.supabase_key = ""
-        print(user['email']," Warnung: Kein supabase_key verfügbar")      
+        print(globals.current_user['email']," Warnung: Kein supabase_key verfügbar")      
     else: 
       pass      
 

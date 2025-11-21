@@ -63,25 +63,32 @@ def send_password_reset_email():
         return "Failed to send password reset email."
 
 @anvil.server.callable
-def get_user_has_subscription_for_email():
-  user = anvil.users.get_user()
+def get_user_has_subscription_for_email(current_user):
+  #current_user = anvil.users.get_user()
   #user = app_tables.users.get(email=email)
-  if not user:
+  if not current_user:
     return False
   
-  subscription_status = user.get('subscription')
+  subscription_status = current_user.get('subscription')
   if subscription_status in ['Subscription', 'Pro-Subscription', 'Canceled']:
     return True
   else:
     subscription_status = False
   
-  tester_status = user.get('tester')  
+  tester_status = current_user.get('tester')  
   if tester_status:
     subscription_status = "tester"
     return True  
 
-  print(user['email']," get_user_has_subscription_for_email: ",subscription_status)
+  print(current_user['email']," get_user_has_subscription_for_email: ",subscription_status)
   return False
+
+@anvil.server.callable
+def launch_get_user_has_subscription_for_email(current_user):
+  if current_user is None:
+    raise Exception("launch_get_user_has_subscription_for_email: Kein Benutzer angemeldet")
+  result= anvil.server.launch_background_task('get_user_has_subscription_for_email',current_user)
+  return result
 
 @anvil.server.callable
 def is_user_below_request_count():
