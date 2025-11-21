@@ -157,6 +157,6 @@ class layout_template(layout_templateTemplate):
     anvil.server.call_s('launch_add_request_count',globals.current_user)
     globals.request_count += 1
     self.upgrade_navigation_link.badge_count = globals.request_count
-    if globals.request_count>20:
-      open_form('upgrade_needed')
+    #if globals.request_count>20:
+    #  open_form('upgrade_needed')
     return
