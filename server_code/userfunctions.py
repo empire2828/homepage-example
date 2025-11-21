@@ -79,13 +79,6 @@ def get_user_has_subscription_for_email():
   if tester_status:
     subscription_status = "tester"
     return True  
-    
-  #signup = user.get('signed_up')
-  #if signup:
-  #  signed_up_aware = signup.replace(tzinfo=timezone.utc)
-  #  trial_end = signed_up_aware + timedelta(days=7)
-  #  now_utc = datetime.now(timezone.utc)
-  #  return now_utc <= trial_end  
 
   print(user['email']," get_user_has_subscription_for_email: ",subscription_status)
   return False
