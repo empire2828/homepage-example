@@ -16,6 +16,8 @@ from anvil.tables import app_tables
 
 user_has_subscription = None
 user_email = None
+request_count = 0
+current_user = None
 
 def say_hello():
   print("Hello, world")

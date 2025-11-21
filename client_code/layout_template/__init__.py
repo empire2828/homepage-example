@@ -15,18 +15,17 @@ from .. import globals
 
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
     self.init_components(**properties)    
     # Keine multiframe Initialisierung hier!
     self.current_multiframe = None
-    user = anvil.users.get_user()    
-    if user is not None:
+    globals.current_user = anvil.users.get_user()    
+    if globals.current_user is not None:
       #email = user['email']
       globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email')
       if globals.user_has_subscription is False:
         self.upgrade_navigation_link.badge = True
-        request_count = anvil.server.call_s('get_request_count')
-        self.upgrade_navigation_link.badge_count = request_count
+        #request_count = anvil.server.call_s('get_request_count')
+        self.upgrade_navigation_link.badge_count = globals.request_count
 
   def open_multiframe_form(self):
     #"""Öffnet die multiframe Form als Hauptinhalt"""
@@ -62,18 +61,16 @@ class layout_template(layout_templateTemplate):
     self.layout.hide_nav_drawer()
 
   def dashboard_navigation_link_click(self, **event_args):
-    self.reset_links()
     self.dashboard_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    self.layout.hide_nav_drawer()
+    self.reset_links()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(0)  # Dashboard
 
   def monthly_outlook_navigation_link_click(self, **event_args):
-    self.reset_links()
     self.monthly_outlook_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    self.layout.hide_nav_drawer()
+    self.reset_links()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(1)  # Dashboard
 
@@ -85,37 +82,37 @@ class layout_template(layout_templateTemplate):
     multiframe_form.lade_und_zeige_iframe(2)  # Profitability
 
   def bookings_navigation_link_click(self, **event_args):
-    self.reset_links()
     self.bookings_navigation_link.selected = True
     self.check_if_upgrade_needed() 
+    self.reset_links()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(3)  # Long Trends
 
   def cancellations_navigation_link_click(self, **event_args):
-    self.reset_links()
     self.cancellations_navigation_link.selected = True
-    self.check_if_upgrade_needed() 
+    self.check_if_upgrade_needed()
+    self.reset_links()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(4)  # Cancellations
 
   def occupancy_navigation_link_click(self, **event_args):
-    self.reset_links()
     self.occupancy_navigation_link.selected = True
     self.check_if_upgrade_needed() 
+    self.reset_links()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(5)  # Occupancy
 
   def lead_time_navigation_link_click(self, **event_args):
-    self.reset_links()
     self.lead_time_navigation_link.selected = True
     self.check_if_upgrade_needed() 
+    self.reset_links()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(6)  # Lead Time
 
   def guest_insights_navigation_link_click(self, **event_args):
-    self.reset_links()
     self.guest_insights_navigation_link.selected = True
     self.check_if_upgrade_needed() 
+    self.reset_links()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(7)  # Guest Insights
 
@@ -127,9 +124,9 @@ class layout_template(layout_templateTemplate):
     multiframe_form.lade_und_zeige_iframe(8)  # Long Trends
 
   def detailed_bookings_navigation_link_click(self, **event_args):
-    self.reset_links()
     self.detailed_bookings_navigation_link.selected = True
     self.check_if_upgrade_needed() 
+    self.reset_links()
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(9)  # Detailed Bookings
 
@@ -158,7 +155,8 @@ class layout_template(layout_templateTemplate):
     pass
 
   def check_if_upgrade_needed(self, **event_args):
-    self.upgrade_navigation_link.badge_count = anvil.server.call_s('add_request_count')
-    if self.upgrade_navigation_link.badge_count>20:
+    self.upgrade_navigation_link.badge_count = anvil.server.call_s('launch_add_request_count',globals.current_user)
+    globals.request_count += 1
+    if globals.request_count>20:
       open_form('upgrade_needed')
     return
