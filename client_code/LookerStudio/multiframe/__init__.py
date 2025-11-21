@@ -22,6 +22,7 @@ class multiframe(multiframeTemplate):
     user = users.get_user()    
     print('User Logged in: ',user['email'])
 
+    is_user_below_request_count = None
     user_has_subscription= anvil.server.call('get_user_has_subscription_for_email')
     
     if user['smoobu_api_key'] is None:
