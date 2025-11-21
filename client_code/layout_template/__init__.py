@@ -3,8 +3,9 @@ from anvil import *
 from routing import router
 import m3.components as m3
 import anvil.server
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
+import anvil.google.auth
+#, anvil.google.drive
+#from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -61,13 +62,15 @@ class layout_template(layout_templateTemplate):
 
   def dashboard_navigation_link_click(self, **event_args):
     self.reset_links()
-    self.my_account_navigation_link.badge_count = anvil.server.call_s('add_request_count')
-    if self.my_account_navigation_link.badge is True:
-      is_user_below_request_count = anvil.server.call_s('is_user_below_request_count')
-      if is_user_below_request_count is False:
-        open_form('upgrade')
+    #if self.my_account_navigation_link.badge is True:
+    #  is_user_below_request_count = anvil.server.call_s('is_user_below_request_count')
+    #  if is_user_below_request_count is False:
+    #    open_form('upgrade')
     self.dashboard_navigation_link.selected = True
     self.layout.hide_nav_drawer()
+    self.my_account_navigation_link.badge_count = anvil.server.call_s('add_request_count')
+    if self.my_account_navigation_link.badge_count>5:
+      open_form('upgrade_needed')
     multiframe_form = self.open_multiframe_form()
     multiframe_form.lade_und_zeige_iframe(0)  # Dashboard
 
