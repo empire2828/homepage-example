@@ -45,7 +45,7 @@ components_by_slot:
         - event_bindings: {click: testen_button_click}
           layout_properties: {grid_position: 'WGBNUK,DNQKEH'}
           name: filled_button_1
-          properties: {role: filled-button, text: 30 day free trial}
+          properties: {role: filled-button, text: Get free analytics}
           type: Button
         - layout_properties: {grid_position: 'DHTVTV,XMRATL'}
           name: spacer_10
@@ -529,12 +529,16 @@ components_by_slot:
         role: outlined-button
         spacing:
           padding: [null, '24', null, null]
-        text: 30 day free trial
+        text: Get free analytics
       type: Button
     - components:
       - layout_properties: {grid_position: 'ZEGUXJ,GFGREP'}
         name: pricing_label
         properties: {}
+        type: Label
+      - layout_properties: {grid_position: 'ZEGUXJ,ZIMNYP'}
+        name: label_9_copy
+        properties: {align: center, bold: true, font_size: 20, foreground: 'theme:Primary', text: FREE}
         type: Label
       - layout_properties: {grid_position: 'ZEGUXJ,HVJHZC'}
         name: label_9
@@ -556,11 +560,15 @@ components_by_slot:
           type: Label
         - layout_properties: {grid_position: 'KNVGKM,SPVMYZ'}
           name: check_box_3
-          properties: {align: center, checked: true, enabled: false, text: '', visible: true}
+          properties: {align: center, checked: true, enabled: false, foreground: 'theme:Primary', text: '', visible: true}
           type: CheckBox
         - layout_properties: {grid_position: 'KNVGKM,HASDLS'}
           name: check_box_9
           properties: {align: center, checked: true, enabled: false, text: ''}
+          type: CheckBox
+        - layout_properties: {grid_position: 'KNVGKM,ZTZFGS'}
+          name: check_box_3_copy
+          properties: {align: center, checked: true, enabled: false, text: '', visible: true}
           type: CheckBox
         layout_properties: {grid_position: 'ZBVUFV,SOCCES'}
         name: elevated_card_5
@@ -577,14 +585,46 @@ components_by_slot:
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
           name: label_14
+          properties: {align: center, font_size: 20, foreground: 'theme:Primary', text: '1'}
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,EWOCUW'}
+          name: label_14_copy
           properties: {align: center, font_size: 20, foreground: 'theme:On Primary Container', text: 1-3}
           type: Label
-        - layout_properties: {grid_position: 'YLUPJR,KPUDGW'}
+        - layout_properties: {grid_position: 'YLUPJR,TRAYAQ'}
           name: label_15
           properties: {align: center, font_size: 20, foreground: 'theme:On Primary Container', text: 4-10}
           type: Label
         layout_properties: {grid_position: 'IQCUEL,QWNJEE'}
         name: elevated_card_6
+        properties: {role: elevated-card, wrap_on: never}
+        type: ColumnPanel
+      - components:
+        - layout_properties: {grid_position: 'YLUPJR,ENXFFK'}
+          name: label_13_copy
+          properties: {font_size: 20, foreground: 'theme:On Primary Container', text: Nutzung}
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
+          name: label_14_copy_2
+          properties:
+            align: center
+            font_size: 20
+            foreground: theme:Primary
+            italic: true
+            text: |-
+              normal
+               (20 Berichtsaufrufe pro Tag)
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,EWOCUW'}
+          name: label_14_copy_copy
+          properties: {align: center, font_size: 20, foreground: 'theme:On Primary Container', italic: true, text: unlimited}
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,TRAYAQ'}
+          name: label_15_copy
+          properties: {align: center, font_size: 20, foreground: 'theme:On Primary Container', italic: true, text: unlimited}
+          type: Label
+        layout_properties: {grid_position: 'ONMTIQ,LTZZMV'}
+        name: elevated_card_6_copy
         properties: {role: elevated-card, wrap_on: never}
         type: ColumnPanel
       - layout_properties: {grid_position: 'MTHCMM,EGPESV'}
@@ -600,7 +640,7 @@ components_by_slot:
         type: Label
       - layout_properties: {grid_position: 'MTHCMM,KISFYQ'}
         name: label_16
-        properties: {align: center, bold: true, font_size: 20, foreground: 'theme:On Primary Container', text: '€ 2,99'}
+        properties: {align: center, bold: true, font_size: 20, foreground: 'theme:Primary', text: '€ 0,00'}
         type: Label
       - layout_properties: {grid_position: 'MTHCMM,FTCARA'}
         name: label_7
@@ -611,9 +651,13 @@ components_by_slot:
           foreground: theme:On Primary Container
           spacing:
             margin: [null, null, '4', null]
-          text: € 4,99
+          text: € 2,99
         type: Label
-      layout_properties: {grid_position: 'DUSZJC,NHQFAR'}
+      - layout_properties: {grid_position: 'MTHCMM,TGIWYY'}
+        name: label_16_copy
+        properties: {align: center, bold: true, font_size: 20, foreground: 'theme:On Primary Container', text: '€ 4,99'}
+        type: Label
+      layout_properties: {grid_position: 'BOCLCD,GJSZGE'}
       name: outlined_card_4
       properties:
         role: null
@@ -654,6 +698,10 @@ components_by_slot:
       name: column_panel_3_copy
       properties: {}
       type: ColumnPanel
+    - layout_properties: {grid_position: 'JQTKLF,DTMXRQ'}
+      name: spacer_7_copy_copy
+      properties: {height: 40.78765869140625}
+      type: Spacer
     layout_properties: {}
     name: column_panel_2_copy
     properties: {background: 'theme:Primary Overlay 2'}

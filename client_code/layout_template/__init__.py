@@ -159,6 +159,6 @@ class layout_template(layout_templateTemplate):
 
   def check_if_upgrade_needed(self, **event_args):
     self.upgrade_navigation_link.badge_count = anvil.server.call_s('add_request_count')
-    if self.upgrade_navigation_link.badge_count>5:
+    if self.upgrade_navigation_link.badge_count>20:
       open_form('upgrade_needed')
     return
