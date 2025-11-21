@@ -14,6 +14,7 @@ class upgrade_needed(upgrade_neededTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.column_panel_1.full_width_row= False
 
     # Any code you write here will run before the form opens.
 
