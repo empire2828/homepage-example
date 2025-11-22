@@ -10,6 +10,7 @@ import anvil.users
 #import anvil.tables as tables
 #import anvil.tables.query as q
 #from anvil.tables import app_tables
+from ... import globals
 
 class home_template(home_templateTemplate):
   def __init__(self, **properties):
@@ -23,6 +24,7 @@ class home_template(home_templateTemplate):
     user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
     if user:
       # Layout Template öffnen
+      globals.current_user = user
       layout_form = open_form('layout_template')
 
       # Dashboard automatisch laden
@@ -32,6 +34,13 @@ class home_template(home_templateTemplate):
       # Navigation Link als aktiv markieren
       layout_form.reset_links()
       layout_form.dashboard_navigation_link.selected = True
+   
+      if globals.current_user is not None:
+        globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email',globals.current_user)
+        if globals.user_has_subscription is False:
+          layout_form.upgrade_navigation_link.badge = True
+          globals.request_count = anvil.server.call('get_request_count')
+          layout_form.upgrade_navigation_link.badge_count = globals.request_count
     pass
 
   def blog_button_click(self, **event_args):

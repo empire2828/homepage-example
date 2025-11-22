@@ -80,15 +80,16 @@ def get_user_has_subscription_for_email(current_user):
     subscription_status = "tester"
     return True  
 
-  print(current_user['email']," get_user_has_subscription_for_email: ",subscription_status)
+  print("get_user_has_subscription_for_email: ",current_user['email']," ",subscription_status)
   return False
 
-@anvil.server.callable
-def launch_get_user_has_subscription_for_email(current_user):
-  if current_user is None:
-    raise Exception("launch_get_user_has_subscription_for_email: Kein Benutzer angemeldet")
-  result= anvil.server.launch_background_task('get_user_has_subscription_for_email',current_user)
-  return result
+#### kann weg
+#@anvil.server.callable
+#def launch_get_user_has_subscription_for_email(current_user):
+#  if current_user is None:
+#    raise Exception("launch_get_user_has_subscription_for_email: Kein Benutzer angemeldet")
+#  result= anvil.server.launch_background_task('get_user_has_subscription_for_email',current_user)
+#  return result
 
 @anvil.server.callable
 def is_user_below_request_count():
