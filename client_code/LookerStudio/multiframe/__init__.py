@@ -18,12 +18,14 @@ class multiframe(multiframeTemplate):
     self.init_components(**properties)
     self.supabase_key= ""  
     self.current_user = globals.current_user
-
-    
+ 
     if globals.request_count>10:
       is_user_below_request_count = False
     else:
       is_user_below_request_count = True
+
+    print("multiframe globals.request_count ",globals.request_count)
+    print("multifram is_user_below_request_count ",is_user_below_request_count)
     
     if self.current_user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
