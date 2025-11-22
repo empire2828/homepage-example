@@ -88,9 +88,9 @@ class multiframe(multiframeTemplate):
 
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
-    user = users.get_user()
+    #user = users.get_user()
     if index < 0 or index >= len(self.iframe_urls):        
-      print(user['email'],f"Ungültiger Index: {index}")
+      print(globals.current_user['email'],f"Ungültiger Index: {index}")
       return
 
     url = self.iframe_urls[index]
@@ -101,7 +101,7 @@ class multiframe(multiframeTemplate):
       params = {"supabase_key_url": self.supabase_key}
       encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
       iframe_url = url + encoded_params
-      print(user['email']," ",iframe_url)
+      print(globals.current_user['email']," ",iframe_url)
     else:
       iframe_url = url
 
@@ -130,8 +130,8 @@ class multiframe(multiframeTemplate):
   def lade_und_zeige_iframe(self, index):
     """Lädt IFrame falls noch nicht geladen und zeigt es an"""
     if index < 0 or index >= len(self.iframe_urls):
-      user = users.get_user()   
-      print(user['email']," ",f"Ungültiger Index: {index}")
+      #user = users.get_user()   
+      print(globals.current_user['email']," ",f"Ungültiger Index: {index}")
       return
 
     # SCHRITT 1: Alle Panels verstecken
@@ -145,7 +145,7 @@ class multiframe(multiframeTemplate):
       #print(f"IFrame {index} wird erstmalig geladen...")
       self.erstelle_iframe(index)
     else:
-      print(user['email']," ",f"IFrame {index} bereits geladen")
+      print(globals.current_user['email']," ",f"IFrame {index} bereits geladen")
 
     # SCHRITT 3: Gewünschtes Panel anzeigen
     self.panels[index].visible = True
