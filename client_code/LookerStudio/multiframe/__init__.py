@@ -1,8 +1,5 @@
 from ._anvil_designer import multiframeTemplate
 from anvil import *
-# from routing import router
-# import m3.components as m3
-# from anvil.tables import app_tables
 from anvil import users
 import anvil.server
 from anvil.js.window import jQuery
@@ -22,9 +19,11 @@ class multiframe(multiframeTemplate):
     self.supabase_key= ""  
     self.current_user = globals.current_user
 
-    is_user_below_request_count = True
+    
     if globals.request_count>10:
       is_user_below_request_count = False
+    else:
+      is_user_below_request_count = True
     
     if self.current_user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True

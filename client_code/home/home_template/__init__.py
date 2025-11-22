@@ -5,15 +5,11 @@ import m3.components as m3
 import anvil.server
 import anvil.google.auth
 import anvil.users
-#import anvil.tables as tables
-#import anvil.tables.query as q
-#from anvil.tables import app_tables
 from ... import globals
 import datetime
 
 class home_template(home_templateTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.user_locale = anvil.js.window.navigator.language
 
