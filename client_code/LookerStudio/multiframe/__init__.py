@@ -23,7 +23,7 @@ class multiframe(multiframeTemplate):
     self.current_user = globals.current_user
 
     is_user_below_request_count = True
-    if globals.request_count>5:
+    if globals.request_count>10:
       is_user_below_request_count = False
     
     if self.current_user['smoobu_api_key'] is None:
