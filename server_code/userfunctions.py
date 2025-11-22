@@ -385,3 +385,10 @@ def delete_user_from_users_table(email):
     return True
   else:
     return False  # User not found
+
+@anvil.server.callable
+def get_my_account_data(email):
+  # Lies Parameter und Channel-Daten ggf. aus BigQuery und return sie gebündelt!
+  params = get_user_parameter()
+  channels = get_user_channels_from_std_commission(email)
+  return {"params": params, "channels": channels}
