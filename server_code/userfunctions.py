@@ -113,7 +113,7 @@ def add_request_count(current_user):
   if request_count_cum is None:
     request_count_cum = 0
   current_user['request_count_cum'] = request_count_cum + 1
-  print(current_user['email']," add_request_count: ",request_count)
+  print(" add_request_count: ",current_user['email']," ",request_count)
   return request_count
 
 @anvil.server.callable
