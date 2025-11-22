@@ -102,18 +102,21 @@ def is_user_below_request_count():
     return True
   return False
 
-@anvil.server.callable
+@anvil.server.background_task
 def add_request_count(current_user):
   request_count = current_user.get('request_count')
   if request_count is None:
     request_count = 0
   current_user['request_count'] = request_count + 1
+  request_count_cum = current_user.get('request_count_cum')
+  if request_count_cum is None:
+    request_count_cum = 0
+  current_user['request_count_cum'] = request_count_cum + 1
   print(current_user['email']," add_request_count: ",request_count)
   return request_count
 
 @anvil.server.callable
 def launch_add_request_count(current_user):
-  #current_user = users.get_user()
   if current_user is None:
     raise Exception("launch_add_request_count: Kein Benutzer angemeldet")
   result= anvil.server.launch_background_task('add_request_count',current_user)

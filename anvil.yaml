@@ -78,6 +78,9 @@ db_schema:
     - admin_ui: {order: 20, width: 200}
       name: request_count
       type: number
+    - admin_ui: {order: 21, width: 200}
+      name: request_count_cum
+      type: number
     server: full
     title: Users
 dependencies:

@@ -19,11 +19,10 @@ class layout_template(layout_templateTemplate):
     self.current_multiframe = None
     globals.current_user = anvil.users.get_user()    
     if globals.current_user is not None:
-      #email = user['email']
       globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email',globals.current_user)
       if globals.user_has_subscription is False:
         self.upgrade_navigation_link.badge = True
-        #request_count = anvil.server.call_s('get_request_count')
+        globals.request_count = anvil.server.call('get_request_count')
         self.upgrade_navigation_link.badge_count = globals.request_count
 
   def open_multiframe_form(self):
@@ -157,6 +156,4 @@ class layout_template(layout_templateTemplate):
     anvil.server.call_s('launch_add_request_count',globals.current_user)
     globals.request_count += 1
     self.upgrade_navigation_link.badge_count = globals.request_count
-    #if globals.request_count>20:
-    #  open_form('upgrade_needed')
     return

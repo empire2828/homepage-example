@@ -19,8 +19,7 @@ class multiframe(multiframeTemplate):
   
   def __init__(self, **properties):
     self.init_components(**properties)
-    self.supabase_key= ""
-    #user = users.get_user()    
+    self.supabase_key= ""  
     print('User Logged in: ',globals.current_user['email'])
 
     is_user_below_request_count = True
@@ -130,7 +129,6 @@ class multiframe(multiframeTemplate):
   def lade_und_zeige_iframe(self, index):
     """Lädt IFrame falls noch nicht geladen und zeigt es an"""
     if index < 0 or index >= len(self.iframe_urls):
-      #user = users.get_user()   
       print(globals.current_user['email']," ",f"Ungültiger Index: {index}")
       return
 
