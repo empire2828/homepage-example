@@ -44,14 +44,30 @@ class my_account(my_accountTemplate):
       #channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
       
         # Populate dropdowns and textboxes for up to 5 channels
+      #for i in range(1, 10):
+      #  d = getattr(self, f'channel{i}_dropdown_menu')
+      #  t = getattr(self, f'channel{i}_text_box')
+      #  name = channel_data[i-1]['channel_name'] if i-1 < len(channel_data) else ''
+      #  comm = channel_data[i-1]['channel_commission'] if i-1 < len(channel_data) else ''
+      #  d.items = [c['channel_name'] for c in channel_data]
+      #  d.selected_value = name or None
+      #  t.text = str(comm) if comm else ''
+
+      items = [c['channel_name'] for c in channel_data]
+
       for i in range(1, 10):
         d = getattr(self, f'channel{i}_dropdown_menu')
         t = getattr(self, f'channel{i}_text_box')
-        name = channel_data[i-1]['channel_name'] if i-1 < len(channel_data) else ''
-        comm = channel_data[i-1]['channel_commission'] if i-1 < len(channel_data) else ''
-        d.items = [c['channel_name'] for c in channel_data]
-        d.selected_value = name or None
-        t.text = str(comm) if comm else ''
+        # Wenn ein Channel-Datensatz für den Index existiert, befüllen, sonst leeren
+        if i-1 < len(channel_data):
+          channel = channel_data[i-1]
+          d.items = items
+          d.selected_value = channel.get('channel_name')
+          t.text = str(channel.get('channel_commission', ''))
+        else:
+          d.items = items
+          d.selected_value = None
+          t.text = ''
   pass
 
   def change_name_link_click(self, **event_args):
