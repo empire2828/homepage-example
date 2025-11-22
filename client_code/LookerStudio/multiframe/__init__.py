@@ -23,18 +23,15 @@ class multiframe(multiframeTemplate):
     #user = users.get_user()    
     print('User Logged in: ',globals.current_user['email'])
 
-    is_user_below_request_count = None
-    #user_has_subscription= anvil.server.call('get_user_has_subscription_for_email')
+    is_user_below_request_count = True
+    if globals.request_count>5:
+      is_user_below_request_count = False
     
     if globals.current_user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       self.channel_manager_connect_button.visible = True
     else:
-      if globals.user_has_subscription is False:
-        if globals.request_count>20:
-          is_user_below_request_count = True
-        #is_user_below_request_count= anvil.server.call('is_user_below_request_count')
-        #if is_user_below_request_count is False:
+      if globals.user_has_subscription is False and is_user_below_request_count is False:
           self.dashboard_upgrade_needed_text_1.visible = True
           self.dashboard_upgrade_needed_text_2.visible = True
           self.dashboard_upgrade_button.visible = True
