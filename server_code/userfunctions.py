@@ -131,7 +131,7 @@ def get_request_count():
   request_count = current_user.get('request_count')
   if request_count is None:
     request_count = 0  
-  print(current_user['email']," get_request_count: ",request_count)
+  print(" get_request_count: ",current_user['email']," ",request_count)
   return request_count
 
 @anvil.server.background_task

@@ -14,7 +14,7 @@ from ... import globals
 class multiframe(multiframeTemplate):
 
   Locker_Version = "https://lookerstudio.google.com/embed/reporting/3a999ac2-c008-44c2-8cbb-3f1847c37211/page/"
-  #share unlisted anyone can listen, embed ohne menu
+  # share unlisted anyone can listen, embed ohne menu
   # Lodginia 1.0.08
   
   def __init__(self, **properties):
@@ -34,8 +34,6 @@ class multiframe(multiframeTemplate):
           self.dashboard_upgrade_needed_text_1.visible = True
           self.dashboard_upgrade_needed_text_2.visible = True
           self.dashboard_upgrade_button.visible = True
-          #self.pms_need_to_connect_text.visible = False
-          #self.channel_manager_connect_button.visible = False
     if (is_user_below_request_count or globals.user_has_subscription) and self.current_user['smoobu_api_key'] is not None:      
       if self.current_user and 'supabase_key' in self.current_user:
         self.supabase_key = self.current_user['supabase_key']
