@@ -19,7 +19,7 @@ class multiframe(multiframeTemplate):
     self.supabase_key= ""  
     self.current_user = globals.current_user
  
-    if globals.request_count>10:
+    if globals.request_count>20:
       is_user_below_request_count = False
     else:
       is_user_below_request_count = True
