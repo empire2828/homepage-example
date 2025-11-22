@@ -1,11 +1,11 @@
 from ._anvil_designer import my_accountTemplate
 from anvil import *
-from routing import router
-import m3.components as m3
+# from routing import router
+# import m3.components as m3
 import anvil.server
 import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
+# import anvil.tables as tables
+# import anvil.tables.query as q
 from anvil.tables import app_tables
 from .ChangeName import ChangeName
 from .ChangeEmail import ChangeEmail
