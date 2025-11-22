@@ -17,13 +17,6 @@ class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)    
     self.current_multiframe = None
-    #globals.current_user = anvil.users.get_user()    
-    #if globals.current_user is not None:
-    #  globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email',globals.current_user)
-    #  if globals.user_has_subscription is False:
-    #    self.upgrade_navigation_link.badge = True
-    #    globals.request_count = anvil.server.call('get_request_count')
-    #    self.upgrade_navigation_link.badge_count = globals.request_count
 
   def open_multiframe_form(self):
     #"""Öffnet die multiframe Form als Hauptinhalt"""
