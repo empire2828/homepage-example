@@ -21,7 +21,6 @@ class multiframe(multiframeTemplate):
     self.init_components(**properties)
     self.supabase_key= ""  
     self.current_user = globals.current_user
-    #print('multiframe User Logged in: ',self.current_user['email'])
 
     is_user_below_request_count = True
     if globals.request_count>5:

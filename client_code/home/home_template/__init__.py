@@ -24,10 +24,6 @@ class home_template(home_templateTemplate):
       globals.current_user = user
       layout_form = open_form('layout_template')
 
-      # Dashboard automatisch laden
-      multiframe_form = layout_form.open_multiframe_form()
-      multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
-
       layout_form.reset_links()
       layout_form.dashboard_navigation_link.selected = True
    
@@ -36,6 +32,10 @@ class home_template(home_templateTemplate):
         layout_form.upgrade_navigation_link.badge = True
         globals.request_count = anvil.server.call('get_request_count')
         layout_form.upgrade_navigation_link.badge_count = globals.request_count
+
+      # Dashboard automatisch laden
+      multiframe_form = layout_form.open_multiframe_form()
+      multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
     pass
 
   def blog_button_click(self, **event_args):
