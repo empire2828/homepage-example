@@ -4,7 +4,6 @@ from routing import router
 import m3.components as m3
 import anvil.server
 import anvil.google.auth
-#from anvil.google.drive import app_files
 import anvil.users
 #import anvil.tables as tables
 #import anvil.tables.query as q
@@ -28,21 +27,22 @@ class home_template(home_templateTemplate):
       layout_form.dashboard_navigation_link.selected = True
    
       globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email',self.user)
-      if globals.user_has_subscription is False:
-        layout_form.upgrade_navigation_link.badge = True
+      #if globals.user_has_subscription is False:
+      #  layout_form.upgrade_navigation_link.badge = True
 
         # Request number nur holen, wenn letzter Login kürzer als 24h her ist
-        last_login = self.user.get('last_login', None)
-        must_refresh = False
-        globals.request_count = 0
-        if last_login is not None:
-          now_dt = datetime.datetime.now(datetime.timezone.utc)
-          delta = now_dt - last_login
-          if delta.total_seconds() < 24 * 3600:
-            must_refresh = True
-        if must_refresh:
-          globals.request_count = anvil.server.call('get_request_count')
-        layout_form.upgrade_navigation_link.badge_count = globals.request_count
+      last_login = self.user.get('last_login', None)
+      must_refresh = False
+      globals.request_count = 0
+      if last_login is not None:
+        now_dt = datetime.datetime.now(datetime.timezone.utc)
+        delta = now_dt - last_login
+        if delta.total_seconds() < 24 * 3600:
+          must_refresh = True
+      if must_refresh:
+        globals.request_count = anvil.server.call('get_request_count')
+        #layout_form.upgrade_navigation_link.badge_count = globals.request_count
+        #print("ja")
 
       # Dashboard automatisch laden
       multiframe_form = layout_form.open_multiframe_form()

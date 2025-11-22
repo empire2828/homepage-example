@@ -1,11 +1,9 @@
 from ._anvil_designer import layout_templateTemplate
 from anvil import *
-# from routing import router
 # import m3.components as m3
 import anvil.server
 # import anvil.google.auth
 #, anvil.google.drive
-# from anvil.google.drive import app_files
 import anvil.users
 # import anvil.tables as tables
 # import anvil.tables.query as q
@@ -17,6 +15,10 @@ class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)    
     self.current_multiframe = None
+
+    if getattr(globals, "user_has_subscription", None) is False:
+      self.upgrade_navigation_link.badge = True
+      self.upgrade_navigation_link.badge_count = getattr(globals, "request_count", 0)
 
   def open_multiframe_form(self):
     #"""Öffnet die multiframe Form als Hauptinhalt"""

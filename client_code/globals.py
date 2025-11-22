@@ -8,13 +8,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 # This is a module.
 # You can define variables and functions here, and use them from any form. For example, in a top-level form:
-#
-#    from .. import Module1
-#
-#    Module1.say_hello()
-#
 
-user_has_subscription = None
+user_has_subscription = False
 user_email = None
 request_count = 0
 current_user = None
