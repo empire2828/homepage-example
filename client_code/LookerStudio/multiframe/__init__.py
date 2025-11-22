@@ -21,7 +21,7 @@ class multiframe(multiframeTemplate):
     self.init_components(**properties)
     self.supabase_key= ""  
     self.current_user = globals.current_user
-    print('User Logged in: ',self.current_user['email'])
+    print('multiframe User Logged in: ',self.current_user['email'])
 
     is_user_below_request_count = True
     if globals.request_count>5:
@@ -101,7 +101,7 @@ class multiframe(multiframeTemplate):
       params = {"supabase_key_url": self.supabase_key}
       encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
       iframe_url = url + encoded_params
-      print(self.current_user['email']," ",iframe_url)
+      #print(self.current_user['email']," ",iframe_url)
     else:
       iframe_url = url
 
