@@ -20,13 +20,14 @@ class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     self.supabase_key= ""  
-    print('User Logged in: ',globals.current_user['email'])
+    self.current_user = globals.current_user
+    print('User Logged in: ',self.current_user['email'])
 
     is_user_below_request_count = True
     if globals.request_count>5:
       is_user_below_request_count = False
     
-    if globals.current_user['smoobu_api_key'] is None:
+    if self.current_user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
       self.channel_manager_connect_button.visible = True
     else:
@@ -36,13 +37,13 @@ class multiframe(multiframeTemplate):
           self.dashboard_upgrade_button.visible = True
           #self.pms_need_to_connect_text.visible = False
           #self.channel_manager_connect_button.visible = False
-    if (is_user_below_request_count or globals.user_has_subscription) and globals.current_user['smoobu_api_key'] is not None:      
-      if globals.current_user and 'supabase_key' in globals.current_user:
-        self.supabase_key = globals.current_user['supabase_key']
+    if (is_user_below_request_count or globals.user_has_subscription) and self.current_user['smoobu_api_key'] is not None:      
+      if self.current_user and 'supabase_key' in self.current_user:
+        self.supabase_key = self.current_user['supabase_key']
         self.content_panel.visible = True
       else:
         self.supabase_key = ""
-        print(globals.current_user['email']," Warnung: Kein supabase_key verfügbar")      
+        print(self.current_user['email']," Warnung: Kein supabase_key verfügbar")      
     else: 
       pass      
 
@@ -89,7 +90,7 @@ class multiframe(multiframeTemplate):
     """Erstellt ein IFrame für den gegebenen Index"""
     #user = users.get_user()
     if index < 0 or index >= len(self.iframe_urls):        
-      print(globals.current_user['email'],f"Ungültiger Index: {index}")
+      print(self.current_user['email'],f"Ungültiger Index: {index}")
       return
 
     url = self.iframe_urls[index]
@@ -100,7 +101,7 @@ class multiframe(multiframeTemplate):
       params = {"supabase_key_url": self.supabase_key}
       encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
       iframe_url = url + encoded_params
-      print(globals.current_user['email']," ",iframe_url)
+      print(self.current_user['email']," ",iframe_url)
     else:
       iframe_url = url
 
@@ -129,7 +130,7 @@ class multiframe(multiframeTemplate):
   def lade_und_zeige_iframe(self, index):
     """Lädt IFrame falls noch nicht geladen und zeigt es an"""
     if index < 0 or index >= len(self.iframe_urls):
-      print(globals.current_user['email']," ",f"Ungültiger Index: {index}")
+      print(self.current_user['email']," ",f"Ungültiger Index: {index}")
       return
 
     # SCHRITT 1: Alle Panels verstecken
@@ -143,7 +144,7 @@ class multiframe(multiframeTemplate):
       #print(f"IFrame {index} wird erstmalig geladen...")
       self.erstelle_iframe(index)
     else:
-      print(globals.current_user['email']," ",f"IFrame {index} bereits geladen")
+      print(self.current_user['email']," ",f"IFrame {index} bereits geladen")
 
     # SCHRITT 3: Gewünschtes Panel anzeigen
     self.panels[index].visible = True

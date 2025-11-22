@@ -10,6 +10,7 @@ from anvil.tables import app_tables
 from .ChangeName import ChangeName
 from .ChangeEmail import ChangeEmail
 from .DeleteAccountAlert import DeleteAccountAlert
+from .. import globals
 
 class my_account(my_accountTemplate):
   def __init__(self, **properties):
@@ -19,7 +20,7 @@ class my_account(my_accountTemplate):
 
   def form_show(self, **event_args):
     self.my_account_heading.scroll_into_view(smooth=True)
-    user = anvil.users.get_user()
+    user = globals.current_user
     if user is None:
       self.subscription_body.text = 'Not logged in'
     else:
@@ -39,7 +40,6 @@ class my_account(my_accountTemplate):
         
       user_email = user.get('email')
       self.email_body.text = user_email
-      #print(user_email)
       channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
       
         # Populate dropdowns and textboxes for up to 5 channels
