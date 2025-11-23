@@ -1,10 +1,11 @@
 from ._anvil_designer import home_enTemplate
 from anvil import *
-from routing import router
-import m3.components as m3
+#from routing import router
+#import m3.components as m3
 import anvil.server
 import anvil.users
-import anvil.js
+#import anvil.js
+from ... import globals
 
 class home_en(home_enTemplate):
   def __init__(self, **properties):

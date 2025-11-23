@@ -1,15 +1,13 @@
 from ._anvil_designer import home_deTemplate
 from anvil import *
-from routing import router
-import m3.components as m3
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
+#from routing import router
+#import m3.components as m3
+#import anvil.google.auth, anvil.google.drive
+#import anvil.tables as tables
 import anvil.server
 import anvil.users
-import anvil.js
+#import anvil.js
+from ... import globals
 
 class home_de(home_deTemplate):
   def __init__(self, **properties):
@@ -21,7 +19,7 @@ class home_de(home_deTemplate):
       anvil.server.call("create_supabase_key")
       anvil.server.call("send_registration_notification", user["email"])
       # Layout Template öffnen
-      globals.current_user = self.user
+      globals.current_user = user
       globals.request_count = 0
       globals.user_has_subscription= False
       layout_form = open_form("layout_template")
