@@ -17,58 +17,48 @@ class my_account(my_accountTemplate):
   def form_show(self, **event_args):
     self.my_account_heading.scroll_into_view(smooth=True)
     user = globals.current_user
+  
     if user is None:
       self.subscription_body.text = 'Not logged in'
-    else:
-      if user.get('subscription') is None:
-        self.subscription_body.text = 'Free subscription'
+      return
+  
+    # Subscription / Admin
+    self.subscription_body.text = user.get('subscription') or 'Free subscription'
+    self.admin_navigation_link.visible = bool(user.get('admin'))
+  
+    # Request Count
+    if user.get('request_count') is not None:
+      self.request_count_body.text = user['request_count']
+  
+    # My-Account-Daten (Parameter + Channels) in EINEM Server-Call holen
+    data = anvil.server.call('get_my_account_data', user['email'])
+    user_parameters = data.get('params') or {}
+    channel_data    = data.get('channels') or []
+  
+    # Parameter-Felder
+    self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee') or '')
+    self.std_linen_fee_text_box.text    = str(user_parameters.get('std_linen_fee') or '')
+    self.use_own_std_fees_checkbox.checked = bool(user_parameters.get('use_own_std_fees'))
+  
+    # E-Mail
+    self.email_body.text = user.get('email', '')
+  
+    # Channels nur einmal als Items-Liste berechnen
+    items = [c['channel_name'] for c in channel_data]
+  
+    # Dropdowns/Textboxen über Schleife befüllen
+    for i in range(1, 11):
+      d = getattr(self, f'channel{i}_dropdown_menu')
+      t = getattr(self, f'channel{i}_text_box')
+      d.items = items
+  
+      if i-1 < len(channel_data):
+        channel = channel_data[i-1]
+        d.selected_value = channel.get('channel_name')
+        t.text = str(channel.get('channel_commission') or '')
       else:
-        self.subscription_body.text = user['subscription']
-        if user.get('admin') is True:
-          self.admin_navigation_link.visible= True
-      if user.get('request_count') is not None:
-        self.request_count_body.text = user.get('request_count')
-
-      data = anvil.server.call('get_my_account_data', user['email'])
-      user_parameters = data['params']
-      channel_data = data['channels']
-      
-      #user_parameters = anvil.server.call('get_user_parameter')
-      if user_parameters:
-        self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))
-        self.std_linen_fee_text_box.text = str(user_parameters.get('std_linen_fee', ''))
-        self.use_own_std_fees_checkbox.checked = user_parameters.get('use_own_std_fees', False)
-        
-      user_email = user.get('email')
-      self.email_body.text = user_email
-      #channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
-      
-        # Populate dropdowns and textboxes for up to 5 channels
-      #for i in range(1, 10):
-      #  d = getattr(self, f'channel{i}_dropdown_menu')
-      #  t = getattr(self, f'channel{i}_text_box')
-      #  name = channel_data[i-1]['channel_name'] if i-1 < len(channel_data) else ''
-      #  comm = channel_data[i-1]['channel_commission'] if i-1 < len(channel_data) else ''
-      #  d.items = [c['channel_name'] for c in channel_data]
-      #  d.selected_value = name or None
-      #  t.text = str(comm) if comm else ''
-
-      items = [c['channel_name'] for c in channel_data]
-
-      for i in range(1, 10):
-        d = getattr(self, f'channel{i}_dropdown_menu')
-        t = getattr(self, f'channel{i}_text_box')
-        # Wenn ein Channel-Datensatz für den Index existiert, befüllen, sonst leeren
-        if i-1 < len(channel_data):
-          channel = channel_data[i-1]
-          d.items = items
-          d.selected_value = channel.get('channel_name')
-          t.text = str(channel.get('channel_commission', ''))
-        else:
-          d.items = items
-          d.selected_value = None
-          t.text = ''
-  pass
+        d.selected_value = None
+        t.text = ''
 
   def change_name_link_click(self, **event_args):
     new_name = alert(ChangeName(item=self.user["name"]), title="Change name", buttons=None, dismissible=True, large=True)
