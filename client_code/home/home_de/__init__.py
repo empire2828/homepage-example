@@ -2,8 +2,6 @@ from ._anvil_designer import home_deTemplate
 from anvil import *
 #from routing import router
 #import m3.components as m3
-#import anvil.google.auth, anvil.google.drive
-#import anvil.tables as tables
 import anvil.server
 import anvil.users
 #import anvil.js
@@ -24,11 +22,12 @@ class home_de(home_deTemplate):
       globals.user_has_subscription= False
       layout_form = open_form("layout_template")
       # Dashboard automatisch laden
+      layout_form.reset_links()
+      layout_form.dashboard_navigation_link.selected = True   
       multiframe_form = layout_form.open_multiframe_form()
       multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
       # Navigation Link als aktiv markieren
-      layout_form.reset_links()
-      layout_form.dashboard_navigation_link.selected = True
+
     pass
 
   def impressum_link_click(self, **event_args):

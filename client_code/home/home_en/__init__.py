@@ -17,22 +17,20 @@ class home_en(home_enTemplate):
       anvil.server.call('create_supabase_key')
       anvil.server.call('send_registration_notification', user['email'])
       # Layout Template öffnen
+      globals.current_user = user
+      globals.request_count = 0
+      globals.user_has_subscription= False
       layout_form = open_form('layout_template')
       # Dashboard automatisch laden
+      layout_form.reset_links()
+      layout_form.dashboard_navigation_link.selected = True   
       multiframe_form = layout_form.open_multiframe_form()
       multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
-      # Navigation Link als aktiv markieren
-      layout_form.reset_links()
-      layout_form.dashboard_navigation_link.selected = True
     pass
   
   def impressum_link_click(self, **event_args):
     open_form('home.impressum')
     pass
- 
-  #def home_link_click(self, **event_args):
-  #  open_form('home_start')
-  #  pass
   
   def pricing_link_click(self, **event_args):
     self.pricing_label.scroll_into_view()

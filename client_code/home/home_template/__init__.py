@@ -24,9 +24,8 @@ class home_template(home_templateTemplate):
    
       globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email',self.user)
       #if globals.user_has_subscription is False:
-      #  layout_form.upgrade_navigation_link.badge = True
 
-        # Request number nur holen, wenn letzter Login kürzer als 24h her ist
+      # Request number nur holen, wenn letzter Login kürzer als 24h her ist
       last_login = self.user.get('last_login', None)
       must_refresh = False
       globals.request_count = 0

@@ -9,6 +9,7 @@ import anvil.users
 #import anvil.tables as tables
 #import anvil.tables.query as q
 #from anvil.tables import app_tables
+from .. import globals
 
 class channel_manager_connect(channel_manager_connectTemplate):
   def __init__(self, **properties):
@@ -35,6 +36,9 @@ class channel_manager_connect(channel_manager_connectTemplate):
       anvil.alert('Smoobu said API Key is not correct. It should look like: jgfKvbu1Sdrqu5INRO0kwjV07fed1xrls22FJIFABY. If correct, just press save again as Smoobu is sometimes slow...',large=True)
       print(current_user['email']," API Key not correct", result)
       return
+    else:
+      current_user = anvil.users.get_user()
+      globals.current_user = current_user
     pass
 
   def sync_smoobu_button_click(self, **event_args):
@@ -46,7 +50,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
       anvil.alert('API Key is not correct or not yet saved. It should look like this one: jgfKvbu1Sdrqu5INRO0kwjV07fed1xrls22FJIFABY',large=True)
       print(current_user['email']," API Key not correct", result)
       return
-    alert("Background sync started- this will take around 2 minutes.")
+    alert("Sync started- this will take around 2 minutes.")
     self.task = anvil.server.call('launch_sync_smoobu')
     self.progress_bar.value = 3
     self.progress_bar.visible = True
@@ -81,8 +85,14 @@ class channel_manager_connect(channel_manager_connectTemplate):
           self.timer_1.enabled = False
           self.progress_bar.progress = 1
           if self._navigate_when_done:
-            alert("You will now be forwarded to the settings.")
-            open_form('my_account')
+            alert("You will now be taken to the Dashboard. You can check your specific settings in My Account.")
+            #open_form('my_account')
+            # Dashboard automatisch laden
+            layout_form = open_form('layout_template')
+            layout_form.reset_links()
+            layout_form.dashboard_navigation_link.selected = True
+            multiframe_form = layout_form.open_multiframe_form()
+            multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
       except Exception:
         self.timer_1.enabled = False
         self.progress_bar.visible = False
