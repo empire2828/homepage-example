@@ -60,6 +60,10 @@ class my_account(my_accountTemplate):
         d.selected_value = None
         t.text = ''
 
+    self.value_loading_checkbox.checked = True
+    self.value_loading_checkbox.text = "Values below calculated."
+    self.value_loading_checkbox.italic = True
+
   def change_name_link_click(self, **event_args):
     new_name = alert(ChangeName(item=self.user["name"]), title="Change name", buttons=None, dismissible=True, large=True)
     if new_name:
