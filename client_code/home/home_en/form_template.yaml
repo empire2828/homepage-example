@@ -78,7 +78,7 @@ components_by_slot:
         - components:
           - layout_properties: {grid_position: 'WKLVAD,UCYNDI'}
             name: checkbox_2
-            properties: {align: left, checked: true, font_size: 20, text: In Free no obligations}
+            properties: {align: left, checked: true, font_size: 20, text: Simple Graphics}
             type: form:dep_g9k4toow7i44kq:_Components.Checkbox
           layout_properties: {grid_position: 'QCSDVZ,CYOJER'}
           name: elevated_card_1_copy_copy
@@ -236,7 +236,7 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['4', null, '4', null]
-        text: Same time last year to avoid discounting too early as some bookings will still come
+        text: Compare your current booking situation with the same period last year – not with last year's final numbers. No more discounts given too early!
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     layout_properties: {}
     name: column_panel_8
@@ -553,7 +553,7 @@ components_by_slot:
         - layout_properties: {grid_position: 'KNVGKM,TWRMQK'}
           name: label_6
           properties:
-            font_size: 15
+            font_size: 16
             foreground: theme:On Primary Container
             spacing:
               margin: [null, null, '6', null]
@@ -576,14 +576,14 @@ components_by_slot:
         properties:
           role: elevated-card
           spacing:
-            padding: ['6', '8', '6', '8']
+            padding: ['6', '0', '6', '0']
           wrap_on: never
         type: ColumnPanel
       - components:
         - layout_properties: {grid_position: 'YLUPJR,ENXFFK'}
           name: label_13
           properties:
-            font_size: 15
+            font_size: 16
             foreground: theme:On Primary Container
             text: |-
               Number of
@@ -591,47 +591,47 @@ components_by_slot:
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
           name: label_14
-          properties: {align: center, font_size: 15, foreground: 'theme:Primary', text: 1-3}
+          properties: {align: center, font_size: 16, foreground: 'theme:Primary', text: 1-3}
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,EWOCUW'}
           name: label_14_copy
-          properties: {align: center, font_size: 15, foreground: 'theme:On Primary Container', text: 1-3}
+          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', text: 1-3}
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,TRAYAQ'}
           name: label_15
-          properties: {align: center, font_size: 15, foreground: 'theme:On Primary Container', text: 4-10}
+          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', text: 4-10}
           type: Label
         layout_properties: {grid_position: 'IQCUEL,QWNJEE'}
         name: elevated_card_6
         properties:
           role: elevated-card
           spacing:
-            padding: [null, '8', null, '8']
+            padding: [null, '0', null, '0']
           wrap_on: never
         type: ColumnPanel
       - components:
         - layout_properties: {grid_position: 'YLUPJR,ENXFFK'}
           name: label_13_copy
-          properties: {font_size: 15, foreground: 'theme:On Primary Container', text: Usage}
+          properties: {font_size: 16, foreground: 'theme:On Primary Container', text: Usage}
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
           name: label_14_copy_2
-          properties: {align: center, font_size: 15, foreground: 'theme:Primary', italic: false, text: normal}
+          properties: {align: center, font_size: 16, foreground: 'theme:Primary', italic: false, text: normal}
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,EWOCUW'}
           name: label_14_copy_copy
-          properties: {align: center, font_size: 15, foreground: 'theme:On Primary Container', italic: false, text: unlimited}
+          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', italic: false, text: unlimited}
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,OZXJXY'}
           name: label_14_copy_copy_copy
-          properties: {align: center, font_size: 15, foreground: 'theme:On Primary Container', italic: false, text: unlimited}
+          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', italic: false, text: unlimited}
           type: Label
         layout_properties: {grid_position: 'ONMTIQ,LTZZMV'}
         name: elevated_card_6_copy
         properties:
           role: elevated-card
           spacing:
-            padding: [null, '8', null, '8']
+            padding: [null, '0', null, '0']
           wrap_on: never
         type: ColumnPanel
       - layout_properties: {grid_position: 'MTHCMM,EGPESV'}
