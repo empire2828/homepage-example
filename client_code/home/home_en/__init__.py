@@ -10,6 +10,7 @@ from ... import globals
 class home_en(home_enTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
+    self.set_event_handler("show", self.form_show)
 
   def form_show(self, **event_args):
   # Wird aufgerufen, wenn die Form angezeigt wird

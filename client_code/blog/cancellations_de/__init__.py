@@ -16,6 +16,6 @@ class cancellations_de(cancellations_deTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-  def filled_button_1_click(self, **event_args):
+  def learn_more_button_click(self, **event_args):
     open_form('home.home_de')
     pass
