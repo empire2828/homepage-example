@@ -142,10 +142,11 @@ class layout_template(layout_templateTemplate):
     pass
 
   def check_if_upgrade_needed(self, **event_args):
-    result = anvil.server.call_s('launch_add_request_count',globals.current_user)
+    result = anvil.server.call_s('add_request_count',globals.current_user)
     try:
       globals.request_count = int(result)
     except (TypeError, ValueError):
       globals.request_count = 0
     self.upgrade_navigation_link.badge_count = globals.request_count
     return
+
