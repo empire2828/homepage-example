@@ -45,7 +45,7 @@ components_by_slot:
         - event_bindings: {click: testen_button_click}
           layout_properties: {grid_position: 'WGBNUK,DNQKEH'}
           name: filled_button_1
-          properties: {role: filled-button, text: 30 day free trial}
+          properties: {role: filled-button, text: Get free analytics}
           type: Button
         - layout_properties: {grid_position: 'DHTVTV,XMRATL'}
           name: spacer_10
@@ -54,7 +54,7 @@ components_by_slot:
         - components:
           - layout_properties: {grid_position: 'MTHMSH,PKOMHH'}
             name: checkbox_3
-            properties: {align: left, checked: true, font_size: 20, text: Keine Kreditkarte für Testversion}
+            properties: {align: left, checked: true, font_size: 20, text: FREE Version ist dauerhaft kostenlos}
             type: form:dep_g9k4toow7i44kq:_Components.Checkbox
           layout_properties: {grid_position: 'QCSDVZ,BMJGRB'}
           name: elevated_card_1
@@ -78,7 +78,7 @@ components_by_slot:
         - components:
           - layout_properties: {grid_position: 'WKLVAD,UCYNDI'}
             name: checkbox_2
-            properties: {align: left, checked: true, font_size: 20, text: Jederzeit kündbar bei Nichtgefallen}
+            properties: {align: left, checked: true, font_size: 20, text: Einfach verständliche Graphiken}
             type: form:dep_g9k4toow7i44kq:_Components.Checkbox
           layout_properties: {grid_position: 'QCSDVZ,CYOJER'}
           name: elevated_card_1_copy_copy
@@ -236,7 +236,7 @@ components_by_slot:
         font_size: 20
         spacing:
           margin: ['4', null, '4', null]
-        text: Vergleiche zum gleichen Zeitpunkt letzten Jahres (und nicht zu den finalen Zahlen) verhindern dass Du zu früh Rabatte gibst
+        text: Vergleiche Deine aktuelle Buchungslage mit dem gleichen Zeitraum des letzten Jahres – nicht mit den finalen Zahlen vom letzten Jahr. Keine zu frühen Rabatte mehr!
       type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     layout_properties: {}
     name: column_panel_8
@@ -513,12 +513,212 @@ components_by_slot:
       name: spacer_11
       properties: {height: 33.31964111328125}
       type: Spacer
-    - layout_properties: {grid_position: 'CVAWKF,NYQUBE'}
-      name: title_4
-      properties: {align: center, font_size: 28, foreground: 'theme:On Primary Container', role: title, text: Preise}
-      type: Label
+    - components:
+      - layout_properties: {grid_position: 'PQKAZK,YZVEXS'}
+        name: title_4
+        properties: {align: center, font_size: 28, foreground: 'theme:On Primary Container', role: title, text: Preise}
+        type: Label
+      - layout_properties: {grid_position: 'ZEGUXJ,GFGREP'}
+        name: pricing_label
+        properties: {}
+        type: Label
+      - layout_properties: {grid_position: 'ZEGUXJ,ZIMNYP'}
+        name: label_9_copy
+        properties: {align: center, bold: true, font_size: 16, foreground: 'theme:Primary', text: FREE}
+        type: Label
+      - layout_properties: {grid_position: 'ZEGUXJ,HVJHZC'}
+        name: label_9
+        properties: {align: center, bold: false, font_size: 16, foreground: 'theme:On Primary Container', text: Abo}
+        type: Label
+      - layout_properties: {grid_position: 'ZEGUXJ,DVQCGG'}
+        name: label_10
+        properties: {align: center, bold: false, font_size: 16, foreground: 'theme:On Primary Container', text: Pro-Abo}
+        type: Label
+      - components:
+        - layout_properties: {grid_position: 'KNVGKM,TWRMQK'}
+          name: label_6
+          properties:
+            font_size: 16
+            foreground: theme:On Primary Container
+            spacing:
+              margin: [null, null, '6', '5']
+              padding: [null, null, null, '0']
+            text: |-
+              Verbindg.
+              via API
+              (Smoobu)
+          type: Label
+        - layout_properties: {grid_position: 'KNVGKM,SPVMYZ'}
+          name: check_box_3
+          properties:
+            align: center
+            checked: true
+            enabled: false
+            foreground: theme:Primary
+            spacing:
+              margin: [null, null, null, '0']
+              padding: [null, '0', null, '0']
+            text: ''
+            visible: true
+          type: CheckBox
+        - layout_properties: {grid_position: 'KNVGKM,HASDLS'}
+          name: check_box_9
+          properties: {align: center, checked: true, enabled: false, text: ''}
+          type: CheckBox
+        - layout_properties: {grid_position: 'KNVGKM,ZTZFGS'}
+          name: check_box_3_copy
+          properties: {align: center, checked: true, enabled: false, text: '', visible: true}
+          type: CheckBox
+        layout_properties: {grid_position: 'ZBVUFV,SOCCES'}
+        name: elevated_card_5
+        properties:
+          role: elevated-card
+          spacing:
+            padding: ['6', '0', '6', '0']
+          wrap_on: never
+        type: ColumnPanel
+      - components:
+        - layout_properties: {grid_position: 'YLUPJR,ENXFFK'}
+          name: label_13
+          properties:
+            font_size: 16
+            foreground: theme:On Primary Container
+            spacing:
+              margin: [null, null, null, '5']
+            text: |-
+              Anzahl
+              Objekte
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
+          name: label_14
+          properties: {align: center, font_size: 16, foreground: 'theme:Primary', text: 1-3}
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,EWOCUW'}
+          name: label_14_copy
+          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', text: 1-3}
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,TRAYAQ'}
+          name: label_15
+          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', text: 4-10}
+          type: Label
+        layout_properties: {grid_position: 'IQCUEL,QWNJEE'}
+        name: elevated_card_6
+        properties:
+          role: elevated-card
+          spacing:
+            padding: [null, '0', null, '0']
+          wrap_on: never
+        type: ColumnPanel
+      - components:
+        - layout_properties: {grid_position: 'YLUPJR,ENXFFK'}
+          name: label_13_copy
+          properties:
+            font_size: 16
+            foreground: theme:On Primary Container
+            spacing:
+              margin: [null, null, null, '5']
+            text: Nutzung
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
+          name: label_14_copy_2
+          properties:
+            align: center
+            font_size: 16
+            foreground: theme:Primary
+            italic: false
+            text: |
+              normal
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,EWOCUW'}
+          name: label_14_copy_copy
+          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', italic: false, text: unlimited}
+          type: Label
+        - layout_properties: {grid_position: 'YLUPJR,OZXJXY'}
+          name: label_14_copy_copy_copy
+          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', italic: false, text: unlimited}
+          type: Label
+        layout_properties: {grid_position: 'ONMTIQ,LTZZMV'}
+        name: elevated_card_6_copy
+        properties:
+          role: elevated-card
+          spacing:
+            padding: [null, '0', null, '0']
+          wrap_on: never
+        type: ColumnPanel
+      - layout_properties: {grid_position: 'MTHCMM,EGPESV'}
+        name: label_17
+        properties:
+          bold: false
+          font_size: 18
+          foreground: theme:On Primary Container
+          spacing:
+            margin: [null, null, null, '6']
+            padding: [null, null, null, '6']
+          text: |-
+            Monats-
+            Preis
+        type: Label
+      - layout_properties: {grid_position: 'MTHCMM,KISFYQ'}
+        name: label_16
+        properties: {align: center, bold: true, font_size: 18, foreground: 'theme:Primary', text: '€ 0,00'}
+        type: Label
+      - layout_properties: {grid_position: 'MTHCMM,FTCARA CNENRL,ZBQATA'}
+        name: label_7
+        properties:
+          align: center
+          bold: true
+          font_size: 18
+          foreground: theme:On Primary Container
+          spacing:
+            margin: [null, null, '4', null]
+          text: € 2,99
+        type: Label
+      - layout_properties: {grid_position: 'MTHCMM,FTCARA DTAOQJ,LHKOIN'}
+        name: text_8_copy_copy
+        properties:
+          align: center
+          bold: false
+          font_size: 15
+          spacing:
+            margin: [null, null, null, '6']
+            padding: [null, null, null, '6']
+          text: |-
+            Jederzeit
+            kündbar
+          text_color: theme:On Primary Container
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      - layout_properties: {grid_position: 'MTHCMM,TGIWYY PWJIIE,QEVYFG'}
+        name: label_16_copy
+        properties: {align: center, bold: true, font_size: 18, foreground: 'theme:On Primary Container', text: '€ 4,99'}
+        type: Label
+      - layout_properties: {grid_position: 'MTHCMM,TGIWYY LSSJRG,NPLYJH'}
+        name: text_8_copy
+        properties:
+          align: center
+          bold: false
+          font_size: 15
+          spacing:
+            margin: [null, null, null, '6']
+            padding: [null, null, null, '6']
+          text: |-
+            Jederzeit
+            kündbar
+          text_color: theme:On Primary Container
+        type: form:dep_g9k4toow7i44kq:_Components.Text
+      layout_properties: {grid_position: 'BOCLCD,GJSZGE'}
+      name: outlined_card_4
+      properties:
+        role: null
+        spacing:
+          margin: [null, '6', null, '6']
+        wrap_on: never
+      type: ColumnPanel
+    - layout_properties: {grid_position: 'AFPNMD,VPIFIV'}
+      name: spacer_11_copy
+      properties: {height: 33.31964111328125}
+      type: Spacer
     - event_bindings: {click: testen_button_click}
-      layout_properties: {grid_position: 'EKMTCN,IZIQPM'}
+      layout_properties: {grid_position: 'BCDBPP,YKQIVS'}
       name: testen_button
       properties:
         align: center
@@ -529,118 +729,8 @@ components_by_slot:
         role: outlined-button
         spacing:
           padding: [null, '24', null, null]
-        text: 30 day free trial
+        text: Get free analytics
       type: Button
-    - components:
-      - layout_properties: {grid_position: 'ZEGUXJ,GFGREP'}
-        name: pricing_label
-        properties: {}
-        type: Label
-      - layout_properties: {grid_position: 'ZEGUXJ,HVJHZC'}
-        name: label_9
-        properties: {align: center, bold: false, font_size: 20, foreground: 'theme:On Primary Container', text: Abo}
-        type: Label
-      - layout_properties: {grid_position: 'ZEGUXJ,DVQCGG'}
-        name: label_10
-        properties: {align: center, bold: false, font_size: 20, foreground: 'theme:On Primary Container', text: Pro-Abo}
-        type: Label
-      - components:
-        - layout_properties: {grid_position: 'KNVGKM,TWRMQK'}
-          name: label_6
-          properties:
-            font_size: 20
-            foreground: theme:On Primary Container
-            spacing:
-              margin: [null, null, '6', null]
-            text: Verbindung via API (Smoobu)
-          type: Label
-        - layout_properties: {grid_position: 'KNVGKM,SPVMYZ'}
-          name: check_box_3
-          properties: {align: center, checked: true, enabled: false, text: '', visible: true}
-          type: CheckBox
-        - layout_properties: {grid_position: 'KNVGKM,HASDLS'}
-          name: check_box_9
-          properties: {align: center, checked: true, enabled: false, text: ''}
-          type: CheckBox
-        layout_properties: {grid_position: 'ZBVUFV,SOCCES'}
-        name: elevated_card_5
-        properties:
-          role: elevated-card
-          spacing:
-            padding: ['6', null, '6', null]
-          wrap_on: never
-        type: ColumnPanel
-      - components:
-        - layout_properties: {grid_position: 'YLUPJR,ENXFFK'}
-          name: label_13
-          properties: {font_size: 20, foreground: 'theme:On Primary Container', text: Anzahl Objekte}
-          type: Label
-        - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
-          name: label_14
-          properties: {align: center, font_size: 20, foreground: 'theme:On Primary Container', text: 1-3}
-          type: Label
-        - layout_properties: {grid_position: 'YLUPJR,KPUDGW'}
-          name: label_15
-          properties: {align: center, font_size: 20, foreground: 'theme:On Primary Container', text: 4-10}
-          type: Label
-        layout_properties: {grid_position: 'IQCUEL,QWNJEE'}
-        name: elevated_card_6
-        properties: {role: elevated-card, wrap_on: never}
-        type: ColumnPanel
-      - layout_properties: {grid_position: 'MTHCMM,EGPESV'}
-        name: label_17
-        properties:
-          bold: true
-          font_size: 20
-          foreground: theme:On Primary Container
-          spacing:
-            margin: [null, null, null, '6']
-            padding: [null, null, null, '6']
-          text: Monatlicher Preis
-        type: Label
-      - layout_properties: {grid_position: 'MTHCMM,KISFYQ'}
-        name: label_16
-        properties: {align: center, bold: true, font_size: 20, foreground: 'theme:On Primary Container', text: '€ 2,99'}
-        type: Label
-      - layout_properties: {grid_position: 'MTHCMM,FTCARA'}
-        name: label_7
-        properties:
-          align: center
-          bold: true
-          font_size: 20
-          foreground: theme:On Primary Container
-          spacing:
-            margin: [null, null, '4', null]
-          text: € 4,99
-        type: Label
-      layout_properties: {grid_position: 'DUSZJC,NHQFAR'}
-      name: outlined_card_4
-      properties:
-        role: null
-        spacing:
-          margin: [null, '6', null, '6']
-        wrap_on: never
-      type: ColumnPanel
-    - layout_properties: {grid_position: 'XHKKPH,XNZTXE'}
-      name: spacer_7
-      properties: {height: 40.78765869140625}
-      type: Spacer
-    - layout_properties: {grid_position: 'XHKKPH,FCEKFX'}
-      name: text_8_copy
-      properties:
-        align: center
-        bold: false
-        font_size: 18
-        spacing:
-          margin: [null, null, null, '6']
-          padding: [null, null, null, '6']
-        text: Jederzeit kündbar
-        text_color: theme:On Primary Container
-      type: form:dep_g9k4toow7i44kq:_Components.Text
-    - layout_properties: {grid_position: 'XHKKPH,UDBQYA'}
-      name: spacer_7_copy
-      properties: {height: 40.78765869140625}
-      type: Spacer
     - layout_properties: {grid_position: 'RAIZNG,ONBFGO'}
       name: spacer_8
       properties: {height: 32}
@@ -654,6 +744,10 @@ components_by_slot:
       name: column_panel_3_copy
       properties: {}
       type: ColumnPanel
+    - layout_properties: {grid_position: 'JQTKLF,DTMXRQ'}
+      name: spacer_7_copy_copy
+      properties: {height: 40.78765869140625}
+      type: Spacer
     layout_properties: {}
     name: column_panel_2_copy
     properties: {background: 'theme:Primary Overlay 2'}

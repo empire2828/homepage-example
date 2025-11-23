@@ -1,15 +1,11 @@
 from ._anvil_designer import home_deTemplate
 from anvil import *
-from routing import router
-import m3.components as m3
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
+#from routing import router
+#import m3.components as m3
 import anvil.server
 import anvil.users
-import anvil.js
+#import anvil.js
+from ... import globals
 
 class home_de(home_deTemplate):
   def __init__(self, **properties):
@@ -21,13 +17,17 @@ class home_de(home_deTemplate):
       anvil.server.call("create_supabase_key")
       anvil.server.call("send_registration_notification", user["email"])
       # Layout Template öffnen
+      globals.current_user = user
+      globals.request_count = 0
+      globals.user_has_subscription= False
       layout_form = open_form("layout_template")
       # Dashboard automatisch laden
+      layout_form.reset_links()
+      layout_form.dashboard_navigation_link.selected = True   
       multiframe_form = layout_form.open_multiframe_form()
       multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
       # Navigation Link als aktiv markieren
-      layout_form.reset_links()
-      layout_form.dashboard_navigation_link.selected = True
+
     pass
 
   def impressum_link_click(self, **event_args):

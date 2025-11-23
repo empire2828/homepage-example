@@ -1,15 +1,12 @@
 from ._anvil_designer import my_accountTemplate
 from anvil import *
-from routing import router
-import m3.components as m3
 import anvil.server
 import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
-from .ChangeName import ChangeName
-from .ChangeEmail import ChangeEmail
-from .DeleteAccountAlert import DeleteAccountAlert
+#from anvil.tables import app_tables
+#from .ChangeName import ChangeName
+#from .ChangeEmail import ChangeEmail
+#from .DeleteAccountAlert import DeleteAccountAlert
+from .. import globals
 
 class my_account(my_accountTemplate):
   def __init__(self, **properties):
@@ -19,37 +16,53 @@ class my_account(my_accountTemplate):
 
   def form_show(self, **event_args):
     self.my_account_heading.scroll_into_view(smooth=True)
-    user = anvil.users.get_user()
+    user = globals.current_user
+  
     if user is None:
       self.subscription_body.text = 'Not logged in'
-    else:
-      if user.get('subscription') is None:
-        self.subscription_body.text = 'Trial subscription'
+      return
+  
+    # Subscription / Admin
+    self.subscription_body.text = user.get('subscription') or 'Free subscription'
+    self.admin_navigation_link.visible = bool(user.get('admin'))
+  
+    # Request Count
+    if user.get('request_count') is not None:
+      self.request_count_body.text = user['request_count']
+  
+    # My-Account-Daten (Parameter + Channels) in EINEM Server-Call holen
+    data = anvil.server.call_s('get_my_account_data', user['email'])
+    user_parameters = data.get('params') or {}
+    channel_data    = data.get('channels') or []
+  
+    # Parameter-Felder
+    self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee') or '')
+    self.std_linen_fee_text_box.text    = str(user_parameters.get('std_linen_fee') or '')
+    self.use_own_std_fees_checkbox.checked = bool(user_parameters.get('use_own_std_fees'))
+  
+    # E-Mail
+    self.email_body.text = user.get('email', '')
+  
+    # Channels nur einmal als Items-Liste berechnen
+    items = [c['channel_name'] for c in channel_data]
+  
+    # Dropdowns/Textboxen über Schleife befüllen
+    for i in range(1, 11):
+      d = getattr(self, f'channel{i}_dropdown_menu')
+      t = getattr(self, f'channel{i}_text_box')
+      d.items = items
+  
+      if i-1 < len(channel_data):
+        channel = channel_data[i-1]
+        d.selected_value = channel.get('channel_name')
+        t.text = str(channel.get('channel_commission') or '')
       else:
-        self.subscription_body.text = user['subscription']
-        if user.get('admin') is True:
-          self.admin_navigation_link.visible= True
-      user_parameters = anvil.server.call('get_user_parameter')
-      if user_parameters:
-        self.std_cleaning_fee_text_box.text = str(user_parameters.get('std_cleaning_fee', ''))
-        self.std_linen_fee_text_box.text = str(user_parameters.get('std_linen_fee', ''))
-        self.use_own_std_fees_checkbox.checked = user_parameters.get('use_own_std_fees', False)
-        
-      user_email = user.get('email')
-      self.email_body.text = user_email
-      #print(user_email)
-      channel_data = anvil.server.call('get_user_channels_from_std_commission', user_email)
-      
-        # Populate dropdowns and textboxes for up to 5 channels
-      for i in range(1, 10):
-        d = getattr(self, f'channel{i}_dropdown_menu')
-        t = getattr(self, f'channel{i}_text_box')
-        name = channel_data[i-1]['channel_name'] if i-1 < len(channel_data) else ''
-        comm = channel_data[i-1]['channel_commission'] if i-1 < len(channel_data) else ''
-        d.items = [c['channel_name'] for c in channel_data]
-        d.selected_value = name or None
-        t.text = str(comm) if comm else ''
-  pass
+        d.selected_value = None
+        t.text = ''
+
+    self.value_loading_checkbox.checked = True
+    self.value_loading_checkbox.text = "Values below calculated."
+    self.value_loading_checkbox.italic = True
 
   def change_name_link_click(self, **event_args):
     new_name = alert(ChangeName(item=self.user["name"]), title="Change name", buttons=None, dismissible=True, large=True)
@@ -112,26 +125,32 @@ class my_account(my_accountTemplate):
     pass
 
   def save_button_click(self, **event_args):
-    std_cleaning_fee=self.std_cleaning_fee_text_box.text
-    std_linen_fee=self.std_linen_fee_text_box.text
-    use_own_std_fees=self.use_own_std_fees_checkbox.checked
-    anvil.server.call('save_user_parameter',std_cleaning_fee, std_linen_fee,use_own_std_fees)
-    channel_name= self.channel1_dropdown_menu.selected_value
-    channel_commission= self.channel1_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
-    channel_name= self.channel2_dropdown_menu.selected_value
-    channel_commission= self.channel2_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
-    channel_name= self.channel3_dropdown_menu.selected_value
-    channel_commission= self.channel3_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
-    channel_name= self.channel4_dropdown_menu.selected_value
-    channel_commission= self.channel4_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
-    channel_name= self.channel5_dropdown_menu.selected_value
-    channel_commission= self.channel5_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
-    pass
+    # 1. User-Parameter speichern (1 Server-Call)
+    std_cleaning_fee = self.std_cleaning_fee_text_box.text
+    std_linen_fee = self.std_linen_fee_text_box.text
+    use_own_std_fees = self.use_own_std_fees_checkbox.checked
+    anvil.server.call('save_user_parameter', std_cleaning_fee, std_linen_fee, use_own_std_fees)
+  
+    # 2. Alle Channel-Daten sammeln
+    channels_data = []
+    for i in range(1, 11):  # Channel 1-10
+      channel_dropdown = getattr(self, f'channel{i}_dropdown_menu')
+      channel_textbox = getattr(self, f'channel{i}_text_box')
+  
+      channel_name = channel_dropdown.selected_value
+      channel_commission = channel_textbox.text
+  
+      # Validierung: Nur wenn Name UND Commission vorhanden
+      if channel_name and channel_commission and channel_commission != "None":
+        channels_data.append({
+          'name': channel_name,
+          'commission': channel_commission
+        })
+  
+      # 3. Alle Channels in EINEM Server-Call speichern
+    if channels_data:
+      anvil.server.call_s('save_std_commissions_batch', channels_data)
+
 
   def reset_password_navigation_link_click(self, **event_args):
     open_form('my_account.reset_password')

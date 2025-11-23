@@ -4,13 +4,13 @@ components_by_slot:
     - components:
       - layout_properties: {slot: card-content-container-slot}
         name: image_2_copy
-        properties: {height: 67.00782775878906, horizontal_align: left, source: _/theme/Lodginia_orange_transparent_klein.png}
+        properties: {height: 67.00782775878906, horizontal_align: left, source: _/theme/app/Lodginia_orange_transparent-logo.jpeg}
         type: Image
       - layout_properties: {slot: card-content-container-slot}
         name: title_1_copy_2
         properties: {font_size: 28, role: title, text: Lodginia Knowledge Base}
         type: Label
-      layout_properties: {full_width_row: true, grid_position: 'EFWCBX,KMNQAL'}
+      layout_properties: {full_width_row: true, grid_position: 'EFWCBX,KMNQAL', row_background: ''}
       name: card_content_container_2
       properties: {}
       type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer

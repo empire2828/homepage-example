@@ -5,18 +5,46 @@ components_by_slot:
       name: my_account_heading
       properties: {bold: true, text: My account}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
-    - layout_properties: {grid_position: 'UYOBPO,JQAMUS BVRSTQ,HCYTND'}
-      name: email_body
-      properties: {bold: false, role: body}
-      type: Label
-    - layout_properties: {grid_position: 'UYOBPO,JQAMUS VUVTBA,RPXSDF'}
-      name: subscription_body
-      properties: {bold: false, role: body}
-      type: Label
-    - layout_properties: {grid_position: 'UYOBPO,QPBRTJ'}
+    - layout_properties: {grid_position: 'BZIFFI,YKCVFT'}
       name: admin_navigation_link
       properties: {background_color: 'theme:Secondary Container', icon: 'mi:admin_panel_settings', navigate_to: Admin, text: Admin, visible: false}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+    - layout_properties: {grid_position: 'BVRSTQ,EIVOMD'}
+      name: body_2_copy_2
+      properties: {role: body, text: 'eMail:'}
+      type: Label
+    - layout_properties: {grid_position: 'BVRSTQ,HCYTND'}
+      name: email_body
+      properties: {bold: false, role: body}
+      type: Label
+    - layout_properties: {grid_position: 'BVRSTQ,KKOUTJ'}
+      name: body_2_copy_copy
+      properties: {role: body, text: ' '}
+      type: Label
+    - layout_properties: {grid_position: 'VUVTBA,WNYKJD'}
+      name: body_2
+      properties: {role: body, text: 'Subscription:'}
+      type: Label
+    - layout_properties: {grid_position: 'VUVTBA,RPXSDF'}
+      name: subscription_body
+      properties: {bold: false, role: body}
+      type: Label
+    - layout_properties: {grid_position: 'VUVTBA,JQBCNQ'}
+      name: body_2_copy
+      properties: {role: body, text: ' '}
+      type: Label
+    - layout_properties: {grid_position: 'HCDCUU,TFRTHZ'}
+      name: body_1
+      properties: {role: body, text: 'Report calls:'}
+      type: Label
+    - layout_properties: {grid_position: 'HCDCUU,XCXOWR'}
+      name: request_count_body
+      properties: {role: body}
+      type: Label
+    - layout_properties: {grid_position: 'HCDCUU,HRFQBS'}
+      name: body_1_copy
+      properties: {role: body, text: (20 report calls per day  included in Free version)}
+      type: Label
     - layout_properties: {grid_position: 'HBUWKL,XGDGBV NGWKFX,OQUWXP'}
       name: spacer_1_copy_copy
       properties: {height: 21.272552490234375}
@@ -92,15 +120,16 @@ components_by_slot:
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'YNQEZX,DSGJZF'}
       name: text_1
-      properties:
-        bold: false
-        font_size: 18
-        text: "For ical connections Commissions and Fees are not correctly set into the right pockets by Smoobu. \n\nFor correct calculation of your base daily rate you can set here standard values for these connections to be taken if no fees or commission are found. \n\nNo need to do something for booking.com,  Airbnb or HomeToGo if you have connected them via API."
+      properties: {bold: true, font_size: 18, text: 'For iCal connections, Smoobu does not place commissions and fees correctly.  Set default values here to use when no fees or commissions are found.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'XSVWVN,SSXBFT'}
       name: spacer_7
       properties: {height: 13.9556884765625}
       type: Spacer
+    - layout_properties: {grid_position: 'GTZJFN,SUJQWY'}
+      name: value_loading_checkbox
+      properties: {bold: false, italic: true, text: Values below for you are calculating ....}
+      type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'BCHDQL,JTLNIG'}
       name: title_1
       properties: {role: title, text: Fees}
@@ -127,7 +156,14 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'MOAZGR,SQIPTN'}
       name: text_1_copy
-      properties: {font_size: 18, text: Here you can set commission percentages to be used when no commission is handed over to your channel mamager (eg. for ical connections). Enter numbers without % sign (eg 8 for 8 %).}
+      properties:
+        font_size: 18
+        text: |-
+          Set the commission percentage here if your channel manager doesn’t get any commission (like with iCal connections).
+
+          Enter numbers without the % sign, e.g., 8 for 8 percent.
+
+          No action needed for Booking, Airbnb or HomeToGo if connected via API (standard connection way).
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG DBBPSB,EWPHRY'}
       name: channel1_dropdown_menu

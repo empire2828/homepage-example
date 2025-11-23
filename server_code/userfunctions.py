@@ -63,24 +63,76 @@ def send_password_reset_email():
         return "Failed to send password reset email."
 
 @anvil.server.callable
-def get_user_has_subscription_for_email(email):
-  user = app_tables.users.get(email=email)
-  if not user:
+def get_user_has_subscription_for_email(current_user):
+  #current_user = anvil.users.get_user()
+  #user = app_tables.users.get(email=email)
+  if not current_user:
     return False
-  subscription_status = user.get('subscription')
+  
+  subscription_status = current_user.get('subscription')
   if subscription_status in ['Subscription', 'Pro-Subscription', 'Canceled']:
     return True
-  tester_status = user.get('tester')
+  else:
+    subscription_status = False
+  
+  tester_status = current_user.get('tester')  
   if tester_status:
-    print(user['email']," has tester status")
-    return True    
-  signup = user.get('signed_up')
-  if signup:
-    signed_up_aware = signup.replace(tzinfo=timezone.utc)
-    trial_end = signed_up_aware + timedelta(days=30)
-    now_utc = datetime.now(timezone.utc)
-    return now_utc <= trial_end
+    subscription_status = "tester"
+    return True  
+
+  print("get_user_has_subscription_for_email: ",current_user['email']," ",subscription_status)
   return False
+
+@anvil.server.callable
+def is_user_below_request_count():
+  current_user = users.get_user()
+  if current_user is None:
+    raise Exception("Kein Benutzer angemeldet")
+  if not current_user:
+    return False
+  request_count = current_user.get('request_count')
+  if request_count is None or request_count < 5:
+    return True
+  return False
+
+@anvil.server.callable
+def add_request_count(current_user):
+  request_count = current_user.get('request_count')
+  try:
+    request_count = int(request_count)
+  except (TypeError, ValueError):
+    request_count = 0
+  current_user['request_count'] = request_count + 1
+
+  request_count_cum = current_user.get('request_count_cum')
+  try:
+    request_count_cum = int(request_count_cum)
+  except (TypeError, ValueError):
+    request_count_cum = 0
+  current_user['request_count_cum'] = request_count_cum + 1
+
+  print(" add_request_count: ", current_user['email'], " ", request_count)
+  return int(current_user['request_count'])
+
+@anvil.server.callable
+def get_request_count():
+  current_user = users.get_user()
+  if current_user is None:
+    raise Exception("Kein Benutzer angemeldet")
+  request_count = current_user.get('request_count')
+  if request_count is None:
+    request_count = 0  
+  print(" get_request_count: ",current_user['email']," ",request_count)
+  return request_count
+
+@anvil.server.background_task
+def reset_request_count_for_all_users():
+  for user in app_tables.users.search():
+    user['request_count'] = 0
+
+@anvil.server.callable
+def trigger_reset_request_count():
+  anvil.server.launch_background_task('reset_request_count_for_all_users')
 
 @anvil.server.callable
 def save_user_api_key(api_key):
@@ -248,6 +300,16 @@ def save_std_commission(channel_name=None, channel_commission=None):
   get_bigquery_client().query(merge_sql).result()
   return True
 
+@anvil.server.callable
+def save_std_commissions_batch(channels_data):
+  """Speichert mehrere Channel-Kommissionen in einem Durchgang"""
+  for channel in channels_data:
+    # Deine existierende Logik für jeden Channel
+    save_std_commission(channel['name'], channel['commission'])
+
+    # Optional: Return für Erfolgsmeldung
+  return len(channels_data)
+
 # ---------------------------------------------------------------------------
 # 4. save_user_apartment_count  (background task)
 # ---------------------------------------------------------------------------
@@ -324,3 +386,10 @@ def delete_user_from_users_table(email):
     return True
   else:
     return False  # User not found
+
+@anvil.server.callable
+def get_my_account_data(email):
+  # Lies Parameter und Channel-Daten ggf. aus BigQuery und return sie gebündelt!
+  params = get_user_parameter()
+  channels = get_user_channels_from_std_commission(email)
+  return {"params": params, "channels": channels}
