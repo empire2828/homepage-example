@@ -8,7 +8,7 @@ components_by_slot:
       - name: rich_text_2
         properties: {content: '**LODGINIA** – these are effective Smoobu analyses for vacation rental hosts – fast, visual, and mobile. It offers easy setup, flexible time comparisons, and smart insights into cancellations, guests, and profitability, and can be used permanently in the free plan without any costs or commitments.', font_size: 18}
         type: RichText
-      - event_bindings: {click: learn_more_button_copy_click}
+      - event_bindings: {click: learn_more_button_click}
         name: learn_more_button
         properties: {align: center, role: filled-button, text: Learn more}
         type: Button
