@@ -146,5 +146,6 @@ class layout_template(layout_templateTemplate):
     try:
       globals.request_count = int(result)
     except (TypeError, ValueError):
-    self.upgrade_navigation_link.badge_count = int(result)
+      globals.request_count = 0
+    self.upgrade_navigation_link.badge_count = globals.request_count
     return
