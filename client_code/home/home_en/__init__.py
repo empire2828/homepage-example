@@ -10,6 +10,11 @@ from ... import globals
 class home_en(home_enTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
+    self.set_event_handler("show", self.form_show)
+
+  def form_show(self, **event_args):
+  # Wird aufgerufen, wenn die Form angezeigt wird
+    self.headline_1.scroll_into_view(smooth=True)
   
   def testen_button_click(self, **event_args):
     user = anvil.users.signup_with_form(allow_cancel=True)
