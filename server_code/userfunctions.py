@@ -300,6 +300,16 @@ def save_std_commission(channel_name=None, channel_commission=None):
   get_bigquery_client().query(merge_sql).result()
   return True
 
+@anvil.server.callable
+def save_std_commissions_batch(channels_data):
+  """Speichert mehrere Channel-Kommissionen in einem Durchgang"""
+  for channel in channels_data:
+    # Deine existierende Logik für jeden Channel
+    save_std_commission(channel['name'], channel['commission'])
+
+    # Optional: Return für Erfolgsmeldung
+  return len(channels_data)
+
 # ---------------------------------------------------------------------------
 # 4. save_user_apartment_count  (background task)
 # ---------------------------------------------------------------------------
