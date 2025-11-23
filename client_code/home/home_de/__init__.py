@@ -26,8 +26,7 @@ class home_de(home_deTemplate):
       layout_form.dashboard_navigation_link.selected = True   
       multiframe_form = layout_form.open_multiframe_form()
       multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
-      # Navigation Link als aktiv markieren
-
+      # in alle Blogs Code ändern wenn hier geändert!
     pass
 
   def impressum_link_click(self, **event_args):
