@@ -11,6 +11,10 @@ class home_de(home_deTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
 
+  def form_show(self, **event_args):
+    # Wird aufgerufen, wenn die Form angezeigt wird
+    self.headline_1.scroll_into_view(smooth=True)
+
   def testen_button_click(self, **event_args):
     user = anvil.users.signup_with_form(allow_cancel=True)
     if user:
