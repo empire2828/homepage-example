@@ -4,7 +4,6 @@ from anvil import users
 import anvil.server
 from anvil.js.window import jQuery
 from anvil.js import get_dom_node
-# import datetime
 import json
 from ... import globals
 
@@ -18,14 +17,15 @@ class multiframe(multiframeTemplate):
     self.init_components(**properties)
     self.supabase_key= ""  
     self.current_user = globals.current_user
+    request_count= int(globals.request_count)
  
-    if globals.request_count>20:
+    if request_count > 20:
       is_user_below_request_count = False
     else:
       is_user_below_request_count = True
 
-    print("multiframe globals.request_count ",globals.request_count)
-    print("multifram is_user_below_request_count ",is_user_below_request_count)
+    print("multiframe globals.request_count ", request_count)
+    print("multiframe is_user_below_request_count ",is_user_below_request_count)
     
     if self.current_user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True

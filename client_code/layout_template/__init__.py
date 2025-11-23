@@ -1,13 +1,7 @@
 from ._anvil_designer import layout_templateTemplate
 from anvil import *
-# import m3.components as m3
 import anvil.server
-# import anvil.google.auth
-#, anvil.google.drive
 import anvil.users
-# import anvil.tables as tables
-# import anvil.tables.query as q
-# from anvil.tables import app_tables
 from ..LookerStudio.multiframe import multiframe
 from .. import globals
 
@@ -18,7 +12,7 @@ class layout_template(layout_templateTemplate):
 
     if getattr(globals, "user_has_subscription", None) is False:
       self.upgrade_navigation_link.badge = True
-      self.upgrade_navigation_link.badge_count = getattr(globals, "request_count", 0)
+      self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))
 
   def open_multiframe_form(self):
     #"""Öffnet die multiframe Form als Hauptinhalt"""
@@ -138,8 +132,8 @@ class layout_template(layout_templateTemplate):
   def knowledge_hub_link_click(self, **event_args):
     self.reset_links()
     self.knowledge_hub_link.selected = True
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(10)  # Knowledge Hub
+    open_form('knowledge_hub')
+    pass
 
   def upgrade_navigation_link_click(self, **event_args):
     self.reset_links()
@@ -148,7 +142,9 @@ class layout_template(layout_templateTemplate):
     pass
 
   def check_if_upgrade_needed(self, **event_args):
-    self.request_count = anvil.server.call_s('launch_add_request_count',globals.current_user)
-    globals.request_count += self.request_count
-    self.upgrade_navigation_link.badge_count = self.request_count
+    result = anvil.server.call_s('launch_add_request_count',globals.current_user)
+    try:
+      globals.request_count = int(result)
+    except (TypeError, ValueError):
+    self.upgrade_navigation_link.badge_count = int(result)
     return
