@@ -31,6 +31,7 @@ class layout_template(layout_templateTemplate):
     return self.current_multiframe
 
   def reset_links(self, **event_args):
+    self.layout.hide_nav_drawer()
     self.dashboard_navigation_link.selected = False
     self.monthly_outlook_navigation_link.selected = False
     self.profitability_navigation_link.selected = False
@@ -45,7 +46,6 @@ class layout_template(layout_templateTemplate):
     self.knowledge_hub_link.selected = False
     self.my_account_navigation_link.selected = False
     self.upgrade_navigation_link.selected= False
-    #self.layout.hide_nav_drawer()
 
   def dashboard_navigation_link_click(self, **event_args):
     self.dashboard_navigation_link.selected = True
