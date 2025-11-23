@@ -47,3 +47,11 @@ class stly_de(Route):
 class stly_en(Route):
   path = "/why_comparing_booking_status_in_smoobu_is_dangerous"
   form = "blog.stly_en"
+
+class vrbo_de(Route):
+  path = "/preise-smoobu-fewo-direkt-synchronisieren"
+  form = "blog.vrbo_de"
+
+class vrbo_en(Route):
+  path = "/synchronize-smoobu-vrbo-prices"
+  form = "blog.vrbo_en"
