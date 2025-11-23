@@ -5,7 +5,7 @@ components_by_slot:
       name: rich_text_1
       properties:
         content: |
-          ### Wie du Fewo‑Direkt mit Smoobu über PriceLabs auch die Preise synchronisieren kannst
+          ### Wie Du Preise bei Fewo‑Direkt mit Smoobu via PriceLabs synchronisieren kannst
 
           &nbsp;
           Viele Smoobu- Vermieter kennen das Problem: Während Portale wie Airbnb oder Booking.com Preisänderungen direkt über die Smoobu‑Schnittstelle übernehmen, bietet Fewo‑Direkt (HomeAway/VRBO) bisher keine direkte Preissynchronisierung mit Smoobu. Wer seine Preise jedoch bereits mit PriceLabs steuert, kann dieses Hindernis elegant umgehen.
