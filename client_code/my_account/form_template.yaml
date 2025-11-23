@@ -43,7 +43,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'HCDCUU,HRFQBS'}
       name: body_1_copy
-      properties: {role: body, text: (20 calls included in Free version)}
+      properties: {role: body, text: (20 report calls per day  included in Free version)}
       type: Label
     - layout_properties: {grid_position: 'HBUWKL,XGDGBV NGWKFX,OQUWXP'}
       name: spacer_1_copy_copy
@@ -120,7 +120,7 @@ components_by_slot:
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'YNQEZX,DSGJZF'}
       name: text_1
-      properties: {bold: false, font_size: 18, text: 'For iCal connections, Smoobu does not place commissions and fees correctly.  Set default values here to use when no fees or commissions are found.  No action is needed for Booking.com, Airbnb, or HomeToGo if connected via API.'}
+      properties: {bold: true, font_size: 18, text: 'For iCal connections, Smoobu does not place commissions and fees correctly.  Set default values here to use when no fees or commissions are found.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'XSVWVN,SSXBFT'}
       name: spacer_7
@@ -158,6 +158,8 @@ components_by_slot:
           Set the commission percentage here if your channel manager doesn’t get any commission (like with iCal connections).
 
           Enter numbers without the % sign, e.g., 8 for 8 percent.
+
+          No action needed for Booking, Airbnb or HomeToGo if connected via API (standard connection way).
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - layout_properties: {grid_position: 'KBUMXL,CZHAOG DBBPSB,EWPHRY'}
       name: channel1_dropdown_menu

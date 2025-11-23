@@ -51,7 +51,7 @@ class layout_template(layout_templateTemplate):
     self.knowledge_hub_link.selected = False
     self.my_account_navigation_link.selected = False
     self.upgrade_navigation_link.selected= False
-    self.layout.hide_nav_drawer()
+    #self.layout.hide_nav_drawer()
 
   def dashboard_navigation_link_click(self, **event_args):
     self.dashboard_navigation_link.selected = True
@@ -148,7 +148,7 @@ class layout_template(layout_templateTemplate):
     pass
 
   def check_if_upgrade_needed(self, **event_args):
-    anvil.server.call_s('launch_add_request_count',globals.current_user)
-    globals.request_count += 1
-    self.upgrade_navigation_link.badge_count = globals.request_count
+    self.request_count = anvil.server.call_s('launch_add_request_count',globals.current_user)
+    globals.request_count += self.request_count
+    self.upgrade_navigation_link.badge_count = self.request_count
     return

@@ -2,7 +2,7 @@ from ._anvil_designer import my_accountTemplate
 from anvil import *
 import anvil.server
 import anvil.users
-from anvil.tables import app_tables
+#from anvil.tables import app_tables
 #from .ChangeName import ChangeName
 #from .ChangeEmail import ChangeEmail
 #from .DeleteAccountAlert import DeleteAccountAlert
@@ -31,7 +31,7 @@ class my_account(my_accountTemplate):
       self.request_count_body.text = user['request_count']
   
     # My-Account-Daten (Parameter + Channels) in EINEM Server-Call holen
-    data = anvil.server.call('get_my_account_data', user['email'])
+    data = anvil.server.call_s('get_my_account_data', user['email'])
     user_parameters = data.get('params') or {}
     channel_data    = data.get('channels') or []
   
