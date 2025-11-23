@@ -3,9 +3,9 @@ from anvil import *
 import anvil.server
 import anvil.users
 from anvil.tables import app_tables
-from .ChangeName import ChangeName
-from .ChangeEmail import ChangeEmail
-from .DeleteAccountAlert import DeleteAccountAlert
+#from .ChangeName import ChangeName
+#from .ChangeEmail import ChangeEmail
+#from .DeleteAccountAlert import DeleteAccountAlert
 from .. import globals
 
 class my_account(my_accountTemplate):
@@ -137,19 +137,44 @@ class my_account(my_accountTemplate):
     anvil.server.call('save_user_parameter',std_cleaning_fee, std_linen_fee,use_own_std_fees)
     channel_name= self.channel1_dropdown_menu.selected_value
     channel_commission= self.channel1_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
     channel_name= self.channel2_dropdown_menu.selected_value
     channel_commission= self.channel2_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
     channel_name= self.channel3_dropdown_menu.selected_value
     channel_commission= self.channel3_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
     channel_name= self.channel4_dropdown_menu.selected_value
     channel_commission= self.channel4_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
     channel_name= self.channel5_dropdown_menu.selected_value
     channel_commission= self.channel5_text_box.text
-    anvil.server.call('save_std_commission', channel_name, channel_commission)
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
+    channel_name= self.channel6_dropdown_menu.selected_value
+    channel_commission= self.channel6_text_box.text
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
+    channel_name= self.channel7_dropdown_menu.selected_value
+    channel_commission= self.channel7_text_box.text
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
+    channel_name= self.channel8_dropdown_menu.selected_value
+    channel_commission= self.channel8_text_box.text
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
+    channel_name= self.channel9_dropdown_menu.selected_value
+    channel_commission= self.channel9_text_box.text
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
+    channel_name= self.channel10_dropdown_menu.selected_value
+    channel_commission= self.channel10_text_box.text
+    if not channel_commission=="" and not channel_commission=="None" and not channel_name=="":
+      anvil.server.call('save_std_commission', channel_name, channel_commission)
     pass
 
   def reset_password_navigation_link_click(self, **event_args):
