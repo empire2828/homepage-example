@@ -21,6 +21,9 @@ class home_de(home_deTemplate):
       anvil.server.call("create_supabase_key")
       anvil.server.call("send_registration_notification", user["email"])
       # Layout Template öffnen
+      globals.current_user = self.user
+      globals.request_count = 0
+      globals.user_has_subscription= False
       layout_form = open_form("layout_template")
       # Dashboard automatisch laden
       multiframe_form = layout_form.open_multiframe_form()

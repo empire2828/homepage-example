@@ -9,9 +9,9 @@ from ... import globals
 
 class multiframe(multiframeTemplate):
 
-  Locker_Version = "https://lookerstudio.google.com/embed/reporting/3a999ac2-c008-44c2-8cbb-3f1847c37211/page/"
+  Locker_Version = "https://lookerstudio.google.com/embed/reporting/1eaf8e1d-9780-4e7c-9d4f-f0f392694afc/page/"
   # share unlisted anyone can listen, embed ohne menu
-  # Lodginia 1.0.08
+  # Lodginia 1.1.00
   
   def __init__(self, **properties):
     self.init_components(**properties)
