@@ -1,5 +1,6 @@
 from ._anvil_designer import multiframeTemplate
 from anvil import *
+#from anvil import users
 import anvil.server
 from anvil.js.window import jQuery
 from anvil.js import get_dom_node
@@ -7,83 +8,104 @@ import json
 from ... import globals
 
 class multiframe(multiframeTemplate):
+
   Locker_Version = "https://lookerstudio.google.com/embed/reporting/1eaf8e1d-9780-4e7c-9d4f-f0f392694afc/page/"
 
   def __init__(self, **properties):
     self.init_components(**properties)
-
-    # Cache User-Daten
+    self.flow_panel_1.scroll_into_view(smooth=True)
+    self.supabase_key= ""  
     self.current_user = globals.current_user
-    self.supabase_key = self.current_user.get('supabase_key', '')
-    request_count = int(globals.request_count)
+    request_count= int(globals.request_count)
 
-    is_user_below_request_count = request_count <= 20
-    has_subscription = globals.user_has_subscription
-    has_api_key = self.current_user.get('smoobu_api_key') is not None
+    if request_count > 20:
+      is_user_below_request_count = False
+    else:
+      is_user_below_request_count = True
 
-    # Sichtbarkeit
-    self.pms_need_to_connect_text.visible = not has_api_key
-    self.channel_manager_connect_button.visible = not has_api_key
+    print("multiframe globals.request_count ", request_count)
+    print("multiframe is_user_below_request_count ",is_user_below_request_count)
 
-    needs_upgrade = not has_subscription and not is_user_below_request_count
-    self.dashboard_upgrade_needed_text_1.visible = needs_upgrade
-    self.dashboard_upgrade_needed_text_2.visible = needs_upgrade
-    self.dashboard_upgrade_button.visible = needs_upgrade
+    if self.current_user['smoobu_api_key'] is None:
+      self.pms_need_to_connect_text.visible = True
+      self.channel_manager_connect_button.visible = True
+    else:
+      if globals.user_has_subscription is False and is_user_below_request_count is False:
+        self.dashboard_upgrade_needed_text_1.visible = True
+        self.dashboard_upgrade_needed_text_2.visible = True
+        self.dashboard_upgrade_button.visible = True
+    if (is_user_below_request_count or globals.user_has_subscription) and self.current_user['smoobu_api_key'] is not None:      
+      if self.current_user and 'supabase_key' in self.current_user:
+        self.supabase_key = self.current_user['supabase_key']
+        self.content_panel.visible = True
+      else:
+        self.supabase_key = ""
+        print(self.current_user['email']," Warnung: Kein supabase_key verfügbar")      
+    else: 
+      pass      
 
-    self.content_panel.visible = (is_user_below_request_count or has_subscription) and has_api_key
-
-    # IFrame URLs
-    page_ids = [
-      "qmCOF", "p_frni7wm2vd", "p_8l5lnc13td", "p_9euf3853td", 
-      "p_knw9h153td", "p_1idplf63td", "p_8hyzd253td", "p_tilmy6zhtd",
-      "p_4dt5tycuud", "p_cc0slxgtud", "p_396qlut0wd",
+    self.iframe_urls = [
+      f"{self.Locker_Version}qmCOF",            # Dashboard
+      f"{self.Locker_Version}p_frni7wm2vd",     # Outlook
+      f"{self.Locker_Version}p_8l5lnc13td",     # Profitability
+      f"{self.Locker_Version}p_9euf3853td",     # Bookings
+      f"{self.Locker_Version}p_knw9h153td",     # Cancellations
+      f"{self.Locker_Version}p_1idplf63td",     # Occupancy
+      f"{self.Locker_Version}p_8hyzd253td",     # Lead Time
+      f"{self.Locker_Version}p_tilmy6zhtd",     # Guest Insights
+      f"{self.Locker_Version}p_4dt5tycuud",     # Long Trends     
+      f"{self.Locker_Version}p_cc0slxgtud",     # Detailed Bookings
+      f"{self.Locker_Version}p_396qlut0wd",     # Knowledge hub
     ]
 
-    self.iframe_urls = [f"{self.Locker_Version}{pid}" for pid in page_ids]
-
     self.panels = [
-      self.looker_flow_panel_1, self.looker_flow_panel_2,
-      self.looker_flow_panel_3, self.looker_flow_panel_4,
-      self.looker_flow_panel_5, self.looker_flow_panel_6,
-      self.looker_flow_panel_7, self.looker_flow_panel_8,
-      self.looker_flow_panel_9, self.looker_flow_panel_10,
+      self.looker_flow_panel_1,
+      self.looker_flow_panel_2,
+      self.looker_flow_panel_3,
+      self.looker_flow_panel_4,
+      self.looker_flow_panel_5,
+      self.looker_flow_panel_6,
+      self.looker_flow_panel_7,
+      self.looker_flow_panel_8,
+      self.looker_flow_panel_9,
+      self.looker_flow_panel_10,
       self.looker_flow_panel_11,
     ]
 
-    # Cache für jQuery DOM nodes - WICHTIG für Performance!
-    self._panel_nodes = [get_dom_node(panel) for panel in self.panels]
-
+    # Status-Tracking welche IFrames bereits geladen wurden
     self.geladene_iframes = [False] * len(self.iframe_urls)
+
+    # Aktuell sichtbarer Index
     self.aktueller_index = None
 
-    # Panels initial konfigurieren
-    for panel in self.panels:
+    # Initial: alle Panels unsichtbar
+    for i, panel in enumerate(self.panels):
       panel.visible = False
       panel.height = 2300
 
-  def _build_iframe_url(self, base_url):
-    """Baut die finale IFrame URL mit Parametern"""
-    if not self.supabase_key:
-      return base_url
-
-    params = {"supabase_key_url": self.supabase_key}
-    encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
-    return base_url + encoded_params
-
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
-    if not (0 <= index < len(self.iframe_urls)):
+    if index < 0 or index >= len(self.iframe_urls):        
+      print(self.current_user['email'],f"Ungültiger Index: {index}")
       return
 
-    url = self._build_iframe_url(self.iframe_urls[index])
+    url = self.iframe_urls[index]
+    panel = self.panels[index]
 
-    # Nutze gecachten DOM node
-    panel_node = self._panel_nodes[index]
-    jQuery(panel_node).empty()
+    # Parameter für Supabase Key hinzufügen
+    if self.supabase_key:
+      params = {"supabase_key_url": self.supabase_key}
+      encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
+      iframe_url = url + encoded_params
+    else:
+      iframe_url = url
 
-    # IFrame-Attribute
-    iframe_attrs = {
-      "src": url,
+    # Vorheriges IFrame entfernen falls vorhanden
+    jQuery(get_dom_node(panel)).empty()
+
+    # IFrame erstellen mit expliziten Attributen
+    iframe = jQuery("<iframe>").attr({
+      "src": iframe_url,
       "width": "100%",
       "height": "2300px",
       "frameborder": "0",
@@ -91,35 +113,65 @@ class multiframe(multiframeTemplate):
       "allow": "fullscreen; storage-access",
       "loading": "lazy",
       "referrerpolicy": "origin-when-cross-origin",
-      "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
-    }
+      "sandbox":"allow-scripts allow-same-origin allow-storage-access-by-user-activation"
+    })
 
-    jQuery("<iframe>").attr(iframe_attrs).appendTo(panel_node)
+    # IFrame zum Panel hinzufügen
+    iframe.appendTo(get_dom_node(panel))
+
+    # Als geladen markieren
     self.geladene_iframes[index] = True
 
   def lade_und_zeige_iframe(self, index):
-    """Optimierte Version - nur Sichtbarkeit ändern, kein Re-Rendering"""
-    if not (0 <= index < len(self.iframe_urls)):
+    """Lädt IFrame falls noch nicht geladen und zeigt es an"""
+    if index < 0 or index >= len(self.iframe_urls):
+      print(self.current_user['email']," ",f"Ungültiger Index: {index}")
       return
 
-    # Nur wenn tatsächlich gewechselt wird
+    # OPTIMIERUNG: Wenn bereits angezeigt, nichts tun
     if self.aktueller_index == index:
-      return  # Bereits angezeigt, nichts tun!
+      return
 
-    # Vorheriges Panel verstecken (falls vorhanden)
+    # OPTIMIERUNG: Nur vorheriges Panel verstecken statt alle
     if self.aktueller_index is not None:
       self.panels[self.aktueller_index].visible = False
 
     # IFrame laden falls nötig
     if not self.geladene_iframes[index]:
+      print(f"IFrame {index} wird erstmalig geladen...")
       self.erstelle_iframe(index)
+    else:
+      print(self.current_user['email']," ",f"IFrame {index} bereits geladen")
 
-    # Neues Panel anzeigen
+    # Gewünschtes Panel anzeigen
     self.panels[index].visible = True
     self.aktueller_index = index
 
+  def verstecke_alle_iframes(self):
+    """Versteckt alle IFrames ohne sie zu entladen"""
+    print("Verstecke alle IFrames...")
+    for i, panel in enumerate(self.panels):
+      panel.visible = False
+      print(f"   Panel {i} versteckt")
+    self.aktueller_index = None
+
+  def ist_geladen(self, index):
+    """Prüft ob IFrame bereits geladen ist"""
+    if index < 0 or index >= len(self.geladene_iframes):
+      return False
+    return self.geladene_iframes[index]
+
+  def lade_alle_iframes(self):
+    """Lädt alle IFrames im Voraus (falls gewünscht für bessere Performance)"""
+    for i in range(len(self.iframe_urls)):
+      if not self.geladene_iframes[i]:
+        self.erstelle_iframe(i)
+    print("Alle IFrames geladen")
+
   def channel_manager_connect_button_click(self, **event_args):
     open_form('channel_manager_connect')
+    pass
 
   def dashboard_upgrade_button_click(self, **event_args):
     open_form('upgrade')
+    pass
