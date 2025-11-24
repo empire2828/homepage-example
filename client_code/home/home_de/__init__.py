@@ -1,10 +1,7 @@
 from ._anvil_designer import home_deTemplate
 from anvil import *
-#from routing import router
-#import m3.components as m3
 import anvil.server
 import anvil.users
-#import anvil.js
 from ... import globals
 
 class home_de(home_deTemplate):

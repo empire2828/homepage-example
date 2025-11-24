@@ -1,7 +1,6 @@
 from ._anvil_designer import home_templateTemplate
 from anvil import *
 from routing import router
-#import m3.components as m3
 import anvil.server
 import anvil.google.auth
 import anvil.users
