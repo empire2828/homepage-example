@@ -1,56 +1,86 @@
 components_by_slot:
   slot_1:
   - components:
-    - event_bindings: {}
-      layout_properties: {grid_position: 'JGTZEZ,PHCDIB'}
-      name: stly_image
-      properties: {height: 474.77777099609375, horizontal_align: left, source: _/theme/blog/stly_intro_pic.jpg}
-      type: Image
-    - event_bindings: {click: stly_link_click}
-      layout_properties: {grid_position: 'BUNLRM,HKDDFO'}
-      name: stly_link
-      properties:
-        bold: true
-        font_size: 24
-        spacing:
-          margin: [null, null, '', null]
-          padding: [null, null, null, null]
-        text: Wieso Vergleiche der Buchungslage in Smoobu gefährlich sein können
-      type: form:dep_g9k4toow7i44kq:_Components.Link
+    - components:
+      - components:
+        - event_bindings: {}
+          layout_properties: {slot: card-content-container-slot}
+          name: stly_image
+          properties: {height: 474.77777099609375, horizontal_align: left, source: _/theme/blog/stly_intro_pic.jpg}
+          type: Image
+        - event_bindings: {click: stly_link_click}
+          layout_properties: {slot: card-content-container-slot}
+          name: stly_link
+          properties:
+            bold: true
+            font_size: 24
+            spacing:
+              margin: [null, null, '', null]
+              padding: [null, null, null, null]
+            text: Wieso Vergleiche der Buchungslage in Smoobu gefährlich sein können
+          type: form:dep_g9k4toow7i44kq:_Components.Link
+        layout_properties: {slot: card-content-slot}
+        name: card_content_container_1
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+      layout_properties: {grid_position: 'JGTZEZ,XCFXGY'}
+      name: card_1
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.Card
     - layout_properties: {grid_position: 'VRHMMF,TGPDWP'}
       name: spacer_1
       properties: {}
       type: Spacer
-    - layout_properties: {grid_position: 'JHAQQQ,CNDBFR'}
-      name: cancellations_image
-      properties: {alt_text: Wie man Stornierungen vermeiden kann, horizontal_align: left, source: _/theme/blog/cancellations_booking_cancelled_sad_person.jpg}
-      type: Image
-    - components: []
-      event_bindings: {click: cancellations_link_click}
-      layout_properties: {grid_position: 'LXJBGC,VGANRM'}
-      name: cancellations_link
-      properties: {bold: true, font_size: 24, text: Wie man Stornierungen analytisch vermeiden kann}
-      type: form:dep_g9k4toow7i44kq:_Components.Link
+    - components:
+      - components:
+        - layout_properties: {slot: card-content-container-slot}
+          name: cancellations_image
+          properties: {alt_text: Wie man Stornierungen vermeiden kann, horizontal_align: left, source: _/theme/blog/cancellations_booking_cancelled_sad_person.jpg}
+          type: Image
+        - components: []
+          event_bindings: {click: cancellations_link_click}
+          layout_properties: {slot: card-content-container-slot}
+          name: cancellations_link
+          properties: {bold: true, font_size: 24, text: Wie man Stornierungen analytisch vermeiden kann}
+          type: form:dep_g9k4toow7i44kq:_Components.Link
+        layout_properties: {slot: card-content-slot}
+        name: card_content_container_2
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+      layout_properties: {grid_position: 'IRFGKF,VYSNGJ'}
+      name: card_2
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.Card
     - layout_properties: {grid_position: 'CMJEPR,EJGIJU'}
       name: spacer_2
       properties: {}
       type: Spacer
-    - event_bindings: {}
-      layout_properties: {grid_position: 'DZFEJF,UJPRYC'}
-      name: vrbo
-      properties: {height: 185.333251953125, horizontal_align: left, source: _/theme/blog/vrbo_intro.jpg}
-      type: Image
-    - event_bindings: {click: vrbo_link_click}
-      layout_properties: {grid_position: 'KEBAFC,UCRHQC'}
-      name: vrbo_link
-      properties:
-        bold: true
-        font_size: 24
-        spacing:
-          margin: [null, null, '', null]
-          padding: [null, null, null, null]
-        text: Fewo-Direkt an Smoobu mit Preissynchronisation anschließen
-      type: form:dep_g9k4toow7i44kq:_Components.Link
+    - components:
+      - components:
+        - event_bindings: {}
+          layout_properties: {slot: card-content-container-slot}
+          name: vrbo
+          properties: {height: 185.333251953125, horizontal_align: left, source: _/theme/blog/vrbo_intro.jpg}
+          type: Image
+        layout_properties: {slot: card-content-slot}
+        name: card_content_container_3
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+      - event_bindings: {click: vrbo_link_click}
+        layout_properties: {slot: card-content-slot}
+        name: vrbo_link
+        properties:
+          bold: true
+          font_size: 24
+          spacing:
+            margin: [null, null, '', null]
+            padding: [null, null, null, null]
+          text: Fewo-Direkt an Smoobu mit Preissynchronisation anschließen
+        type: form:dep_g9k4toow7i44kq:_Components.Link
+      layout_properties: {grid_position: 'CWBKWL,HPPINT'}
+      name: card_3
+      properties: {}
+      type: form:dep_g9k4toow7i44kq:_Components.Card
     layout_properties: {}
     name: column_panel_1
     properties: {}
