@@ -1,182 +1,147 @@
-from ._anvil_designer import multiframeTemplate
+from ._anvil_designer import layout_templateTemplate
 from anvil import *
-#from anvil import users
 import anvil.server
-from anvil.js.window import jQuery
-from anvil.js import get_dom_node
-import json
-from ... import globals
+#import anvil.users
+from ..LookerStudio.multiframe import multiframe
+from .. import globals
 
-class multiframe(multiframeTemplate):
-
-  Locker_Version = "https://lookerstudio.google.com/embed/reporting/1eaf8e1d-9780-4e7c-9d4f-f0f392694afc/page/"
-  # share unlisted anyone can listen, embed ohne menu
-  # Lodginia 1.1.00
-  
+class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
-    self.init_components(**properties)
-    self.flow_panel_1.scroll_into_view(smooth=True)
-    self.supabase_key= ""  
-    self.current_user = globals.current_user
-    request_count= int(globals.request_count)
- 
-    if request_count > 20:
-      is_user_below_request_count = False
-    else:
-      is_user_below_request_count = True
+    self.init_components(**properties)    
+    self.current_multiframe = None
+    self.multiframe_is_open = False  # NEU: Track ob multiframe geöffnet ist
 
-    print("multiframe globals.request_count ", request_count)
-    print("multiframe is_user_below_request_count ",is_user_below_request_count)
-    
-    if self.current_user['smoobu_api_key'] is None:
-      self.pms_need_to_connect_text.visible = True
-      self.channel_manager_connect_button.visible = True
-    else:
-      if globals.user_has_subscription is False and is_user_below_request_count is False:
-          self.dashboard_upgrade_needed_text_1.visible = True
-          self.dashboard_upgrade_needed_text_2.visible = True
-          self.dashboard_upgrade_button.visible = True
-    if (is_user_below_request_count or globals.user_has_subscription) and self.current_user['smoobu_api_key'] is not None:      
-      if self.current_user and 'supabase_key' in self.current_user:
-        self.supabase_key = self.current_user['supabase_key']
-        self.content_panel.visible = True
-      else:
-        self.supabase_key = ""
-        print(self.current_user['email']," Warnung: Kein supabase_key verfügbar")      
-    else: 
-      pass      
+    if getattr(globals, "user_has_subscription", None) is False:
+      self.upgrade_navigation_link.badge = True
+      self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))
 
-    self.iframe_urls = [
-      f"{self.Locker_Version}qmCOF",            # Dashboard
-      f"{self.Locker_Version}p_frni7wm2vd",     # Outlook
-      f"{self.Locker_Version}p_8l5lnc13td",     # Profitability
-      f"{self.Locker_Version}p_9euf3853td",     # Bookings
-      f"{self.Locker_Version}p_knw9h153td",     # Cancellations
-      f"{self.Locker_Version}p_1idplf63td",     # Occupancy
-      f"{self.Locker_Version}p_8hyzd253td",     # Lead Time
-      f"{self.Locker_Version}p_tilmy6zhtd",     # Guest Insights
-      f"{self.Locker_Version}p_4dt5tycuud",     # Long Trends     
-      f"{self.Locker_Version}p_cc0slxgtud",     # Detailed Bookings
-      f"{self.Locker_Version}p_396qlut0wd",     # Knowledge hub
-    ]
+  def open_multiframe_form(self):
+    # KORRIGIERT: Erstelle multiframe nur einmal
+    if not self.current_multiframe:
+      self.current_multiframe = multiframe()
 
-    self.panels = [
-      self.looker_flow_panel_1,
-      self.looker_flow_panel_2,
-      self.looker_flow_panel_3,
-      self.looker_flow_panel_4,
-      self.looker_flow_panel_5,
-      self.looker_flow_panel_6,
-      self.looker_flow_panel_7,
-      self.looker_flow_panel_8,
-      self.looker_flow_panel_9,
-      self.looker_flow_panel_10,
-      self.looker_flow_panel_11,
-    ]
+    # Öffne Form nur wenn noch nicht offen
+    if not self.multiframe_is_open:
+      open_form(self.current_multiframe)
+      self.multiframe_is_open = True
 
-    # Status-Tracking welche IFrames bereits geladen wurden
-    self.geladene_iframes = [False] * len(self.iframe_urls)
+    return self.current_multiframe
 
-    # Aktuell sichtbarer Index
-    self.aktueller_index = None
+  def reset_links(self, **event_args):
+    self.layout.hide_nav_drawer()
+    self.dashboard_navigation_link.selected = False
+    self.monthly_outlook_navigation_link.selected = False
+    self.profitability_navigation_link.selected = False
+    self.bookings_navigation_link.selected = False
+    self.cancellations_navigation_link.selected = False
+    self.occupancy_navigation_link.selected = False
+    self.lead_time_navigation_link.selected = False
+    self.guest_insights_navigation_link.selected = False
+    self.detailed_bookings_navigation_link.selected = False
+    self.long_trends_navigation_link.selected = False
+    self.connect_navigation_link.selected = False
+    self.knowledge_hub_link.selected = False
+    self.my_account_navigation_link.selected = False
+    self.upgrade_navigation_link.selected= False
 
-    # Initial: alle Panels unsichtbar
-    for i, panel in enumerate(self.panels):
-      panel.visible = False
-      panel.height = 2300  # Explizite Höhe
+  def dashboard_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.dashboard_navigation_link.selected = True
+    self.check_if_upgrade_needed() 
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(0)
 
-  def erstelle_iframe(self, index):
-    """Erstellt ein IFrame für den gegebenen Index"""
-    #user = users.get_user()
-    if index < 0 or index >= len(self.iframe_urls):        
-      print(self.current_user['email'],f"Ungültiger Index: {index}")
-      return
+  def monthly_outlook_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.monthly_outlook_navigation_link.selected = True
+    self.check_if_upgrade_needed() 
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(1)
 
-    url = self.iframe_urls[index]
-    panel = self.panels[index]
+  def profitability_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.profitability_navigation_link.selected = True
+    self.check_if_upgrade_needed() 
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(2)
 
-    # Parameter für Supabase Key hinzufügen
-    if self.supabase_key:
-      params = {"supabase_key_url": self.supabase_key}
-      encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
-      iframe_url = url + encoded_params
-      #print(self.current_user['email']," ",iframe_url)
-    else:
-      iframe_url = url
+  def bookings_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.bookings_navigation_link.selected = True
+    self.check_if_upgrade_needed() 
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(3)
 
-     # Vorheriges IFrame entfernen falls vorhanden
-    jQuery(get_dom_node(panel)).empty()
+  def cancellations_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.cancellations_navigation_link.selected = True
+    self.check_if_upgrade_needed()
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(4)
 
-    # IFrame erstellen mit expliziten Attributen
-    iframe = jQuery("<iframe>").attr({
-      "src": iframe_url,
-      "width": "100%",
-      "height": "2300px",
-      "frameborder": "0",
-      "style": "border: none; background: white;",
-      "allow": "fullscreen; storage-access",
-      "loading": "lazy",
-      "referrerpolicy": "origin-when-cross-origin",
-      "sandbox":"allow-scripts allow-same-origin allow-storage-access-by-user-activation"
-    })
+  def occupancy_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.occupancy_navigation_link.selected = True
+    self.check_if_upgrade_needed()
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(5)
 
-    # IFrame zum Panel hinzufügen
-    iframe.appendTo(get_dom_node(panel))
+  def lead_time_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.lead_time_navigation_link.selected = True
+    self.check_if_upgrade_needed() 
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(6)
 
-    # Als geladen markieren
-    self.geladene_iframes[index] = True
+  def guest_insights_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.guest_insights_navigation_link.selected = True
+    self.check_if_upgrade_needed() 
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(7)
 
-  def lade_und_zeige_iframe(self, index):
-    """Lädt IFrame falls noch nicht geladen und zeigt es an"""
-    if index < 0 or index >= len(self.iframe_urls):
-      print(self.current_user['email']," ",f"Ungültiger Index: {index}")
-      return
+  def long_trends_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.long_trends_navigation_link.selected = True
+    self.check_if_upgrade_needed() 
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(8)
 
-    # SCHRITT 1: Alle Panels verstecken
-    for i, panel in enumerate(self.panels):
-      #if panel.visible:
-      #  print(f"Panel {i} war sichtbar -> verstecke")
-      panel.visible = False
+  def detailed_bookings_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.detailed_bookings_navigation_link.selected = True
+    self.check_if_upgrade_needed() 
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(9)
 
-    # SCHRITT 2: IFrame laden falls nötig
-    if not self.geladene_iframes[index]:
-      #print(f"IFrame {index} wird erstmalig geladen...")
-      self.erstelle_iframe(index)
-    else:
-      print(self.current_user['email']," ",f"IFrame {index} bereits geladen")
-
-    # SCHRITT 3: Gewünschtes Panel anzeigen
-    self.panels[index].visible = True
-    self.aktueller_index = index
-
-  def verstecke_alle_iframes(self):
-    """Versteckt alle IFrames ohne sie zu entladen"""
-    print("Verstecke alle IFrames...")
-    for i, panel in enumerate(self.panels):
-      panel.visible = False
-      #print(f"   Panel {i} versteckt")
-    self.aktueller_index = None
-
-  def ist_geladen(self, index):
-    """Prüft ob IFrame bereits geladen ist"""
-    if index < 0 or index >= len(self.geladene_iframes):
-      return False
-    return self.geladene_iframes[index]
-
-  def lade_alle_iframes(self):
-    """Lädt alle IFrames im Voraus (falls gewünscht für bessere Performance)"""
-    #print("Lade alle IFrames im Voraus...")
-    for i in range(len(self.iframe_urls)):
-      if not self.geladene_iframes[i]:
-        self.erstelle_iframe(i)
-    #print("Alle IFrames geladen")
-
-  # Event Handler für fehlende Buttons (um Warnungen zu vermeiden)
-  def channel_manager_connect_button_click(self, **event_args):
+  def connect_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.connect_navigation_link.selected = True
+    self.multiframe_is_open = False  # NEU: Reset wenn andere Form geöffnet wird
     open_form('channel_manager_connect')
-    pass
 
-  def dashboard_upgrade_button_click(self, **event_args):
+  def my_account_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.my_account_navigation_link.selected = True
+    self.multiframe_is_open = False  # NEU: Reset wenn andere Form geöffnet wird
+    open_form('my_account')
+
+  def knowledge_hub_link_click(self, **event_args):
+    self.reset_links()
+    self.knowledge_hub_link.selected = True
+    self.multiframe_is_open = False  # NEU: Reset wenn andere Form geöffnet wird
+    open_form('knowledge_hub')
+
+  def upgrade_navigation_link_click(self, **event_args):
+    self.reset_links()
+    self.upgrade_navigation_link.selected = True
+    self.multiframe_is_open = False  # NEU: Reset wenn andere Form geöffnet wird
     open_form('upgrade')
-    pass
 
+  def check_if_upgrade_needed(self, **event_args):
+    result = anvil.server.call_s('add_request_count',globals.current_user)
+    try:
+      globals.request_count = int(result)
+    except (TypeError, ValueError):
+      globals.request_count = 0
+    self.upgrade_navigation_link.badge_count = globals.request_count

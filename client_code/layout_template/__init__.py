@@ -15,19 +15,13 @@ class layout_template(layout_templateTemplate):
       self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))
 
   def open_multiframe_form(self):
-    #"""Öffnet die multiframe Form als Hauptinhalt"""
-
-    # Schließe vorherige multiframe falls vorhanden
-    if self.current_multiframe:
-      self.current_multiframe.remove_from_parent()
-
-    # Erstelle neue multiframe Instanz
-    self.current_multiframe = multiframe()
-
-    # Öffne als neue Form
-    open_form(self.current_multiframe)
-    #print("✅ multiframe Form geöffnet")
-
+    if not self.current_multiframe:
+      self.current_multiframe = multiframe()
+      open_form(self.current_multiframe)
+    else:
+      # Multiframe ist bereits geöffnet, nur sicherstellen dass es die aktive Form ist
+      if get_open_form() != self.current_multiframe:
+        open_form(self.current_multiframe)
     return self.current_multiframe
 
   def reset_links(self, **event_args):
