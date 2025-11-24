@@ -45,11 +45,11 @@ class layout_template(layout_templateTemplate):
     self.upgrade_navigation_link.selected= False
 
   def dashboard_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(0)
     self.reset_links()
     self.dashboard_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(0)
 
   def monthly_outlook_navigation_link_click(self, **event_args):
     self.reset_links()
