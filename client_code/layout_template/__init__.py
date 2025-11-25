@@ -8,26 +8,25 @@ from .. import globals
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)    
-    self.current_multiframe = None
-    self.multiframe_is_open = False  # NEU: Track ob multiframe geöffnet ist
+    #self.current_multiframe = None
+    #self.multiframe_is_open = False  # NEU: Track ob multiframe geöffnet ist
 
     if getattr(globals, "user_has_subscription", None) is False:
       self.upgrade_navigation_link.badge = True
       self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))
 
   def open_multiframe_form(self):
-    # Erstelle multiframe nur einmal
-    if not self.current_multiframe:
-      self.current_multiframe = multiframe()
-      # Öffne beim ersten Mal direkt
-      open_form(self.current_multiframe)
-      self.multiframe_is_open = True
-    elif not self.multiframe_is_open:
-      # Falls multiframe existiert aber nicht offen ist, öffne es
-      open_form(self.current_multiframe)
-      self.multiframe_is_open = True
+    # NEU: Verwende globals statt self
+    if not hasattr(globals, 'current_multiframe') or globals.current_multiframe is None:
+      print("[DEBUG layout] Erstelle NEUE multiframe Instanz")
+      globals.current_multiframe = multiframe()
+      open_form(globals.current_multiframe)
+    else:
+      print(f"[DEBUG layout] Verwende bestehende multiframe Instanz ID: {globals.current_multiframe.instance_id}")
+      # Stelle sicher, dass multiframe die aktive Form ist
+      open_form(globals.current_multiframe)
   
-    return self.current_multiframe
+    return globals.current_multiframe
 
 
   def reset_links(self, **event_args):

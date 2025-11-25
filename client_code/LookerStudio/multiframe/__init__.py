@@ -6,6 +6,7 @@ from anvil.js.window import jQuery
 from anvil.js import get_dom_node
 import json
 from ... import globals
+import random
 
 class multiframe(multiframeTemplate):
 
@@ -14,6 +15,8 @@ class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     #self.flow_panel_1.scroll_into_view(smooth=True)
+    self.instance_id = random.randint(1000, 9999)
+    print(f"[DEBUG] multiframe.__init__ aufgerufen - Instanz ID: {self.instance_id}")
     self.supabase_key= ""  
     self.current_user = globals.current_user
     request_count= int(globals.request_count)
@@ -123,6 +126,10 @@ class multiframe(multiframeTemplate):
     self.geladene_iframes[index] = True
 
   def lade_und_zeige_iframe(self, index):
+    """Lädt IFrame falls noch nicht geladen und zeigt es an"""
+    print(f"[DEBUG {self.instance_id}] lade_und_zeige_iframe({index}) aufgerufen")
+    print(f"[DEBUG {self.instance_id}] geladene_iframes Status: {self.geladene_iframes}")
+
     """Lädt IFrame falls noch nicht geladen und zeigt es an"""
     if index < 0 or index >= len(self.iframe_urls):
       print(self.current_user['email']," ",f"Ungültiger Index: {index}")
