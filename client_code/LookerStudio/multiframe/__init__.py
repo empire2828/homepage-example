@@ -121,7 +121,7 @@ class multiframe(multiframeTemplate):
 
     # Als geladen markieren
     self.geladene_iframes[index] = True
-    print("erstelle_iframe self.geladene_iframes:",self.geladene_iframes)
+    print("erstelle_iframe als geladen markieren self.geladene_iframes:",self.geladene_iframes)
 
   def lade_und_zeige_iframe(self, index):
     """Lädt IFrame falls noch nicht geladen und zeigt es an"""
