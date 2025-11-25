@@ -20,7 +20,11 @@ class home_template(home_templateTemplate):
 
       layout_form.reset_links()
       layout_form.dashboard_navigation_link.selected = True
-   
+
+      # Dashboard automatisch laden
+      multiframe_form = layout_form.open_multiframe_form()
+      multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
+      
       globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email',self.user)
       #if globals.user_has_subscription is False:
 
@@ -38,9 +42,6 @@ class home_template(home_templateTemplate):
         #layout_form.upgrade_navigation_link.badge_count = globals.request_count
         #print("ja")
 
-      # Dashboard automatisch laden
-      multiframe_form = layout_form.open_multiframe_form()
-      multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
     pass
 
   def blog_button_click(self, **event_args):
