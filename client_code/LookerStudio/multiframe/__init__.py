@@ -23,8 +23,8 @@ class multiframe(multiframeTemplate):
     else:
       is_user_below_request_count = True
 
-    print("multiframe globals.request_count ", request_count)
-    print("multiframe is_user_below_request_count ",is_user_below_request_count)
+    #print("multiframe globals.request_count ", request_count)
+    #print("multiframe is_user_below_request_count ",is_user_below_request_count)
 
     if self.current_user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
