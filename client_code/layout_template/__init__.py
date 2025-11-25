@@ -73,11 +73,11 @@ class layout_template(layout_templateTemplate):
     self.check_if_upgrade_needed() 
 
   def cancellations_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(4)    
     self.reset_links()
     self.cancellations_navigation_link.selected = True
     self.check_if_upgrade_needed()
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(4)
 
   def occupancy_navigation_link_click(self, **event_args):
     multiframe_form = self.open_multiframe_form()
@@ -87,11 +87,11 @@ class layout_template(layout_templateTemplate):
     self.check_if_upgrade_needed()
 
   def lead_time_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(6)
     self.reset_links()
     self.lead_time_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(6)
 
   def guest_insights_navigation_link_click(self, **event_args):
     multiframe_form = self.open_multiframe_form()
