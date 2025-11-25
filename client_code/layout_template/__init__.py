@@ -16,16 +16,19 @@ class layout_template(layout_templateTemplate):
       self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))
 
   def open_multiframe_form(self):
-    # KORRIGIERT: Erstelle multiframe nur einmal
+    # Erstelle multiframe nur einmal
     if not self.current_multiframe:
       self.current_multiframe = multiframe()
-
-    # Öffne Form nur wenn noch nicht offen
-    if not self.multiframe_is_open:
+      # Öffne beim ersten Mal direkt
       open_form(self.current_multiframe)
       self.multiframe_is_open = True
-
+    elif not self.multiframe_is_open:
+      # Falls multiframe existiert aber nicht offen ist, öffne es
+      open_form(self.current_multiframe)
+      self.multiframe_is_open = True
+  
     return self.current_multiframe
+
 
   def reset_links(self, **event_args):
     self.layout.hide_nav_drawer()
@@ -117,25 +120,21 @@ class layout_template(layout_templateTemplate):
   def connect_navigation_link_click(self, **event_args):
     self.reset_links()
     self.connect_navigation_link.selected = True
-    self.multiframe_is_open = False  # NEU: Reset wenn andere Form geöffnet wird
     open_form('channel_manager_connect')
 
   def my_account_navigation_link_click(self, **event_args):
     self.reset_links()
     self.my_account_navigation_link.selected = True
-    self.multiframe_is_open = False  # NEU: Reset wenn andere Form geöffnet wird
     open_form('my_account')
 
   def knowledge_hub_link_click(self, **event_args):
     self.reset_links()
     self.knowledge_hub_link.selected = True
-    self.multiframe_is_open = False  # NEU: Reset wenn andere Form geöffnet wird
     open_form('knowledge_hub')
 
   def upgrade_navigation_link_click(self, **event_args):
     self.reset_links()
     self.upgrade_navigation_link.selected = True
-    self.multiframe_is_open = False  # NEU: Reset wenn andere Form geöffnet wird
     open_form('upgrade')
 
   def check_if_upgrade_needed(self, **event_args):
