@@ -52,14 +52,13 @@ def process_booking(booking_data, user_id):
     print(f"process_booking: Buchung {reservation_id} ist ein Blocked channel - wird übersprungen")
     return
 
-    # Get price data
+  # Get price data
   headers = {"Api-Key": smoobu_api_key, "Content-Type": "application/json"}
   price_data = get_price_elements(reservation_id=reservation_id, headers=headers)
-  # NEUE ID-DEFINITION: user_email + "_" + booking_id
   composite_id = f"{user_email}_{reservation_id}"
 
   data = {
-    "id": composite_id,  # KORRIGIERT: Composite ID aus user_email + booking_id
+    "id": composite_id,  
     "type": booking_data.get('type'),
     "arrival": booking_data.get('arrival'),
     "departure": booking_data.get('departure'),
