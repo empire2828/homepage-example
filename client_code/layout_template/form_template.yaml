@@ -1,5 +1,9 @@
 components_by_slot:
-  content: []
+  content:
+  - layout_properties: {}
+    name: content_panel
+    properties: {}
+    type: ColumnPanel
   navigation:
   - event_bindings: {click: dashboard_navigation_link_click}
     layout_properties: {}
