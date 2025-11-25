@@ -13,7 +13,7 @@ class multiframe(multiframeTemplate):
 
   def __init__(self, **properties):
     self.init_components(**properties)
-    self.flow_panel_1.scroll_into_view(smooth=True)
+    #self.flow_panel_1.scroll_into_view(smooth=True)
     self.supabase_key= ""  
     self.current_user = globals.current_user
     request_count= int(globals.request_count)
