@@ -34,10 +34,10 @@ class home_template(home_templateTemplate):
 
       # Dashboard automatisch laden
       layout_form = open_form('layout_template')
-      multiframe_form = layout_form.open_multiframe_form()
-      multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard      
       layout_form.reset_links()
-      layout_form.dashboard_navigation_link.selected = True      
+      layout_form.dashboard_navigation_link.selected = True   
+      multiframe_form = layout_form.open_multiframe_form()
+      multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
     
     pass
 

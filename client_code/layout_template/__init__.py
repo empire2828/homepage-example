@@ -26,9 +26,10 @@ class layout_template(layout_templateTemplate):
       # Falls multiframe existiert aber nicht offen ist, öffne es
       open_form(self.current_multiframe)
       self.multiframe_is_open = True
+    print("self.open_multiframe_form current_multiframe",self.current_multiframe)
+    print("self.multiframe_is_open",self.multiframe_is_open)
   
     return self.current_multiframe
-
 
   def reset_links(self, **event_args):
     self.layout.hide_nav_drawer()

@@ -121,6 +121,7 @@ class multiframe(multiframeTemplate):
 
     # Als geladen markieren
     self.geladene_iframes[index] = True
+    print("erstelle_iframe self.geladene_iframes:",self.geladene_iframes)
 
   def lade_und_zeige_iframe(self, index):
     """Lädt IFrame falls noch nicht geladen und zeigt es an"""
@@ -140,12 +141,14 @@ class multiframe(multiframeTemplate):
     if not self.geladene_iframes[index]:
       print(f"IFrame {index} wird erstmalig geladen...")
       self.erstelle_iframe(index)
+      print("lade_und_zeige_iframe geladene iframes",self.geladene_iframes)
     else:
       print(self.current_user['email']," ",f"IFrame {index} bereits geladen")
 
     # Gewünschtes Panel anzeigen
     self.panels[index].visible = True
     self.aktueller_index = index
+    print("lade_und_zeige_iframe self.aktueller_index :",self.aktueller_index)
 
   def verstecke_alle_iframes(self):
     """Versteckt alle IFrames ohne sie zu entladen"""
@@ -158,6 +161,7 @@ class multiframe(multiframeTemplate):
   def ist_geladen(self, index):
     """Prüft ob IFrame bereits geladen ist"""
     if index < 0 or index >= len(self.geladene_iframes):
+      print("ist_geladen ","False Index:",index," len(self.geladene_iframes:",len(self.geladene_iframes))
       return False
     return self.geladene_iframes[index]
 
