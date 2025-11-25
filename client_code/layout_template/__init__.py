@@ -52,25 +52,25 @@ class layout_template(layout_templateTemplate):
     self.check_if_upgrade_needed() 
 
   def monthly_outlook_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(1)
     self.reset_links()
     self.monthly_outlook_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(1)
 
   def profitability_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(2)
     self.reset_links()
     self.profitability_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(2)
 
   def bookings_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(3)
     self.reset_links()
     self.bookings_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(3)
 
   def cancellations_navigation_link_click(self, **event_args):
     self.reset_links()
@@ -80,11 +80,11 @@ class layout_template(layout_templateTemplate):
     multiframe_form.lade_und_zeige_iframe(4)
 
   def occupancy_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(5)
     self.reset_links()
     self.occupancy_navigation_link.selected = True
     self.check_if_upgrade_needed()
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(5)
 
   def lead_time_navigation_link_click(self, **event_args):
     self.reset_links()
@@ -94,25 +94,25 @@ class layout_template(layout_templateTemplate):
     multiframe_form.lade_und_zeige_iframe(6)
 
   def guest_insights_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(7)
     self.reset_links()
     self.guest_insights_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(7)
 
   def long_trends_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(8)
     self.reset_links()
     self.long_trends_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(8)
 
   def detailed_bookings_navigation_link_click(self, **event_args):
+    multiframe_form = self.open_multiframe_form()
+    multiframe_form.lade_und_zeige_iframe(9)
     self.reset_links()
     self.detailed_bookings_navigation_link.selected = True
     self.check_if_upgrade_needed() 
-    multiframe_form = self.open_multiframe_form()
-    multiframe_form.lade_und_zeige_iframe(9)
 
   def connect_navigation_link_click(self, **event_args):
     self.reset_links()
