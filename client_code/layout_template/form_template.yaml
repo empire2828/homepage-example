@@ -1,8 +1,13 @@
 components_by_slot:
   content:
-  - components: []
+  - components:
+    - components: []
+      layout_properties: {full_width_row: true, grid_position: 'YOVYCA,VOUUJJ'}
+      name: content_panel
+      properties: {}
+      type: ColumnPanel
     layout_properties: {}
-    name: content_panel
+    name: column_panel_1
     properties: {}
     type: ColumnPanel
   navigation:
