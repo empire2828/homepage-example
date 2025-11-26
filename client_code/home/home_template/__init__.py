@@ -17,33 +17,26 @@ class home_template(home_templateTemplate):
     if self.user:
       globals.current_user = self.user      
       globals.user_has_subscription = anvil.server.call_s('get_user_has_subscription_for_email', self.user)
-    
+  
       # Request count
       last_login = self.user.get('last_login', None)
       must_refresh = False
       globals.request_count = 0
-    
+  
       if last_login is not None:
         now_dt = datetime.datetime.now(datetime.timezone.utc)
         delta = now_dt - last_login
         if delta.total_seconds() < 24 * 3600:
           must_refresh = True
-    
+  
       if must_refresh:
         globals.request_count = anvil.server.call_s('get_request_count')
-    
-        # Öffne layout_template NUR EINMAL
+  
+        # Öffne layout_template
       layout_form = open_form('layout_template')
-    
-      # Speichere Referenz in globals für späteren Zugriff
-      globals.layout_form = layout_form
-    
-      # Dashboard anzeigen (ohne open_form!)
-      layout_form.reset_links()
-      layout_form.dashboard_navigation_link.selected = True
-      layout_form.show_multiframe(0)  # Zeigt Dashboard
-    
-    pass
+  
+      # Zeige Dashboard
+      layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
 
   def blog_button_click(self, **event_args):
     if self.user_locale.lower().startswith("de"):
