@@ -55,7 +55,7 @@ class layout_template(layout_templateTemplate):
     if form_name == 'channel_manager_connect':
       from ..channel_manager_connect import channel_manager_connect
       self.current_other_component = channel_manager_connect()
-      self.content_panel_2.add_component(self.current_other_component, full_width_row=True)  
+      self.content_panel.add_component(self.current_other_component, full_width_row=True)  
     #elif form_name == 'my_account':
     #  from ..my_account import my_account
     #  self.current_other_component = my_account()
@@ -65,11 +65,11 @@ class layout_template(layout_templateTemplate):
     elif form_name == 'knowledge_hub':
       from ..knowledge_hub import knowledge_hub
       self.current_other_component = knowledge_hub()
-      self.content_panel_2.add_component(self.current_other_component, full_width_row=True)
+      self.content_panel.add_component(self.current_other_component, full_width_row=True)
     elif form_name == 'upgrade':
       from ..upgrade import upgrade
       self.current_other_component = upgrade()
-      self.content_panel_2.add_component(self.current_other_component, full_width_row=True)
+      self.content_panel.add_component(self.current_other_component, full_width_row=True)
 
     self.reset_links()
     link.selected = True
