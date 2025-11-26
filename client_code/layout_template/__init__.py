@@ -89,9 +89,13 @@ class layout_template(layout_templateTemplate):
     """Generische Methode um einen IFrame anzuzeigen"""
     print(f"[DEBUG] _show_dashboard_iframe({index}) aufgerufen")
   
+    # Leere content_panel (entfernt andere Komponenten wie my_account)
+    self.content_panel.clear()
+  
     # Mache multiframe wieder sichtbar
     if hasattr(globals, 'current_multiframe_instance') and globals.current_multiframe_instance:
-      print(f"[DEBUG] Mache multiframe sichtbar")
+      print(f"[DEBUG] Füge multiframe zurück zu content_panel")
+      self.content_panel.add_component(globals.current_multiframe_instance, full_width_row=True)
       globals.current_multiframe_instance.visible = True
     else:
       print("[DEBUG] FEHLER: current_multiframe_instance ist None!")
