@@ -44,6 +44,7 @@ class layout_template(layout_templateTemplate):
 
     multiframe_obj = self.get_or_create_multiframe()
     multiframe_obj.visible = False
+    multiframe_obj.verstecke_alle_iframes()  
 
     # Erstelle und speichere neue Komponente
     if form_name == 'channel_manager_connect':
