@@ -1,0 +1,7 @@
+components:
+- layout_properties: {grid_position: 'LNQKHD,XLBALK'}
+  name: rich_text_1
+  properties: {content: großer langer test}
+  type: RichText
+container: {type: ColumnPanel}
+is_package: true

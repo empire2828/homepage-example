@@ -2,7 +2,7 @@ components_by_slot:
   content:
   - components:
     - components: []
-      layout_properties: {full_width_row: true, grid_position: 'EWBOOW,HBOXDH'}
+      layout_properties: {grid_position: 'EZOTJI,WEOICF'}
       name: content_panel
       properties: {}
       type: ColumnPanel
@@ -174,6 +174,11 @@ components_by_slot:
         padding: [null, null, '0', null]
       text: Upgrade
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  - event_bindings: {click: navigation_link_1_click}
+    layout_properties: {}
+    name: navigation_link_1
+    properties: {text: TEST}
+    type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
 is_package: true
 layout:
   properties:
@@ -184,6 +189,6 @@ layout:
   type: form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout
 slots:
   content:
-    index: 0
+    index: 1
     set_layout_properties: {}
     target: {name: content, type: slot}

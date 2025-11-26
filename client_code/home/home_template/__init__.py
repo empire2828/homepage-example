@@ -38,7 +38,6 @@ class home_template(home_templateTemplate):
       # Zeige Dashboard - NEU!
       layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
 
-
   def blog_button_click(self, **event_args):
     if self.user_locale.lower().startswith("de"):
       open_form('blog.blog_de')
