@@ -22,15 +22,19 @@ class layout_template(layout_templateTemplate):
 
   def show_dashboard(self, iframe_index, link):
     """Zeige einen Dashboard-IFrame"""
-    # Entferne alte Komponente falls vorhanden
+    # Entferne alte Komponente ZUERST
     if self.current_other_component is not None:
-      self.current_other_component.remove_from_parent()
+      try:
+        self.current_other_component.remove_from_parent()
+      except:
+        pass
       self.current_other_component = None
-
+  
+      # DANN mache multiframe sichtbar
     multiframe_obj = self.get_or_create_multiframe()
     multiframe_obj.visible = True
     multiframe_obj.lade_und_zeige_iframe(iframe_index)
-
+  
     self.reset_links()
     link.selected = True
     self.check_if_upgrade_needed()
