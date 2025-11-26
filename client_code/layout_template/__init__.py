@@ -7,7 +7,6 @@ from .. import globals
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
-    # NICHT in self speichern, sondern globals verwenden!
 
     if getattr(globals, "user_has_subscription", None) is False:
       self.upgrade_navigation_link.badge = True
@@ -23,7 +22,7 @@ class layout_template(layout_templateTemplate):
       globals.current_multiframe_instance = multiframe()
       # Füge als Komponente hinzu
       self.content_panel.clear()
-      self.content_panel.add_component(globals.current_multiframe_instance)
+      self.content_panel.add_component(globals.current_multiframe_instance,full_width_row=True)
     else:
       print(f"[LAYOUT] Multiframe existiert bereits, verwende es")
   
@@ -55,16 +54,16 @@ class layout_template(layout_templateTemplate):
   
     if form_name == 'channel_manager_connect':
       from ..channel_manager_connect import channel_manager_connect
-      self.content_panel.add_component(channel_manager_connect())
+      self.content_panel.add_component(channel_manager_connect(),full_width_row=True)
     elif form_name == 'my_account':
       from ..my_account import my_account
-      self.content_panel.add_component(my_account())
+      self.content_panel.add_component(my_account(),full_width_row=True)
     elif form_name == 'knowledge_hub':
       from ..knowledge_hub import knowledge_hub
-      self.content_panel.add_component(knowledge_hub())
+      self.content_panel.add_component(knowledge_hub(),full_width_row=True)
     elif form_name == 'upgrade':
       from ..upgrade import upgrade
-      self.content_panel.add_component(upgrade())
+      self.content_panel.add_component(upgrade(),full_width_row=True)
   
     print(f"[LAYOUT] show_other_content({form_name}) FERTIG")
 

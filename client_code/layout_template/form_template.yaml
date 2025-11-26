@@ -2,7 +2,7 @@ components_by_slot:
   content:
   - components:
     - components: []
-      layout_properties: {full_width_row: true, grid_position: 'YOVYCA,VOUUJJ'}
+      layout_properties: {full_width_row: true, grid_position: 'EWBOOW,HBOXDH'}
       name: content_panel
       properties: {}
       type: ColumnPanel
