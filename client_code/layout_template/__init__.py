@@ -14,10 +14,14 @@ class layout_template(layout_templateTemplate):
       self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))
 
   def get_or_create_multiframe(self):
+    self.content_panel.visible = True
+    self.content_panel_2.visible = False
     """Erstelle multiframe nur einmal und füge EINMALIG hinzu"""
     if not hasattr(globals, 'current_multiframe_instance') or globals.current_multiframe_instance is None:
+      print("[DEBUG] Erstelle NEUES multiframe")
       globals.current_multiframe_instance = multiframe()
       self.content_panel.add_component(globals.current_multiframe_instance, full_width_row=True)
+      print(f"[DEBUG] multiframe zu content_panel hinzugefügt, Panel hat jetzt {len(self.content_panel.get_components())} Komponenten")
     return globals.current_multiframe_instance
 
   def show_dashboard(self, iframe_index, link):
@@ -37,32 +41,33 @@ class layout_template(layout_templateTemplate):
 
   def show_other_page(self, form_name, link):
     """Zeige eine andere Seite (My Account, etc.)"""
+
     # Entferne alte Komponente falls vorhanden
     if self.current_other_component is not None:
       self.current_other_component.remove_from_parent()
       self.current_other_component = None
 
-    multiframe_obj = self.get_or_create_multiframe()
-    multiframe_obj.visible = False
-    multiframe_obj.verstecke_alle_iframes()  
+    self.content_panel_2.clear()
+    self.content_panel.visible = False
+    self.content_panel_2.visible = True
 
     # Erstelle und speichere neue Komponente
     if form_name == 'channel_manager_connect':
       from ..channel_manager_connect import channel_manager_connect
       self.current_other_component = channel_manager_connect()
-      self.content_panel.add_component(self.current_other_component, full_width_row=True)
+      self.content_panel_2.add_component(self.current_other_component, full_width_row=True)  
     elif form_name == 'my_account':
       from ..my_account import my_account
       self.current_other_component = my_account()
-      self.content_panel.add_component(self.current_other_component, full_width_row=True)
+      self.content_panel_2.add_component(self.current_other_component, full_width_row=True)       
     elif form_name == 'knowledge_hub':
       from ..knowledge_hub import knowledge_hub
       self.current_other_component = knowledge_hub()
-      self.content_panel.add_component(self.current_other_component, full_width_row=True)
+      self.content_panel_2.add_component(self.current_other_component, full_width_row=True)
     elif form_name == 'upgrade':
       from ..upgrade import upgrade
       self.current_other_component = upgrade()
-      self.content_panel.add_component(self.current_other_component, full_width_row=True)
+      self.content_panel_2.add_component(self.current_other_component, full_width_row=True)
 
     self.reset_links()
     link.selected = True
