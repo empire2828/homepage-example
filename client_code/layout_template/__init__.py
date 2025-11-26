@@ -15,7 +15,7 @@ class layout_template(layout_templateTemplate):
 
   def get_or_create_multiframe(self):
     self.content_panel.visible = True
-    self.content_panel_2.visible = False
+    #self.content_panel_2.visible = False
     """Erstelle multiframe nur einmal und füge EINMALIG hinzu"""
     if not hasattr(globals, 'current_multiframe_instance') or globals.current_multiframe_instance is None:
       print("[DEBUG] Erstelle NEUES multiframe")
@@ -47,19 +47,21 @@ class layout_template(layout_templateTemplate):
       self.current_other_component.remove_from_parent()
       self.current_other_component = None
 
-    self.content_panel_2.clear()
+    #self.content_panel_2.clear()
     self.content_panel.visible = False
-    self.content_panel_2.visible = True
+    #self.content_panel_2.visible = True
 
     # Erstelle und speichere neue Komponente
     if form_name == 'channel_manager_connect':
       from ..channel_manager_connect import channel_manager_connect
       self.current_other_component = channel_manager_connect()
       self.content_panel_2.add_component(self.current_other_component, full_width_row=True)  
+    #elif form_name == 'my_account':
+    #  from ..my_account import my_account
+    #  self.current_other_component = my_account()
+    #  self.content_panel_2.add_component(self.current_other_component, full_width_row=True) 
     elif form_name == 'my_account':
-      from ..my_account import my_account
-      self.current_other_component = my_account()
-      self.content_panel_2.add_component(self.current_other_component, full_width_row=True)       
+      open_form('my_account')
     elif form_name == 'knowledge_hub':
       from ..knowledge_hub import knowledge_hub
       self.current_other_component = knowledge_hub()
