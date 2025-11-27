@@ -7,67 +7,40 @@ from .. import globals
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
-    self.current_other_component = None  # Speichert aktuelle Nicht-Dashboard-Komponente
+    #self.content_panel_iframe.visible = True
 
     if getattr(globals, "user_has_subscription", None) is False:
       self.upgrade_navigation_link.badge = True
       self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))
 
   def get_or_create_multiframe(self):
-    self.content_panel_iframe.visible = True
     """Erstelle multiframe nur einmal und füge EINMALIG hinzu"""
     if not hasattr(globals, 'current_multiframe_instance') or globals.current_multiframe_instance is None:
       print("[DEBUG] Erstelle NEUES multiframe")
       globals.current_multiframe_instance = multiframe()
       self.content_panel_iframe.add_component(globals.current_multiframe_instance, full_width_row=True)
-      print(f"[DEBUG] multiframe zu content_panel hinzugefügt, Panel hat jetzt {len(self.content_panel_iframe.get_components())} Komponenten")
+      print(f"[DEBUG] multiframe zu content_panel hinzugefügt")
+      globals.multiframe_open = True
     return globals.current_multiframe_instance
 
   def show_dashboard(self, iframe_index, link):
     """Zeige einen Dashboard-IFrame"""
-    # Entferne alte Komponente falls vorhanden
-    if self.current_other_component is not None:
-      self.current_other_component.remove_from_parent()
-      self.current_other_component = None
+    print(f"[LAYOUT] show_dashboard({iframe_index}) START")
 
+    # Verstecke "other pages" Panel, zeige iframe Panel
+    #self.content_panel_iframe.visible = True
+
+    # Multiframe holen und sichtbar machen
     multiframe_obj = self.get_or_create_multiframe()
     multiframe_obj.visible = True
+
+    # IFrame laden/anzeigen
     multiframe_obj.lade_und_zeige_iframe(iframe_index)
 
     self.reset_links()
     link.selected = True
     self.check_if_upgrade_needed()
-
-  def show_other_page(self, form_name, link):
-    """Zeige eine andere Seite (My Account, etc.)"""
-
-    # Entferne alte Komponente falls vorhanden
-    if self.current_other_component is not None:
-      self.current_other_component.remove_from_parent()
-      self.current_other_component = None
-
-    #self.content_panel_2.clear()
-    self.content_panel_iframe.visible = False
-    #self.content_panel_2.visible = True
-
-    # Erstelle und speichere neue Komponente
-    if form_name == 'channel_manager_connect':
-      from ..channel_manager_connect import channel_manager_connect
-      self.current_other_component = channel_manager_connect()
-      self.content_panel_iframe.add_component(self.current_other_component, full_width_row=True)  
-    elif form_name == 'my_account':
-      open_form('my_account')
-    elif form_name == 'knowledge_hub':
-      from ..knowledge_hub import knowledge_hub
-      self.current_other_component = knowledge_hub()
-      self.content_panel_iframe.add_component(self.current_other_component, full_width_row=True)
-    elif form_name == 'upgrade':
-      from ..upgrade import upgrade
-      self.current_other_component = upgrade()
-      self.content_panel_iframe.add_component(self.current_other_component, full_width_row=True)
-
-    self.reset_links()
-    link.selected = True
+    print(f"[LAYOUT] show_dashboard({iframe_index}) FERTIG")
 
   def reset_links(self):
     """Deselektiere alle Navigation Links"""
@@ -88,11 +61,12 @@ class layout_template(layout_templateTemplate):
     self.upgrade_navigation_link.selected = False
 
   def dashboard_navigation_link_click(self, **event_args):
-    self.show_dashboard(0, self.dashboard_navigation_link)
-
-  def monthly_outlook_navigation_link_click(self, **event_args):
-    self.show_dashboard(1, self.monthly_outlook_navigation_link)
-
+    if globals.multiframe_open:
+      self.show_dashboard(1, self.profitability_navigation_link)
+    else:
+      layout_form= open_form('layout_template')
+      layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
+    
   def profitability_navigation_link_click(self, **event_args):
     self.show_dashboard(2, self.profitability_navigation_link)
 
@@ -118,16 +92,20 @@ class layout_template(layout_templateTemplate):
     self.show_dashboard(9, self.detailed_bookings_navigation_link)
 
   def connect_navigation_link_click(self, **event_args):
-    self.show_other_page('channel_manager_connect', self.connect_navigation_link)
+    open_form('channel_manager_connect')
 
   def my_account_navigation_link_click(self, **event_args):
-    self.show_other_page('my_account', self.my_account_navigation_link)
+    open_form('my_account')
+    self.reset_links()
+    self.my_account_navigation_link.selected = True
+    globals.current_multiframe_instance = None
+    globals.multiframe_open = False
 
   def knowledge_hub_link_click(self, **event_args):
-    self.show_other_page('knowledge_hub', self.knowledge_hub_link)
+    open_form('knowledge_hub')
 
   def upgrade_navigation_link_click(self, **event_args):
-    self.show_other_page('upgrade', self.upgrade_navigation_link)
+    open_form('upgrade')
 
   def check_if_upgrade_needed(self):
     result = anvil.server.call_s('add_request_count', globals.current_user)

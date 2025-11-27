@@ -78,7 +78,6 @@ class multiframe(multiframeTemplate):
     for i, panel in enumerate(self.panels):
       panel.visible = False
       panel.height = 1000
-      panel.role = 'looker-panel'
 
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
