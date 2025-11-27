@@ -7,7 +7,6 @@ from .. import globals
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
-    #self.content_panel_iframe.visible = True
 
     if getattr(globals, "user_has_subscription", None) is False:
       self.upgrade_navigation_link.badge = True
@@ -26,9 +25,6 @@ class layout_template(layout_templateTemplate):
   def show_dashboard(self, iframe_index, link):
     """Zeige einen Dashboard-IFrame"""
     print(f"[LAYOUT] show_dashboard({iframe_index}) START")
-
-    # Verstecke "other pages" Panel, zeige iframe Panel
-    #self.content_panel_iframe.visible = True
 
     # Multiframe holen und sichtbar machen
     multiframe_obj = self.get_or_create_multiframe()
@@ -62,49 +58,94 @@ class layout_template(layout_templateTemplate):
 
   def dashboard_navigation_link_click(self, **event_args):
     if globals.multiframe_open:
-      self.show_dashboard(1, self.profitability_navigation_link)
+      self.show_dashboard(0, self.dashboard_navigation_link)
     else:
-      layout_form= open_form('layout_template')
+      layout_form = open_form('layout_template')
       layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
-    
+
+  def monthly_outlook_navigation_link_click(self, **event_args):
+    if globals.multiframe_open:
+      self.show_dashboard(1, self.monthly_outlook_navigation_link)
+    else:
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(1, layout_form.monthly_outlook_navigation_link)
+
   def profitability_navigation_link_click(self, **event_args):
-    self.show_dashboard(2, self.profitability_navigation_link)
+    if globals.multiframe_open:
+      self.show_dashboard(2, self.profitability_navigation_link)
+    else:
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(2, layout_form.profitability_navigation_link)
 
   def bookings_navigation_link_click(self, **event_args):
-    self.show_dashboard(3, self.bookings_navigation_link)
+    if globals.multiframe_open:
+      self.show_dashboard(3, self.bookings_navigation_link)
+    else:
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(3, layout_form.bookings_navigation_link)
 
   def cancellations_navigation_link_click(self, **event_args):
-    self.show_dashboard(4, self.cancellations_navigation_link)
+    if globals.multiframe_open:
+      self.show_dashboard(4, self.cancellations_navigation_link)
+    else:
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(4, layout_form.cancellations_navigation_link)
 
   def occupancy_navigation_link_click(self, **event_args):
-    self.show_dashboard(5, self.occupancy_navigation_link)
+    if globals.multiframe_open:
+      self.show_dashboard(5, self.occupancy_navigation_link)
+    else:
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(5, layout_form.occupancy_navigation_link)
 
   def lead_time_navigation_link_click(self, **event_args):
-    self.show_dashboard(6, self.lead_time_navigation_link)
+    if globals.multiframe_open:
+      self.show_dashboard(6, self.lead_time_navigation_link)
+    else:
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(6, layout_form.lead_time_navigation_link)
 
   def guest_insights_navigation_link_click(self, **event_args):
-    self.show_dashboard(7, self.guest_insights_navigation_link)
+    if globals.multiframe_open:
+      self.show_dashboard(7, self.guest_insights_navigation_link)
+    else:
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(7, layout_form.guest_insights_navigation_link)
 
   def long_trends_navigation_link_click(self, **event_args):
-    self.show_dashboard(8, self.long_trends_navigation_link)
+    if globals.multiframe_open:
+      self.show_dashboard(8, self.long_trends_navigation_link)
+    else:
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(8, layout_form.long_trends_navigation_link)
 
   def detailed_bookings_navigation_link_click(self, **event_args):
-    self.show_dashboard(9, self.detailed_bookings_navigation_link)
+    if globals.multiframe_open:
+      self.show_dashboard(9, self.detailed_bookings_navigation_link)
+    else:
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(9, layout_form.detailed_bookings_navigation_link)
 
   def connect_navigation_link_click(self, **event_args):
+    globals.current_multiframe_instance = None
+    globals.multiframe_open = False
     open_form('channel_manager_connect')
 
   def my_account_navigation_link_click(self, **event_args):
-    open_form('my_account')
-    self.reset_links()
-    self.my_account_navigation_link.selected = True
     globals.current_multiframe_instance = None
     globals.multiframe_open = False
+    self.reset_links()
+    self.my_account_navigation_link.selected = True
+    open_form('my_account')
 
   def knowledge_hub_link_click(self, **event_args):
+    globals.current_multiframe_instance = None
+    globals.multiframe_open = False
     open_form('knowledge_hub')
 
   def upgrade_navigation_link_click(self, **event_args):
+    globals.current_multiframe_instance = None
+    globals.multiframe_open = False
     open_form('upgrade')
 
   def check_if_upgrade_needed(self):
