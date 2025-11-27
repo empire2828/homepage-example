@@ -162,3 +162,4 @@ class layout_template(layout_templateTemplate):
     except (TypeError, ValueError):
       globals.request_count = 0
     self.upgrade_navigation_link.badge_count = globals.request_count
+

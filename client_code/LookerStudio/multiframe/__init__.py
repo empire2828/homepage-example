@@ -187,3 +187,9 @@ class multiframe(multiframeTemplate):
   def dashboard_upgrade_button_click(self, **event_args):
     open_form('upgrade')
     pass
+
+  def lade_restliche_iframes(self):
+    """Lädt IFrames 1-10 im Hintergrund"""
+    for i in range(1, len(self.iframe_urls)):
+      if not self.geladene_iframes[i]:
+        self.erstelle_iframe(i)
