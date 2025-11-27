@@ -1,6 +1,5 @@
 from ._anvil_designer import multiframeTemplate
 from anvil import *
-#from anvil import users
 import anvil.server
 from anvil.js.window import jQuery
 from anvil.js import get_dom_node
@@ -78,7 +77,8 @@ class multiframe(multiframeTemplate):
     # Initial: alle Panels unsichtbar
     for i, panel in enumerate(self.panels):
       panel.visible = False
-      panel.height = 2300
+      panel.height = 16000
+      panel.role = 'looker-panel'
 
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
@@ -104,7 +104,7 @@ class multiframe(multiframeTemplate):
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "2300px",
+      "height": "16000",
       "frameborder": "0",
       "style": "border: none; background: white;",
       "allow": "fullscreen; storage-access",
@@ -113,6 +113,8 @@ class multiframe(multiframeTemplate):
       "sandbox":"allow-scripts allow-same-origin allow-storage-access-by-user-activation"
     })
 
+
+    
     # IFrame zum Panel hinzufügen
     iframe.appendTo(get_dom_node(panel))
 

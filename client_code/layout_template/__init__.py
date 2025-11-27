@@ -55,10 +55,6 @@ class layout_template(layout_templateTemplate):
       from ..channel_manager_connect import channel_manager_connect
       self.current_other_component = channel_manager_connect()
       self.content_panel_iframe.add_component(self.current_other_component, full_width_row=True)  
-    #elif form_name == 'my_account':
-    #  from ..my_account import my_account
-    #  self.current_other_component = my_account()
-    #  self.content_panel_2.add_component(self.current_other_component, full_width_row=True) 
     elif form_name == 'my_account':
       open_form('my_account')
     elif form_name == 'knowledge_hub':
