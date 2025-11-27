@@ -89,4 +89,4 @@ components_by_slot:
     properties: {visible: false}
     type: ColumnPanel
 is_package: true
-layout: {type: 'form:layout_template'}
+layout: {type: 'form:blank'}
