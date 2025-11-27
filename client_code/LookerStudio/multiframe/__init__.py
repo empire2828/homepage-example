@@ -175,10 +175,11 @@ class multiframe(multiframeTemplate):
 
   def lade_alle_iframes(self):
     """Lädt alle IFrames im Voraus (falls gewünscht für bessere Performance)"""
+    print(f"[MULTIFRAME] Lade alle {len(self.iframe_urls)} IFrames vor...")
     for i in range(len(self.iframe_urls)):
       if not self.geladene_iframes[i]:
         self.erstelle_iframe(i)
-    print("Alle IFrames geladen")
+    print(f"[MULTIFRAME] Alle IFrames geladen: {self.geladene_iframes}")
 
   def channel_manager_connect_button_click(self, **event_args):
     open_form('channel_manager_connect')
@@ -187,3 +188,9 @@ class multiframe(multiframeTemplate):
   def dashboard_upgrade_button_click(self, **event_args):
     open_form('upgrade')
     pass
+
+  def lade_restliche_iframes(self):
+    """Lädt IFrames 1-10 im Hintergrund"""
+    for i in range(1, len(self.iframe_urls)):
+      if not self.geladene_iframes[i]:
+        self.erstelle_iframe(i)
