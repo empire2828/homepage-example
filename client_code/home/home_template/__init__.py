@@ -15,12 +15,8 @@ class home_template(home_templateTemplate):
   def login_button_click(self, **event_args):
     self.user = anvil.users.login_with_form(allow_cancel=True, show_signup_option=False, allow_remembered=True)
     if self.user:
-      globals.current_user = self.user      
       globals.user_has_subscription = anvil.server.call_s('get_user_has_subscription_for_email', self.user)
-  
-       # Öffne layout_template
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
+      globals.current_user = self.user     
       
       # Request count
       last_login = self.user.get('last_login', None)
@@ -33,6 +29,10 @@ class home_template(home_templateTemplate):
           must_refresh = True
       if must_refresh:
         globals.request_count = anvil.server.call_s('get_request_count')
+
+        # Öffne layout_template
+      layout_form = open_form('layout_template')
+      layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
   
   def blog_button_click(self, **event_args):
     if self.user_locale.lower().startswith("de"):

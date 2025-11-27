@@ -148,7 +148,6 @@ class multiframe(multiframeTemplate):
     if not self.geladene_iframes[index]:
       print(f"[MULTIFRAME] IFrame {index} wird erstmalig geladen...")
       self.erstelle_iframe(index)
-      print("erstelle_iframe als geladen markieren self.geladene_iframes:",self.geladene_iframes)
     else:
       print(f"[MULTIFRAME] IFrame {index} bereits geladen")
 
@@ -193,3 +192,4 @@ class multiframe(multiframeTemplate):
     for i in range(1, len(self.iframe_urls)):
       if not self.geladene_iframes[i]:
         self.erstelle_iframe(i)
+        print("erstelle iframe",i)

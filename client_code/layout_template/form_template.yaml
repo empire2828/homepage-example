@@ -8,10 +8,6 @@ components_by_slot:
       spacing:
         padding: [null, null, null, '-10']
     type: ColumnPanel
-  - layout_properties: {}
-    name: content_panel_other
-    properties: {}
-    type: ColumnPanel
   navigation:
   - event_bindings: {click: dashboard_navigation_link_click}
     layout_properties: {}

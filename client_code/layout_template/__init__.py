@@ -20,6 +20,7 @@ class layout_template(layout_templateTemplate):
       self.content_panel_iframe.add_component(globals.current_multiframe_instance, full_width_row=True)
       print(f"[DEBUG] multiframe zu content_panel hinzugefügt")
       globals.multiframe_open = True
+
     return globals.current_multiframe_instance
 
   def show_dashboard(self, iframe_index, link):
@@ -33,6 +34,13 @@ class layout_template(layout_templateTemplate):
     # IFrame laden/anzeigen
     multiframe_obj.lade_und_zeige_iframe(iframe_index)
 
+    #######################################################################
+    # ← NEU: Beim ersten Dashboard-Aufruf alle anderen im Hintergrund laden
+    #if not hasattr(self, '_background_loading_triggered'):
+    #  self._background_loading_triggered = True
+    #  print('background load triggered')
+    #  anvil.js.window.setTimeout(lambda: multiframe_obj.lade_restliche_iframes(), 2000)
+    
     self.reset_links()
     link.selected = True
     self.check_if_upgrade_needed()
@@ -146,7 +154,6 @@ class layout_template(layout_templateTemplate):
     open_form('knowledge_hub')
     self.reset_links()
     self.knowledge_hub_link.selected = True
-
 
   def upgrade_navigation_link_click(self, **event_args):
     globals.current_multiframe_instance = None
