@@ -7,6 +7,7 @@ from .. import globals
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
+    print("layout_template init")
 
     if getattr(globals, "user_has_subscription", None) is False:
       self.upgrade_navigation_link.badge = True
