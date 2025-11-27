@@ -77,7 +77,7 @@ class multiframe(multiframeTemplate):
     # Initial: alle Panels unsichtbar
     for i, panel in enumerate(self.panels):
       panel.visible = False
-      panel.height = 16000
+      panel.height = 1000
       panel.role = 'looker-panel'
 
   def erstelle_iframe(self, index):
@@ -104,15 +104,16 @@ class multiframe(multiframeTemplate):
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "16000",
+      "height": "950",
       "frameborder": "0",
-      "style": "border: none; background: white;",
-      "allow": "fullscreen; storage-access",
+      "scrolling": "no",
       "loading": "lazy",
       "referrerpolicy": "origin-when-cross-origin",
       "sandbox":"allow-scripts allow-same-origin allow-storage-access-by-user-activation"
     })
 
+    #"style": "border: none; background: white;",
+    #"allow": "fullscreen; storage-access",
 
     
     # IFrame zum Panel hinzufügen
