@@ -130,23 +130,30 @@ class layout_template(layout_templateTemplate):
     globals.current_multiframe_instance = None
     globals.multiframe_open = False
     open_form('channel_manager_connect')
+    self.reset_links()
+    self.connect_navigation_link.selected = True
 
   def my_account_navigation_link_click(self, **event_args):
     globals.current_multiframe_instance = None
     globals.multiframe_open = False
+    open_form('my_account')
     self.reset_links()
     self.my_account_navigation_link.selected = True
-    open_form('my_account')
 
   def knowledge_hub_link_click(self, **event_args):
     globals.current_multiframe_instance = None
     globals.multiframe_open = False
     open_form('knowledge_hub')
+    self.reset_links()
+    self.knowledge_hub_link.selected = True
+
 
   def upgrade_navigation_link_click(self, **event_args):
     globals.current_multiframe_instance = None
     globals.multiframe_open = False
     open_form('upgrade')
+    self.reset_links()
+    self.upgrade_navigation_link.selected = True
 
   def check_if_upgrade_needed(self):
     result = anvil.server.call_s('add_request_count', globals.current_user)
