@@ -15,6 +15,23 @@ db_schema:
       type: number
     server: full
     title: channels
+  log:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: Date
+      type: datetime
+    - admin_ui: {order: 1, width: 200}
+      name: function
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: message
+      type: string
+    - admin_ui: {order: 3, width: 200}
+      name: user
+      type: string
+    server: full
+    title: log
   users:
     client: none
     columns:
