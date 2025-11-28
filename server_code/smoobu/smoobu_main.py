@@ -63,7 +63,6 @@ def get_price_elements(reservation_id, headers):
 
   return price_data
 
-
 #https://developers.booking.com/demand/docs/development-guide/rate-limiting
 
 @anvil.server.callable
