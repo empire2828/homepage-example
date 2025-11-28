@@ -77,7 +77,7 @@ class multiframe(multiframeTemplate):
     # Initial: alle Panels unsichtbar
     for i, panel in enumerate(self.panels):
       panel.visible = False
-      panel.height = 1000
+      panel.height = 2000
 
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
@@ -103,7 +103,7 @@ class multiframe(multiframeTemplate):
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "950",
+      "height": "1950",
       "frameborder": "0",
       "scrolling": "no",
       "loading": "lazy",

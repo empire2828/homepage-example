@@ -7,7 +7,6 @@ from .. import globals
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
-    print("[layout_template] init")
 
   def get_or_create_multiframe(self):
     """Erstelle multiframe nur einmal und füge EINMALIG hinzu"""
