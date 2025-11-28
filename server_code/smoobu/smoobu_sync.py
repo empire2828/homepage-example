@@ -63,7 +63,7 @@ def sync_smoobu(user_email):
     if resp.status_code != 200:
       return f"Fehler: {resp.status_code} - {resp.text}"
     data = resp.json()
-    log(resp, user_email,"sync_smoobu")
+    log(data, user_email,"sync_smoobu")
     bookings = data.get("bookings", [])
     all_bookings.extend(bookings)
     if len(bookings) < params["limit"]:

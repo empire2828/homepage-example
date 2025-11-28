@@ -36,6 +36,12 @@ def log(message: str, email: str = None, function: str = None):
     user = anvil.users.get_user()
     email = user.get("email") if user and "email" in user else None
 
+  # Convert message to string if it's a complex object
+  if not isinstance(message, str):
+    message = str(message)
+
+  print(email, message, function)
+  
   print(email, message,function)
   
   bq_client = get_bigquery_client()
