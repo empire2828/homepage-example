@@ -14,17 +14,23 @@ class multiframe(multiframeTemplate):
     self.init_components(**properties)
     #self.flow_panel_1.scroll_into_view(smooth=True)
     self.current_user = globals.current_user
+    self.supabase_key = ""
 
-    if self.current_user['smoobu_api_key'] is None:
+    if self.current_user is None:
+      print("[multiframe] Warnung: Kein current_user verfügbar")
+      return
+
+    if self.current_user.get('smoobu_api_key') is None:
       self.pms_need_to_connect_text.visible = True
-      self.channel_manager_connect_button.visible = True     
-    else:       
-      if self.current_user and 'supabase_key' in self.current_user:
-        self.supabase_key = self.current_user['supabase_key']
+      self.channel_manager_connect_button.visible = True
+    else:
+      self.supabase_key = self.current_user.get('supabase_key', '')
+
+      if self.supabase_key:
         self.content_panel.visible = True
+        print(f"[multiframe] init {globals.current_user['email']} supabase key: {self.supabase_key}")
       else:
-        self.supabase_key = ""
-        print(self.current_user['email']," Warnung: Kein supabase_key verfügbar")      
+        print(f"{self.current_user['email']} Warnung: Kein supabase_key verfügbar")  
 
     self.iframe_urls = [
       f"{self.Locker_Version}qmCOF",            # Dashboard
