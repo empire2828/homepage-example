@@ -13,32 +13,18 @@ class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     #self.flow_panel_1.scroll_into_view(smooth=True)
-    self.supabase_key= ""  
     self.current_user = globals.current_user
-    request_count= int(globals.request_count)
-
-    if request_count > 20:
-      is_user_below_request_count = False
-    else:
-      is_user_below_request_count = True
 
     if self.current_user['smoobu_api_key'] is None:
       self.pms_need_to_connect_text.visible = True
-      self.channel_manager_connect_button.visible = True
-    else:
-      if globals.user_has_subscription is False and is_user_below_request_count is False:
-        self.dashboard_upgrade_needed_text_1.visible = True
-        self.dashboard_upgrade_needed_text_2.visible = True
-        self.dashboard_upgrade_button.visible = True
-    if (is_user_below_request_count or globals.user_has_subscription) and self.current_user['smoobu_api_key'] is not None:      
+      self.channel_manager_connect_button.visible = True     
+    else:       
       if self.current_user and 'supabase_key' in self.current_user:
         self.supabase_key = self.current_user['supabase_key']
         self.content_panel.visible = True
       else:
         self.supabase_key = ""
         print(self.current_user['email']," Warnung: Kein supabase_key verfügbar")      
-    else: 
-      pass      
 
     self.iframe_urls = [
       f"{self.Locker_Version}qmCOF",            # Dashboard
@@ -113,7 +99,6 @@ class multiframe(multiframeTemplate):
 
     #"style": "border: none; background: white;",
     #"allow": "fullscreen; storage-access",
-
     
     # IFrame zum Panel hinzufügen
     iframe.appendTo(get_dom_node(panel))

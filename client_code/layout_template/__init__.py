@@ -163,6 +163,13 @@ class layout_template(layout_templateTemplate):
     if getattr(globals, "user_has_subscription", None) is False:
       globals.request_count = anvil.server.call_s('add_request_count', globals.current_user) 
       self.upgrade_navigation_link.badge = True
-      self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))               
+      self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0)) 
+
+      self.current_user = globals.current_user
+
+      if globals.request_count> 20:
+        open_form('upgrade_needed')
+
+   
 
 
