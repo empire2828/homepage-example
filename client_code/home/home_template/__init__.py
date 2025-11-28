@@ -58,9 +58,5 @@ class home_template(home_templateTemplate):
 
     globals.user_has_subscription = anvil.server.call_s('get_user_has_subscription_for_email', self.user)
 
-    if getattr(globals, "user_has_subscription", None) is False:
-      self.upgrade_navigation_link.badge = True
-      self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))
-
-    print("get_request_count_and_subscription_status"," count: ",globals.request_count," subscr.: ",globals.user_has_subscription)
+    print("[home template] get_request_count_and_subscription_status"," count: ",globals.request_count," subscr.: ",globals.user_has_subscription)
   

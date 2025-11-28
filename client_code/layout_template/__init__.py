@@ -7,11 +7,7 @@ from .. import globals
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
-    print("layout_template init")
-
-    #if getattr(globals, "user_has_subscription", None) is False:
-    #  self.upgrade_navigation_link.badge = True
-    #  self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))
+    print("[layout_template] init")
 
   def get_or_create_multiframe(self):
     """Erstelle multiframe nur einmal und füge EINMALIG hinzu"""
@@ -164,11 +160,10 @@ class layout_template(layout_templateTemplate):
     self.upgrade_navigation_link.selected = True
 
   def check_if_upgrade_needed(self):
-    if not globals.user_has_subscription:
-      result = anvil.server.call_s('add_request_count', globals.current_user)
-      try:
-        globals.request_count = int(result)
-      except (TypeError, ValueError):
-        globals.request_count = 0
-      self.upgrade_navigation_link.badge_count = globals.request_count
+
+    if getattr(globals, "user_has_subscription", None) is False:
+      globals.request_count = anvil.server.call_s('add_request_count', globals.current_user) 
+      self.upgrade_navigation_link.badge = True
+      self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0))               
+
 
