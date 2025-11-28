@@ -1040,3 +1040,12 @@ div.plot-container.plotly svg.main-svg {
 .anvil-spinner {
     --anvil-spinner-bg: %color:Surface Variant%;
 }
+
+.looker-panel {
+  overflow: hidden;
+  -ms-overflow-style: none;  /* IE und Edge */
+}
+
+.looker-panel::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+}

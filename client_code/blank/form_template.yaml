@@ -1,0 +1,8 @@
+components: []
+container: {type: ColumnPanel}
+is_package: true
+slots:
+  content:
+    index: 0
+    set_layout_properties: {full_width_row: true, grid_position: 'GUNHBG,IJDHXK'}
+    target: {name: '', type: container}

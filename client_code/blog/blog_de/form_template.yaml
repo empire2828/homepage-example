@@ -8,7 +8,8 @@ components_by_slot:
           name: stly_image
           properties: {height: 474.77777099609375, horizontal_align: left, source: _/theme/blog/stly_intro_pic.jpg}
           type: Image
-        - event_bindings: {click: stly_link_click}
+        - components: []
+          event_bindings: {click: stly_link_click}
           layout_properties: {slot: card-content-container-slot}
           name: stly_link
           properties:
