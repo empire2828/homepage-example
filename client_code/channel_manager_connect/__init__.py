@@ -86,13 +86,10 @@ class channel_manager_connect(channel_manager_connectTemplate):
           self.progress_bar.progress = 1
           if self._navigate_when_done:
             alert("You will now be taken to the Dashboard. You can check your specific settings in My Account.")
-            #open_form('my_account')
             # Dashboard automatisch laden
+            # Öffne layout_template
             layout_form = open_form('layout_template')
-            layout_form.reset_links()
-            layout_form.dashboard_navigation_link.selected = True
-            multiframe_form = layout_form.open_multiframe_form()
-            multiframe_form.lade_und_zeige_iframe(0)  # Index 0 = Dashboard
+            layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
       except Exception:
         self.timer_1.enabled = False
         self.progress_bar.visible = False
