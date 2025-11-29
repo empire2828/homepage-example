@@ -74,7 +74,7 @@ class multiframe(multiframeTemplate):
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
     if index < 0 or index >= len(self.iframe_urls):        
-      print(self.current_user['email'],f"Ungültiger Index: {index}")
+      print("[multiframe] erstelle_iframe ",self.current_user['email'],f"Ungültiger Index: {index}")
       return
 
     url = self.iframe_urls[index]
@@ -183,4 +183,4 @@ class multiframe(multiframeTemplate):
     for i in range(1, len(self.iframe_urls)):
       if not self.geladene_iframes[i]:
         self.erstelle_iframe(i)
-        print("erstelle iframe",i)
+        print("[multiframe] lade_restliche_iframses erstelle iframe",i)

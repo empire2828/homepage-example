@@ -11,17 +11,17 @@ class layout_template(layout_templateTemplate):
   def get_or_create_multiframe(self):
     """Erstelle multiframe nur einmal und füge EINMALIG hinzu"""
     if not hasattr(globals, 'current_multiframe_instance') or globals.current_multiframe_instance is None:
-      print("[DEBUG] Erstelle NEUES multiframe")
+      print("[layout template] get_or_create multiframe: Erstelle NEUES multiframe")
       globals.current_multiframe_instance = multiframe()
       self.content_panel_iframe.add_component(globals.current_multiframe_instance, full_width_row=True)
-      print(f"[DEBUG] multiframe zu content_panel hinzugefügt")
+      #print(f"[DEBUG] multiframe zu content_panel hinzugefügt")
       globals.multiframe_open = True
 
     return globals.current_multiframe_instance
 
   def show_dashboard(self, iframe_index, link):
     """Zeige einen Dashboard-IFrame"""
-    print(f"[LAYOUT] show_dashboard({iframe_index}) START")
+    print(f"[layout template] show_dashboard({iframe_index}) START")
 
     # Multiframe holen und sichtbar machen
     multiframe_obj = self.get_or_create_multiframe()
@@ -40,7 +40,7 @@ class layout_template(layout_templateTemplate):
     self.reset_links()
     link.selected = True
     self.check_if_upgrade_needed()
-    print(f"[LAYOUT] show_dashboard({iframe_index}) FERTIG")
+    #print(f"[LAYOUT] show_dashboard({iframe_index}) FERTIG")
 
   def reset_links(self):
     """Deselektiere alle Navigation Links"""
