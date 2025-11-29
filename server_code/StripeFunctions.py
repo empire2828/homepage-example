@@ -50,12 +50,15 @@ def delete_stripe_customer(stripe_id):
   try:
     stripe.Customer.delete(stripe_id)
   except Exception as e:
-    print("Error when deleting user: ", e, "\nUser ID: ", user.get_id())
+    print("[StripeFunctions] delete_stripe_customer: Error when deleting user: ", e, "\nUser ID: ", user.get_id())
 
 @anvil.server.http_endpoint('/stripe/stripe_customer_created')
 def stripe_customer_created():
   # Get the Stripe Customer ID
   payload_json = json.loads(anvil.server.request.body.get_bytes())
+
+  # LOG: Webhook empfangen
+  print(f"[StripeFunctions] stripe_customer_created - Type: customer.created | Timestamp: {datetime.datetime.now()} | Payload Keys: {list(payload_json.keys())}")
 
   # Make sure the event is in a format we expect
   try:
@@ -82,7 +85,7 @@ def stripe_customer_created():
 
   # Update the user record in the Anvil app to include the Stripe Customer ID
   user_row.update(stripe_id=stripe_customer_id)
-  print("user row updated: ", datetime.datetime.now())
+  print("[StripeFunctions] stripe_customer_created: user row updated: ", stripe_customer_email, datetime.datetime.now())
 
 @anvil.server.http_endpoint('/stripe/stripe_subscription_updated')
 def stripe_subscription_updated():
@@ -90,6 +93,9 @@ def stripe_subscription_updated():
   #############!!!!!!!!!!!!!! FOR CUSTOMER.subscription.updated AND customer.subscription.CREATED And customer.subscription.deleted
   payload_json = json.loads(anvil.server.request.body.get_bytes())
 
+  # LOG: Webhook empfangen
+  print(f"[StripeFunctions] stripe_subscription_updated: - Type: subscription.updated | Timestamp: {datetime.datetime.now()} | Payload Keys: {list(payload_json.keys())}")
+  
   # Make sure the event is in a format we expect
   try:
     event = stripe.Event.construct_from(
@@ -103,7 +109,7 @@ def stripe_subscription_updated():
   stripe_customer_id = payload_json.get("data").get("object").get("customer")
 
   if stripe_customer_id is None:
-        print("Customer ID is None.")
+        print("[StripeFunctions] stripe_subscription_updated: Customer ID is None.")
         return anvil.server.HttpResponse(400, "Customer ID is missing.")
 
   stripe_customer = stripe.Customer.retrieve(
