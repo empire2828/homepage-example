@@ -7,9 +7,10 @@ from admin import log
 import time
 
 @anvil.server.background_task
-def get_price_elements(reservation_id, headers):
+def get_price_elements(reservation_id, headers, wait_for_sync=False):
   # warte 15 sekunden, da sonst die preisdaten noch nicht fertig sind
-  time.sleep(15)
+  if wait_for_sync:
+    time.sleep(15)
   price_data = {
     'price_baseprice': 0,
     'price_cleaningfee': 0,

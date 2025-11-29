@@ -55,7 +55,7 @@ def process_booking(booking_data, user_id):
 
   # Get price data
   headers = {"Api-Key": smoobu_api_key, "Content-Type": "application/json"}
-  price_data = get_price_elements(reservation_id=reservation_id, headers=headers)
+  price_data = get_price_elements(reservation_id=reservation_id, headers=headers, wait_for_sync= True)
   composite_id = f"{user_email}_{reservation_id}"
 
   data = {
