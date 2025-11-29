@@ -101,9 +101,9 @@ def send_email_to_support(text, file=None, email=None):
       text=text + "\n\n" + str(email),
       attachments=attachments
     )
-    print("send_email_to_support: success", email, text)
+    print("[servermain] send_email_to_support: success", email, text)
   except Exception as e:
-    print("send_email_to_support: ERROR", e)
+    print("[servermain] send_email_to_support: ERROR", e)
 
 @anvil.server.background_task
 def save_last_fees_as_std(user_email):
@@ -129,7 +129,7 @@ def save_last_fees_as_std(user_email):
   query_job = client.query(query, job_config=job_config)
   rows = list(query_job)
   if not rows:
-    print('save last fees as std: Keine direkt oder Website Buchungen gefunden ', user_email)
+    print('[servermain] save last fees as std: Keine direkt oder Website Buchungen gefunden ', user_email)
     return 0
   cleaning_fee = rows[0]['price_cleaningfee']
   linen_fee = rows[0]['price_addon']
@@ -171,7 +171,7 @@ def save_last_fees_as_std(user_email):
       ]
     )
     result = client.query(insert_query, job_config=insert_config).result()
-  print('save_last_fees_as_std: ', user_email, cleaning_fee, std_linen_fee, guestname)
+  print('[servermain] save_last_fees_as_std: ', user_email, cleaning_fee, std_linen_fee, guestname)
   return 1
 
 
@@ -193,7 +193,7 @@ def save_all_channels_for_user(user_email):
   unique_channels = {row['channel_name'] for row in bookings
                      if row['channel_name'] and row['channel_name'].lower() != "blocked channel"}
   if not unique_channels:
-    print("save_all_channels_for_user: Keine Channels für", user_email, "gefunden.")
+    print("[servermain] save_all_channels_for_user: Keine Channels für", user_email, "gefunden.")
     return 0
 
     # 2. Prepare data for batch insert with commission rates from Anvil
@@ -231,7 +231,7 @@ def save_all_channels_for_user(user_email):
     """
   client.query(insert_sql).result()
 
-  print("save_all_channels_for_user: Channels gespeichert:", user_email, list(unique_channels))
+  print("[servermain] save_all_channels_for_user: Channels gespeichert:", user_email, list(unique_channels))
   return len(rows)
 
 def get_bigquery_client():
@@ -256,7 +256,7 @@ def get_bigquery_client():
     #print(f"Verbindung zu BigQuery-Projekt erfolgreich: {project_id}")
     return client
   except Exception as e:
-    print(f"Fehler beim BigQuery Client Setup: {str(e)}")
+    print(f"[servermain] get_bigquery_client: Fehler beim BigQuery Client Setup: {str(e)}")
     return None
 
 

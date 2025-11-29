@@ -28,7 +28,7 @@ def change_email(email):
         email=email
     )
     user["email"] = email
-    print("Customer email updated successfully:", customer)
+    print("[userfunction] Customer email updated successfully:", customer)
   except stripe.error.StripeError as e:
       print("Stripe API error:", e)
   except Exception as e:
@@ -80,7 +80,7 @@ def get_user_has_subscription_for_email(current_user):
     subscription_status = "tester"
     return True  
 
-  print("get_user_has_subscription_for_email: ",current_user['email']," ",subscription_status)
+  print("[userfunction] get_user_has_subscription_for_email: ",current_user['email']," ",subscription_status)
   return False
 
 @anvil.server.callable
@@ -111,7 +111,7 @@ def add_request_count(current_user):
     request_count_cum = 0
   current_user['request_count_cum'] = request_count_cum + 1
 
-  print(" add_request_count: ", current_user['email'], " ", request_count)
+  print("[userfunction] add_request_count: ", current_user['email'], " ", request_count)
   return int(current_user['request_count'])
 
 @anvil.server.callable
@@ -122,7 +122,7 @@ def get_request_count():
   request_count = current_user.get('request_count')
   if request_count is None:
     request_count = 0  
-  print(" get_request_count: ",current_user['email']," ",request_count)
+  print("[userfunction] get_request_count: ",current_user['email']," ",request_count)
   return request_count
 
 @anvil.server.background_task
@@ -140,13 +140,13 @@ def save_user_api_key(api_key):
     current_user = users.get_user()
     
     if current_user is None:
-        raise Exception("Kein Benutzer angemeldet")
+        raise Exception("[userfunction] save_user_api_key: Kein Benutzer angemeldet")
     
     # Den Benutzer in der Datenbank finden und aktualisieren
     user_row = app_tables.users.get(email=current_user['email'])
     
     if user_row is None:
-        raise Exception("Benutzer nicht in der Datenbank gefunden")
+        raise Exception("[userfunction] save_user_api_key: Benutzer nicht in der Datenbank gefunden")
     
     # API-Key in der Datenbank speichern
     user_row['smoobu_api_key'] = api_key
@@ -332,7 +332,7 @@ def save_user_apartment_count(user_email):
   if not user_row:
     raise Exception(f"User with email {user_email} not found")
   user_row["apartment_count"] = count_result
-  print(f"Apartment count for {user_email}: {count_result}")
+  print(f"[userfunction] save_user_apartment_count:Apartment count for {user_email}: {count_result}")
   return count_result
 
 # ---------------------------------------------------------------------------

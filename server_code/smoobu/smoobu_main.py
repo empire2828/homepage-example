@@ -4,9 +4,12 @@ from anvil.tables import app_tables
 import requests
 import anvil.secrets
 from admin import log
+import time
 
 @anvil.server.background_task
 def get_price_elements(reservation_id, headers):
+  # warte 15 sekunden, da sonst die preisdaten noch nicht fertig sind
+  time.sleep(15)
   price_data = {
     'price_baseprice': 0,
     'price_cleaningfee': 0,
@@ -24,7 +27,7 @@ def get_price_elements(reservation_id, headers):
     if price_elements_response.status_code == 200:
       price_elements = price_elements_response.json().get("priceElements", [])
 
-      print("[smoobu main] get_price_elements Reservation-ID",reservation_id," price_elements_response:",price_elements_response)
+      print("[smoobu main] get_price_elements Reservation-ID",reservation_id," price_elements:",price_elements)
       log(price_elements,reservation_id,"[smoobu_main] get_price_elements")
       
       has_addon = any(pe.get('type') == 'addon' for pe in price_elements)

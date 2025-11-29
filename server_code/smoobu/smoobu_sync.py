@@ -31,7 +31,7 @@ def sync_smoobu(user_email):
   delete_bookings_by_email(user_email)
   
   if client is None:
-    print("sync_smoobu: BigQuery-Client konnte nicht erstellt werden", user_email)
+    print("[smoobu_sync] sync_smoobu: BigQuery-Client konnte nicht erstellt werden", user_email)
     return 
 
   base_url = "https://login.smoobu.com/api/reservations"
@@ -74,7 +74,7 @@ def sync_smoobu(user_email):
   anvil.server.task_state.update({'message': f'{total} Bookings received. Now syncing prices... be patient, get a coffee', 'progress': 0.4})
   
   if not all_bookings:
-    print("sync_smoobu: Keine Buchung gefunden ",user_email)
+    print("[smoobu_sync] sync_smoobu: Keine Buchung gefunden ",user_email)
     return 
   
     # Daten für BigQuery vorbereiten
@@ -118,7 +118,7 @@ def sync_smoobu(user_email):
     rows_to_insert.append(row)
 
   if not rows_to_insert:
-    print("sync_smoobu: Keine Buchung zur Übertragung ",user_email)
+    print("[smoobu_sync] sync_smoobu: Keine Buchung zur Übertragung ",user_email)
     anvil.server.task_state['message'] = 'Keine Buchung zur Übertragung'
     return 
 
@@ -150,7 +150,7 @@ def sync_smoobu(user_email):
   sql = (f"INSERT INTO `{table}` ({', '.join(columns)}) VALUES\n" +
          ",\n".join(value_rows))
   client.query(sql).result()
-  print(f"sync smoobu: {len(rows_to_insert)} bookings imported into BigQuery.")
+  print(f"[smoobu_sync] sync smoobu: {len(rows_to_insert)} bookings imported into BigQuery.")
 
   anvil.server.task_state.update({'message': 'Calculating standard fees and commission...', 'progress': 0.8})
   
