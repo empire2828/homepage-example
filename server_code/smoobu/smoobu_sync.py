@@ -80,7 +80,7 @@ def sync_smoobu(user_email):
     # Daten für BigQuery vorbereiten
   rows_to_insert = []
   for booking in all_bookings:
-    price_data = get_price_elements(booking['id'], headers)
+    price_data = get_price_elements(booking['id'], headers, wait_for_sync = False)
     row = {
       "reservation_id": booking.get('id'),
       "id": f"{user_email}_{booking.get('id')}",
