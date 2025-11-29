@@ -11,31 +11,32 @@ def smoobu_webhook_handler():
   try:
     request = anvil.server.request
     webhook_data = request.body_json
-    print(f"Webhook-Daten empfangen: {webhook_data}")        
+    print(f"[smoobu webhook] smoobu_webhook_handler: Webhook-Daten empfangen: {webhook_data}")        
 
     action = webhook_data.get('action')
     booking_data = webhook_data.get('data', {})
     user_id = str(webhook_data.get('user') or 0)
     user_email = get_user_email(user_id)
+    print("[smoobu webhook] smoobu webhook handler ", user_email, " ",booking_data)
 
     if action in ['newReservation', 'cancelReservation', 'modification of booking','updateReservation']:
       process_booking(booking_data, user_id)            
-      print(f"Buchung verarbeitet: {booking_data.get('id')}")
+      print(f"[smoobu webhook] smoobu_webhook_handler Buchung verarbeitet: {booking_data.get('id')}")
 
     user_row = app_tables.users.get(email=user_email)
     if user_row:
       user_row['server_data_last_update'] = datetime.now()
 
-    return {"status": "success"}
+    return {"[smoobu webhook] smoobu_webhook_handler: status": "success"}
 
   except Exception as e:
-    print(f"smoobu_webhook_handler: Fehler beim Verarbeiten des Webhooks: {str(e)}")
-    return {"status": "error", "message": str(e)}, 500
+    print(f"[smoobu webhook] smoobu_webhook_handler: Fehler beim Verarbeiten des Webhooks: {str(e)}")
+    return {"[smoobu webhook] smoobu_webhook_handler: status": "error", "message": str(e)}, 500
 
 @anvil.server.background_task
 def process_booking(booking_data, user_id):
   if not booking_data or 'id' not in booking_data:
-    print("process_booking: Keine gültigen Buchungsdaten erhalten")
+    print("[smoobu webhook] process_booking: Keine gültigen Buchungsdaten erhalten")
     return
 
   user_email = get_user_email(user_id) or "unbekannt"
@@ -49,7 +50,7 @@ def process_booking(booking_data, user_id):
   # Skip blocked channels
   channel_name = booking_data.get('channel', {}).get('name')
   if channel_name == 'Blocked channel':
-    print(f"process_booking: Buchung {reservation_id} ist ein Blocked channel - wird übersprungen")
+    print(f"[smoobu webhook] process_booking: Buchung {reservation_id} ist ein Blocked channel - wird übersprungen")
     return
 
   # Get price data
@@ -105,7 +106,7 @@ def process_booking(booking_data, user_id):
   )
   row_count = list(client.query(check_sql, job_config=job_config).result())[0]["count"]
   #print("check_sql:",check_sql)
-  print("row_count:",row_count)
+  print("[smoobu webhook] process booking:row_count:",row_count)
 
   fields = ', '.join(data.keys())
   #values = ', '.join([to_sql_value(v) for v in data.values()])
@@ -129,7 +130,7 @@ def process_booking(booking_data, user_id):
         """
     #print("update_sql:",update_sql)
     client.query(update_sql, job_config=job_config).result()
-    print(f"process_booking: Aktualisiere bestehende Buchung: {composite_id}")
+    print(f"[smoobu webhook] process_booking: Aktualisiere bestehende Buchung: {composite_id}")
   else:
     # Insert with DML
     insert_sql = f"""
@@ -138,17 +139,17 @@ def process_booking(booking_data, user_id):
         """
     client.query(insert_sql).result()
     print("insert_sql:",insert_sql)
-    print(f"process_booking: Füge neue Buchung hinzu: {composite_id}")
+    print(f"[smoobu webhook] process_booking: Füge neue Buchung hinzu: {composite_id}")
 
 @anvil.server.background_task
 def delete_booking(reservation_id, user_id):
   if not reservation_id or not user_id:
-    print("Ungültige Reservierungs-ID oder Benutzer-ID")
+    print("[smoobu webhook] delete_booking: Ungültige Reservierungs-ID oder Benutzer-ID")
     return
 
   user_email = get_user_email(user_id)
   if not user_email:
-    print(f"Keine E-Mail für Benutzer-ID {user_id} gefunden")
+    print(f"[smoobu webhook] delete_booking: Keine E-Mail für Benutzer-ID {user_id} gefunden")
     return
 
     # Composite ID für delete_booking
@@ -166,7 +167,7 @@ def delete_booking(reservation_id, user_id):
   )
 
   client.query(delete_sql, job_config=job_config).result()
-  print(f"Buchung {composite_id} aus BigQuery gelöscht")
+  print(f"[smoobu webhook] delete_booking: Buchung {composite_id} aus BigQuery gelöscht")
 
 @anvil.server.background_task
 def get_user_email(user_id):
@@ -177,9 +178,9 @@ def get_user_email(user_id):
     first_row = next(iter(user_rows), None)
     if first_row:
         user_email = first_row['email']
-        print(f"Benutzer gefunden: {user_email}")
+        print(f"[smoobu webhook] get_user_email:Benutzer gefunden: {user_email}")
     else:
-        print(f"Kein Benutzer mit Smoobu-ID {user_id} gefunden")
+        print(f"[smoobu webhook] get_user_email: Kein Benutzer mit Smoobu-ID {user_id} gefunden")
     return user_email
 
 def get_supabase_key_for_user(email):

@@ -29,7 +29,7 @@ class help(helpTemplate):
         ]
       )
       if result == "YES":
-        open_form('dashboard')
+        #open_form('dashboard')
         anvil.server.call_s('launch_sync_smoobu')
         pass
       else:

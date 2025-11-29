@@ -2,10 +2,6 @@ from ._anvil_designer import my_accountTemplate
 from anvil import *
 import anvil.server
 import anvil.users
-#from anvil.tables import app_tables
-#from .ChangeName import ChangeName
-#from .ChangeEmail import ChangeEmail
-#from .DeleteAccountAlert import DeleteAccountAlert
 from .. import globals
 
 class my_account(my_accountTemplate):

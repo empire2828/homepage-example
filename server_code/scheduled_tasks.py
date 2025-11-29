@@ -7,16 +7,9 @@ from supabase import create_client
 from servermain import get_bigquery_client
 from google.cloud import bigquery
 
-# supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-# supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-# supabase_client: create_client(supabase_url, supabase_api_key)
-
-# Supabase-Client initialisieren
-# supabase_client = create_client(supabase_url, supabase_api_key)
-
 @anvil.server.background_task
 def delete_old_logs():
-  x_days_ago = datetime.now(timezone.utc) - timedelta(days=5)
+  x_days_ago = datetime.now(timezone.utc) - timedelta(days=7)
   # Convert to date only
   x_days_ago_date = x_days_ago.date()
 

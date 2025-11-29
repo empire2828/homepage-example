@@ -1,14 +1,7 @@
 from ._anvil_designer import channel_manager_connectTemplate
 from anvil import *
-#from routing import router
-#import m3.components as m3
 import anvil.server
-#import anvil.google.auth, anvil.google.drive
-#from anvil.google.drive import app_files
 import anvil.users
-#import anvil.tables as tables
-#import anvil.tables.query as q
-#from anvil.tables import app_tables
 from .. import globals
 
 class channel_manager_connect(channel_manager_connectTemplate):
@@ -34,7 +27,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
     result = anvil.server.call('validate_smoobu_api_key',current_user['email'])    
     if not result.get("valid"):
       anvil.alert('Smoobu said API Key is not correct. It should look like: jgfKvbu1Sdrqu5INRO0kwjV07fed1xrls22FJIFABY. If correct, just press save again as Smoobu is sometimes slow...',large=True)
-      print(current_user['email']," API Key not correct", result)
+      print("[channel_manager_connect] save_api_key_button_click: ",current_user['email']," API Key not correct", result)
       return
     else:
       current_user = anvil.users.get_user()
@@ -48,7 +41,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
     result = anvil.server.call('validate_smoobu_api_key',current_user['email'])    
     if not result.get("valid"):
       anvil.alert('API Key is not correct or not yet saved. It should look like this one: jgfKvbu1Sdrqu5INRO0kwjV07fed1xrls22FJIFABY',large=True)
-      print(current_user['email']," API Key not correct", result)
+      print("[channel_manager_connect] sync_smoobu_button_click: ",current_user['email']," API Key not correct", result)
       return
     alert("Sync started- this will take around 2 minutes.")
     self.task = anvil.server.call('launch_sync_smoobu')

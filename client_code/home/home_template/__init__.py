@@ -58,5 +58,5 @@ class home_template(home_templateTemplate):
 
     globals.user_has_subscription = anvil.server.call_s('get_user_has_subscription_for_email', self.user)
 
-    print("[home template] get_request_count_and_subscription_status"," count: ",globals.request_count," subscr.: ",globals.user_has_subscription)
+    print("[home template] get_request_count_and_subscription_status: "," count: ",globals.request_count," subscr.: ",globals.user_has_subscription)
   

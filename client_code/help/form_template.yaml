@@ -1,35 +1,41 @@
 components_by_slot:
   content:
-  - layout_properties: {}
-    name: body_2
-    properties: {font_size: 18, role: body, text: 'Tell us your problem or idea, a screenshot always helps:'}
-    type: Label
-  - event_bindings: {click: link_1_click}
+  - components:
+    - layout_properties: {grid_position: 'PRAYBM,AYUDLR'}
+      name: body_2
+      properties: {font_size: 18, role: body, text: 'Tell us your problem or idea, a screenshot always helps:'}
+      type: Label
+    - components:
+      - layout_properties: {slot: anvil-m3-link-slot}
+        name: spacer_1
+        properties: {height: 102.95657348632812}
+        type: Spacer
+      event_bindings: {click: link_1_click}
+      layout_properties: {grid_position: 'JHQPHY,TZTKAD'}
+      name: link_1
+      properties: {font_size: 18, icon: 'mi:email', text: info@lodginia.com, url: 'mailto:info@lodginia.com'}
+      type: form:dep_g9k4toow7i44kq:_Components.Link
+    - layout_properties: {grid_position: ''}
+      name: spacer_2
+      properties: {height: 18.9617919921875}
+      type: Spacer
+    - layout_properties: {grid_position: 'SAJKGF,JQIYFZ'}
+      name: body_1
+      properties:
+        font_size: 18
+        role: body
+        text: |
+          Here you can re-sync all your datas in case you experience any issues:
+      type: Label
+    - event_bindings: {click: resync_button_click}
+      layout_properties: {grid_position: 'DZMZJA,BWOULR'}
+      name: resync_button
+      properties: {role: filled-button, text: Re-sync}
+      type: Button
     layout_properties: {}
-    name: link_1
-    properties: {icon: 'mi:email', text: info@lodginia.com, url: 'mailto:info@lodginia.com'}
-    type: form:dep_g9k4toow7i44kq:_Components.Link
-  - layout_properties: {}
-    name: spacer_1
-    properties: {height: 102.95657348632812}
-    type: Spacer
-  - layout_properties: {}
-    name: body_1
-    properties:
-      font_size: 18
-      role: body
-      text: |
-        Here you can re-sync all your datas in case you experience any issues:
-    type: Label
-  - layout_properties: {}
-    name: spacer_2
-    properties: {height: 18.9617919921875}
-    type: Spacer
-  - event_bindings: {click: resync_button_click}
-    layout_properties: {}
-    name: resync_button
-    properties: {role: filled-button, text: Re-sync}
-    type: Button
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
   slot_1: []
 is_package: true
 layout: {type: 'form:layout_template'}

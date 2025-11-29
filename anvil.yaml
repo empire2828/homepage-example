@@ -15,6 +15,23 @@ db_schema:
       type: number
     server: full
     title: channels
+  log:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: Date
+      type: datetime
+    - admin_ui: {order: 1, width: 200}
+      name: function
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: message
+      type: string
+    - admin_ui: {order: 3, width: 200}
+      name: user
+      type: string
+    server: full
+    title: log
   users:
     client: none
     columns:
@@ -115,8 +132,8 @@ scheduled_tasks:
 - job_id: XRUIAFLI
   task_name: delete_old_logs
   time_spec:
-    at: {day: 1, hour: 3, minute: 7}
-    every: week
+    at: {hour: 3, minute: 7}
+    every: day
     n: 1
 - job_id: RZNAJACY
   task_name: reset_request_count_for_all_users
