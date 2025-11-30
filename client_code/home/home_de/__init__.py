@@ -3,6 +3,7 @@ from anvil import *
 import anvil.server
 import anvil.users
 from ... import globals
+from anvil import js
 
 class home_de(home_deTemplate):
   def __init__(self, **properties):
@@ -25,7 +26,8 @@ class home_de(home_deTemplate):
       open_form('channel_manager_connect')
 
       anvil.server.call_s("send_registration_notification", user["email"])
-    pass
+
+      self.track_conversion(booking_value=0)
 
   def impressum_link_click(self, **event_args):
     open_form("home.impressum")
@@ -40,3 +42,12 @@ class home_de(home_deTemplate):
     pass
 
 ### beim Ändern nicht die englische Version vergessen!!
+
+  def track_conversion(self, booking_value=0):
+    """Triggert Google Ads Conversion"""
+    js.eval(f"""
+          gtag('event', 'conversion_event_signup', {{
+              'value': {booking_value},
+              'currency': 'EUR'
+          }});
+      """)
