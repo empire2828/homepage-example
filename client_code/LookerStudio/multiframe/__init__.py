@@ -21,8 +21,7 @@ class multiframe(multiframeTemplate):
       return
 
     if self.current_user.get('smoobu_api_key') is None:
-      self.pms_need_to_connect_text.visible = True
-      self.channel_manager_connect_button.visible = True
+      open_form('channel_manager_connect')
     else:
       self.supabase_key = self.current_user.get('supabase_key', '')
 

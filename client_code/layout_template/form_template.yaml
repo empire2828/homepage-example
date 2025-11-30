@@ -170,7 +170,7 @@ components_by_slot:
 is_package: true
 layout:
   properties:
-    content_padding: ['8', '8', '8', '8']
+    content_padding: [0, '4', '2', '4']
     navigation_rail_collapse_to: modal_navigation_drawer
     navigation_rail_vertical_align: top
     show_sidesheet: false
