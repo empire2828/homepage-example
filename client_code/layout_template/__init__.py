@@ -3,10 +3,15 @@ from anvil import *
 import anvil.server
 from ..LookerStudio.multiframe import multiframe
 from .. import globals
+import anvil.js
 
 class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
+
+  def is_mobile(self):
+    """Prüft ob Mobile View"""
+    return anvil.js.window.innerWidth < 768
 
   def get_or_create_multiframe(self):
     """Erstelle multiframe nur einmal und füge EINMALIG hinzu"""
@@ -14,9 +19,7 @@ class layout_template(layout_templateTemplate):
       print("[layout template] get_or_create multiframe: Erstelle NEUES multiframe")
       globals.current_multiframe_instance = multiframe()
       self.content_panel_iframe.add_component(globals.current_multiframe_instance, full_width_row=True)
-      #print(f"[DEBUG] multiframe zu content_panel hinzugefügt")
       globals.multiframe_open = True
-
     return globals.current_multiframe_instance
 
   def show_dashboard(self, iframe_index, link):
@@ -27,20 +30,15 @@ class layout_template(layout_templateTemplate):
     multiframe_obj = self.get_or_create_multiframe()
     multiframe_obj.visible = True
 
-    # IFrame laden/anzeigen
-    multiframe_obj.lade_und_zeige_iframe(iframe_index)
+    if self.is_mobile():
+      multiframe_obj.lade_iframe_mobile(iframe_index)
+    else:
+      multiframe_obj.lade_und_zeige_iframe(iframe_index)
 
-    #######################################################################
-    # ← NEU: Beim ersten Dashboard-Aufruf alle anderen im Hintergrund laden
-    #if not hasattr(self, '_background_loading_triggered'):
-    #  self._background_loading_triggered = True
-    #  print('background load triggered')
-    #  anvil.js.window.setTimeout(lambda: multiframe_obj.lade_restliche_iframes(), 2000)
-    
     self.reset_links()
     link.selected = True
+    #self.current_user = globals.current_user
     self.check_if_upgrade_needed()
-    #print(f"[LAYOUT] show_dashboard({iframe_index}) FERTIG")
 
   def reset_links(self):
     """Deselektiere alle Navigation Links"""
@@ -56,7 +54,7 @@ class layout_template(layout_templateTemplate):
     self.detailed_bookings_navigation_link.selected = False
     self.long_trends_navigation_link.selected = False
     self.connect_navigation_link.selected = False
-    self.knowledge_hub_link.selected = False
+    self.help_link.selected = False
     self.my_account_navigation_link.selected = False
     self.upgrade_navigation_link.selected = False
 
@@ -144,12 +142,12 @@ class layout_template(layout_templateTemplate):
     self.reset_links()
     self.my_account_navigation_link.selected = True
 
-  def knowledge_hub_link_click(self, **event_args):
+  def help_link_click(self, **event_args):
     globals.current_multiframe_instance = None
     globals.multiframe_open = False
-    open_form('knowledge_hub')
+    open_form('help')
     self.reset_links()
-    self.knowledge_hub_link.selected = True
+    self.help_link.selected = True
 
   def upgrade_navigation_link_click(self, **event_args):
     globals.current_multiframe_instance = None
@@ -159,16 +157,14 @@ class layout_template(layout_templateTemplate):
     self.upgrade_navigation_link.selected = True
 
   def check_if_upgrade_needed(self):
-
     if getattr(globals, "user_has_subscription", None) is False:
       globals.request_count = anvil.server.call_s('add_request_count', globals.current_user) 
       self.upgrade_navigation_link.badge = True
       self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0)) 
 
-      self.current_user = globals.current_user
-
       if globals.request_count> 20:
         open_form('upgrade_needed')
+
 
    
 

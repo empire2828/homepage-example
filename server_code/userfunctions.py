@@ -257,7 +257,13 @@ def get_user_parameter():
   
   # 4. Run the query and return the first row as a dict (if any).
   rows = list(client.query(sql, job_config=job_config).result())
-  print("[userfunction] get_user_parameter:",email, dict(rows[0]) )
+  if rows:
+    result = dict(rows[0])
+    print("[userfunction] get_user_parameter:", email, result)
+    return result
+  else:
+    print("[userfunction] get_user_parameter:", email, "No parameters found")
+    return None
   return dict(rows[0]) if rows else None
 
 # ---------------------------------------------------------------------------

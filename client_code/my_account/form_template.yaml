@@ -1,14 +1,22 @@
 components_by_slot:
   content:
+  - layout_properties: {}
+    name: spacer_5
+    properties: {}
+    type: Spacer
   - components:
     - layout_properties: {grid_position: 'BZIFFI,BHFSLT'}
       name: my_account_heading
-      properties: {bold: true, text: My account}
+      properties: {bold: true, font_size: 28, text: My account}
       type: form:dep_g9k4toow7i44kq:_Components.Heading
     - layout_properties: {grid_position: 'BZIFFI,YKCVFT'}
       name: admin_navigation_link
       properties: {background_color: 'theme:Secondary Container', icon: 'mi:admin_panel_settings', navigate_to: Admin, text: Admin, visible: false}
       type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+    - layout_properties: {grid_position: 'FSNUWV,ILUHHB'}
+      name: spacer_4
+      properties: {}
+      type: Spacer
     - layout_properties: {grid_position: 'BVRSTQ,EIVOMD'}
       name: body_2_copy_2
       properties: {role: body, text: 'eMail:'}
@@ -126,10 +134,6 @@ components_by_slot:
       name: spacer_7
       properties: {height: 13.9556884765625}
       type: Spacer
-    - layout_properties: {grid_position: 'GTZJFN,SUJQWY'}
-      name: value_loading_checkbox
-      properties: {bold: false, italic: true, text: Values below for you are calculating ....}
-      type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'BCHDQL,JTLNIG'}
       name: title_1
       properties: {role: title, text: Fees}

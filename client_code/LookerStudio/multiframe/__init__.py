@@ -184,3 +184,46 @@ class multiframe(multiframeTemplate):
       if not self.geladene_iframes[i]:
         self.erstelle_iframe(i)
         print("[multiframe] lade_restliche_iframses erstelle iframe",i)
+
+  def lade_iframe_mobile(self, index):
+    """Einfaches IFrame laden für Mobile - OHNE Caching/Status - nutzt nur erstes Panel"""
+    if index < 0 or index >= len(self.iframe_urls):
+      print(f"[multiframe mobile] Ungültiger Index: {index}")
+      return
+
+    url = self.iframe_urls[index]
+
+    # Parameter für Supabase Key hinzufügen
+    if self.supabase_key:
+      params = {"supabase_key_url": self.supabase_key}
+      encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
+      iframe_url = url + encoded_params
+    else:
+      iframe_url = url
+
+    # Nur das ERSTE Panel nutzen für Mobile
+    panel = self.panels[0]
+
+    # 1. Zuerst: Alle iframes explizit entfernen (wichtig für Memory!)
+    jQuery(get_dom_node(panel)).find('iframe').remove()
+
+    # 2. Dann: Panel komplett leeren (falls noch was übrig ist)
+    jQuery(get_dom_node(panel)).empty()
+
+    # IFrame erstellen (OHNE lazy loading für schnellere Mobile-Performance)
+    iframe = jQuery("<iframe>").attr({
+      "src": iframe_url,
+      "width": "100%",
+      "height": "1950",
+      "frameborder": "0",
+      "scrolling": "no",
+      "referrerpolicy": "origin-when-cross-origin",
+      "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
+    })
+
+    iframe.appendTo(get_dom_node(panel))
+    panel.visible = True
+
+    print(f"[multiframe mobile] IFrame {index} einfach in Panel 0 geladen (kein Cache)")
+
+

@@ -1,6 +1,18 @@
 components_by_slot:
   content:
+  - layout_properties: {}
+    name: spacer_4
+    properties: {}
+    type: Spacer
   - components:
+    - layout_properties: {grid_position: 'SUUOGR,NGXZZO'}
+      name: title_1_copy_2
+      properties: {bold: true, font_size: 28, role: title, text: Lodginia Help}
+      type: Label
+    - layout_properties: {grid_position: 'UKFHUF,EXTOTN'}
+      name: spacer_3
+      properties: {height: 74.77777099609375}
+      type: Spacer
     - layout_properties: {grid_position: 'PRAYBM,AYUDLR'}
       name: body_2
       properties: {font_size: 18, role: body, text: 'Tell us your problem or idea, a screenshot always helps:'}
