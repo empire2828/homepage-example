@@ -3,6 +3,7 @@ from anvil import *
 import anvil.server
 import anvil.users
 from ... import globals
+#from anvil import js
 
 class home_de(home_deTemplate):
   def __init__(self, **properties):
@@ -25,12 +26,11 @@ class home_de(home_deTemplate):
       open_form('channel_manager_connect')
 
       anvil.server.call_s("send_registration_notification", user["email"])
-    pass
 
   def impressum_link_click(self, **event_args):
     open_form("home.impressum")
     pass
-
+    
   def pricing_link_click(self, **event_args):
     self.pricing_label.scroll_into_view()
     pass

@@ -113,13 +113,43 @@ dependencies:
 metadata: {description: Smoobu analytics. Easy. Fast. Simple., logo_img: 'asset:app/Lodginia_orange_transparent-logo.jpeg', title: lodginia.com}
 name: lodginia.com
 native_deps:
-  head_html: |+
+  head_html: |-
     <script src="https://elfsightcdn.com/platform.js" async></script>
     <link rel="alternate" hreflang="de" href="https://lodginia.com/de/" />
     <link rel="alternate" hreflang="en" href="https://lodginia.com/en/" />
     <link rel="alternate" hreflang="x-default" href="https://lodginia.com/" />
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-56E5GWG0T1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
+      gtag('config', 'G-56E5GWG0T1');
+    </script>
+
+    <!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1437282281369934'); fbq('track', 'PageView');</script><noscript> <img height="1" width="1" src="https://www.facebook.com/tr?id=1437282281369934&ev=PageView&noscript=1"/></noscript><!-- End Meta Pixel Code -->
+
+    <!-- Dein Helper Script -->
+    <script>
+      function sendGoogleConversion() {
+        return new Promise((resolve) => {
+          var callback = function() { resolve("done"); };
+          // Check, ob gtag existiert (AdBlocker)
+          if (typeof gtag === 'function') {
+            gtag('event', 'conversion_event_signup', {
+              'event_callback': callback,
+              'event_timeout': 2000,
+              'value': 0,
+              'currency': 'EUR'
+            });
+          } else {
+            resolve("skipped");
+          }
+        });
+      }
+    </script>
 package_name: lodginia
 renamed: true
 runtime_options:

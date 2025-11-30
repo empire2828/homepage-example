@@ -3,6 +3,7 @@ from anvil import *
 import anvil.server
 import anvil.users
 from .. import globals
+from anvil import js
 
 class channel_manager_connect(channel_manager_connectTemplate):
   def __init__(self, **properties):
@@ -11,6 +12,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
     self.task = None
     self.last_progress_from_task = 0
     self.last_progress_seen = 0
+    anvil.js.call('sendGoogleConversion')
    # Any code you write here will run before the form opens.
  
   def save_api_key_button_click(self, **event_args):
