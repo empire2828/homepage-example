@@ -12,7 +12,6 @@ class multiframe(multiframeTemplate):
 
   def __init__(self, **properties):
     self.init_components(**properties)
-    #self.flow_panel_1.scroll_into_view(smooth=True)
     self.current_user = globals.current_user
     self.supabase_key = ""
 
@@ -66,121 +65,241 @@ class multiframe(multiframeTemplate):
     # Aktuell sichtbarer Index
     self.aktueller_index = None
 
+    # Geräteerkennung
+    self.ist_mobile = self._ist_mobile_geraet()
+
+    if self.ist_mobile:
+      print("[multiframe] 📱 MOBILE MODUS: Nur 1 iFrame gleichzeitig")
+      self.max_cache_size = 1  # NUR aktuell sichtbares iFrame
+    else:
+      print("[multiframe] 🖥️ DESKTOP MODUS: Max 7 iFrames")
+      self.max_cache_size = 7
+
+    # Cache nur für Desktop
+    self.iframe_cache = [] if not self.ist_mobile else None
+
     # Initial: alle Panels unsichtbar
     for i, panel in enumerate(self.panels):
       panel.visible = False
       panel.height = 2000
 
+  def _ist_mobile_geraet(self):
+    """Prüft ob Mobile-Gerät (aggressiver als nur Breite)"""
+    try:
+      breite = anvil.js.window.innerWidth
+
+      # User Agent prüfen
+      user_agent = anvil.js.window.navigator.userAgent.lower()
+      ist_mobile_ua = any(x in user_agent for x in ['mobile', 'android', 'iphone', 'ipad'])
+
+      # Touch-Support prüfen
+      hat_touch = hasattr(anvil.js.window.navigator, 'maxTouchPoints') and \
+      anvil.js.window.navigator.maxTouchPoints > 0
+
+      # Kombinierte Prüfung
+      ist_mobile = breite < 768 or ist_mobile_ua or hat_touch
+
+      print(f"[multiframe] Gerät: Breite={breite}px, Mobile-UA={ist_mobile_ua}, Touch={hat_touch} → Mobile={ist_mobile}")
+      return ist_mobile
+
+    except Exception as e:
+      print(f"[multiframe] Fehler bei Mobile-Erkennung: {e}")
+      # Im Zweifel: Mobile-Modus (sicherer)
+      return True
+
+  def _entferne_alle_iframes_ausser(self, behalte_index):
+    """AGGRESSIVE Methode: Entfernt ALLE iFrames außer dem angegebenen"""
+    print(f"[multiframe] 🧹 Entferne alle iFrames außer {behalte_index}")
+
+    for i in range(len(self.panels)):
+      if i == behalte_index:
+        continue  # Dieses behalten
+
+      if self.geladene_iframes[i]:
+        try:
+          # Panel leeren
+          jQuery(get_dom_node(self.panels[i])).empty()
+
+          # Status zurücksetzen
+          self.geladene_iframes[i] = False
+
+          print(f"[multiframe]   ✓ iFrame {i} entfernt")
+        except Exception as e:
+          print(f"[multiframe]   ✗ Fehler bei iFrame {i}: {e}")
+
+  def _entferne_aeltestes_iframe_desktop(self):
+    """Desktop: Entfernt ältestes iFrame aus Cache"""
+    if len(self.iframe_cache) == 0:
+      return
+
+    # Ältestes (außer aktuell sichtbares) entfernen
+    for i in range(len(self.iframe_cache)):
+      kandidat = self.iframe_cache[i]
+
+      if kandidat == self.aktueller_index:
+        continue
+
+      self.iframe_cache.pop(i)
+
+      try:
+        panel = self.panels[kandidat]
+        jQuery(get_dom_node(panel)).empty()
+        self.geladene_iframes[kandidat] = False
+
+        print(f"[multiframe] Desktop: iFrame {kandidat} entfernt (Cache: {self.iframe_cache})")
+        return
+      except Exception as e:
+        print(f"[multiframe] Fehler beim Entfernen von iFrame {kandidat}: {e}")
+        return
+
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
     if index < 0 or index >= len(self.iframe_urls):        
-      print("[multiframe] erstelle_iframe ",self.current_user['email'],f"Ungültiger Index: {index}")
+      print(f"[multiframe] Ungültiger Index: {index}")
       return
 
-    url = self.iframe_urls[index]
-    panel = self.panels[index]
+    try:
+      url = self.iframe_urls[index]
+      panel = self.panels[index]
 
-    # Parameter für Supabase Key hinzufügen
-    if self.supabase_key:
-      params = {"supabase_key_url": self.supabase_key}
-      encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
-      iframe_url = url + encoded_params
-    else:
-      iframe_url = url
+      # Parameter für Supabase Key
+      if self.supabase_key:
+        params = {"supabase_key_url": self.supabase_key}
+        encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
+        iframe_url = url + encoded_params
+      else:
+        iframe_url = url
 
-    # Vorheriges IFrame entfernen falls vorhanden
-    jQuery(get_dom_node(panel)).empty()
+      # Vorheriges entfernen
+      jQuery(get_dom_node(panel)).empty()
 
-    # IFrame erstellen mit expliziten Attributen
-    iframe = jQuery("<iframe>").attr({
-      "src": iframe_url,
-      "width": "100%",
-      "height": "1950",
-      "frameborder": "0",
-      "scrolling": "no",
-      "loading": "lazy",
-      "referrerpolicy": "origin-when-cross-origin",
-      "sandbox":"allow-scripts allow-same-origin allow-storage-access-by-user-activation"
-    })
+      # Mobile: Kleinere Höhe für weniger Speicher
+      hoehe = "1500" if self.ist_mobile else "1950"
 
-    #"style": "border: none; background: white;",
-    #"allow": "fullscreen; storage-access",
-    
-    # IFrame zum Panel hinzufügen
-    iframe.appendTo(get_dom_node(panel))
+      # IFrame erstellen
+      iframe_attrs = {
+        "src": iframe_url,
+        "width": "100%",
+        "height": hoehe,
+        "frameborder": "0",
+        "scrolling": "no",
+        "loading": "eager" if self.ist_mobile else "lazy",  # Mobile: sofort laden
+        "referrerpolicy": "origin-when-cross-origin",
+        "allow": "storage-access"
+      }
 
-    # Als geladen markieren
-    self.geladene_iframes[index] = True
-    #print("erstelle_iframe als geladen markieren self.geladene_iframes:",self.geladene_iframes)
+      iframe = jQuery("<iframe>").attr(iframe_attrs)
+      iframe.appendTo(get_dom_node(panel))
+
+      # Status setzen
+      self.geladene_iframes[index] = True
+
+      # Desktop: Cache aktualisieren
+      if not self.ist_mobile:
+        if index in self.iframe_cache:
+          self.iframe_cache.remove(index)
+        self.iframe_cache.append(index)
+
+        while len(self.iframe_cache) > self.max_cache_size:
+          self._entferne_aeltestes_iframe_desktop()
+
+      print(f"[multiframe] ✓ iFrame {index} erstellt ({'Mobile' if self.ist_mobile else 'Desktop'})")
+
+    except Exception as e:
+      print(f"[multiframe] ✗ Fehler beim Erstellen von iFrame {index}: {e}")
 
   def lade_und_zeige_iframe(self, index):
-    """Lädt IFrame falls noch nicht geladen und zeigt es an"""
-    #print(f"[MULTIFRAME] lade_und_zeige_iframe({index}) START")
-  
+    """Lädt IFrame falls nötig und zeigt es an"""
     if index < 0 or index >= len(self.iframe_urls):
-      print(self.current_user['email']," ",f"Ungültiger Index: {index}")
+      print(f"[multiframe] Ungültiger Index: {index}")
       return
-  
-    #print(f"[MULTIFRAME] Index {index} ist gültig")
-  
-    # OPTIMIERUNG: Wenn bereits angezeigt, nichts tun
-    if self.aktueller_index == index:
-      #print(f"[MULTIFRAME] IFrame {index} ist bereits sichtbar, überspringe")
-      return
-  
-    #print(f"[MULTIFRAME] aktueller_index ({self.aktueller_index}) != index ({index})")
-  
-    # OPTIMIERUNG: Nur vorheriges Panel verstecken statt alle
-    if self.aktueller_index is not None:
-        #print(f"[MULTIFRAME] Verstecke vorheriges Panel {self.aktueller_index}")
-        self.panels[self.aktueller_index].visible = False
-  
-    # IFrame laden falls nötig
-    if not self.geladene_iframes[index]:
-      #print(f"[MULTIFRAME] IFrame {index} wird erstmalig geladen...")
-      self.erstelle_iframe(index)
-    #else:
-      #print(f"[MULTIFRAME] IFrame {index} bereits geladen")
 
-    # Gewünschtes Panel anzeigen
-    #print(f"[MULTIFRAME] Zeige Panel {index}")
-    self.panels[index].visible = True
-    self.aktueller_index = index
-    #print(f"[MULTIFRAME] lade_und_zeige_iframe({index}) FERTIG, aktueller_index: {self.aktueller_index}")
+    try:
+      # Bereits sichtbar?
+      if self.aktueller_index == index:
+        print(f"[multiframe] iFrame {index} bereits sichtbar")
+        return
+
+      # 📱 MOBILE: ALLE anderen iFrames SOFORT entfernen
+      if self.ist_mobile:
+        print(f"[multiframe] 📱 Mobile: Wechsel zu iFrame {index}")
+
+        # Verstecke vorheriges
+        if self.aktueller_index is not None:
+          self.panels[self.aktueller_index].visible = False
+
+        # AGGRESSIVE Bereinigung: Entferne ALLE außer dem neuen
+        self._entferne_alle_iframes_ausser(index)
+
+        # Neues laden
+        if not self.geladene_iframes[index]:
+          print(f"[multiframe]   Lade iFrame {index}...")
+          self.erstelle_iframe(index)
+
+      # 🖥️ DESKTOP: Normales Cache-Management
+      else:
+        if self.aktueller_index is not None:
+          self.panels[self.aktueller_index].visible = False
+
+        if not self.geladene_iframes[index]:
+          self.erstelle_iframe(index)
+
+      # Anzeigen
+      self.panels[index].visible = True
+      self.aktueller_index = index
+
+      print(f"[multiframe] ✓ iFrame {index} angezeigt")
+
+      # Mobile: Garbage Collection triggern
+      if self.ist_mobile:
+        try:
+          import gc
+          gc.collect()
+          print("[multiframe] 🗑️ Garbage Collection ausgeführt")
+        except:
+          pass
+
+    except Exception as e:
+      print(f"[multiframe] ✗ Fehler in lade_und_zeige_iframe({index}): {e}")
+      import traceback
+      traceback.print_exc()
 
   def verstecke_alle_iframes(self):
-    """Versteckt alle IFrames ohne sie zu entladen"""
-    print("Verstecke alle IFrames...")
-    for i, panel in enumerate(self.panels):
-      panel.visible = False
-      print(f"   Panel {i} versteckt")
-    self.aktueller_index = None
+    """Versteckt alle IFrames"""
+    try:
+      for panel in self.panels:
+        panel.visible = False
+      self.aktueller_index = None
+
+      # Mobile: Auch alle entladen
+      if self.ist_mobile:
+        self._entferne_alle_iframes_ausser(-1)  # Alle entfernen
+
+    except Exception as e:
+      print(f"[multiframe] Fehler beim Verstecken: {e}")
 
   def ist_geladen(self, index):
-    """Prüft ob IFrame bereits geladen ist"""
+    """Prüft ob IFrame geladen ist"""
     if index < 0 or index >= len(self.geladene_iframes):
-      #print("ist_geladen ","False Index:",index," len(self.geladene_iframes:",len(self.geladene_iframes))
       return False
     return self.geladene_iframes[index]
 
-  def lade_alle_iframes(self):
-    """Lädt alle IFrames im Voraus (falls gewünscht für bessere Performance)"""
-    for i in range(len(self.iframe_urls)):
-      if not self.geladene_iframes[i]:
-        self.erstelle_iframe(i)
-    print("Alle IFrames geladen")
-
   def channel_manager_connect_button_click(self, **event_args):
     open_form('channel_manager_connect')
-    pass
 
   def dashboard_upgrade_button_click(self, **event_args):
     open_form('upgrade')
-    pass
 
   def lade_restliche_iframes(self):
-    """Lädt IFrames 1-10 im Hintergrund"""
+    """Hintergrund-Laden NUR auf Desktop"""
+    if self.ist_mobile:
+      print("[multiframe] 📱 Mobile: Hintergrund-Laden deaktiviert")
+      return
+
+    print("[multiframe] 🖥️ Desktop: Lade restliche iFrames...")
     for i in range(1, len(self.iframe_urls)):
       if not self.geladene_iframes[i]:
-        self.erstelle_iframe(i)
-        print("[multiframe] lade_restliche_iframses erstelle iframe",i)
+        try:
+          self.erstelle_iframe(i)
+        except Exception as e:
+          print(f"[multiframe] Fehler bei Hintergrund-Laden von iFrame {i}: {e}")
