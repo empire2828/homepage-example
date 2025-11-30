@@ -126,10 +126,6 @@ components_by_slot:
       name: spacer_7
       properties: {height: 13.9556884765625}
       type: Spacer
-    - layout_properties: {grid_position: 'GTZJFN,SUJQWY'}
-      name: value_loading_checkbox
-      properties: {bold: false, italic: true, text: Values below for you are calculating ....}
-      type: form:dep_g9k4toow7i44kq:_Components.Checkbox
     - layout_properties: {grid_position: 'BCHDQL,JTLNIG'}
       name: title_1
       properties: {role: title, text: Fees}

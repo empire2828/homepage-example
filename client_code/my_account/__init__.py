@@ -27,7 +27,7 @@ class my_account(my_accountTemplate):
       self.request_count_body.text = user['request_count']
   
     # My-Account-Daten (Parameter + Channels) in EINEM Server-Call holen
-    data = anvil.server.call_s('get_my_account_data', user['email'])
+    data = anvil.server.call('get_my_account_data', user['email'])
     user_parameters = data.get('params') or {}
     channel_data    = data.get('channels') or []
   
@@ -55,10 +55,6 @@ class my_account(my_accountTemplate):
       else:
         d.selected_value = None
         t.text = ''
-
-    self.value_loading_checkbox.checked = True
-    self.value_loading_checkbox.text = "Values below calculated."
-    self.value_loading_checkbox.italic = True
 
   def change_name_link_click(self, **event_args):
     new_name = alert(ChangeName(item=self.user["name"]), title="Change name", buttons=None, dismissible=True, large=True)
