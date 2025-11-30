@@ -20,7 +20,6 @@ class layout_template(layout_templateTemplate):
       globals.current_multiframe_instance = multiframe()
       self.content_panel_iframe.add_component(globals.current_multiframe_instance, full_width_row=True)
       globals.multiframe_open = True
-
     return globals.current_multiframe_instance
 
   def show_dashboard(self, iframe_index, link):
@@ -31,15 +30,14 @@ class layout_template(layout_templateTemplate):
     multiframe_obj = self.get_or_create_multiframe()
     multiframe_obj.visible = True
 
-    # Mobile: Einfaches Laden ohne Cache - nur Panel 0
     if self.is_mobile():
       multiframe_obj.lade_iframe_mobile(iframe_index)
     else:
-      # Desktop: Mit Cache/Status wie bisher
       multiframe_obj.lade_und_zeige_iframe(iframe_index)
 
     self.reset_links()
     link.selected = True
+    #self.current_user = globals.current_user
     self.check_if_upgrade_needed()
 
   def reset_links(self):
@@ -60,7 +58,6 @@ class layout_template(layout_templateTemplate):
     self.my_account_navigation_link.selected = False
     self.upgrade_navigation_link.selected = False
 
-  # ALLE Dashboard Links verwenden GLEICHE Logik für Mobile und Desktop
   def dashboard_navigation_link_click(self, **event_args):
     if globals.multiframe_open:
       self.show_dashboard(0, self.dashboard_navigation_link)
@@ -164,8 +161,6 @@ class layout_template(layout_templateTemplate):
       globals.request_count = anvil.server.call_s('add_request_count', globals.current_user) 
       self.upgrade_navigation_link.badge = True
       self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0)) 
-
-      self.current_user = globals.current_user
 
       if globals.request_count> 20:
         open_form('upgrade_needed')
