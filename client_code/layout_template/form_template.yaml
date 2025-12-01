@@ -170,6 +170,11 @@ components_by_slot:
         padding: [null, null, '0', null]
       text: Upgrade
     type: form:dep_g9k4toow7i44kq:_Components.NavigationLink
+  slot_4:
+  - layout_properties: {}
+    name: text_1
+    properties: {bold: true, font_size: 18, text: Lodginia, text_color: '#ffa200'}
+    type: form:dep_g9k4toow7i44kq:_Components.Text
 is_package: true
 layout:
   properties:
