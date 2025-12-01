@@ -212,10 +212,10 @@ class multiframe(multiframeTemplate):
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "900",
+      "height": "1000",
       "frameborder": "0",
       "scrolling": "no",
-      "style": "border:0; position: relative; z-index: 1; overflow: visible;",
+      #"style": "border:0; position: relative; z-index: 1; overflow: visible;",
       "referrerpolicy": "origin-when-cross-origin",
       "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
     })
