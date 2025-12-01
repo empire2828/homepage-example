@@ -7,6 +7,9 @@ components_by_slot:
       col_spacing: none
       spacing:
         padding: [null, null, null, '-10']
+      spacing_above: none
+      spacing_below: medium
+      wrap_on: never
     type: ColumnPanel
   navigation:
   - event_bindings: {click: dashboard_navigation_link_click}
