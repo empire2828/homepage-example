@@ -178,8 +178,10 @@ layout:
     navigation_rail_vertical_align: top
     show_sidesheet: false
   type: form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout
+properties:
+- {default_binding_prop: true, default_value: '', important: true, name: prop, type: string}
 slots:
   content:
-    index: 1
+    index: 0
     set_layout_properties: {}
     target: {name: content, type: slot}

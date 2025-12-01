@@ -247,7 +247,7 @@ color: %color:On Primary Container%;
     top: 0;
     bottom: 0;
     width: calc(100% - 56px);
-    max-width: 360px;
+    max-width: 300px;
     z-index: 3;
     border-right: none;
     border-radius: 0 20px 20px 0;
