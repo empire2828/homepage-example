@@ -1049,3 +1049,12 @@ div.plot-container.plotly svg.main-svg {
 .looker-panel::-webkit-scrollbar {
   display: none;  /* Chrome, Safari, Opera */
 }
+
+#ergänzt keine Scrollbars
+.nav-holder .left-nav {
+  overflow-x: hidden !important;      /* verstecke horizontale Scrollbar */
+  overflow-y: hidden !important;         /* zeige vertikale Scrollbar */
+  -webkit-overflow-scrolling: touch;  /* smoothes scrolling auf iOS */
+}
+
+

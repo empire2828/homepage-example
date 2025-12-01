@@ -177,6 +177,6 @@ layout:
   type: form:dep_g9k4toow7i44kq:Layouts.NavigationRailLayout
 slots:
   content:
-    index: 0
+    index: 1
     set_layout_properties: {}
     target: {name: content, type: slot}
