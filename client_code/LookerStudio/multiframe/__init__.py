@@ -209,13 +209,13 @@ class multiframe(multiframeTemplate):
     # 2. Dann: Panel komplett leeren (falls noch was übrig ist)
     jQuery(get_dom_node(panel)).empty()
 
-    # IFrame erstellen (OHNE lazy loading für schnellere Mobile-Performance)
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "1950",
+      "height": "900",
       "frameborder": "0",
       "scrolling": "no",
+      "style": "border:0; position: relative; z-index: 1; overflow: visible;",
       "referrerpolicy": "origin-when-cross-origin",
       "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
     })
