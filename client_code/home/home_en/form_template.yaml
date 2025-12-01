@@ -6,7 +6,7 @@ components_by_slot:
       properties:
         align: center
         bold: true
-        font_size: 54
+        font_size: 50
         foreground: theme:Primary
         role: headline
         spacing:
@@ -15,7 +15,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'BUXZAW,MIPLQT'}
       name: headline_2
-      properties: {align: center, bold: true, font_size: 54, foreground: '#ffa200', italic: false, role: headline, text: True Revenue Potential}
+      properties: {align: center, bold: true, font_size: 50, foreground: '#ffa200', italic: false, role: headline, text: True Revenue Potential}
       type: Label
     - components:
       - layout_properties: {}
