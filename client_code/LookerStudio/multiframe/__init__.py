@@ -8,7 +8,7 @@ from ... import globals
 
 class multiframe(multiframeTemplate):
 
-  Locker_Version = "https://lookerstudio.google.com/embed/reporting/1eaf8e1d-9780-4e7c-9d4f-f0f392694afc/page/"
+  Locker_Version = "https://lookerstudio.google.com/embed/reporting/85e3356f-b3c9-4cc4-9287-213af36d98b9/page/"
 
   def __init__(self, **properties):
     self.init_components(**properties)
@@ -213,9 +213,10 @@ class multiframe(multiframeTemplate):
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "1950",
+      "height": "900",
       "frameborder": "0",
       "scrolling": "no",
+      "style": "border:0; position: relative; z-index: 1; overflow: visible;",
       "referrerpolicy": "origin-when-cross-origin",
       "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
     })
