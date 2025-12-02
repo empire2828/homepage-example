@@ -80,7 +80,8 @@ def sync_smoobu(user_email):
   rows_to_insert = []
   
   for idx, booking in enumerate(all_bookings, start=1):
-    #progress bar 0.4 to 0.8
+                               
+    #progress bar 0.3 to 0.9
     progress = 0.3 + 0.6 * (idx / total)
     anvil.server.task_state.update({
       'message': f'Syncing booking {idx} of {total}...',
@@ -160,7 +161,7 @@ def sync_smoobu(user_email):
   client.query(sql).result()
   print(f"[smoobu_sync] sync smoobu: {len(rows_to_insert)} bookings imported into BigQuery.")
 
-  anvil.server.task_state.update({'message': 'Calculating standard fees and commission...', 'progress': 0.8})
+  anvil.server.task_state.update({'message': 'Calculating standard fees and commission...', 'progress': 0.95})
   
   save_last_fees_as_std(user_email)
   save_all_channels_for_user(user_email)
