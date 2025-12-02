@@ -11,7 +11,6 @@ import anvil.media
 import csv
 from datetime import datetime, timedelta, timezone
 import inspect
-from supabase import create_client
 import os
 from google.cloud import bigquery
 from servermain import get_bigquery_client
