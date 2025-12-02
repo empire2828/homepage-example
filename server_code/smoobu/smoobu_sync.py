@@ -80,13 +80,13 @@ def sync_smoobu(user_email):
   rows_to_insert = []
   
   for idx, booking in enumerate(all_bookings, start=1):
-                               
-    #progress bar 0.3 to 0.9
-    progress = 0.3 + 0.6 * (idx / total)
-    anvil.server.task_state.update({
-      'message': f'Syncing booking {idx} of {total}...',
-      'progress': progress
-    })
+    # Nur alle 10 Buchungen updaten
+    if idx == 1 or idx % 10 == 0 or idx == total:
+      progress = 0.3 + 0.6 * (idx / total)
+      anvil.server.task_state.update({
+        'message': f'Syncing booking {idx} of {total}...',
+        'progress': progress
+      })
     
     price_data = get_price_elements(booking['id'], headers, wait_for_sync = False)
     
