@@ -5,7 +5,6 @@ from anvil.tables import app_tables
 import anvil.server
 from datetime import datetime
 import requests
-from supabase import create_client, Client
 from admin import log
 from servermain import save_last_fees_as_std
 from userfunctions import save_user_apartment_count
