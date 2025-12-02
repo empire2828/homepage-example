@@ -49,7 +49,7 @@ def sync_smoobu(user_email):
     "from": "2020-01-01",
     "excludeBlocked": True,
     "showCancellation": True,
-    "includePriceElements": True,
+    "includePriceElements": False,
     "page": 1,
     "limit": 25,   # API-limit: Nicht größer setzen!
   }
