@@ -140,7 +140,7 @@ native_deps:
           if (typeof gtag === 'function') {
             gtag('event', 'conversion_event_signup', {
               'event_callback': callback,
-              'event_timeout': 2000,
+              'event_timeout': 1000,
               'value': 0,
               'currency': 'EUR'
             });

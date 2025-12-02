@@ -2,13 +2,13 @@ from ._anvil_designer import vrbo_enTemplate
 from anvil import *
 import anvil.server
 from routing import router
-import m3.components as m3
-import anvil.google.auth, anvil.google.drive
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
-from ... import globals
+#import m3.components as m3
+#import anvil.google.auth, anvil.google.drive
+#import anvil.users
+#import anvil.tables as tables
+#import anvil.tables.query as q
+#from anvil.tables import app_tables
+#from ... import globals
 
 class vrbo_en(vrbo_enTemplate):
   def __init__(self, **properties):

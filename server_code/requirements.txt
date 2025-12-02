@@ -1,5 +1,3 @@
 stripe
-openai
-supabase
 google-cloud
 google-cloud-bigquery
