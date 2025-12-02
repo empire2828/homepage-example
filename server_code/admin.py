@@ -32,9 +32,7 @@ def log(message: str, email: str = None, function: str = None):
   if not isinstance(message, str):
     message = str(message)
 
-  print(email, message, function)
-  
-  print(email, message,function)
+  #print(email, message,function)
   
   bq_client = get_bigquery_client()
 
