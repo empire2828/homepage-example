@@ -62,7 +62,7 @@ def sync_smoobu(user_email):
     if resp.status_code != 200:
       return f"Fehler: {resp.status_code} - {resp.text}"
     data = resp.json()
-    log(data, user_email,"sync_smoobu")
+    #log(data, user_email,"sync_smoobu")
     bookings = data.get("bookings", [])
     all_bookings.extend(bookings)
     if len(bookings) < params["limit"]:
@@ -78,7 +78,15 @@ def sync_smoobu(user_email):
   
     # Daten für BigQuery vorbereiten
   rows_to_insert = []
-  for booking in all_bookings:
+  
+  for idx, booking in enumerate(all_bookings, start=1):
+    #progress bar 0.4 to 0.8
+    progress = 0.4 + 0.4 * (idx / total)
+    anvil.server.task_state.update({
+      'message': f'Syncing booking {idx} of {total}...',
+      'progress': progress
+    })
+    
     price_data = get_price_elements(booking['id'], headers, wait_for_sync = False)
     row = {
       "reservation_id": booking.get('id'),
