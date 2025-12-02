@@ -184,8 +184,7 @@ def get_smoobu_userid(user_email):
     try:
         response = requests.get("https://login.smoobu.com/api/me", headers=headers)
         if response.status_code == 200:
-            data = response.json()
-            print("get_smoobu_userid: ", data['id'])
+            data = response.json()("get_smoobu_userid: ", data['id'])
             return data['id']
         else:
             print(f"API request failed: {response.status_code} - {response.text}")
