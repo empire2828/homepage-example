@@ -46,7 +46,7 @@ def sync_smoobu(user_email):
   }
   params = {
     "status": "confirmed",
-    "from": "2019-01-01",
+    "from": "2020-01-01",
     "excludeBlocked": True,
     "showCancellation": True,
     "includePriceElements": True,
@@ -70,7 +70,7 @@ def sync_smoobu(user_email):
     params["page"] += 1
 
   total = len(all_bookings)
-  anvil.server.task_state.update({'message': f'{total} Bookings received. Now syncing prices... be patient, get a coffee', 'progress': 0.4})
+  anvil.server.task_state.update({'message': f'{total} Bookings received. Now syncing prices... be patient, get a coffee', 'progress': 0.3})
   
   if not all_bookings:
     print("[smoobu_sync] sync_smoobu: Keine Buchung gefunden ",user_email)
@@ -81,13 +81,14 @@ def sync_smoobu(user_email):
   
   for idx, booking in enumerate(all_bookings, start=1):
     #progress bar 0.4 to 0.8
-    progress = 0.4 + 0.4 * (idx / total)
+    progress = 0.3 + 0.6 * (idx / total)
     anvil.server.task_state.update({
       'message': f'Syncing booking {idx} of {total}...',
       'progress': progress
     })
     
     price_data = get_price_elements(booking['id'], headers, wait_for_sync = False)
+    
     row = {
       "reservation_id": booking.get('id'),
       "id": f"{user_email}_{booking.get('id')}",
@@ -129,7 +130,7 @@ def sync_smoobu(user_email):
     anvil.server.task_state['message'] = 'Keine Buchung zur Übertragung'
     return 
 
-  anvil.server.task_state.update({'message': 'Analyzing prices...', 'progress': 0.8})
+  anvil.server.task_state.update({'message': 'Analyzing prices...', 'progress': 0.9})
   
   table = "lodginia.lodginia.bookings"
   columns = [
