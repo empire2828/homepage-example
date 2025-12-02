@@ -6,7 +6,6 @@ import anvil.server
 import time
 from datetime import datetime, timedelta, timezone
 from . import routes # noqa: F401
-from supabase import create_client, Client
 import anvil.secrets
 from google.cloud import bigquery
 import json
@@ -17,13 +16,6 @@ PROJECT_ID = "lodginia"
 DATASET_ID = "lodginia" 
 TABLE_ID = "bookings"
 FULL_TABLE_ID = "lodginia.lodginia.bookings"
-
-supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-supabase_client: Client = create_client(supabase_url, supabase_api_key)
-
-# Supabase-Client initialisieren
-supabase: Client = create_client(supabase_url, supabase_api_key)
 
 def to_sql_value(v, force_string=False):
   """Turn a Python value into a BigQuery literal."""
