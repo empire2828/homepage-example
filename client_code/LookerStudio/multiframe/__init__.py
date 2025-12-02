@@ -84,6 +84,7 @@ class multiframe(multiframeTemplate):
       params = {"supabase_key_url": self.supabase_key}
       encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
       iframe_url = url + encoded_params
+      print("(multiframe) erstelle_iframe: ",iframe_url)
     else:
       iframe_url = url
 
