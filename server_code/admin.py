@@ -18,13 +18,6 @@ from dateutil.parser import parse
 #from userfunctions import get_user_has_subscription_for_email
 import time
 
-#supabase_url = "https://huqekufiyvheckmdigze.supabase.co"
-#supabase_api_key = anvil.secrets.get_secret('supabase_api_key')
-#supabase_client: create_client(supabase_url, supabase_api_key)
-
-# Supabase-Client initialisieren
-#supabase_client = create_client(supabase_url, supabase_api_key)
-
 BQ_PROJECT = "lodginia"
 BQ_DATASET = "lodginia"
 BQ_TABLE   = "logs"
