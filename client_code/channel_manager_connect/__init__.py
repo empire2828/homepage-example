@@ -67,6 +67,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
       try:
         state = self.task.get_state() or {}
         progress_from_task = state.get('progress', None)
+        print(progress_from_task)
         # Wenn neue Taskdaten kommen, diese übernehmen
         if progress_from_task is not None and progress_from_task > self.last_progress_from_task:
           self.last_progress_from_task = progress_from_task
@@ -76,15 +77,16 @@ class channel_manager_connect(channel_manager_connectTemplate):
           self.progress_bar.progress = min(self.progress_bar.progress + 0.005, 1.0)
         # Optional: Statuslabel wie gehabt
         self.status_label.text = state.get('message', '')
-        if self.task.is_completed():
+        #if self.task.is_completed():
+        if progress_from_task is not None and progress_from_task >= 0.4:
           self.timer_1.enabled = False
           self.progress_bar.progress = 1
-          if self._navigate_when_done:
-            alert("You will now be taken to the Dashboard. You can check your specific settings in My Account.")
+          #if self._navigate_when_done:
+          alert("You will now be taken to the Dashboard. You can check your specific settings in My Account.")
             # Dashboard automatisch laden
             # Öffne layout_template
-            layout_form = open_form('layout_template')
-            layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
+          layout_form = open_form('layout_template')
+          layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
       except Exception:
         self.timer_1.enabled = False
         self.progress_bar.visible = False
