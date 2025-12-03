@@ -66,7 +66,7 @@ components_by_slot:
         - components:
           - layout_properties: {grid_position: 'MTHMSH,PKOMHH'}
             name: checkbox_3
-            properties: {align: left, checked: true, font_size: 20, text: FREE Version ist dauerhaft kostenlos}
+            properties: {align: left, checked: true, font_size: 20, text: FREE Version dauerhaft kostenlos}
             type: form:dep_g9k4toow7i44kq:_Components.Checkbox
           layout_properties: {grid_position: 'QCSDVZ,BMJGRB'}
           name: elevated_card_1
