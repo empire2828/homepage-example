@@ -89,7 +89,20 @@ def sync_smoobu(user_email):
       'progress': progress
     })
     
-    price_data = get_price_elements(booking['id'], headers, wait_for_sync = False)
+    #price_data = get_price_elements(booking['id'], headers, wait_for_sync = False)
+    # Nur Price Elements abrufen, wenn Channel nicht "Blocked channel" ist
+    if booking.get('channel', {}).get('name') != "Blocked channel":
+      price_data = get_price_elements(booking['id'], headers, wait_for_sync = False)
+    else:
+      price_data = {
+        'price_baseprice': 0,
+        'price_cleaningfee': 0,
+        'price_longstaydiscount': 0,
+        'price_coupon': None,
+        'price_addon': None,
+        'price_curr': '',
+        'price_comm': None
+      }
     
     row = {
       "reservation_id": booking.get('id'),
