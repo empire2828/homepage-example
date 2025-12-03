@@ -81,11 +81,12 @@ class channel_manager_connect(channel_manager_connectTemplate):
           self.timer_1.enabled = False
           self.progress_bar.progress = 1
           if self._navigate_when_done:
-            alert("You will now be taken to the Dashboard. You can check your specific settings in My Account.")
+            alert("You will now be taken to the Dashboard. You can check your specific settings in My Account. If dashboard is empty allow some more seconds and retry.")
             # Dashboard automatisch laden
             # Öffne layout_template
             layout_form = open_form('layout_template')
-            layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
+            layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)     
+            self.get_request_count_and_subscription_status()
       except Exception:
         self.timer_1.enabled = False
         self.progress_bar.visible = False
