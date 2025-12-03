@@ -8,7 +8,8 @@ from ... import globals
 
 class multiframe(multiframeTemplate):
 
-  Locker_Version = "https://lookerstudio.google.com/embed/reporting/f501eb07-1cff-4de0-9a92-a929c72f01f6/page/"
+  Locker_Version = "https://lookerstudio.google.com/embed/reporting/acce09fe-77e4-4a07-8e13-becca3cd8dd7/page/"
+  #V1.1.02
 
   def __init__(self, **properties):
     self.init_components(**properties)
