@@ -12,6 +12,7 @@ class multiframe(multiframeTemplate):
   #V1.1.02
   #Freigeben als nicht gelistet und Bericht einbetten aktivieren ohne Berichtsnavi mit URL
   
+
   def __init__(self, **properties):
     self.init_components(**properties)
     #self.flow_panel_1.scroll_into_view(smooth=True)
@@ -86,6 +87,7 @@ class multiframe(multiframeTemplate):
       params = {"supabase_key_url": self.supabase_key}
       encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
       iframe_url = url + encoded_params
+      print("(multiframe) erstelle_iframe: ",iframe_url)
     else:
       iframe_url = url
 
