@@ -29,7 +29,7 @@ def get_price_elements(reservation_id, headers, wait_for_sync=False):
       price_elements = price_elements_response.json().get("priceElements", [])
 
       print("[smoobu main] get_price_elements Reservation-ID",reservation_id," price_elements:",price_elements)
-      log(price_elements,reservation_id,"[smoobu_main] get_price_elements")
+      #log(price_elements,reservation_id,"[smoobu_main] get_price_elements")
       
       has_addon = any(pe.get('type') == 'addon' for pe in price_elements)
       has_cleaningFee = any(pe.get('type') == 'cleaningFee' for pe in price_elements)
