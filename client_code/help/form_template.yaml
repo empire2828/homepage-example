@@ -11,43 +11,135 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'UKFHUF,EXTOTN'}
       name: spacer_3
-      properties: {height: 74.77777099609375}
+      properties: {height: 11.953125}
       type: Spacer
-    - layout_properties: {grid_position: 'PRAYBM,AYUDLR'}
-      name: body_2
-      properties: {font_size: 18, role: body, text: 'Tell us your problem or idea, a screenshot always helps:'}
-      type: Label
     - components:
-      - layout_properties: {slot: anvil-m3-link-slot}
-        name: spacer_1
-        properties: {height: 102.95657348632812}
-        type: Spacer
-      event_bindings: {click: link_1_click}
-      layout_properties: {grid_position: 'JHQPHY,TZTKAD'}
-      name: link_1
-      properties: {font_size: 18, icon: 'mi:email', text: info@lodginia.com, url: 'mailto:info@lodginia.com'}
-      type: form:dep_g9k4toow7i44kq:_Components.Link
-    - layout_properties: {grid_position: ''}
-      name: spacer_2
-      properties: {height: 18.9617919921875}
-      type: Spacer
-    - layout_properties: {grid_position: 'SAJKGF,JQIYFZ'}
-      name: body_1
+      - components:
+        - components:
+          - layout_properties: {slot: card-content-container-slot}
+            name: body_2
+            properties: {font_size: 18, role: body, text: 'Tell us your problem or idea, a screenshot always helps:'}
+            type: Label
+          - components: []
+            event_bindings: {click: link_1_click}
+            layout_properties: {slot: card-content-container-slot}
+            name: link_1
+            properties: {font_size: 18, icon: 'mi:email', text: info@lodginia.com, url: 'mailto:info@lodginia.com'}
+            type: form:dep_g9k4toow7i44kq:_Components.Link
+          layout_properties: {slot: card-content-slot}
+          name: card_content_container_3
+          properties: {}
+          type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+        layout_properties: {slot: card-content-container-slot}
+        name: card_3
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Card
+      layout_properties: {grid_position: 'LMKSHP,WNTMUA'}
+      name: card_content_container_1
       properties:
-        font_size: 18
-        role: body
-        text: |
-          Here you can re-sync all your datas in case you experience any issues:
-      type: Label
-    - event_bindings: {click: resync_button_click}
-      layout_properties: {grid_position: 'DZMZJA,BWOULR'}
-      name: resync_button
-      properties: {role: filled-button, text: Re-sync}
-      type: Button
+        margin: ['16', '8', '16', '8']
+      type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+    - layout_properties: {grid_position: 'JFLSOZ,CNKCMK'}
+      name: spacer_1
+      properties: {height: 9.6328125}
+      type: Spacer
+    - components:
+      - components:
+        - components:
+          - layout_properties: {slot: card-content-container-slot}
+            name: body_1
+            properties:
+              font_size: 18
+              role: body
+              text: |
+                Here you can re-sync all your datas in case you experience any issues:
+            type: Label
+          layout_properties: {slot: card-content-slot}
+          name: card_content_container_5
+          properties: {}
+          type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+        - event_bindings: {click: resync_button_click}
+          layout_properties: {slot: card-content-slot}
+          name: resync_button
+          properties: {role: filled-button, text: Re-sync}
+          type: Button
+        layout_properties: {slot: card-content-container-slot}
+        name: card_4
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Card
+      layout_properties: {grid_position: 'CEWGDA,LJMZYE'}
+      name: card_content_container_4
+      properties:
+        margin: ['16', '8', '16', '8']
+      type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
     layout_properties: {}
     name: column_panel_1
     properties: {}
     type: ColumnPanel
+  - layout_properties: {}
+    name: divider_1
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.Divider
+  - layout_properties: {}
+    name: spacer_2_copy
+    properties: {height: 12.72265625}
+    type: Spacer
+  - components:
+    - components:
+      - components: []
+        layout_properties: {slot: card-content-slot}
+        name: rich_text_1
+        properties:
+          content: |
+            **Red is bad ...**
+
+            In most graphics green is used for current year, red for past year and blue for next year. To see instantly your performance you just need to look at the highest line and the color right below it. If it is green is good, if red is bad ...
+
+            In the example May's revenue is below last year, therefore you see red.
+
+            Some indicators are better the less you have (eg cancellation). There we have changed the color current with prior year, so that there is red bad as well.
+          format: markdown
+        type: RichText
+      - layout_properties: {slot: card-content-slot}
+        name: image_1
+        properties: {source: _/theme/app/Graphics.jpg}
+        type: Image
+      layout_properties: {grid_position: 'BDONOL,XMFMRZ'}
+      name: card_1
+      properties: {orientation: column}
+      type: form:dep_g9k4toow7i44kq:_Components.Card
+    - components:
+      - components: []
+        layout_properties: {slot: card-content-slot}
+        name: rich_text_1_copy
+        properties:
+          content: |
+            **Understanding the dates ...**
+
+            Which date for the page is used is defined in blue at the top line and can be selected at the top right.
+
+            **Stay dates..** is the date when your guests are staying in your house
+
+            **Cancellation date ..** is the date when the cancellation date was made. Smoobu does no track this, therefore last modification date is used for cancelled bookings
+
+            **Booking date..** when the booking was made
+
+            **Same time last year...** Exact same date as last year- best for evaluating if you have a better or worse booking status quo today
+          format: markdown
+        type: RichText
+      layout_properties: {grid_position: 'CZXBHO,MXBXRL'}
+      name: card_2
+      properties: {orientation: row}
+      type: form:dep_g9k4toow7i44kq:_Components.Card
+    layout_properties: {}
+    name: column_panel_2
+    properties: {}
+    type: ColumnPanel
+  - components: []
+    layout_properties: {}
+    name: card_content_container_2
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
   slot_1: []
 is_package: true
 layout: {type: 'form:layout_template'}
