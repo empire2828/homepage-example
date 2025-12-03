@@ -34,25 +34,29 @@ components_by_slot:
       name: title_1
       properties: {bold: true, role: title, text: 1. Get the API key from Smoobu}
       type: Label
-    - layout_properties: {grid_position: 'QIETNA,CPSHHZ'}
-      name: image_1
-      properties: {height: 421.85589599609375, horizontal_align: left, source: _/theme/connect/help smoobu_api_key.jpg}
-      type: Image
-    - layout_properties: {grid_position: 'ZVLSMB,OMUNXY'}
-      name: spacer_1
-      properties: {}
-      type: Spacer
-    - layout_properties: {grid_position: 'FQSZMX,SETHQE'}
+    - layout_properties: {grid_position: 'QUIEJX,NYAJCX'}
       name: body_4
-      properties: {font_size: 18, role: body, text: 'If you have not yet enabled two-factor authentication in Smoobu, you will need to activate it under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. '}
+      properties: {font_size: 18, role: body, text: 'If you have not yet enabled two-factor authentication in Smoobu, you will need to activate it first under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. '}
       type: Label
-    - layout_properties: {grid_position: 'TVEIBE,MTBNFQ'}
+    - layout_properties: {grid_position: 'TYEQRC,OVQXZQ'}
       name: image_2
       properties: {height: 374.06939697265625, horizontal_align: left, source: _/theme/connect/help smoobu_user.jpg}
       type: Image
-    - layout_properties: {grid_position: 'QFDDYF,HGBYFR'}
+    - layout_properties: {grid_position: 'EBHQXF,HHTNWC'}
       name: image_3
       properties: {height: 321.56854248046875, horizontal_align: left, source: _/theme/connect/help smoobu_profildaten.jpg}
+      type: Image
+    - layout_properties: {grid_position: 'PLZKRG,OURIPZ'}
+      name: spacer_1
+      properties: {}
+      type: Spacer
+    - layout_properties: {grid_position: 'RGYZBZ,STXSQT'}
+      name: body_4_copy
+      properties: {font_size: 18, role: body, text: Then you can get your API key as shown below. You will receive a code via eMail which you need to enter to get your key.}
+      type: Label
+    - layout_properties: {grid_position: 'QIETNA,CPSHHZ'}
+      name: image_1
+      properties: {height: 421.85589599609375, horizontal_align: left, source: _/theme/connect/help smoobu_api_key.jpg}
       type: Image
     - layout_properties: {grid_position: 'SVCGPI,WPWKWD'}
       name: spacer_2
