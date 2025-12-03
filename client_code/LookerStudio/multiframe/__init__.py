@@ -12,7 +12,6 @@ class multiframe(multiframeTemplate):
   #V1.1.02
   #Freigeben als nicht gelistet und Bericht einbetten aktivieren ohne Berichtsnavi mit URL
   
-
   def __init__(self, **properties):
     self.init_components(**properties)
     #self.flow_panel_1.scroll_into_view(smooth=True)
