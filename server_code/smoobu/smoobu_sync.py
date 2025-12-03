@@ -71,6 +71,7 @@ def sync_smoobu(user_email):
 
   total = len(all_bookings)
   anvil.server.task_state.update({'message': f'{total} Bookings received. Now syncing prices... be patient, get a coffee', 'progress': 0.3})
+  print("[smoobu_sync] sync_smoobu: bookings received: ",total)
   
   if not all_bookings:
     print("[smoobu_sync] sync_smoobu: Keine Buchung gefunden ",user_email)
@@ -125,6 +126,8 @@ def sync_smoobu(user_email):
       "price_comm": float(price_data.get('price_comm')) if price_data.get('price_comm') is not None else 0
     }
     rows_to_insert.append(row)
+
+  print("[smoobu_sync] sync_smoobu: price elements all done")
 
   if not rows_to_insert:
     print("[smoobu_sync] sync_smoobu: Keine Buchung zur Übertragung ",user_email)

@@ -23,6 +23,7 @@ class channel_manager_connect(channel_manager_connectTemplate):
       erfolg = anvil.server.call('save_user_api_key', api_key)
       if erfolg:
         anvil.Notification("API-Key sucessfully saved").show()
+        print("[channel_manager_connect] save_api_key_button_klick: sucessful")
     except Exception as e:
       anvil.alert(f"Error on saving API-Key: {str(e)}")
       print(current_user['email'],f"Error on saving API-Key: {str(e)}")    
