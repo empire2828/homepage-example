@@ -36,7 +36,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'QUIEJX,NYAJCX'}
       name: body_4
-      properties: {font_size: 18, role: body, text: 'Smoobu requires activated 2 Factor authentication for API connections. You can enable this under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. '}
+      properties: {font_size: 18, role: body, text: 'Smoobu requires activated 2 Factor authentication for API connections. If you have not already done so, you can enable this under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. '}
       type: Label
     - layout_properties: {grid_position: 'TYEQRC,OVQXZQ'}
       name: image_2
