@@ -36,7 +36,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'QUIEJX,NYAJCX'}
       name: body_4
-      properties: {font_size: 18, role: body, text: 'If you have not yet enabled two-factor authentication in Smoobu, you will need to activate it first under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. '}
+      properties: {font_size: 18, role: body, text: 'Smoobu requires activated 2 Factor authentication for API connections. You can enable this under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. '}
       type: Label
     - layout_properties: {grid_position: 'TYEQRC,OVQXZQ'}
       name: image_2
@@ -52,7 +52,7 @@ components_by_slot:
       type: Spacer
     - layout_properties: {grid_position: 'RGYZBZ,STXSQT'}
       name: body_4_copy
-      properties: {font_size: 18, role: body, text: Then you can get your API key as shown below. You will receive a code via eMail which you need to enter to get your key.}
+      properties: {font_size: 18, role: body, text: 'Then you can get your API key as shown below. Unfortunately you need to do 2 Factor Verification twice: first after pressing "Generate API Key" and then after pressing "Show API Key":'}
       type: Label
     - layout_properties: {grid_position: 'QIETNA,CPSHHZ'}
       name: image_1
@@ -64,7 +64,7 @@ components_by_slot:
       type: Spacer
     - layout_properties: {grid_position: 'GVEUCH,MWSDFT'}
       name: api_key_input_prompt
-      properties: {font_size: 18, role: input-prompt, text: 'Please enter your API key here:'}
+      properties: {font_size: 18, role: input-prompt, text: 'Then please enter your API key here and save (API key is :'}
       type: Label
     - layout_properties: {grid_position: 'WPUZEA,HRQKNV'}
       name: api_key_text_box
@@ -109,7 +109,7 @@ components_by_slot:
       type: Label
     - layout_properties: {grid_position: 'WSHFIR,FOQEGV'}
       name: text_1
-      properties: {font_size: 18, text: The initial synchronization and analysis takes place in the background and takes approximately 2 minutes.}
+      properties: {font_size: 18, text: 'The initial synchronization takes approximately 2 minutes, below you will see a status bar.'}
       type: form:dep_g9k4toow7i44kq:_Components.Text
     - event_bindings: {click: sync_smoobu_button_click}
       layout_properties: {grid_position: 'TCJYLX,CLTZVL'}
