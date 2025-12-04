@@ -56,11 +56,11 @@ class my_account(my_accountTemplate):
         d.selected_value = None
         t.text = ''
 
-  def change_name_link_click(self, **event_args):
-    new_name = alert(ChangeName(item=self.user["name"]), title="Change name", buttons=None, dismissible=True, large=True)
-    if new_name:
-      self.user = anvil.server.call('change_name', new_name)
-      self.refresh_data_bindings()
+  #def change_name_link_click(self, **event_args):
+  #  new_name = alert(ChangeName(item=self.user["name"]), title="Change name", buttons=None, dismissible=True, large=True)
+  #  if new_name:
+  #    self.user = anvil.server.call('change_name', new_name)
+  #    self.refresh_data_bindings()
 
   def change_email_link_click(self, **event_args):
     new_email = alert(ChangeEmail(item=self.user["email"]), title="Change email", buttons=None, dismissible=True, large=True)

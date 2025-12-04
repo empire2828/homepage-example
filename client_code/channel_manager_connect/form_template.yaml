@@ -151,7 +151,9 @@ components_by_slot:
         type: Spacer
       layout_properties: {grid_position: 'HZRFIF,RYIUHX'}
       name: card_2
-      properties: {}
+      properties:
+        spacing:
+          padding: [null, '8', null, '8']
       type: form:dep_g9k4toow7i44kq:_Components.Card
     - layout_properties: {grid_position: 'CWEIOE,WOASFL'}
       name: spacer_6
