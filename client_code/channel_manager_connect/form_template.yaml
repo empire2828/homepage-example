@@ -30,114 +30,182 @@ components_by_slot:
     properties: {}
     type: Spacer
   - components:
-    - layout_properties: {grid_position: 'SASQUG,TGXJBN'}
-      name: title_1
-      properties: {bold: true, role: title, text: 1. Get the API key from Smoobu}
-      type: Label
-    - layout_properties: {grid_position: 'QUIEJX,NYAJCX'}
-      name: body_4
-      properties: {font_size: 18, role: body, text: 'Smoobu requires activated 2 Factor authentication for API connections. If you have not already done so, you can enable this under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. '}
-      type: Label
-    - layout_properties: {grid_position: 'TYEQRC,OVQXZQ'}
-      name: image_2
-      properties: {height: 374.06939697265625, horizontal_align: left, source: _/theme/connect/help smoobu_user.jpg}
-      type: Image
-    - layout_properties: {grid_position: 'EBHQXF,HHTNWC'}
-      name: image_3
-      properties: {height: 321.56854248046875, horizontal_align: left, source: _/theme/connect/help smoobu_profildaten.jpg}
-      type: Image
-    - layout_properties: {grid_position: 'PLZKRG,OURIPZ'}
-      name: spacer_1
+    - components:
+      - layout_properties: {slot: card-content-slot}
+        name: title_1
+        properties: {bold: true, role: title, text: 1. Get the API key from Smoobu}
+        type: Label
+      - components:
+        - components:
+          - layout_properties: {slot: card-content-container-slot}
+            name: body_4
+            properties: {font_size: 18, role: body, text: 'Smoobu requires activated 2 Factor authentication for API connections. If you have not already done so, you can enable this under “Manage Account.” Smoobu will send you a code via email, which you will need to enter in Smoobu. '}
+            type: Label
+          - components:
+            - layout_properties: {grid_position: 'LPWBSW,BAVFPU'}
+              name: image_2
+              properties: {height: 374.06939697265625, horizontal_align: left, source: _/theme/connect/help smoobu_user.jpg}
+              type: Image
+            - layout_properties: {grid_position: 'LPWBSW,FQSNKH'}
+              name: image_3
+              properties: {height: 356.75, horizontal_align: left, source: _/theme/connect/help smoobu_profildaten.jpg}
+              type: Image
+            layout_properties: {slot: card-content-container-slot}
+            name: column_panel_4
+            properties: {}
+            type: ColumnPanel
+          layout_properties: {slot: card-content-slot}
+          name: card_content_container_1
+          properties: {}
+          type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+        layout_properties: {slot: card-content-slot}
+        name: card_1
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Card
+      - layout_properties: {slot: card-content-slot}
+        name: spacer_1
+        properties: {}
+        type: Spacer
+      - components:
+        - components:
+          - layout_properties: {slot: card-content-container-slot}
+            name: body_4_copy
+            properties: {font_size: 18, role: body, text: 'Then you can get your API key as shown below. Unfortunately you need to do 2 Factor Verification twice: first after pressing "Generate API Key" and then after pressing "Show API Key":'}
+            type: Label
+          - layout_properties: {slot: card-content-container-slot}
+            name: image_1
+            properties: {height: 501.25, horizontal_align: left, source: _/theme/connect/help smoobu_api_key.jpg}
+            type: Image
+          layout_properties: {slot: card-content-slot}
+          name: card_content_container_3
+          properties: {}
+          type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+        layout_properties: {slot: card-content-slot}
+        name: card_4
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Card
+      - layout_properties: {slot: card-content-slot}
+        name: spacer_2
+        properties: {}
+        type: Spacer
+      - components:
+        - components:
+          - layout_properties: {slot: card-content-container-slot}
+            name: api_key_input_prompt
+            properties: {font_size: 18, role: input-prompt, text: 'Then please enter your API key here and press save:'}
+            type: Label
+          - layout_properties: {slot: card-content-container-slot}
+            name: api_key_text_box
+            properties: {background: 'theme:Secondary Container', text: ''}
+            type: TextBox
+          - event_bindings: {click: save_api_key_button_click}
+            layout_properties: {slot: card-content-container-slot}
+            name: save_api_key_button
+            properties: {role: filled-button, text: Save}
+            type: Button
+          layout_properties: {slot: card-content-slot}
+          name: card_content_container_4
+          properties: {}
+          type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+        layout_properties: {slot: card-content-slot}
+        name: card_6
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Card
+      layout_properties: {grid_position: 'TNTVOF,ZJMIGH'}
+      name: card_5
+      properties: {orientation: column}
+      type: form:dep_g9k4toow7i44kq:_Components.Card
+    layout_properties: {}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
+  - layout_properties: {}
+    name: spacer_6_copy
+    properties: {}
+    type: Spacer
+  - components:
+    - components:
+      - layout_properties: {slot: card-content-slot}
+        name: title_2
+        properties: {bold: true, role: title, text: 2. Register webhook with Smoobu}
+        type: Label
+      - layout_properties: {slot: card-content-slot}
+        name: body_2
+        properties:
+          font_size: 18
+          role: body
+          text: |
+            This will automatically transfer new bookings. Please enter the following:
+        type: Label
+      - layout_properties: {slot: card-content-slot}
+        name: webhook_label
+        properties: {bold: false, font_size: 18, foreground: 'theme:Primary', italic: true, role: null, text: 'https://lodginia.com/_/api/smoobu/webhook', visible: true}
+        type: Label
+      - layout_properties: {slot: card-content-slot}
+        name: image_4
+        properties: {height: 537.25, horizontal_align: left, source: _/theme/connect/help smoobu_webhook.jpg}
+        type: Image
+      - layout_properties: {slot: card-content-slot}
+        name: spacer_5
+        properties: {}
+        type: Spacer
+      layout_properties: {grid_position: 'HZRFIF,RYIUHX'}
+      name: card_2
       properties: {}
-      type: Spacer
-    - layout_properties: {grid_position: 'RGYZBZ,STXSQT'}
-      name: body_4_copy
-      properties: {font_size: 18, role: body, text: 'Then you can get your API key as shown below. Unfortunately you need to do 2 Factor Verification twice: first after pressing "Generate API Key" and then after pressing "Show API Key":'}
-      type: Label
-    - layout_properties: {grid_position: 'QIETNA,CPSHHZ'}
-      name: image_1
-      properties: {height: 421.85589599609375, horizontal_align: left, source: _/theme/connect/help smoobu_api_key.jpg}
-      type: Image
-    - layout_properties: {grid_position: 'SVCGPI,WPWKWD'}
-      name: spacer_2
-      properties: {}
-      type: Spacer
-    - layout_properties: {grid_position: 'GVEUCH,MWSDFT'}
-      name: api_key_input_prompt
-      properties: {font_size: 18, role: input-prompt, text: 'Then please enter your API key here and press save:'}
-      type: Label
-    - layout_properties: {grid_position: 'WPUZEA,HRQKNV'}
-      name: api_key_text_box
-      properties: {background: 'theme:Secondary Container', text: ''}
-      type: TextBox
-    - event_bindings: {click: save_api_key_button_click}
-      layout_properties: {grid_position: 'BZCABQ,MCVDXQ'}
-      name: save_api_key_button
-      properties: {role: filled-button, text: Save}
-      type: Button
-    - layout_properties: {grid_position: 'WZIMBD,KKFDKY'}
-      name: spacer_5
-      properties: {}
-      type: Spacer
-    - layout_properties: {grid_position: 'SZTIDB,SSOEMU'}
-      name: title_2
-      properties: {bold: true, role: title, text: 2. Register webhook with Smoobu}
-      type: Label
-    - layout_properties: {grid_position: 'KYIYYV,ZKHVNR'}
-      name: image_4
-      properties: {height: 386.09027099609375, horizontal_align: left, source: _/theme/connect/help smoobu_webhook.jpg}
-      type: Image
-    - layout_properties: {grid_position: 'FAEDSB,AJPRTR'}
-      name: body_2
-      properties:
-        font_size: 18
-        role: body
-        text: |
-          This will automatically transfer new bookings. Please enter the following:
-      type: Label
-    - layout_properties: {grid_position: 'ZNAOLS,DOCKBY'}
-      name: webhook_label
-      properties: {bold: false, font_size: 18, foreground: 'theme:Primary', italic: true, role: null, text: 'https://lodginia.com/_/api/smoobu/webhook', visible: true}
-      type: Label
+      type: form:dep_g9k4toow7i44kq:_Components.Card
     - layout_properties: {grid_position: 'CWEIOE,WOASFL'}
       name: spacer_6
       properties: {}
       type: Spacer
-    - layout_properties: {grid_position: 'CEXJMB,ZOYTJH'}
-      name: title_3
-      properties: {align: left, bold: true, role: title, text: '3. Start initial synchronization:', underline: false}
-      type: Label
-    - layout_properties: {grid_position: 'WSHFIR,FOQEGV'}
-      name: text_1
-      properties: {font_size: 18, text: 'The initial synchronization takes approximately 2 minutes, below you will see a status bar.'}
-      type: form:dep_g9k4toow7i44kq:_Components.Text
-    - event_bindings: {click: sync_smoobu_button_click}
-      layout_properties: {grid_position: 'TCJYLX,CLTZVL'}
-      name: sync_smoobu_button
-      properties: {role: filled-button, text: Sync Smoobu}
-      type: Button
-    - layout_properties: {grid_position: 'GSIZKN,QFRDSZ'}
-      name: progress_bar
-      properties: {progress: 0}
-      type: form:dep_pa3otpma4dkzg:ProgressBar.Determinate
-    - layout_properties: {grid_position: 'JXUWEY,RUPCQH'}
-      name: spacer_3
-      properties: {height: 16.0234375}
-      type: Spacer
-    - layout_properties: {grid_position: 'JHLWVI,MDXMRH'}
-      name: status_label
-      properties:
-        font_size: 18
-        icon_size: 20
-        italic: true
-        scale: medium
-        text: " \n"
-        visible: true
-      type: form:dep_g9k4toow7i44kq:_Components.Text
-    - layout_properties: {grid_position: 'WOHTZI,KEXOKB'}
-      name: spacer_7
+    - components:
+      - components:
+        - layout_properties: {slot: card-content-container-slot}
+          name: title_3
+          properties: {align: left, bold: true, role: title, text: '3. Start initial synchronization:', underline: false}
+          type: Label
+        - layout_properties: {slot: card-content-container-slot}
+          name: text_1
+          properties: {font_size: 18, text: 'The initial synchronization takes approximately 2 minutes, below you will see a status bar.'}
+          type: form:dep_g9k4toow7i44kq:_Components.Text
+        - layout_properties: {slot: card-content-container-slot}
+          name: spacer_3_copy
+          properties: {height: 16.0234375}
+          type: Spacer
+        - event_bindings: {click: sync_smoobu_button_click}
+          layout_properties: {slot: card-content-container-slot}
+          name: sync_smoobu_button
+          properties: {role: filled-button, text: Sync Smoobu}
+          type: Button
+        - layout_properties: {slot: card-content-container-slot}
+          name: spacer_7
+          properties: {}
+          type: Spacer
+        - layout_properties: {slot: card-content-container-slot}
+          name: progress_bar
+          properties: {progress: 0}
+          type: form:dep_pa3otpma4dkzg:ProgressBar.Determinate
+        - layout_properties: {slot: card-content-container-slot}
+          name: status_label
+          properties:
+            font_size: 18
+            icon_size: 20
+            italic: true
+            scale: medium
+            text: " \n"
+            visible: true
+          type: form:dep_g9k4toow7i44kq:_Components.Text
+        - layout_properties: {slot: card-content-container-slot}
+          name: spacer_3
+          properties: {height: 16.0234375}
+          type: Spacer
+        layout_properties: {slot: card-content-slot}
+        name: card_content_container_2
+        properties: {}
+        type: form:dep_g9k4toow7i44kq:_Components.Card.CardContentContainer
+      layout_properties: {grid_position: 'SYLQNT,BYEVML'}
+      name: card_3
       properties: {}
-      type: Spacer
+      type: form:dep_g9k4toow7i44kq:_Components.Card
     layout_properties: {}
     name: column_panel_2
     properties: {}
