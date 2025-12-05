@@ -397,6 +397,10 @@ components_by_slot:
       name: image_3
       properties: {horizontal_align: center, source: _/theme/homepage/iphone.jpg}
       type: Image
+    - layout_properties: {grid_position: 'NHMLOH,AETONT'}
+      name: form1_1
+      properties: {}
+      type: form:Form1
     - layout_properties: {grid_position: 'WRZLGN,NKNFMI'}
       name: checkbox_16
       properties:
