@@ -1,0 +1,12 @@
+components_by_slot:
+  slot_1:
+  - layout_properties: {}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
+  - layout_properties: {}
+    name: text_box_1
+    properties: {}
+    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+is_package: true
+layout: {type: 'form:home.home_template'}
