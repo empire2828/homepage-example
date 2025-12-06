@@ -22,8 +22,11 @@ class ota_markup_de(ota_markup_deTemplate):
     pass
 
   def calculate_ota_markup(self, **event_args):
-    ota_comm = int(self.ota_commission_text_box.text)
-    ota_markup_result = (100 / (100 - ota_comm) - 1) * 100
+    ota_comm = 0
+    if self.ota_commission_text_box.text:
+      ota_comm = int(self.ota_commission_text_box.text)
+    if self.vat_checkbox:
+      ota_markup_result = (100 / (100 - ota_comm) - 1) * 100
     ota_markup_result_rounded = round(ota_markup_result, 2)
     self.ota_markup_result_body.text = f"{ota_markup_result_rounded:.2f} %"
     return 
