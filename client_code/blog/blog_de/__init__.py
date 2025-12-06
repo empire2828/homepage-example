@@ -24,3 +24,7 @@ class blog_de(blog_deTemplate):
     open_form('blog.vrbo_de')
     pass
 
+  def ota_markuplink_click(self, **event_args):
+    open_form('blog.ota_markup_de')
+    pass
+

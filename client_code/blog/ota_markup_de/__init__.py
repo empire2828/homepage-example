@@ -1,4 +1,4 @@
-from ._anvil_designer import channel_price_adjustment_deTemplate
+from ._anvil_designer import ota_markup_deTemplate
 from anvil import *
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
@@ -18,7 +18,7 @@ import anvil.users
 # from ... import globals
 
 
-class channel_price_adjustment_de(channel_price_adjustment_deTemplate):
+class ota_markup_de(ota_markup_deTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
