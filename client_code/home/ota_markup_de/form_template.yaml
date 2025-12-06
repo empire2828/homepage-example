@@ -1,12 +1,54 @@
 components_by_slot:
   slot_1:
-  - layout_properties: {}
+  - components:
+    - layout_properties: {grid_position: 'DTZTWU,ATNVNB'}
+      name: title_1
+      properties: {role: title, text: 'Machen Sie auch diesen Fehler bei der Berechnung des Portalaufschlages?'}
+      type: Label
+    - layout_properties: {grid_position: 'WVAWWU,EDGHTD'}
+      name: spacer_1
+      properties: {}
+      type: Spacer
+    - components:
+      - layout_properties: {grid_position: 'CXTBJS,MUSFQW JBDVGO,RRCBHN'}
+        name: ota_commission_text_box
+        properties: {appearance: outlined, label: Portal Kommision ohne Umsatzsteuer %, supporting_text: '', text: '15'}
+        type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+      - layout_properties: {grid_position: 'CXTBJS,MUSFQW GQUKXV,AJRFOE'}
+        name: vat_checkbox
+        properties: {text: 'Umsatzsteuerpflicht?'}
+        type: form:dep_g9k4toow7i44kq:_Components.Checkbox
+      - layout_properties: {grid_position: 'CXTBJS,MUSFQW EXBAQP,JDHYVP'}
+        name: cancellation_rate_text_box
+        properties: {appearance: outlined, label: Stornierungsrate %, supporting_text: '', text: '30'}
+        type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+      - layout_properties: {grid_position: 'CXTBJS,MUSFQW IJCJHS,TBFFRD'}
+        name: direct_booking_from_ota_text_box
+        properties: {appearance: outlined, label: Direktbuchungen erhalten vom Kanal %, supporting_text: '', text: ''}
+        type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
+      - layout_properties: {grid_position: 'CXTBJS,MUSFQW BVAVFP,ZZBYVH'}
+        name: spacer_2
+        properties: {}
+        type: Spacer
+      - layout_properties: {grid_position: 'CXTBJS,MUSFQW UJVRPK,YXPKVN'}
+        name: body_2
+        properties: {bold: true, font_size: 18, role: body, text: 'Notwendiger Aufschlag:'}
+        type: Label
+      - layout_properties: {grid_position: 'CXTBJS,MUSFQW UJVRPK,PBLJFY'}
+        name: ota_markup_result_body
+        properties: {bold: true, font_size: 18, role: body}
+        type: Label
+      - layout_properties: {grid_position: 'CXTBJS,UGHACC'}
+        name: column_panel_3
+        properties: {}
+        type: ColumnPanel
+      layout_properties: {grid_position: 'WSIYQO,ZUSHTI'}
+      name: column_panel_2
+      properties: {}
+      type: ColumnPanel
+    layout_properties: {}
     name: column_panel_1
     properties: {}
     type: ColumnPanel
-  - layout_properties: {}
-    name: text_box_1
-    properties: {}
-    type: form:dep_g9k4toow7i44kq:_Components.TextInput.TextBox
 is_package: true
 layout: {type: 'form:home.home_template'}
