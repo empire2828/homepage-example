@@ -14,7 +14,7 @@ class multiframe(multiframeTemplate):
   
   def __init__(self, **properties):
     self.init_components(**properties)
-    self.flow_panel_1.scroll_into_view(smooth=False)
+    self.looker_flow_panel_1.scroll_into_view(smooth=False)
     self.current_user = globals.current_user
     self.supabase_key = ""
 
@@ -150,6 +150,9 @@ class multiframe(multiframeTemplate):
     self.aktueller_index = index
     #print(f"[MULTIFRAME] lade_und_zeige_iframe({index}) FERTIG, aktueller_index: {self.aktueller_index}")
 
+    # SCHNELL nach oben scrollen
+    self.panels[index].scroll_into_view(smooth=False, align="start")
+  
   def verstecke_alle_iframes(self):
     """Versteckt alle IFrames ohne sie zu entladen"""
     print("Verstecke alle IFrames...")
@@ -228,4 +231,5 @@ class multiframe(multiframeTemplate):
 
     print(f"[multiframe mobile] IFrame {index} einfach in Panel 0 geladen (kein Cache)")
 
-
+    # SCHNELL nach oben scrollen
+    panel.scroll_into_view(smooth=False, align="start")
