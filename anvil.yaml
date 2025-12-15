@@ -15,6 +15,20 @@ db_schema:
       type: number
     server: full
     title: channels
+  files:
+    client: none
+    columns:
+    - admin_ui: {width: 200}
+      name: path
+      type: string
+    - admin_ui: {width: 200}
+      name: file
+      type: media
+    - admin_ui: {width: 200}
+      name: file_version
+      type: string
+    server: full
+    title: Files
   log:
     client: none
     columns:
