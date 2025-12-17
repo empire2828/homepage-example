@@ -6,7 +6,8 @@ components_by_slot:
     properties:
       col_spacing: none
       spacing:
-        padding: [null, null, null, '-10']
+        margin: ['0', null, null, null]
+        padding: ['0', null, null, '-10']
       spacing_above: none
       spacing_below: medium
       wrap_on: never

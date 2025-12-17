@@ -1057,4 +1057,8 @@ div.plot-container.plotly svg.main-svg {
   -webkit-overflow-scrolling: touch;  /* smoothes scrolling auf iOS */
 }
 
-
+@media (max-width: 998px) {
+  body {
+    padding-top: 70px !important;
+  }
+}
