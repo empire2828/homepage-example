@@ -1,5 +1,11 @@
 components: []
-container: {type: ColumnPanel}
+container:
+  properties:
+    spacing:
+      margin: ['4', null, null, null]
+      padding: ['0', null, null, null]
+    wrap_on: mobile
+  type: ColumnPanel
 is_package: true
 slots:
   content:

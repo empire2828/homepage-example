@@ -7,7 +7,9 @@ components_by_slot:
   - components:
     - layout_properties: {full_width_row: true, grid_position: 'IKGPXC,HMQELB'}
       name: looker_flow_panel_1
-      properties: {}
+      properties:
+        spacing:
+          margin: ['4', null, null, null]
       type: FlowPanel
     - layout_properties: {full_width_row: true, grid_position: 'CNPAAH,HWJNVS'}
       name: looker_flow_panel_2
