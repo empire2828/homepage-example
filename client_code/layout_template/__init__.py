@@ -18,7 +18,8 @@ class layout_template(layout_templateTemplate):
     if not hasattr(globals, 'current_multiframe_instance') or globals.current_multiframe_instance is None:
       print("[layout template] get_or_create multiframe: Erstelle NEUES multiframe")
       globals.current_multiframe_instance = multiframe()
-      self.content_panel_iframe.add_component(globals.current_multiframe_instance, full_width_row=True)
+      # 🔥 Nicht mehr in content_panel_iframe, sondern in content Slot!
+      self.content.add_component(globals.current_multiframe_instance, full_width_row=True)
       globals.multiframe_open = True
     return globals.current_multiframe_instance
 
@@ -29,6 +30,10 @@ class layout_template(layout_templateTemplate):
     # Multiframe holen und sichtbar machen
     multiframe_obj = self.get_or_create_multiframe()
     multiframe_obj.visible = True
+
+    # 🔥 Laden direkt in den Slot statt in content_panel_iframe
+    self.content.clear()  # Slot leeren
+    self.content.add_component(multiframe_obj, full_width_row=True)
 
     if self.is_mobile():
       multiframe_obj.lade_iframe_mobile(iframe_index)
