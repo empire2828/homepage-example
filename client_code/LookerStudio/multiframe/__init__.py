@@ -176,14 +176,6 @@ class multiframe(multiframeTemplate):
         self.erstelle_iframe(i)
     print("Alle IFrames geladen")
 
-  def channel_manager_connect_button_click(self, **event_args):
-    open_form('channel_manager_connect')
-    pass
-
-  def dashboard_upgrade_button_click(self, **event_args):
-    open_form('upgrade')
-    pass
-
   def lade_restliche_iframes(self):
     """Lädt IFrames 1-10 im Hintergrund"""
     for i in range(1, len(self.iframe_urls)):
