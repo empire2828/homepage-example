@@ -15,9 +15,11 @@ class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     #self.looker_flow_panel_1.scroll_into_view(smooth=False)
+    #anvil.js.window.scrollTo(0, 0)
     globals.current_multiframe_instance = self  # ← HIER
     self.current_user = globals.current_user
     self.supabase_key = ""
+    self.dashboard_index = dashboard_index  # ← HINZUFÜGEN
 
     if self.current_user is None:
       print("[multiframe] Warnung: Kein current_user verfügbar")
@@ -118,42 +120,31 @@ class multiframe(multiframeTemplate):
 
   def lade_und_zeige_iframe(self, index):
     """Lädt IFrame falls noch nicht geladen und zeigt es an"""
-    #print(f"[MULTIFRAME] lade_und_zeige_iframe({index}) START")
-  
+
     if index < 0 or index >= len(self.iframe_urls):
       print(self.current_user['email']," ",f"Ungültiger Index: {index}")
       return
-  
-    #print(f"[MULTIFRAME] Index {index} ist gültig")
-  
+
+    # IMMER das alte Panel verstecken, BEVOR wir das neue zeigen
+    if self.aktueller_index is not None and self.aktueller_index != index:
+      self.panels[self.aktueller_index].visible = False
+
     # OPTIMIERUNG: Wenn bereits angezeigt, nichts tun
     if self.aktueller_index == index:
-      #print(f"[MULTIFRAME] IFrame {index} ist bereits sichtbar, überspringe")
       return
-  
-    #print(f"[MULTIFRAME] aktueller_index ({self.aktueller_index}) != index ({index})")
-  
-    # OPTIMIERUNG: Nur vorheriges Panel verstecken statt alle
-    if self.aktueller_index is not None:
-        #print(f"[MULTIFRAME] Verstecke vorheriges Panel {self.aktueller_index}")
-        self.panels[self.aktueller_index].visible = False
-  
+
     # IFrame laden falls nötig
     if not self.geladene_iframes[index]:
-      #print(f"[MULTIFRAME] IFrame {index} wird erstmalig geladen...")
       self.erstelle_iframe(index)
-    #else:
-      #print(f"[MULTIFRAME] IFrame {index} bereits geladen")
 
     # Gewünschtes Panel anzeigen
-    #print(f"[MULTIFRAME] Zeige Panel {index}")
     self.panels[index].visible = True
     self.aktueller_index = index
-    #print(f"[MULTIFRAME] lade_und_zeige_iframe({index}) FERTIG, aktueller_index: {self.aktueller_index}")
 
-    # SCHNELL nach oben scrollen
-    self.panels[index].scroll_into_view(smooth=False, align="start")
-  
+    # Nach oben scrollen
+    anvil.js.window.scrollTo(0, 0)
+
+    
   def verstecke_alle_iframes(self):
     """Versteckt alle IFrames ohne sie zu entladen"""
     print("Verstecke alle IFrames...")
@@ -184,13 +175,13 @@ class multiframe(multiframeTemplate):
         print("[multiframe] lade_restliche_iframses erstelle iframe",i)
 
   def lade_iframe_mobile(self, index):
-    """Einfaches IFrame laden für Mobile - OHNE Caching/Status - nutzt nur erstes Panel"""
+    """Einfaches IFrame laden für Mobile - nutzt nur Panel 0"""
     if index < 0 or index >= len(self.iframe_urls):
       print(f"[multiframe mobile] Ungültiger Index: {index}")
       return
-
+  
     url = self.iframe_urls[index]
-
+  
     # Parameter für Supabase Key hinzufügen
     if self.supabase_key:
       params = {"supabase_key_url": self.supabase_key}
@@ -198,32 +189,30 @@ class multiframe(multiframeTemplate):
       iframe_url = url + encoded_params
     else:
       iframe_url = url
-
-    # Nur das ERSTE Panel nutzen für Mobile
+  
+      # Nur das ERSTE Panel nutzen für Mobile
     panel = self.panels[0]
-
-    # 1. Zuerst: Alle iframes explizit entfernen (wichtig für Memory!)
+  
+    # Alte iframes entfernen
     jQuery(get_dom_node(panel)).find('iframe').remove()
-
-    # 2. Dann: Panel komplett leeren (falls noch was übrig ist)
     jQuery(get_dom_node(panel)).empty()
-
+  
+    # Neues iframe erstellen
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
       "height": "1000",
       "frameborder": "0",
       "scrolling": "no",
-      #"style": "border:0; position: relative; z-index: 1; overflow: visible;",
       "referrerpolicy": "origin-when-cross-origin",
       "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
     })
-
+  
     iframe.appendTo(get_dom_node(panel))
     panel.visible = True
-
-    print(f"[multiframe mobile] IFrame {index} einfach in Panel 0 geladen (kein Cache)")
-
-    # SCHNELL nach oben scrollen
-    #panel.scroll_into_view(smooth=False, align="start")
+  
+    print(f"[multiframe mobile] IFrame {index} geladen in Panel 0")
+  
+    # Nach oben scrollen
     anvil.js.window.scrollTo(0, 0)
+

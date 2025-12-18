@@ -30,16 +30,16 @@ class layout_template(layout_templateTemplate):
   def show_dashboard(self, iframe_index, link):
     """Zeige einen Dashboard-IFrame"""
     print(f"[layout template] show_dashboard({iframe_index}) START")
-
-    # Multiframe holen und sichtbar machen
-    multiframe_obj = self.get_or_create_multiframe()
-    multiframe_obj.visible = True
-
+  
     if self.is_mobile():
-      multiframe_obj.lade_iframe_mobile(iframe_index)
+      # MOBILE: Öffne multiframe mit dem Dashboard-Index
+      open_form('LookerStudio.multiframe', dashboard_index=iframe_index)
     else:
+      # DESKTOP: Nutze das bestehende Multiframe mit allen Panels
+      multiframe_obj = self.get_or_create_multiframe()
+      multiframe_obj.visible = True
       multiframe_obj.lade_und_zeige_iframe(iframe_index)
-
+  
     self.reset_links()
     link.selected = True
     self.check_if_upgrade_needed()
