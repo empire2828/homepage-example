@@ -15,6 +15,7 @@ class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     #self.looker_flow_panel_1.scroll_into_view(smooth=False)
+    globals.current_multiframe_instance = self  # ← HIER
     self.current_user = globals.current_user
     self.supabase_key = ""
 
