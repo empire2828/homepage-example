@@ -15,6 +15,7 @@ class multiframe(multiframeTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     #self.looker_flow_panel_1.scroll_into_view(smooth=False)
+    globals.current_multiframe_instance = self  # ← HIER
     self.current_user = globals.current_user
     self.supabase_key = ""
 
@@ -175,14 +176,6 @@ class multiframe(multiframeTemplate):
         self.erstelle_iframe(i)
     print("Alle IFrames geladen")
 
-  def channel_manager_connect_button_click(self, **event_args):
-    open_form('channel_manager_connect')
-    pass
-
-  def dashboard_upgrade_button_click(self, **event_args):
-    open_form('upgrade')
-    pass
-
   def lade_restliche_iframes(self):
     """Lädt IFrames 1-10 im Hintergrund"""
     for i in range(1, len(self.iframe_urls)):
@@ -232,4 +225,5 @@ class multiframe(multiframeTemplate):
     print(f"[multiframe mobile] IFrame {index} einfach in Panel 0 geladen (kein Cache)")
 
     # SCHNELL nach oben scrollen
-    panel.scroll_into_view(smooth=False, align="start")
+    #panel.scroll_into_view(smooth=False, align="start")
+    anvil.js.window.scrollTo(0, 0)
