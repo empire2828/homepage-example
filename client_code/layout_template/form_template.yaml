@@ -1,17 +1,5 @@
 components_by_slot:
-  content:
-  - components: []
-    layout_properties: {}
-    name: content_panel_iframe
-    properties:
-      col_spacing: none
-      spacing:
-        margin: ['0', null, null, null]
-        padding: ['0', null, null, '-10']
-      spacing_above: none
-      spacing_below: medium
-      wrap_on: never
-    type: ColumnPanel
+  content: []
   navigation:
   - event_bindings: {click: dashboard_navigation_link_click}
     layout_properties: {}
