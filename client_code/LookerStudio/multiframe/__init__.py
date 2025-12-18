@@ -225,4 +225,5 @@ class multiframe(multiframeTemplate):
     print(f"[multiframe mobile] IFrame {index} einfach in Panel 0 geladen (kein Cache)")
 
     # SCHNELL nach oben scrollen
-    panel.scroll_into_view(smooth=False, align="start")
+    #panel.scroll_into_view(smooth=False, align="start")
+    anvil.js.window.scrollTo(0, 0)
