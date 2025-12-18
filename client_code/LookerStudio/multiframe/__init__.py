@@ -231,5 +231,8 @@ class multiframe(multiframeTemplate):
 
     print(f"[multiframe mobile] IFrame {index} einfach in Panel 0 geladen (kein Cache)")
 
+    # Warte bis Layout berechnet ist
+    anvil.js.window.setTimeout(create_iframe, 100)
+    
     # SCHNELL nach oben scrollen
     panel.scroll_into_view(smooth=False, align="start")
