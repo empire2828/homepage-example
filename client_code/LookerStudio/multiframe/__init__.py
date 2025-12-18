@@ -211,28 +211,28 @@ class multiframe(multiframeTemplate):
 
     # 1. Zuerst: Alle iframes explizit entfernen (wichtig für Memory!)
     jQuery(get_dom_node(panel)).find('iframe').remove()
-
     # 2. Dann: Panel komplett leeren (falls noch was übrig ist)
     jQuery(get_dom_node(panel)).empty()
 
-    iframe = jQuery("<iframe>").attr({
-      "src": iframe_url,
-      "width": "100%",
-      "height": "1000",
-      "frameborder": "0",
-      "scrolling": "no",
-      #"style": "border:0; position: relative; z-index: 1; overflow: visible;",
-      "referrerpolicy": "origin-when-cross-origin",
-      "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
-    })
+    # 🔥 FIX: Verzögere das iframe-Laden um 100ms
+    def create_iframe():
+      iframe = jQuery("<iframe>").attr({
+        "src": iframe_url,
+        "width": "100%",
+        "height": "1000",
+        "frameborder": "0",
+        "scrolling": "no",
+        "referrerpolicy": "origin-when-cross-origin",
+        "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
+      })
 
-    iframe.appendTo(get_dom_node(panel))
-    panel.visible = True
+      iframe.appendTo(get_dom_node(panel))
+      panel.visible = True
 
-    print(f"[multiframe mobile] IFrame {index} einfach in Panel 0 geladen (kein Cache)")
+      print(f"[multiframe mobile] IFrame {index} geladen")
 
     # Warte bis Layout berechnet ist
-    anvil.js.window.setTimeout(create_iframe, 100)
+    anvil.js.window.setTimeout(create_iframe, 1000)
     
     # SCHNELL nach oben scrollen
     panel.scroll_into_view(smooth=False, align="start")
