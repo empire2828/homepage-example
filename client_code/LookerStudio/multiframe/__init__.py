@@ -19,7 +19,7 @@ class multiframe(multiframeTemplate):
     globals.current_multiframe_instance = self  # ← HIER
     self.current_user = globals.current_user
     self.supabase_key = ""
-    self.dashboard_index = dashboard_index  # ← HINZUFÜGEN
+    self.is_mobile = anvil.js.window.innerWidth < 768
 
     if self.current_user is None:
       print("[multiframe] Warnung: Kein current_user verfügbar")
@@ -50,20 +50,23 @@ class multiframe(multiframeTemplate):
       f"{self.Locker_Version}p_396qlut0wd",     # Knowledge hub
     ]
 
-    self.panels = [
-      self.looker_flow_panel_1,
-      self.looker_flow_panel_2,
-      self.looker_flow_panel_3,
-      self.looker_flow_panel_4,
-      self.looker_flow_panel_5,
-      self.looker_flow_panel_6,
-      self.looker_flow_panel_7,
-      self.looker_flow_panel_8,
-      self.looker_flow_panel_9,
-      self.looker_flow_panel_10,
-      self.looker_flow_panel_11,
-    ]
-
+    if self.is_mobile:
+      self.panels = [self.looker_flow_panel_1]
+    else:
+      self.panels = [
+        self.looker_flow_panel_1,
+        self.looker_flow_panel_2,
+        self.looker_flow_panel_3,
+        self.looker_flow_panel_4,
+        self.looker_flow_panel_5,
+        self.looker_flow_panel_6,
+        self.looker_flow_panel_7,
+        self.looker_flow_panel_8,
+        self.looker_flow_panel_9,
+        self.looker_flow_panel_10,
+        self.looker_flow_panel_11,
+      ]
+  
     # Status-Tracking welche IFrames bereits geladen wurden
     self.geladene_iframes = [False] * len(self.iframe_urls)
 
@@ -82,7 +85,7 @@ class multiframe(multiframeTemplate):
       return
 
     url = self.iframe_urls[index]
-    panel = self.panels[index]
+    panel = self.panels[0] if self.is_mobile else self.panels[index]
 
     # Parameter für Supabase Key hinzufügen
     if self.supabase_key:
@@ -97,10 +100,11 @@ class multiframe(multiframeTemplate):
     jQuery(get_dom_node(panel)).empty()
 
     # IFrame erstellen mit expliziten Attributen
+    height = "1000" if self.is_mobile else "1950"
     iframe = jQuery("<iframe>").attr({
       "src": iframe_url,
       "width": "100%",
-      "height": "1950",
+      "height": height,
       "frameborder": "0",
       "scrolling": "no",
       "loading": "lazy",
