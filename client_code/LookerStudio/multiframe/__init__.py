@@ -9,17 +9,27 @@ from ... import globals
 class multiframe(multiframeTemplate):
 
   Locker_Version = "https://lookerstudio.google.com/embed/reporting/90173894-1f4b-4b83-9daf-a0b63eb59f3b/page/"
-  #V1.1.03
-  #Freigeben als nicht gelistet und Bericht einbetten aktivieren ohne Berichtsnavi mit URL
-  
+
+  # Konstante URLs - nur einmal definieren
+  IFRAME_URLS = [
+    "qmCOF",            # 0: Dashboard
+    "p_frni7wm2vd",     # 1: Outlook
+    "p_8l5lnc13td",     # 2: Profitability
+    "p_9euf3853td",     # 3: Bookings
+    "p_knw9h153td",     # 4: Cancellations
+    "p_1idplf63td",     # 5: Occupancy
+    "p_8hyzd253td",     # 6: Lead Time
+    "p_tilmy6zhtd",     # 7: Guest Insights
+    "p_4dt5tycuud",     # 8: Long Trends     
+    "p_cc0slxgtud",     # 9: Detailed Bookings
+    "p_396qlut0wd",     # 10: Knowledge hub
+  ]
+
   def __init__(self, **properties):
     self.init_components(**properties)
-    #self.looker_flow_panel_1.scroll_into_view(smooth=False)
-    #anvil.js.window.scrollTo(0, 0)
-    globals.current_multiframe_instance = self  # ← HIER
+    globals.current_multiframe_instance = self
     self.current_user = globals.current_user
     self.supabase_key = ""
-    self.dashboard_index = dashboard_index  # ← HINZUFÜGEN
 
     if self.current_user is None:
       print("[multiframe] Warnung: Kein current_user verfügbar")
@@ -27,192 +37,109 @@ class multiframe(multiframeTemplate):
 
     if self.current_user.get('smoobu_api_key') is None:
       open_form('channel_manager_connect')
-    else:
-      self.supabase_key = self.current_user.get('supabase_key', '')
+      return
 
-      if self.supabase_key:
-        self.content_panel.visible = True
-        print(f"[multiframe] init {globals.current_user['email']} supabase key: {self.supabase_key}")
-      else:
-        print(f"{self.current_user['email']} Warnung: Kein supabase_key verfügbar")  
+    self.supabase_key = self.current_user.get('supabase_key', '')
 
-    self.iframe_urls = [
-      f"{self.Locker_Version}qmCOF",            # Dashboard
-      f"{self.Locker_Version}p_frni7wm2vd",     # Outlook
-      f"{self.Locker_Version}p_8l5lnc13td",     # Profitability
-      f"{self.Locker_Version}p_9euf3853td",     # Bookings
-      f"{self.Locker_Version}p_knw9h153td",     # Cancellations
-      f"{self.Locker_Version}p_1idplf63td",     # Occupancy
-      f"{self.Locker_Version}p_8hyzd253td",     # Lead Time
-      f"{self.Locker_Version}p_tilmy6zhtd",     # Guest Insights
-      f"{self.Locker_Version}p_4dt5tycuud",     # Long Trends     
-      f"{self.Locker_Version}p_cc0slxgtud",     # Detailed Bookings
-      f"{self.Locker_Version}p_396qlut0wd",     # Knowledge hub
-    ]
+    if not self.supabase_key:
+      print(f"{self.current_user['email']} Warnung: Kein supabase_key verfügbar")
+      return
 
-    self.panels = [
-      self.looker_flow_panel_1,
-      self.looker_flow_panel_2,
-      self.looker_flow_panel_3,
-      self.looker_flow_panel_4,
-      self.looker_flow_panel_5,
-      self.looker_flow_panel_6,
-      self.looker_flow_panel_7,
-      self.looker_flow_panel_8,
-      self.looker_flow_panel_9,
-      self.looker_flow_panel_10,
-      self.looker_flow_panel_11,
-    ]
+    self.content_panel.visible = True
+    print(f"[multiframe] init {self.current_user['email']}")
 
-    # Status-Tracking welche IFrames bereits geladen wurden
-    self.geladene_iframes = [False] * len(self.iframe_urls)
+    # MOBILE: Nur 1 Panel
+    # DESKTOP: Alle Panels
+    self.is_mobile = anvil.js.window.innerWidth < 768
 
-    # Aktuell sichtbarer Index
+    self.panels = [self.looker_flow_panel_1]
+
+    if not self.is_mobile:
+      self.panels = [
+        self.looker_flow_panel_1,
+        self.looker_flow_panel_2,
+        self.looker_flow_panel_3,
+        self.looker_flow_panel_4,
+        self.looker_flow_panel_5,
+        self.looker_flow_panel_6,
+        self.looker_flow_panel_7,
+        self.looker_flow_panel_8,
+        self.looker_flow_panel_9,
+        self.looker_flow_panel_10,
+        self.looker_flow_panel_11,
+      ]
+
+    # Nur geladene IFrames tracken
+    self.geladene_iframes = set()
     self.aktueller_index = None
 
     # Initial: alle Panels unsichtbar
-    for i, panel in enumerate(self.panels):
+    for panel in self.panels:
       panel.visible = False
-      panel.height = 2000
 
-  def erstelle_iframe(self, index):
-    """Erstellt ein IFrame für den gegebenen Index"""
-    if index < 0 or index >= len(self.iframe_urls):        
-      print("[multiframe] erstelle_iframe ",self.current_user['email'],f"Ungültiger Index: {index}")
-      return
+  def _get_iframe_url(self, index):
+    """Generiert die vollständige URL für einen Dashboard"""
+    if index < 0 or index >= len(self.IFRAME_URLS):
+      return None
 
-    url = self.iframe_urls[index]
-    panel = self.panels[index]
+    url = self.Locker_Version + self.IFRAME_URLS[index]
 
-    # Parameter für Supabase Key hinzufügen
     if self.supabase_key:
       params = {"supabase_key_url": self.supabase_key}
-      encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
-      iframe_url = url + encoded_params
-      print("(multiframe) erstelle_iframe: ",iframe_url)
-    else:
-      iframe_url = url
+      encoded = anvil.js.window.encodeURIComponent(json.dumps(params))
+      return f"{url}?params={encoded}"
 
-    # Vorheriges IFrame entfernen falls vorhanden
-    jQuery(get_dom_node(panel)).empty()
-
-    # IFrame erstellen mit expliziten Attributen
-    iframe = jQuery("<iframe>").attr({
-      "src": iframe_url,
-      "width": "100%",
-      "height": "1950",
-      "frameborder": "0",
-      "scrolling": "no",
-      "loading": "lazy",
-      "referrerpolicy": "origin-when-cross-origin",
-      "sandbox":"allow-scripts allow-same-origin allow-storage-access-by-user-activation"
-    })
-
-    #"style": "border: none; background: white;",
-    #"allow": "fullscreen; storage-access",
-    
-    # IFrame zum Panel hinzufügen
-    iframe.appendTo(get_dom_node(panel))
-
-    # Als geladen markieren
-    self.geladene_iframes[index] = True
-    #print("erstelle_iframe als geladen markieren self.geladene_iframes:",self.geladene_iframes)
+    return url
 
   def lade_und_zeige_iframe(self, index):
-    """Lädt IFrame falls noch nicht geladen und zeigt es an"""
+    """Optimiert: Lädt nur das benötigte IFrame"""
 
-    if index < 0 or index >= len(self.iframe_urls):
-      print(self.current_user['email']," ",f"Ungültiger Index: {index}")
+    if index < 0 or index >= len(self.IFRAME_URLS):
+      print(f"{self.current_user['email']} Ungültiger Index: {index}")
       return
 
-    # IMMER das alte Panel verstecken, BEVOR wir das neue zeigen
+    # Altes Panel verstecken
     if self.aktueller_index is not None and self.aktueller_index != index:
       self.panels[self.aktueller_index].visible = False
 
-    # OPTIMIERUNG: Wenn bereits angezeigt, nichts tun
+    # Wenn bereits angezeigt, nicht neu laden
     if self.aktueller_index == index:
       return
 
-    # IFrame laden falls nötig
-    if not self.geladene_iframes[index]:
-      self.erstelle_iframe(index)
+    # IFrame erstellen/laden
+    if index not in self.geladene_iframes:
+      panel = self.panels[0] if self.is_mobile else self.panels[index]
+      jQuery(get_dom_node(panel)).empty()
 
-    # Gewünschtes Panel anzeigen
-    self.panels[index].visible = True
+      url = self._get_iframe_url(index)
+      if not url:
+        return
+
+      iframe = jQuery("<iframe>").attr({
+        "src": url,
+        "width": "100%",
+        "frameborder": "0",
+        "scrolling": "no",
+        "loading": "lazy",
+        "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
+      })
+
+      if self.is_mobile:
+        iframe.attr("height", "900")
+      else:
+        iframe.attr("height", "1950")
+
+      iframe.appendTo(get_dom_node(panel))
+      self.geladene_iframes.add(index)
+
+    # Panel anzeigen
+    self.panels[0 if self.is_mobile else index].visible = True
     self.aktueller_index = index
 
-    # Nach oben scrollen
     anvil.js.window.scrollTo(0, 0)
 
-    
   def verstecke_alle_iframes(self):
-    """Versteckt alle IFrames ohne sie zu entladen"""
-    print("Verstecke alle IFrames...")
-    for i, panel in enumerate(self.panels):
+    """Versteckt alle IFrames"""
+    for panel in self.panels:
       panel.visible = False
-      print(f"   Panel {i} versteckt")
     self.aktueller_index = None
-
-  def ist_geladen(self, index):
-    """Prüft ob IFrame bereits geladen ist"""
-    if index < 0 or index >= len(self.geladene_iframes):
-      #print("ist_geladen ","False Index:",index," len(self.geladene_iframes:",len(self.geladene_iframes))
-      return False
-    return self.geladene_iframes[index]
-
-  def lade_alle_iframes(self):
-    """Lädt alle IFrames im Voraus (falls gewünscht für bessere Performance)"""
-    for i in range(len(self.iframe_urls)):
-      if not self.geladene_iframes[i]:
-        self.erstelle_iframe(i)
-    print("Alle IFrames geladen")
-
-  def lade_restliche_iframes(self):
-    """Lädt IFrames 1-10 im Hintergrund"""
-    for i in range(1, len(self.iframe_urls)):
-      if not self.geladene_iframes[i]:
-        self.erstelle_iframe(i)
-        print("[multiframe] lade_restliche_iframses erstelle iframe",i)
-
-  def lade_iframe_mobile(self, index):
-    """Einfaches IFrame laden für Mobile - nutzt nur Panel 0"""
-    if index < 0 or index >= len(self.iframe_urls):
-      print(f"[multiframe mobile] Ungültiger Index: {index}")
-      return
-  
-    url = self.iframe_urls[index]
-  
-    # Parameter für Supabase Key hinzufügen
-    if self.supabase_key:
-      params = {"supabase_key_url": self.supabase_key}
-      encoded_params = f"?params={anvil.js.window.encodeURIComponent(json.dumps(params))}"
-      iframe_url = url + encoded_params
-    else:
-      iframe_url = url
-  
-      # Nur das ERSTE Panel nutzen für Mobile
-    panel = self.panels[0]
-  
-    # Alte iframes entfernen
-    jQuery(get_dom_node(panel)).find('iframe').remove()
-    jQuery(get_dom_node(panel)).empty()
-  
-    # Neues iframe erstellen
-    iframe = jQuery("<iframe>").attr({
-      "src": iframe_url,
-      "width": "100%",
-      "height": "1000",
-      "frameborder": "0",
-      "scrolling": "no",
-      "referrerpolicy": "origin-when-cross-origin",
-      "sandbox": "allow-scripts allow-same-origin allow-storage-access-by-user-activation"
-    })
-  
-    iframe.appendTo(get_dom_node(panel))
-    panel.visible = True
-  
-    print(f"[multiframe mobile] IFrame {index} geladen in Panel 0")
-  
-    # Nach oben scrollen
-    anvil.js.window.scrollTo(0, 0)
-

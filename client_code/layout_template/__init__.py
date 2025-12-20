@@ -29,20 +29,11 @@ class layout_template(layout_templateTemplate):
 
   def show_dashboard(self, iframe_index, link):
     """Zeige einen Dashboard-IFrame"""
-    print(f"[layout template] show_dashboard({iframe_index}) START")
-  
-    if self.is_mobile():
-      # MOBILE: Öffne multiframe mit dem Dashboard-Index
-      open_form('LookerStudio.multiframe', dashboard_index=iframe_index)
-    else:
-      # DESKTOP: Nutze das bestehende Multiframe mit allen Panels
-      multiframe_obj = self.get_or_create_multiframe()
-      multiframe_obj.visible = True
-      multiframe_obj.lade_und_zeige_iframe(iframe_index)
-  
-    self.reset_links()
-    link.selected = True
-    self.check_if_upgrade_needed()
+    if globals.current_multiframe_instance:
+      globals.current_multiframe_instance.lade_und_zeige_iframe(iframe_index)
+      self.reset_links()
+      link.selected = True
+      self.check_if_upgrade_needed()
 
   def reset_links(self):
     """Deselektiere alle Navigation Links"""
