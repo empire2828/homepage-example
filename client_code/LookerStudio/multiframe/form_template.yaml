@@ -1,9 +1,5 @@
 components_by_slot:
   content:
-  - layout_properties: {}
-    name: flow_panel_1
-    properties: {}
-    type: FlowPanel
   - components:
     - layout_properties: {full_width_row: true, grid_position: 'IKGPXC,HMQELB'}
       name: looker_flow_panel_1
@@ -54,4 +50,4 @@ components_by_slot:
     properties: {visible: false}
     type: ColumnPanel
 is_package: true
-layout: {type: 'form:blank'}
+layout: {type: 'form:layout_template'}

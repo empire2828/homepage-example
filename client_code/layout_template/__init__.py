@@ -9,36 +9,40 @@ class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
 
+  #def form_show(self, **event_args):
+  #  if not globals.multiframe_open:
+  #    # Multiframe als normales Formular in den Slot laden
+  #    open_form('multiframe', slot='content_panel_iframe')
+  #    globals.multiframe_open = True
+
   def is_mobile(self):
     """Prüft ob Mobile View"""
     return anvil.js.window.innerWidth < 768
 
-  def get_or_create_multiframe(self):
-    """Erstelle multiframe nur einmal und füge EINMALIG hinzu"""
-    if not hasattr(globals, 'current_multiframe_instance') or globals.current_multiframe_instance is None:
-      print("[layout template] get_or_create multiframe: Erstelle NEUES multiframe")
-      globals.current_multiframe_instance = multiframe()
-      self.content_panel_iframe.add_component(globals.current_multiframe_instance, full_width_row=True)
-      globals.multiframe_open = True
-    return globals.current_multiframe_instance
-
   def show_dashboard(self, iframe_index, link):
-    """Zeige einen Dashboard-IFrame"""
-    print(f"[layout template] show_dashboard({iframe_index}) START")
-
-    # Multiframe holen und sichtbar machen
-    multiframe_obj = self.get_or_create_multiframe()
-    multiframe_obj.visible = True
+    #für initialen Aufruf nach Login
+    print(f"[layout template] ({iframe_index}) START")
 
     if self.is_mobile():
-      multiframe_obj.lade_iframe_mobile(iframe_index)
+      # MOBILE: Öffne multiframe mit dem Dashboard-Index
+      open_form('LookerStudio.multiframe', dashboard_index=iframe_index)
     else:
+      # DESKTOP: Nutze das bestehende Multiframe mit allen Panels
+      multiframe_obj = self.get_or_create_multiframe()
+      multiframe_obj.visible = True
       multiframe_obj.lade_und_zeige_iframe(iframe_index)
 
     self.reset_links()
     link.selected = True
-    #self.current_user = globals.current_user
     self.check_if_upgrade_needed()
+  
+  def get_or_create_multiframe(self):
+    # für initialen Aufruf druch Show Dashboard nach Login
+    if not hasattr(globals, 'current_multiframe_instance') or globals.current_multiframe_instance is None:
+      print("[layout template] Multiframe wird über open_form geladen")
+      open_form('LookerStudio.multiframe')
+      globals.multiframe_open = True
+    return globals.current_multiframe_instance
 
   def reset_links(self):
     """Deselektiere alle Navigation Links"""
@@ -58,75 +62,46 @@ class layout_template(layout_templateTemplate):
     self.my_account_navigation_link.selected = False
     self.upgrade_navigation_link.selected = False
 
+  def _handle_menu_click(self, index, link):
+    """Universal handler für Desktop & Mobile"""
+    if globals.current_multiframe_instance:
+      if self.is_mobile():
+        globals.current_multiframe_instance.lade_iframe_mobile(index)
+      else:
+        globals.current_multiframe_instance.lade_und_zeige_iframe(index)
+      self.reset_links()
+      link.selected = True
+
   def dashboard_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(0, self.dashboard_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
+    # Multiframe ist bereits da, zeige einfach den Dashboard an
+    self._handle_menu_click(0,self.dashboard_navigation_link)
 
   def monthly_outlook_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(1, self.monthly_outlook_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(1, layout_form.monthly_outlook_navigation_link)
+    self._handle_menu_click(1,self.monthly_outlook_navigation_link)
 
   def profitability_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(2, self.profitability_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(2, layout_form.profitability_navigation_link)
+    self._handle_menu_click(2,self.profitability_navigation_link)
 
   def bookings_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(3, self.bookings_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(3, layout_form.bookings_navigation_link)
+    self._handle_menu_click(3,self.bookings_navigation_link)
 
   def cancellations_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(4, self.cancellations_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(4, layout_form.cancellations_navigation_link)
+     self._handle_menu_click(4,self.cancellations_navigation_link)
 
   def occupancy_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(5, self.occupancy_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(5, layout_form.occupancy_navigation_link)
+    self._handle_menu_click(5,self.occupancy_navigation_link)
 
   def lead_time_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(6, self.lead_time_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(6, layout_form.lead_time_navigation_link)
+    self._handle_menu_click(6,self.lead_time_navigation_link)
 
   def guest_insights_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(7, self.guest_insights_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(7, layout_form.guest_insights_navigation_link)
+    self._handle_menu_click(7,self.guest_insights_navigation_link)
 
   def long_trends_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(8, self.long_trends_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(8, layout_form.long_trends_navigation_link)
+    self._handle_menu_click(8,self.long_trends_navigation_link)
 
   def detailed_bookings_navigation_link_click(self, **event_args):
-    if globals.multiframe_open:
-      self.show_dashboard(9, self.detailed_bookings_navigation_link)
-    else:
-      layout_form = open_form('layout_template')
-      layout_form.show_dashboard(9, layout_form.detailed_bookings_navigation_link)
+    self._handle_menu_click(9,self.detailed_bookings_navigation_link)
 
   def connect_navigation_link_click(self, **event_args):
     globals.current_multiframe_instance = None
