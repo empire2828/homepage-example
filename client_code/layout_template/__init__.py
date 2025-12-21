@@ -19,28 +19,22 @@ class layout_template(layout_templateTemplate):
     """Prüft ob Mobile View"""
     return anvil.js.window.innerWidth < 768
 
-  def get_or_create_multiframe(self):
-    """Multiframe ist jetzt bereits über open_form geladen"""
-    # für initialen Aufruf druch Show Dashboard nach Login
-    if not hasattr(globals, 'current_multiframe_instance') or globals.current_multiframe_instance is None:
-      print("[layout template] Multiframe wird über open_form geladen")
-      open_form('LookerStudio.multiframe')
-      globals.multiframe_open = True
-    return globals.current_multiframe_instance
-
   def show_dashboard(self, iframe_index, link):
-    #für initialen Aufruf nach Login
-    print(f"[layout template] ({iframe_index}) START")
+    #initiales laden nach Login
+    print(f"[layout template] Dashboard {iframe_index} START")
   
     if self.is_mobile():
-      # MOBILE: Öffne multiframe mit dem Dashboard-Index
+      # MOBILE: Öffne multiframe mit dashboard_index
       open_form('LookerStudio.multiframe', dashboard_index=iframe_index)
     else:
-      # DESKTOP: Nutze das bestehende Multiframe mit allen Panels
-      multiframe_obj = self.get_or_create_multiframe()
-      multiframe_obj.visible = True
-      multiframe_obj.lade_und_zeige_iframe(iframe_index)
-  
+      # DESKTOP: Erstelle multiframe falls nicht vorhanden
+      if not globals.current_multiframe_instance:
+        open_form('LookerStudio.multiframe')
+        globals.multiframe_open = True
+      else:
+        globals.current_multiframe_instance.visible = True
+        globals.current_multiframe_instance.lade_und_zeige_iframe(iframe_index)
+
     self.reset_links()
     link.selected = True
     self.check_if_upgrade_needed()
