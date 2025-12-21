@@ -8,8 +8,8 @@ from ... import globals
 
 class multiframe(multiframeTemplate):
 
-  Locker_Version = "https://lookerstudio.google.com/embed/reporting/90173894-1f4b-4b83-9daf-a0b63eb59f3b/page/"
-  #V1.1.03 Freigeben als nicht gelistet und Bericht einbetten aktivieren ohne Berichtsnavi mit URL
+  Locker_Version = "https://lookerstudio.google.com/embed/reporting/10bba35a-e2c8-4c2e-8647-f7483de84c25/page/"
+  #V1.1.04 Freigeben als nicht gelistet und Bericht einbetten aktivieren ohne Berichtsnavi mit URL
   
   def __init__(self, **properties):
     self.init_components(**properties)
