@@ -21,6 +21,7 @@ class layout_template(layout_templateTemplate):
 
   def get_or_create_multiframe(self):
     """Multiframe ist jetzt bereits über open_form geladen"""
+    # für initialen Aufruf druch Show Dashboard nach Login
     if not hasattr(globals, 'current_multiframe_instance') or globals.current_multiframe_instance is None:
       print("[layout template] Multiframe wird über open_form geladen")
       open_form('LookerStudio.multiframe')
@@ -28,8 +29,8 @@ class layout_template(layout_templateTemplate):
     return globals.current_multiframe_instance
 
   def show_dashboard(self, iframe_index, link):
-    """Zeige einen Dashboard-IFrame"""
-    print(f"[layout template] show_dashboard({iframe_index}) START")
+    #für initialen Aufruf nach Login
+    print(f"[layout template] ({iframe_index}) START")
   
     if self.is_mobile():
       # MOBILE: Öffne multiframe mit dem Dashboard-Index

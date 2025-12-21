@@ -9,14 +9,13 @@ from ... import globals
 class multiframe(multiframeTemplate):
 
   Locker_Version = "https://lookerstudio.google.com/embed/reporting/90173894-1f4b-4b83-9daf-a0b63eb59f3b/page/"
-  #V1.1.03
-  #Freigeben als nicht gelistet und Bericht einbetten aktivieren ohne Berichtsnavi mit URL
+  #V1.1.03 Freigeben als nicht gelistet und Bericht einbetten aktivieren ohne Berichtsnavi mit URL
   
   def __init__(self, **properties):
     self.init_components(**properties)
     #self.looker_flow_panel_1.scroll_into_view(smooth=False)
     #anvil.js.window.scrollTo(0, 0)
-    globals.current_multiframe_instance = self  # ← HIER
+    globals.current_multiframe_instance = self  
     self.current_user = globals.current_user
     self.supabase_key = ""
     self.is_mobile = anvil.js.window.innerWidth < 768
@@ -147,7 +146,6 @@ class multiframe(multiframeTemplate):
 
     # Nach oben scrollen
     anvil.js.window.scrollTo(0, 0)
-
     
   def verstecke_alle_iframes(self):
     """Versteckt alle IFrames ohne sie zu entladen"""
