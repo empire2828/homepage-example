@@ -77,6 +77,12 @@ class multiframe(multiframeTemplate):
       panel.visible = False
       panel.height = 2000
 
+    # Dashboard-Index Parameter (für Mobile Initial-Load)
+    dashboard_index = properties.get('dashboard_index', None)
+    if self.is_mobile and dashboard_index is not None:
+      self.lade_iframe_mobile(dashboard_index)
+      print(f"[multiframe] Mobile: Dashboard {dashboard_index} geladen")
+
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
     if index < 0 or index >= len(self.iframe_urls):        
