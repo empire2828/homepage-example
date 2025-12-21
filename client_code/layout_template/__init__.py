@@ -9,11 +9,11 @@ class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
 
-  def form_show(self, **event_args):
-    if not globals.multiframe_open:
-      # Multiframe als normales Formular in den Slot laden
-      open_form('multiframe', slot='content_panel_iframe')
-      globals.multiframe_open = True
+  #def form_show(self, **event_args):
+  #  if not globals.multiframe_open:
+  #    # Multiframe als normales Formular in den Slot laden
+  #    open_form('multiframe', slot='content_panel_iframe')
+  #    globals.multiframe_open = True
 
   def is_mobile(self):
     """Prüft ob Mobile View"""
