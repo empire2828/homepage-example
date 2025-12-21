@@ -1,5 +1,6 @@
 import anvil.server
 
+current_multiframe_instance = None
 user_has_subscription = None
 user_email = None
 request_count = 0
