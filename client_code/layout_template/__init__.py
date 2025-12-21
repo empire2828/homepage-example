@@ -63,66 +63,46 @@ class layout_template(layout_templateTemplate):
     self.my_account_navigation_link.selected = False
     self.upgrade_navigation_link.selected = False
 
+  def _handle_menu_click(self, index, link):
+    """Universal handler für Desktop & Mobile"""
+    if globals.current_multiframe_instance:
+      if self.is_mobile():
+        globals.current_multiframe_instance.lade_iframe_mobile(index)
+      else:
+        globals.current_multiframe_instance.lade_und_zeige_iframe(index)
+      self.reset_links()
+      link.selected = True
+
   def dashboard_navigation_link_click(self, **event_args):
     # Multiframe ist bereits da, zeige einfach den Dashboard an
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(0)
-      self.reset_links()
-      self.dashboard_navigation_link.selected = True
+    self._handle_menu_click(0,self.dashboard_navigation_link)
 
   def monthly_outlook_navigation_link_click(self, **event_args):
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(1)
-      self.reset_links()
-      self.monthly_outlook_navigation_link.selected = True
+    self._handle_menu_click(1,self.monthly_outlook_navigation_link)
 
   def profitability_navigation_link_click(self, **event_args):
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(2)
-      self.reset_links()
-      self.profitability_navigation_link.selected = True
+    self._handle_menu_click(2,self.profitability_navigation_link)
 
   def bookings_navigation_link_click(self, **event_args):
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(3)
-      self.reset_links()
-      self.bookings_navigation_link.selected = True
+    self._handle_menu_click(3,self.bookings_navigation_link)
 
   def cancellations_navigation_link_click(self, **event_args):
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(4)
-      self.reset_links()
-      self.cancellations_navigation_link.selected = True
+     self._handle_menu_click(4,self.cancellations_navigation_link)
 
   def occupancy_navigation_link_click(self, **event_args):
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(5)
-      self.reset_links()
-      self.occupancy_navigation_link.selected = True
+    self._handle_menu_click(5,self.occupancy_navigation_link)
 
   def lead_time_navigation_link_click(self, **event_args):
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(6)
-      self.reset_links()
-      self.lead_time_navigation_link.selected = True
+    self._handle_menu_click(6,self.lead_time_navigation_link)
 
   def guest_insights_navigation_link_click(self, **event_args):
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(7)
-      self.reset_links()
-      self.guest_insights_navigation_link.selected = True
+    self._handle_menu_click(7,self.guest_insights_navigation_link)
 
   def long_trends_navigation_link_click(self, **event_args):
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(8)
-      self.reset_links()
-      self.long_trends_navigation_link.selected = True
+    self._handle_menu_click(8,self.long_trends_navigation_link)
 
   def detailed_bookings_navigation_link_click(self, **event_args):
-    if globals.current_multiframe_instance:
-      globals.current_multiframe_instance.lade_und_zeige_iframe(9)
-      self.reset_links()
-      self.detailed_bookings_navigation_link.selected = True
+    self._handle_menu_click(9,self.detailed_bookings_navigation_link)
 
   def connect_navigation_link_click(self, **event_args):
     globals.current_multiframe_instance = None
