@@ -9,11 +9,14 @@ class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
 
-  #def form_show(self, **event_args):
-  #  if not globals.multiframe_open:
-  #    # Multiframe als normales Formular in den Slot laden
-  #    open_form('multiframe', slot='content_panel_iframe')
-  #    globals.multiframe_open = True
+  def form_show(self, **event_args):
+    """Wird aufgerufen wenn layout_template vollständig geladen ist"""
+    print("[layout_template] form_show - bereit")
+
+    # Wenn Dashboard-Index von außen gesetzt wurde, jetzt laden
+    if self.dashboard_index_on_show is not None:
+      self.show_dashboard(self.dashboard_index_on_show, self.dashboard_navigation_link)
+      self.dashboard_index_on_show = None
 
   def is_mobile(self):
     """Prüft ob Mobile View"""
@@ -28,7 +31,7 @@ class layout_template(layout_templateTemplate):
       globals.multiframe_open = True
     return globals.current_multiframe_instance
 
-  def show_dashboard(self, iframe_index, link):
+  def show_dashboard_alt(self, iframe_index, link):
     #für initialen Aufruf nach Login
     print(f"[layout template] ({iframe_index}) START")
   
@@ -41,6 +44,24 @@ class layout_template(layout_templateTemplate):
       multiframe_obj.visible = True
       multiframe_obj.lade_und_zeige_iframe(iframe_index)
   
+    self.reset_links()
+    link.selected = True
+    self.check_if_upgrade_needed()
+
+  def show_dashboard(self, iframe_index, link):
+    print(f"[layout template] ({iframe_index}) START")
+
+    if self.is_mobile():
+      open_form('LookerStudio.multiframe', dashboard_index=iframe_index)
+    else:
+      # DESKTOP: multiframe muss bereits via form_show() geladen sein
+      if globals.current_multiframe_instance:
+        globals.current_multiframe_instance.visible = True
+        globals.current_multiframe_instance.lade_und_zeige_iframe(iframe_index)
+      else:
+        print("[layout_template] ERROR: Multiframe nicht initialisiert!")
+        open_form('LookerStudio.multiframe')
+
     self.reset_links()
     link.selected = True
     self.check_if_upgrade_needed()
