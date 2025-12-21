@@ -51,7 +51,7 @@ class home_template(home_templateTemplate):
     if last_login is not None:
       now_dt = datetime.datetime.now(datetime.timezone.utc)
       delta = now_dt - last_login
-      if delta.total_seconds() < 24 * 3600:
+      if delta.total_seconds() > 24 * 3600:
         must_refresh = True
     if must_refresh:
       globals.request_count = anvil.server.call_s('get_request_count')
