@@ -75,7 +75,8 @@ class multiframe(multiframeTemplate):
     # Initial: alle Panels unsichtbar
     for i, panel in enumerate(self.panels):
       panel.visible = False
-      panel.height = 2000
+      if not self.is_mobile:
+        panel.height = 2000
 
     # Dashboard-Index Parameter (für Mobile Initial-Load)
     dashboard_index = properties.get('dashboard_index', None)
