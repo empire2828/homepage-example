@@ -80,9 +80,13 @@ class multiframe(multiframeTemplate):
 
     # Dashboard-Index Parameter (für Mobile Initial-Load)
     dashboard_index = properties.get('dashboard_index', None)
-    if self.is_mobile and dashboard_index is not None:
-      self.lade_iframe_mobile(dashboard_index)
-      print(f"[multiframe] Mobile: Dashboard {dashboard_index} geladen")
+    if dashboard_index is not None:
+      if self.is_mobile:
+        print(f"[multiframe] Mobile: Lade Dashboard {dashboard_index}")
+        self.lade_iframe_mobile(dashboard_index)
+      else:
+        print(f"[multiframe] Desktop: Lade Dashboard {dashboard_index}")
+        self.lade_und_zeige_iframe(dashboard_index)
 
   def erstelle_iframe(self, index):
     """Erstellt ein IFrame für den gegebenen Index"""
