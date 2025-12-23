@@ -9,12 +9,6 @@ class layout_template(layout_templateTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
 
-  #def form_show(self, **event_args):
-  #  if not globals.multiframe_open:
-  #    # Multiframe als normales Formular in den Slot laden
-  #    open_form('multiframe', slot='content_panel_iframe')
-  #    globals.multiframe_open = True
-
   def is_mobile(self):
     """Prüft ob Mobile View"""
     return anvil.js.window.innerWidth < 768
@@ -63,14 +57,23 @@ class layout_template(layout_templateTemplate):
     self.upgrade_navigation_link.selected = False
 
   def _handle_menu_click(self, index, link):
-    """Universal handler für Desktop & Mobile"""
-    if globals.current_multiframe_instance:
-      if self.is_mobile():
-        globals.current_multiframe_instance.lade_iframe_mobile(index)
-      else:
-        globals.current_multiframe_instance.lade_und_zeige_iframe(index)
-      self.reset_links()
-      link.selected = True
+    """Universal handler - erstellt multiframe neu falls nötig"""
+  
+    # Falls multiframe gelöscht wurde, neu erstellen
+    if not globals.current_multiframe_instance:
+      print("[layout template] Multiframe wird neu initialisiert")
+      open_form('LookerStudio.multiframe', dashboard_index=index)
+      # WICHTIG: return hier, warte bis Form geladen ist
+      return
+  
+      # Nur wenn bereits vorhanden:
+    if self.is_mobile():
+      globals.current_multiframe_instance.lade_iframe_mobile(index)
+    else:
+      globals.current_multiframe_instance.lade_und_zeige_iframe(index)
+  
+    self.reset_links()
+    link.selected = True
 
   def dashboard_navigation_link_click(self, **event_args):
     # Multiframe ist bereits da, zeige einfach den Dashboard an
