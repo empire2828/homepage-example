@@ -62,6 +62,7 @@ class layout_template(layout_templateTemplate):
     # Falls multiframe gelöscht wurde, neu erstellen
     if not globals.current_multiframe_instance:
       print("[layout template] Multiframe wird neu initialisiert")
+      self.reset_links() 
       open_form('LookerStudio.multiframe', dashboard_index=index)
       # WICHTIG: return hier, warte bis Form geladen ist
       return
