@@ -1,3 +1,15 @@
-components: []
+components:
+- layout_properties: {column: RRMJGJ}
+  name: text_1
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Text
+- layout_properties: {column: EPRIAP}
+  name: text_2
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Text
+- layout_properties: {column: NXLXHQ}
+  name: text_3
+  properties: {}
+  type: form:dep_g9k4toow7i44kq:_Components.Text
 container: {type: DataRowPanel}
 is_package: true
