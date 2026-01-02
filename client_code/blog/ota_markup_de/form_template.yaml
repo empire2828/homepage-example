@@ -15,9 +15,13 @@ components_by_slot:
         name: column_panel_4
         properties: {}
         type: ColumnPanel
-      - layout_properties: {col_xs: 0, row: XTSPRJ, width_xs: 4}
-        name: spacer_3_copy
-        properties: {height: 45.4453125}
+      - layout_properties: {col_xs: 0, row: XTSPRJ, width_xs: 6}
+        name: spacer_5
+        properties: {}
+        type: Spacer
+      - layout_properties: {col_xs: 0, row: XTSPRJ, width_xs: 6}
+        name: spacer_11
+        properties: {}
         type: Spacer
       - layout_properties: {col_xs: 0, row: XTSPRJ, width_xs: 4}
         name: spacer_3_copy_3
@@ -31,79 +35,155 @@ components_by_slot:
         - components:
           - layout_properties: {grid_position: 'MNGMVX,OJQVGR'}
             name: spacer_2
-            properties: {height: 43.5078125}
+            properties: {height: 82.7578125}
             type: Spacer
           - layout_properties: {grid_position: 'FIMDPC,FLKUAK'}
             name: text_1_copy_copy_copy_copy_2
-            properties: {}
+            properties: {bold: true, text: Eingestellter Preis}
             type: form:dep_g9k4toow7i44kq:_Components.Text
-          - layout_properties: {grid_position: 'DCDBDV,LORBPC'}
+          - layout_properties: {grid_position: 'MWPBHK,YZYBGM'}
+            name: spacer_3_copy
+            properties: {height: 31.57421875}
+            type: Spacer
+          - layout_properties: {grid_position: 'LNASZQ,AXDNCO'}
             name: text_1_copy_copy_copy_copy_2_copy
-            properties: {}
+            properties: {text: ' - Genius Rabatt'}
             type: form:dep_g9k4toow7i44kq:_Components.Text
-          layout_properties: {grid_position: 'IILLOV,QDIZWA'}
+          layout_properties: {grid_position: 'IILLOV,QDIZWA NKWQQK,GITKWW'}
           name: column_panel_7
           properties: {}
           type: ColumnPanel
+        - layout_properties: {grid_position: 'IILLOV,QDIZWA MBXIZJ,LXTLYW'}
+          name: spacer_14
+          properties: {}
+          type: Spacer
+        - layout_properties: {grid_position: 'IILLOV,QDIZWA UWSDHD,UODAET'}
+          name: text_1_copy_copy_copy_copy_2_copy_copy
+          properties: {text: ' - Genius Rabatt'}
+          type: form:dep_g9k4toow7i44kq:_Components.Text
+        - layout_properties: {grid_position: 'IILLOV,QDIZWA TOSKTQ,GXPAGK'}
+          name: spacer_3_copy_2
+          properties: {}
+          type: Spacer
         - components:
           - layout_properties: {grid_position: 'FUAZHQ,SOMKTV'}
             name: title_2_copy_copy
             properties: {align: center, role: title, text: '%'}
             type: Label
+          - layout_properties: {grid_position: 'QFZNDA,VKCYRF'}
+            name: spacer_10
+            properties: {}
+            type: Spacer
           - layout_properties: {grid_position: 'OLOICP,GLYJRM'}
             name: text_1_copy_copy_copy_copy
-            properties: {}
+            properties: {bold: true}
             type: form:dep_g9k4toow7i44kq:_Components.Text
+          - layout_properties: {grid_position: 'WHXETB,NTAQQG'}
+            name: spacer_6
+            properties: {}
+            type: Spacer
           - layout_properties: {grid_position: 'EQAUXA,WCMIEZ'}
             name: text_1_copy_copy_copy_2
             properties: {}
             type: form:dep_g9k4toow7i44kq:_Components.Text
-          layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,CYHHOS'}
+          layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,CYHHOS JEEDLN,LRWOEA'}
           name: column_panel_6
           properties: {}
           type: ColumnPanel
+        - layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,CYHHOS RCZFEX,BBFJYG'}
+          name: spacer_13
+          properties: {}
+          type: Spacer
+        - layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,CYHHOS DELVQC,BYRTXK'}
+          name: text_1_copy_copy_copy_3
+          properties: {}
+          type: form:dep_g9k4toow7i44kq:_Components.Text
+        - layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,CYHHOS GQXSMH,ODWXVZ'}
+          name: spacer_3_copy_2_copy
+          properties: {}
+          type: Spacer
         - components:
           - layout_properties: {grid_position: 'XQRTZD,VVUKWR'}
             name: title_2_copy
             properties: {align: center, role: title, text: Kanal}
             type: Label
+          - layout_properties: {grid_position: 'CFKRRP,WOZVSU'}
+            name: spacer_9
+            properties: {}
+            type: Spacer
           - layout_properties: {grid_position: 'LLQCRD,DFGEMZ'}
             name: text_1_copy_copy_copy
-            properties: {}
+            properties: {bold: true}
             type: form:dep_g9k4toow7i44kq:_Components.Text
+          - layout_properties: {grid_position: 'PJLEKO,FBVYMW'}
+            name: spacer_7
+            properties: {}
+            type: Spacer
           - layout_properties: {grid_position: 'TVALAF,JQZJDW'}
             name: text_1_copy_copy
             properties: {}
             type: form:dep_g9k4toow7i44kq:_Components.Text
-          layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,XSNONX'}
+          layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,XSNONX WNGJLT,LYFURB'}
           name: column_panel_3
           properties: {}
           type: ColumnPanel
+        - layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,XSNONX AERYEP,IBXDWS'}
+          name: spacer_13_copy
+          properties: {}
+          type: Spacer
+        - layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,XSNONX SIVTEJ,PHELHK'}
+          name: text_1_copy_copy_copy_2_copy
+          properties: {}
+          type: form:dep_g9k4toow7i44kq:_Components.Text
+        - layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,XSNONX HSDLOO,FMKJGB'}
+          name: spacer_3_copy_2_copy_copy
+          properties: {}
+          type: Spacer
         - components:
-          - layout_properties: {grid_position: 'YNMWBV,RCUQRV'}
+          - layout_properties: {grid_position: 'ZUELTS,CUIYYC'}
             name: title_2
             properties: {align: center, role: title, text: Direktbuchung}
             type: Label
+          - layout_properties: {grid_position: 'EIAJGG,NXOBHB'}
+            name: spacer_12
+            properties: {}
+            type: Spacer
           - layout_properties: {grid_position: 'FIQEZK,TKIXIP'}
             name: text_1_copy
-            properties: {align: justify}
+            properties: {align: justify, bold: true}
             type: form:dep_g9k4toow7i44kq:_Components.Text
-          - layout_properties: {grid_position: 'HFSJHM,CBOEDC'}
+          - layout_properties: {grid_position: 'OUHMNB,YTVOSL'}
+            name: spacer_8
+            properties: {}
+            type: Spacer
+          - layout_properties: {grid_position: 'KQUJLZ,LECMQP'}
             name: text_1
             properties: {align: justify}
             type: form:dep_g9k4toow7i44kq:_Components.Text
-          layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,HTKYHX'}
+          layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,HTKYHX JWHCCR,TUGAUN'}
           name: column_panel_5
           properties: {}
           type: ColumnPanel
-        - layout_properties: {grid_position: 'PVIVRY,ZDFWGK'}
-          name: spacer_3_copy_2
+        - layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,HTKYHX JTTZUL,WBHUGH'}
+          name: spacer_13_copy_copy
           properties: {}
           type: Spacer
+        - layout_properties: {grid_position: 'IILLOV,JDWKDY MVABPK,HTKYHX SBAQYL,XNVJJU'}
+          name: text_1_copy_copy_copy_2_copy_copy
+          properties: {}
+          type: form:dep_g9k4toow7i44kq:_Components.Text
+        - layout_properties: {grid_position: 'VRTUUH,MTNUXG'}
+          name: text_1_copy_copy_copy_copy_2_copy_copy_copy
+          properties: {text: ' - Genius Rabatt'}
+          type: form:dep_g9k4toow7i44kq:_Components.Text
         layout_properties: {col_xs: 0, row: XTSPRJ, width_xs: 12}
         name: column_panel_2
         properties: {col_widths: '{"JDWKDY":35,"XSNONX":25,"HTKYHX":25}'}
         type: ColumnPanel
+      - layout_properties: {col_xs: 6, row: NJVYMD, width_xs: 6}
+        name: spacer_3_copy_2_copy_copy_copy
+        properties: {}
+        type: Spacer
       layout_properties: {grid_position: 'HJWKAN,KGPAFJ'}
       name: grid_panel_1
       properties: {}
