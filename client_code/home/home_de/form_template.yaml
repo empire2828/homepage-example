@@ -11,7 +11,7 @@ components_by_slot:
         role: headline
         spacing:
           margin: ['8', null, null, null]
-        text: Smoobu Analysen
+        text: Analysen für Ferienhaus-Vermieter
       type: Label
     - layout_properties: {grid_position: 'BUXZAW,MIPLQT'}
       name: headline_2
@@ -131,7 +131,7 @@ components_by_slot:
   - components:
     - layout_properties: {grid_position: ''}
       name: headline_3
-      properties: {align: center, bold: true, font_size: 28, role: headline, text: Leistungsstarke Analysen für smarte Smoobu Vermieter}
+      properties: {align: center, bold: true, font_size: 28, role: headline, text: Leistungsstarke Analysen für smarte Ferienhaus Vermieter}
       type: Label
     - layout_properties: {grid_position: 'OUPFVY,RMCQSM'}
       name: body_1
