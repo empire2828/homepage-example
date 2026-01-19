@@ -11,7 +11,7 @@ components_by_slot:
         role: headline
         spacing:
           margin: ['8', null, null, null]
-        text: Unlock Your Rental's
+        text: Unlock Your Smoobu Rental's
       type: Label
     - layout_properties: {grid_position: 'BUXZAW,MIPLQT'}
       name: headline_2
