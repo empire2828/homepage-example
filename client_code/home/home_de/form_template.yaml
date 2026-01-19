@@ -752,7 +752,7 @@ components_by_slot:
         name: review_widget_2
         properties: {}
         type: form:reviewWidget
-      layout_properties: {full_width_row: true, grid_position: 'JQTKLF,UZPWTU', row_background: 'theme:On Secondary'}
+      layout_properties: {full_width_row: false, grid_position: 'JQTKLF,UZPWTU', row_background: 'theme:On Secondary'}
       name: column_panel_3_copy
       properties: {}
       type: ColumnPanel
