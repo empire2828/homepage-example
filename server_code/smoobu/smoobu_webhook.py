@@ -20,7 +20,7 @@ def smoobu_webhook_handler():
     print("[smoobu webhook] smoobu webhook handler ", user_email, " ",booking_data)
 
     if action in ['newReservation', 'cancelReservation', 'modification of booking','updateReservation']:
-      process_booking(booking_data, user_id)            
+      anvil.server.launch_background_task('process_booking', booking_data, user_id)        
       print(f"[smoobu webhook] smoobu_webhook_handler Buchung verarbeitet: {booking_data.get('id')}")
 
     user_row = app_tables.users.get(email=user_email)
