@@ -46,7 +46,7 @@ components_by_slot:
             margin: [null, '6', null, '6']
             padding: [null, null, 8, null]
           spacing_above: small
-          text: Smarte Auswertungen für Ferienhaus Channel Manager (Smoobu). Einfaches Setup, simple Graphiken.
+          text: Smarte Auswertungen für Ferienhaus Channel Manager (z.B. Smoobu). Einfaches Setup, simple Graphiken.
           underline: false
         type: Label
       - components:
