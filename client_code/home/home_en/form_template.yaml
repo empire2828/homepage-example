@@ -34,7 +34,7 @@ components_by_slot:
             margin: [null, '6', null, '6']
             padding: [null, null, 8, null]
           spacing_above: small
-          text: Works with Channel Managers. Easy setup, simple graphics.
+          text: Works with Channel Managers (eg Smoobu). Easy setup, simple graphics.
           underline: false
         type: Label
       - components:
