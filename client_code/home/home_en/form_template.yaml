@@ -11,7 +11,7 @@ components_by_slot:
         role: headline
         spacing:
           margin: ['8', null, null, null]
-        text: Unlock Your Smoobu Rental's
+        text: Unlock Your Rental's
       type: Label
     - layout_properties: {grid_position: 'BUXZAW,MIPLQT'}
       name: headline_2
@@ -34,7 +34,7 @@ components_by_slot:
             margin: [null, '6', null, '6']
             padding: [null, null, 8, null]
           spacing_above: small
-          text: Best Smoobu analytics in minutes. Easy setup, simple graphics.
+          text: Works with Smoobu. Easy setup, simple graphics.
           underline: false
         type: Label
       - components:
