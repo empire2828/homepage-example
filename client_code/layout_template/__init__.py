@@ -75,6 +75,7 @@ class layout_template(layout_templateTemplate):
   
     self.reset_links()
     link.selected = True
+    self.check_if_upgrade_needed()
 
   def dashboard_navigation_link_click(self, **event_args):
     # Multiframe ist bereits da, zeige einfach den Dashboard an
@@ -136,16 +137,19 @@ class layout_template(layout_templateTemplate):
     self.upgrade_navigation_link.selected = True
 
   def check_if_upgrade_needed(self):
-    if globals.user_has_subscription is None:
-      return False    #server function not yet ready
-    if globals.user_has_subscription is False:
+    # Auto-initialisiere falls None
+    if getattr(globals, 'user_has_subscription', None) is None:
+      globals.user_has_subscription = anvil.server.call('get_user_has_subscription_for_email', globals.current_user)
+  
+    if not globals.user_has_subscription:  # False/"free"/etc. → True
       globals.request_count = anvil.server.call_s('add_request_count', globals.current_user) 
       self.upgrade_navigation_link.badge = True
-      self.upgrade_navigation_link.badge_count = int(getattr(globals, "request_count", 0)) 
-      print("[layout_emplate] check_if_upgrade_needed:",globals.user_has_subscription)
-
-      if globals.request_count> 20:
+      self.upgrade_navigation_link.badge_count = globals.request_count
+      print("[layout_template] Badge updated:", globals.request_count)
+  
+      if globals.request_count > 20:
         open_form('upgrade_needed')
+
 
 
    
