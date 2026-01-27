@@ -14,8 +14,8 @@ components:
       role: body
       text: |
         Dirk Klemer
-        Soden kamp 4e
-        22337 Ham burg
+        Sodenkamp 4e
+        22337 Hamburg
         info@lodginia.com
     type: Label
   - event_bindings: {click: back_link_click}
