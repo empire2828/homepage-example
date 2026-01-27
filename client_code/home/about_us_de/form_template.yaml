@@ -36,10 +36,20 @@ components_by_slot:
       name: card_1
       properties: {appearance: filled, background_color: 'theme:Background', border: '', orientation: row, role: null, visible: true}
       type: form:dep_g9k4toow7i44kq:_Components.Card
-    - layout_properties: {grid_position: 'MFZAJJ,PDNLQJ'}
+    - components: []
+      layout_properties: {grid_position: 'MFZAJJ,PDNLQJ'}
       name: rich_text_2_copy
       properties:
         content: Mit dabei sind weiterhin noch eine Digital- Produktspezialistin und ein Entwickler.
+        font_size: 18
+        spacing:
+          margin: [null, null, null, '4']
+          padding: [null, null, null, '4']
+      type: RichText
+    - layout_properties: {grid_position: 'DONGHE,JVIWTQ'}
+      name: rich_text_2_copy_copy
+      properties:
+        content: 'eMail: dirk.klemer@lodginia.com'
         font_size: 18
         spacing:
           margin: [null, null, null, '4']
