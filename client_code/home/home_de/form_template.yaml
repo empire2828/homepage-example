@@ -651,10 +651,10 @@ components_by_slot:
           properties:
             align: center
             font_size: 16
-            foreground: theme:Primary
+            foreground: theme:On Primary Container
             italic: false
             text: |
-              normal
+              20 Berichtsaufrufe/ Tag
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,EWOCUW'}
           name: label_14_copy_copy
