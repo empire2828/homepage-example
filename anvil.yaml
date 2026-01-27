@@ -171,6 +171,8 @@ native_deps:
         // <event_parameters>
       });
     </script>
+
+    <link rel="canonical" href="https://lodginia.com/" />
 package_name: lodginia
 renamed: true
 runtime_options:
