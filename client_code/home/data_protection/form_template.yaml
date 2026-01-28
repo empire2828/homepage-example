@@ -58,7 +58,7 @@ components:
 
         <h3>Transfer of Data to Third Parties</h3>
         <p>
-        Within the scope of our Lodginia service, it may be necessary to transfer personal data to the following
+        Within the scope of our Lodginia service, it may be necessary to transfer data to Google Biqquery as analysis tool. Furthermore we use web analytic tool from Google Analytics (Tag Manager) as well as Facebook Pixel to analyse the efficiency of marketing.
       format: restricted_html
     type: RichText
   - event_bindings: {click: back_link_click}
