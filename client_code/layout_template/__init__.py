@@ -147,7 +147,7 @@ class layout_template(layout_templateTemplate):
       self.upgrade_navigation_link.badge_count = globals.request_count
       print("[layout_template] Badge updated:", globals.request_count)
   
-      if globals.request_count > 20:
+      if globals.request_count > 5:
         open_form('upgrade_needed')
 
 
