@@ -638,7 +638,7 @@ components_by_slot:
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,TPYAZC'}
           name: label_14_copy_2
-          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', italic: false, text: 20 report calls / day}
+          properties: {align: center, font_size: 16, foreground: 'theme:On Primary Container', italic: false, text: 5 report calls / day}
           type: Label
         - layout_properties: {grid_position: 'YLUPJR,EWOCUW'}
           name: label_14_copy_copy
