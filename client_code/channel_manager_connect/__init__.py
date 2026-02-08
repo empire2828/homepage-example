@@ -12,8 +12,8 @@ class channel_manager_connect(channel_manager_connectTemplate):
     self.task = None
     self.last_progress_from_task = 0
     self.last_progress_seen = 0
-    anvil.js.call('sendGoogleConversion')
-   # Any code you write here will run before the form opens.
+    # anvil.js.call('sendGoogleConversion')
+    # Any code you write here will run before the form opens.
  
   def save_api_key_button_click(self, **event_args):
     api_key = self.api_key_text_box.text   
