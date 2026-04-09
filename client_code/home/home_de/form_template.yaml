@@ -93,7 +93,7 @@ components_by_slot:
       properties:
         align: center
         content: |-
-          Von Vermietern, für Vermieter
+          Von Vermietern, für Vermieter.
           Funktioniert mit Smoobu.
         font_size: 20
         foreground: ''

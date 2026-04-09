@@ -81,7 +81,7 @@ components_by_slot:
       properties:
         align: center
         content: |-
-          By hosts, for hosts
+          By hosts, for hosts.
           Works with Smoobu.
         font_size: 20
         foreground: ''
