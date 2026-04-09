@@ -80,7 +80,9 @@ components_by_slot:
       name: rich_text_1
       properties:
         align: center
-        content: By hosts, for hosts
+        content: |-
+          By hosts, for hosts
+          Works with Smoobu.
         font_size: 20
         foreground: ''
         format: markdown

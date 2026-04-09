@@ -92,7 +92,9 @@ components_by_slot:
       name: rich_text_1
       properties:
         align: center
-        content: Von Vermietern, für Vermieter
+        content: |-
+          Von Vermietern, für Vermieter
+          Funktioniert mit Smoobu.
         font_size: 20
         foreground: ''
         format: markdown
