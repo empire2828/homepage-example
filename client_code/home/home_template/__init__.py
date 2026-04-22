@@ -17,11 +17,11 @@ class home_template(home_templateTemplate):
     if self.user:
       globals.current_user = self.user     
 
+      self.get_request_count_and_subscription_status()
+      
       # Öffne layout_template
       layout_form = open_form('layout_template')
       layout_form.show_dashboard(0, layout_form.dashboard_navigation_link)
-
-      self.get_request_count_and_subscription_status()
   
   def blog_button_click(self, **event_args):
     if self.user_locale.lower().startswith("de"):
