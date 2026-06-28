@@ -11,6 +11,8 @@ from google.cloud import bigquery
 import json
 from google.oauth2 import service_account
 
+_BIGQUERY_CLIENT = None
+
 # BigQuery Konfiguration
 PROJECT_ID = "lodginia"
 DATASET_ID = "lodginia" 
@@ -173,17 +175,18 @@ def save_all_channels_for_user(user_email):
 
   # 1. Fetch all relevant channels for user from bookings
   sql = """
-        SELECT channel_name
+        SELECT DISTINCT channel_name
         FROM `lodginia.lodginia.bookings`
         WHERE email = @user_email
-        ORDER BY created_at DESC
+          AND channel_name IS NOT NULL
+          AND LOWER(channel_name) != 'blocked channel'
+        ORDER BY channel_name
     """
   job_config = bigquery.QueryJobConfig(
     query_parameters=[bigquery.ScalarQueryParameter("user_email", "STRING", user_email)]
   )
   bookings = client.query(sql, job_config=job_config).result()
-  unique_channels = {row['channel_name'] for row in bookings
-                     if row['channel_name'] and row['channel_name'].lower() != "blocked channel"}
+  unique_channels = [row['channel_name'] for row in bookings]
   if not unique_channels:
     print("[servermain] save_all_channels_for_user: Keine Channels für", user_email, "gefunden.")
     return 0
@@ -196,10 +199,15 @@ def save_all_channels_for_user(user_email):
       return "'" + val.replace("'", "\\'") + "'"
     return str(val)
 
+  channel_rates = {
+    row['name']: row['std_commission_rate']
+    for row in anvil.tables.app_tables.channels.search()
+    if row['name']
+  }
+
   rows = []
   for channel_name in unique_channels:
-    row = anvil.tables.app_tables.channels.get(name=channel_name)
-    std_commission = row['std_commission_rate'] if row else None
+    std_commission = channel_rates.get(channel_name)
     entry = "({}, {}, {})".format(
       to_sql_value(user_email),
       to_sql_value(channel_name),
@@ -228,6 +236,9 @@ def save_all_channels_for_user(user_email):
 
 def get_bigquery_client():
   """Erstellt einen BigQuery Client mit Service Account Authentifizierung"""
+  global _BIGQUERY_CLIENT
+  if _BIGQUERY_CLIENT is not None:
+    return _BIGQUERY_CLIENT
   try:
     service_account_json = anvil.secrets.get_secret('bigquery_api_key')
     service_account_info = json.loads(service_account_json)
@@ -235,22 +246,14 @@ def get_bigquery_client():
       service_account_info,
       scopes=['https://www.googleapis.com/auth/bigquery']
     )
-    client = bigquery.Client(
-      credentials=credentials,
-      project=service_account_info['project_id']
-    )
-    # Projektname abfragen (Test-Query)
     project_id = service_account_info['project_id']
-    client = bigquery.Client(
+    _BIGQUERY_CLIENT = bigquery.Client(
       credentials=credentials,
       project=project_id
     )
     #print(f"Verbindung zu BigQuery-Projekt erfolgreich: {project_id}")
-    return client
+    return _BIGQUERY_CLIENT
   except Exception as e:
     print(f"[servermain] get_bigquery_client: Fehler beim BigQuery Client Setup: {str(e)}")
     return None
-
-
-
 
